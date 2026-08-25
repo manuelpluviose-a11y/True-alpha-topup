@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Titre de la page</title>
+</head>
+<body>
+    
+</body>
+</html><!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>True Alpha TopUp</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0b12;
+      color: #fff;
+      min-height: 100vh;
+      padding: 18px;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      margin: 12px 0 22px;
+    }
+
+    .header h1 {
+      color: #00e5ff;
+      font-size: 25px;
+    }
+
+    .service {
+      background: #151520;
+      border: 1px solid #303044;
+      border-radius: 14px;
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .ff-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      flex-shrink: 0;
+    }
+
+    .service h2 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .service p {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    #orderBox {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .card {
+      background: #151520;
+      border: 1px solid #29293a;
+      border-radius: 15px;
+      padding: 17px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      color: #ccc;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 14px;
+      border-radius: 9px;
+      border: 1px solid #36364a;
+      background: #0e0e17;
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #00e5ff;
+    }
+
+    .server {
+      background: #0e0e17;
+      border: 1px solid #36364a;
+      border-radius: 9px;
+      padding: 13px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+
+    .server strong {
+      color: #00e5ff;
+    }
+
+    .payment {
+      background: #0e0e17;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .payment strong {
+      color: #00e5ff;
+    }
+
+    .price {
+      text-align: center;
+      background: #101b20;
+      border: 1px solid #00e5ff;
+      border-radius: 10px;
+      padding: 11px;
+      margin-bottom: 14px;
+    }
+
+    .price small {
+      display: block;
+      color: #aaa;
+      margin-bottom: 3px;
+    }
+
+    .price strong {
+      font-size: 23px;
+      color: #00e5ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #00e5ff;
+      color: #001014;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .verify {
+      margin-bottom: 14px;
+    }
+
+    .close {
+      background: transparent;
+      border: 1px solid #36364a;
+      color: #aaa;
+      margin-top: 8px;
+    }
+
+    .whatsapp {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #168c4a;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #purchaseArea {
+      display: none;
+    }
+
+    #verified {
+      display: none;
+      text-align: center;
+      background: #10251c;
+      border: 1px solid #168c4a;
+      color: #5ee39a;
+      border-radius: 9px;
+      padding: 11px;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    #message {
+      display: none;
+      text-align: center;
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>💎 TRUE ALPHA TOPUP</h1>
+  </div>
+
+  <!-- FREE FIRE -->
+  <div class="service" onclick="openOrder()">
+
+    <div class="ff-icon">🎮</div>
+
+    <div>
+      <h2>FREE FIRE TOPUP PAR UID</h2>
+      <p>👆 Klike sou li epi swiv enstriksyon yo</p>
+    </div>
+
+  </div>
+
+  <!-- ORDER BOX -->
+  <div id="orderBox">
+
+    <div class="card">
+
+      <h2>🎮 Free Fire TopUp par UID</h2>
+
+      <!-- SERVER -->
+      <div class="server">
+        🌎 Server:
+        <strong>NA — Amérique du Nord</strong>
+      </div>
+
+      <!-- UID -->
+      <label for="uid">
+        UID Free Fire
+      </label>
+
+      <input
+        type="text"
+        id="uid"
+        placeholder="Antre UID Free Fire ou"
+        inputmode="numeric"
+        autocomplete="off"
+      >
+
+      <!-- CONFIRM UID -->
+      <label for="confirmUid">
+        Konfime UID Free Fire
+      </label>
+
+      <input
+        type="text"
+        id="confirmUid"
+        placeholder="Re-antre menm UID la"
+        inputmode="numeric"
+        autocomplete="off"
+      >
+
+      <!-- VERIFY -->
+      <button
+        type="button"
+        class="verify"
+        onclick="verifyUID()"
+      >
+        🔐 Verifye UID
+      </button>
+
+      <!-- VERIFIED -->
+      <div id="verified">
+        ✅ UID la verifye avèk siksè.
+      </div>
+
+      <!-- PURCHASE AREA -->
+      <div id="purchaseArea">
+
+        <!-- PACK -->
+        <label for="pack">
+          Chwazi Pack
+        </label>
+
+        <select id="pack" onchange="updatePrice()">
+
+          <option value="">
+            -- Chwazi yon pack --
+          </option>
+
+          <option value="100+10" data-price="200">
+            100 + 10 💎 — 200 GDS
+          </option>
+
+          <option value="310+31" data-price="490">
+            310 + 31 💎 — 490 GDS
+          </option>
+
+          <option value="520+52" data-price="900">
+            520 + 52 💎 — 900 GDS
+          </option>
+
+          <option value="1060+106" data-price="1600">
+            1,060 + 106 💎 — 1,600 GDS
+          </option>
+
+          <option value="2180+218" data-price="3100">
+            2,180 + 218 💎 — 3,100 GDS
+          </option>
+
+          <option value="5600+560" data-price="8010">
+            5,600 + 560 💎 — 8,010 GDS
+          </option>
+
+        </select>
+
+        <!-- PRICE -->
+        <div class="price">
+
+          <small>Pri pou peye</small>
+
+          <strong id="price">
+            0 GDS
+          </strong>
+
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="payment">
+
+          💳 Voye kòb la sou Natcash<br>
+
+          📱 Nimewo:
+          <strong>55544179</strong><br>
+
+          👤 Non:
+          <strong>Manuel Pluviose</strong>
+
+        </div>
+
+        <!-- SENDER NUMBER -->
+        <label for="senderNumber">
+          Nimewo ki voye kòb la
+        </label>
+
+        <input
+          type="tel"
+          id="senderNumber"
+          placeholder="Antre nimewo ki voye kòb la"
+          inputmode="tel"
+        >
+
+        <!-- ORDER -->
+        <button
+          type="button"
+          onclick="submitOrder()"
+        >
+          💎 FÈ KÒMAND LAN
+        </button>
+
+      </div>
+
+      <!-- WHATSAPP -->
+      <a
+        class="whatsapp"
+        href="https://wa.me/50940599166"
+        target="_blank"
+        rel="noopener"
+      >
+        💬 Bezwen èd? Kontakte nou sou WhatsApp
+      </a>
+
+      <!-- CLOSE -->
+      <button
+        type="button"
+        class="close"
+        onclick="closeOrder()"
+      >
+        Fèmen
+      </button>
+
+      <div id="message"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function openOrder() {
+  document.getElementById("orderBox").style.display = "block";
+}
+
+
+function closeOrder() {
+  document.getElementById("orderBox").style.display = "none";
+}
+
+
+function updatePrice() {
+
+  const pack = document.getElementById("pack");
+
+  const selected =
+    pack.options[pack.selectedIndex];
+
+  const price =
+    selected.getAttribute("data-price");
+
+  document.getElementById("price").textContent =
+    price ? price + " GDS" : "0 GDS";
+}
+
+
+function verifyUID() {
+
+  const uid =
+    document.getElementById("uid").value.trim();
+
+  const confirmUid =
+    document.getElementById("confirmUid").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+  const verified =
+    document.getElementById("verified");
+
+  const purchaseArea =
+    document.getElementById("purchaseArea");
+
+
+  message.style.display = "block";
+
+
+  if (!uid) {
+
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
+
+    message.style.color = "#ffcc00";
+    message.textContent =
+      "⚠️ Tanpri antre UID Free Fire ou.";
+
+    return;
+  }
+
+
+  if (!confirmUid) {
+
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
+
+    message.style.color = "#ffcc00";
+    message.textContent =
+      "⚠️ Tanpri re-antre UID la pou konfime li.";
+
+    return;
+  }
+
+
+  if (!/^[0-9]+$/.test(uid)) {
+
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
+
+    message.style.color = "#ff4d4d";
+    message.textContent =
+      "❌ UID la dwe genyen sèlman chif.";
+
+    return;
+  }
+
+
+  if (uid !== confirmUid) {
+
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
+
+    message.style.color = "#ff4d4d";
+    message.textContent =
+      "❌ UID yo pa menm. Tanpri verifye yo.";
+
+    return;
+  }
+
+
+  verified.style.display = "block";
+  purchaseArea.style.display = "block";
+
+  message.style.color = "#00e5ff";
+  message.textContent =
+    "✅ UID la konfime. Ou ka chwazi pack ou a.";
+}
+
+
+function submitOrder() {
+
+  const uid =
+    document.getElementById("uid").value.trim();
+
+  const confirmUid =
+    document.getElementById("confirmUid").value.trim();
+
+  const pack =
+    document.getElementById("pack").value;
+
+  const senderNumber =
+    document.getElementById("senderNumber").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+
+  message.style.display = "block";
+
+
+  if (!uid || !confirmUid || uid !== confirmUid) {
+
+    message.style.color = "#ff4d4d";
+    message.textContent =
+      "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
+
+    document.getElementById("purchaseArea").style.display =
+      "none";
+
+    return;
+  }
+
+
+  if (!pack) {
+
+    message.style.color = "#ffcc00";
+    message.textContent =
+      "⚠️ Tanpri chwazi yon pack.";
+
+    return;
+  }
+
+
+  if (!senderNumber) {
+
+    message.style.color = "#ffcc00";
+    message.textContent =
+      "⚠️ Tanpri mete nimewo ki voye kòb la.";
+
+    return;
+  }
+
+
+  message.style.color = "#00e5ff";
+
+  message.textContent =
+    "⏳ Kòmand lan ap prepare...";
+
+
+  /*
+    BACKEND AP AJOUTE PITA.
+
+    Done ki pral voye:
+    - uid
+    - pack
+    - senderNumber
+    - server: NA
+
+    API KEY / API SECRET pa dwe
+    janm mete nan HTML piblik la.
+  */
+
+}
+
+</script>
+
+</body>
+</html>

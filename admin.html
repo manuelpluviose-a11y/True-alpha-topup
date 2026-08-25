@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Titre de la page</title>
+</head>
+<body>
+    
+</body>
+</html><!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - True Alpha</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #0b0b12;
+      color: white;
+      padding: 15px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00e5ff;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* SITE CONTROL */
+    .site-control {
+      background: #151520;
+      border: 1px solid #303044;
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .site-control h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .site-status {
+      text-align: center;
+      padding: 10px;
+      border-radius: 9px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .on-status {
+      background: #123d25;
+      color: #5ee39a;
+      border: 1px solid #168c4a;
+    }
+
+    .off-status {
+      background: #4a1717;
+      color: #ff7777;
+      border: 1px solid #d32f2f;
+    }
+
+    .site-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .site-buttons button {
+      flex: 1;
+      padding: 12px 5px;
+      border: none;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .site-on {
+      background: #00c853;
+      color: white;
+    }
+
+    .site-off {
+      background: #d32f2f;
+      color: white;
+    }
+
+    /* MESAJ YO */
+    #offMessages {
+      display: none;
+      margin-top: 12px;
+    }
+
+    #offMessages p {
+      color: #aaa;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .message-choice {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 8px;
+      border: 1px solid #36364a;
+      border-radius: 9px;
+      background: #0e0e17;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .message-choice:hover {
+      border-color: #00e5ff;
+    }
+
+    .selected-message {
+      display: none;
+      background: #0e0e17;
+      border: 1px solid #36364a;
+      border-radius: 9px;
+      padding: 10px;
+      margin-top: 5px;
+      color: #00e5ff;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .stat {
+      background: #151520;
+      border: 1px solid #29293a;
+      border-radius: 10px;
+      padding: 12px 5px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .stat small {
+      color: #aaa;
+    }
+
+    /* ORDERS */
+    .order {
+      background: #151520;
+      border: 1px solid #303044;
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: #554600;
+      color: #ffe16b;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .line {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .line span {
+      color: #aaa;
+    }
+
+    .pack {
+      color: #00e5ff;
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 20px;
+      color: #00e5ff;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px 6px;
+      border: none;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .validate {
+      background: #00c853;
+      color: white;
+    }
+
+    .failed {
+      background: #d32f2f;
+      color: white;
+    }
+
+    #message {
+      display: none;
+      text-align: center;
+      padding: 12px;
+      border-radius: 9px;
+      background: #151520;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>💎 TRUE ALPHA ADMIN</h1>
+
+
+  <!-- SITE ON / OFF -->
+
+  <div class="site-control">
+
+    <h2>🌐 Kontwòl Sit la</h2>
+
+    <div
+      id="siteStatus"
+      class="site-status on-status">
+
+      🟢 SIT LA ON
+
+    </div>
+
+
+    <div class="site-buttons">
+
+      <button
+        type="button"
+        class="site-on"
+        onclick="siteOn()">
+
+        🟢 SIT ON
+
+      </button>
+
+
+      <button
+        type="button"
+        class="site-off"
+        onclick="showOffMessages()">
+
+        🔴 SIT OFF
+
+      </button>
+
+    </div>
+
+
+    <!-- 2 MESAJ OFF -->
+
+    <div id="offMessages">
+
+      <p>
+        Chwazi mesaj kliyan yo ap wè:
+      </p>
+
+
+      <button
+        type="button"
+        class="message-choice"
+        onclick="chooseOffMessage('⏳ Sit la ap disponib talè.')">
+
+        ⏳ Sit la ap disponib talè.
+
+      </button>
+
+
+      <button
+        type="button"
+        class="message-choice"
+        onclick="chooseOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')">
+
+        🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
+
+      </button>
+
+
+      <div
+        id="selectedMessage"
+        class="selected-message">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong id="pendingCount">1</strong>
+      <small>An atant</small>
+    </div>
+
+    <div class="stat">
+      <strong id="successCount">0</strong>
+      <small>Siksè</small>
+    </div>
+
+    <div class="stat">
+      <strong id="failedCount">0</strong>
+      <small>Échec</small>
+    </div>
+
+  </div>
+
+
+  <div id="message"></div>
+
+
+  <!-- KÒMAND YO -->
+
+  <div id="orders">
+
+    <div
+      class="order"
+      id="order-1001">
+
+      <div class="status">
+        🟡 AN ATANT
+      </div>
+
+      <div class="line">
+        <span>🆔 UID:</span>
+        <strong>123456789</strong>
+      </div>
+
+      <div class="line">
+        <span>💎 Pack:</span>
+        <strong class="pack">
+          310 + 31 Diamonds
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>💰 Pri:</span>
+        <strong class="price">
+          490 GDS
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>📱 Nimewo ki voye kòb la:</span>
+        <strong>405xxxxxx</strong>
+      </div>
+
+      <div class="line">
+        <span>🕐 Kòmand:</span>
+        <strong>21:45</strong>
+      </div>
+
+      <div class="buttons">
+
+        <button
+          class="validate"
+          onclick="validateOrder('order-1001')">
+
+          ✅ VALIDÉ
+
+        </button>
+
+        <button
+          class="failed"
+          onclick="failOrder('order-1001')">
+
+          ❌ ÉCHEC
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PEZE SIT OFF
+   ========================= */
+
+function showOffMessages() {
+
+  const box =
+    document.getElementById("offMessages");
+
+  box.style.display = "block";
+
+}
+
+
+/* =========================
+   CHWAZI MESAJ OFF
+   ========================= */
+
+function chooseOffMessage(selectedMessage) {
+
+  const status =
+    document.getElementById("siteStatus");
+
+  const messageBox =
+    document.getElementById("selectedMessage");
+
+  /*
+    Mete sit la OFF
+  */
+
+  status.className =
+    "site-status off-status";
+
+  status.textContent =
+    "🔴 SIT LA OFF";
+
+
+  /*
+    Montre mesaj ou chwazi a
+  */
+
+  messageBox.style.display =
+    "block";
+
+  messageBox.textContent =
+    "📢 Mesaj aktif: " + selectedMessage;
+
+
+  showMessage(
+    "🔴 Sit la OFF. Mesaj la chwazi avèk siksè."
+  );
+
+
+  /*
+    Pita backend la ap sove:
+    
+    enabled: false
+    message: selectedMessage
+
+    konsa mesaj la ap parèt sou
+    sit kliyan an epi nouvo kòmand
+    yo ap bloke.
+  */
+
+}
+
+
+/* =========================
+   SIT ON
+   ========================= */
+
+function siteOn() {
+
+  const status =
+    document.getElementById("siteStatus");
+
+  const offMessages =
+    document.getElementById("offMessages");
+
+  const selectedMessage =
+    document.getElementById("selectedMessage");
+
+
+  status.className =
+    "site-status on-status";
+
+  status.textContent =
+    "🟢 SIT LA ON";
+
+
+  offMessages.style.display =
+    "none";
+
+  selectedMessage.style.display =
+    "none";
+
+
+  showMessage(
+    "🟢 Sit la ON. Nouvo kòmand yo ka antre."
+  );
+
+
+  /*
+    Pita backend la ap sove:
+
+    enabled: true
+    message: ""
+  */
+
+}
+
+
+/* =========================
+   VALIDÉ
+   ========================= */
+
+function validateOrder(id) {
+
+  const order =
+    document.getElementById(id);
+
+  const status =
+    order.querySelector(".status");
+
+
+  status.textContent =
+    "⏳ AP TRAITE...";
+
+  status.style.background =
+    "#164a55";
+
+  status.style.color =
+    "#00e5ff";
+
+
+  showMessage(
+    "⏳ Kòmand lan ap voye pou tretman..."
+  );
+
+}
+
+
+/* =========================
+   ÉCHEC
+   ========================= */
+
+function failOrder(id) {
+
+  const order =
+    document.getElementById(id);
+
+  const status =
+    order.querySelector(".status");
+
+
+  status.textContent =
+    "❌ ÉCHEC — NOU PA RESEVWA PEMAN AN";
+
+  status.style.background =
+    "#4a1717";
+
+  status.style.color =
+    "#ff7777";
+
+
+  const buttons =
+    order.querySelector(".buttons");
+
+  buttons.style.display =
+    "none";
+
+
+  showMessage(
+    "❌ Kòmand lan make kòm échec."
+  );
+
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent = "0";
+
+
+  document.getElementById(
+    "failedCount"
+  ).textContent = "1";
+
+}
+
+
+/* =========================
+   MESSAGE ADMIN
+   ========================= */
+
+function showMessage(text) {
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent =
+    text;
+
+  message.style.display =
+    "block";
+
+}
+
+</script>
+
+</body>
+</html>
