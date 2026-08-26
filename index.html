@@ -659,175 +659,70 @@ function verifyUID() {
 ========================= */
 
 async function submitOrder() {
+  const uid = document.getElementById("uid").value.trim();
+  const confirmUid = document.getElementById("confirmUid").value.trim();
+  const packSelect = document.getElementById("pack");
+  const pack = packSelect.value;
+  const selected = packSelect.options[packSelect.selectedIndex];
+  const price = selected.getAttribute("data-price");
+  const senderNumber = document.getElementById("senderNumber").value.trim();
+  const message = document.getElementById("message");
 
-  const uid =
-    document.getElementById(
-      "uid"
-    ).value.trim();
+  message.style.display = "block";
 
-  const confirmUid =
-    document.getElementById(
-      "confirmUid"
-    ).value.trim();
-
-  const packSelect =
-    document.getElementById(
-      "pack"
-    );
-
-  const pack =
-    packSelect.value;
-
-  const selected =
-    packSelect.options[
-      packSelect.selectedIndex
-    ];
-
-  const price =
-    selected.getAttribute(
-      "data-price"
-    );
-
-  const senderNumber =
-    document.getElementById(
-      "senderNumber"
-    ).value.trim();
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-
-  message.style.display =
-    "block";
-
-
-  if (!siteIsOpen) {
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "🔴 Sit la fèmen kounye a.";
-
+  if (!uid || !confirmUid || uid !== confirmUid) {
+    message.style.color = "#ff4d4d";
+    message.textContent = "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
     return;
   }
 
-
-  if (!uid || uid !== confirmUid) {
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ Tanpri verifye UID la.";
-
+  if (!pack || !price) {
+    message.style.color = "#ffcc00";
+    message.textContent = "⚠️ Tanpri chwazi yon pack.";
     return;
   }
-
-
-  if (!pack) {
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Tanpri chwazi yon pack.";
-
-    return;
-  }
-
 
   if (!senderNumber) {
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Tanpri mete nimewo ki voye kòb la.";
-
+    message.style.color = "#ffcc00";
+    message.textContent = "⚠️ Tanpri mete nimewo ki voye kòb la.";
     return;
   }
 
-
-  message.style.color =
-    "#00e5ff";
-
-  message.textContent =
-    "⏳ Kòmand lan ap voye...";
-
+  message.style.color = "#00e5ff";
+  message.textContent = "⏳ Kòmand lan ap voye...";
 
   try {
+    const response = await fetch("/.netlify/functions/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        uid: uid,
+        pack: pack,
+        price: Number(price),
+        senderNumber: senderNumber,
+        server: "NA — Amérique du Nord"
+      })
+    });
 
-    const response =
-      await fetch(
-        `${API}/create-order`,
-        {
-          method: "POST",
+    const result = await response.json();
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-
-            uid: uid,
-
-            pack: pack,
-
-            price: Number(price),
-
-            senderNumber:
-              senderNumber,
-
-            server:
-              "NA — Amérique du Nord"
-
-          })
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok ||
-        !data.success) {
-
-      throw new Error(
-        data.message ||
-        "Kòmand lan pa antre."
-      );
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "Kòmand lan pa antre.");
     }
 
-
-    message.style.color =
-      "#5ee39a";
-
+    message.style.color = "#5ee39a";
     message.textContent =
-      "✅ Kòmand lan resevwa avèk siksè.";
-
-
-    document.getElementById(
-      "senderNumber"
-    ).value = "";
-
+      "✅ Kòmand lan antre avèk siksè. ID: " + result.order.id;
 
   } catch (error) {
-
     console.error(error);
 
-    message.style.color =
-      "#ff4d4d";
-
+    message.style.color = "#ff4d4d";
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
-
   }
-
 }
 
 
