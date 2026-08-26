@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Titre de la page</title>
-</head>
-<body>
-    
-</body>
-</html><!DOCTYPE html>
 <html lang="ht">
 <head>
   <meta charset="UTF-8">
@@ -228,6 +219,21 @@
       margin-top: 12px;
       font-size: 13px;
       line-height: 1.5;
+      padding: 10px;
+      border-radius: 9px;
+    }
+
+    #siteClosed {
+      display: none;
+      background: #4a1717;
+      border: 1px solid #d32f2f;
+      color: #ff7777;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -240,177 +246,166 @@
     <h1>💎 TRUE ALPHA TOPUP</h1>
   </div>
 
-  <!-- FREE FIRE -->
-  <div class="service" onclick="openOrder()">
+  <div id="siteClosed"></div>
 
-    <div class="ff-icon">🎮</div>
+  <div id="mainService">
 
-    <div>
-      <h2>FREE FIRE TOPUP PAR UID</h2>
-      <p>👆 Klike sou li epi swiv enstriksyon yo</p>
+    <div class="service" onclick="openOrder()">
+
+      <div class="ff-icon">🎮</div>
+
+      <div>
+        <h2>FREE FIRE TOPUP PAR UID</h2>
+        <p>👆 Klike sou li epi swiv enstriksyon yo</p>
+      </div>
+
     </div>
 
-  </div>
+    <div id="orderBox">
 
-  <!-- ORDER BOX -->
-  <div id="orderBox">
+      <div class="card">
 
-    <div class="card">
+        <h2>🎮 Free Fire TopUp par UID</h2>
 
-      <h2>🎮 Free Fire TopUp par UID</h2>
-
-      <!-- SERVER -->
-      <div class="server">
-        🌎 Server:
-        <strong>NA — Amérique du Nord</strong>
-      </div>
-
-      <!-- UID -->
-      <label for="uid">
-        UID Free Fire
-      </label>
-
-      <input
-        type="text"
-        id="uid"
-        placeholder="Antre UID Free Fire ou"
-        inputmode="numeric"
-        autocomplete="off"
-      >
-
-      <!-- CONFIRM UID -->
-      <label for="confirmUid">
-        Konfime UID Free Fire
-      </label>
-
-      <input
-        type="text"
-        id="confirmUid"
-        placeholder="Re-antre menm UID la"
-        inputmode="numeric"
-        autocomplete="off"
-      >
-
-      <!-- VERIFY -->
-      <button
-        type="button"
-        class="verify"
-        onclick="verifyUID()"
-      >
-        🔐 Verifye UID
-      </button>
-
-      <!-- VERIFIED -->
-      <div id="verified">
-        ✅ UID la verifye avèk siksè.
-      </div>
-
-      <!-- PURCHASE AREA -->
-      <div id="purchaseArea">
-
-        <!-- PACK -->
-        <label for="pack">
-          Chwazi Pack
-        </label>
-
-        <select id="pack" onchange="updatePrice()">
-
-          <option value="">
-            -- Chwazi yon pack --
-          </option>
-
-          <option value="100+10" data-price="200">
-            100 + 10 💎 — 200 GDS
-          </option>
-
-          <option value="310+31" data-price="490">
-            310 + 31 💎 — 490 GDS
-          </option>
-
-          <option value="520+52" data-price="900">
-            520 + 52 💎 — 900 GDS
-          </option>
-
-          <option value="1060+106" data-price="1600">
-            1,060 + 106 💎 — 1,600 GDS
-          </option>
-
-          <option value="2180+218" data-price="3100">
-            2,180 + 218 💎 — 3,100 GDS
-          </option>
-
-          <option value="5600+560" data-price="8010">
-            5,600 + 560 💎 — 8,010 GDS
-          </option>
-
-        </select>
-
-        <!-- PRICE -->
-        <div class="price">
-
-          <small>Pri pou peye</small>
-
-          <strong id="price">
-            0 GDS
-          </strong>
-
+        <div class="server">
+          🌎 Server:
+          <strong>NA — Amérique du Nord</strong>
         </div>
 
-        <!-- PAYMENT -->
-        <div class="payment">
-
-          💳 Voye kòb la sou Natcash<br>
-
-          📱 Nimewo:
-          <strong>55544179</strong><br>
-
-          👤 Non:
-          <strong>Manuel Pluviose</strong>
-
-        </div>
-
-        <!-- SENDER NUMBER -->
-        <label for="senderNumber">
-          Nimewo ki voye kòb la
+        <label for="uid">
+          UID Free Fire
         </label>
 
         <input
-          type="tel"
-          id="senderNumber"
-          placeholder="Antre nimewo ki voye kòb la"
-          inputmode="tel"
+          type="text"
+          id="uid"
+          placeholder="Antre UID Free Fire ou"
+          inputmode="numeric"
+          autocomplete="off"
         >
 
-        <!-- ORDER -->
+        <label for="confirmUid">
+          Konfime UID Free Fire
+        </label>
+
+        <input
+          type="text"
+          id="confirmUid"
+          placeholder="Re-antre menm UID la"
+          inputmode="numeric"
+          autocomplete="off"
+        >
+
         <button
           type="button"
-          onclick="submitOrder()"
+          class="verify"
+          onclick="verifyUID()"
         >
-          💎 FÈ KÒMAND LAN
+          🔐 Verifye UID
         </button>
 
+        <div id="verified">
+          ✅ UID la verifye avèk siksè.
+        </div>
+
+        <div id="purchaseArea">
+
+          <label for="pack">
+            Chwazi Pack
+          </label>
+
+          <select id="pack" onchange="updatePrice()">
+
+            <option value="">
+              -- Chwazi yon pack --
+            </option>
+
+            <option value="100+10" data-price="200">
+              100 + 10 💎 — 200 GDS
+            </option>
+
+            <option value="310+31" data-price="490">
+              310 + 31 💎 — 490 GDS
+            </option>
+
+            <option value="520+52" data-price="900">
+              520 + 52 💎 — 900 GDS
+            </option>
+
+            <option value="1060+106" data-price="1600">
+              1,060 + 106 💎 — 1,600 GDS
+            </option>
+
+            <option value="2180+218" data-price="3100">
+              2,180 + 218 💎 — 3,100 GDS
+            </option>
+
+            <option value="5600+560" data-price="8010">
+              5,600 + 560 💎 — 8,010 GDS
+            </option>
+
+          </select>
+
+          <div class="price">
+            <small>Pri pou peye</small>
+
+            <strong id="price">
+              0 GDS
+            </strong>
+          </div>
+
+          <div class="payment">
+
+            💳 Voye kòb la sou Natcash<br>
+
+            📱 Nimewo:
+            <strong>55544179</strong><br>
+
+            👤 Non:
+            <strong>Manuel Pluviose</strong>
+
+          </div>
+
+          <label for="senderNumber">
+            Nimewo ki voye kòb la
+          </label>
+
+          <input
+            type="tel"
+            id="senderNumber"
+            placeholder="Antre nimewo ki voye kòb la"
+            inputmode="tel"
+          >
+
+          <button
+            type="button"
+            onclick="submitOrder()"
+          >
+            💎 FÈ KÒMAND LAN
+          </button>
+
+        </div>
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/50940599166"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 Bezwen èd? Kontakte nou sou WhatsApp
+        </a>
+
+        <button
+          type="button"
+          class="close"
+          onclick="closeOrder()"
+        >
+          Fèmen
+        </button>
+
+        <div id="message"></div>
+
       </div>
-
-      <!-- WHATSAPP -->
-      <a
-        class="whatsapp"
-        href="https://wa.me/50940599166"
-        target="_blank"
-        rel="noopener"
-      >
-        💬 Bezwen èd? Kontakte nou sou WhatsApp
-      </a>
-
-      <!-- CLOSE -->
-      <button
-        type="button"
-        class="close"
-        onclick="closeOrder()"
-      >
-        Fèmen
-      </button>
-
-      <div id="message"></div>
 
     </div>
 
@@ -418,61 +413,172 @@
 
 </div>
 
-
 <script>
 
+const API = "/.netlify/functions";
+
+let siteIsOpen = true;
+
+
+/* =========================
+   SITE STATUS
+========================= */
+
+async function checkSiteStatus() {
+
+  try {
+
+    const response =
+      await fetch(`${API}/site-status`, {
+        cache: "no-store"
+      });
+
+    if (!response.ok) {
+      throw new Error("Status error");
+    }
+
+    const data =
+      await response.json();
+
+    siteIsOpen =
+      data.enabled !== false;
+
+    const closed =
+      document.getElementById("siteClosed");
+
+    const service =
+      document.getElementById("mainService");
+
+
+    if (!siteIsOpen) {
+
+      service.style.display = "none";
+
+      closed.style.display = "block";
+
+      closed.textContent =
+        data.message ||
+        "🔴 Sit la pa disponib kounye a.";
+
+    } else {
+
+      service.style.display = "block";
+
+      closed.style.display = "none";
+
+    }
+
+  } catch (error) {
+
+    console.log(
+      "Status backend unavailable:",
+      error
+    );
+
+  }
+}
+
+
+/* =========================
+   OPEN / CLOSE
+========================= */
+
 function openOrder() {
-  document.getElementById("orderBox").style.display = "block";
+
+  if (!siteIsOpen) {
+    checkSiteStatus();
+    return;
+  }
+
+  document.getElementById(
+    "orderBox"
+  ).style.display = "block";
 }
 
 
 function closeOrder() {
-  document.getElementById("orderBox").style.display = "none";
+
+  document.getElementById(
+    "orderBox"
+  ).style.display = "none";
 }
 
+
+/* =========================
+   PRICE
+========================= */
 
 function updatePrice() {
 
-  const pack = document.getElementById("pack");
+  const pack =
+    document.getElementById("pack");
 
   const selected =
-    pack.options[pack.selectedIndex];
+    pack.options[
+      pack.selectedIndex
+    ];
 
   const price =
-    selected.getAttribute("data-price");
+    selected.getAttribute(
+      "data-price"
+    );
 
-  document.getElementById("price").textContent =
-    price ? price + " GDS" : "0 GDS";
+  document.getElementById(
+    "price"
+  ).textContent =
+    price
+      ? price + " GDS"
+      : "0 GDS";
 }
 
+
+/* =========================
+   VERIFY UID
+========================= */
 
 function verifyUID() {
 
   const uid =
-    document.getElementById("uid").value.trim();
+    document.getElementById(
+      "uid"
+    ).value.trim();
 
   const confirmUid =
-    document.getElementById("confirmUid").value.trim();
+    document.getElementById(
+      "confirmUid"
+    ).value.trim();
 
   const message =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
 
   const verified =
-    document.getElementById("verified");
+    document.getElementById(
+      "verified"
+    );
 
   const purchaseArea =
-    document.getElementById("purchaseArea");
+    document.getElementById(
+      "purchaseArea"
+    );
 
 
-  message.style.display = "block";
+  message.style.display =
+    "block";
 
 
   if (!uid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
+
     message.textContent =
       "⚠️ Tanpri antre UID Free Fire ou.";
 
@@ -482,12 +588,17 @@ function verifyUID() {
 
   if (!confirmUid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
+
     message.textContent =
-      "⚠️ Tanpri re-antre UID la pou konfime li.";
+      "⚠️ Tanpri re-antre UID la.";
 
     return;
   }
@@ -495,10 +606,15 @@ function verifyUID() {
 
   if (!/^[0-9]+$/.test(uid)) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
+
     message.textContent =
       "❌ UID la dwe genyen sèlman chif.";
 
@@ -508,55 +624,104 @@ function verifyUID() {
 
   if (uid !== confirmUid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
+
     message.textContent =
-      "❌ UID yo pa menm. Tanpri verifye yo.";
+      "❌ UID yo pa menm.";
 
     return;
   }
 
 
-  verified.style.display = "block";
-  purchaseArea.style.display = "block";
+  verified.style.display =
+    "block";
 
-  message.style.color = "#00e5ff";
+  purchaseArea.style.display =
+    "block";
+
+  message.style.color =
+    "#00e5ff";
+
   message.textContent =
     "✅ UID la konfime. Ou ka chwazi pack ou a.";
 }
 
 
-function submitOrder() {
+/* =========================
+   CREATE ORDER
+========================= */
+
+async function submitOrder() {
 
   const uid =
-    document.getElementById("uid").value.trim();
+    document.getElementById(
+      "uid"
+    ).value.trim();
 
   const confirmUid =
-    document.getElementById("confirmUid").value.trim();
+    document.getElementById(
+      "confirmUid"
+    ).value.trim();
+
+  const packSelect =
+    document.getElementById(
+      "pack"
+    );
 
   const pack =
-    document.getElementById("pack").value;
+    packSelect.value;
+
+  const selected =
+    packSelect.options[
+      packSelect.selectedIndex
+    ];
+
+  const price =
+    selected.getAttribute(
+      "data-price"
+    );
 
   const senderNumber =
-    document.getElementById("senderNumber").value.trim();
+    document.getElementById(
+      "senderNumber"
+    ).value.trim();
 
   const message =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
 
 
-  message.style.display = "block";
+  message.style.display =
+    "block";
 
 
-  if (!uid || !confirmUid || uid !== confirmUid) {
+  if (!siteIsOpen) {
 
-    message.style.color = "#ff4d4d";
+    message.style.color =
+      "#ff4d4d";
+
     message.textContent =
-      "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
+      "🔴 Sit la fèmen kounye a.";
 
-    document.getElementById("purchaseArea").style.display =
-      "none";
+    return;
+  }
+
+
+  if (!uid || uid !== confirmUid) {
+
+    message.style.color =
+      "#ff4d4d";
+
+    message.textContent =
+      "❌ Tanpri verifye UID la.";
 
     return;
   }
@@ -564,7 +729,9 @@ function submitOrder() {
 
   if (!pack) {
 
-    message.style.color = "#ffcc00";
+    message.style.color =
+      "#ffcc00";
+
     message.textContent =
       "⚠️ Tanpri chwazi yon pack.";
 
@@ -574,7 +741,9 @@ function submitOrder() {
 
   if (!senderNumber) {
 
-    message.style.color = "#ffcc00";
+    message.style.color =
+      "#ffcc00";
+
     message.textContent =
       "⚠️ Tanpri mete nimewo ki voye kòb la.";
 
@@ -582,28 +751,93 @@ function submitOrder() {
   }
 
 
-  message.style.color = "#00e5ff";
+  message.style.color =
+    "#00e5ff";
 
   message.textContent =
-    "⏳ Kòmand lan ap prepare...";
+    "⏳ Kòmand lan ap voye...";
 
 
-  /*
-    BACKEND AP AJOUTE PITA.
+  try {
 
-    Done ki pral voye:
-    - uid
-    - pack
-    - senderNumber
-    - server: NA
+    const response =
+      await fetch(
+        `${API}/create-order`,
+        {
+          method: "POST",
 
-    API KEY / API SECRET pa dwe
-    janm mete nan HTML piblik la.
-  */
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            uid: uid,
+
+            pack: pack,
+
+            price: Number(price),
+
+            senderNumber:
+              senderNumber,
+
+            server:
+              "NA — Amérique du Nord"
+
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok ||
+        !data.success) {
+
+      throw new Error(
+        data.message ||
+        "Kòmand lan pa antre."
+      );
+    }
+
+
+    message.style.color =
+      "#5ee39a";
+
+    message.textContent =
+      "✅ Kòmand lan resevwa avèk siksè.";
+
+
+    document.getElementById(
+      "senderNumber"
+    ).value = "";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    message.style.color =
+      "#ff4d4d";
+
+    message.textContent =
+      "❌ Kòmand lan pa antre. Eseye ankò.";
+
+  }
 
 }
+
+
+/* =========================
+   START
+========================= */
+
+checkSiteStatus();
 
 </script>
 
 </body>
-</html>
+    </html>
