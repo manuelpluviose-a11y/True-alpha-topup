@@ -2,11 +2,16 @@ const { getStore } = require("@netlify/blobs");
 
 exports.handler = async (event) => {
   try {
-    const token = event.headers["x-admin-token"];
+    const token =
+      event.headers["x-admin-token"] ||
+      event.headers["X-Admin-Token"];
 
-    if (token !== process.env.ADMIN_TOKEN) {
+    if (!token || token !== process.env.ADMIN_TOKEN) {
       return {
         statusCode: 401,
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
           success: false,
           message: "Pa otorize."
@@ -25,7 +30,9 @@ exports.handler = async (event) => {
         type: "json"
       });
 
-      if (order) orders.push(order);
+      if (order) {
+        orders.push(order);
+      }
     }
 
     orders.sort(
@@ -45,8 +52,13 @@ exports.handler = async (event) => {
     };
 
   } catch (error) {
+    console.error("GET ORDERS ERROR:", error);
+
     return {
       statusCode: 500,
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         success: false,
         message: "Erè backend."
