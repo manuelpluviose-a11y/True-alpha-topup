@@ -352,7 +352,7 @@ async function loginAdmin() {
   try {
 
     const response =
-      await fetch(`${API}/get-order`, {
+      await fetch(`${API}/get-orders`, {
         method: "GET",
         headers: {
           "x-admin-token": ADMIN_TOKEN
@@ -624,7 +624,7 @@ async function loadOrders() {
   try {
 
     const response =
-      await fetch(`${API}/get-order`, {
+      await fetch(`${API}/get-orders`, {
         method: "GET",
         headers: {
           "x-admin-token":
