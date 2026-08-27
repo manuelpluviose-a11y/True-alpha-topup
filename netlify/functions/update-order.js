@@ -25,7 +25,7 @@ exports.handler = async (event) => {
 
     const { id, status } = data;
 
-    if (!id || !["processing", "failed"].includes(status)) {
+    if (!id || !["processing", "success", "failed"].includes(status)) {
       return {
         statusCode: 400,
         body: JSON.stringify({
