@@ -608,23 +608,544 @@ function failOrder(id) {
 
 }
 
+<script>
+
+const API = "/.netlify/functions";
+
+let ADMIN_TOKEN = sessionStorage.getItem("TA_ADMIN_TOKEN");
+
+if (!ADMIN_TOKEN) {
+  ADMIN_TOKEN = prompt("🔐 Antre ADMIN TOKEN ou:");
+  
+  if (ADMIN_TOKEN) {
+    sessionStorage.setItem("TA_ADMIN_TOKEN", ADMIN_TOKEN);
+  }
+}
+
+function adminHeaders() {
+  return {
+    "Content-Type": "application/json",
+    "x-admin-token": ADMIN_TOKEN || ""
+  };
+}
+
 
 /* =========================
-   MESSAGE ADMIN
-   ========================= */
+   MESSAGE
+========================= */
 
 function showMessage(text) {
+  const message = document.getElementById("message");
 
-  const message =
-    document.getElementById("message");
+  message.textContent = text;
+  message.style.display = "block";
+}
 
-  message.textContent =
-    text;
 
-  message.style.display =
-    "block";
+/* =========================
+   SITE STATUS
+========================= */
+
+async function loadSiteStatus() {
+
+  try {
+
+    const response = await fetch(
+      `${API}/site-status`,
+      {
+        cache: "no-store"
+      }
+    );
+
+    const data = await response.json();
+
+    const status =
+      document.getElementById("siteStatus");
+
+    const selected =
+      document.getElementById("selectedMessage");
+
+    if (data.enabled === false) {
+
+      status.className =
+        "site-status off-status";
+
+      status.textContent =
+        "🔴 SIT LA OFF";
+
+      selected.style.display =
+        "block";
+
+      selected.textContent =
+        "📢 Mesaj aktif: " +
+        (data.message || "");
+
+    } else {
+
+      status.className =
+        "site-status on-status";
+
+      status.textContent =
+        "🟢 SIT LA ON";
+
+      selected.style.display =
+        "none";
+    }
+
+  } catch (error) {
+
+    showMessage(
+      "❌ Pa kapab li status sit la."
+    );
+
+  }
+}
+
+
+/* =========================
+   SITE ON
+========================= */
+
+async function siteOn() {
+
+  try {
+
+    const response = await fetch(
+      `${API}/site-status`,
+      {
+        method: "POST",
+        headers: adminHeaders(),
+        body: JSON.stringify({
+          enabled: true,
+          message: ""
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.message || "Erè"
+      );
+    }
+
+    document.getElementById(
+      "siteStatus"
+    ).className =
+      "site-status on-status";
+
+    document.getElementById(
+      "siteStatus"
+    ).textContent =
+      "🟢 SIT LA ON";
+
+    document.getElementById(
+      "offMessages"
+    ).style.display =
+      "none";
+
+    document.getElementById(
+      "selectedMessage"
+    ).style.display =
+      "none";
+
+    showMessage(
+      "🟢 Sit la ON. Nouvo kòmand yo ka antre."
+    );
+
+  } catch (error) {
+
+    showMessage(
+      "❌ " + error.message
+    );
+
+  }
+}
+
+
+/* =========================
+   SHOW OFF MESSAGES
+========================= */
+
+function showOffMessages() {
+
+  document.getElementById(
+    "offMessages"
+  ).style.display = "block";
+}
+
+
+/* =========================
+   SITE OFF
+========================= */
+
+async function chooseOffMessage(selectedMessage) {
+
+  try {
+
+    const response = await fetch(
+      `${API}/site-status`,
+      {
+        method: "POST",
+        headers: adminHeaders(),
+        body: JSON.stringify({
+          enabled: false,
+          message: selectedMessage
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.message || "Erè"
+      );
+    }
+
+    document.getElementById(
+      "siteStatus"
+    ).className =
+      "site-status off-status";
+
+    document.getElementById(
+      "siteStatus"
+    ).textContent =
+      "🔴 SIT LA OFF";
+
+    const box =
+      document.getElementById(
+        "selectedMessage"
+      );
+
+    box.style.display = "block";
+
+    box.textContent =
+      "📢 Mesaj aktif: " +
+      selectedMessage;
+
+    showMessage(
+      "🔴 Sit la OFF. Chanjman an sove."
+    );
+
+  } catch (error) {
+
+    showMessage(
+      "❌ " + error.message
+    );
+
+  }
+}
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadOrders() {
+
+  try {
+
+    const response = await fetch(
+      `${API}/get-orders`,
+      {
+        headers: adminHeaders(),
+        cache: "no-store"
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.message || "Pa kapab jwenn kòmand yo."
+      );
+    }
+
+    renderOrders(data.orders || []);
+
+  } catch (error) {
+
+    showMessage(
+      "❌ " + error.message
+    );
+
+  }
+}
+
+
+/* =========================
+   DISPLAY ORDERS
+========================= */
+
+function renderOrders(orders) {
+
+  const container =
+    document.getElementById("orders");
+
+  container.innerHTML = "";
+
+  let pending = 0;
+  let success = 0;
+  let failed = 0;
+
+  if (orders.length === 0) {
+
+    container.innerHTML =
+      `<div class="order">
+        📭 Pa gen kòmand pou montre.
+      </div>`;
+
+  }
+
+  orders.forEach(order => {
+
+    if (order.status === "pending") {
+      pending++;
+    }
+
+    if (
+      order.status === "success" ||
+      order.status === "processing"
+    ) {
+      success++;
+    }
+
+    if (order.status === "failed") {
+      failed++;
+    }
+
+    const div =
+      document.createElement("div");
+
+    div.className = "order";
+
+    div.id =
+      "order-" + order.id;
+
+    let statusText =
+      "🟡 AN ATANT";
+
+    if (order.status === "processing") {
+      statusText =
+        "⏳ AP TRAITE...";
+    }
+
+    if (order.status === "success") {
+      statusText =
+        "✅ VALIDÉ";
+    }
+
+    if (order.status === "failed") {
+      statusText =
+        "❌ ÉCHEC";
+    }
+
+    const date =
+      order.createdAt
+        ? new Date(order.createdAt)
+            .toLocaleString()
+        : "—";
+
+    div.innerHTML = `
+
+      <div class="status">
+        ${statusText}
+      </div>
+
+      <div class="line">
+        <span>🆔 UID:</span>
+        <strong>${escapeHTML(order.uid)}</strong>
+      </div>
+
+      <div class="line">
+        <span>💎 Pack:</span>
+        <strong class="pack">
+          ${escapeHTML(order.pack)}
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>💰 Pri:</span>
+        <strong class="price">
+          ${escapeHTML(String(order.price))} GDS
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>📱 Nimewo:</span>
+        <strong>
+          ${escapeHTML(order.senderNumber)}
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>🌎 Server:</span>
+        <strong>
+          ${escapeHTML(order.server || "NA")}
+        </strong>
+      </div>
+
+      <div class="line">
+        <span>🕐 Kòmand:</span>
+        <strong>${escapeHTML(date)}</strong>
+      </div>
+
+      ${
+        order.status === "pending"
+        ? `
+        <div class="buttons">
+
+          <button
+            class="validate"
+            onclick="validateOrder('${escapeHTML(order.id)}')">
+
+            ✅ VALIDÉ
+
+          </button>
+
+          <button
+            class="failed"
+            onclick="failOrder('${escapeHTML(order.id)}')">
+
+            ❌ ÉCHEC
+
+          </button>
+
+        </div>
+        `
+        : ""
+      }
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent = pending;
+
+  document.getElementById(
+    "successCount"
+  ).textContent = success;
+
+  document.getElementById(
+    "failedCount"
+  ).textContent = failed;
+}
+
+
+/* =========================
+   VALIDATE
+========================= */
+
+async function validateOrder(id) {
+
+  await updateOrderStatus(
+    id,
+    "success"
+  );
+}
+
+
+/* =========================
+   FAILED
+========================= */
+
+async function failOrder(id) {
+
+  await updateOrderStatus(
+    id,
+    "failed"
+  );
+}
+
+
+/* =========================
+   UPDATE ORDER
+========================= */
+
+async function updateOrderStatus(
+  id,
+  status
+) {
+
+  try {
+
+    showMessage(
+      "⏳ Ap mete ajou kòmand lan..."
+    );
+
+    const response =
+      await fetch(
+        `${API}/update-order`,
+        {
+          method: "POST",
+          headers: adminHeaders(),
+          body: JSON.stringify({
+            id: id,
+            status: status
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.message || "Erè kòmand lan."
+      );
+    }
+
+    showMessage(
+      status === "success"
+        ? "✅ Kòmand lan validé."
+        : "❌ Kòmand lan make kòm échec."
+    );
+
+    await loadOrders();
+
+  } catch (error) {
+
+    showMessage(
+      "❌ " + error.message
+    );
+
+  }
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
+
+
+/* =========================
+   START
+========================= */
+
+loadSiteStatus();
+loadOrders();
+
+</script>
 
 </script>
 
