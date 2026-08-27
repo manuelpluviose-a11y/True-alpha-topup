@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Titre de la page</title>
-</head>
-<body>
-    
-</body>
-</html><!DOCTYPE html>
 <html lang="ht">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - True Alpha</title>
+  <title>True Alpha Admin</title>
 
   <style>
     * {
@@ -35,12 +26,10 @@
     h1 {
       text-align: center;
       color: #00e5ff;
-      font-size: 24px;
       margin-bottom: 20px;
     }
 
-    /* SITE CONTROL */
-    .site-control {
+    .card {
       background: #151520;
       border: 1px solid #303044;
       border-radius: 14px;
@@ -48,178 +37,49 @@
       margin-bottom: 15px;
     }
 
-    .site-control h2 {
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-
-    .site-status {
-      text-align: center;
-      padding: 10px;
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
       border-radius: 9px;
-      margin-bottom: 10px;
-      font-size: 13px;
-      font-weight: bold;
+      border: 1px solid #36364a;
+      background: #0e0e17;
+      color: white;
+      outline: none;
     }
 
-    .on-status {
-      background: #123d25;
-      color: #5ee39a;
-      border: 1px solid #168c4a;
+    textarea {
+      min-height: 80px;
+      resize: vertical;
     }
 
-    .off-status {
-      background: #4a1717;
-      color: #ff7777;
-      border: 1px solid #d32f2f;
-    }
-
-    .site-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .site-buttons button {
-      flex: 1;
-      padding: 12px 5px;
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
       border: none;
       border-radius: 9px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .site-on {
+    .login {
+      background: #00e5ff;
+      color: #001014;
+    }
+
+    .on {
       background: #00c853;
       color: white;
     }
 
-    .site-off {
+    .off {
       background: #d32f2f;
       color: white;
     }
 
-    /* MESAJ YO */
-    #offMessages {
-      display: none;
-      margin-top: 12px;
-    }
-
-    #offMessages p {
-      color: #aaa;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .message-choice {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 8px;
-      border: 1px solid #36364a;
-      border-radius: 9px;
-      background: #0e0e17;
-      color: white;
-      cursor: pointer;
-      font-size: 13px;
-      text-align: left;
-    }
-
-    .message-choice:hover {
-      border-color: #00e5ff;
-    }
-
-    .selected-message {
-      display: none;
-      background: #0e0e17;
-      border: 1px solid #36364a;
-      border-radius: 9px;
-      padding: 10px;
-      margin-top: 5px;
-      color: #00e5ff;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* STATS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .stat {
-      background: #151520;
-      border: 1px solid #29293a;
-      border-radius: 10px;
-      padding: 12px 5px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 20px;
-    }
-
-    .stat small {
-      color: #aaa;
-    }
-
-    /* ORDERS */
-    .order {
-      background: #151520;
-      border: 1px solid #303044;
-      border-radius: 14px;
-      padding: 15px;
-      margin-bottom: 12px;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 6px 9px;
-      border-radius: 7px;
-      background: #554600;
-      color: #ffe16b;
-      font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .line {
-      margin: 8px 0;
-      font-size: 14px;
-    }
-
-    .line span {
-      color: #aaa;
-    }
-
-    .pack {
-      color: #00e5ff;
-      font-weight: bold;
-    }
-
-    .price {
-      font-size: 20px;
-      color: #00e5ff;
-      font-weight: bold;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    button {
-      flex: 1;
-      padding: 12px 6px;
-      border: none;
-      border-radius: 9px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .validate {
+    .process {
       background: #00c853;
       color: white;
     }
@@ -229,13 +89,94 @@
       color: white;
     }
 
+    .refresh {
+      background: #36364a;
+      color: white;
+    }
+
+    .message-choice {
+      background: #0e0e17;
+      border: 1px solid #36364a;
+      color: white;
+      text-align: left;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: 9px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .status-on {
+      background: #123d25;
+      color: #5ee39a;
+    }
+
+    .status-off {
+      background: #4a1717;
+      color: #ff7777;
+    }
+
+    .order {
+      background: #0e0e17;
+      border: 1px solid #303044;
+      border-radius: 12px;
+      padding: 13px;
+      margin-top: 10px;
+    }
+
+    .line {
+      margin: 7px 0;
+      font-size: 14px;
+    }
+
+    .line span {
+      color: #aaa;
+    }
+
+    .pack {
+      color: #00e5ff;
+    }
+
+    .price {
+      color: #00e5ff;
+      font-weight: bold;
+    }
+
+    .order-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .order-buttons button {
+      flex: 1;
+    }
+
+    #adminArea {
+      display: none;
+    }
+
+    #offArea {
+      display: none;
+      margin-top: 10px;
+    }
+
     #message {
       display: none;
-      text-align: center;
-      padding: 12px;
-      border-radius: 9px;
       background: #151520;
+      border-radius: 9px;
+      padding: 12px;
+      text-align: center;
       margin-bottom: 15px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #aaa;
+      padding: 20px;
     }
   </style>
 </head>
@@ -246,169 +187,118 @@
 
   <h1>💎 TRUE ALPHA ADMIN</h1>
 
+  <!-- LOGIN -->
 
-  <!-- SITE ON / OFF -->
+  <div class="card" id="loginBox">
 
-  <div class="site-control">
+    <h3>🔐 Admin Login</h3>
 
-    <h2>🌐 Kontwòl Sit la</h2>
+    <input
+      type="password"
+      id="adminToken"
+      placeholder="Antre ADMIN_TOKEN ou"
+      autocomplete="off"
+    >
 
-    <div
-      id="siteStatus"
-      class="site-status on-status">
+    <button
+      class="login"
+      onclick="loginAdmin()"
+    >
+      🔓 ANTRE NAN ADMIN
+    </button>
 
-      🟢 SIT LA ON
-
-    </div>
-
-
-    <div class="site-buttons">
-
-      <button
-        type="button"
-        class="site-on"
-        onclick="siteOn()">
-
-        🟢 SIT ON
-
-      </button>
+  </div>
 
 
-      <button
-        type="button"
-        class="site-off"
-        onclick="showOffMessages()">
+  <!-- ADMIN AREA -->
 
-        🔴 SIT OFF
+  <div id="adminArea">
 
-      </button>
-
-    </div>
+    <div id="message"></div>
 
 
-    <!-- 2 MESAJ OFF -->
+    <!-- SITE CONTROL -->
 
-    <div id="offMessages">
+    <div class="card">
 
-      <p>
-        Chwazi mesaj kliyan yo ap wè:
-      </p>
-
-
-      <button
-        type="button"
-        class="message-choice"
-        onclick="chooseOffMessage('⏳ Sit la ap disponib talè.')">
-
-        ⏳ Sit la ap disponib talè.
-
-      </button>
-
-
-      <button
-        type="button"
-        class="message-choice"
-        onclick="chooseOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')">
-
-        🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
-
-      </button>
-
+      <h3>🌐 Kontwòl Sit la</h3>
 
       <div
-        id="selectedMessage"
-        class="selected-message">
+        id="siteStatus"
+        class="status status-on"
+      >
+        🟢 SIT LA ON
       </div>
 
-    </div>
+      <button
+        class="on"
+        onclick="siteOn()"
+      >
+        🟢 SIT ON
+      </button>
 
-  </div>
-
-
-  <!-- STATS -->
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong id="pendingCount">1</strong>
-      <small>An atant</small>
-    </div>
-
-    <div class="stat">
-      <strong id="successCount">0</strong>
-      <small>Siksè</small>
-    </div>
-
-    <div class="stat">
-      <strong id="failedCount">0</strong>
-      <small>Échec</small>
-    </div>
-
-  </div>
+      <button
+        class="off"
+        onclick="showOffArea()"
+      >
+        🔴 SIT OFF
+      </button>
 
 
-  <div id="message"></div>
+      <div id="offArea">
 
-
-  <!-- KÒMAND YO -->
-
-  <div id="orders">
-
-    <div
-      class="order"
-      id="order-1001">
-
-      <div class="status">
-        🟡 AN ATANT
-      </div>
-
-      <div class="line">
-        <span>🆔 UID:</span>
-        <strong>123456789</strong>
-      </div>
-
-      <div class="line">
-        <span>💎 Pack:</span>
-        <strong class="pack">
-          310 + 31 Diamonds
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>💰 Pri:</span>
-        <strong class="price">
-          490 GDS
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>📱 Nimewo ki voye kòb la:</span>
-        <strong>405xxxxxx</strong>
-      </div>
-
-      <div class="line">
-        <span>🕐 Kòmand:</span>
-        <strong>21:45</strong>
-      </div>
-
-      <div class="buttons">
+        <p>
+          Chwazi youn oswa ekri pwòp mesaj ou:
+        </p>
 
         <button
-          class="validate"
-          onclick="validateOrder('order-1001')">
-
-          ✅ VALIDÉ
-
+          class="message-choice"
+          onclick="setOffMessage('⏳ Sit la ap disponib talè.')"
+        >
+          ⏳ Sit la ap disponib talè.
         </button>
 
         <button
-          class="failed"
-          onclick="failOrder('order-1001')">
-
-          ❌ ÉCHEC
-
+          class="message-choice"
+          onclick="setOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')"
+        >
+          🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
         </button>
 
+        <textarea
+          id="customMessage"
+          placeholder="✍️ Ekri pwòp mesaj OFF ou..."
+        ></textarea>
+
+        <button
+          class="off"
+          onclick="setCustomOffMessage()"
+        >
+          🔴 METE SIT LA OFF AK MESAJ SA
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ORDERS -->
+
+    <div class="card">
+
+      <h3>📋 KÒMAND YO</h3>
+
+      <button
+        class="refresh"
+        onclick="loadOrders()"
+      >
+        🔄 RAFRECHI KÒMAND YO
+      </button>
+
+      <div id="orders">
+        <div class="empty">
+          Peze RAFRECHI pou chaje kòmand yo.
+        </div>
       </div>
 
     </div>
@@ -420,225 +310,97 @@
 
 <script>
 
-/* =========================
-   PEZE SIT OFF
-   ========================= */
-
-function showOffMessages() {
-
-  const box =
-    document.getElementById("offMessages");
-
-  box.style.display = "block";
-
-}
-
-
-/* =========================
-   CHWAZI MESAJ OFF
-   ========================= */
-
-function chooseOffMessage(selectedMessage) {
-
-  const status =
-    document.getElementById("siteStatus");
-
-  const messageBox =
-    document.getElementById("selectedMessage");
-
-  /*
-    Mete sit la OFF
-  */
-
-  status.className =
-    "site-status off-status";
-
-  status.textContent =
-    "🔴 SIT LA OFF";
-
-
-  /*
-    Montre mesaj ou chwazi a
-  */
-
-  messageBox.style.display =
-    "block";
-
-  messageBox.textContent =
-    "📢 Mesaj aktif: " + selectedMessage;
-
-
-  showMessage(
-    "🔴 Sit la OFF. Mesaj la chwazi avèk siksè."
-  );
-
-
-  /*
-    Pita backend la ap sove:
-    
-    enabled: false
-    message: selectedMessage
-
-    konsa mesaj la ap parèt sou
-    sit kliyan an epi nouvo kòmand
-    yo ap bloke.
-  */
-
-}
-
-
-/* =========================
-   SIT ON
-   ========================= */
-
-function siteOn() {
-
-  const status =
-    document.getElementById("siteStatus");
-
-  const offMessages =
-    document.getElementById("offMessages");
-
-  const selectedMessage =
-    document.getElementById("selectedMessage");
-
-
-  status.className =
-    "site-status on-status";
-
-  status.textContent =
-    "🟢 SIT LA ON";
-
-
-  offMessages.style.display =
-    "none";
-
-  selectedMessage.style.display =
-    "none";
-
-
-  showMessage(
-    "🟢 Sit la ON. Nouvo kòmand yo ka antre."
-  );
-
-
-  /*
-    Pita backend la ap sove:
-
-    enabled: true
-    message: ""
-  */
-
-}
-
-
-/* =========================
-   VALIDÉ
-   ========================= */
-
-function validateOrder(id) {
-
-  const order =
-    document.getElementById(id);
-
-  const status =
-    order.querySelector(".status");
-
-
-  status.textContent =
-    "⏳ AP TRAITE...";
-
-  status.style.background =
-    "#164a55";
-
-  status.style.color =
-    "#00e5ff";
-
-
-  showMessage(
-    "⏳ Kòmand lan ap voye pou tretman..."
-  );
-
-}
-
-
-/* =========================
-   ÉCHEC
-   ========================= */
-
-function failOrder(id) {
-
-  const order =
-    document.getElementById(id);
-
-  const status =
-    order.querySelector(".status");
-
-
-  status.textContent =
-    "❌ ÉCHEC — NOU PA RESEVWA PEMAN AN";
-
-  status.style.background =
-    "#4a1717";
-
-  status.style.color =
-    "#ff7777";
-
-
-  const buttons =
-    order.querySelector(".buttons");
-
-  buttons.style.display =
-    "none";
-
-
-  showMessage(
-    "❌ Kòmand lan make kòm échec."
-  );
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent = "0";
-
-
-  document.getElementById(
-    "failedCount"
-  ).textContent = "1";
-
-}
-
-<script>
-
 const API = "/.netlify/functions";
 
-let ADMIN_TOKEN = sessionStorage.getItem("TA_ADMIN_TOKEN");
-
-if (!ADMIN_TOKEN) {
-  ADMIN_TOKEN = prompt("🔐 Antre ADMIN TOKEN ou:");
-  
-  if (ADMIN_TOKEN) {
-    sessionStorage.setItem("TA_ADMIN_TOKEN", ADMIN_TOKEN);
-  }
-}
-
-function adminHeaders() {
-  return {
-    "Content-Type": "application/json",
-    "x-admin-token": ADMIN_TOKEN || ""
-  };
-}
+let ADMIN_TOKEN = "";
 
 
 /* =========================
    MESSAGE
 ========================= */
 
-function showMessage(text) {
-  const message = document.getElementById("message");
+function showMessage(text, color = "#00e5ff") {
 
-  message.textContent = text;
-  message.style.display = "block";
+  const box =
+    document.getElementById("message");
+
+  box.style.display = "block";
+  box.style.color = color;
+  box.textContent = text;
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function loginAdmin() {
+
+  const token =
+    document.getElementById("adminToken").value.trim();
+
+  if (!token) {
+
+    alert("Tanpri antre ADMIN_TOKEN ou.");
+
+    return;
+  }
+
+  ADMIN_TOKEN = token;
+
+  try {
+
+    const response =
+      await fetch(`${API}/get-order`, {
+        method: "GET",
+        headers: {
+          "x-admin-token": ADMIN_TOKEN
+        }
+      });
+
+    if (response.status === 401) {
+
+      ADMIN_TOKEN = "";
+
+      alert("❌ ADMIN_TOKEN la pa bon.");
+
+      return;
+    }
+
+    if (!response.ok) {
+
+      alert("❌ Backend la pa reponn.");
+
+      return;
+    }
+
+    document.getElementById(
+      "loginBox"
+    ).style.display = "none";
+
+    document.getElementById(
+      "adminArea"
+    ).style.display = "block";
+
+    showMessage(
+      "✅ Admin konekte avèk siksè.",
+      "#5ee39a"
+    );
+
+    await loadSiteStatus();
+    await loadOrders();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "❌ Pa kapab konekte ak backend la."
+    );
+
+  }
+
 }
 
 
@@ -650,194 +412,200 @@ async function loadSiteStatus() {
 
   try {
 
-    const response = await fetch(
-      `${API}/site-status`,
-      {
+    const response =
+      await fetch(`${API}/site-status`, {
+        method: "GET",
         cache: "no-store"
-      }
-    );
+      });
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
-    const status =
-      document.getElementById("siteStatus");
-
-    const selected =
-      document.getElementById("selectedMessage");
-
-    if (data.enabled === false) {
-
-      status.className =
-        "site-status off-status";
-
-      status.textContent =
-        "🔴 SIT LA OFF";
-
-      selected.style.display =
-        "block";
-
-      selected.textContent =
-        "📢 Mesaj aktif: " +
-        (data.message || "");
-
-    } else {
-
-      status.className =
-        "site-status on-status";
-
-      status.textContent =
-        "🟢 SIT LA ON";
-
-      selected.style.display =
-        "none";
-    }
+    updateSiteDisplay(data.enabled !== false);
 
   } catch (error) {
 
-    showMessage(
-      "❌ Pa kapab li status sit la."
-    );
+    console.error(error);
 
   }
+
+}
+
+
+function updateSiteDisplay(isOpen) {
+
+  const status =
+    document.getElementById("siteStatus");
+
+  if (isOpen) {
+
+    status.className =
+      "status status-on";
+
+    status.textContent =
+      "🟢 SIT LA ON";
+
+  } else {
+
+    status.className =
+      "status status-off";
+
+    status.textContent =
+      "🔴 SIT LA OFF";
+
+  }
+
 }
 
 
 /* =========================
-   SITE ON
+   SHOW OFF AREA
+========================= */
+
+function showOffArea() {
+
+  const area =
+    document.getElementById("offArea");
+
+  area.style.display =
+    "block";
+
+}
+
+
+/* =========================
+   SET OFF MESSAGE
+========================= */
+
+async function setOffMessage(message) {
+
+  await saveSiteStatus(
+    false,
+    message
+  );
+
+}
+
+
+/* =========================
+   CUSTOM OFF MESSAGE
+========================= */
+
+async function setCustomOffMessage() {
+
+  const message =
+    document.getElementById(
+      "customMessage"
+    ).value.trim();
+
+  if (!message) {
+
+    alert(
+      "Tanpri ekri yon mesaj."
+    );
+
+    return;
+  }
+
+  await saveSiteStatus(
+    false,
+    message
+  );
+
+}
+
+
+/* =========================
+   SAVE SITE STATUS
+========================= */
+
+async function saveSiteStatus(
+  enabled,
+  message
+) {
+
+  if (!ADMIN_TOKEN) {
+
+    alert(
+      "Admin pa konekte."
+    );
+
+    return;
+  }
+
+  try {
+
+    const response =
+      await fetch(`${API}/site-status`, {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          "x-admin-token":
+            ADMIN_TOKEN
+        },
+        body: JSON.stringify({
+          enabled: enabled,
+          message: message || ""
+        })
+      });
+
+    const result =
+      await response.json();
+
+    if (!response.ok || !result.success) {
+
+      throw new Error(
+        result.message ||
+        "Erè site status."
+      );
+
+    }
+
+    updateSiteDisplay(enabled);
+
+    document.getElementById(
+      "offArea"
+    ).style.display = "none";
+
+    document.getElementById(
+      "customMessage"
+    ).value = "";
+
+    showMessage(
+      enabled
+        ? "🟢 Sit la ON."
+        : "🔴 Sit la OFF. Mesaj la aktive.",
+      enabled
+        ? "#5ee39a"
+        : "#ff7777"
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      "❌ Pa kapab chanje status sit la.",
+      "#ff4d4d"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SIT ON
 ========================= */
 
 async function siteOn() {
 
-  try {
+  await saveSiteStatus(
+    true,
+    ""
+  );
 
-    const response = await fetch(
-      `${API}/site-status`,
-      {
-        method: "POST",
-        headers: adminHeaders(),
-        body: JSON.stringify({
-          enabled: true,
-          message: ""
-        })
-      }
-    );
-
-    const data =
-      await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.message || "Erè"
-      );
-    }
-
-    document.getElementById(
-      "siteStatus"
-    ).className =
-      "site-status on-status";
-
-    document.getElementById(
-      "siteStatus"
-    ).textContent =
-      "🟢 SIT LA ON";
-
-    document.getElementById(
-      "offMessages"
-    ).style.display =
-      "none";
-
-    document.getElementById(
-      "selectedMessage"
-    ).style.display =
-      "none";
-
-    showMessage(
-      "🟢 Sit la ON. Nouvo kòmand yo ka antre."
-    );
-
-  } catch (error) {
-
-    showMessage(
-      "❌ " + error.message
-    );
-
-  }
-}
-
-
-/* =========================
-   SHOW OFF MESSAGES
-========================= */
-
-function showOffMessages() {
-
-  document.getElementById(
-    "offMessages"
-  ).style.display = "block";
-}
-
-
-/* =========================
-   SITE OFF
-========================= */
-
-async function chooseOffMessage(selectedMessage) {
-
-  try {
-
-    const response = await fetch(
-      `${API}/site-status`,
-      {
-        method: "POST",
-        headers: adminHeaders(),
-        body: JSON.stringify({
-          enabled: false,
-          message: selectedMessage
-        })
-      }
-    );
-
-    const data =
-      await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.message || "Erè"
-      );
-    }
-
-    document.getElementById(
-      "siteStatus"
-    ).className =
-      "site-status off-status";
-
-    document.getElementById(
-      "siteStatus"
-    ).textContent =
-      "🔴 SIT LA OFF";
-
-    const box =
-      document.getElementById(
-        "selectedMessage"
-      );
-
-    box.style.display = "block";
-
-    box.textContent =
-      "📢 Mesaj aktif: " +
-      selectedMessage;
-
-    showMessage(
-      "🔴 Sit la OFF. Chanjman an sove."
-    );
-
-  } catch (error) {
-
-    showMessage(
-      "❌ " + error.message
-    );
-
-  }
 }
 
 
@@ -847,97 +615,100 @@ async function chooseOffMessage(selectedMessage) {
 
 async function loadOrders() {
 
+  const ordersBox =
+    document.getElementById("orders");
+
+  ordersBox.innerHTML =
+    '<div class="empty">⏳ Kòmand yo ap chaje...</div>';
+
   try {
 
-    const response = await fetch(
-      `${API}/get-orders`,
-      {
-        headers: adminHeaders(),
+    const response =
+      await fetch(`${API}/get-order`, {
+        method: "GET",
+        headers: {
+          "x-admin-token":
+            ADMIN_TOKEN
+        },
         cache: "no-store"
-      }
-    );
+      });
 
-    const data =
-      await response.json();
+    if (response.status === 401) {
 
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.message || "Pa kapab jwenn kòmand yo."
-      );
+      ordersBox.innerHTML =
+        '<div class="empty">❌ Token admin lan pa otorize.</div>';
+
+      return;
     }
 
-    renderOrders(data.orders || []);
+    const result =
+      await response.json();
+
+    if (!response.ok || !result.success) {
+
+      throw new Error(
+        result.message ||
+        "Erè lè chaje kòmand yo."
+      );
+
+    }
+
+    renderOrders(
+      result.orders || []
+    );
 
   } catch (error) {
 
-    showMessage(
-      "❌ " + error.message
-    );
+    console.error(error);
+
+    ordersBox.innerHTML =
+      '<div class="empty">❌ Kòmand yo pa ka chaje.</div>';
 
   }
+
 }
 
 
 /* =========================
-   DISPLAY ORDERS
+   RENDER ORDERS
 ========================= */
 
 function renderOrders(orders) {
 
-  const container =
+  const ordersBox =
     document.getElementById("orders");
 
-  container.innerHTML = "";
+  if (!orders.length) {
 
-  let pending = 0;
-  let success = 0;
-  let failed = 0;
+    ordersBox.innerHTML =
+      '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
 
-  if (orders.length === 0) {
-
-    container.innerHTML =
-      `<div class="order">
-        📭 Pa gen kòmand pou montre.
-      </div>`;
-
+    return;
   }
 
+  ordersBox.innerHTML = "";
+
   orders.forEach(order => {
-
-    if (order.status === "pending") {
-      pending++;
-    }
-
-    if (
-      order.status === "success" ||
-      order.status === "processing"
-    ) {
-      success++;
-    }
-
-    if (order.status === "failed") {
-      failed++;
-    }
 
     const div =
       document.createElement("div");
 
-    div.className = "order";
+    div.className =
+      "order";
 
-    div.id =
-      "order-" + order.id;
+    const date =
+      order.createdAt
+        ? new Date(
+            order.createdAt
+          ).toLocaleString()
+        : "N/A";
 
     let statusText =
       "🟡 AN ATANT";
 
     if (order.status === "processing") {
       statusText =
-        "⏳ AP TRAITE...";
-    }
-
-    if (order.status === "success") {
-      statusText =
-        "✅ VALIDÉ";
+        "⏳ AP TRAITE";
     }
 
     if (order.status === "failed") {
@@ -945,11 +716,10 @@ function renderOrders(orders) {
         "❌ ÉCHEC";
     }
 
-    const date =
-      order.createdAt
-        ? new Date(order.createdAt)
-            .toLocaleString()
-        : "—";
+    if (order.status === "success") {
+      statusText =
+        "✅ SIKSÈ";
+    }
 
     div.innerHTML = `
 
@@ -958,112 +728,86 @@ function renderOrders(orders) {
       </div>
 
       <div class="line">
-        <span>🆔 UID:</span>
-        <strong>${escapeHTML(order.uid)}</strong>
+        <span>🆔 ID:</span>
+        <strong>${escapeHtml(order.id || "")}</strong>
+      </div>
+
+      <div class="line">
+        <span>🎮 UID:</span>
+        <strong>${escapeHtml(order.uid || "")}</strong>
       </div>
 
       <div class="line">
         <span>💎 Pack:</span>
         <strong class="pack">
-          ${escapeHTML(order.pack)}
+          ${escapeHtml(order.pack || "")}
         </strong>
       </div>
 
       <div class="line">
         <span>💰 Pri:</span>
         <strong class="price">
-          ${escapeHTML(String(order.price))} GDS
+          ${escapeHtml(String(order.price || ""))} GDS
         </strong>
       </div>
 
       <div class="line">
         <span>📱 Nimewo:</span>
         <strong>
-          ${escapeHTML(order.senderNumber)}
+          ${escapeHtml(order.senderNumber || "")}
         </strong>
       </div>
 
       <div class="line">
         <span>🌎 Server:</span>
         <strong>
-          ${escapeHTML(order.server || "NA")}
+          ${escapeHtml(order.server || "")}
         </strong>
       </div>
 
       <div class="line">
         <span>🕐 Kòmand:</span>
-        <strong>${escapeHTML(date)}</strong>
+        <strong>
+          ${escapeHtml(date)}
+        </strong>
       </div>
 
       ${
         order.status === "pending"
         ? `
-        <div class="buttons">
+          <div class="order-buttons">
 
-          <button
-            class="validate"
-            onclick="validateOrder('${escapeHTML(order.id)}')">
+            <button
+              class="process"
+              onclick="updateOrder(
+                '${escapeHtml(order.id)}',
+                'processing'
+              )"
+            >
+              ✅ VALIDÉ
+            </button>
 
-            ✅ VALIDÉ
+            <button
+              class="failed"
+              onclick="updateOrder(
+                '${escapeHtml(order.id)}',
+                'failed'
+              )"
+            >
+              ❌ ÉCHEC
+            </button>
 
-          </button>
-
-          <button
-            class="failed"
-            onclick="failOrder('${escapeHTML(order.id)}')">
-
-            ❌ ÉCHEC
-
-          </button>
-
-        </div>
+          </div>
         `
         : ""
       }
 
     `;
 
-    container.appendChild(div);
+    ordersBox.appendChild(div);
 
   });
 
-  document.getElementById(
-    "pendingCount"
-  ).textContent = pending;
-
-  document.getElementById(
-    "successCount"
-  ).textContent = success;
-
-  document.getElementById(
-    "failedCount"
-  ).textContent = failed;
-}
-
-
-/* =========================
-   VALIDATE
-========================= */
-
-async function validateOrder(id) {
-
-  await updateOrderStatus(
-    id,
-    "success"
-  );
-}
-
-
-/* =========================
-   FAILED
-========================= */
-
-async function failOrder(id) {
-
-  await updateOrderStatus(
-    id,
-    "failed"
-  );
 }
 
 
@@ -1071,62 +815,79 @@ async function failOrder(id) {
    UPDATE ORDER
 ========================= */
 
-async function updateOrderStatus(
+async function updateOrder(
   id,
   status
 ) {
 
-  try {
+  if (!ADMIN_TOKEN) {
 
-    showMessage(
-      "⏳ Ap mete ajou kòmand lan..."
+    alert(
+      "Admin pa konekte."
     );
 
-    const response =
-      await fetch(
-        `${API}/update-order`,
-        {
-          method: "POST",
-          headers: adminHeaders(),
-          body: JSON.stringify({
-            id: id,
-            status: status
-          })
-        }
-      );
+    return;
+  }
 
-    const data =
+  try {
+
+    const response =
+      await fetch(`${API}/update-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          "x-admin-token":
+            ADMIN_TOKEN
+        },
+        body: JSON.stringify({
+          id: id,
+          status: status
+        })
+      });
+
+    const result =
       await response.json();
 
-    if (!response.ok || !data.success) {
+    if (!response.ok || !result.success) {
+
       throw new Error(
-        data.message || "Erè kòmand lan."
+        result.message ||
+        "Erè kòmand."
       );
+
     }
 
     showMessage(
-      status === "success"
-        ? "✅ Kòmand lan validé."
-        : "❌ Kòmand lan make kòm échec."
+      status === "processing"
+        ? "⏳ Kòmand lan ap trete."
+        : "❌ Kòmand lan make kòm échec.",
+      status === "processing"
+        ? "#00e5ff"
+        : "#ff7777"
     );
 
     await loadOrders();
 
   } catch (error) {
 
+    console.error(error);
+
     showMessage(
-      "❌ " + error.message
+      "❌ Pa kapab modifye kòmand lan.",
+      "#ff4d4d"
     );
 
   }
+
 }
 
 
 /* =========================
-   SECURITY
+   SECURITY DISPLAY
 ========================= */
 
-function escapeHTML(value) {
+function escapeHtml(value) {
 
   return String(value)
     .replaceAll("&", "&amp;")
@@ -1137,17 +898,7 @@ function escapeHTML(value) {
 
 }
 
-
-/* =========================
-   START
-========================= */
-
-loadSiteStatus();
-loadOrders();
-
-</script>
-
 </script>
 
 </body>
-</html>
+          </html>
