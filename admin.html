@@ -202,6 +202,7 @@
 
     <button
       class="login"
+      type="button"
       onclick="loginAdmin()"
     >
       🔓 ANTRE NAN ADMIN
@@ -232,6 +233,7 @@
 
       <button
         class="on"
+        type="button"
         onclick="siteOn()"
       >
         🟢 SIT ON
@@ -239,6 +241,7 @@
 
       <button
         class="off"
+        type="button"
         onclick="showOffArea()"
       >
         🔴 SIT OFF
@@ -253,6 +256,7 @@
 
         <button
           class="message-choice"
+          type="button"
           onclick="setOffMessage('⏳ Sit la ap disponib talè.')"
         >
           ⏳ Sit la ap disponib talè.
@@ -260,6 +264,7 @@
 
         <button
           class="message-choice"
+          type="button"
           onclick="setOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')"
         >
           🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
@@ -272,6 +277,7 @@
 
         <button
           class="off"
+          type="button"
           onclick="setCustomOffMessage()"
         >
           🔴 METE SIT LA OFF AK MESAJ SA
@@ -290,6 +296,7 @@
 
       <button
         class="refresh"
+        type="button"
         onclick="loadOrders()"
       >
         🔄 RAFRECHI KÒMAND YO
@@ -342,7 +349,7 @@ async function loginAdmin() {
 
   if (!token) {
 
-    alert("Tanpri antre ADMIN_TOKEN ou.");
+    alert("⚠️ Tanpri antre ADMIN_TOKEN ou.");
 
     return;
   }
@@ -355,9 +362,16 @@ async function loginAdmin() {
       await fetch(`${API}/get-orders`, {
         method: "GET",
         headers: {
-          "x-admin-token": ADMIN_TOKEN
-        }
+          "x-admin-token": ADMIN_TOKEN,
+          "Accept": "application/json"
+        },
+        cache: "no-store"
       });
+
+
+    /*
+      401 = token pa bon
+    */
 
     if (response.status === 401) {
 
@@ -368,12 +382,59 @@ async function loginAdmin() {
       return;
     }
 
+
+    /*
+      Eseye li repons backend lan
+    */
+
+    let result = null;
+
+    try {
+
+      result = await response.json();
+
+    } catch (error) {
+
+      result = null;
+
+    }
+
+
+    /*
+      Nenpòt lòt HTTP error
+    */
+
     if (!response.ok) {
 
-      alert("❌ Backend la pa reponn.");
+      const backendMessage =
+        result &&
+        result.message
+          ? result.message
+          : "Backend error: HTTP " + response.status;
+
+      alert("❌ " + backendMessage);
 
       return;
     }
+
+
+    /*
+      Si backend lan reponn men success pa true
+    */
+
+    if (!result || result.success !== true) {
+
+      alert(
+        "❌ Backend lan pa valide koneksyon an."
+      );
+
+      return;
+    }
+
+
+    /*
+      LOGIN SIKSÈ
+    */
 
     document.getElementById(
       "loginBox"
@@ -383,20 +444,28 @@ async function loginAdmin() {
       "adminArea"
     ).style.display = "block";
 
+
     showMessage(
       "✅ Admin konekte avèk siksè.",
       "#5ee39a"
     );
 
+
     await loadSiteStatus();
-    await loadOrders();
+
+    renderOrders(
+      result.orders || []
+    );
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
 
     alert(
-      "❌ Pa kapab konekte ak backend la."
+      "❌ Pa kapab kontakte backend la. Verifye URL Function lan."
     );
 
   }
@@ -418,14 +487,32 @@ async function loadSiteStatus() {
         cache: "no-store"
       });
 
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Site status HTTP " +
+        response.status
+      );
+
+    }
+
+
     const data =
       await response.json();
 
-    updateSiteDisplay(data.enabled !== false);
+
+    updateSiteDisplay(
+      data.enabled !== false
+    );
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "SITE STATUS ERROR:",
+      error
+    );
 
   }
 
@@ -435,7 +522,10 @@ async function loadSiteStatus() {
 function updateSiteDisplay(isOpen) {
 
   const status =
-    document.getElementById("siteStatus");
+    document.getElementById(
+      "siteStatus"
+    );
+
 
   if (isOpen) {
 
@@ -464,11 +554,9 @@ function updateSiteDisplay(isOpen) {
 
 function showOffArea() {
 
-  const area =
-    document.getElementById("offArea");
-
-  area.style.display =
-    "block";
+  document.getElementById(
+    "offArea"
+  ).style.display = "block";
 
 }
 
@@ -498,14 +586,16 @@ async function setCustomOffMessage() {
       "customMessage"
     ).value.trim();
 
+
   if (!message) {
 
     alert(
-      "Tanpri ekri yon mesaj."
+      "⚠️ Tanpri ekri yon mesaj."
     );
 
     return;
   }
+
 
   await saveSiteStatus(
     false,
@@ -527,11 +617,12 @@ async function saveSiteStatus(
   if (!ADMIN_TOKEN) {
 
     alert(
-      "Admin pa konekte."
+      "❌ Admin pa konekte."
     );
 
     return;
   }
+
 
   try {
 
@@ -550,27 +641,57 @@ async function saveSiteStatus(
         })
       });
 
-    const result =
-      await response.json();
 
-    if (!response.ok || !result.success) {
+    let result = null;
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch (error) {
+
+      result = null;
+
+    }
+
+
+    if (!response.ok) {
 
       throw new Error(
-        result.message ||
-        "Erè site status."
+        result &&
+        result.message
+          ? result.message
+          : "HTTP " +
+            response.status
       );
 
     }
 
-    updateSiteDisplay(enabled);
+
+    if (!result || !result.success) {
+
+      throw new Error(
+        "Backend lan pa konfime chanjman an."
+      );
+
+    }
+
+
+    updateSiteDisplay(
+      enabled
+    );
+
 
     document.getElementById(
       "offArea"
     ).style.display = "none";
 
+
     document.getElementById(
       "customMessage"
     ).value = "";
+
 
     showMessage(
       enabled
@@ -581,12 +702,17 @@ async function saveSiteStatus(
         : "#ff7777"
     );
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "SITE STATUS ERROR:",
+      error
+    );
+
 
     showMessage(
-      "❌ Pa kapab chanje status sit la.",
+      "❌ " + error.message,
       "#ff4d4d"
     );
 
@@ -616,10 +742,23 @@ async function siteOn() {
 async function loadOrders() {
 
   const ordersBox =
-    document.getElementById("orders");
+    document.getElementById(
+      "orders"
+    );
+
 
   ordersBox.innerHTML =
     '<div class="empty">⏳ Kòmand yo ap chaje...</div>';
+
+
+  if (!ADMIN_TOKEN) {
+
+    ordersBox.innerHTML =
+      '<div class="empty">❌ Admin pa konekte.</div>';
+
+    return;
+  }
+
 
   try {
 
@@ -628,10 +767,27 @@ async function loadOrders() {
         method: "GET",
         headers: {
           "x-admin-token":
-            ADMIN_TOKEN
+            ADMIN_TOKEN,
+          "Accept":
+            "application/json"
         },
         cache: "no-store"
       });
+
+
+    let result = null;
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch (error) {
+
+      result = null;
+
+    }
+
 
     if (response.status === 401) {
 
@@ -641,28 +797,46 @@ async function loadOrders() {
       return;
     }
 
-    const result =
-      await response.json();
 
-    if (!response.ok || !result.success) {
+    if (!response.ok) {
 
       throw new Error(
-        result.message ||
-        "Erè lè chaje kòmand yo."
+        result &&
+        result.message
+          ? result.message
+          : "HTTP " +
+            response.status
       );
 
     }
+
+
+    if (!result || !result.success) {
+
+      throw new Error(
+        "Backend lan pa konfime kòmand yo."
+      );
+
+    }
+
 
     renderOrders(
       result.orders || []
     );
 
+
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "LOAD ORDERS ERROR:",
+      error
+    );
+
 
     ordersBox.innerHTML =
-      '<div class="empty">❌ Kòmand yo pa ka chaje.</div>';
+      '<div class="empty">❌ ' +
+      escapeHtml(error.message) +
+      '</div>';
 
   }
 
@@ -676,7 +850,10 @@ async function loadOrders() {
 function renderOrders(orders) {
 
   const ordersBox =
-    document.getElementById("orders");
+    document.getElementById(
+      "orders"
+    );
+
 
   if (!orders.length) {
 
@@ -686,15 +863,21 @@ function renderOrders(orders) {
     return;
   }
 
+
   ordersBox.innerHTML = "";
+
 
   orders.forEach(order => {
 
     const div =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
+
 
     div.className =
       "order";
+
 
     const date =
       order.createdAt
@@ -703,38 +886,103 @@ function renderOrders(orders) {
           ).toLocaleString()
         : "N/A";
 
+
     let statusText =
       "🟡 AN ATANT";
 
-    if (order.status === "processing") {
+
+    if (
+      order.status ===
+      "processing"
+    ) {
+
       statusText =
         "⏳ AP TRAITE";
+
     }
 
-    if (order.status === "failed") {
+
+    if (
+      order.status ===
+      "failed"
+    ) {
+
       statusText =
         "❌ ÉCHEC";
+
     }
 
-    if (order.status === "success") {
+
+    if (
+      order.status ===
+      "success"
+    ) {
+
       statusText =
         "✅ SIKSÈ";
+
     }
+
+
+    let buttons = "";
+
+
+    if (
+      order.status ===
+      "pending"
+    ) {
+
+      buttons = `
+
+        <div class="order-buttons">
+
+          <button
+            class="process"
+            type="button"
+            onclick="updateOrder(
+              '${escapeJs(order.id || "")}',
+              'processing'
+            )"
+          >
+            ✅ VALIDÉ
+          </button>
+
+          <button
+            class="failed"
+            type="button"
+            onclick="updateOrder(
+              '${escapeJs(order.id || "")}',
+              'failed'
+            )"
+          >
+            ❌ ÉCHEC
+          </button>
+
+        </div>
+
+      `;
+
+    }
+
 
     div.innerHTML = `
 
       <div class="status">
-        ${statusText}
+        ${escapeHtml(statusText)}
       </div>
 
       <div class="line">
         <span>🆔 ID:</span>
-        <strong>${escapeHtml(order.id || "")}</strong>
+        <strong>
+          ${escapeHtml(order.id || "")}
+        </strong>
       </div>
 
       <div class="line">
         <span>🎮 UID:</span>
-        <strong>${escapeHtml(order.uid || "")}</strong>
+        <strong>
+          ${escapeHtml(order.uid || "")}
+        </strong>
       </div>
 
       <div class="line">
@@ -747,21 +995,27 @@ function renderOrders(orders) {
       <div class="line">
         <span>💰 Pri:</span>
         <strong class="price">
-          ${escapeHtml(String(order.price || ""))} GDS
+          ${escapeHtml(
+            String(order.price || "")
+          )} GDS
         </strong>
       </div>
 
       <div class="line">
         <span>📱 Nimewo:</span>
         <strong>
-          ${escapeHtml(order.senderNumber || "")}
+          ${escapeHtml(
+            order.senderNumber || ""
+          )}
         </strong>
       </div>
 
       <div class="line">
         <span>🌎 Server:</span>
         <strong>
-          ${escapeHtml(order.server || "")}
+          ${escapeHtml(
+            order.server || ""
+          )}
         </strong>
       </div>
 
@@ -772,39 +1026,14 @@ function renderOrders(orders) {
         </strong>
       </div>
 
-      ${
-        order.status === "pending"
-        ? `
-          <div class="order-buttons">
-
-            <button
-              class="process"
-              onclick="updateOrder(
-                '${escapeHtml(order.id)}',
-                'processing'
-              )"
-            >
-              ✅ VALIDÉ
-            </button>
-
-            <button
-              class="failed"
-              onclick="updateOrder(
-                '${escapeHtml(order.id)}',
-                'failed'
-              )"
-            >
-              ❌ ÉCHEC
-            </button>
-
-          </div>
-        `
-        : ""
-      }
+      ${buttons}
 
     `;
 
-    ordersBox.appendChild(div);
+
+    ordersBox.appendChild(
+      div
+    );
 
   });
 
@@ -823,11 +1052,12 @@ async function updateOrder(
   if (!ADMIN_TOKEN) {
 
     alert(
-      "Admin pa konekte."
+      "❌ Admin pa konekte."
     );
 
     return;
   }
+
 
   try {
 
@@ -846,17 +1076,42 @@ async function updateOrder(
         })
       });
 
-    const result =
-      await response.json();
 
-    if (!response.ok || !result.success) {
+    let result = null;
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch (error) {
+
+      result = null;
+
+    }
+
+
+    if (!response.ok) {
 
       throw new Error(
-        result.message ||
-        "Erè kòmand."
+        result &&
+        result.message
+          ? result.message
+          : "HTTP " +
+            response.status
       );
 
     }
+
+
+    if (!result || !result.success) {
+
+      throw new Error(
+        "Backend lan pa konfime chanjman an."
+      );
+
+    }
+
 
     showMessage(
       status === "processing"
@@ -867,14 +1122,21 @@ async function updateOrder(
         : "#ff7777"
     );
 
+
     await loadOrders();
+
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "UPDATE ORDER ERROR:",
+      error
+    );
+
 
     showMessage(
-      "❌ Pa kapab modifye kòmand lan.",
+      "❌ " +
+      error.message,
       "#ff4d4d"
     );
 
@@ -884,21 +1146,63 @@ async function updateOrder(
 
 
 /* =========================
-   SECURITY DISPLAY
+   ESCAPE HTML
 ========================= */
 
 function escapeHtml(value) {
 
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =========================
+   ESCAPE JAVASCRIPT
+========================= */
+
+function escapeJs(value) {
+
+  return String(value)
+    .replaceAll(
+      "\\",
+      "\\\\"
+    )
+    .replaceAll(
+      "'",
+      "\\'"
+    )
+    .replaceAll(
+      "\n",
+      "\\n"
+    )
+    .replaceAll(
+      "\r",
+      "\\r"
+    );
 
 }
 
 </script>
 
 </body>
-          </html>
+  </html>
