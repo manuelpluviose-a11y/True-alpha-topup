@@ -155,6 +155,39 @@
       flex: 1;
     }
 
+    /* SISTÈM PAGINATION AK FLÈCH */
+    .pagination-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background: #0e0e17;
+      padding: 8px 12px;
+      border-radius: 9px;
+      border: 1px solid #303044;
+    }
+
+    .pagination-btn {
+      width: auto;
+      padding: 8px 16px;
+      margin-top: 0;
+      background: #00e5ff;
+      color: #001014;
+    }
+
+    .pagination-btn:disabled {
+      background: #36364a;
+      color: #777;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      font-size: 14px;
+      font-weight: bold;
+      color: #00e5ff;
+    }
+
     #adminArea {
       display: none;
     }
@@ -302,6 +335,13 @@
         🔄 RAFRECHI KÒMAND YO
       </button>
 
+      <!-- PANÈL NAVIGASYON FLÈCH -->
+      <div id="paginationNav" class="pagination-container" style="display: none;">
+        <button id="prevBtn" class="pagination-btn" type="button" onclick="changeOrderPage(-1)">⬅️ Prèsedan</button>
+        <span id="pageInfo" class="pagination-info">1 / 1</span>
+        <button id="nextBtn" class="pagination-btn" type="button" onclick="changeOrderPage(1)">Swivan ➡️</button>
+      </div>
+
       <div id="orders">
         <div class="empty">
           Peze RAFRECHI pou chaje kòmand yo.
@@ -320,6 +360,8 @@
 const API = "/.netlify/functions";
 
 let ADMIN_TOKEN = "";
+let allOrdersList = [];
+let currentOrderIndex = 0;
 
 
 /* =========================
@@ -368,11 +410,6 @@ async function loginAdmin() {
         cache: "no-store"
       });
 
-
-    /*
-      401 = token pa bon
-    */
-
     if (response.status === 401) {
 
       ADMIN_TOKEN = "";
@@ -381,11 +418,6 @@ async function loginAdmin() {
 
       return;
     }
-
-
-    /*
-      Eseye li repons backend lan
-    */
 
     let result = null;
 
@@ -398,11 +430,6 @@ async function loginAdmin() {
       result = null;
 
     }
-
-
-    /*
-      Nenpòt lòt HTTP error
-    */
 
     if (!response.ok) {
 
@@ -417,11 +444,6 @@ async function loginAdmin() {
       return;
     }
 
-
-    /*
-      Si backend lan reponn men success pa true
-    */
-
     if (!result || result.success !== true) {
 
       alert(
@@ -431,10 +453,7 @@ async function loginAdmin() {
       return;
     }
 
-
-    /*
-      LOGIN SIKSÈ
-    */
+    /* LOGIN SIKSÈ */
 
     document.getElementById(
       "loginBox"
@@ -444,18 +463,16 @@ async function loginAdmin() {
       "adminArea"
     ).style.display = "block";
 
-
     showMessage(
       "✅ Admin konekte avèk siksè.",
       "#5ee39a"
     );
 
-
     await loadSiteStatus();
 
-    renderOrders(
-      result.orders || []
-    );
+    allOrdersList = result.orders || [];
+    currentOrderIndex = 0;
+    renderOrders();
 
   } catch (error) {
 
@@ -487,7 +504,6 @@ async function loadSiteStatus() {
         cache: "no-store"
       });
 
-
     if (!response.ok) {
 
       throw new Error(
@@ -497,15 +513,12 @@ async function loadSiteStatus() {
 
     }
 
-
     const data =
       await response.json();
-
 
     updateSiteDisplay(
       data.enabled !== false
     );
-
 
   } catch (error) {
 
@@ -525,7 +538,6 @@ function updateSiteDisplay(isOpen) {
     document.getElementById(
       "siteStatus"
     );
-
 
   if (isOpen) {
 
@@ -586,7 +598,6 @@ async function setCustomOffMessage() {
       "customMessage"
     ).value.trim();
 
-
   if (!message) {
 
     alert(
@@ -595,7 +606,6 @@ async function setCustomOffMessage() {
 
     return;
   }
-
 
   await saveSiteStatus(
     false,
@@ -623,7 +633,6 @@ async function saveSiteStatus(
     return;
   }
 
-
   try {
 
     const response =
@@ -641,7 +650,6 @@ async function saveSiteStatus(
         })
       });
 
-
     let result = null;
 
     try {
@@ -655,7 +663,6 @@ async function saveSiteStatus(
 
     }
 
-
     if (!response.ok) {
 
       throw new Error(
@@ -668,7 +675,6 @@ async function saveSiteStatus(
 
     }
 
-
     if (!result || !result.success) {
 
       throw new Error(
@@ -677,21 +683,17 @@ async function saveSiteStatus(
 
     }
 
-
     updateSiteDisplay(
       enabled
     );
-
 
     document.getElementById(
       "offArea"
     ).style.display = "none";
 
-
     document.getElementById(
       "customMessage"
     ).value = "";
-
 
     showMessage(
       enabled
@@ -702,14 +704,12 @@ async function saveSiteStatus(
         : "#ff7777"
     );
 
-
   } catch (error) {
 
     console.error(
       "SITE STATUS ERROR:",
       error
     );
-
 
     showMessage(
       "❌ " + error.message,
@@ -746,10 +746,8 @@ async function loadOrders() {
       "orders"
     );
 
-
   ordersBox.innerHTML =
     '<div class="empty">⏳ Kòmand yo ap chaje...</div>';
-
 
   if (!ADMIN_TOKEN) {
 
@@ -758,7 +756,6 @@ async function loadOrders() {
 
     return;
   }
-
 
   try {
 
@@ -774,7 +771,6 @@ async function loadOrders() {
         cache: "no-store"
       });
 
-
     let result = null;
 
     try {
@@ -788,7 +784,6 @@ async function loadOrders() {
 
     }
 
-
     if (response.status === 401) {
 
       ordersBox.innerHTML =
@@ -796,7 +791,6 @@ async function loadOrders() {
 
       return;
     }
-
 
     if (!response.ok) {
 
@@ -810,7 +804,6 @@ async function loadOrders() {
 
     }
 
-
     if (!result || !result.success) {
 
       throw new Error(
@@ -819,11 +812,9 @@ async function loadOrders() {
 
     }
 
-
-    renderOrders(
-      result.orders || []
-    );
-
+    allOrdersList = result.orders || [];
+    currentOrderIndex = 0;
+    renderOrders();
 
   } catch (error) {
 
@@ -831,7 +822,6 @@ async function loadOrders() {
       "LOAD ORDERS ERROR:",
       error
     );
-
 
     ordersBox.innerHTML =
       '<div class="empty">❌ ' +
@@ -844,18 +834,45 @@ async function loadOrders() {
 
 
 /* =========================
-   RENDER ORDERS
+   PAGINATION (FLÈCH)
 ========================= */
 
-function renderOrders(orders) {
+function changeOrderPage(direction) {
+
+  currentOrderIndex += direction;
+
+  if (currentOrderIndex < 0) {
+    currentOrderIndex = 0;
+  }
+
+  if (currentOrderIndex >= allOrdersList.length) {
+    currentOrderIndex = allOrdersList.length - 1;
+  }
+
+  renderOrders();
+
+}
+
+
+/* =========================
+   RENDER ORDERS (AK FLÈCH)
+========================= */
+
+function renderOrders() {
 
   const ordersBox =
     document.getElementById(
       "orders"
     );
 
+  const paginationNav =
+    document.getElementById(
+      "paginationNav"
+    );
 
-  if (!orders.length) {
+  if (!allOrdersList.length) {
+
+    paginationNav.style.display = "none";
 
     ordersBox.innerHTML =
       '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
@@ -863,179 +880,188 @@ function renderOrders(orders) {
     return;
   }
 
+  /*
+    Triye pou kòmand an atant (pending) parèt an premye
+  */
+
+  allOrdersList.sort((a, b) => {
+    if (a.status === 'pending' && b.status !== 'pending') return -1;
+    if (a.status !== 'pending' && b.status === 'pending') return 1;
+    return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+  });
+
+  /*
+    Afiche Navigasyon an
+  */
+
+  paginationNav.style.display = "flex";
+
+  document.getElementById("pageInfo").textContent =
+    `${currentOrderIndex + 1} / ${allOrdersList.length}`;
+
+  document.getElementById("prevBtn").disabled = (currentOrderIndex === 0);
+
+  document.getElementById("nextBtn").disabled = (currentOrderIndex === allOrdersList.length - 1);
 
   ordersBox.innerHTML = "";
 
+  const order = allOrdersList[currentOrderIndex];
 
-  orders.forEach(order => {
+  const div =
+    document.createElement(
+      "div"
+    );
 
-    const div =
-      document.createElement(
-        "div"
-      );
+  div.className =
+    "order";
 
+  const date =
+    order.createdAt
+      ? new Date(
+          order.createdAt
+        ).toLocaleString()
+      : "N/A";
 
-    div.className =
-      "order";
+  let statusText =
+    "🟡 AN ATANT";
 
+  if (
+    order.status ===
+    "processing"
+  ) {
 
-    const date =
-      order.createdAt
-        ? new Date(
-            order.createdAt
-          ).toLocaleString()
-        : "N/A";
+    statusText =
+      "⏳ AP TRAITE";
 
+  }
 
-    let statusText =
-      "🟡 AN ATANT";
+  if (
+    order.status ===
+    "failed"
+  ) {
 
+    statusText =
+      "❌ ÉCHEC";
 
-    if (
-      order.status ===
-      "processing"
-    ) {
+  }
 
-      statusText =
-        "⏳ AP TRAITE";
+  if (
+    order.status ===
+    "success"
+  ) {
 
-    }
+    statusText =
+      "✅ SIKSÈ";
 
+  }
 
-    if (
-      order.status ===
-      "failed"
-    ) {
+  let buttons = "";
 
-      statusText =
-        "❌ ÉCHEC";
+  if (
+    order.status ===
+    "pending"
+  ) {
 
-    }
+    buttons = `
 
+      <div class="order-buttons">
 
-    if (
-      order.status ===
-      "success"
-    ) {
+        <button
+          class="process"
+          type="button"
+          onclick="updateOrder(
+            '${escapeJs(order.id || "")}',
+            'processing'
+          )"
+        >
+          ✅ VALIDÉ
+        </button>
 
-      statusText =
-        "✅ SIKSÈ";
+        <button
+          class="failed"
+          type="button"
+          onclick="updateOrder(
+            '${escapeJs(order.id || "")}',
+            'failed'
+          )"
+        >
+          ❌ ÉCHEC
+        </button>
 
-    }
-
-
-    let buttons = "";
-
-
-    if (
-      order.status ===
-      "pending"
-    ) {
-
-      buttons = `
-
-        <div class="order-buttons">
-
-          <button
-            class="process"
-            type="button"
-            onclick="updateOrder(
-              '${escapeJs(order.id || "")}',
-              'processing'
-            )"
-          >
-            ✅ VALIDÉ
-          </button>
-
-          <button
-            class="failed"
-            type="button"
-            onclick="updateOrder(
-              '${escapeJs(order.id || "")}',
-              'failed'
-            )"
-          >
-            ❌ ÉCHEC
-          </button>
-
-        </div>
-
-      `;
-
-    }
-
-
-    div.innerHTML = `
-
-      <div class="status">
-        ${escapeHtml(statusText)}
       </div>
-
-      <div class="line">
-        <span>🆔 ID:</span>
-        <strong>
-          ${escapeHtml(order.id || "")}
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>🎮 UID:</span>
-        <strong>
-          ${escapeHtml(order.uid || "")}
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>💎 Pack:</span>
-        <strong class="pack">
-          ${escapeHtml(order.pack || "")}
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>💰 Pri:</span>
-        <strong class="price">
-          ${escapeHtml(
-            String(order.price || "")
-          )} GDS
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>📱 Nimewo:</span>
-        <strong>
-          ${escapeHtml(
-            order.senderNumber || ""
-          )}
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>🌎 Server:</span>
-        <strong>
-          ${escapeHtml(
-            order.server || ""
-          )}
-        </strong>
-      </div>
-
-      <div class="line">
-        <span>🕐 Kòmand:</span>
-        <strong>
-          ${escapeHtml(date)}
-        </strong>
-      </div>
-
-      ${buttons}
 
     `;
 
+  }
 
-    ordersBox.appendChild(
-      div
-    );
+  div.innerHTML = `
 
-  });
+    <div class="status">
+      ${escapeHtml(statusText)}
+    </div>
+
+    <div class="line">
+      <span>🆔 ID:</span>
+      <strong>
+        ${escapeHtml(order.id || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🎮 UID:</span>
+      <strong>
+        ${escapeHtml(order.uid || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>💎 Pack:</span>
+      <strong class="pack">
+        ${escapeHtml(order.pack || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>💰 Pri:</span>
+      <strong class="price">
+        ${escapeHtml(
+          String(order.price || "")
+        )} GDS
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>📱 Nimewo:</span>
+      <strong>
+        ${escapeHtml(
+          order.senderNumber || ""
+        )}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🌎 Server:</span>
+      <strong>
+        ${escapeHtml(
+          order.server || ""
+        )}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🕐 Kòmand:</span>
+      <strong>
+        ${escapeHtml(date)}
+      </strong>
+    </div>
+
+    ${buttons}
+
+  `;
+
+  ordersBox.appendChild(
+    div
+  );
 
 }
 
@@ -1058,8 +1084,14 @@ async function updateOrder(
     return;
   }
 
-
   try {
+
+    /* ===================================================
+       PLAS POU API DYAMAN AN LÈ W PARE:
+       Si status === 'processing', ou ka fè yon fetch()
+       voye bay API dyaman Free Fire ou an la anvan
+       voye rezilta a bay update-order Netlify Function la.
+    =================================================== */
 
     const response =
       await fetch(`${API}/update-order`, {
@@ -1076,7 +1108,6 @@ async function updateOrder(
         })
       });
 
-
     let result = null;
 
     try {
@@ -1090,7 +1121,6 @@ async function updateOrder(
 
     }
 
-
     if (!response.ok) {
 
       throw new Error(
@@ -1103,7 +1133,6 @@ async function updateOrder(
 
     }
 
-
     if (!result || !result.success) {
 
       throw new Error(
@@ -1111,7 +1140,6 @@ async function updateOrder(
       );
 
     }
-
 
     showMessage(
       status === "processing"
@@ -1122,9 +1150,7 @@ async function updateOrder(
         : "#ff7777"
     );
 
-
     await loadOrders();
-
 
   } catch (error) {
 
@@ -1132,7 +1158,6 @@ async function updateOrder(
       "UPDATE ORDER ERROR:",
       error
     );
-
 
     showMessage(
       "❌ " +
@@ -1205,4 +1230,4 @@ function escapeJs(value) {
 </script>
 
 </body>
-  </html>
+</html>
