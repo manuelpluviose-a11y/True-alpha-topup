@@ -320,27 +320,27 @@
               -- Chwazi yon pack --
             </option>
 
-            <option value="100+10" data-price="200">
+            <option value="100+10 💎" data-price="200">
               100 + 10 💎 — 200 GDS
             </option>
 
-            <option value="310+31" data-price="490">
+            <option value="310+31 💎" data-price="490">
               310 + 31 💎 — 490 GDS
             </option>
 
-            <option value="520+52" data-price="900">
+            <option value="520+52 💎" data-price="900">
               520 + 52 💎 — 900 GDS
             </option>
 
-            <option value="1060+106" data-price="1600">
+            <option value="1060+106 💎" data-price="1600">
               1,060 + 106 💎 — 1,600 GDS
             </option>
 
-            <option value="2180+218" data-price="3100">
+            <option value="2180+218 💎" data-price="3100">
               2,180 + 218 💎 — 3,100 GDS
             </option>
 
-            <option value="5600+560" data-price="8010">
+            <option value="5600+560 💎" data-price="8010">
               5,600 + 560 💎 — 8,010 GDS
             </option>
 
@@ -379,6 +379,7 @@
 
           <button
             type="button"
+            id="orderBtn"
             onclick="submitOrder()"
           >
             💎 FÈ KÒMAND LAN
@@ -664,9 +665,10 @@ async function submitOrder() {
   const packSelect = document.getElementById("pack");
   const pack = packSelect.value;
   const selected = packSelect.options[packSelect.selectedIndex];
-  const price = selected.getAttribute("data-price");
+  const price = selected ? selected.getAttribute("data-price") : null;
   const senderNumber = document.getElementById("senderNumber").value.trim();
   const message = document.getElementById("message");
+  const orderBtn = document.getElementById("orderBtn");
 
   message.style.display = "block";
 
@@ -688,11 +690,13 @@ async function submitOrder() {
     return;
   }
 
+  // Efè lè moun lan klike: Bloke bouton an epi montre mesaj ap prepare
+  orderBtn.disabled = true;
   message.style.color = "#00e5ff";
-  message.textContent = "⏳ Kòmand lan ap voye...";
+  message.textContent = "⏳ N ap prepare kòmand ou an...";
 
   try {
-    const response = await fetch("/.netlify/functions/create-order", {
+    const response = await fetch(`${API}/create-order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -714,7 +718,10 @@ async function submitOrder() {
 
     message.style.color = "#5ee39a";
     message.textContent =
-      "✅ Kòmand lan antre avèk siksè. ID: " + result.order.id;
+      "✅ Kòmand ou an anrejistre avèk siksè! ID Kòmand: " + result.order.id;
+
+    // Netwaye fòm nan
+    document.getElementById("senderNumber").value = "";
 
   } catch (error) {
     console.error(error);
@@ -722,6 +729,8 @@ async function submitOrder() {
     message.style.color = "#ff4d4d";
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
+  } finally {
+    orderBtn.disabled = false;
   }
 }
 
@@ -735,4 +744,4 @@ checkSiteStatus();
 </script>
 
 </body>
-    </html>
+</html>
