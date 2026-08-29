@@ -235,6 +235,20 @@
       line-height: 1.5;
       font-size: 14px;
     }
+
+    .processing {
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.45;
+      }
+    }
   </style>
 </head>
 
@@ -251,14 +265,12 @@
   <div id="mainService">
 
     <div class="service" onclick="openOrder()">
-
       <div class="ff-icon">🎮</div>
 
       <div>
         <h2>FREE FIRE TOPUP PAR UID</h2>
         <p>👆 Klike sou li epi swiv enstriksyon yo</p>
       </div>
-
     </div>
 
     <div id="orderBox">
@@ -272,9 +284,7 @@
           <strong>NA — Amérique du Nord</strong>
         </div>
 
-        <label for="uid">
-          UID Free Fire
-        </label>
+        <label for="uid">UID Free Fire</label>
 
         <input
           type="text"
@@ -284,9 +294,7 @@
           autocomplete="off"
         >
 
-        <label for="confirmUid">
-          Konfime UID Free Fire
-        </label>
+        <label for="confirmUid">Konfime UID Free Fire</label>
 
         <input
           type="text"
@@ -310,9 +318,7 @@
 
         <div id="purchaseArea">
 
-          <label for="pack">
-            Chwazi Pack
-          </label>
+          <label for="pack">Chwazi Pack</label>
 
           <select id="pack" onchange="updatePrice()">
 
@@ -348,14 +354,10 @@
 
           <div class="price">
             <small>Pri pou peye</small>
-
-            <strong id="price">
-              0 GDS
-            </strong>
+            <strong id="price">0 GDS</strong>
           </div>
 
           <div class="payment">
-
             💳 Voye kòb la sou Natcash<br>
 
             📱 Nimewo:
@@ -363,7 +365,6 @@
 
             👤 Non:
             <strong>Manuel Pluviose</strong>
-
           </div>
 
           <label for="senderNumber">
@@ -416,9 +417,13 @@
 
 <script>
 
-const API = "/.netlify/functions";
+/*
+  VERCEL API
+*/
+const API = "/api";
 
 let siteIsOpen = true;
+let currentOrderId = null;
 
 
 /* =========================
@@ -450,7 +455,6 @@ async function checkSiteStatus() {
     const service =
       document.getElementById("mainService");
 
-
     if (!siteIsOpen) {
 
       service.style.display = "none";
@@ -466,7 +470,6 @@ async function checkSiteStatus() {
       service.style.display = "block";
 
       closed.style.display = "none";
-
     }
 
   } catch (error) {
@@ -487,7 +490,9 @@ async function checkSiteStatus() {
 function openOrder() {
 
   if (!siteIsOpen) {
+
     checkSiteStatus();
+
     return;
   }
 
@@ -564,21 +569,14 @@ function verifyUID() {
       "purchaseArea"
     );
 
-
-  message.style.display =
-    "block";
-
+  message.style.display = "block";
 
   if (!uid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri antre UID Free Fire ou.";
@@ -586,17 +584,12 @@ function verifyUID() {
     return;
   }
 
-
   if (!confirmUid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri re-antre UID la.";
@@ -604,17 +597,12 @@ function verifyUID() {
     return;
   }
 
-
   if (!/^[0-9]+$/.test(uid)) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ UID la dwe genyen sèlman chif.";
@@ -622,17 +610,12 @@ function verifyUID() {
     return;
   }
 
-
   if (uid !== confirmUid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ UID yo pa menm.";
@@ -640,15 +623,10 @@ function verifyUID() {
     return;
   }
 
+  verified.style.display = "block";
+  purchaseArea.style.display = "block";
 
-  verified.style.display =
-    "block";
-
-  purchaseArea.style.display =
-    "block";
-
-  message.style.color =
-    "#00e5ff";
+  message.style.color = "#00e5ff";
 
   message.textContent =
     "✅ UID la konfime. Ou ka chwazi pack ou a.";
@@ -660,78 +638,264 @@ function verifyUID() {
 ========================= */
 
 async function submitOrder() {
-  const uid = document.getElementById("uid").value.trim();
-  const confirmUid = document.getElementById("confirmUid").value.trim();
-  const packSelect = document.getElementById("pack");
-  const pack = packSelect.value;
-  const selected = packSelect.options[packSelect.selectedIndex];
-  const price = selected ? selected.getAttribute("data-price") : null;
-  const senderNumber = document.getElementById("senderNumber").value.trim();
-  const message = document.getElementById("message");
-  const orderBtn = document.getElementById("orderBtn");
+
+  const uid =
+    document.getElementById(
+      "uid"
+    ).value.trim();
+
+  const confirmUid =
+    document.getElementById(
+      "confirmUid"
+    ).value.trim();
+
+  const packSelect =
+    document.getElementById(
+      "pack"
+    );
+
+  const pack =
+    packSelect.value;
+
+  const selected =
+    packSelect.options[
+      packSelect.selectedIndex
+    ];
+
+  const price =
+    selected
+      ? selected.getAttribute(
+          "data-price"
+        )
+      : null;
+
+  const senderNumber =
+    document.getElementById(
+      "senderNumber"
+    ).value.trim();
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  const orderBtn =
+    document.getElementById(
+      "orderBtn"
+    );
+
 
   message.style.display = "block";
 
+
   if (!uid || !confirmUid || uid !== confirmUid) {
+
     message.style.color = "#ff4d4d";
-    message.textContent = "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
+
+    message.textContent =
+      "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
+
     return;
   }
+
 
   if (!pack || !price) {
+
     message.style.color = "#ffcc00";
-    message.textContent = "⚠️ Tanpri chwazi yon pack.";
+
+    message.textContent =
+      "⚠️ Tanpri chwazi yon pack.";
+
     return;
   }
+
 
   if (!senderNumber) {
+
     message.style.color = "#ffcc00";
-    message.textContent = "⚠️ Tanpri mete nimewo ki voye kòb la.";
+
+    message.textContent =
+      "⚠️ Tanpri mete nimewo ki voye kòb la.";
+
     return;
   }
 
-  // Efè lè moun lan klike: Bloke bouton an epi montre mesaj ap prepare
+
+  /*
+    BLOKE DOUBLE CLICK
+  */
+
   orderBtn.disabled = true;
+
+  message.classList.add("processing");
+
   message.style.color = "#00e5ff";
-  message.textContent = "⏳ N ap prepare kòmand ou an...";
+
+  message.textContent =
+    "⏳ N ap prepare kòmand ou an...";
+
 
   try {
-    const response = await fetch(`${API}/create-order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        uid: uid,
-        pack: pack,
-        price: Number(price),
-        senderNumber: senderNumber,
-        server: "NA — Amérique du Nord"
-      })
-    });
 
-    const result = await response.json();
+    const response =
+      await fetch(
+        `${API}/create-order`,
+        {
+          method: "POST",
 
-    if (!response.ok || !result.success) {
-      throw new Error(result.message || "Kòmand lan pa antre.");
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            uid: uid,
+
+            pack: pack,
+
+            price: Number(price),
+
+            senderNumber:
+              senderNumber,
+
+            server:
+              "NA — Amérique du Nord"
+          })
+        }
+      );
+
+
+    let result;
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch {
+
+      throw new Error(
+        "Backend la pa voye JSON."
+      );
     }
 
-    message.style.color = "#5ee39a";
-    message.textContent =
-      "✅ Kòmand ou an anrejistre avèk siksè! ID Kòmand: " + result.order.id;
 
-    // Netwaye fòm nan
-    document.getElementById("senderNumber").value = "";
+    if (!response.ok || !result.success) {
+
+      throw new Error(
+        result.message ||
+        "Kòmand lan pa antre."
+      );
+    }
+
+
+    /*
+      KÒMAND LA ANTRE
+    */
+
+    currentOrderId =
+      result.order &&
+      result.order.id
+        ? result.order.id
+        : null;
+
+
+    message.classList.add(
+      "processing"
+    );
+
+    message.style.color =
+      "#00e5ff";
+
+    message.innerHTML =
+      "⏳ <strong>KÒMAND OU AN AP TRETE...</strong><br>" +
+      "💎 N ap verifye peman ou a.<br>" +
+      "🙏 Tanpri tann pandan admin lan ap trete kòmand lan.";
+
+
+    /*
+      Pa pèmèt kliyan an fè menm
+      kòmand lan de fwa.
+    */
+
+    orderBtn.disabled = true;
+
+
+    /*
+      Montre ID a si backend la voye li.
+    */
+
+    if (currentOrderId) {
+
+      message.innerHTML +=
+        "<br><small>ID Kòmand: " +
+        escapeHtml(currentOrderId) +
+        "</small>";
+    }
+
+
+    /*
+      IMPORTANT:
+      Pou paj kliyan an konnen lè admin
+      peze VALIDÉ oswa ÉCHEC,
+      nou pral bezwen order-status.js.
+    */
 
   } catch (error) {
-    console.error(error);
 
-    message.style.color = "#ff4d4d";
+    console.error(
+      "CREATE ORDER ERROR:",
+      error
+    );
+
+    message.classList.remove(
+      "processing"
+    );
+
+    message.style.color =
+      "#ff4d4d";
+
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
-  } finally {
+
     orderBtn.disabled = false;
   }
+}
+
+
+/* =========================
+   SECURITY DISPLAY
+========================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 }
 
 
