@@ -155,7 +155,6 @@
       flex: 1;
     }
 
-    /* SISTÈM PAGINATION AK FLÈCH */
     .pagination-container {
       display: flex;
       align-items: center;
@@ -220,8 +219,6 @@
 
   <h1>💎 TRUE ALPHA ADMIN</h1>
 
-  <!-- LOGIN -->
-
   <div class="card" id="loginBox">
 
     <h3>🔐 Admin Login</h3>
@@ -243,15 +240,9 @@
 
   </div>
 
-
-  <!-- ADMIN AREA -->
-
   <div id="adminArea">
 
     <div id="message"></div>
-
-
-    <!-- SITE CONTROL -->
 
     <div class="card">
 
@@ -279,7 +270,6 @@
       >
         🔴 SIT OFF
       </button>
-
 
       <div id="offArea">
 
@@ -320,9 +310,6 @@
 
     </div>
 
-
-    <!-- ORDERS -->
-
     <div class="card">
 
       <h3>📋 KÒMAND YO</h3>
@@ -335,11 +322,35 @@
         🔄 RAFRECHI KÒMAND YO
       </button>
 
-      <!-- PANÈL NAVIGASYON FLÈCH -->
-      <div id="paginationNav" class="pagination-container" style="display: none;">
-        <button id="prevBtn" class="pagination-btn" type="button" onclick="changeOrderPage(-1)">⬅️ Prèsedan</button>
-        <span id="pageInfo" class="pagination-info">1 / 1</span>
-        <button id="nextBtn" class="pagination-btn" type="button" onclick="changeOrderPage(1)">Swivan ➡️</button>
+      <div
+        id="paginationNav"
+        class="pagination-container"
+        style="display: none;"
+      >
+        <button
+          id="prevBtn"
+          class="pagination-btn"
+          type="button"
+          onclick="changeOrderPage(-1)"
+        >
+          ⬅️ Prèsedan
+        </button>
+
+        <span
+          id="pageInfo"
+          class="pagination-info"
+        >
+          1 / 1
+        </span>
+
+        <button
+          id="nextBtn"
+          class="pagination-btn"
+          type="button"
+          onclick="changeOrderPage(1)"
+        >
+          Swivan ➡️
+        </button>
       </div>
 
       <div id="orders">
@@ -354,21 +365,27 @@
 
 </div>
 
-
 <script>
 
-const API = "/.netlify/functions";
+/* =====================================
+   VERCEL API
+===================================== */
+
+const API = "/api";
 
 let ADMIN_TOKEN = "";
 let allOrdersList = [];
 let currentOrderIndex = 0;
 
 
-/* =========================
+/* =====================================
    MESSAGE
-========================= */
+===================================== */
 
-function showMessage(text, color = "#00e5ff") {
+function showMessage(
+  text,
+  color = "#00e5ff"
+) {
 
   const box =
     document.getElementById("message");
@@ -376,22 +393,26 @@ function showMessage(text, color = "#00e5ff") {
   box.style.display = "block";
   box.style.color = color;
   box.textContent = text;
-
 }
 
 
-/* =========================
+/* =====================================
    LOGIN
-========================= */
+===================================== */
 
 async function loginAdmin() {
 
   const token =
-    document.getElementById("adminToken").value.trim();
+    document
+      .getElementById("adminToken")
+      .value
+      .trim();
 
   if (!token) {
 
-    alert("⚠️ Tanpri antre ADMIN_TOKEN ou.");
+    alert(
+      "⚠️ Tanpri antre ADMIN_TOKEN ou."
+    );
 
     return;
   }
@@ -401,20 +422,30 @@ async function loginAdmin() {
   try {
 
     const response =
-      await fetch(`${API}/get-orders`, {
-        method: "GET",
-        headers: {
-          "x-admin-token": ADMIN_TOKEN,
-          "Accept": "application/json"
-        },
-        cache: "no-store"
-      });
+      await fetch(
+        `${API}/get-orders`,
+        {
+          method: "GET",
+
+          headers: {
+            "x-admin-token":
+              ADMIN_TOKEN,
+
+            "Accept":
+              "application/json"
+          },
+
+          cache: "no-store"
+        }
+      );
 
     if (response.status === 401) {
 
       ADMIN_TOKEN = "";
 
-      alert("❌ ADMIN_TOKEN la pa bon.");
+      alert(
+        "❌ ADMIN_TOKEN la pa bon."
+      );
 
       return;
     }
@@ -423,7 +454,8 @@ async function loginAdmin() {
 
     try {
 
-      result = await response.json();
+      result =
+        await response.json();
 
     } catch (error) {
 
@@ -437,14 +469,21 @@ async function loginAdmin() {
         result &&
         result.message
           ? result.message
-          : "Backend error: HTTP " + response.status;
+          : "Backend error: HTTP " +
+            response.status;
 
-      alert("❌ " + backendMessage);
+      alert(
+        "❌ " +
+        backendMessage
+      );
 
       return;
     }
 
-    if (!result || result.success !== true) {
+    if (
+      !result ||
+      result.success !== true
+    ) {
 
       alert(
         "❌ Backend lan pa valide koneksyon an."
@@ -452,8 +491,6 @@ async function loginAdmin() {
 
       return;
     }
-
-    /* LOGIN SIKSÈ */
 
     document.getElementById(
       "loginBox"
@@ -470,8 +507,11 @@ async function loginAdmin() {
 
     await loadSiteStatus();
 
-    allOrdersList = result.orders || [];
+    allOrdersList =
+      result.orders || [];
+
     currentOrderIndex = 0;
+
     renderOrders();
 
   } catch (error) {
@@ -482,27 +522,29 @@ async function loginAdmin() {
     );
 
     alert(
-      "❌ Pa kapab kontakte backend la. Verifye URL Function lan."
+      "❌ Pa kapab kontakte backend la."
     );
 
   }
-
 }
 
 
-/* =========================
+/* =====================================
    SITE STATUS
-========================= */
+===================================== */
 
 async function loadSiteStatus() {
 
   try {
 
     const response =
-      await fetch(`${API}/site-status`, {
-        method: "GET",
-        cache: "no-store"
-      });
+      await fetch(
+        `${API}/site-status`,
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
 
     if (!response.ok) {
 
@@ -528,11 +570,12 @@ async function loadSiteStatus() {
     );
 
   }
-
 }
 
 
-function updateSiteDisplay(isOpen) {
+function updateSiteDisplay(
+  isOpen
+) {
 
   const status =
     document.getElementById(
@@ -554,15 +597,13 @@ function updateSiteDisplay(isOpen) {
 
     status.textContent =
       "🔴 SIT LA OFF";
-
   }
-
 }
 
 
-/* =========================
-   SHOW OFF AREA
-========================= */
+/* =====================================
+   OFF AREA
+===================================== */
 
 function showOffArea() {
 
@@ -573,11 +614,9 @@ function showOffArea() {
 }
 
 
-/* =========================
-   SET OFF MESSAGE
-========================= */
-
-async function setOffMessage(message) {
+async function setOffMessage(
+  message
+) {
 
   await saveSiteStatus(
     false,
@@ -587,16 +626,15 @@ async function setOffMessage(message) {
 }
 
 
-/* =========================
-   CUSTOM OFF MESSAGE
-========================= */
-
 async function setCustomOffMessage() {
 
   const message =
-    document.getElementById(
-      "customMessage"
-    ).value.trim();
+    document
+      .getElementById(
+        "customMessage"
+      )
+      .value
+      .trim();
 
   if (!message) {
 
@@ -615,9 +653,9 @@ async function setCustomOffMessage() {
 }
 
 
-/* =========================
+/* =====================================
    SAVE SITE STATUS
-========================= */
+===================================== */
 
 async function saveSiteStatus(
   enabled,
@@ -636,19 +674,29 @@ async function saveSiteStatus(
   try {
 
     const response =
-      await fetch(`${API}/site-status`, {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-          "x-admin-token":
-            ADMIN_TOKEN
-        },
-        body: JSON.stringify({
-          enabled: enabled,
-          message: message || ""
-        })
-      });
+      await fetch(
+        `${API}/site-status`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "x-admin-token":
+              ADMIN_TOKEN
+          },
+
+          body:
+            JSON.stringify({
+              enabled:
+                enabled,
+
+              message:
+                message || ""
+            })
+        }
+      );
 
     let result = null;
 
@@ -675,7 +723,10 @@ async function saveSiteStatus(
 
     }
 
-    if (!result || !result.success) {
+    if (
+      !result ||
+      !result.success
+    ) {
 
       throw new Error(
         "Backend lan pa konfime chanjman an."
@@ -699,6 +750,7 @@ async function saveSiteStatus(
       enabled
         ? "🟢 Sit la ON."
         : "🔴 Sit la OFF. Mesaj la aktive.",
+
       enabled
         ? "#5ee39a"
         : "#ff7777"
@@ -712,18 +764,18 @@ async function saveSiteStatus(
     );
 
     showMessage(
-      "❌ " + error.message,
+      "❌ " +
+      error.message,
       "#ff4d4d"
     );
 
   }
-
 }
 
 
-/* =========================
+/* =====================================
    SIT ON
-========================= */
+===================================== */
 
 async function siteOn() {
 
@@ -735,9 +787,9 @@ async function siteOn() {
 }
 
 
-/* =========================
+/* =====================================
    LOAD ORDERS
-========================= */
+===================================== */
 
 async function loadOrders() {
 
@@ -760,16 +812,22 @@ async function loadOrders() {
   try {
 
     const response =
-      await fetch(`${API}/get-orders`, {
-        method: "GET",
-        headers: {
-          "x-admin-token":
-            ADMIN_TOKEN,
-          "Accept":
-            "application/json"
-        },
-        cache: "no-store"
-      });
+      await fetch(
+        `${API}/get-orders`,
+        {
+          method: "GET",
+
+          headers: {
+            "x-admin-token":
+              ADMIN_TOKEN,
+
+            "Accept":
+              "application/json"
+          },
+
+          cache: "no-store"
+        }
+      );
 
     let result = null;
 
@@ -804,7 +862,10 @@ async function loadOrders() {
 
     }
 
-    if (!result || !result.success) {
+    if (
+      !result ||
+      !result.success
+    ) {
 
       throw new Error(
         "Backend lan pa konfime kòmand yo."
@@ -812,8 +873,11 @@ async function loadOrders() {
 
     }
 
-    allOrdersList = result.orders || [];
+    allOrdersList =
+      result.orders || [];
+
     currentOrderIndex = 0;
+
     renderOrders();
 
   } catch (error) {
@@ -825,38 +889,51 @@ async function loadOrders() {
 
     ordersBox.innerHTML =
       '<div class="empty">❌ ' +
-      escapeHtml(error.message) +
+      escapeHtml(
+        error.message
+      ) +
       '</div>';
 
   }
-
 }
 
 
-/* =========================
-   PAGINATION (FLÈCH)
-========================= */
+/* =====================================
+   PAGINATION
+===================================== */
 
-function changeOrderPage(direction) {
+function changeOrderPage(
+  direction
+) {
 
-  currentOrderIndex += direction;
+  currentOrderIndex +=
+    direction;
 
-  if (currentOrderIndex < 0) {
+  if (
+    currentOrderIndex < 0
+  ) {
+
     currentOrderIndex = 0;
+
   }
 
-  if (currentOrderIndex >= allOrdersList.length) {
-    currentOrderIndex = allOrdersList.length - 1;
+  if (
+    currentOrderIndex >=
+    allOrdersList.length
+  ) {
+
+    currentOrderIndex =
+      allOrdersList.length - 1;
+
   }
 
   renderOrders();
-
 }
 
 
-/* =========================
-   RENDER ORDERS (AK FLÈCH)
-========================= */
+/* =====================================
+   RENDER ORDERS
+===================================== */
 
 function renderOrders() {
 
@@ -870,9 +947,12 @@ function renderOrders() {
       "paginationNav"
     );
 
-  if (!allOrdersList.length) {
+  if (
+    !allOrdersList.length
+  ) {
 
-    paginationNav.style.display = "none";
+    paginationNav.style.display =
+      "none";
 
     ordersBox.innerHTML =
       '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
@@ -880,32 +960,60 @@ function renderOrders() {
     return;
   }
 
-  /*
-    Triye pou kòmand an atant (pending) parèt an premye
-  */
+  allOrdersList.sort(
+    (a, b) => {
 
-  allOrdersList.sort((a, b) => {
-    if (a.status === 'pending' && b.status !== 'pending') return -1;
-    if (a.status !== 'pending' && b.status === 'pending') return 1;
-    return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
-  });
+      if (
+        a.status === "pending" &&
+        b.status !== "pending"
+      ) {
+        return -1;
+      }
 
-  /*
-    Afiche Navigasyon an
-  */
+      if (
+        a.status !== "pending" &&
+        b.status === "pending"
+      ) {
+        return 1;
+      }
 
-  paginationNav.style.display = "flex";
+      return (
+        new Date(
+          b.createdAt || 0
+        ) -
+        new Date(
+          a.createdAt || 0
+        )
+      );
 
-  document.getElementById("pageInfo").textContent =
+    }
+  );
+
+  paginationNav.style.display =
+    "flex";
+
+  document.getElementById(
+    "pageInfo"
+  ).textContent =
     `${currentOrderIndex + 1} / ${allOrdersList.length}`;
 
-  document.getElementById("prevBtn").disabled = (currentOrderIndex === 0);
+  document.getElementById(
+    "prevBtn"
+  ).disabled =
+    currentOrderIndex === 0;
 
-  document.getElementById("nextBtn").disabled = (currentOrderIndex === allOrdersList.length - 1);
+  document.getElementById(
+    "nextBtn"
+  ).disabled =
+    currentOrderIndex ===
+    allOrdersList.length - 1;
 
   ordersBox.innerHTML = "";
 
-  const order = allOrdersList[currentOrderIndex];
+  const order =
+    allOrdersList[
+      currentOrderIndex
+    ];
 
   const div =
     document.createElement(
@@ -991,7 +1099,6 @@ function renderOrders() {
       </div>
 
     `;
-
   }
 
   div.innerHTML = `
@@ -1025,7 +1132,9 @@ function renderOrders() {
       <span>💰 Pri:</span>
       <strong class="price">
         ${escapeHtml(
-          String(order.price || "")
+          String(
+            order.price || ""
+          )
         )} GDS
       </strong>
     </div>
@@ -1062,13 +1171,12 @@ function renderOrders() {
   ordersBox.appendChild(
     div
   );
-
 }
 
 
-/* =========================
+/* =====================================
    UPDATE ORDER
-========================= */
+===================================== */
 
 async function updateOrder(
   id,
@@ -1086,27 +1194,27 @@ async function updateOrder(
 
   try {
 
-    /* ===================================================
-       PLAS POU API DYAMAN AN LÈ W PARE:
-       Si status === 'processing', ou ka fè yon fetch()
-       voye bay API dyaman Free Fire ou an la anvan
-       voye rezilta a bay update-order Netlify Function la.
-    =================================================== */
-
     const response =
-      await fetch(`${API}/update-order`, {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-          "x-admin-token":
-            ADMIN_TOKEN
-        },
-        body: JSON.stringify({
-          id: id,
-          status: status
-        })
-      });
+      await fetch(
+        `${API}/update-order`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "x-admin-token":
+              ADMIN_TOKEN
+          },
+
+          body:
+            JSON.stringify({
+              id: id,
+              status: status
+            })
+        }
+      );
 
     let result = null;
 
@@ -1133,7 +1241,10 @@ async function updateOrder(
 
     }
 
-    if (!result || !result.success) {
+    if (
+      !result ||
+      !result.success
+    ) {
 
       throw new Error(
         "Backend lan pa konfime chanjman an."
@@ -1145,6 +1256,7 @@ async function updateOrder(
       status === "processing"
         ? "⏳ Kòmand lan ap trete."
         : "❌ Kòmand lan make kòm échec.",
+
       status === "processing"
         ? "#00e5ff"
         : "#ff7777"
@@ -1166,15 +1278,16 @@ async function updateOrder(
     );
 
   }
-
 }
 
 
-/* =========================
+/* =====================================
    ESCAPE HTML
-========================= */
+===================================== */
 
-function escapeHtml(value) {
+function escapeHtml(
+  value
+) {
 
   return String(value)
     .replaceAll(
@@ -1201,11 +1314,13 @@ function escapeHtml(value) {
 }
 
 
-/* =========================
+/* =====================================
    ESCAPE JAVASCRIPT
-========================= */
+===================================== */
 
-function escapeJs(value) {
+function escapeJs(
+  value
+) {
 
   return String(value)
     .replaceAll(
@@ -1230,4 +1345,4 @@ function escapeJs(value) {
 </script>
 
 </body>
-</html>
+  </html>
