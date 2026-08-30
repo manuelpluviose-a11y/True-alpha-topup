@@ -45,7 +45,15 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = new Response(existing.stream);
+    const response = await fetch(existing.url);
+
+    if (!response.ok) {
+      return res.status(500).json({
+        success: false,
+        message: "Pa kapab li kòmand lan."
+      });
+    }
+
     const order = await response.json();
 
     order.status = status;
@@ -75,4 +83,4 @@ export default async function handler(req, res) {
       message: "Erè backend."
     });
   }
-                                  }
+        }
