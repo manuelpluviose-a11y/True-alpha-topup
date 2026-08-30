@@ -20,13 +20,10 @@ export async function GET(request) {
   } catch (error) {
     console.error("SITE STATUS GET ERROR:", error);
 
-    return Response.json(
-      {
-        enabled: true,
-        message: ""
-      },
-      { status: 200 }
-    );
+    return Response.json({
+      enabled: true,
+      message: ""
+    });
   }
 }
 
@@ -57,6 +54,7 @@ export async function POST(request) {
       {
         access: "public",
         addRandomSuffix: false,
+        allowOverwrite: true,
         contentType: "application/json"
       }
     );
@@ -77,4 +75,4 @@ export async function POST(request) {
       { status: 500 }
     );
   }
-      }
+}
