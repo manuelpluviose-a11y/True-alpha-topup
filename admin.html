@@ -94,6 +94,16 @@
       color: white;
     }
 
+    .delete {
+      background: #6d1b1b;
+      color: white;
+    }
+
+    .delete-all {
+      background: #9b2226;
+      color: white;
+    }
+
     .message-choice {
       background: #0e0e17;
       border: 1px solid #36364a;
@@ -155,10 +165,6 @@
       flex: 1;
     }
 
-    /* =========================
-       ORDER STATS
-    ========================= */
-
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -197,10 +203,6 @@
     .failed-number {
       color: #ff7777;
     }
-
-    /* =========================
-       PAGINATION
-    ========================= */
 
     .pagination-container {
       display: flex;
@@ -257,6 +259,12 @@
       color: #aaa;
       padding: 20px;
     }
+
+    .list-title {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: #00e5ff;
+    }
   </style>
 </head>
 
@@ -265,8 +273,6 @@
 <div class="container">
 
   <h1>💎 TRUE ALPHA ADMIN</h1>
-
-  <!-- LOGIN -->
 
   <div class="card" id="loginBox">
 
@@ -290,14 +296,14 @@
   </div>
 
 
-  <!-- ADMIN -->
-
   <div id="adminArea">
 
     <div id="message"></div>
 
 
-    <!-- SITE CONTROL -->
+    <!-- =========================
+         SITE CONTROL
+    ========================== -->
 
     <div class="card">
 
@@ -366,14 +372,14 @@
     </div>
 
 
-    <!-- ORDERS -->
+    <!-- =========================
+         ORDERS
+    ========================== -->
 
     <div class="card">
 
       <h3>📋 KÒMAND YO</h3>
 
-
-      <!-- STATS -->
 
       <div class="stats">
 
@@ -436,12 +442,10 @@
       </button>
 
 
-      <!-- PAGINATION -->
-
       <div
         id="paginationNav"
         class="pagination-container"
-        style="display: none;"
+        style="display:none;"
       >
 
         <button
@@ -489,10 +493,6 @@
 
 <script>
 
-/* =====================================
-   API
-===================================== */
-
 const API = "/api";
 
 let ADMIN_TOKEN = "";
@@ -506,18 +506,13 @@ let currentOrderIndex = 0;
    MESSAGE
 ===================================== */
 
-function showMessage(
-  text,
-  color = "#00e5ff"
-) {
+function showMessage(text, color="#00e5ff") {
 
   const box =
     document.getElementById("message");
 
   box.style.display = "block";
-
   box.style.color = color;
-
   box.textContent = text;
 }
 
@@ -536,9 +531,7 @@ async function loginAdmin() {
 
   if (!token) {
 
-    alert(
-      "⚠️ Tanpri antre ADMIN_TOKEN ou."
-    );
+    alert("⚠️ Tanpri antre ADMIN_TOKEN ou.");
 
     return;
   }
@@ -554,11 +547,8 @@ async function loginAdmin() {
           method: "GET",
 
           headers: {
-            "x-admin-token":
-              ADMIN_TOKEN,
-
-            "Accept":
-              "application/json"
+            "x-admin-token": ADMIN_TOKEN,
+            "Accept": "application/json"
           },
 
           cache: "no-store"
@@ -569,41 +559,20 @@ async function loginAdmin() {
 
       ADMIN_TOKEN = "";
 
-      alert(
-        "❌ ADMIN_TOKEN la pa bon."
-      );
+      alert("❌ ADMIN_TOKEN la pa bon.");
 
       return;
     }
 
-    let result = null;
-
-    try {
-
-      result =
-        await response.json();
-
-    } catch (error) {
-
-      result = null;
-
-    }
+    const result =
+      await response.json();
 
     if (!response.ok) {
 
-      const backendMessage =
-        result &&
-        result.message
-          ? result.message
-          : "Backend error: HTTP " +
-            response.status;
-
-      alert(
-        "❌ " +
-        backendMessage
+      throw new Error(
+        result.message ||
+        "HTTP " + response.status
       );
-
-      return;
     }
 
     if (
@@ -611,39 +580,30 @@ async function loginAdmin() {
       result.success !== true
     ) {
 
-      alert(
-        "❌ Backend lan pa valide koneksyon an."
+      throw new Error(
+        "Backend lan pa valide koneksyon an."
       );
-
-      return;
     }
-
 
     document.getElementById(
       "loginBox"
     ).style.display = "none";
 
-
     document.getElementById(
       "adminArea"
     ).style.display = "block";
-
 
     showMessage(
       "✅ Admin konekte avèk siksè.",
       "#5ee39a"
     );
 
-
     await loadSiteStatus();
-
 
     allOrdersList =
       result.orders || [];
 
-
     currentOrderIndex = 0;
-
 
     renderOrders();
 
@@ -655,9 +615,9 @@ async function loginAdmin() {
     );
 
     alert(
-      "❌ Pa kapab kontakte backend la."
+      "❌ " +
+      error.message
     );
-
   }
 }
 
@@ -680,17 +640,13 @@ async function loadSiteStatus() {
       );
 
     if (!response.ok) {
-
       throw new Error(
-        "Site status HTTP " +
-        response.status
+        "HTTP " + response.status
       );
-
     }
 
     const data =
       await response.json();
-
 
     updateSiteDisplay(
       data.enabled !== false
@@ -702,20 +658,16 @@ async function loadSiteStatus() {
       "SITE STATUS ERROR:",
       error
     );
-
   }
 }
 
 
-function updateSiteDisplay(
-  isOpen
-) {
+function updateSiteDisplay(isOpen) {
 
   const status =
     document.getElementById(
       "siteStatus"
     );
-
 
   if (isOpen) {
 
@@ -732,33 +684,24 @@ function updateSiteDisplay(
 
     status.textContent =
       "🔴 SIT LA OFF";
-
   }
 }
 
-
-/* =====================================
-   OFF AREA
-===================================== */
 
 function showOffArea() {
 
   document.getElementById(
     "offArea"
   ).style.display = "block";
-
 }
 
 
-async function setOffMessage(
-  message
-) {
+async function setOffMessage(message) {
 
   await saveSiteStatus(
     false,
     message
   );
-
 }
 
 
@@ -772,7 +715,6 @@ async function setCustomOffMessage() {
       .value
       .trim();
 
-
   if (!message) {
 
     alert(
@@ -782,18 +724,12 @@ async function setCustomOffMessage() {
     return;
   }
 
-
   await saveSiteStatus(
     false,
     message
   );
-
 }
 
-
-/* =====================================
-   SAVE SITE STATUS
-===================================== */
 
 async function saveSiteStatus(
   enabled,
@@ -808,7 +744,6 @@ async function saveSiteStatus(
 
     return;
   }
-
 
   try {
 
@@ -828,69 +763,42 @@ async function saveSiteStatus(
 
           body:
             JSON.stringify({
-              enabled:
-                enabled,
-
-              message:
-                message || ""
+              enabled,
+              message: message || ""
             })
         }
       );
 
-
-    let result = null;
-
-    try {
-
-      result =
-        await response.json();
-
-    } catch (error) {
-
-      result = null;
-
-    }
-
+    const result =
+      await response.json();
 
     if (!response.ok) {
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "HTTP " +
-            response.status
+        result.message ||
+        "HTTP " +
+        response.status
       );
-
     }
 
-
-    if (
-      !result ||
-      !result.success
-    ) {
+    if (!result.success) {
 
       throw new Error(
         "Backend lan pa konfime chanjman an."
       );
-
     }
-
 
     updateSiteDisplay(
       enabled
     );
 
-
     document.getElementById(
       "offArea"
     ).style.display = "none";
 
-
     document.getElementById(
       "customMessage"
     ).value = "";
-
 
     showMessage(
       enabled
@@ -902,7 +810,6 @@ async function saveSiteStatus(
         : "#ff7777"
     );
 
-
   } catch (error) {
 
     console.error(
@@ -910,20 +817,13 @@ async function saveSiteStatus(
       error
     );
 
-
     showMessage(
-      "❌ " +
-      error.message,
+      "❌ " + error.message,
       "#ff4d4d"
     );
-
   }
 }
 
-
-/* =====================================
-   SIT ON
-===================================== */
 
 async function siteOn() {
 
@@ -931,7 +831,6 @@ async function siteOn() {
     true,
     ""
   );
-
 }
 
 
@@ -946,10 +845,8 @@ async function loadOrders() {
       "orders"
     );
 
-
   ordersBox.innerHTML =
     '<div class="empty">⏳ Kòmand yo ap chaje...</div>';
-
 
   if (!ADMIN_TOKEN) {
 
@@ -958,7 +855,6 @@ async function loadOrders() {
 
     return;
   }
-
 
   try {
 
@@ -980,20 +876,8 @@ async function loadOrders() {
         }
       );
 
-
-    let result = null;
-
-    try {
-
-      result =
-        await response.json();
-
-    } catch (error) {
-
-      result = null;
-
-    }
-
+    const result =
+      await response.json();
 
     if (response.status === 401) {
 
@@ -1003,41 +887,31 @@ async function loadOrders() {
       return;
     }
 
-
     if (!response.ok) {
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "HTTP " +
-            response.status
+        result.message ||
+        "HTTP " +
+        response.status
       );
-
     }
-
 
     if (
       !result ||
-      !result.success
+      result.success !== true
     ) {
 
       throw new Error(
         "Backend lan pa konfime kòmand yo."
       );
-
     }
-
 
     allOrdersList =
       result.orders || [];
 
-
     currentOrderIndex = 0;
 
-
     renderOrders();
-
 
   } catch (error) {
 
@@ -1046,82 +920,60 @@ async function loadOrders() {
       error
     );
 
-
     ordersBox.innerHTML =
       '<div class="empty">❌ ' +
       escapeHtml(
         error.message
       ) +
       '</div>';
-
   }
 }
 
 
 /* =====================================
-   UPDATE STATS
+   STATS
 ===================================== */
 
 function updateOrderStats() {
 
   let pending = 0;
-
   let success = 0;
-
   let failed = 0;
 
-
   for (
-    const order
-    of allOrdersList
+    const order of allOrdersList
   ) {
 
     if (
-      order.status ===
-      "pending"
+      order.status === "pending"
     ) {
-
       pending++;
-
     }
 
-
     if (
-      order.status ===
-      "success"
+      order.status === "success"
     ) {
-
       success++;
-
     }
-
 
     if (
-      order.status ===
-      "failed"
+      order.status === "failed"
     ) {
-
       failed++;
-
     }
-
   }
-
 
   document.getElementById(
     "pendingCount"
   ).textContent = pending;
 
-
   document.getElementById(
     "successCount"
   ).textContent = success;
 
-
   document.getElementById(
     "failedCount"
   ).textContent = failed;
-
 }
 
 
@@ -1129,21 +981,93 @@ function updateOrderStats() {
    PAGINATION
 ===================================== */
 
-function changeOrderPage(
-  direction
-) {
+function changeOrderPage(direction) {
 
-  currentOrderIndex +=
-    direction;
-
+  currentOrderIndex += direction;
 
   if (
     currentOrderIndex < 0
   ) {
-
     currentOrderIndex = 0;
-
   }
+
+  if (
+    currentOrderIndex >=
+    allOrdersList.length
+  ) {
+
+    currentOrderIndex =
+      Math.max(
+        0,
+        allOrdersList.length - 1
+      );
+  }
+
+  renderOrders();
+}
+
+
+/* =====================================
+   RENDER
+===================================== */
+
+function renderOrders() {
+
+  updateOrderStats();
+
+  const ordersBox =
+    document.getElementById(
+      "orders"
+    );
+
+  const paginationNav =
+    document.getElementById(
+      "paginationNav"
+    );
+
+  if (!allOrdersList.length) {
+
+    paginationNav.style.display =
+      "none";
+
+    ordersBox.innerHTML =
+      '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
+
+    return;
+  }
+
+
+  /*
+    PENDING FIRST
+  */
+
+  allOrdersList.sort(
+    (a, b) => {
+
+      if (
+        a.status === "pending" &&
+        b.status !== "pending"
+      ) {
+        return -1;
+      }
+
+      if (
+        a.status !== "pending" &&
+        b.status === "pending"
+      ) {
+        return 1;
+      }
+
+      return (
+        new Date(
+          b.createdAt || 0
+        ) -
+        new Date(
+          a.createdAt || 0
+        )
+      );
+    }
+  );
 
 
   if (
@@ -1156,106 +1080,21 @@ function changeOrderPage(
         0,
         allOrdersList.length - 1
       );
-
   }
-
-
-  renderOrders();
-
-}
-
-
-/* =====================================
-   RENDER ORDERS
-===================================== */
-
-function renderOrders() {
-
-  updateOrderStats();
-
-
-  const ordersBox =
-    document.getElementById(
-      "orders"
-    );
-
-
-  const paginationNav =
-    document.getElementById(
-      "paginationNav"
-    );
-
-
-  if (
-    !allOrdersList.length
-  ) {
-
-    paginationNav.style.display =
-      "none";
-
-
-    ordersBox.innerHTML =
-      '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
-
-    return;
-  }
-
-
-  /*
-     PENDING FIRST
-  */
-
-  allOrdersList.sort(
-    (a, b) => {
-
-      if (
-        a.status === "pending" &&
-        b.status !== "pending"
-      ) {
-
-        return -1;
-
-      }
-
-
-      if (
-        a.status !== "pending" &&
-        b.status === "pending"
-      ) {
-
-        return 1;
-
-      }
-
-
-      return (
-        new Date(
-          b.createdAt || 0
-        ) -
-        new Date(
-          a.createdAt || 0
-        )
-      );
-
-    }
-  );
 
 
   paginationNav.style.display =
     "flex";
-
 
   document.getElementById(
     "pageInfo"
   ).textContent =
     `${currentOrderIndex + 1} / ${allOrdersList.length}`;
 
-
   document.getElementById(
     "prevBtn"
   ).disabled =
     currentOrderIndex === 0;
-
 
   document.getElementById(
     "nextBtn"
@@ -1278,7 +1117,6 @@ function renderOrders() {
       "div"
     );
 
-
   div.className =
     "order";
 
@@ -1296,35 +1134,24 @@ function renderOrders() {
 
 
   if (
-    order.status ===
-    "processing"
+    order.status === "processing"
   ) {
-
     statusText =
       "⏳ AP TRAITE";
-
   }
 
-
   if (
-    order.status ===
-    "failed"
+    order.status === "failed"
   ) {
-
     statusText =
       "❌ ÉCHEC";
-
   }
 
-
   if (
-    order.status ===
-    "success"
+    order.status === "success"
   ) {
-
     statusText =
       "✅ SIKSÈ";
-
   }
 
 
@@ -1332,13 +1159,12 @@ function renderOrders() {
 
 
   /*
-     ONLY PENDING
-     CAN BE VALIDATED OR FAILED
+    ONLY PENDING
+    CAN BE ACTIONED
   */
 
   if (
-    order.status ===
-    "pending"
+    order.status === "pending"
   ) {
 
     buttons = `
@@ -1370,7 +1196,31 @@ function renderOrders() {
       </div>
 
     `;
+  }
 
+
+  /*
+    FINISHED ORDER
+  */
+
+  if (
+    order.status === "failed" ||
+    order.status === "success"
+  ) {
+
+    buttons = `
+
+      <button
+        class="delete"
+        type="button"
+        onclick="removeFromAdmin(
+          '${escapeJs(order.id || "")}'
+        )"
+      >
+        🗑️ RETIRE NAN ADMIN
+      </button>
+
+    `;
   }
 
 
@@ -1383,27 +1233,21 @@ function renderOrders() {
     <div class="line">
       <span>🆔 ID:</span>
       <strong>
-        ${escapeHtml(
-          order.id || ""
-        )}
+        ${escapeHtml(order.id || "")}
       </strong>
     </div>
 
     <div class="line">
       <span>🎮 UID:</span>
       <strong>
-        ${escapeHtml(
-          order.uid || ""
-        )}
+        ${escapeHtml(order.uid || "")}
       </strong>
     </div>
 
     <div class="line">
       <span>💎 Pack:</span>
       <strong class="pack">
-        ${escapeHtml(
-          order.pack || ""
-        )}
+        ${escapeHtml(order.pack || "")}
       </strong>
     </div>
 
@@ -1448,10 +1292,7 @@ function renderOrders() {
   `;
 
 
-  ordersBox.appendChild(
-    div
-  );
-
+  ordersBox.appendChild(div);
 }
 
 
@@ -1492,38 +1333,24 @@ async function updateOrder(
 
           body:
             JSON.stringify({
-              id: id,
-              status: status
+              id,
+              status
             })
         }
       );
 
 
-    let result = null;
-
-
-    try {
-
-      result =
-        await response.json();
-
-    } catch (error) {
-
-      result = null;
-
-    }
+    const result =
+      await response.json();
 
 
     if (!response.ok) {
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "HTTP " +
-            response.status
+        result.message ||
+        "HTTP " +
+        response.status
       );
-
     }
 
 
@@ -1535,17 +1362,15 @@ async function updateOrder(
       throw new Error(
         "Backend lan pa konfime chanjman an."
       );
-
     }
 
 
     /*
-       SUCCESS MESSAGE
+      MESSAGE FOR CUSTOMER
     */
 
     if (
-      status ===
-      "processing"
+      status === "processing"
     ) {
 
       showMessage(
@@ -1553,48 +1378,23 @@ async function updateOrder(
         "#00e5ff"
       );
 
-    }
-
-
-    /*
-       FAILED MESSAGE
-    */
-
-    else if (
-      status ===
-      "failed"
+    } else if (
+      status === "failed"
     ) {
 
       showMessage(
         "❌ Nou pa resevwa peman an.",
         "#ff7777"
       );
-
     }
 
 
     /*
-       SUCCESS FINAL
-    */
-
-    else if (
-      status ===
-      "success"
-    ) {
-
-      showMessage(
-        "✅ Pwodui ou an te trete avèk siksè.",
-        "#5ee39a"
-      );
-
-    }
-
-
-    /*
-       RELOAD ORDERS
+      RELOAD
     */
 
     await loadOrders();
+
 
   } catch (error) {
 
@@ -1603,15 +1403,59 @@ async function updateOrder(
       error
     );
 
-
     showMessage(
       "❌ " +
       error.message,
       "#ff4d4d"
     );
+  }
+}
 
+
+/* =====================================
+   REMOVE FROM CURRENT ADMIN LIST
+===================================== */
+
+function removeFromAdmin(id) {
+
+  const ok =
+    confirm(
+      "⚠️ Retire kòmand sa a nan lis admin lan?"
+    );
+
+  if (!ok) {
+    return;
   }
 
+
+  allOrdersList =
+    allOrdersList.filter(
+      order =>
+        String(order.id) !==
+        String(id)
+    );
+
+
+  if (
+    currentOrderIndex >=
+    allOrdersList.length
+  ) {
+
+    currentOrderIndex =
+      Math.max(
+        0,
+        allOrdersList.length - 1
+      );
+  }
+
+
+  renderOrders();
+
+
+  showMessage(
+    "🗑️ Kòmand lan retire nan lis admin lan.",
+    "#5ee39a"
+  );
 }
 
 
@@ -1619,9 +1463,7 @@ async function updateOrder(
    ESCAPE HTML
 ===================================== */
 
-function escapeHtml(
-  value
-) {
+function escapeHtml(value) {
 
   return String(value)
 
@@ -1649,7 +1491,6 @@ function escapeHtml(
       "'",
       "&#039;"
     );
-
 }
 
 
@@ -1657,9 +1498,7 @@ function escapeHtml(
    ESCAPE JS
 ===================================== */
 
-function escapeJs(
-  value
-) {
+function escapeJs(value) {
 
   return String(value)
 
@@ -1682,10 +1521,9 @@ function escapeJs(
       "\r",
       "\\r"
     );
-
 }
 
 </script>
 
 </body>
-</html>
+      </html>
