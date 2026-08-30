@@ -1,17 +1,26 @@
 import { get, put } from "@vercel/blob";
 
 export default async function handler(req, res) {
+
   try {
+
     if (req.method !== "POST") {
+
       return res.status(405).json({
         success: false,
         message: "Method Not Allowed"
       });
+
     }
 
-    const token = req.headers["x-admin-token"];
+    const token =
+      req.headers["x-admin-token"];
 
-    if (!token || token !== process.env.ADMIN_TOKEN) {
+    if (
+      !token ||
+      token !== process.env.ADMIN_TOKEN
+    ) {
+
       return res.status(401).json({
         success: false,
         message: "Pa otorize."
@@ -24,40 +33,70 @@ export default async function handler(req, res) {
 
     if (
       !id ||
-      !["processing", "success", "failed"].includes(status)
+      ![
+        "processing",
+        "success",
+        "failed"
+      ].includes(status)
     ) {
+
       return res.status(400).json({
         success: false,
-        message: "Kòmand oswa status pa valid."
+        message:
+          "Kòmand oswa status pa valid."
       });
     }
 
-    const pathname = `orders/${id}.json`;
+    const pathname =
+      `orders/${id}.json`;
 
-    const existing = await get(pathname, {
-      access: "public"
-    });
+    const existing =
+      await get(pathname, {
+        access: "public"
+      });
 
     if (!existing) {
+
       return res.status(404).json({
         success: false,
-        message: "Kòmand lan pa egziste."
+        message:
+          "Kòmand lan pa egziste."
       });
     }
 
-    const response = await fetch(existing.url);
+    const response =
+      new Response(existing.stream);
 
-    if (!response.ok) {
-      return res.status(500).json({
-        success: false,
-        message: "Pa kapab li kòmand lan."
-      });
-    }
-
-    const order = await response.json();
+    const order =
+      await response.json();
 
     order.status = status;
-    order.updatedAt = new Date().toISOString();
+
+    order.updatedAt =
+      new Date().toISOString();
+
+
+    if (status === "processing") {
+
+      order.customerMessage =
+        "⏳ Pwodui ou an ap antre nan kèk segonn.";
+
+    }
+
+    if (status === "failed") {
+
+      order.customerMessage =
+        "❌ Nou pa resevwa peman an.";
+
+    }
+
+    if (status === "success") {
+
+      order.customerMessage =
+        "✅ Pwodui ou an te trete avèk siksè.";
+
+    }
+
 
     await put(
       pathname,
@@ -66,7 +105,8 @@ export default async function handler(req, res) {
         access: "public",
         addRandomSuffix: false,
         allowOverwrite: true,
-        contentType: "application/json"
+        contentType:
+          "application/json"
       }
     );
 
@@ -76,7 +116,11 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("UPDATE ORDER ERROR:", error);
+
+    console.error(
+      "UPDATE ORDER ERROR:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
