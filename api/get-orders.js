@@ -1,37 +1,21 @@
 import { list } from "@vercel/blob";
 
-export default async function handler(request) {
+export default async function handler(req, res) {
   try {
-    if (request.method !== "GET") {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Method Not Allowed"
-        }),
-        {
-          status: 405,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
+    if (req.method !== "GET") {
+      return res.status(405).json({
+        success: false,
+        message: "Method Not Allowed"
+      });
     }
 
-    const token = request.headers.get("x-admin-token");
+    const token = req.headers["x-admin-token"];
 
     if (!token || token !== process.env.ADMIN_TOKEN) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Pa otorize."
-        }),
-        {
-          status: 401,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      );
+      return res.status(401).json({
+        success: false,
+        message: "Pa otorize."
+      });
     }
 
     const result = await list({
@@ -62,33 +46,17 @@ export default async function handler(request) {
         new Date(a.createdAt || 0)
     );
 
-    return new Response(
-      JSON.stringify({
-        success: true,
-        orders
-      }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
+    return res.status(200).json({
+      success: true,
+      orders
+    });
 
   } catch (error) {
     console.error("GET ORDERS ERROR:", error);
 
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: "Erè backend."
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
+    return res.status(500).json({
+      success: false,
+      message: "Erè backend."
+    });
   }
-        }
+      }
