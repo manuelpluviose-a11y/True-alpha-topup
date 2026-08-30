@@ -155,6 +155,53 @@
       flex: 1;
     }
 
+    /* =========================
+       ORDER STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .stat {
+      background: #0e0e17;
+      border: 1px solid #303044;
+      border-radius: 10px;
+      padding: 12px 5px;
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .pending-number {
+      color: #ffd54f;
+    }
+
+    .success-number {
+      color: #5ee39a;
+    }
+
+    .failed-number {
+      color: #ff7777;
+    }
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
     .pagination-container {
       display: flex;
       align-items: center;
@@ -219,6 +266,8 @@
 
   <h1>💎 TRUE ALPHA ADMIN</h1>
 
+  <!-- LOGIN -->
+
   <div class="card" id="loginBox">
 
     <h3>🔐 Admin Login</h3>
@@ -240,9 +289,15 @@
 
   </div>
 
+
+  <!-- ADMIN -->
+
   <div id="adminArea">
 
     <div id="message"></div>
+
+
+    <!-- SITE CONTROL -->
 
     <div class="card">
 
@@ -310,9 +365,67 @@
 
     </div>
 
+
+    <!-- ORDERS -->
+
     <div class="card">
 
       <h3>📋 KÒMAND YO</h3>
+
+
+      <!-- STATS -->
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <span
+            id="pendingCount"
+            class="stat-number pending-number"
+          >
+            0
+          </span>
+
+          <span class="stat-label">
+            🟡 AN ATANT
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span
+            id="successCount"
+            class="stat-number success-number"
+          >
+            0
+          </span>
+
+          <span class="stat-label">
+            ✅ SIKSÈ
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span
+            id="failedCount"
+            class="stat-number failed-number"
+          >
+            0
+          </span>
+
+          <span class="stat-label">
+            ❌ ÉCHEC
+          </span>
+
+        </div>
+
+      </div>
+
 
       <button
         class="refresh"
@@ -322,11 +435,15 @@
         🔄 RAFRECHI KÒMAND YO
       </button>
 
+
+      <!-- PAGINATION -->
+
       <div
         id="paginationNav"
         class="pagination-container"
         style="display: none;"
       >
+
         <button
           id="prevBtn"
           class="pagination-btn"
@@ -351,12 +468,16 @@
         >
           Swivan ➡️
         </button>
+
       </div>
 
+
       <div id="orders">
+
         <div class="empty">
           Peze RAFRECHI pou chaje kòmand yo.
         </div>
+
       </div>
 
     </div>
@@ -365,16 +486,19 @@
 
 </div>
 
+
 <script>
 
 /* =====================================
-   VERCEL API
+   API
 ===================================== */
 
 const API = "/api";
 
 let ADMIN_TOKEN = "";
+
 let allOrdersList = [];
+
 let currentOrderIndex = 0;
 
 
@@ -391,7 +515,9 @@ function showMessage(
     document.getElementById("message");
 
   box.style.display = "block";
+
   box.style.color = color;
+
   box.textContent = text;
 }
 
@@ -492,25 +618,32 @@ async function loginAdmin() {
       return;
     }
 
+
     document.getElementById(
       "loginBox"
     ).style.display = "none";
 
+
     document.getElementById(
       "adminArea"
     ).style.display = "block";
+
 
     showMessage(
       "✅ Admin konekte avèk siksè.",
       "#5ee39a"
     );
 
+
     await loadSiteStatus();
+
 
     allOrdersList =
       result.orders || [];
 
+
     currentOrderIndex = 0;
+
 
     renderOrders();
 
@@ -558,6 +691,7 @@ async function loadSiteStatus() {
     const data =
       await response.json();
 
+
     updateSiteDisplay(
       data.enabled !== false
     );
@@ -582,6 +716,7 @@ function updateSiteDisplay(
       "siteStatus"
     );
 
+
   if (isOpen) {
 
     status.className =
@@ -597,6 +732,7 @@ function updateSiteDisplay(
 
     status.textContent =
       "🔴 SIT LA OFF";
+
   }
 }
 
@@ -636,6 +772,7 @@ async function setCustomOffMessage() {
       .value
       .trim();
 
+
   if (!message) {
 
     alert(
@@ -644,6 +781,7 @@ async function setCustomOffMessage() {
 
     return;
   }
+
 
   await saveSiteStatus(
     false,
@@ -670,6 +808,7 @@ async function saveSiteStatus(
 
     return;
   }
+
 
   try {
 
@@ -698,6 +837,7 @@ async function saveSiteStatus(
         }
       );
 
+
     let result = null;
 
     try {
@@ -711,6 +851,7 @@ async function saveSiteStatus(
 
     }
 
+
     if (!response.ok) {
 
       throw new Error(
@@ -723,6 +864,7 @@ async function saveSiteStatus(
 
     }
 
+
     if (
       !result ||
       !result.success
@@ -734,17 +876,21 @@ async function saveSiteStatus(
 
     }
 
+
     updateSiteDisplay(
       enabled
     );
+
 
     document.getElementById(
       "offArea"
     ).style.display = "none";
 
+
     document.getElementById(
       "customMessage"
     ).value = "";
+
 
     showMessage(
       enabled
@@ -756,12 +902,14 @@ async function saveSiteStatus(
         : "#ff7777"
     );
 
+
   } catch (error) {
 
     console.error(
       "SITE STATUS ERROR:",
       error
     );
+
 
     showMessage(
       "❌ " +
@@ -798,8 +946,10 @@ async function loadOrders() {
       "orders"
     );
 
+
   ordersBox.innerHTML =
     '<div class="empty">⏳ Kòmand yo ap chaje...</div>';
+
 
   if (!ADMIN_TOKEN) {
 
@@ -808,6 +958,7 @@ async function loadOrders() {
 
     return;
   }
+
 
   try {
 
@@ -829,6 +980,7 @@ async function loadOrders() {
         }
       );
 
+
     let result = null;
 
     try {
@@ -842,6 +994,7 @@ async function loadOrders() {
 
     }
 
+
     if (response.status === 401) {
 
       ordersBox.innerHTML =
@@ -849,6 +1002,7 @@ async function loadOrders() {
 
       return;
     }
+
 
     if (!response.ok) {
 
@@ -862,6 +1016,7 @@ async function loadOrders() {
 
     }
 
+
     if (
       !result ||
       !result.success
@@ -873,12 +1028,16 @@ async function loadOrders() {
 
     }
 
+
     allOrdersList =
       result.orders || [];
 
+
     currentOrderIndex = 0;
 
+
     renderOrders();
+
 
   } catch (error) {
 
@@ -886,6 +1045,7 @@ async function loadOrders() {
       "LOAD ORDERS ERROR:",
       error
     );
+
 
     ordersBox.innerHTML =
       '<div class="empty">❌ ' +
@@ -895,6 +1055,73 @@ async function loadOrders() {
       '</div>';
 
   }
+}
+
+
+/* =====================================
+   UPDATE STATS
+===================================== */
+
+function updateOrderStats() {
+
+  let pending = 0;
+
+  let success = 0;
+
+  let failed = 0;
+
+
+  for (
+    const order
+    of allOrdersList
+  ) {
+
+    if (
+      order.status ===
+      "pending"
+    ) {
+
+      pending++;
+
+    }
+
+
+    if (
+      order.status ===
+      "success"
+    ) {
+
+      success++;
+
+    }
+
+
+    if (
+      order.status ===
+      "failed"
+    ) {
+
+      failed++;
+
+    }
+
+  }
+
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent = pending;
+
+
+  document.getElementById(
+    "successCount"
+  ).textContent = success;
+
+
+  document.getElementById(
+    "failedCount"
+  ).textContent = failed;
+
 }
 
 
@@ -909,6 +1136,7 @@ function changeOrderPage(
   currentOrderIndex +=
     direction;
 
+
   if (
     currentOrderIndex < 0
   ) {
@@ -917,17 +1145,23 @@ function changeOrderPage(
 
   }
 
+
   if (
     currentOrderIndex >=
     allOrdersList.length
   ) {
 
     currentOrderIndex =
-      allOrdersList.length - 1;
+      Math.max(
+        0,
+        allOrdersList.length - 1
+      );
 
   }
 
+
   renderOrders();
+
 }
 
 
@@ -937,15 +1171,20 @@ function changeOrderPage(
 
 function renderOrders() {
 
+  updateOrderStats();
+
+
   const ordersBox =
     document.getElementById(
       "orders"
     );
 
+
   const paginationNav =
     document.getElementById(
       "paginationNav"
     );
+
 
   if (
     !allOrdersList.length
@@ -954,11 +1193,17 @@ function renderOrders() {
     paginationNav.style.display =
       "none";
 
+
     ordersBox.innerHTML =
       '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
 
     return;
   }
+
+
+  /*
+     PENDING FIRST
+  */
 
   allOrdersList.sort(
     (a, b) => {
@@ -967,15 +1212,21 @@ function renderOrders() {
         a.status === "pending" &&
         b.status !== "pending"
       ) {
+
         return -1;
+
       }
+
 
       if (
         a.status !== "pending" &&
         b.status === "pending"
       ) {
+
         return 1;
+
       }
+
 
       return (
         new Date(
@@ -989,18 +1240,22 @@ function renderOrders() {
     }
   );
 
+
   paginationNav.style.display =
     "flex";
+
 
   document.getElementById(
     "pageInfo"
   ).textContent =
     `${currentOrderIndex + 1} / ${allOrdersList.length}`;
 
+
   document.getElementById(
     "prevBtn"
   ).disabled =
     currentOrderIndex === 0;
+
 
   document.getElementById(
     "nextBtn"
@@ -1008,20 +1263,25 @@ function renderOrders() {
     currentOrderIndex ===
     allOrdersList.length - 1;
 
+
   ordersBox.innerHTML = "";
+
 
   const order =
     allOrdersList[
       currentOrderIndex
     ];
 
+
   const div =
     document.createElement(
       "div"
     );
 
+
   div.className =
     "order";
+
 
   const date =
     order.createdAt
@@ -1030,8 +1290,10 @@ function renderOrders() {
         ).toLocaleString()
       : "N/A";
 
+
   let statusText =
     "🟡 AN ATANT";
+
 
   if (
     order.status ===
@@ -1043,6 +1305,7 @@ function renderOrders() {
 
   }
 
+
   if (
     order.status ===
     "failed"
@@ -1052,6 +1315,7 @@ function renderOrders() {
       "❌ ÉCHEC";
 
   }
+
 
   if (
     order.status ===
@@ -1063,7 +1327,14 @@ function renderOrders() {
 
   }
 
+
   let buttons = "";
+
+
+  /*
+     ONLY PENDING
+     CAN BE VALIDATED OR FAILED
+  */
 
   if (
     order.status ===
@@ -1099,7 +1370,9 @@ function renderOrders() {
       </div>
 
     `;
+
   }
+
 
   div.innerHTML = `
 
@@ -1110,21 +1383,27 @@ function renderOrders() {
     <div class="line">
       <span>🆔 ID:</span>
       <strong>
-        ${escapeHtml(order.id || "")}
+        ${escapeHtml(
+          order.id || ""
+        )}
       </strong>
     </div>
 
     <div class="line">
       <span>🎮 UID:</span>
       <strong>
-        ${escapeHtml(order.uid || "")}
+        ${escapeHtml(
+          order.uid || ""
+        )}
       </strong>
     </div>
 
     <div class="line">
       <span>💎 Pack:</span>
       <strong class="pack">
-        ${escapeHtml(order.pack || "")}
+        ${escapeHtml(
+          order.pack || ""
+        )}
       </strong>
     </div>
 
@@ -1168,9 +1447,11 @@ function renderOrders() {
 
   `;
 
+
   ordersBox.appendChild(
     div
   );
+
 }
 
 
@@ -1191,6 +1472,7 @@ async function updateOrder(
 
     return;
   }
+
 
   try {
 
@@ -1216,7 +1498,9 @@ async function updateOrder(
         }
       );
 
+
     let result = null;
+
 
     try {
 
@@ -1228,6 +1512,7 @@ async function updateOrder(
       result = null;
 
     }
+
 
     if (!response.ok) {
 
@@ -1241,6 +1526,7 @@ async function updateOrder(
 
     }
 
+
     if (
       !result ||
       !result.success
@@ -1252,15 +1538,61 @@ async function updateOrder(
 
     }
 
-    showMessage(
-      status === "processing"
-        ? "⏳ Kòmand lan ap trete."
-        : "❌ Kòmand lan make kòm échec.",
 
-      status === "processing"
-        ? "#00e5ff"
-        : "#ff7777"
-    );
+    /*
+       SUCCESS MESSAGE
+    */
+
+    if (
+      status ===
+      "processing"
+    ) {
+
+      showMessage(
+        "⏳ Pwodui ou an ap antre nan kèk segonn.",
+        "#00e5ff"
+      );
+
+    }
+
+
+    /*
+       FAILED MESSAGE
+    */
+
+    else if (
+      status ===
+      "failed"
+    ) {
+
+      showMessage(
+        "❌ Nou pa resevwa peman an.",
+        "#ff7777"
+      );
+
+    }
+
+
+    /*
+       SUCCESS FINAL
+    */
+
+    else if (
+      status ===
+      "success"
+    ) {
+
+      showMessage(
+        "✅ Pwodui ou an te trete avèk siksè.",
+        "#5ee39a"
+      );
+
+    }
+
+
+    /*
+       RELOAD ORDERS
+    */
 
     await loadOrders();
 
@@ -1271,6 +1603,7 @@ async function updateOrder(
       error
     );
 
+
     showMessage(
       "❌ " +
       error.message,
@@ -1278,6 +1611,7 @@ async function updateOrder(
     );
 
   }
+
 }
 
 
@@ -1290,22 +1624,27 @@ function escapeHtml(
 ) {
 
   return String(value)
+
     .replaceAll(
       "&",
       "&amp;"
     )
+
     .replaceAll(
       "<",
       "&lt;"
     )
+
     .replaceAll(
       ">",
       "&gt;"
     )
+
     .replaceAll(
       '"',
       "&quot;"
     )
+
     .replaceAll(
       "'",
       "&#039;"
@@ -1315,7 +1654,7 @@ function escapeHtml(
 
 
 /* =====================================
-   ESCAPE JAVASCRIPT
+   ESCAPE JS
 ===================================== */
 
 function escapeJs(
@@ -1323,18 +1662,22 @@ function escapeJs(
 ) {
 
   return String(value)
+
     .replaceAll(
       "\\",
       "\\\\"
     )
+
     .replaceAll(
       "'",
       "\\'"
     )
+
     .replaceAll(
       "\n",
       "\\n"
     )
+
     .replaceAll(
       "\r",
       "\\r"
@@ -1345,4 +1688,4 @@ function escapeJs(
 </script>
 
 </body>
-  </html>
+</html>
