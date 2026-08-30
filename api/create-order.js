@@ -1,18 +1,15 @@
 import { put } from "@vercel/blob";
 
-export default async function handler(request) {
-  if (request.method !== "POST") {
-    return Response.json(
-      {
-        success: false,
-        message: "Method Not Allowed"
-      },
-      { status: 405 }
-    );
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      message: "Method Not Allowed"
+    });
   }
 
   try {
-    const data = await request.json();
+    const data = req.body || {};
 
     const {
       id,
@@ -24,13 +21,10 @@ export default async function handler(request) {
     } = data;
 
     if (!uid || !pack || !price) {
-      return Response.json(
-        {
-          success: false,
-          message: "UID, pack ak pri obligatwa."
-        },
-        { status: 400 }
-      );
+      return res.status(400).json({
+        success: false,
+        message: "UID, pack ak pri obligatwa."
+      });
     }
 
     const orderId =
@@ -64,20 +58,20 @@ export default async function handler(request) {
       }
     );
 
-    return Response.json({
+    return res.status(200).json({
       success: true,
       order
     });
 
   } catch (error) {
-    console.error("CREATE ORDER ERROR:", error);
-
-    return Response.json(
-      {
-        success: false,
-        message: "Erè backend."
-      },
-      { status: 500 }
+    console.error(
+      "CREATE ORDER ERROR:",
+      error
     );
+
+    return res.status(500).json({
+      success: false,
+      message: "Erè backend."
+    });
   }
-          }
+        }
