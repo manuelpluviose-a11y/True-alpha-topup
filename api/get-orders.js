@@ -18,27 +18,43 @@ export default async function handler(req, res) {
       });
     }
 
-    const result = await list({
-      prefix: "orders/"
-    });
-
+    let cursor = undefined;
     const orders = [];
 
-    for (const blob of result.blobs) {
-      try {
-        const response = await fetch(blob.url);
+    do {
+      const result = await list({
+        prefix: "orders/",
+        ...(cursor ? { cursor } : {})
+      });
 
-        if (!response.ok) continue;
+      for (const blob of result.blobs) {
+        try {
+          const response = await fetch(
+            blob.url,
+            { cache: "no-store" }
+          );
 
-        const order = await response.json();
+          if (!response.ok) continue;
 
-        if (order) {
-          orders.push(order);
+          const order = await response.json();
+
+          if (order && order.id) {
+            orders.push(order);
+          }
+
+        } catch (error) {
+          console.error(
+            "ORDER READ ERROR:",
+            error
+          );
         }
-      } catch (error) {
-        console.error("ORDER READ ERROR:", error);
       }
-    }
+
+      cursor = result.hasMore
+        ? result.cursor
+        : undefined;
+
+    } while (cursor);
 
     orders.sort(
       (a, b) =>
@@ -52,11 +68,15 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("GET ORDERS ERROR:", error);
+
+    console.error(
+      "GET ORDERS ERROR:",
+      error
+    );
 
     return res.status(500).json({
       success: false,
       message: "Erè backend."
     });
   }
-      }
+}
