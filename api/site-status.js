@@ -15,15 +15,21 @@ export async function GET(request) {
       });
     }
 
-    return Response.json(await blob.json());
+    const response = new Response(blob.stream);
+    const settings = await response.json();
+
+    return Response.json(settings);
 
   } catch (error) {
     console.error("SITE STATUS GET ERROR:", error);
 
-    return Response.json({
-      enabled: true,
-      message: ""
-    });
+    return Response.json(
+      {
+        enabled: true,
+        message: ""
+      },
+      { status: 200 }
+    );
   }
 }
 
