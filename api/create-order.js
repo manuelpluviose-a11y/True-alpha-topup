@@ -17,7 +17,11 @@ export default async function handler(req, res) {
       pack,
       price,
       senderNumber,
-      server
+      server,
+      transactionId,
+      transaction_id,
+      transId,
+      code
     } = data;
 
     if (!uid || !pack || !price) {
@@ -26,6 +30,14 @@ export default async function handler(req, res) {
         message: "UID, pack ak pri obligatwa."
       });
     }
+
+    // Ranmase kòd tranzaksyon an nenpòt ki jan l rele
+    const finalTransactionId = 
+      transactionId || 
+      transaction_id || 
+      transId || 
+      code || 
+      "";
 
     const orderId =
       id ||
@@ -38,12 +50,9 @@ export default async function handler(req, res) {
       uid: String(uid),
       pack: String(pack),
       price: String(price),
-      senderNumber: senderNumber
-        ? String(senderNumber)
-        : "",
-      server: server
-        ? String(server)
-        : "",
+      senderNumber: senderNumber ? String(senderNumber) : "",
+      transactionId: String(finalTransactionId),
+      server: server ? String(server) : "",
       status: "pending",
       createdAt: new Date().toISOString()
     };
@@ -64,14 +73,11 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error(
-      "CREATE ORDER ERROR:",
-      error
-    );
+    console.error("CREATE ORDER ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Erè backend."
     });
   }
-        }
+}
