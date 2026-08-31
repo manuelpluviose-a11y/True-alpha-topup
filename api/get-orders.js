@@ -1,7 +1,8 @@
-import { list } from "@vercel/blob";
+import { head } from "@vercel/blob";
 
 export default async function handler(req, res) {
   try {
+
     if (req.method !== "GET") {
       return res.status(405).json({
         success: false,
@@ -9,68 +10,69 @@ export default async function handler(req, res) {
       });
     }
 
-    const token = req.headers["x-admin-token"];
+    const id =
+      typeof req.query.id === "string"
+        ? req.query.id.trim()
+        : "";
 
-    if (!token || token !== process.env.ADMIN_TOKEN) {
-      return res.status(401).json({
+    if (!id) {
+      return res.status(400).json({
         success: false,
-        message: "Pa otorize."
+        message: "ID kòmand lan obligatwa."
       });
     }
 
-    let cursor = undefined;
-    const orders = [];
+    const pathname = `orders/${id}.json`;
 
-    do {
-      const result = await list({
-        prefix: "orders/",
-        ...(cursor ? { cursor } : {})
+    const blobDetails =
+      await head(pathname).catch(() => null);
+
+    if (!blobDetails || !blobDetails.url) {
+      return res.status(404).json({
+        success: false,
+        message: "Kòmand lan pa egziste."
       });
+    }
 
-      for (const blob of result.blobs) {
-        try {
-          const response = await fetch(
-            blob.url,
-            { cache: "no-store" }
-          );
+    const response =
+      await fetch(
+        blobDetails.url,
+        { cache: "no-store" }
+      );
 
-          if (!response.ok) continue;
+    if (!response.ok) {
+      return res.status(500).json({
+        success: false,
+        message: "Pa kapab li kòmand lan."
+      });
+    }
 
-          const order = await response.json();
+    const order =
+      await response.json();
 
-          if (order && order.id) {
-            orders.push(order);
-          }
-
-        } catch (error) {
-          console.error(
-            "ORDER READ ERROR:",
-            error
-          );
-        }
-      }
-
-      cursor = result.hasMore
-        ? result.cursor
-        : undefined;
-
-    } while (cursor);
-
-    orders.sort(
-      (a, b) =>
-        new Date(b.createdAt || 0) -
-        new Date(a.createdAt || 0)
-    );
+    if (!order || order.id !== id) {
+      return res.status(404).json({
+        success: false,
+        message: "Kòmand lan pa egziste."
+      });
+    }
 
     return res.status(200).json({
       success: true,
-      orders
+      order: {
+        id: order.id,
+        status: order.status || "pending",
+        customerMessage:
+          order.customerMessage || "",
+        updatedAt:
+          order.updatedAt || null
+      }
     });
 
   } catch (error) {
 
     console.error(
-      "GET ORDERS ERROR:",
+      "GET ORDER ERROR:",
       error
     );
 
@@ -79,4 +81,4 @@ export default async function handler(req, res) {
       message: "Erè backend."
     });
   }
-}
+                                  }
