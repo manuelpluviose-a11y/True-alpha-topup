@@ -252,6 +252,14 @@ button {
   padding: 20px;
 }
 
+.tx-highlight {
+  background: #2b2409;
+  border: 1px solid #ffd54f;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
 </style>
 
 </head>
@@ -1074,6 +1082,17 @@ function renderList(
     const statusText =
       "🟡 AN ATANT";
 
+    // Kaptire tout kalite non valè kòd tranzaksyon an soti nan backend an
+    const userTxCode = 
+      order.transactionId || 
+      order.transaction_id || 
+      order.transId || 
+      order.idTranzaksyon || 
+      order.txId || 
+      order.code || 
+      order.id_transaction ||
+      order.transaction || 
+      "Pa gen kòd";
 
     const buttons = `
       <div class="order-buttons">
@@ -1168,12 +1187,10 @@ function renderList(
       </div>
 
 
-      <div class="line">
-        <span>🧾 ID Tranzaksyon:</span>
-        <strong style="color: #ffd54f;">
-          ${escapeHtml(
-            order.transactionId || "N/A"
-          )}
+      <div class="tx-highlight">
+        <div style="color: #aaa; font-size: 12px;">🧾 KÒD TRANZAKSYON (NATCASH/MONCASH):</div>
+        <strong style="color: #ffd54f; font-size: 16px;">
+          ${escapeHtml(userTxCode)}
         </strong>
       </div>
 
