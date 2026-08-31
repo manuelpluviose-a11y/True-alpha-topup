@@ -1,8 +1,7 @@
-import { head } from "@vercel/blob";
+import { list } from "@vercel/blob";
 
 export default async function handler(req, res) {
   try {
-
     if (req.method !== "GET") {
       return res.status(405).json({
         success: false,
@@ -10,69 +9,68 @@ export default async function handler(req, res) {
       });
     }
 
-    const id =
-      typeof req.query.id === "string"
-        ? req.query.id.trim()
-        : "";
+    const token = req.headers["x-admin-token"];
 
-    if (!id) {
-      return res.status(400).json({
+    if (!token || token !== process.env.ADMIN_TOKEN) {
+      return res.status(401).json({
         success: false,
-        message: "ID kòmand lan obligatwa."
+        message: "Pa otorize."
       });
     }
 
-    const pathname = `orders/${id}.json`;
+    let cursor = undefined;
+    const orders = [];
 
-    const blobDetails =
-      await head(pathname).catch(() => null);
-
-    if (!blobDetails || !blobDetails.url) {
-      return res.status(404).json({
-        success: false,
-        message: "Kòmand lan pa egziste."
+    do {
+      const result = await list({
+        prefix: "orders/",
+        ...(cursor ? { cursor } : {})
       });
-    }
 
-    const response =
-      await fetch(
-        blobDetails.url,
-        { cache: "no-store" }
-      );
+      for (const blob of result.blobs) {
+        try {
+          const response = await fetch(
+            blob.url,
+            { cache: "no-store" }
+          );
 
-    if (!response.ok) {
-      return res.status(500).json({
-        success: false,
-        message: "Pa kapab li kòmand lan."
-      });
-    }
+          if (!response.ok) continue;
 
-    const order =
-      await response.json();
+          const order = await response.json();
 
-    if (!order || order.id !== id) {
-      return res.status(404).json({
-        success: false,
-        message: "Kòmand lan pa egziste."
-      });
-    }
+          if (order && order.id) {
+            orders.push(order);
+          }
+
+        } catch (error) {
+          console.error(
+            "ORDER READ ERROR:",
+            error
+          );
+        }
+      }
+
+      cursor = result.hasMore
+        ? result.cursor
+        : undefined;
+
+    } while (cursor);
+
+    orders.sort(
+      (a, b) =>
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
+    );
 
     return res.status(200).json({
       success: true,
-      order: {
-        id: order.id,
-        status: order.status || "pending",
-        customerMessage:
-          order.customerMessage || "",
-        updatedAt:
-          order.updatedAt || null
-      }
+      orders
     });
 
   } catch (error) {
 
     console.error(
-      "GET ORDER ERROR:",
+      "GET ORDERS ERROR:",
       error
     );
 
@@ -81,4 +79,4 @@ export default async function handler(req, res) {
       message: "Erè backend."
     });
   }
-                                  }
+      }
