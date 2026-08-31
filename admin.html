@@ -2,18 +2,11 @@
 <html lang="ht">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>True Alpha Admin</title>
 
 <style>
-
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -45,8 +38,7 @@ h1 {
   margin-bottom: 15px;
 }
 
-input,
-textarea {
+input, textarea {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -72,35 +64,12 @@ button {
   cursor: pointer;
 }
 
-.login {
-  background: #00e5ff;
-  color: #001014;
-}
-
-.on {
-  background: #00c853;
-  color: white;
-}
-
-.off {
-  background: #d32f2f;
-  color: white;
-}
-
-.process {
-  background: #00c853;
-  color: white;
-}
-
-.failed {
-  background: #d32f2f;
-  color: white;
-}
-
-.refresh {
-  background: #36364a;
-  color: white;
-}
+.login { background: #00e5ff; color: #001014; }
+.on { background: #00c853; color: white; }
+.off { background: #d32f2f; color: white; }
+.process { background: #00c853; color: white; }
+.failed { background: #d32f2f; color: white; }
+.refresh { background: #36364a; color: white; }
 
 .delete-btn-all {
   background: #9b2226;
@@ -126,15 +95,8 @@ button {
   margin-bottom: 10px;
 }
 
-.status-on {
-  background: #123d25;
-  color: #5ee39a;
-}
-
-.status-off {
-  background: #4a1717;
-  color: #ff7777;
-}
+.status-on { background: #123d25; color: #5ee39a; }
+.status-off { background: #4a1717; color: #ff7777; }
 
 .order {
   background: #0e0e17;
@@ -149,18 +111,9 @@ button {
   font-size: 14px;
 }
 
-.line span {
-  color: #aaa;
-}
-
-.pack {
-  color: #00e5ff;
-}
-
-.price {
-  color: #00e5ff;
-  font-weight: bold;
-}
+.line span { color: #aaa; }
+.pack { color: #00e5ff; }
+.price { color: #00e5ff; font-weight: bold; }
 
 .order-buttons {
   display: flex;
@@ -168,9 +121,7 @@ button {
   margin-top: 12px;
 }
 
-.order-buttons button {
-  flex: 1;
-}
+.order-buttons button { flex: 1; }
 
 .stats {
   display: grid;
@@ -199,17 +150,9 @@ button {
   font-weight: bold;
 }
 
-.pending-number {
-  color: #ffd54f;
-}
-
-.success-number {
-  color: #5ee39a;
-}
-
-.failed-number {
-  color: #ff7777;
-}
+.pending-number { color: #ffd54f; }
+.success-number { color: #5ee39a; }
+.failed-number { color: #ff7777; }
 
 .section-title {
   margin-top: 20px;
@@ -218,27 +161,48 @@ button {
   border-radius: 9px;
   background: #10101b;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.pending-title {
-  color: #ffd54f;
-}
+.pending-title { color: #ffd54f; }
 
-.list {
-  margin-bottom: 15px;
-}
-
-#adminArea {
-  display: none;
-}
-
-#offArea {
-  display: none;
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
+
+.nav-btn {
+  background: #00e5ff;
+  color: #001014;
+  width: auto;
+  padding: 8px 16px;
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.nav-btn:disabled {
+  background: #252538;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: bold;
+}
+
+.list { margin-bottom: 15px; }
+
+#adminArea, #offArea, #message { display: none; }
 
 #message {
-  display: none;
   background: #151520;
   border-radius: 9px;
   padding: 12px;
@@ -259,1192 +223,401 @@ button {
   border-radius: 8px;
   margin: 8px 0;
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="container">
+  <h1>💎 TRUE ALPHA ADMIN</h1>
 
-<h1>💎 TRUE ALPHA ADMIN</h1>
+  <!-- LOGIN -->
+  <div class="card" id="loginBox">
+    <h3>🔐 Admin Login</h3>
+    <input type="password" id="adminToken" placeholder="Antre ADMIN_TOKEN ou" autocomplete="off">
+    <button class="login" onclick="loginAdmin()">🔓 ANTRE NAN ADMIN</button>
+  </div>
 
+  <!-- ADMIN AREA -->
+  <div id="adminArea">
+    <div id="message"></div>
 
-<!-- LOGIN -->
+    <!-- SITE CONTROL -->
+    <div class="card">
+      <h3>🌐 Kontwòl Sit la</h3>
+      <div id="siteStatus" class="status status-on">🟢 SIT LA ON</div>
+      <button class="on" onclick="siteOn()">🟢 SIT ON</button>
+      <button class="off" onclick="showOffArea()">🔴 SIT OFF</button>
 
-<div
-  class="card"
-  id="loginBox"
->
+      <div id="offArea">
+        <p>Chwazi youn oswa ekri pwòp mesaj ou:</p>
+        <button class="message-choice" onclick="setOffMessage('⏳ Sit la ap disponib talè.')">⏳ Sit la ap disponib talè.</button>
+        <button class="message-choice" onclick="setOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')">🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.</button>
+        <textarea id="customMessage" placeholder="✍️ Ekri pwòp mesaj OFF ou..."></textarea>
+        <button class="off" onclick="setCustomOffMessage()">🔴 METE SIT LA OFF AK MESAJ SA</button>
+      </div>
+    </div>
 
-<h3>🔐 Admin Login</h3>
+    <!-- ORDERS -->
+    <div class="card">
+      <h3>📋 KÒMAND YO</h3>
 
-<input
-  type="password"
-  id="adminToken"
-  placeholder="Antre ADMIN_TOKEN ou"
-  autocomplete="off"
->
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat">
+          <span id="pendingCount" class="stat-number pending-number">0</span>
+          <span class="stat-label">🟡 AN ATANT</span>
+        </div>
 
-<button
-  class="login"
-  onclick="loginAdmin()"
->
+        <div class="stat">
+          <span id="successCount" class="stat-number success-number">0</span>
+          <span class="stat-label">✅ SIKSÈ</span>
+          <button class="delete-btn-all" onclick="clearAllOrdersByStatus('success')">🗑️ Efase tout</button>
+        </div>
 
-🔓 ANTRE NAN ADMIN
+        <div class="stat">
+          <span id="failedCount" class="stat-number failed-number">0</span>
+          <span class="stat-label">❌ ÉCHEC</span>
+          <button class="delete-btn-all" onclick="clearAllOrdersByStatus('failed')">🗑️ Efase tout</button>
+        </div>
+      </div>
 
-</button>
+      <button class="refresh" onclick="loadOrders()">🔄 RAFRECHI KÒMAND YO</button>
 
+      <!-- NAVIGATION FLÈCH -->
+      <div class="section-title pending-title">
+        <span>🟡 KÒMAND AN ATANT</span>
+      </div>
+
+      <div class="pagination-controls" id="paginationBox" style="display: none;">
+        <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">◄ Prasa</button>
+        <span class="page-indicator" id="pageIndicator">0 / 0</span>
+        <button class="nav-btn" id="nextBtn" onclick="changePage(1)">Pwochen ►</button>
+      </div>
+
+      <div id="pendingList" class="list">
+        <div class="empty">Pa gen kòmand an atant.</div>
+      </div>
+
+    </div>
+  </div>
 </div>
-
-
-<!-- ADMIN -->
-
-<div id="adminArea">
-
-<div id="message"></div>
-
-
-<!-- SITE CONTROL -->
-
-<div class="card">
-
-<h3>🌐 Kontwòl Sit la</h3>
-
-<div
-  id="siteStatus"
-  class="status status-on"
->
-🟢 SIT LA ON
-</div>
-
-
-<button
-  class="on"
-  onclick="siteOn()"
->
-🟢 SIT ON
-</button>
-
-
-<button
-  class="off"
-  onclick="showOffArea()"
->
-🔴 SIT OFF
-</button>
-
-
-<div id="offArea">
-
-<p>
-Chwazi youn oswa ekri pwòp mesaj ou:
-</p>
-
-
-<button
-  class="message-choice"
-  onclick="setOffMessage(
-    '⏳ Sit la ap disponib talè.'
-  )"
->
-⏳ Sit la ap disponib talè.
-</button>
-
-
-<button
-  class="message-choice"
-  onclick="setOffMessage(
-    '🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.'
-  )"
->
-🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
-</button>
-
-
-<textarea
-  id="customMessage"
-  placeholder="✍️ Ekri pwòp mesaj OFF ou..."
-></textarea>
-
-
-<button
-  class="off"
-  onclick="setCustomOffMessage()"
->
-🔴 METE SIT LA OFF AK MESAJ SA
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ORDERS -->
-
-<div class="card">
-
-<h3>📋 KÒMAND YO</h3>
-
-
-<!-- STATS -->
-
-<div class="stats">
-
-<div class="stat">
-
-<span
-  id="pendingCount"
-  class="stat-number pending-number"
->
-0
-</span>
-
-<span class="stat-label">
-🟡 AN ATANT
-</span>
-
-</div>
-
-
-<!-- SIKSÈ AK BOUTON EFASE -->
-<div class="stat">
-
-<span
-  id="successCount"
-  class="stat-number success-number"
->
-0
-</span>
-
-<span class="stat-label">
-✅ SIKSÈ
-</span>
-
-<button class="delete-btn-all" onclick="clearAllOrdersByStatus('success')">🗑️ Efase tout</button>
-
-</div>
-
-
-<!-- ÈCHÈK AK BOUTON EFASE -->
-<div class="stat">
-
-<span
-  id="failedCount"
-  class="stat-number failed-number"
->
-0
-</span>
-
-<span class="stat-label">
-❌ ÉCHEC
-</span>
-
-<button class="delete-btn-all" onclick="clearAllOrdersByStatus('failed')">🗑️ Efase tout</button>
-
-</div>
-
-</div>
-
-
-<button
-  class="refresh"
-  onclick="loadOrders()"
->
-🔄 RAFRECHI KÒMAND YO
-</button>
-
-
-<!-- AN ATANT SÈLMAN -->
-
-<div
-  class="section-title pending-title"
->
-🟡 KÒMAND AN ATANT
-</div>
-
-<div
-  id="pendingList"
-  class="list"
->
-<div class="empty">
-Pa gen kòmand an atant.
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 
 <script>
-
 const API = "/api";
-
 let ADMIN_TOKEN = "";
-
 let allOrdersList = [];
+let currentIndex = 0;
 
-
-/* =====================================
-   MESSAGE
-===================================== */
-
-function showMessage(
-  text,
-  color = "#00e5ff"
-) {
-
-  const box =
-    document.getElementById(
-      "message"
-    );
-
+/* MESSAGE */
+function showMessage(text, color = "#00e5ff") {
+  const box = document.getElementById("message");
   box.style.display = "block";
-
   box.style.color = color;
-
   box.textContent = text;
 }
 
-
-/* =====================================
-   LOGIN
-===================================== */
-
+/* LOGIN */
 async function loginAdmin() {
-
-  const token =
-    document
-      .getElementById(
-        "adminToken"
-      )
-      .value
-      .trim();
-
-
+  const token = document.getElementById("adminToken").value.trim();
   if (!token) {
-
-    alert(
-      "⚠️ Tanpri antre ADMIN_TOKEN ou."
-    );
-
+    alert("⚠️ Tanpri antre ADMIN_TOKEN ou.");
     return;
   }
-
 
   ADMIN_TOKEN = token;
 
-
   try {
+    const response = await fetch(`${API}/get-orders`, {
+      method: "GET",
+      headers: { "x-admin-token": ADMIN_TOKEN, "Accept": "application/json" },
+      cache: "no-store"
+    });
 
-    const response =
-      await fetch(
-        `${API}/get-orders`,
-        {
-          method: "GET",
+    const result = await response.json();
 
-          headers: {
-            "x-admin-token":
-              ADMIN_TOKEN,
-
-            "Accept":
-              "application/json"
-          },
-
-          cache: "no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (
-      response.status === 401
-    ) {
-
+    if (response.status === 401) {
       ADMIN_TOKEN = "";
-
-      alert(
-        "❌ ADMIN_TOKEN la pa bon."
-      );
-
+      alert("❌ ADMIN_TOKEN la pa bon.");
       return;
     }
 
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "HTTP " +
-        response.status
-      );
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "HTTP " + response.status);
     }
 
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminArea").style.display = "block";
 
-    if (
-      !result ||
-      result.success !== true
-    ) {
-
-      throw new Error(
-        "Backend lan pa valide koneksyon an."
-      );
-    }
-
-
-    document.getElementById(
-      "loginBox"
-    ).style.display = "none";
-
-
-    document.getElementById(
-      "adminArea"
-    ).style.display = "block";
-
-
-    showMessage(
-      "✅ Admin konekte avèk siksè.",
-      "#5ee39a"
-    );
-
+    showMessage("✅ Admin konekte avèk siksè.", "#5ee39a");
 
     await loadSiteStatus();
-
-
-    allOrdersList =
-      result.orders || [];
-
-
+    allOrdersList = result.orders || [];
     renderAllLists();
 
   } catch (error) {
-
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
-
-    alert(
-      "❌ " +
-      error.message
-    );
+    console.error("LOGIN ERROR:", error);
+    alert("❌ " + error.message);
   }
 }
 
-
-/* =====================================
-   SITE STATUS
-===================================== */
-
+/* SITE STATUS */
 async function loadSiteStatus() {
-
   try {
-
-    const response =
-      await fetch(
-        `${API}/site-status`,
-        {
-          method: "GET",
-          cache: "no-store"
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-    }
-
-
-    const data =
-      await response.json();
-
-
-    updateSiteDisplay(
-      data.enabled !== false
-    );
-
+    const response = await fetch(`${API}/site-status`, { method: "GET", cache: "no-store" });
+    const data = await response.json();
+    updateSiteDisplay(data.enabled !== false);
   } catch (error) {
-
-    console.error(
-      "SITE STATUS ERROR:",
-      error
-    );
+    console.error("SITE STATUS ERROR:", error);
   }
 }
 
-
-function updateSiteDisplay(
-  isOpen
-) {
-
-  const status =
-    document.getElementById(
-      "siteStatus"
-    );
-
-
+function updateSiteDisplay(isOpen) {
+  const status = document.getElementById("siteStatus");
   if (isOpen) {
-
-    status.className =
-      "status status-on";
-
-    status.textContent =
-      "🟢 SIT LA ON";
-
+    status.className = "status status-on";
+    status.textContent = "🟢 SIT LA ON";
   } else {
-
-    status.className =
-      "status status-off";
-
-    status.textContent =
-      "🔴 SIT LA OFF";
+    status.className = "status status-off";
+    status.textContent = "🔴 SIT LA OFF";
   }
 }
-
 
 function showOffArea() {
-
-  document.getElementById(
-    "offArea"
-  ).style.display =
-    "block";
+  document.getElementById("offArea").style.display = "block";
 }
 
-
-async function setOffMessage(
-  message
-) {
-
-  await saveSiteStatus(
-    false,
-    message
-  );
+async function setOffMessage(message) {
+  await saveSiteStatus(false, message);
 }
-
 
 async function setCustomOffMessage() {
-
-  const message =
-    document
-      .getElementById(
-        "customMessage"
-      )
-      .value
-      .trim();
-
-
+  const message = document.getElementById("customMessage").value.trim();
   if (!message) {
-
-    alert(
-      "⚠️ Tanpri ekri yon mesaj."
-    );
-
+    alert("⚠️ Tanpri ekri yon mesaj.");
     return;
   }
-
-
-  await saveSiteStatus(
-    false,
-    message
-  );
+  await saveSiteStatus(false, message);
 }
 
-
-async function saveSiteStatus(
-  enabled,
-  message
-) {
-
-  if (!ADMIN_TOKEN) {
-
-    alert(
-      "❌ Admin pa konekte."
-    );
-
-    return;
-  }
-
+async function saveSiteStatus(enabled, message) {
+  if (!ADMIN_TOKEN) return;
 
   try {
+    const response = await fetch(`${API}/site-status`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-admin-token": ADMIN_TOKEN },
+      body: JSON.stringify({ enabled, message: message || "" })
+    });
 
-    const response =
-      await fetch(
-        `${API}/site-status`,
-        {
-          method: "POST",
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error(result.message || "Erè backend.");
 
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:
-            JSON.stringify({
-              enabled,
-              message:
-                message || ""
-            })
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "HTTP " +
-        response.status
-      );
-    }
-
-
-    if (!result.success) {
-
-      throw new Error(
-        "Backend lan pa konfime chanjman an."
-      );
-    }
-
-
-    updateSiteDisplay(
-      enabled
-    );
-
-
-    document.getElementById(
-      "offArea"
-    ).style.display =
-      "none";
-
-
-    document.getElementById(
-      "customMessage"
-    ).value = "";
-
-
-    showMessage(
-
-      enabled
-        ? "🟢 Sit la ON."
-        : "🔴 Sit la OFF. Mesaj la aktive.",
-
-      enabled
-        ? "#5ee39a"
-        : "#ff7777"
-    );
-
+    updateSiteDisplay(enabled);
+    document.getElementById("offArea").style.display = "none";
+    document.getElementById("customMessage").value = "";
+    showMessage(enabled ? "🟢 Sit la ON." : "🔴 Sit la OFF. Mesaj la aktive.", enabled ? "#5ee39a" : "#ff7777");
 
   } catch (error) {
-
-    console.error(
-      "SITE STATUS ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
-    );
+    showMessage("❌ " + error.message, "#ff4d4d");
   }
 }
-
 
 async function siteOn() {
-
-  await saveSiteStatus(
-    true,
-    ""
-  );
+  await saveSiteStatus(true, "");
 }
 
-
-/* =====================================
-   LOAD ORDERS
-===================================== */
-
+/* LOAD ORDERS */
 async function loadOrders() {
-
-  if (!ADMIN_TOKEN) {
-
-    return;
-  }
-
+  if (!ADMIN_TOKEN) return;
 
   try {
+    const response = await fetch(`${API}/get-orders`, {
+      method: "GET",
+      headers: { "x-admin-token": ADMIN_TOKEN, "Accept": "application/json" },
+      cache: "no-store"
+    });
 
-    const response =
-      await fetch(
-        `${API}/get-orders`,
-        {
-          method: "GET",
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error(result.message || "Erè backend.");
 
-          headers: {
-
-            "x-admin-token":
-              ADMIN_TOKEN,
-
-            "Accept":
-              "application/json"
-          },
-
-          cache: "no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (
-      response.status === 401
-    ) {
-
-      alert(
-        "❌ Token admin lan pa otorize."
-      );
-
-      return;
-    }
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "HTTP " +
-        response.status
-      );
-    }
-
-
-    allOrdersList =
-      result.orders || [];
-
-
+    allOrdersList = result.orders || [];
     renderAllLists();
 
-
   } catch (error) {
-
-    console.error(
-      "LOAD ORDERS ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
-    );
+    showMessage("❌ " + error.message, "#ff4d4d");
   }
 }
 
-
-/* =====================================
-   RENDER ALL LISTS
-===================================== */
-
+/* RENDER ALL LISTS & NAVIGATION */
 function renderAllLists() {
+  const pending = allOrdersList.filter(o => o.status === "pending");
+  const failed = allOrdersList.filter(o => o.status === "failed");
+  const success = allOrdersList.filter(o => o.status === "success" || o.status === "processing");
 
-  const pending =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "pending"
-    );
+  document.getElementById("pendingCount").textContent = pending.length;
+  document.getElementById("failedCount").textContent = failed.length;
+  document.getElementById("successCount").textContent = success.length;
 
+  const paginationBox = document.getElementById("paginationBox");
 
-  const failed =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "failed"
-    );
-
-
-  const success =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "success"
-    );
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent =
-    pending.length;
-
-
-  document.getElementById(
-    "failedCount"
-  ).textContent =
-    failed.length;
-
-
-  document.getElementById(
-    "successCount"
-  ).textContent =
-    success.length;
-
-
-  renderList(
-    pending,
-    "pendingList"
-  );
-}
-
-
-/* =====================================
-   RENDER PENDING LIST
-===================================== */
-
-function renderList(
-  orders,
-  containerId
-) {
-
-  const box =
-    document.getElementById(
-      containerId
-    );
-
-
-  if (!orders.length) {
-
-    box.innerHTML =
-      '<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
-
+  if (pending.length === 0) {
+    paginationBox.style.display = "none";
+    document.getElementById("pendingList").innerHTML = '<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
     return;
   }
 
+  paginationBox.style.display = "flex";
 
-  orders.sort(
-    (a, b) =>
-      new Date(
-        b.createdAt || 0
-      ) -
-      new Date(
-        a.createdAt || 0
-      )
-  );
+  if (currentIndex >= pending.length) currentIndex = pending.length - 1;
+  if (currentIndex < 0) currentIndex = 0;
 
+  document.getElementById("pageIndicator").textContent = `${currentIndex + 1} / ${pending.length}`;
+  document.getElementById("prevBtn").disabled = (currentIndex === 0);
+  document.getElementById("nextBtn").disabled = (currentIndex === pending.length - 1);
 
+  renderList([pending[currentIndex]], "pendingList");
+}
+
+function changePage(direction) {
+  currentIndex += direction;
+  renderAllLists();
+}
+
+/* RENDER LIST CARD */
+function renderList(orders, containerId) {
+  const box = document.getElementById(containerId);
   box.innerHTML = "";
 
+  for (const order of orders) {
+    const div = document.createElement("div");
+    div.className = "order";
 
-  for (
-    const order of orders
-  ) {
-
-    const div =
-      document.createElement(
-        "div"
-      );
-
-
-    div.className =
-      "order";
-
-
-    const date =
-      order.createdAt
-        ? new Date(
-            order.createdAt
-          ).toLocaleString()
-        : "N/A";
-
-
-    const statusText =
-      "🟡 AN ATANT";
-
-    // Kaptire tout kalite non valè kòd tranzaksyon an soti nan backend an
-    const userTxCode = 
-      order.transactionId || 
-      order.transaction_id || 
-      order.transId || 
-      order.idTranzaksyon || 
-      order.txId || 
-      order.code || 
-      order.id_transaction ||
-      order.transaction || 
-      "Pa gen kòd";
-
-    const buttons = `
-      <div class="order-buttons">
-
-        <button
-          class="process"
-          onclick="updateOrder(
-            '${escapeJs(
-              order.id || ""
-            )}',
-            'processing'
-          )"
-        >
-          ✅ VALIDÉ
-        </button>
-
-        <button
-          class="failed"
-          onclick="updateOrder(
-            '${escapeJs(
-              order.id || ""
-            )}',
-            'failed'
-          )"
-        >
-          ❌ ÉCHEC
-        </button>
-
-      </div>
-    `;
-
+    const date = order.createdAt ? new Date(order.createdAt).toLocaleString() : "N/A";
+    const userTxCode = order.transactionId || order.transaction_id || order.transId || order.code || "Pa gen kòd";
 
     div.innerHTML = `
-
-      <div class="status">
-        ${escapeHtml(
-          statusText
-        )}
-      </div>
-
-
-      <div class="line">
-        <span>🆔 ID:</span>
-        <strong>
-          ${escapeHtml(
-            order.id || ""
-          )}
-        </strong>
-      </div>
-
-
-      <div class="line">
-        <span>🎮 UID:</span>
-        <strong>
-          ${escapeHtml(
-            order.uid || ""
-          )}
-        </strong>
-      </div>
-
-
-      <div class="line">
-        <span>💎 Pack:</span>
-        <strong class="pack">
-          ${escapeHtml(
-            order.pack || ""
-          )}
-        </strong>
-      </div>
-
-
-      <div class="line">
-        <span>💰 Pri:</span>
-        <strong class="price">
-          ${escapeHtml(
-            String(
-              order.price || ""
-            )
-          )}
-          GDS
-        </strong>
-      </div>
-
-
-      <div class="line">
-        <span>📱 Nimewo/Non:</span>
-        <strong>
-          ${escapeHtml(
-            order.senderNumber || ""
-          )}
-        </strong>
-      </div>
-
+      <div class="status">🟡 AN ATANT</div>
+      <div class="line"><span>🆔 ID:</span> <strong>${escapeHtml(order.id || "")}</strong></div>
+      <div class="line"><span>🎮 UID:</span> <strong>${escapeHtml(order.uid || "")}</strong></div>
+      <div class="line"><span>💎 Pack:</span> <strong class="pack">${escapeHtml(order.pack || "")}</strong></div>
+      <div class="line"><span>💰 Pri:</span> <strong class="price">${escapeHtml(String(order.price || ""))} GDS</strong></div>
+      <div class="line"><span>📱 Nimewo/Non:</span> <strong>${escapeHtml(order.senderNumber || "")}</strong></div>
 
       <div class="tx-highlight">
         <div style="color: #aaa; font-size: 12px;">🧾 KÒD TRANZAKSYON (NATCASH/MONCASH):</div>
-        <strong style="color: #ffd54f; font-size: 16px;">
-          ${escapeHtml(userTxCode)}
-        </strong>
+        <strong style="color: #ffd54f; font-size: 16px;">${escapeHtml(userTxCode)}</strong>
       </div>
 
+      <div class="line"><span>🌎 Server:</span> <strong>${escapeHtml(order.server || "")}</strong></div>
+      <div class="line"><span>🕐 Kòmand:</span> <strong>${escapeHtml(date)}</strong></div>
 
-      <div class="line">
-        <span>🌎 Server:</span>
-        <strong>
-          ${escapeHtml(
-            order.server || ""
-          )}
-        </strong>
+      <div class="order-buttons">
+        <button class="process" onclick="updateOrder('${escapeJs(order.id || "")}', 'processing')">✅ VALIDÉ</button>
+        <button class="failed" onclick="handleFailOrder('${escapeJs(order.id || "")}')">❌ ÉCHEC</button>
       </div>
-
-
-      <div class="line">
-        <span>🕐 Kòmand:</span>
-        <strong>
-          ${escapeHtml(date)}
-        </strong>
-      </div>
-
-
-      ${buttons}
-
     `;
-
 
     box.appendChild(div);
   }
 }
 
+/* KONTWOLE REZON AK MESAJ ÈCHÈK LA */
+function handleFailOrder(id) {
+  const reason = prompt("🔴 Antre rezon echèk la pou kliyan an (oswa kite l konsa pou mesaj pa defo a):", "Nou pa resevwa tranzaksyon an sou kont nou an.");
+  if (reason === null) return; // Anile si l peze cancel
+  
+  updateOrder(id, "failed", reason.trim() || "Nou pa resevwa tranzaksyon an sou kont nou an.");
+}
 
-/* =====================================
-   UPDATE ORDER
-===================================== */
-
-async function updateOrder(
-  id,
-  status
-) {
-
+/* UPDATE ORDER (IMEDYAT SOU MEMWA LOKAL LA) */
+async function updateOrder(id, status, customerMessage = "") {
   if (!ADMIN_TOKEN) {
-
-    alert(
-      "❌ Admin pa konekte."
-    );
-
+    alert("❌ Admin pa konekte.");
     return;
   }
 
+  // 1. Mete ajou memwa lokal la touswit pou l pase nan lis échec la
+  const target = allOrdersList.find(o => o.id === id);
+  if (target) {
+    target.status = status;
+    target.customerMessage = customerMessage;
+  }
 
+  if (status === "failed") {
+    showMessage("❌ Kòmand lan voye nan ÈCHÈK avèk siksè!", "#ff7777");
+  } else {
+    showMessage("✅ Kòmand lan VALIDÉ avèk siksè!", "#5ee39a");
+  }
+
+  // Rafrechi lis la imedyatman nan ekran an
+  renderAllLists();
+
+  // 2. Syenkronize ak Backend la
   try {
+    const response = await fetch(`${API}/update-order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-admin-token": ADMIN_TOKEN },
+      body: JSON.stringify({ id, status, customerMessage })
+    });
 
-    const response =
-      await fetch(
-        `${API}/update-order`,
-        {
-          method: "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:
-            JSON.stringify({
-              id,
-              status
-            })
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "HTTP " +
-        response.status
-      );
+    const result = await response.json();
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "Erè backend.");
     }
-
-
-    if (
-      !result.success
-    ) {
-
-      throw new Error(
-        "Backend lan pa konfime chanjman an."
-      );
-    }
-
-
-    if (
-      status === "processing"
-    ) {
-
-      showMessage(
-        "✅ Kòmand la valide! (N ap konekte ak API an)",
-        "#5ee39a"
-      );
-
-    }
-
-
-    if (
-      status === "failed"
-    ) {
-
-      showMessage(
-        "❌ Nou pa resevwa peman an.",
-        "#ff7777"
-      );
-    }
-
-
-    await loadOrders();
-
-
   } catch (error) {
-
-    console.error(
-      "UPDATE ORDER ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
-    );
+    console.error("UPDATE ERROR:", error);
+    showMessage("⚠️ Pasaj lokal la fèt men gen yon ti pwoblèm nan backend lan.", "#ff4d4d");
   }
 }
 
-
-/* =====================================
-   EFASE TOUT KÒMAND YON SÈL KOU (SIKSÈ / ÈCHÈK)
-===================================== */
-
+/* CLEAR ALL BY STATUS */
 async function clearAllOrdersByStatus(statusType) {
-
-  const targetOrders = allOrdersList.filter(o => o.status === statusType);
+  const targetOrders = allOrdersList.filter(o => statusType === 'success' ? (o.status === 'success' || o.status === 'processing') : o.status === statusType);
 
   if (!targetOrders.length) {
     alert(`⚠️ Pa gen okenn kòmand nan kategori ${statusType === 'success' ? 'SIKSÈ' : 'ÉCHEC'} pou efase.`);
     return;
   }
 
-  const ok = confirm(`⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${statusType === 'success' ? 'SIKSÈ' : 'ÉCHEC'} yo yon sèl kou?`);
+  if (!confirm(`⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${statusType === 'success' ? 'SIKSÈ' : 'ÉCHEC'} yo?`)) return;
 
-  if (!ok) return;
-
-  let count = 0;
+  allOrdersList = allOrdersList.filter(o => statusType === 'success' ? (o.status !== 'success' && o.status !== 'processing') : o.status !== statusType);
+  renderAllLists();
 
   for (const order of targetOrders) {
     try {
       await fetch(`${API}/delete-order`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-token": ADMIN_TOKEN
-        },
+        headers: { "Content-Type": "application/json", "x-admin-token": ADMIN_TOKEN },
         body: JSON.stringify({ id: order.id })
       });
-      count++;
     } catch (err) {
-      console.error("Erè pandan efasman an", order.id, err);
+      console.error("Erè efasman:", order.id, err);
     }
   }
 
-  showMessage(`🗑️ ${count} kòmand ${statusType === 'success' ? 'Siksè' : 'Échec'} efase nèt!`, "#5ee39a");
-  await loadOrders();
+  showMessage(`🗑️ Kòmand ${statusType === 'success' ? 'Siksè' : 'Échec'} yo efase nèt!`, "#5ee39a");
 }
 
-
-/* =====================================
-   ESCAPE HTML
-===================================== */
-
-function escapeHtml(
-  value
-) {
-
+/* ESCAPE UTILS */
+function escapeHtml(value) {
   return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
-
-/* =====================================
-   ESCAPE JS
-===================================== */
-
-function escapeJs(
-  value
-) {
-
+function escapeJs(value) {
   return String(value)
-
-    .replaceAll(
-      "\\",
-      "\\\\"
-    )
-
-    .replaceAll(
-      "'",
-      "\\'"
-    )
-
-    .replaceAll(
-      "\n",
-      "\\n"
-    )
-
-    .replaceAll(
-      "\r",
-      "\\r"
-    );
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'")
+    .replaceAll("\n", "\\n")
+    .replaceAll("\r", "\\r");
 }
-
 </script>
 
 </body>
-
 </html>
