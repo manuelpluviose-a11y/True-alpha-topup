@@ -36,10 +36,6 @@
       font-size: 25px;
     }
 
-    /* =========================
-       PRODUCT CARD
-    ========================= */
-
     .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -99,10 +95,6 @@
       font-size: 14px;
       font-weight: bold;
     }
-
-    /* =========================
-       ORDER AREA
-    ========================= */
 
     #orderBox {
       display: none;
@@ -315,23 +307,21 @@
 
   <div id="siteClosed"></div>
 
-  <!-- =========================
-       MENI PWODWI YO
-  ========================== -->
-
   <div id="mainService">
 
     <div class="products">
 
-      <!-- FREE FIRE TOPUP PAR UID -->
       <div
         class="product-card"
         onclick="openOrder()"
       >
 
         <div class="diamond-image">
-          <!-- FOTO BANNER W MONTE AN -->
-          <img src="file_00000000826881f6bc6f4ed8fee2220d.png" alt="Free Fire Diamonds" class="banner-img-card">
+          <img
+            src="file_00000000826881f6bc6f4ed8fee2220d.png"
+            alt="Free Fire Diamonds"
+            class="banner-img-card"
+          >
         </div>
 
         <div class="product-info">
@@ -355,10 +345,6 @@
     </div>
 
 
-    <!-- =========================
-         FORM NAN
-    ========================== -->
-
     <div id="orderBox">
 
       <div class="card">
@@ -380,8 +366,6 @@
           <strong>NA — Amérique du Nord</strong>
         </div>
 
-
-        <!-- UID -->
 
         <label for="uid">
           UID Free Fire
@@ -426,9 +410,6 @@
 
 
         <div id="purchaseArea">
-
-
-          <!-- PACK -->
 
           <label for="pack">
             Chwazi Pack
@@ -489,8 +470,6 @@
           </select>
 
 
-          <!-- PRI -->
-
           <div class="price">
 
             <small>
@@ -504,8 +483,6 @@
           </div>
 
 
-          <!-- NATCASH -->
-
           <div class="payment">
 
             💳 Voye kòb la sou NatCash<br>
@@ -518,8 +495,6 @@
 
           </div>
 
-
-          <!-- AVÈTISMAN -->
 
           <div class="warning">
 
@@ -535,13 +510,9 @@
           </div>
 
 
-          <!-- NIMEWO OSWA NON -->
-
           <label for="senderNumber">
-
             Nimewo ki voye kòb la
             oswa non ki sou kont NatCash la
-
           </label>
 
           <input
@@ -553,15 +524,11 @@
           >
 
 
-          <!-- ID TRANZAKSYON -->
-
           <label for="transactionId">
-
             ID Tranzaksyon
             <span style="color:#ff7777;">
               * Obligatwa
             </span>
-
           </label>
 
           <input
@@ -572,8 +539,6 @@
             required
           >
 
-
-          <!-- KÒMAND -->
 
           <button
             type="button"
@@ -586,8 +551,6 @@
 
         </div>
 
-
-        <!-- WHATSAPP -->
 
         <a
           class="whatsapp"
@@ -612,14 +575,11 @@
 
 <script>
 
-/* =========================
-   API
-========================= */
-
 const API = "/api";
 
 let siteIsOpen = true;
 let currentOrderId = null;
+let orderStatusTimer = null;
 
 
 /* =========================
@@ -639,9 +599,7 @@ async function checkSiteStatus() {
       );
 
     if (!response.ok) {
-      throw new Error(
-        "Status error"
-      );
+      throw new Error("Status error");
     }
 
     const data =
@@ -651,22 +609,16 @@ async function checkSiteStatus() {
       data.enabled !== false;
 
     const closed =
-      document.getElementById(
-        "siteClosed"
-      );
+      document.getElementById("siteClosed");
 
     const service =
-      document.getElementById(
-        "mainService"
-      );
+      document.getElementById("mainService");
 
     if (!siteIsOpen) {
 
-      service.style.display =
-        "none";
+      service.style.display = "none";
 
-      closed.style.display =
-        "block";
+      closed.style.display = "block";
 
       closed.textContent =
         data.message ||
@@ -674,11 +626,10 @@ async function checkSiteStatus() {
 
     } else {
 
-      service.style.display =
-        "block";
+      service.style.display = "block";
 
-      closed.style.display =
-        "none";
+      closed.style.display = "none";
+
     }
 
   } catch (error) {
@@ -708,8 +659,7 @@ function openOrder() {
 
   document.getElementById(
     "orderBox"
-  ).style.display =
-    "block";
+  ).style.display = "block";
 
   window.scrollTo({
     top: 0,
@@ -727,8 +677,7 @@ function closeOrder() {
 
   document.getElementById(
     "orderBox"
-  ).style.display =
-    "none";
+  ).style.display = "none";
 
 }
 
@@ -740,9 +689,7 @@ function closeOrder() {
 function updatePrice() {
 
   const pack =
-    document.getElementById(
-      "pack"
-    );
+    document.getElementById("pack");
 
   const selected =
     pack.options[
@@ -797,20 +744,15 @@ function verifyUID() {
     );
 
 
-  message.style.display =
-    "block";
+  message.style.display = "block";
 
 
   if (!uid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri antre UID Free Fire ou.";
@@ -821,14 +763,10 @@ function verifyUID() {
 
   if (!confirmUid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri re-antre UID la.";
@@ -839,14 +777,10 @@ function verifyUID() {
 
   if (!/^[0-9]+$/.test(uid)) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ UID la dwe genyen sèlman chif.";
@@ -857,14 +791,10 @@ function verifyUID() {
 
   if (uid !== confirmUid) {
 
-    verified.style.display =
-      "none";
+    verified.style.display = "none";
+    purchaseArea.style.display = "none";
 
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ UID yo pa menm.";
@@ -873,14 +803,11 @@ function verifyUID() {
   }
 
 
-  verified.style.display =
-    "block";
+  verified.style.display = "block";
 
-  purchaseArea.style.display =
-    "block";
+  purchaseArea.style.display = "block";
 
-  message.style.color =
-    "#00e5ff";
+  message.style.color = "#00e5ff";
 
   message.textContent =
     "✅ UID la konfime. Ou ka kontinye.";
@@ -945,11 +872,8 @@ async function submitOrder() {
     );
 
 
-  message.style.display =
-    "block";
+  message.style.display = "block";
 
-
-  /* UID */
 
   if (
     !uid ||
@@ -957,8 +881,7 @@ async function submitOrder() {
     uid !== confirmUid
   ) {
 
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
@@ -967,12 +890,9 @@ async function submitOrder() {
   }
 
 
-  /* PACK */
-
   if (!pack || !price) {
 
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri chwazi yon pack.";
@@ -981,12 +901,9 @@ async function submitOrder() {
   }
 
 
-  /* NIMEWO / NON */
-
   if (!senderNumber) {
 
-    message.style.color =
-      "#ffcc00";
+    message.style.color = "#ffcc00";
 
     message.textContent =
       "⚠️ Mete nimewo ki voye kòb la oswa non ki sou NatCash la.";
@@ -995,12 +912,9 @@ async function submitOrder() {
   }
 
 
-  /* ID TRANZAKSYON */
-
   if (!transactionId) {
 
-    message.style.color =
-      "#ff4d4d";
+    message.style.color = "#ff4d4d";
 
     message.textContent =
       "❌ ID Tranzaksyon an obligatwa.";
@@ -1013,17 +927,11 @@ async function submitOrder() {
   }
 
 
-  /* DOUBLE CLICK */
+  orderBtn.disabled = true;
 
-  orderBtn.disabled =
-    true;
+  message.classList.add("processing");
 
-  message.classList.add(
-    "processing"
-  );
-
-  message.style.color =
-    "#00e5ff";
+  message.style.color = "#00e5ff";
 
   message.textContent =
     "⏳ N ap prepare kòmand ou an...";
@@ -1044,14 +952,11 @@ async function submitOrder() {
 
           body: JSON.stringify({
 
-            uid:
-              uid,
+            uid: uid,
 
-            pack:
-              pack,
+            pack: pack,
 
-            price:
-              Number(price),
+            price: Number(price),
 
             senderNumber:
               senderNumber,
@@ -1103,22 +1008,17 @@ async function submitOrder() {
         : null;
 
 
-    message.classList.add(
-      "processing"
-    );
-
     message.style.color =
       "#00e5ff";
 
+    message.classList.add(
+      "processing"
+    );
 
     message.innerHTML =
       "⏳ <strong>KÒMAND OU AN ANTRE</strong><br>" +
       "💎 N ap verifye enfòmasyon peman ou yo.<br>" +
       "🙏 Tanpri tann admin lan trete kòmand lan.";
-
-
-    orderBtn.disabled =
-      true;
 
 
     if (currentOrderId) {
@@ -1130,6 +1030,15 @@ async function submitOrder() {
         ) +
         "</small>";
 
+      /*
+       * KOUNYE A NOU KÒMANSE SIVEYE KÒMAND LAN.
+       * Lè admin chanje l an failed,
+       * backend la dwe retounen customerMessage.
+       */
+      startOrderStatusCheck(
+        currentOrderId
+      );
+
     }
 
 
@@ -1139,7 +1048,6 @@ async function submitOrder() {
       "CREATE ORDER ERROR:",
       error
     );
-
 
     message.classList.remove(
       "processing"
@@ -1151,10 +1059,258 @@ async function submitOrder() {
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
 
-    orderBtn.disabled =
-      false;
+    orderBtn.disabled = false;
 
   }
+
+}
+
+
+/* =========================
+   CHECK ORDER STATUS
+========================= */
+
+function startOrderStatusCheck(
+  orderId
+) {
+
+  if (orderStatusTimer) {
+    clearInterval(
+      orderStatusTimer
+    );
+  }
+
+  checkOrderStatus(orderId);
+
+  orderStatusTimer =
+    setInterval(
+      () => checkOrderStatus(orderId),
+      5000
+    );
+
+}
+
+
+/* =========================
+   GET ORDER STATUS
+========================= */
+
+async function checkOrderStatus(
+  orderId
+) {
+
+  if (!orderId) return;
+
+  try {
+
+    /*
+     * Endpoint sa a dwe bay enfòmasyon
+     * sou yon kòmand espesifik.
+     *
+     * Pa mete ADMIN_TOKEN isit la.
+     */
+    const response =
+      await fetch(
+        `${API}/get-order?id=${encodeURIComponent(orderId)}`,
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok) {
+      return;
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
+      return;
+    }
+
+
+    const order =
+      result.order;
+
+
+    if (!order) {
+      return;
+    }
+
+
+    /*
+     * ÉCHEC
+     */
+    if (
+      order.status === "failed"
+    ) {
+
+      stopOrderStatusCheck();
+
+      showCustomerResult(
+        order.customerMessage ||
+        "Nou pa resevwa peman an."
+      );
+
+      return;
+    }
+
+
+    /*
+     * SIKSÈ
+     */
+    if (
+      order.status === "success"
+    ) {
+
+      stopOrderStatusCheck();
+
+      showCustomerSuccess();
+
+      return;
+    }
+
+
+    /*
+     * PROCESSING
+     */
+    if (
+      order.status === "processing"
+    ) {
+
+      const message =
+        document.getElementById(
+          "message"
+        );
+
+      message.style.display =
+        "block";
+
+      message.classList.add(
+        "processing"
+      );
+
+      message.style.color =
+        "#00e5ff";
+
+      message.innerHTML =
+        "⏳ <strong>KÒMAND OU AN AP TRETE</strong><br>" +
+        "💎 Tanpri tann kèk moman.";
+
+    }
+
+  } catch (error) {
+
+    console.log(
+      "ORDER STATUS CHECK:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   STOP STATUS CHECK
+========================= */
+
+function stopOrderStatusCheck() {
+
+  if (orderStatusTimer) {
+
+    clearInterval(
+      orderStatusTimer
+    );
+
+    orderStatusTimer = null;
+
+  }
+
+}
+
+
+/* =========================
+   CUSTOMER FAILED MESSAGE
+========================= */
+
+function showCustomerResult(
+  customerMessage
+) {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  const orderBtn =
+    document.getElementById(
+      "orderBtn"
+    );
+
+
+  message.classList.remove(
+    "processing"
+  );
+
+  message.style.display =
+    "block";
+
+  message.style.color =
+    "#ff7777";
+
+  message.style.background =
+    "#4a1717";
+
+  message.style.border =
+    "1px solid #d32f2f";
+
+  message.innerHTML =
+    "❌ <strong>ÉCHEC</strong><br>" +
+    escapeHtml(
+      customerMessage
+    );
+
+
+  orderBtn.disabled = false;
+
+}
+
+
+/* =========================
+   CUSTOMER SUCCESS
+========================= */
+
+function showCustomerSuccess() {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  message.classList.remove(
+    "processing"
+  );
+
+  message.style.display =
+    "block";
+
+  message.style.color =
+    "#5ee39a";
+
+  message.style.background =
+    "#10251c";
+
+  message.style.border =
+    "1px solid #168c4a";
+
+  message.innerHTML =
+    "✅ <strong>KÒMAND LA REYISI</strong><br>" +
+    "💎 Diamond yo ap trete pou UID ou.";
 
 }
 
@@ -1163,7 +1319,9 @@ async function submitOrder() {
    ESCAPE HTML
 ========================= */
 
-function escapeHtml(value) {
+function escapeHtml(
+  value
+) {
 
   return String(value)
 
