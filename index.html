@@ -65,36 +65,16 @@
 
     .diamond-image {
       height: 145px;
-      background:
-        radial-gradient(
-          circle at center,
-          #087cff 0%,
-          #063b91 35%,
-          #111827 72%,
-          #080811 100%
-        );
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       overflow: hidden;
+      background: #0e0e17;
     }
 
-    .diamond {
-      font-size: 76px;
-      filter:
-        drop-shadow(0 0 8px #00e5ff)
-        drop-shadow(0 0 18px #006eff);
-    }
-
-    .shine {
-      position: absolute;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: rgba(0,229,255,.12);
-      filter: blur(12px);
+    .banner-img-card {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .product-info {
@@ -350,13 +330,8 @@
       >
 
         <div class="diamond-image">
-
-          <div class="shine"></div>
-
-          <div class="diamond">
-            💎
-          </div>
-
+          <!-- FOTO BANNER PNG AN -->
+          <img src="banner.png" alt="Free Fire Diamonds" class="banner-img-card">
         </div>
 
         <div class="product-info">
@@ -376,12 +351,6 @@
         </div>
 
       </div>
-
-      <!--
-        LÈ OU GEN LOT PWODWI,
-        OU KA METE LOT PRODUCT-CARD
-        YO LA.
-      -->
 
     </div>
 
@@ -561,7 +530,7 @@
             anvan kòmand lan trete.
 
             Si enfòmasyon peman yo pa koresponn,
-            kòmand lan ka echwe.
+            kòmand lan ap echwe.
 
           </div>
 
@@ -1235,4 +1204,4 @@ checkSiteStatus();
 </script>
 
 </body>
-          </html>
+</html>
