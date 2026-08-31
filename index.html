@@ -7,7 +7,6 @@
   <title>True Alpha TopUp</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -38,79 +37,91 @@
     }
 
     /* =========================
-       MENU SERVICE CARD
+       PRODUCT CARD
     ========================= */
 
-    .services-grid {
+    .products {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .service {
+    .product-card {
       background: #151520;
       border: 1px solid #303044;
-      border-radius: 15px;
-      padding: 14px;
-
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
+      border-radius: 14px;
+      overflow: hidden;
       cursor: pointer;
-
-      min-height: 105px;
-
-      transition: transform .15s ease,
-                  border-color .15s ease;
+      transition: transform .15s, border-color .15s;
     }
 
-    .service:active {
-      transform: scale(.98);
+    .product-card:active {
+      transform: scale(.97);
     }
 
-    .service:hover {
+    .product-card:hover {
       border-color: #00e5ff;
     }
 
-    .diamond-logo {
-      width: 76px;
-      height: 76px;
+    .diamond-image {
+      height: 145px;
+      background:
+        radial-gradient(
+          circle at center,
+          #087cff 0%,
+          #063b91 35%,
+          #111827 72%,
+          #080811 100%
+        );
 
-      border-radius: 12px;
-
-      object-fit: cover;
-
-      flex-shrink: 0;
-
-      background: #0e0e17;
-
-      border: 1px solid #303044;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .service-content {
-      min-width: 0;
+    .diamond {
+      font-size: 76px;
+      filter:
+        drop-shadow(0 0 8px #00e5ff)
+        drop-shadow(0 0 18px #006eff);
     }
 
-    .service h2 {
-      font-size: 16px;
-      margin-bottom: 7px;
-      color: white;
+    .shine {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(0,229,255,.12);
+      filter: blur(12px);
     }
 
-    .service p {
-      color: #aaa;
+    .product-info {
+      padding: 12px;
+    }
+
+    .category {
+      color: #888;
       font-size: 12px;
-      line-height: 1.4;
+      margin-bottom: 7px;
     }
 
-    .click-text {
-      color: #00e5ff !important;
-      margin-top: 5px;
+    .product-name {
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 9px;
+    }
+
+    .product-price {
+      color: #00e5ff;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     /* =========================
-       ORDER BOX
+       ORDER AREA
     ========================= */
 
     #orderBox {
@@ -130,6 +141,13 @@
       margin-bottom: 15px;
     }
 
+    .back-menu {
+      background: transparent;
+      border: 1px solid #36364a;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
     label {
       display: block;
       color: #ccc;
@@ -139,23 +157,14 @@
 
     input,
     select {
-
       width: 100%;
-
       padding: 13px;
-
       margin-bottom: 14px;
-
       border-radius: 9px;
-
       border: 1px solid #36364a;
-
       background: #0e0e17;
-
       color: white;
-
       outline: none;
-
       font-size: 14px;
     }
 
@@ -165,17 +174,11 @@
     }
 
     .server {
-
       background: #0e0e17;
-
       border: 1px solid #36364a;
-
       border-radius: 9px;
-
       padding: 13px;
-
       margin-bottom: 14px;
-
       font-size: 14px;
     }
 
@@ -183,22 +186,12 @@
       color: #00e5ff;
     }
 
-    /* =========================
-       PAYMENT
-    ========================= */
-
     .payment {
-
       background: #0e0e17;
-
       border-radius: 10px;
-
       padding: 12px;
-
       margin-bottom: 14px;
-
       font-size: 13px;
-
       line-height: 1.7;
     }
 
@@ -206,106 +199,51 @@
       color: #00e5ff;
     }
 
-    /* =========================
-       WARNING
-    ========================= */
-
     .warning {
-
-      background: #2a2110;
-
-      border: 1px solid #8a6817;
-
+      background: #291e08;
+      border: 1px solid #8b6a15;
       color: #ffd54f;
-
       border-radius: 10px;
-
       padding: 12px;
-
       margin-bottom: 14px;
-
       font-size: 12px;
-
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
-    /* =========================
-       PRICE
-    ========================= */
-
     .price {
-
       text-align: center;
-
       background: #101b20;
-
       border: 1px solid #00e5ff;
-
       border-radius: 10px;
-
-      padding: 12px;
-
+      padding: 11px;
       margin-bottom: 14px;
     }
 
     .price small {
-
       display: block;
-
       color: #aaa;
-
-      margin-bottom: 4px;
-    }
-
-    .diamond-amount {
-
-      display: block;
-
-      color: #fff;
-
-      font-size: 19px;
-
-      font-weight: bold;
-
       margin-bottom: 3px;
     }
 
     .price strong {
-
       font-size: 23px;
-
       color: #00e5ff;
     }
 
-    /* =========================
-       BUTTON
-    ========================= */
-
     button {
-
       width: 100%;
-
       padding: 13px;
-
       border: none;
-
       border-radius: 10px;
-
       background: #00e5ff;
-
       color: #001014;
-
       font-size: 16px;
-
       font-weight: bold;
-
       cursor: pointer;
     }
 
     button:disabled {
-
       opacity: .45;
-
       cursor: not-allowed;
     }
 
@@ -313,132 +251,63 @@
       margin-bottom: 14px;
     }
 
-    .close {
-
-      background: transparent;
-
-      border: 1px solid #36364a;
-
-      color: #aaa;
-
-      margin-top: 8px;
-    }
-
-    /* =========================
-       WHATSAPP
-    ========================= */
-
     .whatsapp {
-
-      display: none;
-
+      display: block;
       text-align: center;
-
       text-decoration: none;
-
       margin-top: 12px;
-
       padding: 12px;
-
       border-radius: 10px;
-
       background: #168c4a;
-
       color: white;
-
       font-weight: bold;
-
       font-size: 14px;
     }
-
-    /* =========================
-       VERIFIED
-    ========================= */
 
     #purchaseArea {
       display: none;
     }
 
     #verified {
-
       display: none;
-
       text-align: center;
-
       background: #10251c;
-
       border: 1px solid #168c4a;
-
       color: #5ee39a;
-
       border-radius: 9px;
-
       padding: 11px;
-
       margin-bottom: 14px;
-
       font-size: 13px;
     }
-
-    /* =========================
-       MESSAGE
-    ========================= */
 
     #message {
-
       display: none;
-
       text-align: center;
-
       margin-top: 12px;
-
       font-size: 13px;
-
       line-height: 1.5;
-
       padding: 10px;
-
       border-radius: 9px;
     }
 
-    /* =========================
-       SITE CLOSED
-    ========================= */
-
     #siteClosed {
-
       display: none;
-
       background: #4a1717;
-
       border: 1px solid #d32f2f;
-
       color: #ff7777;
-
       border-radius: 12px;
-
       padding: 15px;
-
       margin-top: 15px;
-
       text-align: center;
-
       line-height: 1.5;
-
       font-size: 14px;
     }
 
-    /* =========================
-       PROCESSING
-    ========================= */
-
     .processing {
-
       animation: pulse 1.2s infinite;
     }
 
     @keyframes pulse {
-
       0%, 100% {
         opacity: 1;
       }
@@ -446,9 +315,13 @@
       50% {
         opacity: .45;
       }
-
     }
 
+    @media (max-width: 360px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -456,85 +329,86 @@
 
 <div class="container">
 
-  <!-- HEADER -->
-
   <div class="header">
-
-    <h1>
-      💎 TRUE ALPHA TOPUP
-    </h1>
-
+    <h1>💎 TRUE ALPHA TOPUP</h1>
   </div>
-
-
-  <!-- SITE OFF -->
 
   <div id="siteClosed"></div>
 
-
-  <!-- MAIN MENU -->
+  <!-- =========================
+       MENI PWODWI YO
+  ========================== -->
 
   <div id="mainService">
 
-    <div class="services-grid">
+    <div class="products">
 
-      <!-- FREE FIRE TOPUP CARD -->
-
+      <!-- FREE FIRE TOPUP PAR UID -->
       <div
-        class="service"
+        class="product-card"
         onclick="openOrder()"
       >
 
-        <img
-          src="diamond.png"
-          class="diamond-logo"
-          alt="Diamonds"
-        >
+        <div class="diamond-image">
 
-        <div class="service-content">
+          <div class="shine"></div>
 
-          <h2>
-            FREE FIRE TOPUP PAR UID
-          </h2>
+          <div class="diamond">
+            💎
+          </div>
 
-          <p>
-            💎 Diamonds Free Fire
-          </p>
+        </div>
 
-          <p class="click-text">
-            👆 Klike la pou antre
-          </p>
+        <div class="product-info">
+
+          <div class="category">
+            Free Fire
+          </div>
+
+          <div class="product-name">
+            Freefire Topup par UID
+          </div>
+
+          <div class="product-price">
+            💎 Chwazi pack
+          </div>
 
         </div>
 
       </div>
 
+      <!--
+        LÈ OU GEN LOT PWODWI,
+        OU KA METE LOT PRODUCT-CARD
+        YO LA.
+      -->
+
     </div>
 
 
     <!-- =========================
-         ORDER FORM
-    ========================= -->
+         FORM NAN
+    ========================== -->
 
     <div id="orderBox">
 
       <div class="card">
 
+        <button
+          type="button"
+          class="back-menu"
+          onclick="closeOrder()"
+        >
+          ⬅️ Retounen nan meni
+        </button>
+
         <h2>
           💎 Free Fire TopUp par UID
         </h2>
 
-
-        <!-- SERVER -->
-
         <div class="server">
-
           🌎 Server:
-
-          <strong>
-            NA — Amérique du Nord
-          </strong>
-
+          <strong>NA — Amérique du Nord</strong>
         </div>
 
 
@@ -550,10 +424,9 @@
           placeholder="Antre UID Free Fire ou"
           inputmode="numeric"
           autocomplete="off"
+          required
         >
 
-
-        <!-- CONFIRM UID -->
 
         <label for="confirmUid">
           Konfime UID Free Fire
@@ -565,30 +438,23 @@
           placeholder="Re-antre menm UID la"
           inputmode="numeric"
           autocomplete="off"
+          required
         >
 
-
-        <!-- VERIFY -->
 
         <button
           type="button"
           class="verify"
           onclick="verifyUID()"
         >
-
           🔐 Verifye UID
-
         </button>
 
 
         <div id="verified">
-
           ✅ UID la verifye avèk siksè.
-
         </div>
 
-
-        <!-- PURCHASE -->
 
         <div id="purchaseArea">
 
@@ -602,6 +468,7 @@
           <select
             id="pack"
             onchange="updatePrice()"
+            required
           >
 
             <option value="">
@@ -610,7 +477,6 @@
 
             <option
               value="100+10 💎"
-              data-diamonds="100 + 10 💎"
               data-price="200"
             >
               100 + 10 💎 — 200 GDS
@@ -618,7 +484,6 @@
 
             <option
               value="310+31 💎"
-              data-diamonds="310 + 31 💎"
               data-price="490"
             >
               310 + 31 💎 — 490 GDS
@@ -626,7 +491,6 @@
 
             <option
               value="520+52 💎"
-              data-diamonds="520 + 52 💎"
               data-price="900"
             >
               520 + 52 💎 — 900 GDS
@@ -634,7 +498,6 @@
 
             <option
               value="1060+106 💎"
-              data-diamonds="1,060 + 106 💎"
               data-price="1600"
             >
               1,060 + 106 💎 — 1,600 GDS
@@ -642,7 +505,6 @@
 
             <option
               value="2180+218 💎"
-              data-diamonds="2,180 + 218 💎"
               data-price="3100"
             >
               2,180 + 218 💎 — 3,100 GDS
@@ -650,7 +512,6 @@
 
             <option
               value="5600+560 💎"
-              data-diamonds="5,600 + 560 💎"
               data-price="8010"
             >
               5,600 + 560 💎 — 8,010 GDS
@@ -659,20 +520,9 @@
           </select>
 
 
-          <!-- PRICE -->
+          <!-- PRI -->
 
           <div class="price">
-
-            <small>
-              Pack chwazi
-            </small>
-
-            <span
-              id="diamondAmount"
-              class="diamond-amount"
-            >
-              💎 0
-            </span>
 
             <small>
               Pri pou peye
@@ -685,51 +535,38 @@
           </div>
 
 
-          <!-- PAYMENT -->
+          <!-- NATCASH -->
 
           <div class="payment">
 
-            💳 Voye kòb la sou Natcash
-            <br>
+            💳 Voye kòb la sou NatCash<br>
 
             📱 Nimewo:
-            <strong>
-              55544179
-            </strong>
-
-            <br>
+            <strong>55544179</strong><br>
 
             👤 Non:
-            <strong>
-              Manuel Pluviose
-            </strong>
+            <strong>Manuel Pluviose</strong>
 
           </div>
 
 
-          <!-- WARNING -->
+          <!-- AVÈTISMAN -->
 
           <div class="warning">
 
-            <strong>
-              ⚠️ ATANSYON:
-            </strong>
+            <strong>⚠️ ATANSYON:</strong><br>
 
-            <br>
+            Pa voye fo kòmand.
+            N ap verifye enfòmasyon peman yo
+            anvan kòmand lan trete.
 
-            Pa voye fo kòmand!
-
-            N ap verifye ID Tranzaksyon an
-            ak enfòmasyon peman yo anvan
-            nou trete kòmand lan.
-
-            Si peman an pa bon,
-            kòmand ou an ap echwe.
+            Si enfòmasyon peman yo pa koresponn,
+            kòmand lan ka echwe.
 
           </div>
 
 
-          <!-- SENDER NUMBER OR NAME -->
+          <!-- NIMEWO OSWA NON -->
 
           <label for="senderNumber">
 
@@ -741,12 +578,13 @@
           <input
             type="text"
             id="senderNumber"
-            placeholder="Nimewo ki voye kòb la oswa non ki sou NatCash la"
+            placeholder="Mete nimewo ki voye kòb la oswa non ki sou NatCash la"
             autocomplete="off"
+            required
           >
 
 
-          <!-- TRANSACTION ID -->
+          <!-- ID TRANZAKSYON -->
 
           <label for="transactionId">
 
@@ -760,21 +598,20 @@
           <input
             type="text"
             id="transactionId"
-            placeholder="Antre ID Tranzaksyon NatCash ou"
+            placeholder="Antre ID tranzaksyon NatCash la"
             autocomplete="off"
+            required
           >
 
 
-          <!-- ORDER BUTTON -->
+          <!-- KÒMAND -->
 
           <button
             type="button"
             id="orderBtn"
             onclick="submitOrder()"
           >
-
             💎 FÈ KÒMAND LAN
-
           </button>
 
 
@@ -784,33 +621,14 @@
         <!-- WHATSAPP -->
 
         <a
-          id="whatsappLink"
           class="whatsapp"
-          href=""
+          href="https://wa.me/50940599166"
           target="_blank"
           rel="noopener"
         >
-
-          💬 Bezwen èd?
-          Kontakte nou sou WhatsApp
-
+          💬 Bezwen èd? Ekri nou sou WhatsApp
         </a>
 
-
-        <!-- CLOSE -->
-
-        <button
-          type="button"
-          class="close"
-          onclick="closeOrder()"
-        >
-
-          ⬅️ Retounen nan meni
-
-        </button>
-
-
-        <!-- MESSAGE -->
 
         <div id="message"></div>
 
@@ -831,51 +649,8 @@
 
 const API = "/api";
 
-
 let siteIsOpen = true;
-
 let currentOrderId = null;
-
-
-/* =========================
-   WHATSAPP
-=========================
-
-   Mete nimewo WhatsApp ou pita.
-
-   Egzanp:
-   const WHATSAPP_NUMBER = "509XXXXXXXX";
-
-   Pou kounye a li VID.
-*/
-
-const WHATSAPP_NUMBER = "";
-
-
-/* =========================
-   WHATSAPP SETUP
-========================= */
-
-function setupWhatsApp() {
-
-  const link =
-    document.getElementById(
-      "whatsappLink"
-    );
-
-  if (!WHATSAPP_NUMBER) {
-
-    link.style.display = "none";
-
-    return;
-  }
-
-  link.href =
-    "https://wa.me/" +
-    WHATSAPP_NUMBER;
-
-  link.style.display = "block";
-}
 
 
 /* =========================
@@ -894,35 +669,27 @@ async function checkSiteStatus() {
         }
       );
 
-
     if (!response.ok) {
-
       throw new Error(
         "Status error"
       );
-
     }
-
 
     const data =
       await response.json();
 
-
     siteIsOpen =
       data.enabled !== false;
-
 
     const closed =
       document.getElementById(
         "siteClosed"
       );
 
-
     const service =
       document.getElementById(
         "mainService"
       );
-
 
     if (!siteIsOpen) {
 
@@ -943,7 +710,6 @@ async function checkSiteStatus() {
 
       closed.style.display =
         "none";
-
     }
 
   } catch (error) {
@@ -959,7 +725,7 @@ async function checkSiteStatus() {
 
 
 /* =========================
-   OPEN
+   OPEN ORDER
 ========================= */
 
 function openOrder() {
@@ -969,15 +735,12 @@ function openOrder() {
     checkSiteStatus();
 
     return;
-
   }
-
 
   document.getElementById(
     "orderBox"
   ).style.display =
     "block";
-
 
   window.scrollTo({
     top: 0,
@@ -988,7 +751,7 @@ function openOrder() {
 
 
 /* =========================
-   CLOSE
+   CLOSE ORDER
 ========================= */
 
 function closeOrder() {
@@ -1012,39 +775,23 @@ function updatePrice() {
       "pack"
     );
 
-
   const selected =
     pack.options[
       pack.selectedIndex
     ];
-
 
   const price =
     selected.getAttribute(
       "data-price"
     );
 
-
-  const diamonds =
-    selected.getAttribute(
-      "data-diamonds"
-    );
-
-
   document.getElementById(
     "price"
   ).textContent =
     price
-      ? price + " GDS"
+      ? Number(price).toLocaleString() +
+        " GDS"
       : "0 GDS";
-
-
-  document.getElementById(
-    "diamondAmount"
-  ).textContent =
-    diamonds
-      ? "💎 " + diamonds
-      : "💎 0";
 
 }
 
@@ -1060,24 +807,20 @@ function verifyUID() {
       "uid"
     ).value.trim();
 
-
   const confirmUid =
     document.getElementById(
       "confirmUid"
     ).value.trim();
-
 
   const message =
     document.getElementById(
       "message"
     );
 
-
   const verified =
     document.getElementById(
       "verified"
     );
-
 
   const purchaseArea =
     document.getElementById(
@@ -1104,7 +847,6 @@ function verifyUID() {
       "⚠️ Tanpri antre UID Free Fire ou.";
 
     return;
-
   }
 
 
@@ -1123,7 +865,6 @@ function verifyUID() {
       "⚠️ Tanpri re-antre UID la.";
 
     return;
-
   }
 
 
@@ -1142,7 +883,6 @@ function verifyUID() {
       "❌ UID la dwe genyen sèlman chif.";
 
     return;
-
   }
 
 
@@ -1161,24 +901,20 @@ function verifyUID() {
       "❌ UID yo pa menm.";
 
     return;
-
   }
 
 
   verified.style.display =
     "block";
 
-
   purchaseArea.style.display =
     "block";
-
 
   message.style.color =
     "#00e5ff";
 
-
   message.textContent =
-    "✅ UID la konfime. Ou ka chwazi pack ou a.";
+    "✅ UID la konfime. Ou ka kontinye.";
 
 }
 
@@ -1194,28 +930,23 @@ async function submitOrder() {
       "uid"
     ).value.trim();
 
-
   const confirmUid =
     document.getElementById(
       "confirmUid"
     ).value.trim();
-
 
   const packSelect =
     document.getElementById(
       "pack"
     );
 
-
   const pack =
     packSelect.value;
-
 
   const selected =
     packSelect.options[
       packSelect.selectedIndex
     ];
-
 
   const price =
     selected
@@ -1224,32 +955,20 @@ async function submitOrder() {
         )
       : null;
 
-
-  const diamonds =
-    selected
-      ? selected.getAttribute(
-          "data-diamonds"
-        )
-      : null;
-
-
   const senderNumber =
     document.getElementById(
       "senderNumber"
     ).value.trim();
-
 
   const transactionId =
     document.getElementById(
       "transactionId"
     ).value.trim();
 
-
   const message =
     document.getElementById(
       "message"
     );
-
 
   const orderBtn =
     document.getElementById(
@@ -1276,7 +995,6 @@ async function submitOrder() {
       "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
 
     return;
-
   }
 
 
@@ -1291,11 +1009,10 @@ async function submitOrder() {
       "⚠️ Tanpri chwazi yon pack.";
 
     return;
-
   }
 
 
-  /* SENDER INFO */
+  /* NIMEWO / NON */
 
   if (!senderNumber) {
 
@@ -1303,14 +1020,13 @@ async function submitOrder() {
       "#ffcc00";
 
     message.textContent =
-      "⚠️ Mete nimewo ki voye kòb la oswa non ki sou kont NatCash la.";
+      "⚠️ Mete nimewo ki voye kòb la oswa non ki sou NatCash la.";
 
     return;
-
   }
 
 
-  /* TRANSACTION ID */
+  /* ID TRANZAKSYON */
 
   if (!transactionId) {
 
@@ -1325,24 +1041,20 @@ async function submitOrder() {
     ).focus();
 
     return;
-
   }
 
 
-  /* BLOCK DOUBLE CLICK */
+  /* DOUBLE CLICK */
 
   orderBtn.disabled =
     true;
-
 
   message.classList.add(
     "processing"
   );
 
-
   message.style.color =
     "#00e5ff";
-
 
   message.textContent =
     "⏳ N ap prepare kòmand ou an...";
@@ -1357,44 +1069,36 @@ async function submitOrder() {
           method: "POST",
 
           headers: {
-
             "Content-Type":
               "application/json"
-
           },
 
-          body:
-            JSON.stringify({
+          body: JSON.stringify({
 
-              uid:
-                uid,
+            uid:
+              uid,
 
-              pack:
-                pack,
+            pack:
+              pack,
 
-              diamonds:
-                diamonds,
+            price:
+              Number(price),
 
-              price:
-                Number(price),
+            senderNumber:
+              senderNumber,
 
-              senderNumber:
-                senderNumber,
+            transactionId:
+              transactionId,
 
-              transactionId:
-                transactionId,
+            server:
+              "NA — Amérique du Nord"
 
-              server:
-                "NA — Amérique du Nord"
-
-            })
-
+          })
         }
       );
 
 
     let result;
-
 
     try {
 
@@ -1423,8 +1127,6 @@ async function submitOrder() {
     }
 
 
-    /* ORDER ID */
-
     currentOrderId =
       result.order &&
       result.order.id
@@ -1436,33 +1138,19 @@ async function submitOrder() {
       "processing"
     );
 
-
     message.style.color =
       "#00e5ff";
 
 
     message.innerHTML =
-      "⏳ <strong>KÒMAND OU AN AP TRETE...</strong><br>" +
-
-      "💎 Pack: " +
-      escapeHtml(
-        diamonds || pack
-      ) +
-
-      "<br>" +
-
-      "💰 Pri: " +
-      escapeHtml(
-        String(price)
-      ) +
-      " GDS" +
-
-      "<br>" +
-
-      "🙏 Tanpri tann pandan admin lan ap verifye peman an.";
+      "⏳ <strong>KÒMAND OU AN ANTRE</strong><br>" +
+      "💎 N ap verifye enfòmasyon peman ou yo.<br>" +
+      "🙏 Tanpri tann admin lan trete kòmand lan.";
 
 
-    /* ORDER ID */
+    orderBtn.disabled =
+      true;
+
 
     if (currentOrderId) {
 
@@ -1474,10 +1162,6 @@ async function submitOrder() {
         "</small>";
 
     }
-
-
-    orderBtn.disabled =
-      true;
 
 
   } catch (error) {
@@ -1492,14 +1176,11 @@ async function submitOrder() {
       "processing"
     );
 
-
     message.style.color =
       "#ff4d4d";
 
-
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
-
 
     orderBtn.disabled =
       false;
@@ -1549,11 +1230,9 @@ function escapeHtml(value) {
    START
 ========================= */
 
-setupWhatsApp();
-
 checkSiteStatus();
 
 </script>
 
 </body>
-  </html>
+          </html>
