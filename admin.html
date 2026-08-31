@@ -47,19 +47,13 @@ h1 {
 
 input,
 textarea {
-
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-
   border-radius: 9px;
-
   border: 1px solid #36364a;
-
   background: #0e0e17;
-
   color: white;
-
   outline: none;
 }
 
@@ -69,19 +63,12 @@ textarea {
 }
 
 button {
-
   width: 100%;
-
   padding: 12px;
-
   margin-top: 8px;
-
   border: none;
-
   border-radius: 9px;
-
   font-weight: bold;
-
   cursor: pointer;
 }
 
@@ -115,66 +102,50 @@ button {
   color: white;
 }
 
-.delete {
+.delete-btn-all {
   background: #9b2226;
   color: white;
+  padding: 5px 8px;
+  font-size: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .message-choice {
-
   background: #0e0e17;
-
   border: 1px solid #36364a;
-
   color: white;
-
   text-align: left;
 }
 
 .status {
-
   padding: 10px;
-
   border-radius: 9px;
-
   text-align: center;
-
   font-weight: bold;
-
   margin-bottom: 10px;
 }
 
 .status-on {
-
   background: #123d25;
-
   color: #5ee39a;
 }
 
 .status-off {
-
   background: #4a1717;
-
   color: #ff7777;
 }
 
 .order {
-
   background: #0e0e17;
-
   border: 1px solid #303044;
-
   border-radius: 12px;
-
   padding: 13px;
-
   margin-top: 10px;
 }
 
 .line {
-
   margin: 7px 0;
-
   font-size: 14px;
 }
 
@@ -187,18 +158,13 @@ button {
 }
 
 .price {
-
   color: #00e5ff;
-
   font-weight: bold;
 }
 
 .order-buttons {
-
   display: flex;
-
   gap: 8px;
-
   margin-top: 12px;
 }
 
@@ -207,43 +173,29 @@ button {
 }
 
 .stats {
-
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-
   margin-bottom: 15px;
 }
 
 .stat {
-
   background: #0e0e17;
-
   border: 1px solid #303044;
-
   border-radius: 10px;
-
   padding: 12px 5px;
-
   text-align: center;
 }
 
 .stat-number {
-
   display: block;
-
   font-size: 24px;
-
   font-weight: bold;
-
   margin-bottom: 4px;
 }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
 }
 
@@ -260,17 +212,11 @@ button {
 }
 
 .section-title {
-
   margin-top: 20px;
-
   margin-bottom: 8px;
-
   padding: 10px;
-
   border-radius: 9px;
-
   background: #10101b;
-
   font-weight: bold;
 }
 
@@ -278,16 +224,7 @@ button {
   color: #ffd54f;
 }
 
-.success-title {
-  color: #5ee39a;
-}
-
-.failed-title {
-  color: #ff7777;
-}
-
 .list {
-
   margin-bottom: 15px;
 }
 
@@ -301,26 +238,17 @@ button {
 }
 
 #message {
-
   display: none;
-
   background: #151520;
-
   border-radius: 9px;
-
   padding: 12px;
-
   text-align: center;
-
   margin-bottom: 15px;
 }
 
 .empty {
-
   text-align: center;
-
   color: #aaa;
-
   padding: 20px;
 }
 
@@ -473,6 +401,7 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 </div>
 
 
+<!-- SIKSÈ AK BOUTON EFASE -->
 <div class="stat">
 
 <span
@@ -486,9 +415,12 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 ✅ SIKSÈ
 </span>
 
+<button class="delete-btn-all" onclick="clearAllOrdersByStatus('success')">🗑️ Efase tout</button>
+
 </div>
 
 
+<!-- ÈCHÈK AK BOUTON EFASE -->
 <div class="stat">
 
 <span
@@ -501,6 +433,8 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 <span class="stat-label">
 ❌ ÉCHEC
 </span>
+
+<button class="delete-btn-all" onclick="clearAllOrdersByStatus('failed')">🗑️ Efase tout</button>
 
 </div>
 
@@ -515,7 +449,7 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 </button>
 
 
-<!-- AN ATANT -->
+<!-- AN ATANT SÈLMAN -->
 
 <div
   class="section-title pending-title"
@@ -531,43 +465,6 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 Pa gen kòmand an atant.
 </div>
 </div>
-
-
-<!-- ECHEC -->
-
-<div
-  class="section-title failed-title"
->
-❌ KÒMAND ÉCHEC
-</div>
-
-<div
-  id="failedList"
-  class="list"
->
-<div class="empty">
-Pa gen kòmand échec.
-</div>
-</div>
-
-
-<!-- SIKSE -->
-
-<div
-  class="section-title success-title"
->
-✅ KÒMAND SIKSÈ
-</div>
-
-<div
-  id="successList"
-  class="list"
->
-<div class="empty">
-Pa gen kòmand siksè.
-</div>
-</div>
-
 
 </div>
 
@@ -1089,16 +986,6 @@ function renderAllLists() {
     );
 
 
-  /*
-    PROCESSING IS NOT
-    AN ATANT ANYMORE.
-
-    It is temporarily hidden
-    until Jeffry Tech returns
-    success.
-  */
-
-
   document.getElementById(
     "pendingCount"
   ).textContent =
@@ -1119,34 +1006,18 @@ function renderAllLists() {
 
   renderList(
     pending,
-    "pendingList",
-    "pending"
-  );
-
-
-  renderList(
-    failed,
-    "failedList",
-    "failed"
-  );
-
-
-  renderList(
-    success,
-    "successList",
-    "success"
+    "pendingList"
   );
 }
 
 
 /* =====================================
-   RENDER ONE LIST
+   RENDER PENDING LIST
 ===================================== */
 
 function renderList(
   orders,
-  containerId,
-  type
+  containerId
 ) {
 
   const box =
@@ -1158,7 +1029,7 @@ function renderList(
   if (!orders.length) {
 
     box.innerHTML =
-      '<div class="empty">📭 Pa gen kòmand pou kounye a.</div>';
+      '<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
 
     return;
   }
@@ -1200,99 +1071,39 @@ function renderList(
         : "N/A";
 
 
-    let statusText =
+    const statusText =
       "🟡 AN ATANT";
 
 
-    if (
-      type === "failed"
-    ) {
-
-      statusText =
-        "❌ ÉCHEC";
-    }
-
-
-    if (
-      type === "success"
-    ) {
-
-      statusText =
-        "✅ SIKSÈ";
-    }
-
-
-    let buttons = "";
-
-
-    /*
-      ONLY PENDING
-    */
-
-    if (
-      type === "pending"
-    ) {
-
-      buttons = `
-
-        <div class="order-buttons">
-
-          <button
-            class="process"
-            onclick="updateOrder(
-              '${escapeJs(
-                order.id || ""
-              )}',
-              'processing'
-            )"
-          >
-            ✅ VALIDÉ
-          </button>
-
-
-          <button
-            class="failed"
-            onclick="updateOrder(
-              '${escapeJs(
-                order.id || ""
-              )}',
-              'failed'
-            )"
-          >
-            ❌ ÉCHEC
-          </button>
-
-        </div>
-
-      `;
-    }
-
-
-    /*
-      FAILED OR SUCCESS
-      CAN BE DELETED
-    */
-
-    if (
-      type === "failed" ||
-      type === "success"
-    ) {
-
-      buttons = `
+    const buttons = `
+      <div class="order-buttons">
 
         <button
-          class="delete"
-          onclick="deleteOrder(
+          class="process"
+          onclick="updateOrder(
             '${escapeJs(
               order.id || ""
-            )}'
+            )}',
+            'processing'
           )"
         >
-          🗑️ RETIRE
+          ✅ VALIDÉ
         </button>
 
-      `;
-    }
+        <button
+          class="failed"
+          onclick="updateOrder(
+            '${escapeJs(
+              order.id || ""
+            )}',
+            'failed'
+          )"
+        >
+          ❌ ÉCHEC
+        </button>
+
+      </div>
+    `;
 
 
     div.innerHTML = `
@@ -1348,10 +1159,20 @@ function renderList(
 
 
       <div class="line">
-        <span>📱 Nimewo:</span>
+        <span>📱 Nimewo/Non:</span>
         <strong>
           ${escapeHtml(
             order.senderNumber || ""
+          )}
+        </strong>
+      </div>
+
+
+      <div class="line">
+        <span>🧾 ID Tranzaksyon:</span>
+        <strong style="color: #ffd54f;">
+          ${escapeHtml(
+            order.transactionId || "N/A"
           )}
         </strong>
       </div>
@@ -1454,17 +1275,13 @@ async function updateOrder(
     }
 
 
-    /*
-      CUSTOMER MESSAGE
-    */
-
     if (
       status === "processing"
     ) {
 
       showMessage(
-        "⏳ Pwodui ou an ap antre nan kèk segonn.",
-        "#00e5ff"
+        "✅ Kòmand la valide! (N ap konekte ak API an)",
+        "#5ee39a"
       );
 
     }
@@ -1502,103 +1319,42 @@ async function updateOrder(
 
 
 /* =====================================
-   DELETE ORDER
+   EFASE TOUT KÒMAND YON SÈL KOU (SIKSÈ / ÈCHÈK)
 ===================================== */
 
-async function deleteOrder(
-  id
-) {
+async function clearAllOrdersByStatus(statusType) {
 
-  const ok =
-    confirm(
-      "⚠️ Èske ou vle efase kòmand sa a pou toutbon?"
-    );
+  const targetOrders = allOrdersList.filter(o => o.status === statusType);
 
-
-  if (!ok) {
+  if (!targetOrders.length) {
+    alert(`⚠️ Pa gen okenn kòmand nan kategori ${statusType === 'success' ? 'SIKSÈ' : 'ÉCHEC'} pou efase.`);
     return;
   }
 
+  const ok = confirm(`⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${statusType === 'success' ? 'SIKSÈ' : 'ÉCHEC'} yo yon sèl kou?`);
 
-  try {
+  if (!ok) return;
 
-    const response =
-      await fetch(
-        `${API}/delete-order`,
-        {
-          method: "POST",
+  let count = 0;
 
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:
-            JSON.stringify({
-              id
-            })
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "HTTP " +
-        response.status
-      );
+  for (const order of targetOrders) {
+    try {
+      await fetch(`${API}/delete-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-token": ADMIN_TOKEN
+        },
+        body: JSON.stringify({ id: order.id })
+      });
+      count++;
+    } catch (err) {
+      console.error("Erè pandan efasman an", order.id, err);
     }
-
-
-    if (
-      !result.success
-    ) {
-
-      throw new Error(
-        result.message ||
-        "Efase a pa fèt."
-      );
-    }
-
-
-    /*
-      Reload from Blob.
-      Since it was actually deleted,
-      it will NOT return after refresh.
-    */
-
-    showMessage(
-      "🗑️ Kòmand lan efase nèt.",
-      "#5ee39a"
-    );
-
-
-    await loadOrders();
-
-
-  } catch (error) {
-
-    console.error(
-      "DELETE ORDER ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
-    );
   }
+
+  showMessage(`🗑️ ${count} kòmand ${statusType === 'success' ? 'Siksè' : 'Échec'} efase nèt!`, "#5ee39a");
+  await loadOrders();
 }
 
 
@@ -1674,4 +1430,4 @@ function escapeJs(
 
 </body>
 
-  </html>
+</html>
