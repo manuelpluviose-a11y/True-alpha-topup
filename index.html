@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>True Alpha TopUp</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,9 +23,13 @@
     }
 
     .container {
-      max-width: 480px;
+      max-width: 520px;
       margin: auto;
     }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     .header {
       text-align: center;
@@ -35,55 +41,176 @@
       font-size: 25px;
     }
 
-    .service {
-      background: #151520;
-      border: 1px solid #303044;
-      border-radius: 14px;
-      padding: 13px;
-      display: flex;
-      align-items: center;
+    /* =========================
+       PRODUCTS MENU
+    ========================= */
+
+    #productsMenu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      cursor: pointer;
     }
 
-    .ff-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      background: #111827;
+    .product-card {
+      background: #151520;
+      border: 1px solid #303044;
+      border-radius: 15px;
+      padding: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      min-height: 190px;
+    }
+
+    .product-card:hover {
+      border-color: #00e5ff;
+      transform: translateY(-2px);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 105px;
+      border-radius: 11px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #007caa 0%,
+          #073347 35%,
+          #090b14 75%
+        );
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 27px;
-      flex-shrink: 0;
+
+      overflow: hidden;
+
+      border: 1px solid #243b4a;
     }
 
-    .service h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
+    .diamond-logo {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      display: block;
     }
 
-    .service p {
-      color: #aaa;
-      font-size: 12px;
+    .diamond-fallback {
+      font-size: 65px;
+
+      filter:
+        drop-shadow(0 0 8px #00e5ff)
+        drop-shadow(0 0 18px #007caa);
     }
+
+    .product-title {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+      line-height: 1.25;
+    }
+
+    .product-category {
+      color: #888;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .product-price {
+      color: #00e5ff;
+      font-weight: bold;
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    /* =========================
+       ORDER
+    ========================= */
 
     #orderBox {
       display: none;
-      margin-top: 15px;
+      margin-top: 12px;
     }
 
-    .card {
+    .order-card {
       background: #151520;
-      border: 1px solid #29293a;
+      border: 1px solid #303044;
       border-radius: 15px;
       padding: 17px;
     }
 
-    .card h2 {
-      font-size: 18px;
+    .order-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 15px;
     }
+
+    .order-logo {
+      width: 55px;
+      height: 55px;
+      border-radius: 11px;
+
+      background:
+        radial-gradient(
+          circle,
+          #007caa,
+          #0b0b12
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .order-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .order-logo span {
+      font-size: 38px;
+
+      filter:
+        drop-shadow(0 0 6px #00e5ff);
+    }
+
+    .order-title h2 {
+      font-size: 18px;
+      color: white;
+    }
+
+    .order-title p {
+      color: #888;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       SERVER
+    ========================= */
+
+    .server {
+      background: #0e0e17;
+      border: 1px solid #36364a;
+      border-radius: 9px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+
+    .server strong {
+      color: #00e5ff;
+    }
+
+    /* =========================
+       LABELS
+    ========================= */
 
     label {
       display: block;
@@ -92,16 +219,28 @@
       margin-bottom: 7px;
     }
 
+    /* =========================
+       INPUT / SELECT
+    ========================= */
+
     input,
     select {
       width: 100%;
+
       padding: 13px;
+
       margin-bottom: 14px;
+
       border-radius: 9px;
+
       border: 1px solid #36364a;
+
       background: #0e0e17;
+
       color: white;
+
       outline: none;
+
       font-size: 14px;
     }
 
@@ -110,25 +249,21 @@
       border-color: #00e5ff;
     }
 
-    .server {
-      background: #0e0e17;
-      border: 1px solid #36364a;
-      border-radius: 9px;
-      padding: 13px;
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    .server strong {
-      color: #00e5ff;
-    }
+    /* =========================
+       PAYMENT
+    ========================= */
 
     .payment {
       background: #0e0e17;
+
       border-radius: 10px;
+
       padding: 12px;
+
       margin-bottom: 14px;
+
       font-size: 13px;
+
       line-height: 1.7;
     }
 
@@ -136,278 +271,643 @@
       color: #00e5ff;
     }
 
+    /* =========================
+       PRICE
+    ========================= */
+
     .price {
       text-align: center;
+
       background: #101b20;
+
       border: 1px solid #00e5ff;
+
       border-radius: 10px;
+
       padding: 11px;
+
       margin-bottom: 14px;
     }
 
     .price small {
       display: block;
+
       color: #aaa;
+
       margin-bottom: 3px;
     }
 
     .price strong {
       font-size: 23px;
+
       color: #00e5ff;
     }
 
+    /* =========================
+       BUTTON
+    ========================= */
+
     button {
       width: 100%;
+
       padding: 13px;
+
       border: none;
+
       border-radius: 10px;
+
       background: #00e5ff;
+
       color: #001014;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
     button:disabled {
-      opacity: 0.45;
+      opacity: 0.35;
+
       cursor: not-allowed;
+
+      background: #36364a;
+
+      color: #888;
     }
 
-    .verify {
+    .verify-button {
       margin-bottom: 14px;
     }
 
-    .close {
+    .back-button {
       background: transparent;
-      border: 1px solid #36364a;
-      color: #aaa;
-      margin-top: 8px;
-    }
 
-    .whatsapp {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 10px;
-      background: #168c4a;
-      color: white;
-      font-weight: bold;
+      color: #aaa;
+
+      border: 1px solid #36364a;
+
+      margin-top: 9px;
+
       font-size: 14px;
     }
 
-    #purchaseArea {
-      display: none;
+    .back-button:hover {
+      color: white;
+
+      border-color: #00e5ff;
     }
+
+    /* =========================
+       VERIFIED
+    ========================= */
 
     #verified {
       display: none;
+
       text-align: center;
+
       background: #10251c;
+
       border: 1px solid #168c4a;
+
       color: #5ee39a;
+
       border-radius: 9px;
+
       padding: 11px;
+
       margin-bottom: 14px;
+
       font-size: 13px;
     }
+
+    /* =========================
+       MESSAGE
+    ========================= */
 
     #message {
       display: none;
+
       text-align: center;
+
       margin-top: 12px;
+
       font-size: 13px;
+
       line-height: 1.5;
+
       padding: 10px;
+
       border-radius: 9px;
     }
 
+    /* =========================
+       WARNING
+    ========================= */
+
+    .warning {
+      background: #241d0a;
+
+      border: 1px solid #806b20;
+
+      color: #ffd54f;
+
+      border-radius: 10px;
+
+      padding: 11px;
+
+      margin-bottom: 14px;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+    }
+
+    /* =========================
+       SITE CLOSED
+    ========================= */
+
     #siteClosed {
       display: none;
+
       background: #4a1717;
+
       border: 1px solid #d32f2f;
+
       color: #ff7777;
+
       border-radius: 12px;
+
       padding: 15px;
+
       margin-top: 15px;
+
       text-align: center;
+
       line-height: 1.5;
+
       font-size: 14px;
     }
+
+    /* =========================
+       PROCESSING
+    ========================= */
 
     .processing {
       animation: pulse 1.2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 1;
       }
 
       50% {
         opacity: 0.45;
       }
+
     }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 380px) {
+
+      #productsMenu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+      }
+
+      .product-card {
+        min-height: 175px;
+        padding: 8px;
+      }
+
+      .product-image {
+        height: 90px;
+      }
+
+      .product-title {
+        font-size: 12px;
+      }
+
+      .product-price {
+        font-size: 12px;
+      }
+
+    }
+
   </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <div class="header">
-    <h1>💎 TRUE ALPHA TOPUP</h1>
+
+    <h1>
+      💎 TRUE ALPHA TOPUP
+    </h1>
+
   </div>
+
+
+  <!-- =========================
+       SITE CLOSED
+  ========================= -->
 
   <div id="siteClosed"></div>
 
-  <div id="mainService">
 
-    <div class="service" onclick="openOrder()">
-      <div class="ff-icon">🎮</div>
+  <!-- =========================
+       MENU
+  ========================= -->
 
-      <div>
-        <h2>FREE FIRE TOPUP PAR UID</h2>
-        <p>👆 Klike sou li epi swiv enstriksyon yo</p>
+  <div id="productsMenu">
+
+
+    <!-- FREE FIRE TOPUP PAR UID -->
+
+    <div
+      class="product-card"
+      onclick="openFreeFireUID()"
+    >
+
+      <div class="product-image">
+
+        <img
+          src="diamond-logo.png"
+          class="diamond-logo"
+          alt="Diamond"
+          onerror="
+            this.style.display='none';
+            this.nextElementSibling.style.display='block';
+          "
+        >
+
+        <span
+          class="diamond-fallback"
+          style="display:none;"
+        >
+          💎
+        </span>
+
       </div>
+
+
+      <div class="product-title">
+
+        FREE FIRE TOPUP PAR UID
+
+      </div>
+
+
+      <div class="product-category">
+
+        Free Fire
+
+      </div>
+
+
+      <div class="product-price">
+
+        💎 Klike pou antre
+
+      </div>
+
     </div>
 
-    <div id="orderBox">
 
-      <div class="card">
+    <!--
+      LÒT PWODWI YO KA AJOUTE LA
+    -->
 
-        <h2>🎮 Free Fire TopUp par UID</h2>
 
-        <div class="server">
-          🌎 Server:
-          <strong>NA — Amérique du Nord</strong>
-        </div>
+  </div>
 
-        <label for="uid">UID Free Fire</label>
 
-        <input
-          type="text"
-          id="uid"
-          placeholder="Antre UID Free Fire ou"
-          inputmode="numeric"
-          autocomplete="off"
-        >
+  <!-- =========================
+       ORDER PAGE
+  ========================= -->
 
-        <label for="confirmUid">Konfime UID Free Fire</label>
+  <div id="orderBox">
 
-        <input
-          type="text"
-          id="confirmUid"
-          placeholder="Re-antre menm UID la"
-          inputmode="numeric"
-          autocomplete="off"
-        >
+    <div class="order-card">
 
-        <button
-          type="button"
-          class="verify"
-          onclick="verifyUID()"
-        >
-          🔐 Verifye UID
-        </button>
 
-        <div id="verified">
-          ✅ UID la verifye avèk siksè.
-        </div>
+      <!-- HEADER -->
 
-        <div id="purchaseArea">
+      <div class="order-header">
 
-          <label for="pack">Chwazi Pack</label>
+        <div class="order-logo">
 
-          <select id="pack" onchange="updatePrice()">
-
-            <option value="">
-              -- Chwazi yon pack --
-            </option>
-
-            <option value="100+10 💎" data-price="200">
-              100 + 10 💎 — 200 GDS
-            </option>
-
-            <option value="310+31 💎" data-price="490">
-              310 + 31 💎 — 490 GDS
-            </option>
-
-            <option value="520+52 💎" data-price="900">
-              520 + 52 💎 — 900 GDS
-            </option>
-
-            <option value="1060+106 💎" data-price="1600">
-              1,060 + 106 💎 — 1,600 GDS
-            </option>
-
-            <option value="2180+218 💎" data-price="3100">
-              2,180 + 218 💎 — 3,100 GDS
-            </option>
-
-            <option value="5600+560 💎" data-price="8010">
-              5,600 + 560 💎 — 8,010 GDS
-            </option>
-
-          </select>
-
-          <div class="price">
-            <small>Pri pou peye</small>
-            <strong id="price">0 GDS</strong>
-          </div>
-
-          <div class="payment">
-            💳 Voye kòb la sou Natcash<br>
-
-            📱 Nimewo:
-            <strong>55544179</strong><br>
-
-            👤 Non:
-            <strong>Manuel Pluviose</strong>
-          </div>
-
-          <label for="senderNumber">
-            Nimewo ki voye kòb la
-          </label>
-
-          <input
-            type="tel"
-            id="senderNumber"
-            placeholder="Antre nimewo ki voye kòb la"
-            inputmode="tel"
+          <img
+            src="diamond-logo.png"
+            alt="Diamond"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            "
           >
 
-          <button
-            type="button"
-            id="orderBtn"
-            onclick="submitOrder()"
-          >
-            💎 FÈ KÒMAND LAN
-          </button>
+          <span style="display:none;">
+            💎
+          </span>
 
         </div>
 
-        <a
-          class="whatsapp"
-          href="https://wa.me/50940599166"
-          target="_blank"
-          rel="noopener"
-        >
-          💬 Bezwen èd? Kontakte nou sou WhatsApp
-        </a>
 
-        <button
-          type="button"
-          class="close"
-          onclick="closeOrder()"
-        >
-          Fèmen
-        </button>
+        <div class="order-title">
 
-        <div id="message"></div>
+          <h2>
+            Free Fire TopUp par UID
+          </h2>
+
+          <p>
+            Ranpli enfòmasyon yo pou fè kòmand lan.
+          </p>
+
+        </div>
 
       </div>
+
+
+      <!-- SERVER -->
+
+      <div class="server">
+
+        🌎 Server:
+
+        <strong>
+          NA — Amérique du Nord
+        </strong>
+
+      </div>
+
+
+      <!-- UID -->
+
+      <label for="uid">
+        UID Free Fire
+      </label>
+
+      <input
+        type="text"
+        id="uid"
+        placeholder="Antre UID Free Fire ou"
+        inputmode="numeric"
+        autocomplete="off"
+      >
+
+
+      <!-- CONFIRM UID -->
+
+      <label for="confirmUid">
+        Konfime UID Free Fire
+      </label>
+
+      <input
+        type="text"
+        id="confirmUid"
+        placeholder="Re-antre menm UID la"
+        inputmode="numeric"
+        autocomplete="off"
+      >
+
+
+      <!-- VERIFY -->
+
+      <button
+        type="button"
+        class="verify-button"
+        onclick="verifyUID()"
+      >
+        🔐 VERIFYE UID
+      </button>
+
+
+      <div id="verified">
+
+        ✅ UID la verifye avèk siksè.
+
+      </div>
+
+
+      <!-- =========================
+           PURCHASE AREA
+      ========================= -->
+
+      <div
+        id="purchaseArea"
+        style="display:none;"
+      >
+
+
+        <!-- PACK -->
+
+        <label for="pack">
+
+          Chwazi Pack
+
+        </label>
+
+        <select
+          id="pack"
+          onchange="checkOrderFields()"
+        >
+
+          <option value="">
+            -- Chwazi yon pack --
+          </option>
+
+          <option
+            value="100+10 💎"
+            data-price="200"
+          >
+            100 + 10 💎 — 200 GDS
+          </option>
+
+          <option
+            value="310+31 💎"
+            data-price="490"
+          >
+            310 + 31 💎 — 490 GDS
+          </option>
+
+          <option
+            value="520+52 💎"
+            data-price="900"
+          >
+            520 + 52 💎 — 900 GDS
+          </option>
+
+          <option
+            value="1060+106 💎"
+            data-price="1600"
+          >
+            1,060 + 106 💎 — 1,600 GDS
+          </option>
+
+          <option
+            value="2180+218 💎"
+            data-price="3100"
+          >
+            2,180 + 218 💎 — 3,100 GDS
+          </option>
+
+          <option
+            value="5600+560 💎"
+            data-price="8010"
+          >
+            5,600 + 560 💎 — 8,010 GDS
+          </option>
+
+        </select>
+
+
+        <!-- PRICE -->
+
+        <div class="price">
+
+          <small>
+            Pri pou peye
+          </small>
+
+          <strong id="price">
+            0 GDS
+          </strong>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="payment">
+
+          💳 Voye kòb la sou Natcash<br>
+
+          📱 Nimewo:
+
+          <strong>
+            55544179
+          </strong>
+
+          <br>
+
+          👤 Non:
+
+          <strong>
+            Manuel Pluviose
+          </strong>
+
+        </div>
+
+
+        <!-- =========================
+             SENDER INFO
+        ========================= -->
+
+        <label for="senderInfo">
+
+          Nimewo ki voye kòb la
+          oswa non ki sou kont NatCash la
+
+        </label>
+
+        <input
+          type="text"
+          id="senderInfo"
+          placeholder="Mete nimewo ki voye kòb la oswa non ki sou kont NatCash la"
+          autocomplete="off"
+          required
+          oninput="checkOrderFields()"
+        >
+
+
+        <!-- =========================
+             TRANSACTION ID
+        ========================= -->
+
+        <label for="transactionId">
+
+          ID Tranzaksyon
+
+        </label>
+
+        <input
+          type="text"
+          id="transactionId"
+          placeholder="Mete ID Tranzaksyon NatCash la"
+          autocomplete="off"
+          required
+          oninput="checkOrderFields()"
+        >
+
+
+        <!-- WARNING -->
+
+        <div class="warning">
+
+          <strong>
+            ⚠️ ATANSYON:
+          </strong>
+
+          Pa voye fo kòmand!
+
+          N ap verifye enfòmasyon peman yo
+          anvan nou voye dyaman yo.
+
+          Si peman an pa bon,
+          kòmand ou an ap echwe.
+
+        </div>
+
+
+        <!-- ORDER BUTTON -->
+
+        <button
+          type="button"
+          id="orderBtn"
+          disabled
+          onclick="submitOrder()"
+        >
+
+          💎 FÈ KÒMAND LAN
+
+        </button>
+
+
+      </div>
+
+
+      <!-- MESSAGE -->
+
+      <div id="message"></div>
+
+
+      <!-- BACK -->
+
+      <button
+        type="button"
+        class="back-button"
+        onclick="backToMenu()"
+      >
+
+        ← RETOUNEN NAN MENI
+
+      </button>
+
 
     </div>
 
@@ -415,14 +915,17 @@
 
 </div>
 
+
 <script>
 
-/*
-  VERCEL API
-*/
+/* =========================
+   API
+========================= */
+
 const API = "/api";
 
 let siteIsOpen = true;
+
 let currentOrderId = null;
 
 
@@ -435,31 +938,59 @@ async function checkSiteStatus() {
   try {
 
     const response =
-      await fetch(`${API}/site-status`, {
-        cache: "no-store"
-      });
+      await fetch(
+        `${API}/site-status`,
+        {
+          cache: "no-store"
+        }
+      );
+
 
     if (!response.ok) {
-      throw new Error("Status error");
+
+      throw new Error(
+        "Status error"
+      );
+
     }
+
 
     const data =
       await response.json();
 
+
     siteIsOpen =
       data.enabled !== false;
 
-    const closed =
-      document.getElementById("siteClosed");
 
-    const service =
-      document.getElementById("mainService");
+    const closed =
+      document.getElementById(
+        "siteClosed"
+      );
+
+
+    const products =
+      document.getElementById(
+        "productsMenu"
+      );
+
+
+    const order =
+      document.getElementById(
+        "orderBox"
+      );
+
 
     if (!siteIsOpen) {
 
-      service.style.display = "none";
+      products.style.display =
+        "none";
 
-      closed.style.display = "block";
+      order.style.display =
+        "none";
+
+      closed.style.display =
+        "block";
 
       closed.textContent =
         data.message ||
@@ -467,46 +998,85 @@ async function checkSiteStatus() {
 
     } else {
 
-      service.style.display = "block";
+      products.style.display =
+        "grid";
 
-      closed.style.display = "none";
+      closed.style.display =
+        "none";
+
     }
+
 
   } catch (error) {
 
     console.log(
-      "Status backend unavailable:",
+      "STATUS ERROR:",
       error
     );
 
   }
+
 }
 
 
 /* =========================
-   OPEN / CLOSE
+   OPEN PRODUCT
 ========================= */
 
-function openOrder() {
+function openFreeFireUID() {
 
   if (!siteIsOpen) {
 
     checkSiteStatus();
 
     return;
+
   }
+
+
+  document.getElementById(
+    "productsMenu"
+  ).style.display =
+    "none";
+
 
   document.getElementById(
     "orderBox"
-  ).style.display = "block";
+  ).style.display =
+    "block";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 }
 
 
-function closeOrder() {
+/* =========================
+   BACK TO MENU
+========================= */
+
+function backToMenu() {
 
   document.getElementById(
     "orderBox"
-  ).style.display = "none";
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "productsMenu"
+  ).style.display =
+    "grid";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
 }
 
 
@@ -517,17 +1087,22 @@ function closeOrder() {
 function updatePrice() {
 
   const pack =
-    document.getElementById("pack");
+    document.getElementById(
+      "pack"
+    );
+
 
   const selected =
     pack.options[
       pack.selectedIndex
     ];
 
+
   const price =
     selected.getAttribute(
       "data-price"
     );
+
 
   document.getElementById(
     "price"
@@ -535,6 +1110,10 @@ function updatePrice() {
     price
       ? price + " GDS"
       : "0 GDS";
+
+
+  checkOrderFields();
+
 }
 
 
@@ -549,87 +1128,177 @@ function verifyUID() {
       "uid"
     ).value.trim();
 
+
   const confirmUid =
     document.getElementById(
       "confirmUid"
     ).value.trim();
+
 
   const message =
     document.getElementById(
       "message"
     );
 
+
   const verified =
     document.getElementById(
       "verified"
     );
+
 
   const purchaseArea =
     document.getElementById(
       "purchaseArea"
     );
 
-  message.style.display = "block";
+
+  message.style.display =
+    "block";
+
 
   if (!uid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri antre UID Free Fire ou.";
 
     return;
+
   }
+
 
   if (!confirmUid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri re-antre UID la.";
 
     return;
+
   }
+
 
   if (!/^[0-9]+$/.test(uid)) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ UID la dwe genyen sèlman chif.";
 
     return;
+
   }
+
 
   if (uid !== confirmUid) {
 
-    verified.style.display = "none";
-    purchaseArea.style.display = "none";
+    verified.style.display =
+      "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ UID yo pa menm.";
 
     return;
+
   }
 
-  verified.style.display = "block";
-  purchaseArea.style.display = "block";
 
-  message.style.color = "#00e5ff";
+  verified.style.display =
+    "block";
+
+
+  purchaseArea.style.display =
+    "block";
+
+
+  message.style.color =
+    "#00e5ff";
+
 
   message.textContent =
-    "✅ UID la konfime. Ou ka chwazi pack ou a.";
+    "✅ UID la konfime. Ou ka ranpli enfòmasyon peman yo.";
+
+
+  checkOrderFields();
+
+}
+
+
+/* =========================
+   CHECK ALL REQUIRED FIELDS
+========================= */
+
+function checkOrderFields() {
+
+  const pack =
+    document.getElementById(
+      "pack"
+    ).value.trim();
+
+
+  const senderInfo =
+    document.getElementById(
+      "senderInfo"
+    ).value.trim();
+
+
+  const transactionId =
+    document.getElementById(
+      "transactionId"
+    ).value.trim();
+
+
+  const orderBtn =
+    document.getElementById(
+      "orderBtn"
+    );
+
+
+  /*
+    Bouton an pap disponib
+    toutotan 3 bagay sa yo
+    pa ranpli:
+    
+    1. Pack
+    2. Nimewo oswa non NatCash
+    3. ID tranzaksyon
+  */
+
+  orderBtn.disabled =
+    !pack ||
+    !senderInfo ||
+    !transactionId;
+
 }
 
 
@@ -644,23 +1313,28 @@ async function submitOrder() {
       "uid"
     ).value.trim();
 
+
   const confirmUid =
     document.getElementById(
       "confirmUid"
     ).value.trim();
+
 
   const packSelect =
     document.getElementById(
       "pack"
     );
 
+
   const pack =
     packSelect.value;
+
 
   const selected =
     packSelect.options[
       packSelect.selectedIndex
     ];
+
 
   const price =
     selected
@@ -669,15 +1343,32 @@ async function submitOrder() {
         )
       : null;
 
-  const senderNumber =
+
+  /*
+    NIMEWO OSWA NON NATCASH
+  */
+
+  const senderInfo =
     document.getElementById(
-      "senderNumber"
+      "senderInfo"
     ).value.trim();
+
+
+  /*
+    ID TRANZAKSYON
+  */
+
+  const transactionId =
+    document.getElementById(
+      "transactionId"
+    ).value.trim();
+
 
   const message =
     document.getElementById(
       "message"
     );
+
 
   const orderBtn =
     document.getElementById(
@@ -685,51 +1376,94 @@ async function submitOrder() {
     );
 
 
-  message.style.display = "block";
+  message.style.display =
+    "block";
 
 
-  if (!uid || !confirmUid || uid !== confirmUid) {
+  /* UID */
 
-    message.style.color = "#ff4d4d";
+  if (
+    !uid ||
+    !confirmUid ||
+    uid !== confirmUid
+  ) {
+
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
 
     return;
+
   }
 
 
+  /* PACK */
+
   if (!pack || !price) {
 
-    message.style.color = "#ffcc00";
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri chwazi yon pack.";
 
+    checkOrderFields();
+
     return;
+
   }
 
 
-  if (!senderNumber) {
+  /* SENDER INFO */
 
-    message.style.color = "#ffcc00";
+  if (!senderInfo) {
+
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
-      "⚠️ Tanpri mete nimewo ki voye kòb la.";
+      "⚠️ Mete nimewo ki voye kòb la oswa non ki sou kont NatCash la.";
+
+    checkOrderFields();
 
     return;
+
   }
 
 
-  /*
-    BLOKE DOUBLE CLICK
-  */
+  /* TRANSACTION ID */
 
-  orderBtn.disabled = true;
+  if (!transactionId) {
 
-  message.classList.add("processing");
+    message.style.color =
+      "#ff4d4d";
 
-  message.style.color = "#00e5ff";
+    message.textContent =
+      "❌ ID Tranzaksyon an obligatwa.";
+
+    checkOrderFields();
+
+    return;
+
+  }
+
+
+  /* DOUBLE CLICK BLOCK */
+
+  orderBtn.disabled =
+    true;
+
+
+  message.classList.add(
+    "processing"
+  );
+
+
+  message.style.color =
+    "#00e5ff";
+
 
   message.textContent =
     "⏳ N ap prepare kòmand ou an...";
@@ -750,23 +1484,37 @@ async function submitOrder() {
 
           body: JSON.stringify({
 
-            uid: uid,
+            uid:
+              uid,
 
-            pack: pack,
+            pack:
+              pack,
 
-            price: Number(price),
+            price:
+              Number(price),
 
-            senderNumber:
-              senderNumber,
+            /*
+              MENM NON SA A
+              BACKEND LAN DWE SOVE
+            */
+
+            senderInfo:
+              senderInfo,
+
+            transactionId:
+              transactionId,
 
             server:
               "NA — Amérique du Nord"
+
           })
+
         }
       );
 
 
     let result;
+
 
     try {
 
@@ -778,21 +1526,22 @@ async function submitOrder() {
       throw new Error(
         "Backend la pa voye JSON."
       );
+
     }
 
 
-    if (!response.ok || !result.success) {
+    if (
+      !response.ok ||
+      !result.success
+    ) {
 
       throw new Error(
         result.message ||
         "Kòmand lan pa antre."
       );
+
     }
 
-
-    /*
-      KÒMAND LA ANTRE
-    */
 
     currentOrderId =
       result.order &&
@@ -805,8 +1554,10 @@ async function submitOrder() {
       "processing"
     );
 
+
     message.style.color =
       "#00e5ff";
+
 
     message.innerHTML =
       "⏳ <strong>KÒMAND OU AN AP TRETE...</strong><br>" +
@@ -814,33 +1565,21 @@ async function submitOrder() {
       "🙏 Tanpri tann pandan admin lan ap trete kòmand lan.";
 
 
-    /*
-      Pa pèmèt kliyan an fè menm
-      kòmand lan de fwa.
-    */
-
-    orderBtn.disabled = true;
-
-
-    /*
-      Montre ID a si backend la voye li.
-    */
-
     if (currentOrderId) {
 
       message.innerHTML +=
         "<br><small>ID Kòmand: " +
-        escapeHtml(currentOrderId) +
+        escapeHtml(
+          currentOrderId
+        ) +
         "</small>";
+
     }
 
 
-    /*
-      IMPORTANT:
-      Pou paj kliyan an konnen lè admin
-      peze VALIDÉ oswa ÉCHEC,
-      nou pral bezwen order-status.js.
-    */
+    orderBtn.disabled =
+      true;
+
 
   } catch (error) {
 
@@ -849,23 +1588,29 @@ async function submitOrder() {
       error
     );
 
+
     message.classList.remove(
       "processing"
     );
 
+
     message.style.color =
       "#ff4d4d";
+
 
     message.textContent =
       "❌ Kòmand lan pa antre. Eseye ankò.";
 
-    orderBtn.disabled = false;
+
+    checkOrderFields();
+
   }
+
 }
 
 
 /* =========================
-   SECURITY DISPLAY
+   ESCAPE HTML
 ========================= */
 
 function escapeHtml(value) {
@@ -896,6 +1641,7 @@ function escapeHtml(value) {
       "'",
       "&#039;"
     );
+
 }
 
 
@@ -908,4 +1654,4 @@ checkSiteStatus();
 </script>
 
 </body>
-</html>
+  </html>
