@@ -23,13 +23,9 @@
     }
 
     .container {
-      max-width: 520px;
+      max-width: 480px;
       margin: auto;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
 
     .header {
       text-align: center;
@@ -42,175 +38,97 @@
     }
 
     /* =========================
-       PRODUCTS MENU
+       MENU SERVICE CARD
     ========================= */
 
-    #productsMenu {
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: 1fr;
+      gap: 14px;
     }
 
-    .product-card {
+    .service {
       background: #151520;
       border: 1px solid #303044;
       border-radius: 15px;
-      padding: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-      min-height: 190px;
-    }
-
-    .product-card:hover {
-      border-color: #00e5ff;
-      transform: translateY(-2px);
-    }
-
-    .product-image {
-      width: 100%;
-      height: 105px;
-      border-radius: 11px;
-
-      background:
-        radial-gradient(
-          circle at center,
-          #007caa 0%,
-          #073347 35%,
-          #090b14 75%
-        );
+      padding: 14px;
 
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 13px;
 
-      overflow: hidden;
+      cursor: pointer;
 
-      border: 1px solid #243b4a;
+      min-height: 105px;
+
+      transition: transform .15s ease,
+                  border-color .15s ease;
+    }
+
+    .service:active {
+      transform: scale(.98);
+    }
+
+    .service:hover {
+      border-color: #00e5ff;
     }
 
     .diamond-logo {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-      display: block;
+      width: 76px;
+      height: 76px;
+
+      border-radius: 12px;
+
+      object-fit: cover;
+
+      flex-shrink: 0;
+
+      background: #0e0e17;
+
+      border: 1px solid #303044;
     }
 
-    .diamond-fallback {
-      font-size: 65px;
-
-      filter:
-        drop-shadow(0 0 8px #00e5ff)
-        drop-shadow(0 0 18px #007caa);
+    .service-content {
+      min-width: 0;
     }
 
-    .product-title {
+    .service h2 {
+      font-size: 16px;
+      margin-bottom: 7px;
       color: white;
-      font-weight: bold;
-      font-size: 14px;
-      margin-top: 10px;
-      line-height: 1.25;
     }
 
-    .product-category {
-      color: #888;
-      font-size: 11px;
+    .service p {
+      color: #aaa;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .click-text {
+      color: #00e5ff !important;
       margin-top: 5px;
     }
 
-    .product-price {
-      color: #00e5ff;
-      font-weight: bold;
-      font-size: 13px;
-      margin-top: 7px;
-    }
-
     /* =========================
-       ORDER
+       ORDER BOX
     ========================= */
 
     #orderBox {
       display: none;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
-    .order-card {
+    .card {
       background: #151520;
-      border: 1px solid #303044;
+      border: 1px solid #29293a;
       border-radius: 15px;
       padding: 17px;
     }
 
-    .order-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .card h2 {
+      font-size: 18px;
       margin-bottom: 15px;
     }
-
-    .order-logo {
-      width: 55px;
-      height: 55px;
-      border-radius: 11px;
-
-      background:
-        radial-gradient(
-          circle,
-          #007caa,
-          #0b0b12
-        );
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .order-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .order-logo span {
-      font-size: 38px;
-
-      filter:
-        drop-shadow(0 0 6px #00e5ff);
-    }
-
-    .order-title h2 {
-      font-size: 18px;
-      color: white;
-    }
-
-    .order-title p {
-      color: #888;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* =========================
-       SERVER
-    ========================= */
-
-    .server {
-      background: #0e0e17;
-      border: 1px solid #36364a;
-      border-radius: 9px;
-      padding: 12px;
-      margin-bottom: 14px;
-      font-size: 13px;
-    }
-
-    .server strong {
-      color: #00e5ff;
-    }
-
-    /* =========================
-       LABELS
-    ========================= */
 
     label {
       display: block;
@@ -219,12 +137,9 @@
       margin-bottom: 7px;
     }
 
-    /* =========================
-       INPUT / SELECT
-    ========================= */
-
     input,
     select {
+
       width: 100%;
 
       padding: 13px;
@@ -249,11 +164,31 @@
       border-color: #00e5ff;
     }
 
+    .server {
+
+      background: #0e0e17;
+
+      border: 1px solid #36364a;
+
+      border-radius: 9px;
+
+      padding: 13px;
+
+      margin-bottom: 14px;
+
+      font-size: 14px;
+    }
+
+    .server strong {
+      color: #00e5ff;
+    }
+
     /* =========================
        PAYMENT
     ========================= */
 
     .payment {
+
       background: #0e0e17;
 
       border-radius: 10px;
@@ -272,10 +207,34 @@
     }
 
     /* =========================
+       WARNING
+    ========================= */
+
+    .warning {
+
+      background: #2a2110;
+
+      border: 1px solid #8a6817;
+
+      color: #ffd54f;
+
+      border-radius: 10px;
+
+      padding: 12px;
+
+      margin-bottom: 14px;
+
+      font-size: 12px;
+
+      line-height: 1.55;
+    }
+
+    /* =========================
        PRICE
     ========================= */
 
     .price {
+
       text-align: center;
 
       background: #101b20;
@@ -284,20 +243,35 @@
 
       border-radius: 10px;
 
-      padding: 11px;
+      padding: 12px;
 
       margin-bottom: 14px;
     }
 
     .price small {
+
       display: block;
 
       color: #aaa;
+
+      margin-bottom: 4px;
+    }
+
+    .diamond-amount {
+
+      display: block;
+
+      color: #fff;
+
+      font-size: 19px;
+
+      font-weight: bold;
 
       margin-bottom: 3px;
     }
 
     .price strong {
+
       font-size: 23px;
 
       color: #00e5ff;
@@ -308,6 +282,7 @@
     ========================= */
 
     button {
+
       width: 100%;
 
       padding: 13px;
@@ -328,42 +303,64 @@
     }
 
     button:disabled {
-      opacity: 0.35;
+
+      opacity: .45;
 
       cursor: not-allowed;
-
-      background: #36364a;
-
-      color: #888;
     }
 
-    .verify-button {
+    .verify {
       margin-bottom: 14px;
     }
 
-    .back-button {
-      background: transparent;
+    .close {
 
-      color: #aaa;
+      background: transparent;
 
       border: 1px solid #36364a;
 
-      margin-top: 9px;
+      color: #aaa;
 
-      font-size: 14px;
+      margin-top: 8px;
     }
 
-    .back-button:hover {
+    /* =========================
+       WHATSAPP
+    ========================= */
+
+    .whatsapp {
+
+      display: none;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      margin-top: 12px;
+
+      padding: 12px;
+
+      border-radius: 10px;
+
+      background: #168c4a;
+
       color: white;
 
-      border-color: #00e5ff;
+      font-weight: bold;
+
+      font-size: 14px;
     }
 
     /* =========================
        VERIFIED
     ========================= */
 
+    #purchaseArea {
+      display: none;
+    }
+
     #verified {
+
       display: none;
 
       text-align: center;
@@ -388,6 +385,7 @@
     ========================= */
 
     #message {
+
       display: none;
 
       text-align: center;
@@ -404,32 +402,11 @@
     }
 
     /* =========================
-       WARNING
-    ========================= */
-
-    .warning {
-      background: #241d0a;
-
-      border: 1px solid #806b20;
-
-      color: #ffd54f;
-
-      border-radius: 10px;
-
-      padding: 11px;
-
-      margin-bottom: 14px;
-
-      font-size: 12px;
-
-      line-height: 1.5;
-    }
-
-    /* =========================
        SITE CLOSED
     ========================= */
 
     #siteClosed {
+
       display: none;
 
       background: #4a1717;
@@ -456,48 +433,18 @@
     ========================= */
 
     .processing {
+
       animation: pulse 1.2s infinite;
     }
 
     @keyframes pulse {
 
-      0%,
-      100% {
+      0%, 100% {
         opacity: 1;
       }
 
       50% {
-        opacity: 0.45;
-      }
-
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 380px) {
-
-      #productsMenu {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 9px;
-      }
-
-      .product-card {
-        min-height: 175px;
-        padding: 8px;
-      }
-
-      .product-image {
-        height: 90px;
-      }
-
-      .product-title {
-        font-size: 12px;
-      }
-
-      .product-price {
-        font-size: 12px;
+        opacity: .45;
       }
 
     }
@@ -505,14 +452,11 @@
   </style>
 </head>
 
-
 <body>
 
 <div class="container">
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+  <!-- HEADER -->
 
   <div class="header">
 
@@ -523,391 +467,354 @@
   </div>
 
 
-  <!-- =========================
-       SITE CLOSED
-  ========================= -->
+  <!-- SITE OFF -->
 
   <div id="siteClosed"></div>
 
 
-  <!-- =========================
-       MENU
-  ========================= -->
+  <!-- MAIN MENU -->
 
-  <div id="productsMenu">
+  <div id="mainService">
 
+    <div class="services-grid">
 
-    <!-- FREE FIRE TOPUP PAR UID -->
+      <!-- FREE FIRE TOPUP CARD -->
 
-    <div
-      class="product-card"
-      onclick="openFreeFireUID()"
-    >
-
-      <div class="product-image">
+      <div
+        class="service"
+        onclick="openOrder()"
+      >
 
         <img
-          src="diamond-logo.png"
+          src="diamond.png"
           class="diamond-logo"
-          alt="Diamond"
-          onerror="
-            this.style.display='none';
-            this.nextElementSibling.style.display='block';
-          "
+          alt="Diamonds"
         >
 
-        <span
-          class="diamond-fallback"
-          style="display:none;"
-        >
-          💎
-        </span>
-
-      </div>
-
-
-      <div class="product-title">
-
-        FREE FIRE TOPUP PAR UID
-
-      </div>
-
-
-      <div class="product-category">
-
-        Free Fire
-
-      </div>
-
-
-      <div class="product-price">
-
-        💎 Klike pou antre
-
-      </div>
-
-    </div>
-
-
-    <!--
-      LÒT PWODWI YO KA AJOUTE LA
-    -->
-
-
-  </div>
-
-
-  <!-- =========================
-       ORDER PAGE
-  ========================= -->
-
-  <div id="orderBox">
-
-    <div class="order-card">
-
-
-      <!-- HEADER -->
-
-      <div class="order-header">
-
-        <div class="order-logo">
-
-          <img
-            src="diamond-logo.png"
-            alt="Diamond"
-            onerror="
-              this.style.display='none';
-              this.nextElementSibling.style.display='block';
-            "
-          >
-
-          <span style="display:none;">
-            💎
-          </span>
-
-        </div>
-
-
-        <div class="order-title">
+        <div class="service-content">
 
           <h2>
-            Free Fire TopUp par UID
+            FREE FIRE TOPUP PAR UID
           </h2>
 
           <p>
-            Ranpli enfòmasyon yo pou fè kòmand lan.
+            💎 Diamonds Free Fire
+          </p>
+
+          <p class="click-text">
+            👆 Klike la pou antre
           </p>
 
         </div>
 
       </div>
 
-
-      <!-- SERVER -->
-
-      <div class="server">
-
-        🌎 Server:
-
-        <strong>
-          NA — Amérique du Nord
-        </strong>
-
-      </div>
+    </div>
 
 
-      <!-- UID -->
+    <!-- =========================
+         ORDER FORM
+    ========================= -->
 
-      <label for="uid">
-        UID Free Fire
-      </label>
+    <div id="orderBox">
 
-      <input
-        type="text"
-        id="uid"
-        placeholder="Antre UID Free Fire ou"
-        inputmode="numeric"
-        autocomplete="off"
-      >
+      <div class="card">
+
+        <h2>
+          💎 Free Fire TopUp par UID
+        </h2>
 
 
-      <!-- CONFIRM UID -->
+        <!-- SERVER -->
 
-      <label for="confirmUid">
-        Konfime UID Free Fire
-      </label>
+        <div class="server">
 
-      <input
-        type="text"
-        id="confirmUid"
-        placeholder="Re-antre menm UID la"
-        inputmode="numeric"
-        autocomplete="off"
-      >
+          🌎 Server:
 
-
-      <!-- VERIFY -->
-
-      <button
-        type="button"
-        class="verify-button"
-        onclick="verifyUID()"
-      >
-        🔐 VERIFYE UID
-      </button>
-
-
-      <div id="verified">
-
-        ✅ UID la verifye avèk siksè.
-
-      </div>
-
-
-      <!-- =========================
-           PURCHASE AREA
-      ========================= -->
-
-      <div
-        id="purchaseArea"
-        style="display:none;"
-      >
-
-
-        <!-- PACK -->
-
-        <label for="pack">
-
-          Chwazi Pack
-
-        </label>
-
-        <select
-          id="pack"
-          onchange="checkOrderFields()"
-        >
-
-          <option value="">
-            -- Chwazi yon pack --
-          </option>
-
-          <option
-            value="100+10 💎"
-            data-price="200"
-          >
-            100 + 10 💎 — 200 GDS
-          </option>
-
-          <option
-            value="310+31 💎"
-            data-price="490"
-          >
-            310 + 31 💎 — 490 GDS
-          </option>
-
-          <option
-            value="520+52 💎"
-            data-price="900"
-          >
-            520 + 52 💎 — 900 GDS
-          </option>
-
-          <option
-            value="1060+106 💎"
-            data-price="1600"
-          >
-            1,060 + 106 💎 — 1,600 GDS
-          </option>
-
-          <option
-            value="2180+218 💎"
-            data-price="3100"
-          >
-            2,180 + 218 💎 — 3,100 GDS
-          </option>
-
-          <option
-            value="5600+560 💎"
-            data-price="8010"
-          >
-            5,600 + 560 💎 — 8,010 GDS
-          </option>
-
-        </select>
-
-
-        <!-- PRICE -->
-
-        <div class="price">
-
-          <small>
-            Pri pou peye
-          </small>
-
-          <strong id="price">
-            0 GDS
+          <strong>
+            NA — Amérique du Nord
           </strong>
 
         </div>
 
 
-        <!-- PAYMENT -->
+        <!-- UID -->
 
-        <div class="payment">
-
-          💳 Voye kòb la sou Natcash<br>
-
-          📱 Nimewo:
-
-          <strong>
-            55544179
-          </strong>
-
-          <br>
-
-          👤 Non:
-
-          <strong>
-            Manuel Pluviose
-          </strong>
-
-        </div>
-
-
-        <!-- =========================
-             SENDER INFO
-        ========================= -->
-
-        <label for="senderInfo">
-
-          Nimewo ki voye kòb la
-          oswa non ki sou kont NatCash la
-
+        <label for="uid">
+          UID Free Fire
         </label>
 
         <input
           type="text"
-          id="senderInfo"
-          placeholder="Mete nimewo ki voye kòb la oswa non ki sou kont NatCash la"
+          id="uid"
+          placeholder="Antre UID Free Fire ou"
+          inputmode="numeric"
           autocomplete="off"
-          required
-          oninput="checkOrderFields()"
         >
 
 
-        <!-- =========================
-             TRANSACTION ID
-        ========================= -->
+        <!-- CONFIRM UID -->
 
-        <label for="transactionId">
-
-          ID Tranzaksyon
-
+        <label for="confirmUid">
+          Konfime UID Free Fire
         </label>
 
         <input
           type="text"
-          id="transactionId"
-          placeholder="Mete ID Tranzaksyon NatCash la"
+          id="confirmUid"
+          placeholder="Re-antre menm UID la"
+          inputmode="numeric"
           autocomplete="off"
-          required
-          oninput="checkOrderFields()"
         >
 
 
-        <!-- WARNING -->
-
-        <div class="warning">
-
-          <strong>
-            ⚠️ ATANSYON:
-          </strong>
-
-          Pa voye fo kòmand!
-
-          N ap verifye enfòmasyon peman yo
-          anvan nou voye dyaman yo.
-
-          Si peman an pa bon,
-          kòmand ou an ap echwe.
-
-        </div>
-
-
-        <!-- ORDER BUTTON -->
+        <!-- VERIFY -->
 
         <button
           type="button"
-          id="orderBtn"
-          disabled
-          onclick="submitOrder()"
+          class="verify"
+          onclick="verifyUID()"
         >
 
-          💎 FÈ KÒMAND LAN
+          🔐 Verifye UID
 
         </button>
 
 
+        <div id="verified">
+
+          ✅ UID la verifye avèk siksè.
+
+        </div>
+
+
+        <!-- PURCHASE -->
+
+        <div id="purchaseArea">
+
+
+          <!-- PACK -->
+
+          <label for="pack">
+            Chwazi Pack
+          </label>
+
+          <select
+            id="pack"
+            onchange="updatePrice()"
+          >
+
+            <option value="">
+              -- Chwazi yon pack --
+            </option>
+
+            <option
+              value="100+10 💎"
+              data-diamonds="100 + 10 💎"
+              data-price="200"
+            >
+              100 + 10 💎 — 200 GDS
+            </option>
+
+            <option
+              value="310+31 💎"
+              data-diamonds="310 + 31 💎"
+              data-price="490"
+            >
+              310 + 31 💎 — 490 GDS
+            </option>
+
+            <option
+              value="520+52 💎"
+              data-diamonds="520 + 52 💎"
+              data-price="900"
+            >
+              520 + 52 💎 — 900 GDS
+            </option>
+
+            <option
+              value="1060+106 💎"
+              data-diamonds="1,060 + 106 💎"
+              data-price="1600"
+            >
+              1,060 + 106 💎 — 1,600 GDS
+            </option>
+
+            <option
+              value="2180+218 💎"
+              data-diamonds="2,180 + 218 💎"
+              data-price="3100"
+            >
+              2,180 + 218 💎 — 3,100 GDS
+            </option>
+
+            <option
+              value="5600+560 💎"
+              data-diamonds="5,600 + 560 💎"
+              data-price="8010"
+            >
+              5,600 + 560 💎 — 8,010 GDS
+            </option>
+
+          </select>
+
+
+          <!-- PRICE -->
+
+          <div class="price">
+
+            <small>
+              Pack chwazi
+            </small>
+
+            <span
+              id="diamondAmount"
+              class="diamond-amount"
+            >
+              💎 0
+            </span>
+
+            <small>
+              Pri pou peye
+            </small>
+
+            <strong id="price">
+              0 GDS
+            </strong>
+
+          </div>
+
+
+          <!-- PAYMENT -->
+
+          <div class="payment">
+
+            💳 Voye kòb la sou Natcash
+            <br>
+
+            📱 Nimewo:
+            <strong>
+              55544179
+            </strong>
+
+            <br>
+
+            👤 Non:
+            <strong>
+              Manuel Pluviose
+            </strong>
+
+          </div>
+
+
+          <!-- WARNING -->
+
+          <div class="warning">
+
+            <strong>
+              ⚠️ ATANSYON:
+            </strong>
+
+            <br>
+
+            Pa voye fo kòmand!
+
+            N ap verifye ID Tranzaksyon an
+            ak enfòmasyon peman yo anvan
+            nou trete kòmand lan.
+
+            Si peman an pa bon,
+            kòmand ou an ap echwe.
+
+          </div>
+
+
+          <!-- SENDER NUMBER OR NAME -->
+
+          <label for="senderNumber">
+
+            Nimewo ki voye kòb la
+            oswa non ki sou kont NatCash la
+
+          </label>
+
+          <input
+            type="text"
+            id="senderNumber"
+            placeholder="Nimewo ki voye kòb la oswa non ki sou NatCash la"
+            autocomplete="off"
+          >
+
+
+          <!-- TRANSACTION ID -->
+
+          <label for="transactionId">
+
+            ID Tranzaksyon
+            <span style="color:#ff7777;">
+              * Obligatwa
+            </span>
+
+          </label>
+
+          <input
+            type="text"
+            id="transactionId"
+            placeholder="Antre ID Tranzaksyon NatCash ou"
+            autocomplete="off"
+          >
+
+
+          <!-- ORDER BUTTON -->
+
+          <button
+            type="button"
+            id="orderBtn"
+            onclick="submitOrder()"
+          >
+
+            💎 FÈ KÒMAND LAN
+
+          </button>
+
+
+        </div>
+
+
+        <!-- WHATSAPP -->
+
+        <a
+          id="whatsappLink"
+          class="whatsapp"
+          href=""
+          target="_blank"
+          rel="noopener"
+        >
+
+          💬 Bezwen èd?
+          Kontakte nou sou WhatsApp
+
+        </a>
+
+
+        <!-- CLOSE -->
+
+        <button
+          type="button"
+          class="close"
+          onclick="closeOrder()"
+        >
+
+          ⬅️ Retounen nan meni
+
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <div id="message"></div>
+
       </div>
-
-
-      <!-- MESSAGE -->
-
-      <div id="message"></div>
-
-
-      <!-- BACK -->
-
-      <button
-        type="button"
-        class="back-button"
-        onclick="backToMenu()"
-      >
-
-        ← RETOUNEN NAN MENI
-
-      </button>
-
 
     </div>
 
@@ -924,9 +831,51 @@
 
 const API = "/api";
 
+
 let siteIsOpen = true;
 
 let currentOrderId = null;
+
+
+/* =========================
+   WHATSAPP
+=========================
+
+   Mete nimewo WhatsApp ou pita.
+
+   Egzanp:
+   const WHATSAPP_NUMBER = "509XXXXXXXX";
+
+   Pou kounye a li VID.
+*/
+
+const WHATSAPP_NUMBER = "";
+
+
+/* =========================
+   WHATSAPP SETUP
+========================= */
+
+function setupWhatsApp() {
+
+  const link =
+    document.getElementById(
+      "whatsappLink"
+    );
+
+  if (!WHATSAPP_NUMBER) {
+
+    link.style.display = "none";
+
+    return;
+  }
+
+  link.href =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER;
+
+  link.style.display = "block";
+}
 
 
 /* =========================
@@ -969,24 +918,15 @@ async function checkSiteStatus() {
       );
 
 
-    const products =
+    const service =
       document.getElementById(
-        "productsMenu"
-      );
-
-
-    const order =
-      document.getElementById(
-        "orderBox"
+        "mainService"
       );
 
 
     if (!siteIsOpen) {
 
-      products.style.display =
-        "none";
-
-      order.style.display =
+      service.style.display =
         "none";
 
       closed.style.display =
@@ -998,19 +938,18 @@ async function checkSiteStatus() {
 
     } else {
 
-      products.style.display =
-        "grid";
+      service.style.display =
+        "block";
 
       closed.style.display =
         "none";
 
     }
 
-
   } catch (error) {
 
     console.log(
-      "STATUS ERROR:",
+      "Status backend unavailable:",
       error
     );
 
@@ -1020,10 +959,10 @@ async function checkSiteStatus() {
 
 
 /* =========================
-   OPEN PRODUCT
+   OPEN
 ========================= */
 
-function openFreeFireUID() {
+function openOrder() {
 
   if (!siteIsOpen) {
 
@@ -1032,12 +971,6 @@ function openFreeFireUID() {
     return;
 
   }
-
-
-  document.getElementById(
-    "productsMenu"
-  ).style.display =
-    "none";
 
 
   document.getElementById(
@@ -1055,27 +988,15 @@ function openFreeFireUID() {
 
 
 /* =========================
-   BACK TO MENU
+   CLOSE
 ========================= */
 
-function backToMenu() {
+function closeOrder() {
 
   document.getElementById(
     "orderBox"
   ).style.display =
     "none";
-
-
-  document.getElementById(
-    "productsMenu"
-  ).style.display =
-    "grid";
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 
 }
 
@@ -1104,6 +1025,12 @@ function updatePrice() {
     );
 
 
+  const diamonds =
+    selected.getAttribute(
+      "data-diamonds"
+    );
+
+
   document.getElementById(
     "price"
   ).textContent =
@@ -1112,7 +1039,12 @@ function updatePrice() {
       : "0 GDS";
 
 
-  checkOrderFields();
+  document.getElementById(
+    "diamondAmount"
+  ).textContent =
+    diamonds
+      ? "💎 " + diamonds
+      : "💎 0";
 
 }
 
@@ -1246,58 +1178,7 @@ function verifyUID() {
 
 
   message.textContent =
-    "✅ UID la konfime. Ou ka ranpli enfòmasyon peman yo.";
-
-
-  checkOrderFields();
-
-}
-
-
-/* =========================
-   CHECK ALL REQUIRED FIELDS
-========================= */
-
-function checkOrderFields() {
-
-  const pack =
-    document.getElementById(
-      "pack"
-    ).value.trim();
-
-
-  const senderInfo =
-    document.getElementById(
-      "senderInfo"
-    ).value.trim();
-
-
-  const transactionId =
-    document.getElementById(
-      "transactionId"
-    ).value.trim();
-
-
-  const orderBtn =
-    document.getElementById(
-      "orderBtn"
-    );
-
-
-  /*
-    Bouton an pap disponib
-    toutotan 3 bagay sa yo
-    pa ranpli:
-    
-    1. Pack
-    2. Nimewo oswa non NatCash
-    3. ID tranzaksyon
-  */
-
-  orderBtn.disabled =
-    !pack ||
-    !senderInfo ||
-    !transactionId;
+    "✅ UID la konfime. Ou ka chwazi pack ou a.";
 
 }
 
@@ -1344,19 +1225,19 @@ async function submitOrder() {
       : null;
 
 
-  /*
-    NIMEWO OSWA NON NATCASH
-  */
+  const diamonds =
+    selected
+      ? selected.getAttribute(
+          "data-diamonds"
+        )
+      : null;
 
-  const senderInfo =
+
+  const senderNumber =
     document.getElementById(
-      "senderInfo"
+      "senderNumber"
     ).value.trim();
 
-
-  /*
-    ID TRANZAKSYON
-  */
 
   const transactionId =
     document.getElementById(
@@ -1409,8 +1290,6 @@ async function submitOrder() {
     message.textContent =
       "⚠️ Tanpri chwazi yon pack.";
 
-    checkOrderFields();
-
     return;
 
   }
@@ -1418,15 +1297,13 @@ async function submitOrder() {
 
   /* SENDER INFO */
 
-  if (!senderInfo) {
+  if (!senderNumber) {
 
     message.style.color =
       "#ffcc00";
 
     message.textContent =
       "⚠️ Mete nimewo ki voye kòb la oswa non ki sou kont NatCash la.";
-
-    checkOrderFields();
 
     return;
 
@@ -1443,14 +1320,16 @@ async function submitOrder() {
     message.textContent =
       "❌ ID Tranzaksyon an obligatwa.";
 
-    checkOrderFields();
+    document.getElementById(
+      "transactionId"
+    ).focus();
 
     return;
 
   }
 
 
-  /* DOUBLE CLICK BLOCK */
+  /* BLOCK DOUBLE CLICK */
 
   orderBtn.disabled =
     true;
@@ -1478,36 +1357,37 @@ async function submitOrder() {
           method: "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
-          body: JSON.stringify({
+          body:
+            JSON.stringify({
 
-            uid:
-              uid,
+              uid:
+                uid,
 
-            pack:
-              pack,
+              pack:
+                pack,
 
-            price:
-              Number(price),
+              diamonds:
+                diamonds,
 
-            /*
-              MENM NON SA A
-              BACKEND LAN DWE SOVE
-            */
+              price:
+                Number(price),
 
-            senderInfo:
-              senderInfo,
+              senderNumber:
+                senderNumber,
 
-            transactionId:
-              transactionId,
+              transactionId:
+                transactionId,
 
-            server:
-              "NA — Amérique du Nord"
+              server:
+                "NA — Amérique du Nord"
 
-          })
+            })
 
         }
       );
@@ -1543,6 +1423,8 @@ async function submitOrder() {
     }
 
 
+    /* ORDER ID */
+
     currentOrderId =
       result.order &&
       result.order.id
@@ -1561,9 +1443,26 @@ async function submitOrder() {
 
     message.innerHTML =
       "⏳ <strong>KÒMAND OU AN AP TRETE...</strong><br>" +
-      "💎 N ap verifye peman ou a.<br>" +
-      "🙏 Tanpri tann pandan admin lan ap trete kòmand lan.";
 
+      "💎 Pack: " +
+      escapeHtml(
+        diamonds || pack
+      ) +
+
+      "<br>" +
+
+      "💰 Pri: " +
+      escapeHtml(
+        String(price)
+      ) +
+      " GDS" +
+
+      "<br>" +
+
+      "🙏 Tanpri tann pandan admin lan ap verifye peman an.";
+
+
+    /* ORDER ID */
 
     if (currentOrderId) {
 
@@ -1602,7 +1501,8 @@ async function submitOrder() {
       "❌ Kòmand lan pa antre. Eseye ankò.";
 
 
-    checkOrderFields();
+    orderBtn.disabled =
+      false;
 
   }
 
@@ -1648,6 +1548,8 @@ function escapeHtml(value) {
 /* =========================
    START
 ========================= */
+
+setupWhatsApp();
 
 checkSiteStatus();
 
