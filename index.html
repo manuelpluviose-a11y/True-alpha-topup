@@ -113,11 +113,31 @@
       margin-bottom: 15px;
     }
 
-    .back-menu {
+    .menu-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .back-menu,
+    .close-order {
+      margin-bottom: 0;
       background: transparent;
       border: 1px solid #36364a;
       color: #aaa;
-      margin-bottom: 12px;
+      font-size: 14px;
+      padding: 11px;
+    }
+
+    .close-order {
+      border-color: #7a3030;
+      color: #ff7777;
+    }
+
+    .menu-buttons button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
     }
 
     label {
@@ -143,6 +163,11 @@
     input:focus,
     select:focus {
       border-color: #00e5ff;
+    }
+
+    input:disabled,
+    select:disabled {
+      opacity: .55;
     }
 
     .server {
@@ -293,6 +318,10 @@
       .products {
         grid-template-columns: 1fr;
       }
+
+      .menu-buttons {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -349,17 +378,34 @@
 
       <div class="card">
 
-        <button
-          type="button"
-          class="back-menu"
-          onclick="closeOrder()"
-        >
-          ⬅️ Retounen nan meni
-        </button>
+        <!-- BOUTON YO -->
+        <div class="menu-buttons">
+
+          <button
+            type="button"
+            class="back-menu"
+            id="backMenuBtn"
+            onclick="closeOrder()"
+          >
+            ⬅️ Retounen nan meni
+          </button>
+
+          <button
+            type="button"
+            class="close-order"
+            id="closeOrderBtn"
+            onclick="closeOrder()"
+          >
+            ❌ Fèmen
+          </button>
+
+        </div>
+
 
         <h2>
           💎 Free Fire TopUp par UID
         </h2>
+
 
         <div class="server">
           🌎 Server:
@@ -398,6 +444,7 @@
         <button
           type="button"
           class="verify"
+          id="verifyBtn"
           onclick="verifyUID()"
         >
           🔐 Verifye UID
@@ -548,7 +595,6 @@
             💎 FÈ KÒMAND LAN
           </button>
 
-
         </div>
 
 
@@ -578,8 +624,12 @@
 const API = "/api";
 
 let siteIsOpen = true;
+
 let currentOrderId = null;
+
 let orderStatusTimer = null;
+
+let orderSubmitted = false;
 
 
 /* =========================
@@ -609,10 +659,14 @@ async function checkSiteStatus() {
       data.enabled !== false;
 
     const closed =
-      document.getElementById("siteClosed");
+      document.getElementById(
+        "siteClosed"
+      );
 
     const service =
-      document.getElementById("mainService");
+      document.getElementById(
+        "mainService"
+      );
 
     if (!siteIsOpen) {
 
@@ -657,6 +711,14 @@ function openOrder() {
     return;
   }
 
+  /*
+   * Si pa gen kòmand aktif,
+   * prepare yon nouvo fòm pwòp.
+   */
+  if (!orderSubmitted) {
+    resetOrderForm();
+  }
+
   document.getElementById(
     "orderBox"
   ).style.display = "block";
@@ -675,9 +737,152 @@ function openOrder() {
 
 function closeOrder() {
 
+  /*
+   * SI KÒMAND LAN DEJA FÈT,
+   * PA kite kliyan an fèmen fòm nan
+   * pandan admin poko bay repons.
+   */
+  if (orderSubmitted) {
+
+    if (orderStatusTimer) {
+
+      showTemporaryMessage(
+        "⏳ Kòmand ou an toujou ap trete. Tanpri tann repons admin lan.",
+        "#ffcc00"
+      );
+
+    }
+
+    return;
+  }
+
+
+  /*
+   * Si kòmand lan poko fèt,
+   * tout enfòmasyon yo efase.
+   */
+  stopOrderStatusCheck();
+
+  resetOrderForm();
+
   document.getElementById(
     "orderBox"
   ).style.display = "none";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================
+   RESET FORM
+========================= */
+
+function resetOrderForm() {
+
+  currentOrderId = null;
+
+  orderSubmitted = false;
+
+
+  /*
+   * Efase tout chan yo
+   */
+  document.getElementById(
+    "uid"
+  ).value = "";
+
+  document.getElementById(
+    "confirmUid"
+  ).value = "";
+
+  document.getElementById(
+    "pack"
+  ).value = "";
+
+  document.getElementById(
+    "senderNumber"
+  ).value = "";
+
+  document.getElementById(
+    "transactionId"
+  ).value = "";
+
+
+  document.getElementById(
+    "price"
+  ).textContent = "0 GDS";
+
+
+  document.getElementById(
+    "verified"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "purchaseArea"
+  ).style.display = "none";
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  message.style.display = "none";
+
+  message.textContent = "";
+
+  message.innerHTML = "";
+
+  message.classList.remove(
+    "processing"
+  );
+
+  message.style.background = "";
+
+  message.style.border = "";
+
+
+  /*
+   * Reaktive bouton yo
+   */
+  setFormLocked(false);
+
+
+  document.getElementById(
+    "orderBtn"
+  ).disabled = false;
+
+}
+
+
+/* =========================
+   LOCK / UNLOCK FORM
+========================= */
+
+function setFormLocked(locked) {
+
+  const backBtn =
+    document.getElementById(
+      "backMenuBtn"
+    );
+
+  const closeBtn =
+    document.getElementById(
+      "closeOrderBtn"
+    );
+
+  /*
+   * Pandan kòmand ap trete,
+   * bouton sa yo pa disponib.
+   */
+  backBtn.disabled = locked;
+
+  closeBtn.disabled = locked;
 
 }
 
@@ -689,7 +894,9 @@ function closeOrder() {
 function updatePrice() {
 
   const pack =
-    document.getElementById("pack");
+    document.getElementById(
+      "pack"
+    );
 
   const selected =
     pack.options[
@@ -717,6 +924,15 @@ function updatePrice() {
 ========================= */
 
 function verifyUID() {
+
+  /*
+   * Pa kite verifye pandan
+   * yon kòmand deja ap trete.
+   */
+  if (orderSubmitted) {
+    return;
+  }
+
 
   const uid =
     document.getElementById(
@@ -750,9 +966,12 @@ function verifyUID() {
   if (!uid) {
 
     verified.style.display = "none";
-    purchaseArea.style.display = "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri antre UID Free Fire ou.";
@@ -764,9 +983,12 @@ function verifyUID() {
   if (!confirmUid) {
 
     verified.style.display = "none";
-    purchaseArea.style.display = "none";
 
-    message.style.color = "#ffcc00";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri re-antre UID la.";
@@ -778,9 +1000,12 @@ function verifyUID() {
   if (!/^[0-9]+$/.test(uid)) {
 
     verified.style.display = "none";
-    purchaseArea.style.display = "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ UID la dwe genyen sèlman chif.";
@@ -792,9 +1017,12 @@ function verifyUID() {
   if (uid !== confirmUid) {
 
     verified.style.display = "none";
-    purchaseArea.style.display = "none";
 
-    message.style.color = "#ff4d4d";
+    purchaseArea.style.display =
+      "none";
+
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ UID yo pa menm.";
@@ -805,9 +1033,11 @@ function verifyUID() {
 
   verified.style.display = "block";
 
-  purchaseArea.style.display = "block";
+  purchaseArea.style.display =
+    "block";
 
-  message.style.color = "#00e5ff";
+  message.style.color =
+    "#00e5ff";
 
   message.textContent =
     "✅ UID la konfime. Ou ka kontinye.";
@@ -820,6 +1050,15 @@ function verifyUID() {
 ========================= */
 
 async function submitOrder() {
+
+  /*
+   * Pa pèmèt dezyèm kòmand
+   * pandan premye a toujou ap trete.
+   */
+  if (orderSubmitted) {
+    return;
+  }
+
 
   const uid =
     document.getElementById(
@@ -881,7 +1120,8 @@ async function submitOrder() {
     uid !== confirmUid
   ) {
 
-    message.style.color = "#ff4d4d";
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
@@ -890,9 +1130,22 @@ async function submitOrder() {
   }
 
 
+  if (!/^[0-9]+$/.test(uid)) {
+
+    message.style.color =
+      "#ff4d4d";
+
+    message.textContent =
+      "❌ UID la dwe genyen sèlman chif.";
+
+    return;
+  }
+
+
   if (!pack || !price) {
 
-    message.style.color = "#ffcc00";
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Tanpri chwazi yon pack.";
@@ -903,7 +1156,8 @@ async function submitOrder() {
 
   if (!senderNumber) {
 
-    message.style.color = "#ffcc00";
+    message.style.color =
+      "#ffcc00";
 
     message.textContent =
       "⚠️ Mete nimewo ki voye kòb la oswa non ki sou NatCash la.";
@@ -914,7 +1168,8 @@ async function submitOrder() {
 
   if (!transactionId) {
 
-    message.style.color = "#ff4d4d";
+    message.style.color =
+      "#ff4d4d";
 
     message.textContent =
       "❌ ID Tranzaksyon an obligatwa.";
@@ -927,11 +1182,18 @@ async function submitOrder() {
   }
 
 
+  /*
+   * Bloke fòm nan pandan
+   * demann lan ap ale backend.
+   */
   orderBtn.disabled = true;
 
-  message.classList.add("processing");
+  message.classList.add(
+    "processing"
+  );
 
-  message.style.color = "#00e5ff";
+  message.style.color =
+    "#00e5ff";
 
   message.textContent =
     "⏳ N ap prepare kòmand ou an...";
@@ -1001,11 +1263,28 @@ async function submitOrder() {
     }
 
 
+    /*
+     * KÒMAND LAN FÈT.
+     */
     currentOrderId =
       result.order &&
       result.order.id
         ? result.order.id
         : null;
+
+
+    /*
+     * Make orderSubmitted true.
+     * Sa anpeche kliyan an fèmen
+     * fòm nan pandan l ap tann admin.
+     */
+    orderSubmitted = true;
+
+
+    /*
+     * Bloke bouton Retounen/Fèmen.
+     */
+    setFormLocked(true);
 
 
     message.style.color =
@@ -1030,14 +1309,29 @@ async function submitOrder() {
         ) +
         "</small>";
 
+
       /*
-       * KOUNYE A NOU KÒMANSE SIVEYE KÒMAND LAN.
-       * Lè admin chanje l an failed,
-       * backend la dwe retounen customerMessage.
+       * Kòmanse siveyans.
        */
       startOrderStatusCheck(
         currentOrderId
       );
+
+    } else {
+
+      /*
+       * Si backend lan pa retounen ID,
+       * nou pa ka siveye kòmand lan.
+       */
+      message.classList.remove(
+        "processing"
+      );
+
+      message.style.color =
+        "#ffcc00";
+
+      message.innerHTML =
+        "⚠️ Kòmand lan antre, men pa gen ID kòmand pou siveyans.";
 
     }
 
@@ -1061,13 +1355,17 @@ async function submitOrder() {
 
     orderBtn.disabled = false;
 
+    orderSubmitted = false;
+
+    setFormLocked(false);
+
   }
 
 }
 
 
 /* =========================
-   CHECK ORDER STATUS
+   START STATUS CHECK
 ========================= */
 
 function startOrderStatusCheck(
@@ -1075,16 +1373,28 @@ function startOrderStatusCheck(
 ) {
 
   if (orderStatusTimer) {
+
     clearInterval(
       orderStatusTimer
     );
+
   }
 
-  checkOrderStatus(orderId);
+
+  checkOrderStatus(
+    orderId
+  );
+
 
   orderStatusTimer =
     setInterval(
-      () => checkOrderStatus(orderId),
+      () => {
+
+        checkOrderStatus(
+          orderId
+        );
+
+      },
       5000
     );
 
@@ -1099,22 +1409,25 @@ async function checkOrderStatus(
   orderId
 ) {
 
-  if (!orderId) return;
+  if (!orderId) {
+    return;
+  }
+
 
   try {
 
-    /*
-     * Endpoint sa a dwe bay enfòmasyon
-     * sou yon kòmand espesifik.
-     *
-     * Pa mete ADMIN_TOKEN isit la.
-     */
     const response =
       await fetch(
-        `${API}/get-order?id=${encodeURIComponent(orderId)}`,
+        `${API}/get-order?id=${encodeURIComponent(orderId)}&t=${Date.now()}`,
         {
           method: "GET",
-          cache: "no-store"
+
+          cache: "no-store",
+
+          headers: {
+            "Cache-Control":
+              "no-cache"
+          }
         }
       );
 
@@ -1151,10 +1464,12 @@ async function checkOrderStatus(
 
       stopOrderStatusCheck();
 
+
       showCustomerResult(
         order.customerMessage ||
         "Nou pa resevwa peman an."
       );
+
 
       return;
     }
@@ -1169,7 +1484,11 @@ async function checkOrderStatus(
 
       stopOrderStatusCheck();
 
-      showCustomerSuccess();
+
+      showCustomerSuccess(
+        order.customerMessage
+      );
+
 
       return;
     }
@@ -1187,6 +1506,7 @@ async function checkOrderStatus(
           "message"
         );
 
+
       message.style.display =
         "block";
 
@@ -1197,11 +1517,21 @@ async function checkOrderStatus(
       message.style.color =
         "#00e5ff";
 
+      message.style.background =
+        "";
+
+      message.style.border =
+        "";
+
       message.innerHTML =
         "⏳ <strong>KÒMAND OU AN AP TRETE</strong><br>" +
-        "💎 Tanpri tann kèk moman.";
+        (
+          order.customerMessage ||
+          "💎 Tanpri tann kèk moman."
+        );
 
     }
+
 
   } catch (error) {
 
@@ -1235,7 +1565,7 @@ function stopOrderStatusCheck() {
 
 
 /* =========================
-   CUSTOMER FAILED MESSAGE
+   CUSTOMER FAILED
 ========================= */
 
 function showCustomerResult(
@@ -1251,6 +1581,16 @@ function showCustomerResult(
     document.getElementById(
       "orderBtn"
     );
+
+
+  /*
+   * Kòmand lan fini.
+   * Kounye a kliyan an ka fèmen.
+   */
+  orderSubmitted = false;
+
+
+  setFormLocked(false);
 
 
   message.classList.remove(
@@ -1272,7 +1612,8 @@ function showCustomerResult(
   message.innerHTML =
     "❌ <strong>ÉCHEC</strong><br>" +
     escapeHtml(
-      customerMessage
+      customerMessage ||
+      "Nou pa resevwa peman an."
     );
 
 
@@ -1285,12 +1626,26 @@ function showCustomerResult(
    CUSTOMER SUCCESS
 ========================= */
 
-function showCustomerSuccess() {
+function showCustomerSuccess(
+  customerMessage
+) {
 
   const message =
     document.getElementById(
       "message"
     );
+
+
+  /*
+   * Kòmand lan fini.
+   * Kounye a kliyan an ka fèmen
+   * oswa retounen nan meni.
+   */
+  orderSubmitted = false;
+
+
+  setFormLocked(false);
+
 
   message.classList.remove(
     "processing"
@@ -1310,7 +1665,46 @@ function showCustomerSuccess() {
 
   message.innerHTML =
     "✅ <strong>KÒMAND LA REYISI</strong><br>" +
-    "💎 Diamond yo ap trete pou UID ou.";
+    escapeHtml(
+      customerMessage ||
+      "Pwodui ou an te trete avèk siksè!"
+    );
+
+}
+
+
+/* =========================
+   TEMPORARY MESSAGE
+========================= */
+
+function showTemporaryMessage(
+  text,
+  color
+) {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  message.style.display =
+    "block";
+
+  message.style.color =
+    color;
+
+  message.style.background =
+    "";
+
+  message.style.border =
+    "";
+
+  message.classList.remove(
+    "processing"
+  );
+
+  message.textContent =
+    text;
 
 }
 
@@ -1362,4 +1756,4 @@ checkSiteStatus();
 </script>
 
 </body>
-</html>
+  </html>
