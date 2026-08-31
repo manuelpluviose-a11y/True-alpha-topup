@@ -23,8 +23,7 @@ export default async function handler(req, res) {
 
     const pathname = `orders/${id}.json`;
 
-    const blobDetails =
-      await head(pathname).catch(() => null);
+    const blobDetails = await head(pathname).catch(() => null);
 
     if (!blobDetails || !blobDetails.url) {
       return res.status(404).json({
@@ -33,10 +32,21 @@ export default async function handler(req, res) {
       });
     }
 
+    /*
+     * Cache-buster:
+     * Sa anpeche browser/CDN retounen ansyen status la.
+     */
+    const cacheBuster = `?t=${Date.now()}`;
+
     const response = await fetch(
-      blobDetails.url,
+      blobDetails.url + cacheBuster,
       {
-        cache: "no-store"
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache",
+          "Pragma": "no-cache"
+        }
       }
     );
 
@@ -56,17 +66,68 @@ export default async function handler(req, res) {
       });
     }
 
+    /*
+     * Toujou voye dènye status ak mesaj la.
+     */
+    const status =
+      order.status || "pending";
+
+    let customerMessage =
+      order.customerMessage || "";
+
+    /*
+     * Si update-order deja mete failed,
+     * nou garanti kliyan an toujou resevwa mesaj la.
+     */
+    if (
+      status === "failed" &&
+      !customerMessage
+    ) {
+      customerMessage =
+        "❌ Nou pa resevwa peman an. Kòmand lan echwe.";
+    }
+
+    if (
+      status === "processing" &&
+      !customerMessage
+    ) {
+      customerMessage =
+        "⏳ Pwodui ou an ap antre nan kèk segonn.";
+    }
+
+    if (
+      status === "success" &&
+      !customerMessage
+    ) {
+      customerMessage =
+        "✅ Pwodui ou an te trete avèk siksè!";
+    }
+
+    res.setHeader(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+
+    res.setHeader(
+      "Pragma",
+      "no-cache"
+    );
+
+    res.setHeader(
+      "Expires",
+      "0"
+    );
+
     return res.status(200).json({
       success: true,
 
       order: {
         id: order.id,
 
-        status:
-          order.status || "pending",
+        status: status,
 
         customerMessage:
-          order.customerMessage || "",
+          customerMessage,
 
         updatedAt:
           order.updatedAt || null
@@ -85,4 +146,4 @@ export default async function handler(req, res) {
       message: "Erè backend."
     });
   }
-      }
+}
