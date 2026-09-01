@@ -1,7 +1,12 @@
-<!DOCTYPE html><html lang="ht"><head>
+<!DOCTYPE html>
+<html lang="ht">
+
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>True Alpha Admin</title><style>
+<title>True Alpha Admin</title>
+
+<style>
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -33,8 +38,7 @@ h1 {
   margin-bottom: 15px;
 }
 
-input,
-textarea {
+input, textarea {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -60,35 +64,12 @@ button {
   cursor: pointer;
 }
 
-.login {
-  background: #00e5ff;
-  color: #001014;
-}
-
-.on {
-  background: #00c853;
-  color: white;
-}
-
-.off {
-  background: #d32f2f;
-  color: white;
-}
-
-.process {
-  background: #00c853;
-  color: white;
-}
-
-.failed {
-  background: #d32f2f;
-  color: white;
-}
-
-.refresh {
-  background: #36364a;
-  color: white;
-}
+.login { background: #00e5ff; color: #001014; }
+.on { background: #00c853; color: white; }
+.off { background: #d32f2f; color: white; }
+.process { background: #00c853; color: white; }
+.failed { background: #d32f2f; color: white; }
+.refresh { background: #36364a; color: white; }
 
 .delete-btn-all {
   background: #9b2226;
@@ -276,184 +257,210 @@ button {
   border-radius: 8px;
   margin: 8px 0;
 }
+</style>
+</head>
 
-.small-status {
-  padding: 8px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+<body>
 
-.status-processing {
-  background: #12352d;
-  color: #5ee39a;
-}
+<div class="container">
 
-.status-failed {
-  background: #4a1717;
-  color: #ff7777;
-}
+<h1>💎 TRUE ALPHA ADMIN</h1>
 
-.status-success {
-  background: #123d25;
-  color: #5ee39a;
-}
-</style></head><body><div class="container"><h1>💎 TRUE ALPHA ADMIN</h1><!-- LOGIN --><div class="card" id="loginBox"><h3>🔐 Admin Login</h3><input
+<div class="card" id="loginBox">
+
+<h3>🔐 Admin Login</h3>
+
+<input
 type="password"
 id="adminToken"
 placeholder="Antre ADMIN_TOKEN ou"
 autocomplete="off"
-
-«»
+>
 
 <button
 class="login"
 onclick="loginAdmin()"
-
-«»
-
+>
 🔓 ANTRE NAN ADMIN
 </button>
 
-</div><!-- ADMIN AREA --><div id="adminArea"><div id="message"></div><!-- SITE CONTROL --><div class="card"><h3>🌐 Kontwòl Sit la</h3><div
+</div>
+
+
+<div id="adminArea">
+
+<div id="message"></div>
+
+
+<div class="card">
+
+<h3>🌐 Kontwòl Sit la</h3>
+
+<div
 id="siteStatus"
 class="status status-on"
 >
 🟢 SIT LA ON
-</div><button
+</div>
+
+<button
 class="on"
 onclick="siteOn()"
-
-«»
-
+>
 🟢 SIT ON
 </button>
 
 <button
 class="off"
 onclick="showOffArea()"
-
-«»
-
+>
 🔴 SIT OFF
 </button>
 
-<div id="offArea"><p>
+
+<div id="offArea">
+
+<p>
 Chwazi youn oswa ekri pwòp mesaj ou:
-</p><button
+</p>
+
+<button
 class="message-choice"
 onclick="setOffMessage('⏳ Sit la ap disponib talè.')"
-
-«»
-
+>
 ⏳ Sit la ap disponib talè.
 </button>
 
 <button
 class="message-choice"
 onclick="setOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')"
-
-«»
-
+>
 🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
 </button>
 
 <textarea
 id="customMessage"
 placeholder="✍️ Ekri pwòp mesaj OFF ou..."
-></textarea><button
+></textarea>
+
+<button
 class="off"
 onclick="setCustomOffMessage()"
-
-«»
-
+>
 🔴 METE SIT LA OFF AK MESAJ SA
 </button>
 
-</div></div><!-- ORDERS --><div class="card"><h3>📋 KÒMAND YO</h3><!-- STATS --><div class="stats"><div class="stat"><span
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📋 KÒMAND YO</h3>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<span
 id="pendingCount"
 class="stat-number pending-number"
-
-«»
-
+>
 0
 </span>
 
 <span class="stat-label">
 🟡 AN ATANT
-</span></div><div class="stat"><span
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<span
 id="successCount"
 class="stat-number success-number"
-
-«»
-
+>
 0
 </span>
 
 <span class="stat-label">
 ✅ SIKSÈ
-</span><button
+</span>
+
+<button
 class="delete-btn-all"
 onclick="clearAllOrdersByStatus('success')"
-
-«»
-
+>
 🗑️ Efase tout
 </button>
 
-</div><div class="stat"><span
+</div>
+
+
+<div class="stat">
+
+<span
 id="failedCount"
 class="stat-number failed-number"
-
-«»
-
+>
 0
 </span>
 
 <span class="stat-label">
 ❌ ÉCHEC
-</span><button
+</span>
+
+<button
 class="delete-btn-all"
 onclick="clearAllOrdersByStatus('failed')"
-
-«»
-
+>
 🗑️ Efase tout
 </button>
 
-</div></div><button
+</div>
+
+</div>
+
+
+<button
 class="refresh"
-id="refreshBtn"
 onclick="loadOrders()"
-
-«»
-
+>
 🔄 RAFRECHI KÒMAND YO
 </button>
 
-<!-- PENDING --><div class="section-title pending-title"><span>
+
+<div class="section-title pending-title">
+
+<span>
 🟡 KÒMAND AN ATANT
-</span></div><div
+</span>
+
+</div>
+
+
+<div
 class="pagination-controls"
 id="paginationBox"
 style="display:none;"
-><button
+>
+
+<button
 class="nav-btn"
 id="prevBtn"
 onclick="changePage(-1)"
-
-«»
-
+>
 ◄ Prasa
 </button>
 
 <span
 class="page-indicator"
 id="pageIndicator"
-
-«»
-
+>
 0 / 0
 </span>
 
@@ -461,18 +468,32 @@ id="pageIndicator"
 class="nav-btn"
 id="nextBtn"
 onclick="changePage(1)"
-
-«»
-
+>
 Pwochen ►
 </button>
 
-</div><div
+</div>
+
+
+<div
 id="pendingList"
 class="list"
-><div class="empty">
+>
+
+<div class="empty">
 Pa gen kòmand an atant.
-</div></div></div></div></div><script>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
 
 const API = "/api";
 
@@ -482,14 +503,8 @@ let allOrdersList = [];
 
 let currentIndex = 0;
 
-let loadingOrders = false;
 
-
-/*
-==================================================
-MESSAGE
-==================================================
-*/
+/* MESSAGE */
 
 function showMessage(
 text,
@@ -508,11 +523,7 @@ box.textContent = text;
 }
 
 
-/*
-==================================================
-LOGIN
-==================================================
-*/
+/* LOGIN */
 
 async function loginAdmin() {
 
@@ -538,7 +549,7 @@ try {
 
 const response =
 await fetch(
-`${API}/get-orders`,
+`${API}/get-orders?t=${Date.now()}`,
 {
 method: "GET",
 
@@ -547,10 +558,14 @@ headers: {
 ADMIN_TOKEN,
 
 "Accept":
-"application/json"
+"application/json",
+
+"Cache-Control":
+"no-cache"
 },
 
 cache: "no-store"
+
 }
 );
 
@@ -586,20 +601,6 @@ response.status
 }
 
 
-/*
- * Kounye a nou pran tout kòmand
- * ki deja egziste nan backend lan.
- *
- * Sa pèmèt SIKSÈ ak ÉCHEC rete
- * apre yon nouvo koneksyon.
- */
-
-allOrdersList =
-normalizeOrders(
-result.orders || []
-);
-
-
 document
 .getElementById("loginBox")
 .style.display = "none";
@@ -618,6 +619,11 @@ showMessage(
 
 await loadSiteStatus();
 
+
+allOrdersList =
+result.orders || [];
+
+
 renderAllLists();
 
 
@@ -627,8 +633,6 @@ console.error(
 "LOGIN ERROR:",
 error
 );
-
-ADMIN_TOKEN = "";
 
 alert(
 "❌ " +
@@ -640,43 +644,7 @@ error.message
 }
 
 
-/*
-==================================================
-NORMALIZE ORDERS
-==================================================
-*/
-
-function normalizeOrders(orders) {
-
-const map = new Map();
-
-for (const order of orders) {
-
-if (!order || !order.id) {
-continue;
-}
-
-map.set(
-String(order.id),
-{
-...order
-}
-);
-
-}
-
-return Array.from(
-map.values()
-);
-
-}
-
-
-/*
-==================================================
-SITE STATUS
-==================================================
-*/
+/* SITE STATUS */
 
 async function loadSiteStatus() {
 
@@ -684,7 +652,7 @@ try {
 
 const response =
 await fetch(
-`${API}/site-status`,
+`${API}/site-status?t=${Date.now()}`,
 {
 method: "GET",
 cache: "no-store"
@@ -800,9 +768,8 @@ enabled,
 message
 ) {
 
-if (!ADMIN_TOKEN) {
-return;
-}
+if (!ADMIN_TOKEN) return;
+
 
 try {
 
@@ -820,12 +787,12 @@ headers: {
 ADMIN_TOKEN
 },
 
-body:
-JSON.stringify({
+body: JSON.stringify({
 enabled,
 message:
 message || ""
 })
+
 }
 );
 
@@ -878,6 +845,7 @@ enabled
 showMessage(
 "❌ " +
 error.message,
+
 "#ff4d4d"
 );
 
@@ -896,56 +864,11 @@ true,
 }
 
 
-/*
-==================================================
-LOAD ORDERS / REFRESH
-==================================================
-
-IMPORTANT:
-
-Refresh pa efase lis lokal la.
-
-Nou pran sa backend lan retounen,
-epi nou fè merge sou ID yo.
-
-Yon kòmand ki deja:
-
-success
-failed
-processing
-
-pap janm vin pending jis paske
-nou peze refresh.
-==================================================
-*/
+/* LOAD ORDERS */
 
 async function loadOrders() {
 
-if (!ADMIN_TOKEN) {
-return;
-}
-
-
-/*
- * Evite plizyè refresh an menm tan.
- */
-if (loadingOrders) {
-return;
-}
-
-loadingOrders = true;
-
-
-const refreshBtn =
-document.getElementById(
-"refreshBtn"
-);
-
-refreshBtn.disabled = true;
-
-refreshBtn.textContent =
-"⏳ AP CHÈCHE NOUVO KÒMAND...";
-
+if (!ADMIN_TOKEN) return;
 
 try {
 
@@ -988,120 +911,86 @@ result.message ||
 }
 
 
-const serverOrders =
-normalizeOrders(
-result.orders || []
-);
-
-
 /*
- * Map ansyen lis la.
- */
-const existing =
-new Map();
-
-for (
-const order of allOrdersList
-) {
-
-if (
-order &&
-order.id
-) {
-
-existing.set(
-String(order.id),
-order
-);
-
-}
-
-}
-
-
-/*
- * Merge server lan.
+ * REFRESH LA PA RANPLASE
+ * LALIS ADMIN LAN NÈT.
  *
- * Backend lan se sous verite.
- * Men nou pa pèmèt yon ansyen
- * status final tounen pending
- * akoz yon refresh.
+ * Li pran nouvo kòmand sèlman.
  */
+
+const freshOrders =
+result.orders || [];
+
+
+/*
+ * Ajoute sèlman ID ki pa t
+ * deja nan lis la.
+ */
+
 for (
-const serverOrder of serverOrders
+const newOrder of freshOrders
 ) {
 
-const key =
-String(serverOrder.id);
+const exists =
+allOrdersList.some(
+oldOrder =>
+oldOrder.id ===
+newOrder.id
+);
 
-const oldOrder =
-existing.get(key);
+
+if (!exists) {
+
+allOrdersList.push(
+newOrder
+);
+
+}
+
+}
 
 
 /*
- * Si nou te deja mete kòmand lan
- * nan final status lokalman,
- * epi server lan ta retounen yon
- * ansyen pending akoz yon pwoblèm
- * cache, nou konsève final status la.
+ * Mete status aktyèl yo ajou
+ * san nou pa fè success/failed
+ * retounen kòm nouvo kòmand.
  */
-if (
-oldOrder &&
-(
-oldOrder.status === "failed" ||
-oldOrder.status === "success"
-)
-&&
-(
-serverOrder.status === "pending" ||
-serverOrder.status === "processing"
-)
+
+for (
+const serverOrder of freshOrders
 ) {
 
-existing.set(
-key,
-{
-...serverOrder,
-status:
-oldOrder.status,
-
-customerMessage:
-oldOrder.customerMessage ||
-serverOrder.customerMessage
-}
+const localOrder =
+allOrdersList.find(
+order =>
+order.id ===
+serverOrder.id
 );
 
-continue;
+
+if (localOrder) {
+
+localOrder.status =
+serverOrder.status;
+
+localOrder.customerMessage =
+serverOrder.customerMessage;
+
+}
 
 }
 
 
 /*
- * Sinon pran vèsyon server lan.
+ * Pa ajoute ansyen success/failed
+ * yo kòm nouvo kòmand.
+ *
+ * Si yon pending te vin success
+ * oswa failed, li rete nan done
+ * lokal yo men li pap parèt nan
+ * lis AN ATANT.
  */
-existing.set(
-key,
-{
-...oldOrder,
-...serverOrder
-}
-);
 
-}
-
-
-/*
- * Fè lis final la.
- */
-allOrdersList =
-Array.from(
-existing.values()
-);
-
-
-/*
- * Pi nouvo kòmand an premye.
- */
 allOrdersList.sort(
 (a, b) =>
 new Date(
@@ -1113,11 +1002,17 @@ a.createdAt || 0
 );
 
 
+/*
+ * Si refresh la vini ak yon
+ * pending ki pa nan lis la,
+ * li parèt.
+ */
+
 renderAllLists();
 
 
 showMessage(
-"🔄 Kòmand yo rafrechi. Nouvo kòmand yo chaje.",
+"🔄 Refresh fini — nouvo kòmand yo chaje.",
 "#00e5ff"
 );
 
@@ -1125,7 +1020,7 @@ showMessage(
 } catch (error) {
 
 console.error(
-"LOAD ORDERS ERROR:",
+"REFRESH ORDERS ERROR:",
 error
 );
 
@@ -1135,63 +1030,33 @@ error.message,
 "#ff4d4d"
 );
 
-} finally {
-
-loadingOrders = false;
-
-refreshBtn.disabled = false;
-
-refreshBtn.textContent =
-"🔄 RAFRECHI KÒMAND YO";
-
 }
 
 }
 
 
-/*
-==================================================
-RENDER ALL LISTS
-==================================================
-*/
+/* RENDER ALL LISTS */
 
 function renderAllLists() {
 
 const pending =
 allOrdersList.filter(
-o =>
-o.status === "pending"
+o => o.status === "pending"
 );
 
 
 const failed =
 allOrdersList.filter(
-o =>
-o.status === "failed"
+o => o.status === "failed"
 );
 
 
 const success =
 allOrdersList.filter(
 o =>
-o.status === "success"
-);
-
-
-const processing =
-allOrdersList.filter(
-o =>
+o.status === "success" ||
 o.status === "processing"
 );
-
-
-/*
- * Processing antre nan SIKSÈ
- * kòm kòmand ki deja valide.
- */
-const successTotal =
-success.length +
-processing.length;
 
 
 document
@@ -1215,7 +1080,7 @@ document
 "successCount"
 )
 .textContent =
-successTotal;
+success.length;
 
 
 const paginationBox =
@@ -1228,7 +1093,6 @@ if (pending.length === 0) {
 
 paginationBox.style.display =
 "none";
-
 
 document
 .getElementById(
@@ -1257,9 +1121,7 @@ pending.length - 1;
 }
 
 
-if (
-currentIndex < 0
-) {
+if (currentIndex < 0) {
 
 currentIndex = 0;
 
@@ -1275,50 +1137,63 @@ document
 
 
 document
-.getElementById(
-"prevBtn"
-)
+.getElementById("prevBtn")
 .disabled =
 currentIndex === 0;
 
 
 document
-.getElementById(
-"nextBtn"
-)
+.getElementById("nextBtn")
 .disabled =
 currentIndex ===
 pending.length - 1;
 
 
-renderPendingOrder(
-pending[currentIndex]
+renderList(
+[pending[currentIndex]],
+"pendingList"
 );
 
 }
 
 
-/*
-==================================================
-PENDING ORDER
-==================================================
-*/
+function changePage(
+direction
+) {
 
-function renderPendingOrder(
-order
+currentIndex +=
+direction;
+
+renderAllLists();
+
+}
+
+
+/* RENDER ORDER */
+
+function renderList(
+orders,
+containerId
 ) {
 
 const box =
 document.getElementById(
-"pendingList"
+containerId
 );
 
+
 box.innerHTML = "";
+
+
+for (
+const order of orders
+) {
 
 const div =
 document.createElement(
 "div"
 );
+
 
 div.className =
 "order";
@@ -1477,49 +1352,10 @@ box.appendChild(div);
 
 }
 
-
-/*
-==================================================
-PAGE
-==================================================
-*/
-
-function changePage(
-direction
-) {
-
-const pending =
-allOrdersList.filter(
-o =>
-o.status === "pending"
-);
-
-currentIndex +=
-direction;
-
-if (
-currentIndex < 0
-) {
-currentIndex = 0;
-}
-
-if (
-currentIndex >= pending.length
-) {
-currentIndex =
-pending.length - 1;
-}
-
-renderAllLists();
-
 }
 
 
-/*
-==================================================
-ECHEC
-==================================================
-*/
+/* ECHEC */
 
 function handleFailOrder(
 id
@@ -1547,11 +1383,7 @@ reason.trim() ||
 }
 
 
-/*
-==================================================
-UPDATE ORDER
-==================================================
-*/
+/* UPDATE ORDER */
 
 async function updateOrder(
 id,
@@ -1572,30 +1404,11 @@ return;
 
 const target =
 allOrdersList.find(
-o =>
-String(o.id) ===
-String(id)
+o => o.id === id
 );
 
 
-if (!target) {
-
-alert(
-"❌ Kòmand lan pa jwenn."
-);
-
-return;
-
-}
-
-
-/*
- * Chanje status lokalman touswit.
- *
- * Sa vle di lè ou peze ÉCHEC
- * oswa VALIDÉ, kòmand lan soti
- * nan AN ATANT imedyatman.
- */
+if (target) {
 
 target.status =
 status;
@@ -1603,30 +1416,27 @@ status;
 target.customerMessage =
 customerMessage;
 
-target.updatedAt =
-new Date().toISOString();
+}
 
 
-renderAllLists();
-
-
-if (
-status === "failed"
-) {
+if (status === "failed") {
 
 showMessage(
-"❌ Kòmand lan voye nan ÉCHEC avèk siksè!",
+"❌ Kòmand lan voye nan ÈCHÈK avèk siksè!",
 "#ff7777"
 );
 
 } else {
 
 showMessage(
-"✅ Kòmand lan VALIDÉ. Li pap retounen AN ATANT apre refresh.",
+"✅ Kòmand lan VALIDÉ avèk siksè!",
 "#5ee39a"
 );
 
 }
+
+
+renderAllLists();
 
 
 try {
@@ -1645,12 +1455,12 @@ headers: {
 ADMIN_TOKEN
 },
 
-body:
-JSON.stringify({
+body: JSON.stringify({
 id,
 status,
 customerMessage
 })
+
 }
 );
 
@@ -1672,35 +1482,6 @@ result.message ||
 }
 
 
-/*
- * Pran vèsyon backend lan
- * sèlman pou kòmand sa a.
- */
-if (
-result.order
-) {
-
-const index =
-allOrdersList.findIndex(
-o =>
-String(o.id) ===
-String(id)
-);
-
-if (index !== -1) {
-
-allOrdersList[index] = {
-...allOrdersList[index],
-...result.order
-};
-
-}
-
-renderAllLists();
-
-}
-
-
 } catch (error) {
 
 console.error(
@@ -1709,13 +1490,8 @@ error
 );
 
 
-/*
- * Si backend lan echwe,
- * mete yon mesaj pou admin nan.
- */
 showMessage(
-"⚠️ Backend lan pa konfime chanjman an: " +
-error.message,
+"⚠️ Pasaj lokal la fèt men gen yon ti pwoblèm nan backend lan.",
 "#ff4d4d"
 );
 
@@ -1724,11 +1500,7 @@ error.message,
 }
 
 
-/*
-==================================================
-CLEAR ALL
-==================================================
-*/
+/* CLEAR ALL */
 
 async function clearAllOrdersByStatus(
 statusType
@@ -1738,13 +1510,11 @@ const targetOrders =
 allOrdersList.filter(
 o =>
 statusType === "success"
-?
-(
+? (
 o.status === "success" ||
 o.status === "processing"
 )
-:
-o.status === "failed"
+: o.status === statusType
 );
 
 
@@ -1772,46 +1542,31 @@ statusType === "success"
 } yo?`
 )
 ) {
-
 return;
-
 }
-
-
-/*
- * Efase lokalman.
- */
-const idsToDelete =
-new Set(
-targetOrders.map(
-o =>
-String(o.id)
-)
-);
 
 
 allOrdersList =
 allOrdersList.filter(
 o =>
-!idsToDelete.has(
-String(o.id)
+statusType === "success"
+? (
+o.status !== "success" &&
+o.status !== "processing"
 )
+: o.status !== statusType
 );
 
 
 renderAllLists();
 
 
-/*
- * Efase nan backend.
- */
 for (
 const order of targetOrders
 ) {
 
 try {
 
-const response =
 await fetch(
 `${API}/delete-order`,
 {
@@ -1825,29 +1580,19 @@ headers: {
 ADMIN_TOKEN
 },
 
-body:
-JSON.stringify({
+body: JSON.stringify({
 id: order.id
 })
+
 }
 );
 
-
-if (!response.ok) {
-
-console.error(
-"DELETE FAILED:",
-order.id
-);
-
-}
-
-} catch (error) {
+} catch (err) {
 
 console.error(
-"DELETE ERROR:",
+"Erè efasman:",
 order.id,
-error
+err
 );
 
 }
@@ -1867,11 +1612,7 @@ statusType === "success"
 }
 
 
-/*
-==================================================
-ESCAPE HTML
-==================================================
-*/
+/* ESCAPE HTML */
 
 function escapeHtml(
 value
@@ -1907,11 +1648,7 @@ return String(value)
 }
 
 
-/*
-==================================================
-ESCAPE JS
-==================================================
-*/
+/* ESCAPE JS */
 
 function escapeJs(
 value
@@ -1941,5 +1678,7 @@ return String(value)
 
 }
 
-</script></body>
-</html>
+</script>
+
+</body>
+  </html>
