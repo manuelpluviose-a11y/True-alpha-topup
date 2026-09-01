@@ -38,7 +38,8 @@ h1 {
   margin-bottom: 15px;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -64,12 +65,35 @@ button {
   cursor: pointer;
 }
 
-.login { background: #00e5ff; color: #001014; }
-.on { background: #00c853; color: white; }
-.off { background: #d32f2f; color: white; }
-.process { background: #00c853; color: white; }
-.failed { background: #d32f2f; color: white; }
-.refresh { background: #36364a; color: white; }
+.login {
+  background: #00e5ff;
+  color: #001014;
+}
+
+.on {
+  background: #00c853;
+  color: white;
+}
+
+.off {
+  background: #d32f2f;
+  color: white;
+}
+
+.process {
+  background: #00c853;
+  color: white;
+}
+
+.failed {
+  background: #d32f2f;
+  color: white;
+}
+
+.refresh {
+  background: #36364a;
+  color: white;
+}
 
 .delete-btn-all {
   background: #9b2226;
@@ -266,6 +290,9 @@ button {
 
 <h1>💎 TRUE ALPHA ADMIN</h1>
 
+
+<!-- LOGIN -->
+
 <div class="card" id="loginBox">
 
 <h3>🔐 Admin Login</h3>
@@ -287,10 +314,14 @@ onclick="loginAdmin()"
 </div>
 
 
+<!-- ADMIN AREA -->
+
 <div id="adminArea">
 
 <div id="message"></div>
 
+
+<!-- SITE CONTROL -->
 
 <div class="card">
 
@@ -355,10 +386,14 @@ onclick="setCustomOffMessage()"
 </div>
 
 
+<!-- ORDERS -->
+
 <div class="card">
 
 <h3>📋 KÒMAND YO</h3>
 
+
+<!-- STATS -->
 
 <div class="stats">
 
@@ -426,6 +461,8 @@ onclick="clearAllOrdersByStatus('failed')"
 </div>
 
 
+<!-- REFRESH -->
+
 <button
 class="refresh"
 onclick="loadOrders()"
@@ -433,6 +470,8 @@ onclick="loadOrders()"
 🔄 RAFRECHI KÒMAND YO
 </button>
 
+
+<!-- PENDING -->
 
 <div class="section-title pending-title">
 
@@ -442,6 +481,8 @@ onclick="loadOrders()"
 
 </div>
 
+
+<!-- PAGINATION -->
 
 <div
 class="pagination-controls"
@@ -475,6 +516,8 @@ Pwochen ►
 </div>
 
 
+<!-- PENDING LIST -->
+
 <div
 id="pendingList"
 class="list"
@@ -504,718 +547,765 @@ let allOrdersList = [];
 let currentIndex = 0;
 
 
-/* MESSAGE */
+/* =========================
+   MESSAGE
+========================= */
 
 function showMessage(
-text,
-color = "#00e5ff"
+  text,
+  color = "#00e5ff"
 ) {
 
-const box =
-document.getElementById("message");
+  const box =
+    document.getElementById("message");
 
-box.style.display = "block";
+  box.style.display = "block";
 
-box.style.color = color;
+  box.style.color = color;
 
-box.textContent = text;
+  box.textContent = text;
 
 }
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 async function loginAdmin() {
 
-const token =
-document
-.getElementById("adminToken")
-.value
-.trim();
+  const token =
+    document
+      .getElementById("adminToken")
+      .value
+      .trim();
 
-if (!token) {
+  if (!token) {
 
-alert(
-"⚠️ Tanpri antre ADMIN_TOKEN ou."
-);
+    alert(
+      "⚠️ Tanpri antre ADMIN_TOKEN ou."
+    );
 
-return;
+    return;
+
+  }
+
+  ADMIN_TOKEN = token;
+
+  try {
+
+    const response =
+      await fetch(
+        `${API}/get-orders?t=${Date.now()}`,
+        {
+          method: "GET",
+
+          headers: {
+            "x-admin-token":
+              ADMIN_TOKEN,
+
+            "Accept":
+              "application/json",
+
+            "Cache-Control":
+              "no-cache"
+          },
+
+          cache: "no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (response.status === 401) {
+
+      ADMIN_TOKEN = "";
+
+      alert(
+        "❌ ADMIN_TOKEN la pa bon."
+      );
+
+      return;
+
+    }
+
+
+    if (
+      !response.ok ||
+      result.success !== true
+    ) {
+
+      throw new Error(
+        result.message ||
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+
+    document
+      .getElementById("loginBox")
+      .style.display = "none";
+
+
+    document
+      .getElementById("adminArea")
+      .style.display = "block";
+
+
+    showMessage(
+      "✅ Admin konekte avèk siksè.",
+      "#5ee39a"
+    );
+
+
+    await loadSiteStatus();
+
+
+    /*
+     * Lè admin nan konekte,
+     * nou chaje tout kòmand yo yon sèl fwa.
+     *
+     * Apre sa, REFRESH pa pral
+     * ranplase lis la.
+     */
+
+    allOrdersList =
+      result.orders || [];
+
+
+    renderAllLists();
+
+
+  } catch (error) {
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+    alert(
+      "❌ " +
+      error.message
+    );
+
+  }
 
 }
 
-ADMIN_TOKEN = token;
 
-try {
-
-const response =
-await fetch(
-`${API}/get-orders?t=${Date.now()}`,
-{
-method: "GET",
-
-headers: {
-"x-admin-token":
-ADMIN_TOKEN,
-
-"Accept":
-"application/json",
-
-"Cache-Control":
-"no-cache"
-},
-
-cache: "no-store"
-
-}
-);
-
-
-const result =
-await response.json();
-
-
-if (response.status === 401) {
-
-ADMIN_TOKEN = "";
-
-alert(
-"❌ ADMIN_TOKEN la pa bon."
-);
-
-return;
-
-}
-
-
-if (
-!response.ok ||
-result.success !== true
-) {
-
-throw new Error(
-result.message ||
-"HTTP " +
-response.status
-);
-
-}
-
-
-document
-.getElementById("loginBox")
-.style.display = "none";
-
-
-document
-.getElementById("adminArea")
-.style.display = "block";
-
-
-showMessage(
-"✅ Admin konekte avèk siksè.",
-"#5ee39a"
-);
-
-
-await loadSiteStatus();
-
-
-allOrdersList =
-result.orders || [];
-
-
-renderAllLists();
-
-
-} catch (error) {
-
-console.error(
-"LOGIN ERROR:",
-error
-);
-
-alert(
-"❌ " +
-error.message
-);
-
-}
-
-}
-
-
-/* SITE STATUS */
+/* =========================
+   SITE STATUS
+========================= */
 
 async function loadSiteStatus() {
 
-try {
+  try {
 
-const response =
-await fetch(
-`${API}/site-status?t=${Date.now()}`,
-{
-method: "GET",
-cache: "no-store"
-}
-);
-
-
-const data =
-await response.json();
+    const response =
+      await fetch(
+        `${API}/site-status?t=${Date.now()}`,
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
 
 
-updateSiteDisplay(
-data.enabled !== false
-);
+    const data =
+      await response.json();
 
 
-} catch (error) {
+    updateSiteDisplay(
+      data.enabled !== false
+    );
 
-console.error(
-"SITE STATUS ERROR:",
-error
-);
 
-}
+  } catch (error) {
+
+    console.error(
+      "SITE STATUS ERROR:",
+      error
+    );
+
+  }
 
 }
 
 
 function updateSiteDisplay(
-isOpen
+  isOpen
 ) {
 
-const status =
-document.getElementById(
-"siteStatus"
-);
+  const status =
+    document.getElementById(
+      "siteStatus"
+    );
 
 
-if (isOpen) {
+  if (isOpen) {
 
-status.className =
-"status status-on";
+    status.className =
+      "status status-on";
 
-status.textContent =
-"🟢 SIT LA ON";
+    status.textContent =
+      "🟢 SIT LA ON";
 
-} else {
+  } else {
 
-status.className =
-"status status-off";
+    status.className =
+      "status status-off";
 
-status.textContent =
-"🔴 SIT LA OFF";
+    status.textContent =
+      "🔴 SIT LA OFF";
 
-}
+  }
 
 }
 
 
 function showOffArea() {
 
-document
-.getElementById("offArea")
-.style.display = "block";
+  document
+    .getElementById("offArea")
+    .style.display = "block";
 
 }
 
 
 async function setOffMessage(
-message
+  message
 ) {
 
-await saveSiteStatus(
-false,
-message
-);
+  await saveSiteStatus(
+    false,
+    message
+  );
 
 }
 
 
 async function setCustomOffMessage() {
 
-const message =
-document
-.getElementById(
-"customMessage"
-)
-.value
-.trim();
+  const message =
+    document
+      .getElementById(
+        "customMessage"
+      )
+      .value
+      .trim();
 
 
-if (!message) {
+  if (!message) {
 
-alert(
-"⚠️ Tanpri ekri yon mesaj."
-);
+    alert(
+      "⚠️ Tanpri ekri yon mesaj."
+    );
 
-return;
+    return;
 
-}
+  }
 
 
-await saveSiteStatus(
-false,
-message
-);
+  await saveSiteStatus(
+    false,
+    message
+  );
 
 }
 
 
 async function saveSiteStatus(
-enabled,
-message
+  enabled,
+  message
 ) {
 
-if (!ADMIN_TOKEN) return;
+  if (!ADMIN_TOKEN) return;
 
 
-try {
+  try {
 
-const response =
-await fetch(
-`${API}/site-status`,
-{
-method: "POST",
+    const response =
+      await fetch(
+        `${API}/site-status`,
+        {
+          method: "POST",
 
-headers: {
-"Content-Type":
-"application/json",
+          headers: {
+            "Content-Type":
+              "application/json",
 
-"x-admin-token":
-ADMIN_TOKEN
-},
+            "x-admin-token":
+              ADMIN_TOKEN
+          },
 
-body: JSON.stringify({
-enabled,
-message:
-message || ""
-})
+          body: JSON.stringify({
+            enabled,
+            message:
+              message || ""
+          })
 
-}
-);
-
-
-const result =
-await response.json();
+        }
+      );
 
 
-if (
-!response.ok ||
-!result.success
-) {
-
-throw new Error(
-result.message ||
-"Erè backend."
-);
-
-}
+    const result =
+      await response.json();
 
 
-updateSiteDisplay(
-enabled
-);
+    if (
+      !response.ok ||
+      !result.success
+    ) {
+
+      throw new Error(
+        result.message ||
+        "Erè backend."
+      );
+
+    }
 
 
-document
-.getElementById("offArea")
-.style.display = "none";
+    updateSiteDisplay(
+      enabled
+    );
 
 
-document
-.getElementById("customMessage")
-.value = "";
+    document
+      .getElementById("offArea")
+      .style.display = "none";
 
 
-showMessage(
-enabled
-? "🟢 Sit la ON."
-: "🔴 Sit la OFF. Mesaj la aktive.",
-
-enabled
-? "#5ee39a"
-: "#ff7777"
-);
+    document
+      .getElementById("customMessage")
+      .value = "";
 
 
-} catch (error) {
+    showMessage(
+      enabled
+        ? "🟢 Sit la ON."
+        : "🔴 Sit la OFF. Mesaj la aktive.",
 
-showMessage(
-"❌ " +
-error.message,
+      enabled
+        ? "#5ee39a"
+        : "#ff7777"
+    );
 
-"#ff4d4d"
-);
 
-}
+  } catch (error) {
+
+    showMessage(
+      "❌ " +
+      error.message,
+
+      "#ff4d4d"
+    );
+
+  }
 
 }
 
 
 async function siteOn() {
 
-await saveSiteStatus(
-true,
-""
-);
+  await saveSiteStatus(
+    true,
+    ""
+  );
 
 }
 
 
-/* LOAD ORDERS */
+/* =========================
+   LOAD / REFRESH ORDERS
+========================= */
 
 async function loadOrders() {
 
-if (!ADMIN_TOKEN) return;
+  if (!ADMIN_TOKEN) return;
 
-try {
 
-const response =
-await fetch(
-`${API}/get-orders?t=${Date.now()}`,
-{
-method: "GET",
+  try {
 
-headers: {
-"x-admin-token":
-ADMIN_TOKEN,
+    const response =
+      await fetch(
+        `${API}/get-orders?t=${Date.now()}`,
+        {
+          method: "GET",
 
-"Accept":
-"application/json",
+          headers: {
+            "x-admin-token":
+              ADMIN_TOKEN,
 
-"Cache-Control":
-"no-cache"
-},
+            "Accept":
+              "application/json",
 
-cache: "no-store"
+            "Cache-Control":
+              "no-cache"
+          },
+
+          cache: "no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !result.success
+    ) {
+
+      throw new Error(
+        result.message ||
+        "Erè backend."
+      );
+
+    }
+
+
+    const freshOrders =
+      result.orders || [];
+
+
+    /*
+     * IMPORTANT:
+     *
+     * REFRESH LA PA RANPLASE
+     * allOrdersList.
+     *
+     * Li pran PENDING sèlman.
+     *
+     * Si kòmand lan deja nan
+     * allOrdersList, li pa ajoute l
+     * ankò.
+     *
+     * Si kòmand lan success/failed,
+     * refresh pap ajoute l kòm nouvo.
+     */
+
+    let addedCount = 0;
+
+
+    for (
+      const newOrder of freshOrders
+    ) {
+
+      /*
+       * Se pending sèlman nou
+       * aksepte kòm nouvo kòmand.
+       */
+
+      if (
+        newOrder.status !== "pending"
+      ) {
+
+        continue;
+
+      }
+
+
+      /*
+       * Verifye si ID a deja
+       * egziste nan admin lan.
+       */
+
+      const exists =
+        allOrdersList.some(
+          oldOrder =>
+            oldOrder.id ===
+            newOrder.id
+        );
+
+
+      /*
+       * Si ID a pa egziste,
+       * ajoute l.
+       */
+
+      if (!exists) {
+
+        allOrdersList.push(
+          newOrder
+        );
+
+        addedCount++;
+
+      }
+
+    }
+
+
+    /*
+     * Triye nouvo kòmand yo:
+     * pi nouvo an premye.
+     */
+
+    allOrdersList.sort(
+      (a, b) =>
+        new Date(
+          b.createdAt || 0
+        ) -
+        new Date(
+          a.createdAt || 0
+        )
+    );
+
+
+    /*
+     * Rann lis la ankò.
+     */
+
+    renderAllLists();
+
+
+    if (addedCount > 0) {
+
+      showMessage(
+        `🔄 Refresh fini — ${addedCount} nouvo kòmand chaje.`,
+        "#00e5ff"
+      );
+
+    } else {
+
+      showMessage(
+        "🔄 Refresh fini — pa gen nouvo kòmand.",
+        "#00e5ff"
+      );
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "REFRESH ORDERS ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "❌ " +
+      error.message,
+      "#ff4d4d"
+    );
+
+  }
+
 }
-);
 
 
-const result =
-await response.json();
-
-
-if (
-!response.ok ||
-!result.success
-) {
-
-throw new Error(
-result.message ||
-"Erè backend."
-);
-
-}
-
-
-/*
- * REFRESH LA PA RANPLASE
- * LALIS ADMIN LAN NÈT.
- *
- * Li pran nouvo kòmand sèlman.
- */
-
-const freshOrders =
-result.orders || [];
-
-
-/*
- * Ajoute sèlman ID ki pa t
- * deja nan lis la.
- */
-
-for (
-const newOrder of freshOrders
-) {
-
-const exists =
-allOrdersList.some(
-oldOrder =>
-oldOrder.id ===
-newOrder.id
-);
-
-
-if (!exists) {
-
-allOrdersList.push(
-newOrder
-);
-
-}
-
-}
-
-
-/*
- * Mete status aktyèl yo ajou
- * san nou pa fè success/failed
- * retounen kòm nouvo kòmand.
- */
-
-for (
-const serverOrder of freshOrders
-) {
-
-const localOrder =
-allOrdersList.find(
-order =>
-order.id ===
-serverOrder.id
-);
-
-
-if (localOrder) {
-
-localOrder.status =
-serverOrder.status;
-
-localOrder.customerMessage =
-serverOrder.customerMessage;
-
-}
-
-}
-
-
-/*
- * Pa ajoute ansyen success/failed
- * yo kòm nouvo kòmand.
- *
- * Si yon pending te vin success
- * oswa failed, li rete nan done
- * lokal yo men li pap parèt nan
- * lis AN ATANT.
- */
-
-allOrdersList.sort(
-(a, b) =>
-new Date(
-b.createdAt || 0
-) -
-new Date(
-a.createdAt || 0
-)
-);
-
-
-/*
- * Si refresh la vini ak yon
- * pending ki pa nan lis la,
- * li parèt.
- */
-
-renderAllLists();
-
-
-showMessage(
-"🔄 Refresh fini — nouvo kòmand yo chaje.",
-"#00e5ff"
-);
-
-
-} catch (error) {
-
-console.error(
-"REFRESH ORDERS ERROR:",
-error
-);
-
-showMessage(
-"❌ " +
-error.message,
-"#ff4d4d"
-);
-
-}
-
-}
-
-
-/* RENDER ALL LISTS */
+/* =========================
+   RENDER ALL LISTS
+========================= */
 
 function renderAllLists() {
 
-const pending =
-allOrdersList.filter(
-o => o.status === "pending"
-);
+  const pending =
+    allOrdersList.filter(
+      o =>
+        o.status === "pending"
+    );
 
 
-const failed =
-allOrdersList.filter(
-o => o.status === "failed"
-);
+  const failed =
+    allOrdersList.filter(
+      o =>
+        o.status === "failed"
+    );
 
 
-const success =
-allOrdersList.filter(
-o =>
-o.status === "success" ||
-o.status === "processing"
-);
+  const success =
+    allOrdersList.filter(
+      o =>
+        o.status === "success" ||
+        o.status === "processing"
+    );
 
 
-document
-.getElementById(
-"pendingCount"
-)
-.textContent =
-pending.length;
+  document
+    .getElementById(
+      "pendingCount"
+    )
+    .textContent =
+      pending.length;
 
 
-document
-.getElementById(
-"failedCount"
-)
-.textContent =
-failed.length;
+  document
+    .getElementById(
+      "failedCount"
+    )
+    .textContent =
+      failed.length;
 
 
-document
-.getElementById(
-"successCount"
-)
-.textContent =
-success.length;
+  document
+    .getElementById(
+      "successCount"
+    )
+    .textContent =
+      success.length;
 
 
-const paginationBox =
-document.getElementById(
-"paginationBox"
-);
+  const paginationBox =
+    document.getElementById(
+      "paginationBox"
+    );
 
 
-if (pending.length === 0) {
+  /*
+   * Si pa gen pending.
+   */
 
-paginationBox.style.display =
-"none";
+  if (pending.length === 0) {
 
-document
-.getElementById(
-"pendingList"
-)
-.innerHTML =
-'<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
+    paginationBox.style.display =
+      "none";
 
-return;
+
+    currentIndex = 0;
+
+
+    document
+      .getElementById(
+        "pendingList"
+      )
+      .innerHTML =
+        '<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
+
+
+    return;
+
+  }
+
+
+  paginationBox.style.display =
+    "flex";
+
+
+  /*
+   * Pa kite index la depase
+   * kantite kòmand pending yo.
+   */
+
+  if (
+    currentIndex >=
+    pending.length
+  ) {
+
+    currentIndex =
+      pending.length - 1;
+
+  }
+
+
+  if (currentIndex < 0) {
+
+    currentIndex = 0;
+
+  }
+
+
+  document
+    .getElementById(
+      "pageIndicator"
+    )
+    .textContent =
+      `${currentIndex + 1} / ${pending.length}`;
+
+
+  document
+    .getElementById("prevBtn")
+    .disabled =
+      currentIndex === 0;
+
+
+  document
+    .getElementById("nextBtn")
+    .disabled =
+      currentIndex ===
+      pending.length - 1;
+
+
+  renderList(
+    [pending[currentIndex]],
+    "pendingList"
+  );
 
 }
 
 
-paginationBox.style.display =
-"flex";
-
-
-if (
-currentIndex >=
-pending.length
-) {
-
-currentIndex =
-pending.length - 1;
-
-}
-
-
-if (currentIndex < 0) {
-
-currentIndex = 0;
-
-}
-
-
-document
-.getElementById(
-"pageIndicator"
-)
-.textContent =
-`${currentIndex + 1} / ${pending.length}`;
-
-
-document
-.getElementById("prevBtn")
-.disabled =
-currentIndex === 0;
-
-
-document
-.getElementById("nextBtn")
-.disabled =
-currentIndex ===
-pending.length - 1;
-
-
-renderList(
-[pending[currentIndex]],
-"pendingList"
-);
-
-}
-
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
 function changePage(
-direction
+  direction
 ) {
 
-currentIndex +=
-direction;
+  currentIndex +=
+    direction;
 
-renderAllLists();
+  renderAllLists();
 
 }
 
 
-/* RENDER ORDER */
+/* =========================
+   RENDER ORDER
+========================= */
 
 function renderList(
-orders,
-containerId
+  orders,
+  containerId
 ) {
 
-const box =
-document.getElementById(
-containerId
-);
+  const box =
+    document.getElementById(
+      containerId
+    );
 
 
-box.innerHTML = "";
+  box.innerHTML = "";
 
 
-for (
-const order of orders
-) {
+  for (
+    const order of orders
+  ) {
 
-const div =
-document.createElement(
-"div"
-);
-
-
-div.className =
-"order";
+    const div =
+      document.createElement(
+        "div"
+      );
 
 
-const date =
-order.createdAt
-? new Date(
-order.createdAt
-).toLocaleString()
-: "N/A";
+    div.className =
+      "order";
 
 
-const userTxCode =
-order.transactionId ||
-order.transaction_id ||
-order.transId ||
-order.code ||
-"Pa gen kòd";
+    const date =
+      order.createdAt
+        ? new Date(
+            order.createdAt
+          ).toLocaleString()
+        : "N/A";
 
 
-div.innerHTML = `
+    const userTxCode =
+      order.transactionId ||
+      order.transaction_id ||
+      order.transId ||
+      order.code ||
+      "Pa gen kòd";
+
+
+    div.innerHTML = `
 
 <div class="status">
 🟡 AN ATANT
@@ -1225,7 +1315,7 @@ div.innerHTML = `
 <span>🆔 ID:</span>
 <strong>
 ${escapeHtml(
-order.id || ""
+  order.id || ""
 )}
 </strong>
 </div>
@@ -1234,7 +1324,7 @@ order.id || ""
 <span>🎮 UID:</span>
 <strong>
 ${escapeHtml(
-order.uid || ""
+  order.uid || ""
 )}
 </strong>
 </div>
@@ -1243,7 +1333,7 @@ order.uid || ""
 <span>💎 Pack:</span>
 <strong class="pack">
 ${escapeHtml(
-order.pack || ""
+  order.pack || ""
 )}
 </strong>
 </div>
@@ -1252,9 +1342,9 @@ order.pack || ""
 <span>💰 Pri:</span>
 <strong class="price">
 ${escapeHtml(
-String(
-order.price || ""
-)
+  String(
+    order.price || ""
+  )
 )}
 GDS
 </strong>
@@ -1264,7 +1354,7 @@ GDS
 <span>📱 Nimewo/Non:</span>
 <strong>
 ${escapeHtml(
-order.senderNumber || ""
+  order.senderNumber || ""
 )}
 </strong>
 </div>
@@ -1288,7 +1378,7 @@ font-size:16px;
 "
 >
 ${escapeHtml(
-userTxCode
+  userTxCode
 )}
 </strong>
 
@@ -1298,7 +1388,7 @@ userTxCode
 <span>🌎 Server:</span>
 <strong>
 ${escapeHtml(
-order.server || ""
+  order.server || ""
 )}
 </strong>
 </div>
@@ -1307,7 +1397,7 @@ order.server || ""
 <span>🕐 Kòmand:</span>
 <strong>
 ${escapeHtml(
-date
+  date
 )}
 </strong>
 </div>
@@ -1320,7 +1410,7 @@ class="process"
 onclick="
 updateOrder(
 '${escapeJs(
-order.id || ""
+  order.id || ""
 )}',
 'processing'
 )
@@ -1335,7 +1425,7 @@ class="failed"
 onclick="
 handleFailOrder(
 '${escapeJs(
-order.id || ""
+  order.id || ""
 )}'
 )
 "
@@ -1348,333 +1438,357 @@ order.id || ""
 `;
 
 
-box.appendChild(div);
+    box.appendChild(div);
+
+  }
 
 }
 
-}
 
-
-/* ECHEC */
+/* =========================
+   ECHEC
+========================= */
 
 function handleFailOrder(
-id
+  id
 ) {
 
-const reason =
-prompt(
-"🔴 Antre mesaj echèk la pou kliyan an:",
-"Nou pa resevwa peman an."
-);
+  const reason =
+    prompt(
+      "🔴 Antre mesaj echèk la pou kliyan an:",
+      "Nou pa resevwa peman an."
+    );
 
 
-if (reason === null) {
-return;
+  if (reason === null) {
+
+    return;
+
+  }
+
+
+  updateOrder(
+    id,
+    "failed",
+    reason.trim() ||
+    "Nou pa resevwa peman an."
+  );
+
 }
 
 
-updateOrder(
-id,
-"failed",
-reason.trim() ||
-"Nou pa resevwa peman an."
-);
-
-}
-
-
-/* UPDATE ORDER */
+/* =========================
+   UPDATE ORDER
+========================= */
 
 async function updateOrder(
-id,
-status,
-customerMessage = ""
+  id,
+  status,
+  customerMessage = ""
 ) {
 
-if (!ADMIN_TOKEN) {
+  if (!ADMIN_TOKEN) {
 
-alert(
-"❌ Admin pa konekte."
-);
+    alert(
+      "❌ Admin pa konekte."
+    );
 
-return;
+    return;
+
+  }
+
+
+  const target =
+    allOrdersList.find(
+      o =>
+        o.id === id
+    );
+
+
+  /*
+   * Chanje status lokalman
+   * imedyatman.
+   *
+   * Sa vle di lè ou valide,
+   * kòmand lan pa retounen
+   * nan pending.
+   */
+
+  if (target) {
+
+    target.status =
+      status;
+
+    target.customerMessage =
+      customerMessage;
+
+  }
+
+
+  if (status === "failed") {
+
+    showMessage(
+      "❌ Kòmand lan voye nan ÈCHÈK avèk siksè!",
+      "#ff7777"
+    );
+
+  } else {
+
+    showMessage(
+      "✅ Kòmand lan VALIDÉ avèk siksè!",
+      "#5ee39a"
+    );
+
+  }
+
+
+  renderAllLists();
+
+
+  try {
+
+    const response =
+      await fetch(
+        `${API}/update-order`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "x-admin-token":
+              ADMIN_TOKEN
+          },
+
+          body: JSON.stringify({
+            id,
+            status,
+            customerMessage
+          })
+
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !result.success
+    ) {
+
+      throw new Error(
+        result.message ||
+        "Erè backend."
+      );
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "UPDATE ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "⚠️ Pasaj lokal la fèt men gen yon ti pwoblèm nan backend lan.",
+      "#ff4d4d"
+    );
+
+  }
 
 }
 
 
-const target =
-allOrdersList.find(
-o => o.id === id
-);
-
-
-if (target) {
-
-target.status =
-status;
-
-target.customerMessage =
-customerMessage;
-
-}
-
-
-if (status === "failed") {
-
-showMessage(
-"❌ Kòmand lan voye nan ÈCHÈK avèk siksè!",
-"#ff7777"
-);
-
-} else {
-
-showMessage(
-"✅ Kòmand lan VALIDÉ avèk siksè!",
-"#5ee39a"
-);
-
-}
-
-
-renderAllLists();
-
-
-try {
-
-const response =
-await fetch(
-`${API}/update-order`,
-{
-method: "POST",
-
-headers: {
-"Content-Type":
-"application/json",
-
-"x-admin-token":
-ADMIN_TOKEN
-},
-
-body: JSON.stringify({
-id,
-status,
-customerMessage
-})
-
-}
-);
-
-
-const result =
-await response.json();
-
-
-if (
-!response.ok ||
-!result.success
-) {
-
-throw new Error(
-result.message ||
-"Erè backend."
-);
-
-}
-
-
-} catch (error) {
-
-console.error(
-"UPDATE ERROR:",
-error
-);
-
-
-showMessage(
-"⚠️ Pasaj lokal la fèt men gen yon ti pwoblèm nan backend lan.",
-"#ff4d4d"
-);
-
-}
-
-}
-
-
-/* CLEAR ALL */
+/* =========================
+   CLEAR ALL
+========================= */
 
 async function clearAllOrdersByStatus(
-statusType
+  statusType
 ) {
 
-const targetOrders =
-allOrdersList.filter(
-o =>
-statusType === "success"
-? (
-o.status === "success" ||
-o.status === "processing"
-)
-: o.status === statusType
-);
+  const targetOrders =
+    allOrdersList.filter(
+      o =>
+        statusType === "success"
+          ? (
+              o.status === "success" ||
+              o.status === "processing"
+            )
+          : o.status === statusType
+    );
 
 
-if (!targetOrders.length) {
+  if (!targetOrders.length) {
 
-alert(
-`⚠️ Pa gen okenn kòmand nan kategori ${
-statusType === "success"
-? "SIKSÈ"
-: "ÉCHEC"
-} pou efase.`
-);
+    alert(
+      `⚠️ Pa gen okenn kòmand nan kategori ${
+        statusType === "success"
+          ? "SIKSÈ"
+          : "ÉCHEC"
+      } pou efase.`
+    );
 
-return;
+    return;
+
+  }
+
+
+  if (
+    !confirm(
+      `⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${
+        statusType === "success"
+          ? "SIKSÈ"
+          : "ÉCHEC"
+      } yo?`
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  allOrdersList =
+    allOrdersList.filter(
+      o =>
+        statusType === "success"
+          ? (
+              o.status !== "success" &&
+              o.status !== "processing"
+            )
+          : o.status !== statusType
+    );
+
+
+  renderAllLists();
+
+
+  for (
+    const order of targetOrders
+  ) {
+
+    try {
+
+      await fetch(
+        `${API}/delete-order`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "x-admin-token":
+              ADMIN_TOKEN
+          },
+
+          body: JSON.stringify({
+            id: order.id
+          })
+
+        }
+      );
+
+    } catch (err) {
+
+      console.error(
+        "Erè efasman:",
+        order.id,
+        err
+      );
+
+    }
+
+  }
+
+
+  showMessage(
+    `🗑️ Kòmand ${
+      statusType === "success"
+        ? "Siksè"
+        : "Échec"
+    } yo efase nèt!`,
+    "#5ee39a"
+  );
 
 }
 
 
-if (
-!confirm(
-`⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${
-statusType === "success"
-? "SIKSÈ"
-: "ÉCHEC"
-} yo?`
-)
-) {
-return;
-}
-
-
-allOrdersList =
-allOrdersList.filter(
-o =>
-statusType === "success"
-? (
-o.status !== "success" &&
-o.status !== "processing"
-)
-: o.status !== statusType
-);
-
-
-renderAllLists();
-
-
-for (
-const order of targetOrders
-) {
-
-try {
-
-await fetch(
-`${API}/delete-order`,
-{
-method: "POST",
-
-headers: {
-"Content-Type":
-"application/json",
-
-"x-admin-token":
-ADMIN_TOKEN
-},
-
-body: JSON.stringify({
-id: order.id
-})
-
-}
-);
-
-} catch (err) {
-
-console.error(
-"Erè efasman:",
-order.id,
-err
-);
-
-}
-
-}
-
-
-showMessage(
-`🗑️ Kòmand ${
-statusType === "success"
-? "Siksè"
-: "Échec"
-} yo efase nèt!`,
-"#5ee39a"
-);
-
-}
-
-
-/* ESCAPE HTML */
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHtml(
-value
+  value
 ) {
 
-return String(value)
+  return String(value)
 
-.replaceAll(
-"&",
-"&amp;"
-)
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
 
-.replaceAll(
-"<",
-"&lt;"
-)
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
 
-.replaceAll(
-">",
-"&gt;"
-)
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
 
-.replaceAll(
-'"',
-"&quot;"
-)
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
 
-.replaceAll(
-"'",
-"&#039;"
-);
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
-/* ESCAPE JS */
+/* =========================
+   ESCAPE JS
+========================= */
 
 function escapeJs(
-value
+  value
 ) {
 
-return String(value)
+  return String(value)
 
-.replaceAll(
-"\\",
-"\\\\"
-)
+    .replaceAll(
+      "\\",
+      "\\\\"
+    )
 
-.replaceAll(
-"'",
-"\\'"
-)
+    .replaceAll(
+      "'",
+      "\\'"
+    )
 
-.replaceAll(
-"\n",
-"\\n"
-)
+    .replaceAll(
+      "\n",
+      "\\n"
+    )
 
-.replaceAll(
-"\r",
-"\\r"
-);
+    .replaceAll(
+      "\r",
+      "\\r"
+    );
 
 }
 
