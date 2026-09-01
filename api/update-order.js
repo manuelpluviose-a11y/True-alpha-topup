@@ -19,7 +19,20 @@ export default async function handler(req, res) {
     }
 
     const data = req.body || {};
-    const { id, status, customerMessage } = data;
+
+    const {
+      id,
+      status,
+      customerMessage
+    } = data;
+
+    /*
+     * Admin nan kapab voye:
+     *
+     * processing
+     * success
+     * failed
+     */
 
     if (
       !id ||
@@ -43,9 +56,20 @@ export default async function handler(req, res) {
       });
     }
 
+    /*
+     * Li dènye vèsyon kòmand lan.
+     */
+
     const response = await fetch(
-      blobDetails.url,
-      { cache: "no-store" }
+      `${blobDetails.url}?t=${Date.now()}`,
+      {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache",
+          "Pragma": "no-cache"
+        }
+      }
     );
 
     if (!response.ok) {
@@ -57,30 +81,63 @@ export default async function handler(req, res) {
 
     const order = await response.json();
 
-    order.status = status;
-    order.updatedAt = new Date().toISOString();
+    /*
+     * PA kite yon kòmand ki deja fini
+     * tounen nan pending/processing.
+     */
+
+    if (
+      order.status === "success" ||
+      order.status === "failed"
+    ) {
+      return res.status(200).json({
+        success: true,
+        order,
+        message: "Kòmand sa a deja fini."
+      });
+    }
+
+    /*
+     * SI ADMIN NAN PEZE VALIDÉ,
+     * NOU METE L SUCCESS DIRÈKTEMAN.
+     *
+     * processing ap toujou disponib si
+     * ou bezwen li pita.
+     */
+
+    if (status === "processing") {
+      order.status = "success";
+    } else {
+      order.status = status;
+    }
+
+    order.updatedAt =
+      new Date().toISOString();
 
     /*
      * MESAJ KLIYAN AN
      */
 
-    if (status === "failed") {
+    if (order.status === "failed") {
+
       order.customerMessage =
         customerMessage?.trim() ||
         "Nou pa resevwa peman an.";
+
     }
 
-    if (status === "processing") {
-      order.customerMessage =
-        customerMessage?.trim() ||
-        "Pwodui ou an ap antre nan kèk segonn.";
-    }
+    if (order.status === "success") {
 
-    if (status === "success") {
       order.customerMessage =
         customerMessage?.trim() ||
         "Pwodui ou an te trete avèk siksè!";
+
     }
+
+    /*
+     * SOVE NOUVO STATUS LA NAN
+     * MENM KÒMAND LAN.
+     */
 
     await put(
       pathname,
@@ -109,5 +166,6 @@ export default async function handler(req, res) {
       success: false,
       message: "Erè backend."
     });
+
   }
-           }
+}
