@@ -4,283 +4,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>True Alpha Admin</title>
+
+<title>TRUE ALPHA ADMIN</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+
+*{
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
-body {
-  margin: 0;
-  background: #0b0b12;
-  color: white;
-  padding: 15px;
+body{
+  margin:0;
+  background:#0b0b12;
+  color:white;
+  padding:15px;
 }
 
-.container {
-  max-width: 650px;
-  margin: auto;
+.container{
+  max-width:700px;
+  margin:auto;
 }
 
-h1 {
-  text-align: center;
-  color: #00e5ff;
-  margin-bottom: 20px;
+h1{
+  text-align:center;
+  color:#00e5ff;
+  margin-bottom:20px;
 }
 
-.card {
-  background: #151520;
-  border: 1px solid #303044;
-  border-radius: 14px;
-  padding: 15px;
-  margin-bottom: 15px;
+.card{
+  background:#151520;
+  border:1px solid #303044;
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:15px;
 }
 
 input,
-textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 9px;
-  border: 1px solid #36364a;
-  background: #0e0e17;
-  color: white;
-  outline: none;
+textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:9px;
+  border:1px solid #36364a;
+  background:#0e0e17;
+  color:white;
+  outline:none;
 }
 
-textarea {
-  min-height: 80px;
-  resize: vertical;
+textarea{
+  min-height:80px;
+  resize:vertical;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: none;
-  border-radius: 9px;
-  font-weight: bold;
-  cursor: pointer;
+button{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border:none;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.login {
-  background: #00e5ff;
-  color: #001014;
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
-.on {
-  background: #00c853;
-  color: white;
+.login{
+  background:#00e5ff;
+  color:#001014;
 }
 
-.off {
-  background: #d32f2f;
-  color: white;
+.on{
+  background:#00c853;
+  color:white;
 }
 
-.process {
-  background: #00c853;
-  color: white;
+.off{
+  background:#d32f2f;
+  color:white;
 }
 
-.failed {
-  background: #d32f2f;
-  color: white;
+.refresh{
+  background:#36364a;
+  color:white;
 }
 
-.refresh {
-  background: #36364a;
-  color: white;
+.send{
+  background:#00b8d4;
+  color:white;
 }
 
-.delete-btn-all {
-  background: #9b2226;
-  color: white;
-  padding: 5px 8px;
-  font-size: 10px;
-  border-radius: 5px;
-  margin-top: 5px;
+.validate{
+  background:#00c853;
+  color:white;
 }
 
-.message-choice {
-  background: #0e0e17;
-  border: 1px solid #36364a;
-  color: white;
-  text-align: left;
+.delete{
+  background:#9b2226;
+  color:white;
+  font-size:11px;
 }
 
-.status {
-  padding: 10px;
-  border-radius: 9px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
+.message-choice{
+  background:#0e0e17;
+  border:1px solid #36364a;
+  color:white;
+  text-align:left;
 }
 
-.status-on {
-  background: #123d25;
-  color: #5ee39a;
+.status{
+  padding:9px;
+  border-radius:9px;
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-.status-off {
-  background: #4a1717;
-  color: #ff7777;
+.status-pending{
+  background:#332b0b;
+  color:#ffd54f;
 }
 
-.order {
-  background: #0e0e17;
-  border: 1px solid #303044;
-  border-radius: 12px;
-  padding: 13px;
-  margin-top: 10px;
+.status-processing{
+  background:#062f38;
+  color:#5eeaff;
 }
 
-.line {
-  margin: 7px 0;
-  font-size: 14px;
+.status-success{
+  background:#123d25;
+  color:#5ee39a;
 }
 
-.line span {
-  color: #aaa;
+.status-off{
+  background:#4a1717;
+  color:#ff7777;
 }
 
-.pack {
-  color: #00e5ff;
+.order{
+  background:#0e0e17;
+  border:1px solid #303044;
+  border-radius:13px;
+  padding:14px;
+  margin-top:10px;
 }
 
-.price {
-  color: #00e5ff;
-  font-weight: bold;
+.line{
+  margin:8px 0;
+  font-size:14px;
 }
 
-.order-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
+.line span{
+  color:#aaa;
 }
 
-.order-buttons button {
-  flex: 1;
+.pack{
+  color:#00e5ff;
+  font-weight:bold;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 15px;
+.price{
+  color:#00e5ff;
+  font-weight:bold;
 }
 
-.stat {
-  background: #0e0e17;
-  border: 1px solid #303044;
-  border-radius: 10px;
-  padding: 12px 5px;
-  text-align: center;
+.cost{
+  color:#ffb74d;
+  font-weight:bold;
 }
 
-.stat-number {
-  display: block;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 4px;
+.profit{
+  color:#5ee39a;
+  font-weight:bold;
 }
 
-.stat-label {
-  font-size: 11px;
-  font-weight: bold;
+.order-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
 }
 
-.pending-number {
-  color: #ffd54f;
+.order-buttons button{
+  flex:1;
 }
 
-.success-number {
-  color: #5ee39a;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:15px;
 }
 
-.failed-number {
-  color: #ff7777;
+.stat{
+  background:#0e0e17;
+  border:1px solid #303044;
+  border-radius:10px;
+  padding:12px 5px;
+  text-align:center;
 }
 
-.section-title {
-  margin-top: 20px;
-  margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 9px;
-  background: #10101b;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.stat-number{
+  display:block;
+  font-size:23px;
+  font-weight:bold;
+  margin-bottom:4px;
 }
 
-.pending-title {
-  color: #ffd54f;
+.stat-label{
+  font-size:10px;
+  font-weight:bold;
 }
 
-.pagination-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.pending-number{
+  color:#ffd54f;
 }
 
-.nav-btn {
-  background: #00e5ff;
-  color: #001014;
-  width: auto;
-  padding: 8px 16px;
-  margin-top: 0;
-  font-size: 16px;
+.processing-number{
+  color:#5eeaff;
 }
 
-.nav-btn:disabled {
-  background: #252538;
-  color: #666;
-  cursor: not-allowed;
+.success-number{
+  color:#5ee39a;
 }
 
-.page-indicator {
-  font-size: 14px;
-  color: #aaa;
-  font-weight: bold;
+.tabs{
+  display:flex;
+  gap:6px;
+  margin:12px 0;
+  overflow-x:auto;
 }
 
-.list {
-  margin-bottom: 15px;
+.tab{
+  width:auto;
+  margin:0;
+  padding:9px 13px;
+  background:#242438;
+  color:#aaa;
+  white-space:nowrap;
+}
+
+.tab.active{
+  background:#00e5ff;
+  color:#001014;
+}
+
+.section-title{
+  margin-top:15px;
+  margin-bottom:8px;
+  padding:10px;
+  border-radius:9px;
+  background:#10101b;
+  font-weight:bold;
+}
+
+.pagination-controls{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.nav-btn{
+  background:#00e5ff;
+  color:#001014;
+  width:auto;
+  padding:8px 16px;
+  margin-top:0;
+}
+
+.nav-btn:disabled{
+  background:#252538;
+  color:#666;
+}
+
+.page-indicator{
+  font-size:14px;
+  color:#aaa;
+  font-weight:bold;
 }
 
 #adminArea,
 #offArea,
-#message {
-  display: none;
+#message{
+  display:none;
 }
 
-#message {
-  background: #151520;
-  border-radius: 9px;
-  padding: 12px;
-  text-align: center;
-  margin-bottom: 15px;
+#message{
+  background:#151520;
+  border-radius:9px;
+  padding:12px;
+  text-align:center;
+  margin-bottom:15px;
 }
 
-.empty {
-  text-align: center;
-  color: #aaa;
-  padding: 20px;
+.empty{
+  text-align:center;
+  color:#aaa;
+  padding:20px;
 }
 
-.tx-highlight {
-  background: #2b2409;
-  border: 1px solid #ffd54f;
-  padding: 8px 10px;
-  border-radius: 8px;
-  margin: 8px 0;
+.money-box{
+  background:#10101b;
+  border:1px solid #303044;
+  border-radius:12px;
+  padding:12px;
+  margin-top:10px;
 }
+
+.money-row{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+}
+
+.money-row span{
+  color:#aaa;
+}
+
+.money-row strong{
+  color:#5ee39a;
+}
+
+.lock-note{
+  color:#888;
+  font-size:11px;
+  margin-top:10px;
+  line-height:1.5;
+}
+
 </style>
 </head>
 
@@ -291,7 +346,9 @@ button {
 <h1>💎 TRUE ALPHA ADMIN</h1>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div class="card" id="loginBox">
 
@@ -306,22 +363,32 @@ autocomplete="off"
 
 <button
 class="login"
+id="loginBtn"
 onclick="loginAdmin()"
 >
 🔓 ANTRE NAN ADMIN
 </button>
 
+<div class="lock-note">
+🔒 Token admin lan rete sèlman nan sesyon navigatè sa a.
+Pa mete Jeffry Tech API Key oswa API Secret nan HTML sa a.
+</div>
+
 </div>
 
 
-<!-- ADMIN AREA -->
+<!-- =========================
+     ADMIN AREA
+========================= -->
 
 <div id="adminArea">
 
 <div id="message"></div>
 
 
-<!-- SITE CONTROL -->
+<!-- =========================
+     SITE CONTROL
+========================= -->
 
 <div class="card">
 
@@ -386,7 +453,9 @@ onclick="setCustomOffMessage()"
 </div>
 
 
-<!-- ORDERS -->
+<!-- =========================
+     ORDERS
+========================= -->
 
 <div class="card">
 
@@ -416,22 +485,15 @@ class="stat-number pending-number"
 <div class="stat">
 
 <span
-id="successCount"
-class="stat-number success-number"
+id="processingCount"
+class="stat-number processing-number"
 >
 0
 </span>
 
 <span class="stat-label">
-✅ SIKSÈ
+🟠 AP TRETE
 </span>
-
-<button
-class="delete-btn-all"
-onclick="clearAllOrdersByStatus('success')"
->
-🗑️ Efase tout
-</button>
 
 </div>
 
@@ -439,24 +501,56 @@ onclick="clearAllOrdersByStatus('success')"
 <div class="stat">
 
 <span
-id="failedCount"
-class="stat-number failed-number"
+id="successCount"
+class="stat-number success-number"
 >
 0
 </span>
 
 <span class="stat-label">
-❌ ÉCHEC
+🟢 VALIDE
 </span>
 
-<button
-class="delete-btn-all"
-onclick="clearAllOrdersByStatus('failed')"
->
-🗑️ Efase tout
-</button>
+</div>
 
 </div>
+
+
+<!-- FILTER TABS -->
+
+<div class="tabs">
+
+<button
+class="tab active"
+id="tabPending"
+onclick="setFilter('pending')"
+>
+🟡 An atant
+</button>
+
+<button
+class="tab"
+id="tabProcessing"
+onclick="setFilter('processing')"
+>
+🟠 Ap trete
+</button>
+
+<button
+class="tab"
+id="tabSuccess"
+onclick="setFilter('success')"
+>
+🟢 Valide
+</button>
+
+<button
+class="tab"
+id="tabAll"
+onclick="setFilter('all')"
+>
+📋 Tout
+</button>
 
 </div>
 
@@ -469,17 +563,6 @@ onclick="loadOrders()"
 >
 🔄 RAFRECHI KÒMAND YO
 </button>
-
-
-<!-- PENDING -->
-
-<div class="section-title pending-title">
-
-<span>
-🟡 KÒMAND AN ATANT
-</span>
-
-</div>
 
 
 <!-- PAGINATION -->
@@ -516,19 +599,58 @@ Pwochen ►
 </div>
 
 
-<!-- PENDING LIST -->
+<!-- ORDER LIST -->
 
 <div
-id="pendingList"
+id="ordersList"
 class="list"
 >
 
 <div class="empty">
-Pa gen kòmand an atant.
+📭 Pa gen kòmand.
 </div>
 
 </div>
 
+</div>
+
+
+<!-- =========================
+     FINANCIAL OVERVIEW
+========================= -->
+
+<div class="card">
+
+<h3>💰 FINANS TRUE ALPHA</h3>
+
+<div class="money-box">
+
+<div class="money-row">
+<span>💵 Revenue:</span>
+<strong id="revenueAmount">
+0 HTG
+</strong>
+</div>
+
+<div class="money-row">
+<span>🏦 Pri Jeffry Tech:</span>
+<strong id="supplierCostAmount">
+0 HTG
+</strong>
+</div>
+
+<div class="money-row">
+<span>💎 Pwofi:</span>
+<strong id="profitAmount">
+0 HTG
+</strong>
+</div>
+
+</div>
+
+<div class="lock-note">
+🔐 Chif sa yo dwe soti nan backend/database la.
+Admin pa dwe kapab modifye yo dirèkteman nan browser la.
 </div>
 
 </div>
@@ -538,11 +660,19 @@ Pa gen kòmand an atant.
 
 <script>
 
+/* =====================================================
+   TRUE ALPHA ADMIN
+   FRONTEND ONLY
+   API SECRETS MUST STAY ON VERCEL BACKEND
+===================================================== */
+
 const API = "/api";
 
 let ADMIN_TOKEN = "";
 
 let allOrdersList = [];
+
+let currentFilter = "pending";
 
 let currentIndex = 0;
 
@@ -554,7 +684,7 @@ let currentIndex = 0;
 function showMessage(
   text,
   color = "#00e5ff"
-) {
+){
 
   const box =
     document.getElementById("message");
@@ -572,15 +702,18 @@ function showMessage(
    LOGIN
 ========================= */
 
-async function loginAdmin() {
+async function loginAdmin(){
+
+  const input =
+    document.getElementById("adminToken");
+
+  const btn =
+    document.getElementById("loginBtn");
 
   const token =
-    document
-      .getElementById("adminToken")
-      .value
-      .trim();
+    input.value.trim();
 
-  if (!token) {
+  if(!token){
 
     alert(
       "⚠️ Tanpri antre ADMIN_TOKEN ou."
@@ -590,28 +723,28 @@ async function loginAdmin() {
 
   }
 
-  ADMIN_TOKEN = token;
 
-  try {
+  btn.disabled = true;
+
+  btn.textContent =
+    "⏳ VERIFIKASYON...";
+
+
+  try{
 
     const response =
       await fetch(
         `${API}/get-orders?t=${Date.now()}`,
         {
-          method: "GET",
+          method:"GET",
 
-          headers: {
-            "x-admin-token":
-              ADMIN_TOKEN,
-
-            "Accept":
-              "application/json",
-
-            "Cache-Control":
-              "no-cache"
+          headers:{
+            "x-admin-token":token,
+            "Accept":"application/json",
+            "Cache-Control":"no-cache"
           },
 
-          cache: "no-store"
+          cache:"no-store"
         }
       );
 
@@ -620,31 +753,38 @@ async function loginAdmin() {
       await response.json();
 
 
-    if (response.status === 401) {
+    if(
+      response.status === 401
+    ){
 
-      ADMIN_TOKEN = "";
-
-      alert(
-        "❌ ADMIN_TOKEN la pa bon."
+      throw new Error(
+        "ADMIN_TOKEN la pa bon."
       );
-
-      return;
 
     }
 
 
-    if (
+    if(
       !response.ok ||
       result.success !== true
-    ) {
+    ){
 
       throw new Error(
         result.message ||
-        "HTTP " +
-        response.status
+        "Backend la pa reponn byen."
       );
 
     }
+
+
+    /*
+     * Nou sèlman kenbe token an
+     * nan memory JavaScript.
+     *
+     * Nou PA mete li nan localStorage.
+     */
+
+    ADMIN_TOKEN = token;
 
 
     document
@@ -663,25 +803,18 @@ async function loginAdmin() {
     );
 
 
+    allOrdersList =
+      Array.isArray(result.orders)
+        ? result.orders
+        : [];
+
+
     await loadSiteStatus();
 
-
-    /*
-     * Lè admin nan konekte,
-     * nou chaje tout kòmand yo yon sèl fwa.
-     *
-     * Apre sa, REFRESH pa pral
-     * ranplase lis la.
-     */
-
-    allOrdersList =
-      result.orders || [];
+    renderAll();
 
 
-    renderAllLists();
-
-
-  } catch (error) {
+  }catch(error){
 
     console.error(
       "LOGIN ERROR:",
@@ -693,6 +826,15 @@ async function loginAdmin() {
       error.message
     );
 
+    ADMIN_TOKEN = "";
+
+  }finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      "🔓 ANTRE NAN ADMIN";
+
   }
 
 }
@@ -702,16 +844,16 @@ async function loginAdmin() {
    SITE STATUS
 ========================= */
 
-async function loadSiteStatus() {
+async function loadSiteStatus(){
 
-  try {
+  try{
 
     const response =
       await fetch(
         `${API}/site-status?t=${Date.now()}`,
         {
-          method: "GET",
-          cache: "no-store"
+          method:"GET",
+          cache:"no-store"
         }
       );
 
@@ -725,7 +867,7 @@ async function loadSiteStatus() {
     );
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(
       "SITE STATUS ERROR:",
@@ -739,7 +881,7 @@ async function loadSiteStatus() {
 
 function updateSiteDisplay(
   isOpen
-) {
+){
 
   const status =
     document.getElementById(
@@ -747,7 +889,7 @@ function updateSiteDisplay(
     );
 
 
-  if (isOpen) {
+  if(isOpen){
 
     status.className =
       "status status-on";
@@ -755,7 +897,7 @@ function updateSiteDisplay(
     status.textContent =
       "🟢 SIT LA ON";
 
-  } else {
+  }else{
 
     status.className =
       "status status-off";
@@ -768,18 +910,19 @@ function updateSiteDisplay(
 }
 
 
-function showOffArea() {
+function showOffArea(){
 
   document
     .getElementById("offArea")
-    .style.display = "block";
+    .style.display =
+      "block";
 
 }
 
 
 async function setOffMessage(
   message
-) {
+){
 
   await saveSiteStatus(
     false,
@@ -789,7 +932,7 @@ async function setOffMessage(
 }
 
 
-async function setCustomOffMessage() {
+async function setCustomOffMessage(){
 
   const message =
     document
@@ -800,7 +943,7 @@ async function setCustomOffMessage() {
       .trim();
 
 
-  if (!message) {
+  if(!message){
 
     alert(
       "⚠️ Tanpri ekri yon mesaj."
@@ -822,20 +965,28 @@ async function setCustomOffMessage() {
 async function saveSiteStatus(
   enabled,
   message
-) {
+){
 
-  if (!ADMIN_TOKEN) return;
+  if(!ADMIN_TOKEN){
+
+    alert(
+      "❌ Admin pa konekte."
+    );
+
+    return;
+
+  }
 
 
-  try {
+  try{
 
     const response =
       await fetch(
         `${API}/site-status`,
         {
-          method: "POST",
+          method:"POST",
 
-          headers: {
+          headers:{
             "Content-Type":
               "application/json",
 
@@ -843,7 +994,7 @@ async function saveSiteStatus(
               ADMIN_TOKEN
           },
 
-          body: JSON.stringify({
+          body:JSON.stringify({
             enabled,
             message:
               message || ""
@@ -857,10 +1008,10 @@ async function saveSiteStatus(
       await response.json();
 
 
-    if (
+    if(
       !response.ok ||
       !result.success
-    ) {
+    ){
 
       throw new Error(
         result.message ||
@@ -877,7 +1028,8 @@ async function saveSiteStatus(
 
     document
       .getElementById("offArea")
-      .style.display = "none";
+      .style.display =
+        "none";
 
 
     document
@@ -888,20 +1040,18 @@ async function saveSiteStatus(
     showMessage(
       enabled
         ? "🟢 Sit la ON."
-        : "🔴 Sit la OFF. Mesaj la aktive.",
-
+        : "🔴 Sit la OFF.",
       enabled
         ? "#5ee39a"
         : "#ff7777"
     );
 
 
-  } catch (error) {
+  }catch(error){
 
     showMessage(
       "❌ " +
       error.message,
-
       "#ff4d4d"
     );
 
@@ -910,7 +1060,7 @@ async function saveSiteStatus(
 }
 
 
-async function siteOn() {
+async function siteOn(){
 
   await saveSiteStatus(
     true,
@@ -921,23 +1071,27 @@ async function siteOn() {
 
 
 /* =========================
-   LOAD / REFRESH ORDERS
+   LOAD ORDERS
 ========================= */
 
-async function loadOrders() {
+async function loadOrders(){
 
-  if (!ADMIN_TOKEN) return;
+  if(!ADMIN_TOKEN){
+
+    return;
+
+  }
 
 
-  try {
+  try{
 
     const response =
       await fetch(
         `${API}/get-orders?t=${Date.now()}`,
         {
-          method: "GET",
+          method:"GET",
 
-          headers: {
+          headers:{
             "x-admin-token":
               ADMIN_TOKEN,
 
@@ -948,7 +1102,7 @@ async function loadOrders() {
               "no-cache"
           },
 
-          cache: "no-store"
+          cache:"no-store"
         }
       );
 
@@ -957,10 +1111,23 @@ async function loadOrders() {
       await response.json();
 
 
-    if (
+    if(
+      response.status === 401
+    ){
+
+      logoutAdmin();
+
+      throw new Error(
+        "Sesyon admin lan pa valide ankò."
+      );
+
+    }
+
+
+    if(
       !response.ok ||
       !result.success
-    ) {
+    ){
 
       throw new Error(
         result.message ||
@@ -970,122 +1137,33 @@ async function loadOrders() {
     }
 
 
-    const freshOrders =
-      result.orders || [];
-
-
     /*
-     * IMPORTANT:
-     *
-     * REFRESH LA PA RANPLASE
-     * allOrdersList.
-     *
-     * Li pran PENDING sèlman.
-     *
-     * Si kòmand lan deja nan
-     * allOrdersList, li pa ajoute l
-     * ankò.
-     *
-     * Si kòmand lan success/failed,
-     * refresh pap ajoute l kòm nouvo.
+     * Backend lan se source of truth.
+     * Nou ranplase lis lokal la ak
+     * nouvo done server la.
      */
 
-    let addedCount = 0;
+    allOrdersList =
+      Array.isArray(result.orders)
+        ? result.orders
+        : [];
 
 
-    for (
-      const newOrder of freshOrders
-    ) {
+    currentIndex = 0;
 
-      /*
-       * Se pending sèlman nou
-       * aksepte kòm nouvo kòmand.
-       */
-
-      if (
-        newOrder.status !== "pending"
-      ) {
-
-        continue;
-
-      }
+    renderAll();
 
 
-      /*
-       * Verifye si ID a deja
-       * egziste nan admin lan.
-       */
-
-      const exists =
-        allOrdersList.some(
-          oldOrder =>
-            oldOrder.id ===
-            newOrder.id
-        );
-
-
-      /*
-       * Si ID a pa egziste,
-       * ajoute l.
-       */
-
-      if (!exists) {
-
-        allOrdersList.push(
-          newOrder
-        );
-
-        addedCount++;
-
-      }
-
-    }
-
-
-    /*
-     * Triye nouvo kòmand yo:
-     * pi nouvo an premye.
-     */
-
-    allOrdersList.sort(
-      (a, b) =>
-        new Date(
-          b.createdAt || 0
-        ) -
-        new Date(
-          a.createdAt || 0
-        )
+    showMessage(
+      "🔄 Kòmand yo rafrechi.",
+      "#00e5ff"
     );
 
 
-    /*
-     * Rann lis la ankò.
-     */
-
-    renderAllLists();
-
-
-    if (addedCount > 0) {
-
-      showMessage(
-        `🔄 Refresh fini — ${addedCount} nouvo kòmand chaje.`,
-        "#00e5ff"
-      );
-
-    } else {
-
-      showMessage(
-        "🔄 Refresh fini — pa gen nouvo kòmand.",
-        "#00e5ff"
-      );
-
-    }
-
-
-  } catch (error) {
+  }catch(error){
 
     console.error(
-      "REFRESH ORDERS ERROR:",
+      "LOAD ORDERS ERROR:",
       error
     );
 
@@ -1102,30 +1180,136 @@ async function loadOrders() {
 
 
 /* =========================
-   RENDER ALL LISTS
+   FILTER
 ========================= */
 
-function renderAllLists() {
+function setFilter(
+  filter
+){
 
-  const pending =
-    allOrdersList.filter(
-      o =>
-        o.status === "pending"
+  currentFilter =
+    filter;
+
+  currentIndex = 0;
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(
+      button =>
+        button.classList.remove(
+          "active"
+        )
     );
 
 
-  const failed =
+  const map = {
+    pending:"tabPending",
+    processing:"tabProcessing",
+    success:"tabSuccess",
+    all:"tabAll"
+  };
+
+
+  const selected =
+    document.getElementById(
+      map[filter]
+    );
+
+
+  if(selected){
+
+    selected.classList.add(
+      "active"
+    );
+
+  }
+
+
+  renderAll();
+
+}
+
+
+/* =========================
+   FILTER ORDERS
+========================= */
+
+function getFilteredOrders(){
+
+  if(
+    currentFilter ===
+    "pending"
+  ){
+
+    return allOrdersList.filter(
+      order =>
+        order.status ===
+        "pending"
+    );
+
+  }
+
+
+  if(
+    currentFilter ===
+    "processing"
+  ){
+
+    return allOrdersList.filter(
+      order =>
+        order.status ===
+        "processing"
+    );
+
+  }
+
+
+  if(
+    currentFilter ===
+    "success"
+  ){
+
+    return allOrdersList.filter(
+      order =>
+        order.status ===
+        "success"
+    );
+
+  }
+
+
+  return allOrdersList;
+
+}
+
+
+/* =========================
+   RENDER ALL
+========================= */
+
+function renderAll(){
+
+  const pending =
     allOrdersList.filter(
-      o =>
-        o.status === "failed"
+      order =>
+        order.status ===
+        "pending"
+    );
+
+
+  const processing =
+    allOrdersList.filter(
+      order =>
+        order.status ===
+        "processing"
     );
 
 
   const success =
     allOrdersList.filter(
-      o =>
-        o.status === "success" ||
-        o.status === "processing"
+      order =>
+        order.status ===
+        "success"
     );
 
 
@@ -1139,10 +1323,10 @@ function renderAllLists() {
 
   document
     .getElementById(
-      "failedCount"
+      "processingCount"
     )
     .textContent =
-      failed.length;
+      processing.length;
 
 
   document
@@ -1153,31 +1337,107 @@ function renderAllLists() {
       success.length;
 
 
+  /*
+   * Kalkil finans yo:
+   *
+   * Sa a se yon aperçu frontend.
+   * Vrè ledger la dwe fèt nan backend.
+   */
+
+  let revenue = 0;
+
+  let supplierCost = 0;
+
+  let profit = 0;
+
+
+  for(
+    const order of success
+  ){
+
+    const retail =
+      Number(order.price) || 0;
+
+    const cost =
+      Number(
+        order.supplierCost
+      ) || 0;
+
+
+    revenue += retail;
+
+    supplierCost += cost;
+
+    profit +=
+      Math.max(
+        0,
+        retail - cost
+      );
+
+  }
+
+
+  document
+    .getElementById(
+      "revenueAmount"
+    )
+    .textContent =
+      `${revenue} HTG`;
+
+
+  document
+    .getElementById(
+      "supplierCostAmount"
+    )
+    .textContent =
+      `${supplierCost} HTG`;
+
+
+  document
+    .getElementById(
+      "profitAmount"
+    )
+    .textContent =
+      `${profit} HTG`;
+
+
+  renderCurrentList();
+
+}
+
+
+/* =========================
+   RENDER CURRENT LIST
+========================= */
+
+function renderCurrentList(){
+
+  const orders =
+    getFilteredOrders();
+
+
   const paginationBox =
     document.getElementById(
       "paginationBox"
     );
 
 
-  /*
-   * Si pa gen pending.
-   */
-
-  if (pending.length === 0) {
+  if(
+    orders.length === 0
+  ){
 
     paginationBox.style.display =
       "none";
 
 
-    currentIndex = 0;
-
-
     document
       .getElementById(
-        "pendingList"
+        "ordersList"
       )
       .innerHTML =
-        '<div class="empty">📭 Pa gen kòmand an atant pou kounye a.</div>';
+        `<div class="empty">
+          📭 Pa gen kòmand nan kategori sa a.
+        </div>`;
 
 
     return;
@@ -1189,23 +1449,20 @@ function renderAllLists() {
     "flex";
 
 
-  /*
-   * Pa kite index la depase
-   * kantite kòmand pending yo.
-   */
-
-  if (
+  if(
     currentIndex >=
-    pending.length
-  ) {
+    orders.length
+  ){
 
     currentIndex =
-      pending.length - 1;
+      orders.length - 1;
 
   }
 
 
-  if (currentIndex < 0) {
+  if(
+    currentIndex < 0
+  ){
 
     currentIndex = 0;
 
@@ -1217,277 +1474,259 @@ function renderAllLists() {
       "pageIndicator"
     )
     .textContent =
-      `${currentIndex + 1} / ${pending.length}`;
+      `${currentIndex + 1} / ${orders.length}`;
 
 
   document
-    .getElementById("prevBtn")
+    .getElementById(
+      "prevBtn"
+    )
     .disabled =
       currentIndex === 0;
 
 
   document
-    .getElementById("nextBtn")
+    .getElementById(
+      "nextBtn"
+    )
     .disabled =
       currentIndex ===
-      pending.length - 1;
+      orders.length - 1;
 
 
-  renderList(
-    [pending[currentIndex]],
-    "pendingList"
+  renderOrder(
+    orders[currentIndex]
   );
 
 }
 
 
 /* =========================
-   PAGE NAVIGATION
+   PAGINATION
 ========================= */
 
 function changePage(
   direction
-) {
+){
 
   currentIndex +=
     direction;
 
-  renderAllLists();
+  renderCurrentList();
 
 }
 
 
 /* =========================
-   RENDER ORDER
+   RENDER ONE ORDER
 ========================= */
 
-function renderList(
-  orders,
-  containerId
-) {
+function renderOrder(
+  order
+){
 
   const box =
     document.getElementById(
-      containerId
+      "ordersList"
     );
 
 
   box.innerHTML = "";
 
 
-  for (
-    const order of orders
-  ) {
-
-    const div =
-      document.createElement(
-        "div"
-      );
-
-
-    div.className =
-      "order";
-
-
-    const date =
-      order.createdAt
-        ? new Date(
-            order.createdAt
-          ).toLocaleString()
-        : "N/A";
-
-
-    const userTxCode =
-      order.transactionId ||
-      order.transaction_id ||
-      order.transId ||
-      order.code ||
-      "Pa gen kòd";
-
-
-    div.innerHTML = `
-
-<div class="status">
-🟡 AN ATANT
-</div>
-
-<div class="line">
-<span>🆔 ID:</span>
-<strong>
-${escapeHtml(
-  order.id || ""
-)}
-</strong>
-</div>
-
-<div class="line">
-<span>🎮 UID:</span>
-<strong>
-${escapeHtml(
-  order.uid || ""
-)}
-</strong>
-</div>
-
-<div class="line">
-<span>💎 Pack:</span>
-<strong class="pack">
-${escapeHtml(
-  order.pack || ""
-)}
-</strong>
-</div>
-
-<div class="line">
-<span>💰 Pri:</span>
-<strong class="price">
-${escapeHtml(
-  String(
-    order.price || ""
-  )
-)}
-GDS
-</strong>
-</div>
-
-<div class="line">
-<span>📱 Nimewo/Non:</span>
-<strong>
-${escapeHtml(
-  order.senderNumber || ""
-)}
-</strong>
-</div>
-
-<div class="tx-highlight">
-
-<div
-style="
-color:#aaa;
-font-size:12px;
-"
->
-🧾 KÒD TRANZAKSYON
-(NATCASH/MONCASH):
-</div>
-
-<strong
-style="
-color:#ffd54f;
-font-size:16px;
-"
->
-${escapeHtml(
-  userTxCode
-)}
-</strong>
-
-</div>
-
-<div class="line">
-<span>🌎 Server:</span>
-<strong>
-${escapeHtml(
-  order.server || ""
-)}
-</strong>
-</div>
-
-<div class="line">
-<span>🕐 Kòmand:</span>
-<strong>
-${escapeHtml(
-  date
-)}
-</strong>
-</div>
-
-
-<div class="order-buttons">
-
-<button
-class="process"
-onclick="
-updateOrder(
-'${escapeJs(
-  order.id || ""
-)}',
-'processing'
-)
-"
->
-✅ VALIDÉ
-</button>
-
-
-<button
-class="failed"
-onclick="
-handleFailOrder(
-'${escapeJs(
-  order.id || ""
-)}'
-)
-"
->
-❌ ÉCHEC
-</button>
-
-</div>
-
-`;
-
-
-    box.appendChild(div);
-
-  }
-
-}
-
-
-/* =========================
-   ECHEC
-========================= */
-
-function handleFailOrder(
-  id
-) {
-
-  const reason =
-    prompt(
-      "🔴 Antre mesaj echèk la pou kliyan an:",
-      "Nou pa resevwa peman an."
+  const div =
+    document.createElement(
+      "div"
     );
 
 
-  if (reason === null) {
+  div.className =
+    "order";
 
-    return;
+
+  const date =
+    order.createdAt
+      ? new Date(
+          order.createdAt
+        ).toLocaleString()
+      : "N/A";
+
+
+  const status =
+    order.status ||
+    "pending";
+
+
+  let statusHtml = "";
+
+  let buttonHtml = "";
+
+
+  if(
+    status === "pending"
+  ){
+
+    statusHtml =
+      `<div class="status status-pending">
+        🟡 AN ATANT
+      </div>`;
+
+
+    buttonHtml =
+      `<button
+        class="send"
+        onclick="sendOrder('${escapeJs(order.id || "")}')"
+      >
+        🚀 ENVOYER BAY JEFFRY TECH
+      </button>`;
 
   }
 
 
-  updateOrder(
-    id,
-    "failed",
-    reason.trim() ||
-    "Nou pa resevwa peman an."
-  );
+  else if(
+    status === "processing"
+  ){
+
+    statusHtml =
+      `<div class="status status-processing">
+        🟠 AP TRETE
+      </div>`;
+
+
+    buttonHtml =
+      `<button
+        class="validate"
+        onclick="validateOrder('${escapeJs(order.id || "")}')"
+      >
+        ✅ VALIDER
+      </button>`;
+
+  }
+
+
+  else if(
+    status === "success"
+  ){
+
+    statusHtml =
+      `<div class="status status-success">
+        🟢 VALIDE
+      </div>`;
+
+  }
+
+
+  else{
+
+    statusHtml =
+      `<div class="status status-pending">
+        🟡 ${escapeHtml(status)}
+      </div>`;
+
+  }
+
+
+  div.innerHTML = `
+
+    ${statusHtml}
+
+    <div class="line">
+      <span>🆔 ID:</span>
+      <strong>
+        ${escapeHtml(order.id || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>👤 Kliyan:</span>
+      <strong>
+        ${escapeHtml(
+          order.userName ||
+          order.email ||
+          "Kliyan"
+        )}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🎮 UID:</span>
+      <strong>
+        ${escapeHtml(order.uid || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>💎 Pack:</span>
+      <strong class="pack">
+        ${escapeHtml(order.pack || "")}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>💰 Pri kliyan:</span>
+      <strong class="price">
+        ${escapeHtml(
+          String(order.price || 0)
+        )} HTG
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🏦 Pri Jeffry Tech:</span>
+      <strong class="cost">
+        ${escapeHtml(
+          String(
+            order.supplierCost || 0
+          )
+        )} HTG
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>💵 Pwofi:</span>
+      <strong class="profit">
+        ${calculateProfit(order)} HTG
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🌎 Server:</span>
+      <strong>
+        ${escapeHtml(
+          order.server ||
+          "NA — North America"
+        )}
+      </strong>
+    </div>
+
+    <div class="line">
+      <span>🕐 Kòmand:</span>
+      <strong>
+        ${escapeHtml(date)}
+      </strong>
+    </div>
+
+    <div class="order-buttons">
+      ${buttonHtml}
+    </div>
+
+  `;
+
+
+  box.appendChild(div);
 
 }
 
 
 /* =========================
-   UPDATE ORDER
+   SEND ORDER
 ========================= */
 
-async function updateOrder(
-  id,
-  status,
-  customerMessage = ""
-) {
+async function sendOrder(
+  id
+){
 
-  if (!ADMIN_TOKEN) {
+  if(!ADMIN_TOKEN){
 
     alert(
       "❌ Admin pa konekte."
@@ -1500,60 +1739,64 @@ async function updateOrder(
 
   const target =
     allOrdersList.find(
-      o =>
-        o.id === id
+      order =>
+        order.id === id
     );
 
 
-  /*
-   * Chanje status lokalman
-   * imedyatman.
-   *
-   * Sa vle di lè ou valide,
-   * kòmand lan pa retounen
-   * nan pending.
-   */
+  if(!target){
 
-  if (target) {
+    alert(
+      "❌ Kòmand lan pa jwenn."
+    );
 
-    target.status =
-      status;
-
-    target.customerMessage =
-      customerMessage;
+    return;
 
   }
 
 
-  if (status === "failed") {
+  if(
+    target.status !==
+    "pending"
+  ){
 
-    showMessage(
-      "❌ Kòmand lan voye nan ÈCHÈK avèk siksè!",
-      "#ff7777"
+    alert(
+      "⚠️ Kòmand sa a deja trete."
     );
 
-  } else {
-
-    showMessage(
-      "✅ Kòmand lan VALIDÉ avèk siksè!",
-      "#5ee39a"
-    );
+    return;
 
   }
 
 
-  renderAllLists();
+  const confirmed =
+    confirm(
+      "🚀 Voye kòmand sa a bay Jeffry Tech?"
+    );
 
 
-  try {
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    showMessage(
+      "⏳ K ap voye kòmand lan bay Jeffry Tech...",
+      "#00e5ff"
+    );
+
 
     const response =
       await fetch(
-        `${API}/update-order`,
+        `${API}/send-order`,
         {
-          method: "POST",
+          method:"POST",
 
-          headers: {
+          headers:{
             "Content-Type":
               "application/json",
 
@@ -1561,10 +1804,8 @@ async function updateOrder(
               ADMIN_TOKEN
           },
 
-          body: JSON.stringify({
-            id,
-            status,
-            customerMessage
+          body:JSON.stringify({
+            id
           })
 
         }
@@ -1575,30 +1816,78 @@ async function updateOrder(
       await response.json();
 
 
-    if (
-      !response.ok ||
-      !result.success
-    ) {
+    if(
+      response.status === 401
+    ){
+
+      logoutAdmin();
 
       throw new Error(
-        result.message ||
-        "Erè backend."
+        "Sesyon admin lan ekspire."
       );
 
     }
 
 
-  } catch (error) {
+    if(
+      !response.ok ||
+      !result.success
+    ){
+
+      throw new Error(
+        result.message ||
+        "Jeffry Tech pa aksepte kòmand lan."
+      );
+
+    }
+
+
+    /*
+     * Nou PA mete success isit la.
+     *
+     * Apre Envoyer, status la dwe
+     * AP TRETE.
+     */
+
+    target.status =
+      "processing";
+
+
+    if(result.order){
+
+      Object.assign(
+        target,
+        result.order
+      );
+
+    }
+
+
+    currentIndex = 0;
+
+    setFilter(
+      "processing"
+    );
+
+
+    showMessage(
+      "🚀 Kòmand lan voye. Li kounye a AP TRETE.",
+      "#5eeaff"
+    );
+
+
+  }catch(error){
 
     console.error(
-      "UPDATE ERROR:",
+      "SEND ORDER ERROR:",
       error
     );
 
 
     showMessage(
-      "⚠️ Pasaj lokal la fèt men gen yon ti pwoblèm nan backend lan.",
-      "#ff4d4d"
+      "❌ " +
+      error.message,
+      "#ff7777"
     );
 
   }
@@ -1607,33 +1896,17 @@ async function updateOrder(
 
 
 /* =========================
-   CLEAR ALL
+   VALIDATE ORDER
 ========================= */
 
-async function clearAllOrdersByStatus(
-  statusType
-) {
+async function validateOrder(
+  id
+){
 
-  const targetOrders =
-    allOrdersList.filter(
-      o =>
-        statusType === "success"
-          ? (
-              o.status === "success" ||
-              o.status === "processing"
-            )
-          : o.status === statusType
-    );
-
-
-  if (!targetOrders.length) {
+  if(!ADMIN_TOKEN){
 
     alert(
-      `⚠️ Pa gen okenn kòmand nan kategori ${
-        statusType === "success"
-          ? "SIKSÈ"
-          : "ÉCHEC"
-      } pou efase.`
+      "❌ Admin pa konekte."
     );
 
     return;
@@ -1641,48 +1914,74 @@ async function clearAllOrdersByStatus(
   }
 
 
-  if (
-    !confirm(
-      `⚠️ Èske ou sèten ou vle efase TOUT (${targetOrders.length}) kòmand ${
-        statusType === "success"
-          ? "SIKSÈ"
-          : "ÉCHEC"
-      } yo?`
-    )
-  ) {
+  const target =
+    allOrdersList.find(
+      order =>
+        order.id === id
+    );
+
+
+  if(!target){
+
+    alert(
+      "❌ Kòmand lan pa jwenn."
+    );
 
     return;
 
   }
 
 
-  allOrdersList =
-    allOrdersList.filter(
-      o =>
-        statusType === "success"
-          ? (
-              o.status !== "success" &&
-              o.status !== "processing"
-            )
-          : o.status !== statusType
+  if(
+    target.status !==
+    "processing"
+  ){
+
+    alert(
+      "⚠️ Kòmand lan pa nan AP TRETE."
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * IMPORTANT:
+   *
+   * Backend lan dwe verifye ke
+   * Jeffry Tech konfime kòmand lan
+   * anvan li pèmèt status success.
+   */
+
+  const confirmed =
+    confirm(
+      "✅ Jeffry Tech konfime kòmand lan? Peze OK pou valide kliyan an."
     );
 
 
-  renderAllLists();
+  if(!confirmed){
+
+    return;
+
+  }
 
 
-  for (
-    const order of targetOrders
-  ) {
+  try{
 
-    try {
+    showMessage(
+      "⏳ Validasyon an ap fèt...",
+      "#00e5ff"
+    );
 
+
+    const response =
       await fetch(
-        `${API}/delete-order`,
+        `${API}/validate-order`,
         {
-          method: "POST",
+          method:"POST",
 
-          headers: {
+          headers:{
             "Content-Type":
               "application/json",
 
@@ -1690,34 +1989,138 @@ async function clearAllOrdersByStatus(
               ADMIN_TOKEN
           },
 
-          body: JSON.stringify({
-            id: order.id
+          body:JSON.stringify({
+            id
           })
 
         }
       );
 
-    } catch (err) {
 
-      console.error(
-        "Erè efasman:",
-        order.id,
-        err
+    const result =
+      await response.json();
+
+
+    if(
+      response.status === 401
+    ){
+
+      logoutAdmin();
+
+      throw new Error(
+        "Sesyon admin lan ekspire."
       );
 
     }
 
+
+    if(
+      !response.ok ||
+      !result.success
+    ){
+
+      throw new Error(
+        result.message ||
+        "Backend lan poko pèmèt validasyon an."
+      );
+
+    }
+
+
+    target.status =
+      "success";
+
+
+    if(result.order){
+
+      Object.assign(
+        target,
+        result.order
+      );
+
+    }
+
+
+    currentIndex = 0;
+
+    setFilter(
+      "success"
+    );
+
+
+    showMessage(
+      "✅ Kòmand lan VALIDE. Kliyan an ap wè li kòm Valide.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "VALIDATE ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "❌ " +
+      error.message,
+      "#ff7777"
+    );
+
   }
 
+}
 
-  showMessage(
-    `🗑️ Kòmand ${
-      statusType === "success"
-        ? "Siksè"
-        : "Échec"
-    } yo efase nèt!`,
-    "#5ee39a"
+
+/* =========================
+   PROFIT
+========================= */
+
+function calculateProfit(
+  order
+){
+
+  const retail =
+    Number(order.price) || 0;
+
+  const cost =
+    Number(
+      order.supplierCost
+    ) || 0;
+
+
+  return Math.max(
+    0,
+    retail - cost
   );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutAdmin(){
+
+  ADMIN_TOKEN = "";
+
+  allOrdersList = [];
+
+  document
+    .getElementById("adminArea")
+    .style.display =
+      "none";
+
+  document
+    .getElementById("loginBox")
+    .style.display =
+      "block";
+
+  document
+    .getElementById("adminToken")
+    .value = "";
 
 }
 
@@ -1728,7 +2131,7 @@ async function clearAllOrdersByStatus(
 
 function escapeHtml(
   value
-) {
+){
 
   return String(value)
 
@@ -1766,7 +2169,7 @@ function escapeHtml(
 
 function escapeJs(
   value
-) {
+){
 
   return String(value)
 
