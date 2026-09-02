@@ -529,12 +529,29 @@ header{
  overflow:hidden;
 }
 
-.freefireBg{background:linear-gradient(135deg,#ff6b00,#ef2020);}
-.dlsBg{background:linear-gradient(135deg,#0066ff,#101a62);}
-.europeBg{background:linear-gradient(135deg,#243b55,#141e30);}
-.latamBg{background:linear-gradient(135deg,#11998e,#38ef7d);}
-.booyahBg{background:linear-gradient(135deg,#ff416c,#ff4b2b);}
-.otherBg{background:linear-gradient(135deg,#667eea,#764ba2);}
+.freefireBg{
+ background:linear-gradient(135deg,#ff6b00,#ef2020);
+}
+
+.dlsBg{
+ background:linear-gradient(135deg,#0066ff,#101a62);
+}
+
+.europeBg{
+ background:linear-gradient(135deg,#243b55,#141e30);
+}
+
+.latamBg{
+ background:linear-gradient(135deg,#11998e,#38ef7d);
+}
+
+.booyahBg{
+ background:linear-gradient(135deg,#ff416c,#ff4b2b);
+}
+
+.otherBg{
+ background:linear-gradient(135deg,#667eea,#764ba2);
+}
 
 .gameEmoji{
  font-size:48px;
@@ -1106,6 +1123,7 @@ body.dark .bottomNav{
 }
 
 @media(min-width:700px){
+
  .categories{
   grid-template-columns:repeat(2,280px);
  }
@@ -1117,6 +1135,7 @@ body.dark .bottomNav{
  .banner{
   height:210px;
  }
+
 }
 </style>
 </head>
@@ -1175,7 +1194,9 @@ body.dark .bottomNav{
 
  <div class="brand">
 
-  <div class="brandLogo">TA</div>
+  <div class="brandLogo">
+   TA
+  </div>
 
   <div class="brandText">
 
@@ -1189,15 +1210,21 @@ body.dark .bottomNav{
 
  <div class="headerRight">
 
-  <button class="iconBtn" onclick="openWallet()">💰</button>
+  <button class="iconBtn" onclick="openWallet()">
+   💰
+  </button>
 
-  <button class="iconBtn" onclick="toggleDark()">🌙</button>
+  <button class="iconBtn" onclick="toggleDark()">
+   🌙
+  </button>
 
   <button class="iconBtn" onclick="showNotifications()">
 
    🔔
 
-   <span class="badge" id="notificationBadge">0</span>
+   <span class="badge" id="notificationBadge">
+    0
+   </span>
 
   </button>
 
@@ -1261,7 +1288,9 @@ body.dark .bottomNav{
 
    </div>
 
-   <div class="bannerArt">📱💸</div>
+   <div class="bannerArt">
+    📱💸
+   </div>
 
   </div>
 
@@ -1280,7 +1309,9 @@ body.dark .bottomNav{
 
    </div>
 
-   <div class="bannerArt">💳✨</div>
+   <div class="bannerArt">
+    💳✨
+   </div>
 
   </div>
 
@@ -1299,7 +1330,9 @@ body.dark .bottomNav{
 
    </div>
 
-   <div class="bannerArt">💎🔥</div>
+   <div class="bannerArt">
+    💎🔥
+   </div>
 
   </div>
 
@@ -1323,7 +1356,9 @@ body.dark .bottomNav{
    Rechaje jwèt, kat kado ak sèvis dijital nan yon sèl klik.
    Peman rapid ak sekirize.
    <br><br>
-   <b>True Alpha — solisyon dijital ou ka konte sou li.</b>
+   <b>
+    True Alpha — solisyon dijital ou ka konte sou li.
+   </b>
   </p>
 
  </div>
@@ -1338,23 +1373,35 @@ body.dark .bottomNav{
 
  <div class="categories">
 
-  <div class="category" onclick="showPage('games')">
+  <div
+   class="category"
+   onclick="showPage('games')">
 
-   <div class="categoryIcon gamesIcon">🎮</div>
+   <div class="categoryIcon gamesIcon">
+    🎮
+   </div>
 
    <strong>Jwèt</strong>
 
-   <small>TopUp & services gaming</small>
+   <small>
+    TopUp & services gaming
+   </small>
 
   </div>
 
-  <div class="category" onclick="showPage('cards')">
+  <div
+   class="category"
+   onclick="showPage('cards')">
 
-   <div class="categoryIcon cardsIcon">💳</div>
+   <div class="categoryIcon cardsIcon">
+    💳
+   </div>
 
    <strong>Kat</strong>
 
-   <small>Cartes virtuelles</small>
+   <small>
+    Cartes virtuelles
+   </small>
 
   </div>
 
@@ -1366,8 +1413,12 @@ body.dark .bottomNav{
 
 <section id="games" class="page">
 
- <button class="backBtn" onclick="showPage('home')">
+ <button
+  class="backBtn"
+  onclick="showPage('home')">
+
   ← Retour
+
  </button>
 
  <div class="sectionTitle">
@@ -1380,17 +1431,23 @@ body.dark .bottomNav{
 
  <div class="gamesGrid">
 
-  <div class="gameCard" onclick="showPage('freefire')">
+  <div
+   class="gameCard"
+   onclick="showPage('freefire')">
 
    <div class="gameVisual freefireBg">
 
-    <div class="gameEmoji">🔥</div>
+    <div class="gameEmoji">
+     🔥
+    </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>Free Fire TopUp par UID</strong>
+    <strong>
+     Free Fire TopUp par UID
+    </strong>
 
     <small class="available">
      ● Disponible • NA — North America
@@ -1404,7 +1461,9 @@ body.dark .bottomNav{
 
    <div class="gameVisual dlsBg">
 
-    <div class="gameEmoji">⚽</div>
+    <div class="gameEmoji">
+     ⚽
+    </div>
 
     <div class="soonLayer">
      <span>Bientôt disponible</span>
@@ -1416,7 +1475,9 @@ body.dark .bottomNav{
 
     <strong>DLS</strong>
 
-    <small class="soon">Bientôt disponible</small>
+    <small class="soon">
+     Bientôt disponible
+    </small>
 
    </div>
 
@@ -1426,7 +1487,9 @@ body.dark .bottomNav{
 
    <div class="gameVisual europeBg">
 
-    <div class="gameEmoji">🌍</div>
+    <div class="gameEmoji">
+     🌍
+    </div>
 
     <div class="soonLayer">
      <span>Bientôt disponible</span>
@@ -1438,7 +1501,9 @@ body.dark .bottomNav{
 
     <strong>Free Fire Europe</strong>
 
-    <small class="soon">Bientôt disponible</small>
+    <small class="soon">
+     Bientôt disponible
+    </small>
 
    </div>
 
@@ -1448,7 +1513,9 @@ body.dark .bottomNav{
 
    <div class="gameVisual latamBg">
 
-    <div class="gameEmoji">🌎</div>
+    <div class="gameEmoji">
+     🌎
+    </div>
 
     <div class="soonLayer">
      <span>Bientôt disponible</span>
@@ -1460,7 +1527,9 @@ body.dark .bottomNav{
 
     <strong>Free Fire PIN LATAM</strong>
 
-    <small class="soon">Bientôt disponible</small>
+    <small class="soon">
+     Bientôt disponible
+    </small>
 
    </div>
 
@@ -1470,7 +1539,9 @@ body.dark .bottomNav{
 
    <div class="gameVisual booyahBg">
 
-    <div class="gameEmoji">🏆</div>
+    <div class="gameEmoji">
+     🏆
+    </div>
 
     <div class="soonLayer">
      <span>Bientôt disponible</span>
@@ -1482,7 +1553,9 @@ body.dark .bottomNav{
 
     <strong>Pass Booyah</strong>
 
-    <small class="soon">Bientôt disponible</small>
+    <small class="soon">
+     Bientôt disponible
+    </small>
 
    </div>
 
@@ -1492,7 +1565,9 @@ body.dark .bottomNav{
 
    <div class="gameVisual otherBg">
 
-    <div class="gameEmoji">🎮</div>
+    <div class="gameEmoji">
+     🎮
+    </div>
 
     <div class="soonLayer">
      <span>Bientôt disponible</span>
@@ -1504,7 +1579,9 @@ body.dark .bottomNav{
 
     <strong>Autres jeux</strong>
 
-    <small class="soon">Bientôt disponible</small>
+    <small class="soon">
+     Bientôt disponible
+    </small>
 
    </div>
 
@@ -1518,15 +1595,21 @@ body.dark .bottomNav{
 
 <section id="freefire" class="page">
 
- <button class="backBtn" onclick="showPage('games')">
+ <button
+  class="backBtn"
+  onclick="showPage('games')">
+
   ← Retour aux jeux
+
  </button>
 
  <div class="sectionTitle">
 
   <h2>Free Fire TopUp 💎</h2>
 
-  <span>NA — North America</span>
+  <span>
+   NA — North America
+  </span>
 
  </div>
 
@@ -1543,13 +1626,17 @@ body.dark .bottomNav{
 
    <br>
 
-   <b>Serveur : NA — North America 🇺🇸</b>
+   <b>
+    Serveur : NA — North America 🇺🇸
+   </b>
 
   </div>
 
   <div class="field">
 
-   <label>UID Free Fire</label>
+   <label>
+    UID Free Fire
+   </label>
 
    <input
     id="uid"
@@ -1559,29 +1646,43 @@ body.dark .bottomNav{
 
   </div>
 
-  <button class="verifyBtn" onclick="verifyUID()">
+  <button
+   class="verifyBtn"
+   onclick="verifyUID()">
+
    Vérifier le joueur
+
   </button>
 
-  <div class="playerResult" id="playerResult">
+  <div
+   class="playerResult"
+   id="playerResult">
 
    <b>✓ Joueur vérifié</b>
 
    <br>
 
-   <span id="playerName">—</span>
+   <span id="playerName">
+    —
+   </span>
 
    <br>
 
-   <small>Serveur : NA — North America</small>
+   <small>
+    Serveur : NA — North America
+   </small>
 
   </div>
 
-  <div id="packsArea" style="display:none">
+  <div
+   id="packsArea"
+   style="display:none">
 
    <div class="sectionTitle">
 
-    <h2>Choisissez votre pack</h2>
+    <h2>
+     Choisissez votre pack
+    </h2>
 
    </div>
 
@@ -1597,11 +1698,15 @@ body.dark .bottomNav{
        💎 100 + 10
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">200 HTG</div>
+     <div class="price">
+      200 HTG
+     </div>
 
     </div>
 
@@ -1615,11 +1720,15 @@ body.dark .bottomNav{
        💎 310 + 32
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">450 HTG</div>
+     <div class="price">
+      450 HTG
+     </div>
 
     </div>
 
@@ -1633,11 +1742,15 @@ body.dark .bottomNav{
        💎 520 + 52
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">750 HTG</div>
+     <div class="price">
+      750 HTG
+     </div>
 
     </div>
 
@@ -1651,11 +1764,15 @@ body.dark .bottomNav{
        💎 1,060 + 106
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">1,350 HTG</div>
+     <div class="price">
+      1,350 HTG
+     </div>
 
     </div>
 
@@ -1669,11 +1786,15 @@ body.dark .bottomNav{
        💎 2,180 + 218
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">3,000 HTG</div>
+     <div class="price">
+      3,000 HTG
+     </div>
 
     </div>
 
@@ -1687,18 +1808,26 @@ body.dark .bottomNav{
        💎 5,600 + 560
       </div>
 
-      <small>Bonus inclus</small>
+      <small>
+       Bonus inclus
+      </small>
 
      </div>
 
-     <div class="price">8,000 HTG</div>
+     <div class="price">
+      8,000 HTG
+     </div>
 
     </div>
 
    </div>
 
-   <button class="buyBtn" onclick="buyNow()">
+   <button
+    class="buyBtn"
+    onclick="buyNow()">
+
     Acheter maintenant
+
    </button>
 
   </div>
@@ -1711,13 +1840,19 @@ body.dark .bottomNav{
 
 <section id="cards" class="page">
 
- <button class="backBtn" onclick="showPage('home')">
+ <button
+  class="backBtn"
+  onclick="showPage('home')">
+
   ← Retour
+
  </button>
 
  <div class="sectionTitle">
 
-  <h2>Cartes virtuelles</h2>
+  <h2>
+   Cartes virtuelles
+  </h2>
 
  </div>
 
@@ -1749,15 +1884,24 @@ body.dark .bottomNav{
 
  <div class="ffBox">
 
-  <h3>Créer une carte Visa virtuelle</h3>
+  <h3>
+   Créer une carte Visa virtuelle
+  </h3>
 
-  <p style="font-size:12px;color:var(--muted);line-height:1.6;margin:10px 0 18px">
+  <p
+   style="font-size:12px;color:var(--muted);line-height:1.6;margin:10px 0 18px">
+
    Créez votre carte virtuelle avec Kirikou
    pour vos paiements en ligne.
+
   </p>
 
-  <button class="primaryBtn" onclick="contactCard()">
+  <button
+   class="primaryBtn"
+   onclick="contactCard()">
+
    Contacter pour créer la carte
+
   </button>
 
  </div>
@@ -1770,7 +1914,9 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Mes commandes</h2>
+  <h2>
+   Mes commandes
+  </h2>
 
  </div>
 
@@ -1784,7 +1930,9 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Mon Wallet</h2>
+  <h2>
+   Mon Wallet
+  </h2>
 
  </div>
 
@@ -1792,51 +1940,79 @@ body.dark .bottomNav{
 
   <div class="balanceBox">
 
-   <small>Solde disponible</small>
+   <small>
+    Solde disponible
+   </small>
 
-   <h2 id="walletBalance">0 HTG</h2>
+   <h2 id="walletBalance">
+    0 HTG
+   </h2>
 
   </div>
 
   <div class="walletActions">
 
-   <div class="actionCard" onclick="openRecharge()">
+   <div
+    class="actionCard"
+    onclick="openRecharge()">
 
     💰
 
-    <strong>Recharger</strong>
+    <strong>
+     Recharger
+    </strong>
 
-    <small>NatCash / MonCash</small>
+    <small>
+     NatCash / MonCash
+    </small>
 
    </div>
 
-   <div class="actionCard" onclick="transferMoney()">
+   <div
+    class="actionCard"
+    onclick="transferMoney()">
 
     ↗️
 
-    <strong>Transférer</strong>
+    <strong>
+     Transférer
+    </strong>
 
-    <small>Minimum 50 HTG</small>
+    <small>
+     Minimum 50 HTG
+    </small>
 
    </div>
 
-   <div class="actionCard" onclick="withdrawMoney()">
+   <div
+    class="actionCard"
+    onclick="withdrawMoney()">
 
     🏦
 
-    <strong>Retrait</strong>
+    <strong>
+     Retrait
+    </strong>
 
-    <small>Minimum 5,000 HTG</small>
+    <small>
+     Minimum 5,000 HTG
+    </small>
 
    </div>
 
-   <div class="actionCard" onclick="privatePage('orders')">
+   <div
+    class="actionCard"
+    onclick="privatePage('orders')">
 
     📋
 
-    <strong>Historique</strong>
+    <strong>
+     Historique
+    </strong>
 
-    <small>Voir les commandes</small>
+    <small>
+     Voir les commandes
+    </small>
 
    </div>
 
@@ -1852,20 +2028,32 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Notifications</h2>
+  <h2>
+   Notifications
+  </h2>
 
-  <span id="unreadText">0 nouvelles</span>
+  <span id="unreadText">
+   0 nouvelles
+  </span>
 
  </div>
 
  <div class="notificationActions">
 
-  <button class="readAll" onclick="readAllNotifications()">
+  <button
+   class="readAll"
+   onclick="readAllNotifications()">
+
    ✓ Lire tout
+
   </button>
 
-  <button class="clearNotifications" onclick="clearAllNotifications()">
+  <button
+   class="clearNotifications"
+   onclick="clearAllNotifications()">
+
    🗑️ Efacer tout
+
   </button>
 
  </div>
@@ -1880,66 +2068,111 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Profil</h2>
+  <h2>
+   Profil
+  </h2>
 
  </div>
 
  <div class="profileBox">
 
-  <div class="avatar" id="profileAvatar">
+  <div
+   class="avatar"
+   id="profileAvatar">
+
    TA
+
   </div>
 
-  <div class="profileName" id="profileName">
+  <div
+   class="profileName"
+   id="profileName">
+
    Visiteur
+
   </div>
 
-  <div class="profileEmail" id="profileEmail">
+  <div
+   class="profileEmail"
+   id="profileEmail">
+
    Connectez-vous pour accéder à votre compte
+
   </div>
 
   <div style="height:15px"></div>
 
-  <div class="menuItem" onclick="openLogin()">
+  <div
+   class="menuItem"
+   onclick="openLogin()">
 
-   <span>👤 Compte</span>
+   <span>
+    👤 Compte
+   </span>
+
    <span>›</span>
 
   </div>
 
-  <div class="menuItem" onclick="privatePage('orders')">
+  <div
+   class="menuItem"
+   onclick="privatePage('orders')">
 
-   <span>🛒 Mes commandes</span>
+   <span>
+    🛒 Mes commandes
+   </span>
+
    <span>›</span>
 
   </div>
 
-  <div class="menuItem" onclick="openRecharge()">
+  <div
+   class="menuItem"
+   onclick="openRecharge()">
 
-   <span>💰 Recharger Wallet</span>
+   <span>
+    💰 Recharger Wallet
+   </span>
+
    <span>›</span>
 
   </div>
 
   <div class="menuItem">
 
-   <span>💵 Wallet disponible</span>
+   <span>
+    💵 Wallet disponible
+   </span>
 
-   <strong id="profileBalance">0 HTG</strong>
-
-  </div>
-
-  <div class="menuItem" onclick="changeLanguage()">
-
-   <span>🌐 Langue</span>
-
-   <span id="languageText">Français / Kreyòl ›</span>
+   <strong id="profileBalance">
+    0 HTG
+   </strong>
 
   </div>
 
-  <div class="menuItem logout" id="logoutItem" onclick="logout()">
+  <div
+   class="menuItem"
+   onclick="changeLanguage()">
 
-   <span>🚪 Déconnexion</span>
+   <span>
+    🌐 Langue
+   </span>
+
+   <span id="languageText">
+    Français / Kreyòl ›
+   </span>
+
+  </div>
+
+  <div
+   class="menuItem logout"
+   id="logoutItem"
+   onclick="logout()">
+
+   <span>
+    🚪 Déconnexion
+   </span>
+
    <span>›</span>
 
   </div>
@@ -1966,29 +2199,54 @@ body.dark .bottomNav{
 
 <nav class="bottomNav">
 
- <button class="navItem active" data-page="home" onclick="showPage('home')">
+ <button
+  class="navItem active"
+  data-page="home"
+  onclick="showPage('home')">
+
   <span>⌂</span>
   Akèy
+
  </button>
 
- <button class="navItem" data-page="games" onclick="showPage('games')">
+ <button
+  class="navItem"
+  data-page="games"
+  onclick="showPage('games')">
+
   <span>🎮</span>
   Boutik
+
  </button>
 
- <button class="navItem" data-page="cards" onclick="showPage('cards')">
+ <button
+  class="navItem"
+  data-page="cards"
+  onclick="showPage('cards')">
+
   <span>💳</span>
   Kat
+
  </button>
 
- <button class="navItem" data-page="orders" onclick="privatePage('orders')">
+ <button
+  class="navItem"
+  data-page="orders"
+  onclick="privatePage('orders')">
+
   <span>🛒</span>
   Achat
+
  </button>
 
- <button class="navItem" data-page="wallet" onclick="openWallet()">
+ <button
+  class="navItem"
+  data-page="wallet"
+  onclick="openWallet()">
+
   <span>💰</span>
   Wallet
+
  </button>
 
 </nav>
@@ -1997,16 +2255,24 @@ body.dark .bottomNav{
 
 <!-- LOGIN -->
 
-<div class="modal" id="loginModal">
+<div
+ class="modal"
+ id="loginModal">
 
  <div class="modalBox">
 
   <div class="modalHeader">
 
-   <h3>Se connecter</h3>
+   <h3>
+    Se connecter
+   </h3>
 
-   <button class="close" onclick="closeModal('loginModal')">
+   <button
+    class="close"
+    onclick="closeModal('loginModal')">
+
     ✕
+
    </button>
 
   </div>
@@ -2018,7 +2284,9 @@ body.dark .bottomNav{
 
   </div>
 
-  <button class="googleBtn" onclick="googleLogin()">
+  <button
+   class="googleBtn"
+   onclick="googleLogin()">
 
    🇬 Connexion avec Google
 
@@ -2030,16 +2298,24 @@ body.dark .bottomNav{
 
 <!-- RECHARGE -->
 
-<div class="modal" id="rechargeModal">
+<div
+ class="modal"
+ id="rechargeModal">
 
  <div class="modalBox">
 
   <div class="modalHeader">
 
-   <h3>Recharger Wallet</h3>
+   <h3>
+    Recharger Wallet
+   </h3>
 
-   <button class="close" onclick="closeModal('rechargeModal')">
-    ✕
+   <button
+    class="close"
+    onclick="closeModal('rechargeModal')">
+
+   ✕
+
    </button>
 
   </div>
@@ -2050,13 +2326,16 @@ body.dark .bottomNav{
 
    <br><br>
 
-   Minimum : <b>50 HTG</b>
+   Minimum :
+   <b>50 HTG</b>
 
   </div>
 
   <div class="field">
 
-   <label>Montant HTG</label>
+   <label>
+    Montant HTG
+   </label>
 
    <input
     id="rechargeAmount"
@@ -2066,8 +2345,12 @@ body.dark .bottomNav{
 
   </div>
 
-  <button class="primaryBtn" onclick="startRecharge()">
+  <button
+   class="primaryBtn"
+   onclick="startRecharge()">
+
    Continuer
+
   </button>
 
  </div>
@@ -2076,27 +2359,40 @@ body.dark .bottomNav{
 
 <!-- TRANSFER -->
 
-<div class="modal" id="transferModal">
+<div
+ class="modal"
+ id="transferModal">
 
  <div class="modalBox">
 
   <div class="modalHeader">
 
-   <h3>Transférer</h3>
+   <h3>
+    Transférer
+   </h3>
 
-   <button class="close" onclick="closeModal('transferModal')">
+   <button
+    class="close"
+    onclick="closeModal('transferModal')">
+
     ✕
+
    </button>
 
   </div>
 
   <div class="instruction">
-   ↗️ Minimum transfè : <b>50 HTG</b>
+
+   ↗️ Minimum transfè :
+   <b>50 HTG</b>
+
   </div>
 
   <div class="field">
 
-   <label>Email du destinataire</label>
+   <label>
+    Email du destinataire
+   </label>
 
    <input
     id="transferEmail"
@@ -2107,7 +2403,9 @@ body.dark .bottomNav{
 
   <div class="field">
 
-   <label>Montant HTG</label>
+   <label>
+    Montant HTG
+   </label>
 
    <input
     id="transferAmount"
@@ -2117,8 +2415,12 @@ body.dark .bottomNav{
 
   </div>
 
-  <button class="primaryBtn" onclick="submitTransfer()">
+  <button
+   class="primaryBtn"
+   onclick="submitTransfer()">
+
    Continuer
+
   </button>
 
  </div>
@@ -2127,27 +2429,40 @@ body.dark .bottomNav{
 
 <!-- WITHDRAW -->
 
-<div class="modal" id="withdrawModal">
+<div
+ class="modal"
+ id="withdrawModal">
 
  <div class="modalBox">
 
   <div class="modalHeader">
 
-   <h3>Retrait Wallet</h3>
+   <h3>
+    Retrait Wallet
+   </h3>
 
-   <button class="close" onclick="closeModal('withdrawModal')">
+   <button
+    class="close"
+    onclick="closeModal('withdrawModal')">
+
     ✕
+
    </button>
 
   </div>
 
   <div class="instruction">
-   🏦 Montant minimum : <b>5,000 HTG</b>
+
+   🏦 Montant minimum :
+   <b>5,000 HTG</b>
+
   </div>
 
   <div class="field">
 
-   <label>Numéro de retrait</label>
+   <label>
+    Numéro de retrait
+   </label>
 
    <input
     id="withdrawPhone"
@@ -2159,7 +2474,9 @@ body.dark .bottomNav{
 
   <div class="field">
 
-   <label>Montant HTG</label>
+   <label>
+    Montant HTG
+   </label>
 
    <input
     id="withdrawAmount"
@@ -2169,15 +2486,22 @@ body.dark .bottomNav{
 
   </div>
 
-  <button class="primaryBtn" onclick="submitWithdraw()">
+  <button
+   class="primaryBtn"
+   onclick="submitWithdraw()">
+
    Demander le retrait
+
   </button>
 
  </div>
 
 </div>
 
-<div class="toast" id="toast"></div>
+<div
+ class="toast"
+ id="toast">
+</div>
 
 <script>
 
@@ -2216,7 +2540,10 @@ async function loadSiteStatus(){
 
  }catch(error){
 
-  console.error("SITE STATUS ERROR:",error);
+  console.error(
+   "SITE STATUS ERROR:",
+   error
+  );
 
   siteStatusLoaded=false;
   siteEnabled=true;
@@ -2227,10 +2554,14 @@ async function loadSiteStatus(){
 
 function applySiteStatus(data){
 
- const closed=document.getElementById("siteClosed");
- const message=document.getElementById("siteClosedMessage");
+ const closed=
+  document.getElementById("siteClosed");
 
- if(!closed)return;
+ const message=
+  document.getElementById("siteClosedMessage");
+
+ if(!closed)
+  return;
 
  if(data.enabled===false){
 
@@ -2249,6 +2580,7 @@ function applySiteStatus(data){
  }else{
 
   closed.style.display="none";
+
   document.body.style.overflow="";
 
  }
@@ -2263,7 +2595,9 @@ function canUseSite(){
 
  if(siteEnabled===false){
 
-  toast("🔒 TRUE ALPHA fèmen pou kounye a.");
+  toast(
+   "🔒 TRUE ALPHA fèmen pou kounye a."
+  );
 
   return false;
 
@@ -2273,22 +2607,26 @@ function canUseSite(){
 
 }
 
-setInterval(refreshSiteStatus,30000);
+setInterval(
+ refreshSiteStatus,
+ 30000
+);
 
 
 /* =========================
    DATA
 ========================= */
 
-const OWNER_NAME="Manuel Pluviose";
+const OWNER_NAME=
+ "Manuel Pluviose";
 
 let selectedPack=null;
 let selectedPrice=0;
 
+
 /*
- * Firebase se sous verite pou login.
- * Pa itilize localStorage pou konnen si
- * itilizatè a konekte.
+ * Firebase se sous verite
+ * pou login.
  */
 
 let loggedIn=false;
@@ -2296,17 +2634,19 @@ let firebaseUser=null;
 
 
 /*
- * Wallet/command yo toujou local
- * pou moman sa a.
- * Backend Wallet la ap vini nan
- * pwochen etap la.
+ * Wallet ak command yo
+ * toujou local pou moman sa a.
  */
 
 let balance=
- Number(localStorage.getItem("ta_balance")||0);
+ Number(
+  localStorage.getItem("ta_balance")||0
+ );
 
 let orders=
- JSON.parse(localStorage.getItem("ta_orders")||"[]");
+ JSON.parse(
+  localStorage.getItem("ta_orders")||"[]"
+ );
 
 
 /* =========================
@@ -2348,7 +2688,8 @@ let notifications=
 
 if(!notifications){
 
- notifications=defaultNotifications;
+ notifications=
+  defaultNotifications;
 
  localStorage.setItem(
   "ta_notifications",
@@ -2362,38 +2703,42 @@ if(!notifications){
    SPLASH
 ========================= */
 
-window.addEventListener("load",async()=>{
+window.addEventListener(
+ "load",
+ async()=>{
 
- await loadSiteStatus();
+  await loadSiteStatus();
 
- setTimeout(()=>{
+  setTimeout(()=>{
 
-  const splash=document.getElementById("splash");
+   const splash=
+    document.getElementById("splash");
 
-  if(splash){
+   if(splash){
 
-   splash.style.opacity="0";
+    splash.style.opacity="0";
 
-   setTimeout(()=>{
+    setTimeout(()=>{
 
-    splash.style.display="none";
+     splash.style.display="none";
 
-    const app=document.getElementById("app");
+     const app=
+      document.getElementById("app");
 
-    if(app)
-     app.style.display="block";
+     if(app)
+      app.style.display="block";
 
-   },500);
+    },500);
 
-  }
+   }
 
- },1800);
+  },1800);
 
- updateUI();
- renderOrders();
- renderNotifications();
+  updateUI();
+  renderOrders();
+  renderNotifications();
 
-});
+ });
 
 
 /* =========================
@@ -2402,7 +2747,9 @@ window.addEventListener("load",async()=>{
 
 function toggleDark(){
 
- document.body.classList.toggle("dark");
+ document.body.classList.toggle(
+  "dark"
+ );
 
  localStorage.setItem(
   "ta_dark",
@@ -2411,7 +2758,9 @@ function toggleDark(){
 
 }
 
-if(localStorage.getItem("ta_dark")==="true"){
+if(
+ localStorage.getItem("ta_dark")==="true"
+){
 
  document.body.classList.add("dark");
 
@@ -2427,22 +2776,28 @@ function showPage(page){
  if(!canUseSite())
   return;
 
- document.querySelectorAll(".page").forEach(
+ document.querySelectorAll(
+  ".page"
+ ).forEach(
   p=>p.classList.remove("active")
  );
 
- const target=document.getElementById(page);
+ const target=
+  document.getElementById(page);
 
  if(target)
   target.classList.add("active");
 
- document.querySelectorAll(".navItem").forEach(
+ document.querySelectorAll(
+  ".navItem"
+ ).forEach(
   n=>n.classList.remove("active")
  );
 
- const nav=document.querySelector(
-  `.navItem[data-page="${page}"]`
- );
+ const nav=
+  document.querySelector(
+   `.navItem[data-page="${page}"]`
+  );
 
  if(nav)
   nav.classList.add("active");
@@ -2463,7 +2818,9 @@ function requireLogin(){
 
  if(!firebaseUser){
 
-  toast("Tanpri konekte ak kont ou avan.");
+  toast(
+   "Tanpri konekte ak kont ou avan."
+  );
 
   setTimeout(
    ()=>openLogin(),
@@ -2515,16 +2872,23 @@ function openWallet(){
 function updateUI(){
 
  const amount=
-  balance.toLocaleString("fr-FR")+" HTG";
+  balance.toLocaleString("fr-FR")+
+  " HTG";
 
  const headerBalance=
-  document.getElementById("headerBalance");
+  document.getElementById(
+   "headerBalance"
+  );
 
  const walletBalance=
-  document.getElementById("walletBalance");
+  document.getElementById(
+   "walletBalance"
+  );
 
  const profileBalance=
-  document.getElementById("profileBalance");
+  document.getElementById(
+   "profileBalance"
+  );
 
  if(headerBalance)
   headerBalance.textContent=amount;
@@ -2536,16 +2900,24 @@ function updateUI(){
   profileBalance.textContent=amount;
 
  const loginButton=
-  document.getElementById("loginButton");
+  document.getElementById(
+   "loginButton"
+  );
 
  const profileName=
-  document.getElementById("profileName");
+  document.getElementById(
+   "profileName"
+  );
 
  const profileEmail=
-  document.getElementById("profileEmail");
+  document.getElementById(
+   "profileEmail"
+  );
 
  const profileAvatar=
-  document.getElementById("profileAvatar");
+  document.getElementById(
+   "profileAvatar"
+  );
 
  if(firebaseUser){
 
@@ -2570,17 +2942,20 @@ function updateUI(){
     name.trim().charAt(0).toUpperCase() ||
     "TA";
 
-   profileAvatar.textContent=firstLetter;
+   profileAvatar.textContent=
+    firstLetter;
 
   }
 
   if(loginButton)
-   loginButton.textContent="Mon compte";
+   loginButton.textContent=
+    "Mon compte";
 
  }else{
 
   if(profileName)
-   profileName.textContent="Visiteur";
+   profileName.textContent=
+    "Visiteur";
 
   if(profileEmail)
    profileEmail.textContent=
@@ -2590,7 +2965,8 @@ function updateUI(){
    profileAvatar.textContent="TA";
 
   if(loginButton)
-   loginButton.textContent="Se connecter";
+   loginButton.textContent=
+    "Se connecter";
 
  }
 
@@ -2606,10 +2982,14 @@ function updateUI(){
 function updateNotificationBadge(){
 
  const badge=
-  document.getElementById("notificationBadge");
+  document.getElementById(
+   "notificationBadge"
+  );
 
  const unread=
-  notifications.filter(n=>!n.read).length;
+  notifications.filter(
+   n=>!n.read
+  ).length;
 
  if(unread>0){
 
@@ -2625,13 +3005,19 @@ function updateNotificationBadge(){
  }
 
  const unreadText=
-  document.getElementById("unreadText");
+  document.getElementById(
+   "unreadText"
+  );
 
  if(unreadText){
 
   unreadText.textContent=
    unread+
-   (unread===1?" nouvelle":" nouvelles");
+   (
+    unread===1
+     ?" nouvelle"
+     :" nouvelles"
+   );
 
  }
 
@@ -2640,9 +3026,12 @@ function updateNotificationBadge(){
 function renderNotifications(){
 
  const box=
-  document.getElementById("notificationsList");
+  document.getElementById(
+   "notificationsList"
+  );
 
- if(!box)return;
+ if(!box)
+  return;
 
  if(!notifications.length){
 
@@ -2657,7 +3046,9 @@ function renderNotifications(){
 
     <br>
 
-    <small>Ou pa gen okenn notification.</small>
+    <small>
+     Ou pa gen okenn notification.
+    </small>
 
    </div>
 
@@ -2670,7 +3061,8 @@ function renderNotifications(){
  }
 
  box.innerHTML=
-  notifications.map(n=>`
+  notifications.map(
+   n=>`
 
    <div
     class="notification ${n.read?"read":"unread"}"
@@ -2704,7 +3096,8 @@ function renderNotifications(){
 
    </div>
 
-  `).join("");
+  `
+  ).join("");
 
  updateNotificationBadge();
 
@@ -2724,7 +3117,9 @@ function showNotifications(){
 function readNotification(id){
 
  const notification=
-  notifications.find(n=>n.id===id);
+  notifications.find(
+   n=>n.id===id
+  );
 
  if(!notification)
   return;
@@ -2741,7 +3136,9 @@ function readNotification(id){
 
  renderNotifications();
 
- toast("Notification lue.");
+ toast(
+  "Notification lue."
+ );
 
 }
 
@@ -2749,13 +3146,17 @@ function readAllNotifications(){
 
  if(!notifications.length){
 
-  toast("Pa gen notification.");
+  toast(
+   "Pa gen notification."
+  );
 
   return;
 
  }
 
- notifications.forEach(n=>n.read=true);
+ notifications.forEach(
+  n=>n.read=true
+ );
 
  localStorage.setItem(
   "ta_notifications",
@@ -2764,7 +3165,9 @@ function readAllNotifications(){
 
  renderNotifications();
 
- toast("Tout notifications lues.");
+ toast(
+  "Tout notifications lues."
+ );
 
 }
 
@@ -2772,7 +3175,9 @@ function clearAllNotifications(){
 
  if(!notifications.length){
 
-  toast("Pa gen notification pou efase.");
+  toast(
+   "Pa gen notification pou efase."
+  );
 
   return;
 
@@ -2787,18 +3192,27 @@ function clearAllNotifications(){
 
  renderNotifications();
 
- toast("Tout notifications efase.");
+ toast(
+  "Tout notifications efase."
+ );
 
 }
 
-function addNotification(title,text){
+function addNotification(
+ title,
+ text
+){
 
  notifications.unshift({
 
   id:Date.now(),
+
   title:title,
+
   text:text,
+
   time:"À l'instant",
+
   read:false
 
  });
@@ -2821,8 +3235,15 @@ let slideIndex=0;
 
 setInterval(()=>{
 
- const slides=document.querySelectorAll(".slide");
- const dots=document.querySelectorAll(".dot");
+ const slides=
+  document.querySelectorAll(
+   ".slide"
+  );
+
+ const dots=
+  document.querySelectorAll(
+   ".dot"
+  );
 
  if(!slides.length)
   return;
@@ -2837,11 +3258,18 @@ setInterval(()=>{
 
  slideIndex++;
 
- if(slideIndex>=slides.length)
+ if(
+  slideIndex>=slides.length
+ )
   slideIndex=0;
 
- slides[slideIndex].classList.add("active");
- dots[slideIndex].classList.add("active");
+ slides[slideIndex].classList.add(
+  "active"
+ );
+
+ dots[slideIndex].classList.add(
+  "active"
+ );
 
 },4500);
 
@@ -2856,11 +3284,15 @@ function verifyUID(){
   return;
 
  const uid=
-  document.getElementById("uid").value.trim();
+  document.getElementById(
+   "uid"
+  ).value.trim();
 
  if(!uid){
 
-  toast("Tanpri antre UID Free Fire ou.");
+  toast(
+   "Tanpri antre UID Free Fire ou."
+  );
 
   return;
 
@@ -2868,33 +3300,55 @@ function verifyUID(){
 
  if(uid.length<5){
 
-  toast("UID la pa sanble valid.");
+  toast(
+   "UID la pa sanble valid."
+  );
 
   return;
 
  }
 
  const btn=
-  document.querySelector(".verifyBtn");
+  document.querySelector(
+   ".verifyBtn"
+  );
 
  btn.disabled=true;
- btn.textContent="Vérification...";
 
- document.getElementById("playerResult").style.display="none";
- document.getElementById("packsArea").style.display="none";
+ btn.textContent=
+  "Vérification...";
+
+ document.getElementById(
+  "playerResult"
+ ).style.display="none";
+
+ document.getElementById(
+  "packsArea"
+ ).style.display="none";
 
  setTimeout(()=>{
 
-  document.getElementById("playerName").textContent=
+  document.getElementById(
+   "playerName"
+  ).textContent=
    "UID "+uid;
 
-  document.getElementById("playerResult").style.display="block";
-  document.getElementById("packsArea").style.display="block";
+  document.getElementById(
+   "playerResult"
+  ).style.display="block";
+
+  document.getElementById(
+   "packsArea"
+  ).style.display="block";
 
   btn.disabled=false;
-  btn.textContent="Vérifier le joueur";
 
-  toast("UID prepare pou verification.");
+  btn.textContent=
+   "Vérifier le joueur";
+
+  toast(
+   "UID prepare pou verification."
+  );
 
  },1400);
 
@@ -2905,21 +3359,30 @@ function verifyUID(){
    PACK
 ========================= */
 
-function selectPack(element,name,price){
+function selectPack(
+ element,
+ name,
+ price
+){
 
  if(!canUseSite())
   return;
 
- document.querySelectorAll(".pack").forEach(
+ document.querySelectorAll(
+  ".pack"
+ ).forEach(
   p=>p.classList.remove("selected")
  );
 
  element.classList.add("selected");
 
  selectedPack=name;
+
  selectedPrice=price;
 
- toast(name+" sélectionné.");
+ toast(
+  name+" sélectionné."
+ );
 
 }
 
@@ -2938,18 +3401,24 @@ function buyNow(){
 
  if(!selectedPack){
 
-  toast("Chwazi yon pack avan.");
+  toast(
+   "Chwazi yon pack avan."
+  );
 
   return;
 
  }
 
  const uid=
-  document.getElementById("uid").value.trim();
+  document.getElementById(
+   "uid"
+  ).value.trim();
 
  if(!uid){
 
-  toast("UID la obligatwa.");
+  toast(
+   "UID la obligatwa."
+  );
 
   return;
 
@@ -2957,7 +3426,9 @@ function buyNow(){
 
  if(balance<selectedPrice){
 
-  toast("Solde insuffisant. Recharger Wallet.");
+  toast(
+   "Solde insuffisant. Recharger Wallet."
+  );
 
   setTimeout(
    ()=>openRecharge(),
@@ -2968,30 +3439,33 @@ function buyNow(){
 
  }
 
- /*
-  * ATANSYON:
-  * Kòmand lan toujou local pou moman sa a.
-  * Nou pral ranplase sa ak /api/create-order
-  * apre backend Firebase Wallet la pare.
-  */
-
  const order={
 
-  id:"TA-"+Date.now(),
+  id:
+   "TA-"+Date.now(),
 
-  type:"Free Fire",
+  type:
+   "Free Fire",
 
-  uid:uid,
+  uid:
+   uid,
 
-  server:"NA — North America",
+  server:
+   "NA — North America",
 
-  pack:selectedPack,
+  pack:
+   selectedPack,
 
-  price:selectedPrice,
+  price:
+   selectedPrice,
 
-  status:"En attente",
+  status:
+   "En attente",
 
-  date:new Date().toLocaleString("fr-FR")
+  date:
+   new Date().toLocaleString(
+    "fr-FR"
+   )
 
  };
 
@@ -3009,7 +3483,9 @@ function buyNow(){
   "Votre commande Free Fire a été créée et attend la validation."
  );
 
- toast("Commande préparée.");
+ toast(
+  "Commande préparée."
+ );
 
  showPage("orders");
 
@@ -3023,7 +3499,9 @@ function buyNow(){
 function renderOrders(){
 
  const box=
-  document.getElementById("ordersList");
+  document.getElementById(
+   "ordersList"
+  );
 
  if(!box)
   return;
@@ -3034,7 +3512,8 @@ function renderOrders(){
 
    <div class="ffBox">
 
-    <p style="text-align:center;color:var(--muted);font-size:12px">
+    <p
+     style="text-align:center;color:var(--muted);font-size:12px">
 
      Aucune commande pour le moment.
 
@@ -3049,7 +3528,8 @@ function renderOrders(){
  }
 
  box.innerHTML=
-  orders.map(order=>`
+  orders.map(
+   order=>`
 
    <div class="order">
 
@@ -3065,28 +3545,32 @@ function renderOrders(){
 
     </div>
 
-    <div style="margin-top:10px;font-size:11px">
+    <div
+     style="margin-top:10px;font-size:11px">
 
      <b>UID:</b>
      ${escapeHTML(order.uid)}
 
     </div>
 
-    <div style="margin-top:5px;font-size:11px">
+    <div
+     style="margin-top:5px;font-size:11px">
 
      <b>Serveur:</b>
      ${escapeHTML(order.server)}
 
     </div>
 
-    <div style="margin-top:5px;font-size:11px">
+    <div
+     style="margin-top:5px;font-size:11px">
 
      <b>Pack:</b>
      ${escapeHTML(order.pack)}
 
     </div>
 
-    <div style="margin-top:5px;font-size:11px">
+    <div
+     style="margin-top:5px;font-size:11px">
 
      <b>Prix:</b>
 
@@ -3096,7 +3580,8 @@ function renderOrders(){
 
     </div>
 
-    <div style="margin-top:5px;font-size:9px;color:var(--muted)">
+    <div
+     style="margin-top:5px;font-size:9px;color:var(--muted)">
 
      ${escapeHTML(order.date)}
 
@@ -3104,7 +3589,8 @@ function renderOrders(){
 
    </div>
 
-  `).join("");
+  `
+  ).join("");
 
 }
 
@@ -3123,13 +3609,24 @@ function openLogin(){
 
  }
 
- document.getElementById("loginModal").classList.add("show");
+ const modal=
+  document.getElementById(
+   "loginModal"
+  );
+
+ if(modal)
+  modal.classList.add("show");
 
 }
 
 
 /*
- * Google Login la rele nan firebase.js.
+ * GOOGLE LOGIN
+ *
+ * Firebase se nan firebase.js.
+ *
+ * Nou montre erè Firebase egzak la
+ * pou konnen poukisa login lan echwe.
  */
 
 async function googleLogin(){
@@ -3139,9 +3636,13 @@ async function googleLogin(){
 
  if(!window.TA_FIREBASE){
 
-  console.error("Firebase pa chaje.");
+  console.error(
+   "Firebase pa chaje."
+  );
 
-  toast("❌ Firebase pa chaje. Verifye firebase.js.");
+  toast(
+   "❌ Firebase pa chaje. Verifye firebase.js."
+  );
 
   return;
 
@@ -3149,64 +3650,130 @@ async function googleLogin(){
 
  try{
 
+  toast(
+   "⏳ Connexion Google..."
+  );
+
   const result=
    await window.TA_FIREBASE.signInWithPopup(
     window.TA_FIREBASE.auth,
     window.TA_FIREBASE.googleProvider
    );
 
-  const user=result.user;
+  const user=
+   result.user;
 
   firebaseUser=user;
+
   loggedIn=true;
 
   updateUI();
 
-  closeModal("loginModal");
+  closeModal(
+   "loginModal"
+  );
+
+  const userName=
+   user.displayName ||
+   user.email ||
+   "Utilisateur";
 
   addNotification(
    "Connexion réussie",
-   "Bienvenue sur TRUE ALPHA, "+(
-    user.displayName ||
-    user.email ||
-    "Utilisateur"
-   )+"."
+   "Bienvenue sur TRUE ALPHA, "+
+   userName+
+   "."
   );
 
   toast(
-   "✅ Bienvenue "+(
-    user.displayName ||
-    user.email ||
-    "!"
-   )
+   "✅ Bienvenue "+
+   userName
   );
 
  }catch(error){
 
-  console.error("GOOGLE LOGIN ERROR:",error);
+  console.error(
+   "GOOGLE LOGIN ERROR:",
+   error
+  );
 
-  if(error.code==="auth/popup-closed-by-user"){
+  console.error(
+   "GOOGLE ERROR CODE:",
+   error.code
+  );
 
-   toast("Fenèt Google la fèmen.");
+  console.error(
+   "GOOGLE ERROR MESSAGE:",
+   error.message
+  );
 
-  }else if(error.code==="auth/popup-blocked"){
+  if(
+   error.code===
+   "auth/popup-closed-by-user"
+  ){
 
-   toast("❌ Navigatè a bloke fenèt Google la.");
+   toast(
+    "Fenèt Google la fèmen."
+   );
 
-  }else if(error.code==="auth/unauthorized-domain"){
+  }else if(
+   error.code===
+   "auth/popup-blocked"
+  ){
 
-   toast("❌ Domèn sit la poko otorize nan Firebase.");
+   toast(
+    "❌ Navigatè a bloke fenèt Google la."
+   );
+
+  }else if(
+   error.code===
+   "auth/unauthorized-domain"
+  ){
+
+   toast(
+    "❌ Domèn Vercel la poko otorize nan Firebase."
+   );
+
+  }else if(
+   error.code===
+   "auth/operation-not-allowed"
+  ){
+
+   toast(
+    "❌ Google Login pa aktive nan Firebase."
+   );
+
+  }else if(
+   error.code===
+   "auth/network-request-failed"
+  ){
+
+   toast(
+    "❌ Pwoblèm entènèt. Eseye ankò."
+   );
+
+  }else if(
+   error.code===
+   "auth/cancelled-popup-request"
+  ){
+
+   toast(
+    "❌ Yon lòt fenèt Google deja louvri."
+   );
 
   }else{
 
    toast(
-    "❌ Google Login pa reyisi."
+    "❌ Google Login: "+
+    (
+     error.code ||
+     "erè enkoni"
+    )
    );
 
   }
 
  }
-
 
 }
 
@@ -3219,7 +3786,9 @@ async function logout(){
 
  if(!firebaseUser){
 
-  toast("Ou pa konekte.");
+  toast(
+   "Ou pa konekte."
+  );
 
   return;
 
@@ -3232,19 +3801,27 @@ async function logout(){
   );
 
   firebaseUser=null;
+
   loggedIn=false;
 
   updateUI();
 
   showPage("home");
 
-  toast("✅ Déconnexion réussie.");
+  toast(
+   "✅ Déconnexion réussie."
+  );
 
  }catch(error){
 
-  console.error("LOGOUT ERROR:",error);
+  console.error(
+   "LOGOUT ERROR:",
+   error
+  );
 
-  toast("❌ Erè pandan déconnexion.");
+  toast(
+   "❌ Erè pandan déconnexion."
+  );
 
  }
 
@@ -3263,7 +3840,9 @@ function openRecharge(){
  if(!requireLogin())
   return;
 
- document.getElementById("rechargeModal").classList.add("show");
+ document.getElementById(
+  "rechargeModal"
+ ).classList.add("show");
 
 }
 
@@ -3274,7 +3853,9 @@ function startRecharge(){
 
  if(!requireLogin()){
 
-  closeModal("rechargeModal");
+  closeModal(
+   "rechargeModal"
+  );
 
   return;
 
@@ -3282,25 +3863,36 @@ function startRecharge(){
 
  const amount=
   Number(
-   document.getElementById("rechargeAmount").value
+   document.getElementById(
+    "rechargeAmount"
+   ).value
   );
 
- if(!amount || amount<50){
+ if(
+  !amount ||
+  amount<50
+ ){
 
-  toast("Minimum recharge : 50 HTG.");
+  toast(
+   "Minimum recharge : 50 HTG."
+  );
 
   return;
 
  }
 
- closeModal("rechargeModal");
+ closeModal(
+  "rechargeModal"
+ );
 
  addNotification(
   "Recharge Wallet",
   "Votre demande de recharge a été préparée."
  );
 
- toast("Demande de recharge prepare.");
+ toast(
+  "Demande de recharge prepare."
+ );
 
 }
 
@@ -3317,7 +3909,9 @@ function transferMoney(){
  if(!requireLogin())
   return;
 
- document.getElementById("transferModal").classList.add("show");
+ document.getElementById(
+  "transferModal"
+ ).classList.add("show");
 
 }
 
@@ -3327,16 +3921,22 @@ function submitTransfer(){
   return;
 
  const email=
-  document.getElementById("transferEmail").value.trim();
+  document.getElementById(
+   "transferEmail"
+  ).value.trim();
 
  const amount=
   Number(
-   document.getElementById("transferAmount").value
+   document.getElementById(
+    "transferAmount"
+   ).value
   );
 
  if(!email){
 
-  toast("Antre email moun nan.");
+  toast(
+   "Antre email moun nan."
+  );
 
   return;
 
@@ -3344,7 +3944,9 @@ function submitTransfer(){
 
  if(amount<50){
 
-  toast("Minimum transfè : 50 HTG.");
+  toast(
+   "Minimum transfè : 50 HTG."
+  );
 
   return;
 
@@ -3352,20 +3954,26 @@ function submitTransfer(){
 
  if(amount>balance){
 
-  toast("Solde insuffisant.");
+  toast(
+   "Solde insuffisant."
+  );
 
   return;
 
  }
 
- closeModal("transferModal");
+ closeModal(
+  "transferModal"
+ );
 
  addNotification(
   "Transfert",
   "Votre demande de transfert a été préparée."
  );
 
- toast("Demann transfè prepare.");
+ toast(
+  "Demann transfè prepare."
+ );
 
 }
 
@@ -3382,7 +3990,9 @@ function withdrawMoney(){
  if(!requireLogin())
   return;
 
- document.getElementById("withdrawModal").classList.add("show");
+ document.getElementById(
+  "withdrawModal"
+ ).classList.add("show");
 
 }
 
@@ -3392,16 +4002,22 @@ function submitWithdraw(){
   return;
 
  const phone=
-  document.getElementById("withdrawPhone").value.trim();
+  document.getElementById(
+   "withdrawPhone"
+  ).value.trim();
 
  const amount=
   Number(
-   document.getElementById("withdrawAmount").value
+   document.getElementById(
+    "withdrawAmount"
+   ).value
   );
 
  if(!phone){
 
-  toast("Antre nimewo retrè a.");
+  toast(
+   "Antre nimewo retrè a."
+  );
 
   return;
 
@@ -3409,7 +4025,9 @@ function submitWithdraw(){
 
  if(amount<5000){
 
-  toast("Minimum retrè : 5,000 HTG.");
+  toast(
+   "Minimum retrè : 5,000 HTG."
+  );
 
   return;
 
@@ -3417,20 +4035,26 @@ function submitWithdraw(){
 
  if(amount>balance){
 
-  toast("Solde insuffisant.");
+  toast(
+   "Solde insuffisant."
+  );
 
   return;
 
  }
 
- closeModal("withdrawModal");
+ closeModal(
+  "withdrawModal"
+ );
 
  addNotification(
   "Demande de retrait",
   "Votre demande de retrait a été enregistrée."
  );
 
- toast("Demann retrè prepare.");
+ toast(
+  "Demann retrè prepare."
+ );
 
 }
 
@@ -3459,20 +4083,33 @@ function contactCard(){
 function changeLanguage(){
 
  const current=
-  localStorage.getItem("ta_language")||"fr";
+  localStorage.getItem(
+   "ta_language"
+  )||"fr";
 
  const next=
-  current==="fr"?"ht":"fr";
+  current==="fr"
+   ?"ht"
+   :"fr";
 
  localStorage.setItem(
   "ta_language",
   next
  );
 
- document.getElementById("languageText").textContent=
-  next==="fr"
-   ?"Français / Kreyòl ›"
-   :"Kreyòl / Français ›";
+ const el=
+  document.getElementById(
+   "languageText"
+  );
+
+ if(el){
+
+  el.textContent=
+   next==="fr"
+    ?"Français / Kreyòl ›"
+    :"Kreyòl / Français ›";
+
+ }
 
  toast(
   next==="fr"
@@ -3493,11 +4130,15 @@ function closeModal(id){
   document.getElementById(id);
 
  if(modal)
-  modal.classList.remove("show");
+  modal.classList.remove(
+   "show"
+  );
 
 }
 
-document.querySelectorAll(".modal").forEach(
+document.querySelectorAll(
+ ".modal"
+).forEach(
  modal=>{
 
   modal.addEventListener(
@@ -3505,7 +4146,9 @@ document.querySelectorAll(".modal").forEach(
    e=>{
 
     if(e.target===modal)
-     modal.classList.remove("show");
+     modal.classList.remove(
+      "show"
+     );
 
    }
   );
@@ -3523,7 +4166,9 @@ let toastTimer;
 function toast(message){
 
  const t=
-  document.getElementById("toast");
+  document.getElementById(
+   "toast"
+  );
 
  if(!t)
   return;
@@ -3532,13 +4177,17 @@ function toast(message){
 
  t.classList.add("show");
 
- clearTimeout(toastTimer);
+ clearTimeout(
+  toastTimer
+ );
 
  toastTimer=setTimeout(
   ()=>{
-   t.classList.remove("show");
+   t.classList.remove(
+    "show"
+   );
   },
-  2600
+  3000
  );
 
 }
@@ -3551,11 +4200,26 @@ function toast(message){
 function escapeHTML(value){
 
  return String(value)
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  .replace(
+   /&/g,
+   "&amp;"
+  )
+  .replace(
+   /</g,
+   "&lt;"
+  )
+  .replace(
+   />/g,
+   "&gt;"
+  )
+  .replace(
+   /"/g,
+   "&quot;"
+  )
+  .replace(
+   /'/g,
+   "&#039;"
+  );
 
 }
 
@@ -3567,10 +4231,14 @@ function escapeHTML(value){
 (function(){
 
  const lang=
-  localStorage.getItem("ta_language")||"fr";
+  localStorage.getItem(
+   "ta_language"
+  )||"fr";
 
  const el=
-  document.getElementById("languageText");
+  document.getElementById(
+   "languageText"
+  );
 
  if(el){
 
@@ -3602,7 +4270,7 @@ import {
 
 
 /*
- * Nou mete Firebase sou window pou
+ * Firebase sou window pou
  * script prensipal la ka itilize li.
  */
 
@@ -3620,36 +4288,40 @@ window.TA_FIREBASE={
 
 
 /*
- * Firebase ap kontwole si itilizatè a
- * konekte oswa dekonekte.
+ * Firebase ap kontwole login/logout.
  */
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(
+ auth,
+ (user)=>{
 
- firebaseUser=user || null;
+  firebaseUser=
+   user || null;
 
- loggedIn=!!user;
+  loggedIn=
+   !!user;
 
- updateUI();
+  updateUI();
 
- if(user){
+  if(user){
 
-  console.log(
-   "TRUE ALPHA user connecté:",
-   user.email
-  );
+   console.log(
+    "TRUE ALPHA user connecté:",
+    user.email
+   );
 
- }else{
+  }else{
 
-  console.log(
-   "TRUE ALPHA user non connecté"
-  );
+   console.log(
+    "TRUE ALPHA user non connecté"
+   );
+
+  }
 
  }
-
-});
+);
 
 </script>
 
 </body>
- </html>
+</html>
