@@ -1,10 +1,10 @@
 import { get, put } from "@vercel/blob";
 
-export async function GET(request) {
-  try {
-    const pathname = "settings/site-status.json";
+const PATH = "settings/site-status.json";
 
-    const blob = await get(pathname, {
+export async function GET() {
+  try {
+    const blob = await get(PATH, {
       access: "public"
     });
 
@@ -16,28 +16,41 @@ export async function GET(request) {
     }
 
     const response = new Response(blob.stream);
+
     const settings = await response.json();
 
-    return Response.json(settings);
+    return Response.json({
+      enabled: settings.enabled === true,
+      message: settings.message || ""
+    });
 
   } catch (error) {
-    console.error("SITE STATUS GET ERROR:", error);
-
-    return Response.json(
-      {
-        enabled: true,
-        message: ""
-      },
-      { status: 200 }
+    console.error(
+      "SITE STATUS GET ERROR:",
+      error
     );
+
+    /*
+     * Si pa gen settings ankò,
+     * sit la rete ON pa default.
+     */
+
+    return Response.json({
+      enabled: true,
+      message: ""
+    });
   }
 }
 
 export async function POST(request) {
   try {
-    const token = request.headers.get("x-admin-token");
+    const token =
+      request.headers.get("x-admin-token");
 
-    if (!token || token !== process.env.ADMIN_TOKEN) {
+    if (
+      !token ||
+      token !== process.env.ADMIN_TOKEN
+    ) {
       return Response.json(
         {
           success: false,
@@ -51,11 +64,14 @@ export async function POST(request) {
 
     const settings = {
       enabled: data.enabled === true,
-      message: data.message || ""
+      message:
+        typeof data.message === "string"
+          ? data.message.trim()
+          : ""
     };
 
     await put(
-      "settings/site-status.json",
+      PATH,
       JSON.stringify(settings),
       {
         access: "public",
@@ -71,7 +87,10 @@ export async function POST(request) {
     });
 
   } catch (error) {
-    console.error("SITE STATUS POST ERROR:", error);
+    console.error(
+      "SITE STATUS POST ERROR:",
+      error
+    );
 
     return Response.json(
       {
@@ -81,4 +100,4 @@ export async function POST(request) {
       { status: 500 }
     );
   }
-}
+      }
