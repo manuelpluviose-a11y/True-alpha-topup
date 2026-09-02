@@ -1,1710 +1,3564 @@
 <!DOCTYPE html>
-<html lang="ht">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>TRUE ALPHA TopUp</title>
 
-  <title>True Alpha TopUp</title>
+<style>
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:Inter,Arial,sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+:root{
+ --bg:#f6f8fc;
+ --card:#fff;
+ --text:#101828;
+ --muted:#667085;
+ --primary:#635bff;
+ --primary2:#7c3aed;
+ --border:#e7eaf0;
+ --success:#12b76a;
+ --danger:#f04438;
+ --warning:#f79009;
+ --shadow:0 10px 30px rgba(16,24,40,.07);
+}
 
-    body {
-      background: #0b0b12;
-      color: #fff;
-      min-height: 100vh;
-      padding: 18px;
-    }
+body.dark{
+ --bg:#0b0d13;
+ --card:#151821;
+ --text:#f5f7fa;
+ --muted:#98a2b3;
+ --border:#272b36;
+ --shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
-    .container {
-      max-width: 480px;
-      margin: auto;
-    }
+body{
+ background:var(--bg);
+ color:var(--text);
+ min-height:100vh;
+ transition:.25s;
+}
 
-    .header {
-      text-align: center;
-      margin: 12px 0 22px;
-    }
+button,input{
+ font:inherit;
+}
 
-    .header h1 {
-      color: #00e5ff;
-      font-size: 25px;
-    }
+button{
+ cursor:pointer;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+/* SPLASH */
 
-    .product-card {
-      background: #151520;
-      border: 1px solid #303044;
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform .15s, border-color .15s;
-    }
+#splash{
+ position:fixed;
+ inset:0;
+ z-index:9999;
+ background:#fff;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ transition:.5s;
+}
 
-    .product-card:active {
-      transform: scale(.97);
-    }
+body.dark #splash{
+ background:#0b0d13;
+}
 
-    .product-card:hover {
-      border-color: #00e5ff;
-    }
+.splashBox{
+ text-align:center;
+ animation:fadeUp .7s ease;
+}
 
-    .diamond-image {
-      height: 145px;
-      position: relative;
-      overflow: hidden;
-      background: #0e0e17;
-    }
+.alphaLogo,
+.brandLogo{
+ background:linear-gradient(135deg,#635bff,#8b5cf6);
+ color:#fff;
+ font-weight:900;
+}
 
-    .banner-img-card {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+.alphaLogo{
+ width:70px;
+ height:70px;
+ border-radius:22px;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:34px;
+ box-shadow:0 15px 35px rgba(99,91,255,.3);
+}
 
-    .product-info {
-      padding: 12px;
-    }
+.splashTitle{
+ margin-top:14px;
+ font-size:23px;
+ font-weight:900;
+}
 
-    .category {
-      color: #888;
-      font-size: 12px;
-      margin-bottom: 7px;
-    }
+.splashName{
+ margin-top:5px;
+ color:#667085;
+ font-size:14px;
+}
 
-    .product-name {
-      font-size: 15px;
-      font-weight: bold;
-      line-height: 1.3;
-      margin-bottom: 9px;
-    }
+.loader{
+ width:35px;
+ height:35px;
+ border:3px solid #e6e8ef;
+ border-top-color:#635bff;
+ border-radius:50%;
+ margin:22px auto 0;
+ animation:spin .8s linear infinite;
+}
 
-    .product-price {
-      color: #00e5ff;
-      font-size: 14px;
-      font-weight: bold;
-    }
+@keyframes spin{
+ to{transform:rotate(360deg);}
+}
 
-    #orderBox {
-      display: none;
-      margin-top: 15px;
-    }
+@keyframes fadeUp{
+ from{
+  opacity:0;
+  transform:translateY(15px);
+ }
+ to{
+  opacity:1;
+  transform:none;
+ }
+}
 
-    .card {
-      background: #151520;
-      border: 1px solid #29293a;
-      border-radius: 15px;
-      padding: 17px;
-    }
+/* APP */
 
-    .card h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
+#app{
+ display:none;
+ padding-bottom:90px;
+}
 
-    .menu-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-      margin-bottom: 12px;
-    }
+.container{
+ width:min(100% - 28px,1100px);
+ margin:auto;
+}
 
-    .back-menu,
-    .close-order {
-      margin-bottom: 0;
-      background: transparent;
-      border: 1px solid #36364a;
-      color: #aaa;
-      font-size: 14px;
-      padding: 11px;
-    }
+/* HEADER */
 
-    .close-order {
-      border-color: #7a3030;
-      color: #ff7777;
-    }
+header{
+ height:72px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+}
 
-    .menu-buttons button:disabled {
-      opacity: .35;
-      cursor: not-allowed;
-    }
+.brand{
+ display:flex;
+ align-items:center;
+ gap:9px;
+}
 
-    label {
-      display: block;
-      color: #ccc;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
+.brandLogo{
+ width:40px;
+ height:40px;
+ border-radius:13px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 13px;
-      margin-bottom: 14px;
-      border-radius: 9px;
-      border: 1px solid #36364a;
-      background: #0e0e17;
-      color: white;
-      outline: none;
-      font-size: 14px;
-    }
+.brandText strong{
+ display:block;
+ font-size:15px;
+}
 
-    input:focus,
-    select:focus {
-      border-color: #00e5ff;
-    }
+.brandText span{
+ font-size:10px;
+ color:var(--muted);
+}
 
-    input:disabled,
-    select:disabled {
-      opacity: .55;
-    }
+.headerRight{
+ display:flex;
+ align-items:center;
+ gap:7px;
+}
 
-    .server {
-      background: #0e0e17;
-      border: 1px solid #36364a;
-      border-radius: 9px;
-      padding: 13px;
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
+.iconBtn{
+ width:38px;
+ height:38px;
+ border:1px solid var(--border);
+ background:var(--card);
+ border-radius:12px;
+ color:var(--text);
+ position:relative;
+}
 
-    .server strong {
-      color: #00e5ff;
-    }
+.badge{
+ position:absolute;
+ right:-4px;
+ top:-4px;
+ background:#f04438;
+ color:#fff;
+ font-size:8px;
+ min-width:16px;
+ height:16px;
+ padding:0 4px;
+ border-radius:20px;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ font-weight:900;
+}
 
-    .payment {
-      background: #0e0e17;
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 14px;
-      font-size: 13px;
-      line-height: 1.7;
-    }
+.loginBtn{
+ border:0;
+ color:#fff;
+ background:linear-gradient(135deg,#635bff,#7c3aed);
+ border-radius:12px;
+ padding:10px 12px;
+ font-weight:800;
+ font-size:11px;
+}
 
-    .payment strong {
-      color: #00e5ff;
-    }
+/* WALLET */
 
-    .warning {
-      background: #291e08;
-      border: 1px solid #8b6a15;
-      color: #ffd54f;
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 14px;
-      font-size: 12px;
-      line-height: 1.5;
-    }
+.walletMini{
+ background:var(--card);
+ border:1px solid var(--border);
+ box-shadow:var(--shadow);
+ border-radius:18px;
+ padding:15px;
+ margin-top:5px;
+}
 
-    .price {
-      text-align: center;
-      background: #101b20;
-      border: 1px solid #00e5ff;
-      border-radius: 10px;
-      padding: 11px;
-      margin-bottom: 14px;
-    }
+.walletTop{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
 
-    .price small {
-      display: block;
-      color: #aaa;
-      margin-bottom: 3px;
-    }
+.walletLabel{
+ color:var(--muted);
+ font-size:11px;
+}
 
-    .price strong {
-      font-size: 23px;
-      color: #00e5ff;
-    }
+.walletAmount{
+ font-size:21px;
+ font-weight:900;
+ margin-top:3px;
+}
 
-    button {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      background: #00e5ff;
-      color: #001014;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.recharge{
+ border:0;
+ background:#eeeafe;
+ color:#635bff;
+ font-weight:800;
+ padding:9px 11px;
+ border-radius:10px;
+}
 
-    button:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
+/* BANNER */
 
-    .verify {
-      margin-bottom: 14px;
-    }
+.banner{
+ margin-top:16px;
+ position:relative;
+ overflow:hidden;
+ border-radius:20px;
+ height:180px;
+ box-shadow:var(--shadow);
+}
 
-    .whatsapp {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 10px;
-      background: #168c4a;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-    }
+.slide{
+ position:absolute;
+ inset:0;
+ opacity:0;
+ transform:scale(1.02);
+ transition:.6s;
+ padding:24px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+}
 
-    #purchaseArea {
-      display: none;
-    }
+.slide.active{
+ opacity:1;
+ transform:scale(1);
+}
 
-    #verified {
-      display: none;
-      text-align: center;
-      background: #10251c;
-      border: 1px solid #168c4a;
-      color: #5ee39a;
-      border-radius: 9px;
-      padding: 11px;
-      margin-bottom: 14px;
-      font-size: 13px;
-    }
+.slide:nth-child(1){
+ background:linear-gradient(120deg,#111827,#312e81);
+ color:#fff;
+}
 
-    #message {
-      display: none;
-      text-align: center;
-      margin-top: 12px;
-      font-size: 13px;
-      line-height: 1.5;
-      padding: 10px;
-      border-radius: 9px;
-    }
+.slide:nth-child(2){
+ background:linear-gradient(120deg,#071e34,#087f8c);
+ color:#fff;
+}
 
-    #siteClosed {
-      display: none;
-      background: #4a1717;
-      border: 1px solid #d32f2f;
-      color: #ff7777;
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 15px;
-      text-align: center;
-      line-height: 1.5;
-      font-size: 14px;
-    }
+.slide:nth-child(3){
+ background:linear-gradient(120deg,#40106e,#7c1d4d);
+ color:#fff;
+}
 
-    .processing {
-      animation: pulse 1.2s infinite;
-    }
+.slideText{
+ max-width:70%;
+}
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
+.slideText small{
+ opacity:.75;
+ font-weight:700;
+}
 
-      50% {
-        opacity: .45;
-      }
-    }
+.slideText h2{
+ margin:7px 0;
+ font-size:20px;
+}
 
-    @media (max-width: 360px) {
-      .products {
-        grid-template-columns: 1fr;
-      }
+.slideText p{
+ font-size:11px;
+ opacity:.88;
+ line-height:1.5;
+}
 
-      .menu-buttons {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.bannerArt{
+ font-size:54px;
+}
+
+.dots{
+ position:absolute;
+ bottom:10px;
+ left:50%;
+ transform:translateX(-50%);
+ display:flex;
+ gap:5px;
+}
+
+.dot{
+ width:6px;
+ height:6px;
+ border-radius:50%;
+ background:rgba(255,255,255,.4);
+}
+
+.dot.active{
+ width:18px;
+ border-radius:10px;
+ background:#fff;
+}
+
+/* HERO */
+
+.hero{
+ margin-top:24px;
+}
+
+.hero h1{
+ font-size:27px;
+ line-height:1.15;
+}
+
+.hero h1 span{
+ color:var(--primary);
+}
+
+.hero p{
+ margin-top:8px;
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.6;
+}
+
+/* CATEGORIES */
+
+.sectionTitle{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:25px 0 13px;
+}
+
+.sectionTitle h2{
+ font-size:17px;
+}
+
+.sectionTitle span{
+ color:var(--primary);
+ font-size:11px;
+ font-weight:800;
+}
+
+.categories{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:13px;
+}
+
+.category{
+ min-height:125px;
+ border:1px solid var(--border);
+ background:var(--card);
+ border-radius:20px;
+ padding:17px;
+ box-shadow:var(--shadow);
+ transition:.2s;
+}
+
+.category:hover{
+ transform:translateY(-3px);
+}
+
+.categoryIcon{
+ width:52px;
+ height:52px;
+ border-radius:17px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:28px;
+ margin-bottom:12px;
+}
+
+.gamesIcon{
+ background:#eeeafe;
+}
+
+.cardsIcon{
+ background:#e7f8ef;
+}
+
+.category strong{
+ display:block;
+ font-size:15px;
+}
+
+.category small{
+ color:var(--muted);
+ font-size:10px;
+}
+
+/* PAGES */
+
+.page{
+ display:none;
+ animation:fadeUp .3s ease;
+}
+
+.page.active{
+ display:block;
+}
+
+.backBtn{
+ border:0;
+ background:transparent;
+ color:var(--primary);
+ font-weight:800;
+ margin:10px 0 18px;
+}
+
+/* GAMES */
+
+.gamesGrid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:13px;
+}
+
+.gameCard{
+ position:relative;
+ overflow:hidden;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ box-shadow:var(--shadow);
+ min-height:185px;
+}
+
+.gameVisual{
+ height:105px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ position:relative;
+ overflow:hidden;
+}
+
+.freefireBg{
+ background:linear-gradient(135deg,#ff6b00,#ef2020);
+}
+
+.dlsBg{
+ background:linear-gradient(135deg,#0066ff,#101a62);
+}
+
+.europeBg{
+ background:linear-gradient(135deg,#243b55,#141e30);
+}
+
+.latamBg{
+ background:linear-gradient(135deg,#11998e,#38ef7d);
+}
+
+.booyahBg{
+ background:linear-gradient(135deg,#ff416c,#ff4b2b);
+}
+
+.otherBg{
+ background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.gameEmoji{
+ font-size:48px;
+ filter:drop-shadow(0 8px 8px rgba(0,0,0,.25));
+}
+
+.gameInfo{
+ padding:12px;
+}
+
+.gameInfo strong{
+ display:block;
+ font-size:13px;
+}
+
+.gameInfo small{
+ color:var(--muted);
+ font-size:10px;
+}
+
+.available{
+ color:var(--success)!important;
+ font-weight:800;
+}
+
+.soon{
+ color:var(--warning)!important;
+ font-weight:800;
+}
+
+.soonLayer{
+ position:absolute;
+ inset:0;
+ background:rgba(0,0,0,.38);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.soonLayer span{
+ color:#fff;
+ background:rgba(0,0,0,.58);
+ padding:6px 9px;
+ border-radius:8px;
+ font-size:10px;
+ font-weight:800;
+}
+
+/* FREE FIRE */
+
+.ffBox{
+ background:var(--card);
+ border:1px solid var(--border);
+ box-shadow:var(--shadow);
+ border-radius:20px;
+ padding:18px;
+}
+
+.instruction{
+ background:#eeeafe;
+ color:#5147c8;
+ border-radius:13px;
+ padding:12px;
+ font-size:12px;
+ line-height:1.5;
+ margin-bottom:15px;
+}
+
+body.dark .instruction{
+ background:#211d39;
+ color:#c8c2ff;
+}
+
+.field{
+ margin-bottom:14px;
+}
+
+.field label{
+ display:block;
+ font-size:11px;
+ font-weight:800;
+ margin-bottom:6px;
+}
+
+.field input{
+ width:100%;
+ border:1px solid var(--border);
+ background:var(--bg);
+ color:var(--text);
+ padding:13px;
+ border-radius:12px;
+ outline:none;
+}
+
+.verifyBtn,
+.buyBtn,
+.primaryBtn{
+ width:100%;
+ border:0;
+ background:linear-gradient(135deg,#635bff,#7c3aed);
+ color:#fff;
+ padding:14px;
+ border-radius:13px;
+ font-weight:900;
+}
+
+.verifyBtn:disabled{
+ opacity:.65;
+}
+
+.playerResult{
+ display:none;
+ margin-top:15px;
+ padding:13px;
+ border-radius:13px;
+ background:#eafaf2;
+ border:1px solid #c6f0d9;
+ color:#087443;
+}
+
+.packs{
+ display:grid;
+ gap:10px;
+ margin-top:15px;
+}
+
+.pack{
+ border:1px solid var(--border);
+ background:var(--card);
+ border-radius:15px;
+ padding:14px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+}
+
+.pack.selected{
+ border:2px solid var(--primary);
+ background:#f2f0ff;
+}
+
+body.dark .pack.selected{
+ background:#211d39;
+}
+
+.diamonds{
+ font-weight:900;
+}
+
+.price{
+ font-weight:900;
+ color:var(--primary);
+}
+
+/* CARD */
+
+.virtualCard{
+ background:linear-gradient(135deg,#111827,#4f46e5);
+ height:190px;
+ border-radius:22px;
+ padding:22px;
+ color:#fff;
+ position:relative;
+ overflow:hidden;
+ box-shadow:0 18px 35px rgba(79,70,229,.25);
+}
+
+.virtualCard:after{
+ content:"";
+ position:absolute;
+ width:180px;
+ height:180px;
+ border-radius:50%;
+ background:rgba(255,255,255,.08);
+ right:-50px;
+ top:-40px;
+}
+
+.cardBrand{
+ display:flex;
+ justify-content:space-between;
+ font-weight:900;
+}
+
+.chip{
+ width:40px;
+ height:30px;
+ border-radius:7px;
+ background:#d8b65a;
+ margin-top:35px;
+}
+
+.cardNumber{
+ margin-top:25px;
+ letter-spacing:3px;
+ font-size:14px;
+}
+
+.cardBottom{
+ display:flex;
+ justify-content:space-between;
+ margin-top:17px;
+ font-size:9px;
+}
+
+/* WALLET */
+
+.balanceBox{
+ background:linear-gradient(135deg,#635bff,#7c3aed);
+ color:#fff;
+ border-radius:22px;
+ padding:23px;
+ box-shadow:0 18px 35px rgba(99,91,255,.25);
+}
+
+.balanceBox small{
+ opacity:.8;
+}
+
+.balanceBox h2{
+ margin-top:7px;
+ font-size:30px;
+}
+
+.walletActions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:14px;
+}
+
+.actionCard{
+ padding:16px;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:17px;
+ box-shadow:var(--shadow);
+}
+
+.actionCard strong{
+ display:block;
+ margin-top:8px;
+ font-size:13px;
+}
+
+.actionCard small{
+ color:var(--muted);
+}
+
+/* ORDERS */
+
+.order{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:17px;
+ padding:15px;
+ margin-bottom:10px;
+}
+
+.orderTop{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.status{
+ font-size:9px;
+ padding:5px 8px;
+ border-radius:20px;
+ background:#fff3e8;
+ color:#d66b00;
+ font-weight:800;
+}
+
+/* PROFILE */
+
+.profileBox{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:18px;
+ box-shadow:var(--shadow);
+}
+
+.avatar{
+ width:65px;
+ height:65px;
+ border-radius:50%;
+ background:linear-gradient(135deg,#635bff,#7c3aed);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ color:#fff;
+ font-size:24px;
+ font-weight:900;
+ margin-bottom:12px;
+}
+
+.profileName{
+ font-size:19px;
+ font-weight:900;
+}
+
+.profileEmail{
+ color:var(--muted);
+ font-size:11px;
+}
+
+.menuItem{
+ padding:14px 0;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ justify-content:space-between;
+ cursor:pointer;
+}
+
+.menuItem:last-child{
+ border-bottom:0;
+}
+
+.logout{
+ color:#f04438;
+}
+
+/* NOTIFICATIONS */
+
+.notification{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:16px;
+ padding:15px;
+ margin-bottom:10px;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.notification.unread{
+ border-left:4px solid var(--primary);
+ background:#f7f6ff;
+}
+
+body.dark .notification.unread{
+ background:#1d1a30;
+}
+
+.notification.read{
+ opacity:.78;
+}
+
+.notificationTop{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:10px;
+}
+
+.notificationTitle{
+ font-size:13px;
+ font-weight:900;
+}
+
+.notificationText{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:6px;
+ line-height:1.5;
+}
+
+.notificationTime{
+ font-size:9px;
+ color:var(--muted);
+ margin-top:7px;
+}
+
+.unreadDot{
+ width:8px;
+ height:8px;
+ border-radius:50%;
+ background:#635bff;
+ flex-shrink:0;
+ margin-top:4px;
+}
+
+.notificationActions{
+ display:flex;
+ gap:8px;
+ margin-bottom:13px;
+}
+
+.notificationActions button{
+ flex:1;
+ border:0;
+ padding:11px;
+ border-radius:12px;
+ font-size:10px;
+ font-weight:900;
+}
+
+.readAll{
+ background:#eeeafe;
+ color:#5147c8;
+}
+
+.clearNotifications{
+ background:#fff0ef;
+ color:#d92d20;
+}
+
+body.dark .readAll{
+ background:#211d39;
+}
+
+body.dark .clearNotifications{
+ background:#32191a;
+}
+
+.emptyNotifications{
+ text-align:center;
+ padding:35px 15px;
+ color:var(--muted);
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:18px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+ position:fixed;
+ right:17px;
+ bottom:83px;
+ width:51px;
+ height:51px;
+ border-radius:50%;
+ background:#25d366;
+ color:#fff;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:25px;
+ box-shadow:0 10px 25px rgba(37,211,102,.3);
+ z-index:90;
+ text-decoration:none;
+}
+
+/* NAV */
+
+.bottomNav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ height:70px;
+ background:rgba(255,255,255,.94);
+ backdrop-filter:blur(15px);
+ border-top:1px solid #e7eaf0;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ z-index:80;
+}
+
+body.dark .bottomNav{
+ background:rgba(21,24,33,.94);
+ border-color:#272b36;
+}
+
+.navItem{
+ border:0;
+ background:transparent;
+ color:var(--muted);
+ font-size:10px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:4px;
+}
+
+.navItem span{
+ font-size:19px;
+}
+
+.navItem.active{
+ color:var(--primary);
+ font-weight:900;
+}
+
+/* MODAL */
+
+.modal{
+ position:fixed;
+ inset:0;
+ z-index:500;
+ background:rgba(0,0,0,.55);
+ display:none;
+ align-items:flex-end;
+ justify-content:center;
+}
+
+.modal.show{
+ display:flex;
+}
+
+.modalBox{
+ width:min(100%,500px);
+ background:var(--card);
+ border-radius:25px 25px 0 0;
+ padding:22px;
+ animation:slideUp .3s ease;
+}
+
+@keyframes slideUp{
+ from{transform:translateY(100%);}
+ to{transform:none;}
+}
+
+.modalHeader{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:18px;
+}
+
+.close{
+ border:0;
+ background:var(--bg);
+ color:var(--text);
+ width:34px;
+ height:34px;
+ border-radius:10px;
+}
+
+/* GOOGLE */
+
+.googleBtn{
+ width:100%;
+ border:1px solid var(--border);
+ background:var(--card);
+ color:var(--text);
+ padding:13px;
+ border-radius:13px;
+ font-weight:900;
+ margin-top:10px;
+}
+
+/* TOAST */
+
+.toast{
+ position:fixed;
+ top:85px;
+ left:50%;
+ transform:translateX(-50%) translateY(-20px);
+ background:#101828;
+ color:#fff;
+ padding:12px 15px;
+ border-radius:12px;
+ font-size:11px;
+ opacity:0;
+ pointer-events:none;
+ transition:.3s;
+ z-index:10000;
+ max-width:90%;
+ text-align:center;
+}
+
+.toast.show{
+ opacity:1;
+ transform:translateX(-50%) translateY(0);
+}
+
+@media(min-width:700px){
+
+ .categories{
+  grid-template-columns:repeat(2,280px);
+ }
+
+ .gamesGrid{
+  grid-template-columns:repeat(3,1fr);
+ }
+
+ .banner{
+  height:210px;
+ }
+}
+</style>
 </head>
 
 <body>
 
+<!-- SPLASH -->
+
+<div id="splash">
+ <div class="splashBox">
+  <div class="alphaLogo">TA</div>
+  <div class="splashTitle">TRUE ALPHA</div>
+  <div class="splashName">Manuel Pluviose</div>
+  <div class="loader"></div>
+ </div>
+</div>
+
+
+<div id="app">
+
 <div class="container">
 
-  <div class="header">
-    <h1>💎 TRUE ALPHA TOPUP</h1>
+<header>
+
+ <div class="brand">
+
+  <div class="brandLogo">TA</div>
+
+  <div class="brandText">
+   <strong>TRUE ALPHA</strong>
+   <span>TopUp & Digital Services</span>
   </div>
 
-  <div id="siteClosed"></div>
+ </div>
 
-  <div id="mainService">
+ <div class="headerRight">
 
-    <div class="products">
+  <button class="iconBtn" onclick="openWallet()">💰</button>
 
-      <div
-        class="product-card"
-        onclick="openOrder()"
-      >
+  <button class="iconBtn" onclick="toggleDark()">🌙</button>
 
-        <div class="diamond-image">
-          <img
-            src="file_00000000826881f6bc6f4ed8fee2220d.png"
-            alt="Free Fire Diamonds"
-            class="banner-img-card"
-          >
-        </div>
+  <button class="iconBtn" onclick="showNotifications()">
+   🔔
+   <span class="badge" id="notificationBadge">0</span>
+  </button>
 
-        <div class="product-info">
+  <button class="loginBtn" id="loginButton" onclick="openLogin()">
+   Se connecter
+  </button>
 
-          <div class="category">
-            Free Fire
-          </div>
+ </div>
 
-          <div class="product-name">
-            Freefire Topup par UID
-          </div>
+</header>
 
-          <div class="product-price">
-            💎 Chwazi pack
-          </div>
 
-        </div>
+<div class="walletMini">
 
-      </div>
+ <div class="walletTop">
 
-    </div>
-
-
-    <div id="orderBox">
-
-      <div class="card">
-
-        <!-- BOUTON YO -->
-        <div class="menu-buttons">
-
-          <button
-            type="button"
-            class="back-menu"
-            id="backMenuBtn"
-            onclick="closeOrder()"
-          >
-            ⬅️ Retounen nan meni
-          </button>
-
-          <button
-            type="button"
-            class="close-order"
-            id="closeOrderBtn"
-            onclick="closeOrder()"
-          >
-            ❌ Fèmen
-          </button>
-
-        </div>
-
-
-        <h2>
-          💎 Free Fire TopUp par UID
-        </h2>
-
-
-        <div class="server">
-          🌎 Server:
-          <strong>NA — Amérique du Nord</strong>
-        </div>
-
-
-        <label for="uid">
-          UID Free Fire
-        </label>
-
-        <input
-          type="text"
-          id="uid"
-          placeholder="Antre UID Free Fire ou"
-          inputmode="numeric"
-          autocomplete="off"
-          required
-        >
-
-
-        <label for="confirmUid">
-          Konfime UID Free Fire
-        </label>
-
-        <input
-          type="text"
-          id="confirmUid"
-          placeholder="Re-antre menm UID la"
-          inputmode="numeric"
-          autocomplete="off"
-          required
-        >
-
-
-        <button
-          type="button"
-          class="verify"
-          id="verifyBtn"
-          onclick="verifyUID()"
-        >
-          🔐 Verifye UID
-        </button>
-
-
-        <div id="verified">
-          ✅ UID la verifye avèk siksè.
-        </div>
-
-
-        <div id="purchaseArea">
-
-          <label for="pack">
-            Chwazi Pack
-          </label>
-
-          <select
-            id="pack"
-            onchange="updatePrice()"
-            required
-          >
-
-            <option value="">
-              -- Chwazi yon pack --
-            </option>
-
-            <option
-              value="100+10 💎"
-              data-price="200"
-            >
-              100 + 10 💎 — 200 GDS
-            </option>
-
-            <option
-              value="310+31 💎"
-              data-price="490"
-            >
-              310 + 31 💎 — 490 GDS
-            </option>
-
-            <option
-              value="520+52 💎"
-              data-price="900"
-            >
-              520 + 52 💎 — 900 GDS
-            </option>
-
-            <option
-              value="1060+106 💎"
-              data-price="1600"
-            >
-              1,060 + 106 💎 — 1,600 GDS
-            </option>
-
-            <option
-              value="2180+218 💎"
-              data-price="3100"
-            >
-              2,180 + 218 💎 — 3,100 GDS
-            </option>
-
-            <option
-              value="5600+560 💎"
-              data-price="8010"
-            >
-              5,600 + 560 💎 — 8,010 GDS
-            </option>
-
-          </select>
-
-
-          <div class="price">
-
-            <small>
-              Pri pou peye
-            </small>
-
-            <strong id="price">
-              0 GDS
-            </strong>
-
-          </div>
-
-
-          <div class="payment">
-
-            💳 Voye kòb la sou NatCash<br>
-
-            📱 Nimewo:
-            <strong>55544179</strong><br>
-
-            👤 Non:
-            <strong>Manuel Pluviose</strong>
-
-          </div>
-
-
-          <div class="warning">
-
-            <strong>⚠️ ATANSYON:</strong><br>
-
-            Pa voye fo kòmand.
-            N ap verifye enfòmasyon peman yo
-            anvan kòmand lan trete.
-
-            Si enfòmasyon peman yo pa koresponn,
-            kòmand lan ap echwe.
-
-          </div>
-
-
-          <label for="senderNumber">
-            Nimewo ki voye kòb la
-            oswa non ki sou kont NatCash la
-          </label>
-
-          <input
-            type="text"
-            id="senderNumber"
-            placeholder="Mete nimewo ki voye kòb la oswa non ki sou NatCash la"
-            autocomplete="off"
-            required
-          >
-
-
-          <label for="transactionId">
-            ID Tranzaksyon
-            <span style="color:#ff7777;">
-              * Obligatwa
-            </span>
-          </label>
-
-          <input
-            type="text"
-            id="transactionId"
-            placeholder="Antre ID tranzaksyon NatCash la"
-            autocomplete="off"
-            required
-          >
-
-
-          <button
-            type="button"
-            id="orderBtn"
-            onclick="submitOrder()"
-          >
-            💎 FÈ KÒMAND LAN
-          </button>
-
-        </div>
-
-
-        <a
-          class="whatsapp"
-          href="https://wa.me/50940599166"
-          target="_blank"
-          rel="noopener"
-        >
-          💬 Bezwen èd? Ekri nou sou WhatsApp
-        </a>
-
-
-        <div id="message"></div>
-
-      </div>
-
-    </div>
-
+  <div>
+   <div class="walletLabel">Solde Wallet</div>
+   <div class="walletAmount" id="headerBalance">0 HTG</div>
   </div>
+
+  <button class="recharge" onclick="openRecharge()">
+   + Recharger
+  </button>
+
+ </div>
 
 </div>
 
 
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+ <div class="banner">
+
+  <div class="slide active">
+
+   <div class="slideText">
+
+    <small>PAIEMENT MOBILE</small>
+
+    <h2>NatCash & MonCash</h2>
+
+    <p>
+     Le paiement mobile simple et sécurisé.
+     Votre argent, toujours à portée de main !
+     <br><br>
+     Transferts rapides • Paiements sécurisés • Recharge facile
+    </p>
+
+   </div>
+
+   <div class="bannerArt">📱💸</div>
+
+  </div>
+
+
+  <div class="slide">
+
+   <div class="slideText">
+
+    <small>CARTE VIRTUELLE</small>
+
+    <h2>Créez votre carte Visa virtuelle</h2>
+
+    <p>
+     Créez votre carte virtuelle avec Kirikou
+     pour vos paiements en ligne.
+    </p>
+
+   </div>
+
+   <div class="bannerArt">💳✨</div>
+
+  </div>
+
+
+  <div class="slide">
+
+   <div class="slideText">
+
+    <small>FREE FIRE</small>
+
+    <h2>Rechargez vos Diamonds 💎</h2>
+
+    <p>
+     Entrez votre UID, choisissez votre pack
+     et préparez votre commande.
+    </p>
+
+   </div>
+
+   <div class="bannerArt">💎🔥</div>
+
+  </div>
+
+
+  <div class="dots">
+   <div class="dot active"></div>
+   <div class="dot"></div>
+   <div class="dot"></div>
+  </div>
+
+ </div>
+
+
+ <div class="hero">
+
+  <h1>
+   Dijital <span>san limit.</span>
+  </h1>
+
+  <p>
+   Rechaje jwèt, kat kado ak sèvis dijital nan yon sèl klik.
+   Peman rapid ak sekirize.
+   <br><br>
+   <b>True Alpha — solisyon dijital ou ka konte sou li.</b>
+  </p>
+
+ </div>
+
+
+ <div class="sectionTitle">
+  <h2>Catégories</h2>
+  <span>Tout services</span>
+ </div>
+
+
+ <div class="categories">
+
+  <div class="category" onclick="showPage('games')">
+
+   <div class="categoryIcon gamesIcon">🎮</div>
+
+   <strong>Jwèt</strong>
+
+   <small>
+    TopUp & services gaming
+   </small>
+
+  </div>
+
+
+  <div class="category" onclick="showPage('cards')">
+
+   <div class="categoryIcon cardsIcon">💳</div>
+
+   <strong>Kat</strong>
+
+   <small>
+    Cartes virtuelles
+   </small>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- GAMES -->
+
+<section id="games" class="page">
+
+ <button class="backBtn" onclick="showPage('home')">
+  ← Retour
+ </button>
+
+ <div class="sectionTitle">
+  <h2>Jeux & services</h2>
+  <span>6 services</span>
+ </div>
+
+
+ <div class="gamesGrid">
+
+  <div class="gameCard" onclick="showPage('freefire')">
+
+   <div class="gameVisual freefireBg">
+    <div class="gameEmoji">🔥</div>
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>
+     Free Fire TopUp par UID
+    </strong>
+
+    <small class="available">
+     ● Disponible • NA — North America
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <div class="gameCard">
+
+   <div class="gameVisual dlsBg">
+
+    <div class="gameEmoji">⚽</div>
+
+    <div class="soonLayer">
+     <span>Bientôt disponible</span>
+    </div>
+
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>DLS</strong>
+
+    <small class="soon">
+     Bientôt disponible
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <div class="gameCard">
+
+   <div class="gameVisual europeBg">
+
+    <div class="gameEmoji">🌍</div>
+
+    <div class="soonLayer">
+     <span>Bientôt disponible</span>
+    </div>
+
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>Free Fire Europe</strong>
+
+    <small class="soon">
+     Bientôt disponible
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <div class="gameCard">
+
+   <div class="gameVisual latamBg">
+
+    <div class="gameEmoji">🌎</div>
+
+    <div class="soonLayer">
+     <span>Bientôt disponible</span>
+    </div>
+
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>Free Fire PIN LATAM</strong>
+
+    <small class="soon">
+     Bientôt disponible
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <div class="gameCard">
+
+   <div class="gameVisual booyahBg">
+
+    <div class="gameEmoji">🏆</div>
+
+    <div class="soonLayer">
+     <span>Bientôt disponible</span>
+    </div>
+
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>Pass Booyah</strong>
+
+    <small class="soon">
+     Bientôt disponible
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <div class="gameCard">
+
+   <div class="gameVisual otherBg">
+
+    <div class="gameEmoji">🎮</div>
+
+    <div class="soonLayer">
+     <span>Bientôt disponible</span>
+    </div>
+
+   </div>
+
+   <div class="gameInfo">
+
+    <strong>Autres jeux</strong>
+
+    <small class="soon">
+     Bientôt disponible
+    </small>
+
+   </div>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- FREE FIRE -->
+
+<section id="freefire" class="page">
+
+ <button class="backBtn" onclick="showPage('games')">
+  ← Retour aux jeux
+ </button>
+
+
+ <div class="sectionTitle">
+
+  <h2>Free Fire TopUp 💎</h2>
+
+  <span>NA — North America</span>
+
+ </div>
+
+
+ <div class="ffBox">
+
+  <div class="instruction">
+
+   🇭🇹 <b>Antre UID Free Fire ou.</b>
+
+   <br>
+
+   Mete UID ou epi verifye enfòmasyon joueur la.
+
+   <br>
+
+   <b>Serveur : NA — North America 🇺🇸</b>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>UID Free Fire</label>
+
+   <input
+    id="uid"
+    type="number"
+    inputmode="numeric"
+    placeholder="Antre UID ou">
+
+  </div>
+
+
+  <button
+   class="verifyBtn"
+   onclick="verifyUID()">
+
+   Vérifier le joueur
+
+  </button>
+
+
+  <div class="playerResult" id="playerResult">
+
+   <b>✓ Joueur vérifié</b>
+
+   <br>
+
+   <span id="playerName">—</span>
+
+   <br>
+
+   <small>
+    Serveur : NA — North America
+   </small>
+
+  </div>
+
+
+  <div id="packsArea" style="display:none">
+
+   <div class="sectionTitle">
+
+    <h2>Choisissez votre pack</h2>
+
+   </div>
+
+
+   <div class="packs">
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'100 + 10 💎',200)">
+
+     <div>
+      <div class="diamonds">💎 100 + 10</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">200 HTG</div>
+
+    </div>
+
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'310 + 32 💎',450)">
+
+     <div>
+      <div class="diamonds">💎 310 + 32</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">450 HTG</div>
+
+    </div>
+
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'520 + 52 💎',750)">
+
+     <div>
+      <div class="diamonds">💎 520 + 52</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">750 HTG</div>
+
+    </div>
+
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'1,060 + 106 💎',1350)">
+
+     <div>
+      <div class="diamonds">💎 1,060 + 106</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">1,350 HTG</div>
+
+    </div>
+
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'2,180 + 218 💎',3000)">
+
+     <div>
+      <div class="diamonds">💎 2,180 + 218</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">3,000 HTG</div>
+
+    </div>
+
+
+    <div
+     class="pack"
+     onclick="selectPack(this,'5,600 + 560 💎',8000)">
+
+     <div>
+      <div class="diamonds">💎 5,600 + 560</div>
+      <small>Bonus inclus</small>
+     </div>
+
+     <div class="price">8,000 HTG</div>
+
+    </div>
+
+   </div>
+
+
+   <button
+    class="buyBtn"
+    onclick="buyNow()">
+
+    Acheter maintenant
+
+   </button>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- CARDS -->
+
+<section id="cards" class="page">
+
+ <button class="backBtn" onclick="showPage('home')">
+  ← Retour
+ </button>
+
+
+ <div class="sectionTitle">
+  <h2>Cartes virtuelles</h2>
+ </div>
+
+
+ <div class="virtualCard">
+
+  <div class="cardBrand">
+   <span>KIRIKOU</span>
+   <span>VISA</span>
+  </div>
+
+  <div class="chip"></div>
+
+  <div class="cardNumber">
+   •••• •••• •••• 0000
+  </div>
+
+  <div class="cardBottom">
+   <span>TRUE ALPHA</span>
+   <span>VIRTUAL CARD</span>
+  </div>
+
+ </div>
+
+
+ <div style="height:15px"></div>
+
+
+ <div class="ffBox">
+
+  <h3>Créer une carte Visa virtuelle</h3>
+
+  <p style="font-size:12px;color:var(--muted);line-height:1.6;margin:10px 0 18px">
+
+   Créez votre carte virtuelle avec Kirikou
+   pour vos paiements en ligne.
+
+  </p>
+
+
+  <button
+   class="primaryBtn"
+   onclick="contactCard()">
+
+   Contacter pour créer la carte
+
+  </button>
+
+ </div>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="page">
+
+ <div class="sectionTitle">
+  <h2>Mes commandes</h2>
+ </div>
+
+ <div id="ordersList"></div>
+
+</section>
+
+
+<!-- WALLET -->
+
+<section id="wallet" class="page">
+
+ <div class="sectionTitle">
+  <h2>Mon Wallet</h2>
+ </div>
+
+
+ <div id="privateWallet">
+
+  <div class="balanceBox">
+
+   <small>Solde disponible</small>
+
+   <h2 id="walletBalance">
+    0 HTG
+   </h2>
+
+  </div>
+
+
+  <div class="walletActions">
+
+   <div class="actionCard" onclick="openRecharge()">
+
+    💰
+
+    <strong>Recharger</strong>
+
+    <small>NatCash / MonCash</small>
+
+   </div>
+
+
+   <div class="actionCard" onclick="transferMoney()">
+
+    ↗️
+
+    <strong>Transférer</strong>
+
+    <small>Minimum 50 HTG</small>
+
+   </div>
+
+
+   <div class="actionCard" onclick="withdrawMoney()">
+
+    🏦
+
+    <strong>Retrait</strong>
+
+    <small>Minimum 5,000 HTG</small>
+
+   </div>
+
+
+   <div class="actionCard" onclick="privatePage('orders')">
+
+    📋
+
+    <strong>Historique</strong>
+
+    <small>Voir les commandes</small>
+
+   </div>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page">
+
+ <div class="sectionTitle">
+
+  <h2>Notifications</h2>
+
+  <span id="unreadText">0 nouvelles</span>
+
+ </div>
+
+
+ <div class="notificationActions">
+
+  <button
+   class="readAll"
+   onclick="readAllNotifications()">
+
+   ✓ Lire tout
+
+  </button>
+
+
+  <button
+   class="clearNotifications"
+   onclick="clearAllNotifications()">
+
+   🗑️ Efacer tout
+
+  </button>
+
+ </div>
+
+
+ <div id="notificationsList"></div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+ <div class="sectionTitle">
+  <h2>Profil</h2>
+ </div>
+
+
+ <div class="profileBox">
+
+  <div class="avatar" id="profileAvatar">
+   TA
+  </div>
+
+
+  <div class="profileName" id="profileName">
+   Visiteur
+  </div>
+
+
+  <div class="profileEmail" id="profileEmail">
+   Connectez-vous pour accéder à votre compte
+  </div>
+
+
+  <div style="height:15px"></div>
+
+
+  <div
+   class="menuItem"
+   onclick="openLogin()">
+
+   <span>👤 Compte</span>
+   <span>›</span>
+
+  </div>
+
+
+  <div
+   class="menuItem"
+   onclick="privatePage('orders')">
+
+   <span>🛒 Mes commandes</span>
+   <span>›</span>
+
+  </div>
+
+
+  <div
+   class="menuItem"
+   onclick="openRecharge()">
+
+   <span>💰 Recharger Wallet</span>
+   <span>›</span>
+
+  </div>
+
+
+  <div class="menuItem">
+
+   <span>💵 Wallet disponible</span>
+
+   <strong id="profileBalance">
+    0 HTG
+   </strong>
+
+  </div>
+
+
+  <div
+   class="menuItem"
+   onclick="changeLanguage()">
+
+   <span>🌐 Langue</span>
+
+   <span id="languageText">
+    Français / Kreyòl ›
+   </span>
+
+  </div>
+
+
+  <div
+   class="menuItem logout"
+   id="logoutItem"
+   onclick="logout()">
+
+   <span>🚪 Déconnexion</span>
+   <span>›</span>
+
+  </div>
+
+ </div>
+
+</section>
+
+</div>
+
+
+<!-- WHATSAPP -->
+
+<a
+ class="whatsapp"
+ href="https://wa.me/50941515802"
+ target="_blank"
+ rel="noopener">
+
+ ☎
+
+</a>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottomNav">
+
+ <button
+  class="navItem active"
+  data-page="home"
+  onclick="showPage('home')">
+
+  <span>⌂</span>
+  Akèy
+
+ </button>
+
+
+ <button
+  class="navItem"
+  data-page="games"
+  onclick="showPage('games')">
+
+  <span>🎮</span>
+  Boutik
+
+ </button>
+
+
+ <button
+  class="navItem"
+  data-page="cards"
+  onclick="showPage('cards')">
+
+  <span>💳</span>
+  Kat
+
+ </button>
+
+
+ <button
+  class="navItem"
+  data-page="orders"
+  onclick="privatePage('orders')">
+
+  <span>🛒</span>
+  Achat
+
+ </button>
+
+
+ <button
+  class="navItem"
+  data-page="wallet"
+  onclick="openWallet()">
+
+  <span>💰</span>
+  Wallet
+
+ </button>
+
+</nav>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div class="modal" id="loginModal">
+
+ <div class="modalBox">
+
+  <div class="modalHeader">
+
+   <h3>Se connecter</h3>
+
+   <button
+    class="close"
+    onclick="closeModal('loginModal')">
+
+    ✕
+
+   </button>
+
+  </div>
+
+
+  <div class="instruction">
+
+   🔐 Konekte pou jwenn aksè ak Wallet,
+   kòmand ou yo epi pou kontinye yon achat.
+
+  </div>
+
+
+  <button
+   class="googleBtn"
+   onclick="googleLogin()">
+
+   🇬 Connexion avec Google
+
+  </button>
+
+
+  <p style="text-align:center;font-size:10px;color:var(--muted);margin-top:12px">
+
+   Google Login ap konekte ak Firebase/backend
+   lè configuration lan mete.
+
+  </p>
+
+ </div>
+
+</div>
+
+
+<!-- RECHARGE -->
+
+<div class="modal" id="rechargeModal">
+
+ <div class="modalBox">
+
+  <div class="modalHeader">
+
+   <h3>Recharger Wallet</h3>
+
+   <button
+    class="close"
+    onclick="closeModal('rechargeModal')">
+
+    ✕
+
+   </button>
+
+  </div>
+
+
+  <div class="instruction">
+
+   💡 Ou dwe konekte pou rechaje Wallet ou.
+
+   <br><br>
+
+   Minimum : <b>50 HTG</b>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Montant HTG</label>
+
+   <input
+    id="rechargeAmount"
+    type="number"
+    min="50"
+    placeholder="Ex: 500">
+
+  </div>
+
+
+  <button
+   class="primaryBtn"
+   onclick="startRecharge()">
+
+   Continuer
+
+  </button>
+
+ </div>
+
+</div>
+
+
+<!-- TRANSFER -->
+
+<div class="modal" id="transferModal">
+
+ <div class="modalBox">
+
+  <div class="modalHeader">
+
+   <h3>Transférer</h3>
+
+   <button
+    class="close"
+    onclick="closeModal('transferModal')">
+
+    ✕
+
+   </button>
+
+  </div>
+
+
+  <div class="instruction">
+
+   ↗️ Minimum transfè :
+   <b>50 HTG</b>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Email du destinataire</label>
+
+   <input
+    id="transferEmail"
+    type="email"
+    placeholder="Email">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Montant HTG</label>
+
+   <input
+    id="transferAmount"
+    type="number"
+    min="50"
+    placeholder="Minimum 50">
+
+  </div>
+
+
+  <button
+   class="primaryBtn"
+   onclick="submitTransfer()">
+
+   Continuer
+
+  </button>
+
+ </div>
+
+</div>
+
+
+<!-- WITHDRAW -->
+
+<div class="modal" id="withdrawModal">
+
+ <div class="modalBox">
+
+  <div class="modalHeader">
+
+   <h3>Retrait Wallet</h3>
+
+   <button
+    class="close"
+    onclick="closeModal('withdrawModal')">
+
+    ✕
+
+   </button>
+
+  </div>
+
+
+  <div class="instruction">
+
+   🏦 Montant minimum :
+   <b>5,000 HTG</b>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Numéro de retrait</label>
+
+   <input
+    id="withdrawPhone"
+    type="tel"
+    inputmode="numeric"
+    placeholder="Numéro NatCash">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Montant HTG</label>
+
+   <input
+    id="withdrawAmount"
+    type="number"
+    min="5000"
+    placeholder="Minimum 5000">
+
+  </div>
+
+
+  <button
+   class="primaryBtn"
+   onclick="submitWithdraw()">
+
+   Demander le retrait
+
+  </button>
+
+ </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
 
-const API = "/api";
+/* =========================
+   DATA
+========================= */
 
-let siteIsOpen = true;
+const OWNER_NAME="Manuel Pluviose";
 
-let currentOrderId = null;
+let selectedPack=null;
+let selectedPrice=0;
 
-let orderStatusTimer = null;
+let loggedIn=
+ localStorage.getItem("ta_logged")==="true";
 
-let orderSubmitted = false;
+let balance=
+ Number(localStorage.getItem("ta_balance")||0);
+
+let orders=
+ JSON.parse(
+  localStorage.getItem("ta_orders")||"[]"
+ );
 
 
 /* =========================
-   SITE STATUS
+   NOTIFICATIONS
 ========================= */
 
-async function checkSiteStatus() {
+const defaultNotifications=[
 
-  try {
+ {
+  id:1,
+  title:"Bienvenue sur True Alpha",
+  text:"Bienvenue sur votre plateforme de services digitaux.",
+  time:"Aujourd'hui",
+  read:false
+ },
 
-    const response =
-      await fetch(
-        `${API}/site-status`,
-        {
-          cache: "no-store"
-        }
-      );
+ {
+  id:2,
+  title:"Free Fire TopUp disponible",
+  text:"Free Fire TopUp par UID — serveur NA North America.",
+  time:"Aujourd'hui",
+  read:false
+ },
 
-    if (!response.ok) {
-      throw new Error("Status error");
-    }
+ {
+  id:3,
+  title:"Carte virtuelle",
+  text:"Vous pouvez contacter True Alpha pour créer votre carte virtuelle.",
+  time:"Aujourd'hui",
+  read:false
+ }
 
-    const data =
-      await response.json();
+];
 
-    siteIsOpen =
-      data.enabled !== false;
 
-    const closed =
-      document.getElementById(
-        "siteClosed"
-      );
+let notifications=
+ JSON.parse(
+  localStorage.getItem("ta_notifications")||"null"
+ );
 
-    const service =
-      document.getElementById(
-        "mainService"
-      );
 
-    if (!siteIsOpen) {
+if(!notifications){
 
-      service.style.display = "none";
+ notifications=defaultNotifications;
 
-      closed.style.display = "block";
-
-      closed.textContent =
-        data.message ||
-        "🔴 Sit la pa disponib kounye a.";
-
-    } else {
-
-      service.style.display = "block";
-
-      closed.style.display = "none";
-
-    }
-
-  } catch (error) {
-
-    console.log(
-      "Status backend unavailable:",
-      error
-    );
-
-  }
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(notifications)
+ );
 
 }
 
 
 /* =========================
-   OPEN ORDER
+   SPLASH
 ========================= */
 
-function openOrder() {
+window.addEventListener("load",()=>{
 
-  if (!siteIsOpen) {
+ setTimeout(()=>{
 
-    checkSiteStatus();
+  document.getElementById("splash")
+   .style.opacity="0";
 
-    return;
-  }
+  setTimeout(()=>{
 
-  /*
-   * Si pa gen kòmand aktif,
-   * prepare yon nouvo fòm pwòp.
-   */
-  if (!orderSubmitted) {
-    resetOrderForm();
-  }
+   document.getElementById("splash")
+    .style.display="none";
 
-  document.getElementById(
-    "orderBox"
-  ).style.display = "block";
+   document.getElementById("app")
+    .style.display="block";
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  },500);
 
+ },1800);
+
+ updateUI();
+ renderOrders();
+ renderNotifications();
+
+});
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+ document.body.classList.toggle("dark");
+
+ localStorage.setItem(
+  "ta_dark",
+  document.body.classList.contains("dark")
+ );
+
+}
+
+if(localStorage.getItem("ta_dark")==="true"){
+ document.body.classList.add("dark");
 }
 
 
 /* =========================
-   CLOSE ORDER
+   PAGE
 ========================= */
 
-function closeOrder() {
-
-  /*
-   * SI KÒMAND LAN DEJA FÈT,
-   * PA kite kliyan an fèmen fòm nan
-   * pandan admin poko bay repons.
-   */
-  if (orderSubmitted) {
-
-    if (orderStatusTimer) {
-
-      showTemporaryMessage(
-        "⏳ Kòmand ou an toujou ap trete. Tanpri tann repons admin lan.",
-        "#ffcc00"
-      );
-
-    }
-
-    return;
-  }
-
-
-  /*
-   * Si kòmand lan poko fèt,
-   * tout enfòmasyon yo efase.
-   */
-  stopOrderStatusCheck();
-
-  resetOrderForm();
-
-  document.getElementById(
-    "orderBox"
-  ).style.display = "none";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================
-   RESET FORM
-========================= */
-
-function resetOrderForm() {
-
-  currentOrderId = null;
-
-  orderSubmitted = false;
-
-
-  /*
-   * Efase tout chan yo
-   */
-  document.getElementById(
-    "uid"
-  ).value = "";
-
-  document.getElementById(
-    "confirmUid"
-  ).value = "";
-
-  document.getElementById(
-    "pack"
-  ).value = "";
-
-  document.getElementById(
-    "senderNumber"
-  ).value = "";
-
-  document.getElementById(
-    "transactionId"
-  ).value = "";
-
-
-  document.getElementById(
-    "price"
-  ).textContent = "0 GDS";
-
-
-  document.getElementById(
-    "verified"
-  ).style.display = "none";
-
-
-  document.getElementById(
-    "purchaseArea"
-  ).style.display = "none";
-
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-  message.style.display = "none";
-
-  message.textContent = "";
-
-  message.innerHTML = "";
-
-  message.classList.remove(
-    "processing"
-  );
-
-  message.style.background = "";
-
-  message.style.border = "";
-
-
-  /*
-   * Reaktive bouton yo
-   */
-  setFormLocked(false);
-
-
-  document.getElementById(
-    "orderBtn"
-  ).disabled = false;
-
-}
-
-
-/* =========================
-   LOCK / UNLOCK FORM
-========================= */
-
-function setFormLocked(locked) {
-
-  const backBtn =
-    document.getElementById(
-      "backMenuBtn"
-    );
-
-  const closeBtn =
-    document.getElementById(
-      "closeOrderBtn"
-    );
-
-  /*
-   * Pandan kòmand ap trete,
-   * bouton sa yo pa disponib.
-   */
-  backBtn.disabled = locked;
-
-  closeBtn.disabled = locked;
-
-}
-
-
-/* =========================
-   PRICE
-========================= */
-
-function updatePrice() {
-
-  const pack =
-    document.getElementById(
-      "pack"
-    );
-
-  const selected =
-    pack.options[
-      pack.selectedIndex
-    ];
-
-  const price =
-    selected.getAttribute(
-      "data-price"
-    );
-
-  document.getElementById(
-    "price"
-  ).textContent =
-    price
-      ? Number(price).toLocaleString() +
-        " GDS"
-      : "0 GDS";
-
-}
-
-
-/* =========================
-   VERIFY UID
-========================= */
-
-function verifyUID() {
-
-  /*
-   * Pa kite verifye pandan
-   * yon kòmand deja ap trete.
-   */
-  if (orderSubmitted) {
-    return;
-  }
-
-
-  const uid =
-    document.getElementById(
-      "uid"
-    ).value.trim();
-
-  const confirmUid =
-    document.getElementById(
-      "confirmUid"
-    ).value.trim();
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-  const verified =
-    document.getElementById(
-      "verified"
-    );
-
-  const purchaseArea =
-    document.getElementById(
-      "purchaseArea"
-    );
-
-
-  message.style.display = "block";
-
-
-  if (!uid) {
-
-    verified.style.display = "none";
-
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Tanpri antre UID Free Fire ou.";
-
-    return;
-  }
-
-
-  if (!confirmUid) {
-
-    verified.style.display = "none";
-
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Tanpri re-antre UID la.";
-
-    return;
-  }
-
-
-  if (!/^[0-9]+$/.test(uid)) {
-
-    verified.style.display = "none";
-
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ UID la dwe genyen sèlman chif.";
-
-    return;
-  }
-
-
-  if (uid !== confirmUid) {
-
-    verified.style.display = "none";
-
-    purchaseArea.style.display =
-      "none";
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ UID yo pa menm.";
-
-    return;
-  }
-
-
-  verified.style.display = "block";
-
-  purchaseArea.style.display =
-    "block";
-
-  message.style.color =
-    "#00e5ff";
-
-  message.textContent =
-    "✅ UID la konfime. Ou ka kontinye.";
-
-}
-
-
-/* =========================
-   CREATE ORDER
-========================= */
-
-async function submitOrder() {
-
-  /*
-   * Pa pèmèt dezyèm kòmand
-   * pandan premye a toujou ap trete.
-   */
-  if (orderSubmitted) {
-    return;
-  }
-
-
-  const uid =
-    document.getElementById(
-      "uid"
-    ).value.trim();
-
-  const confirmUid =
-    document.getElementById(
-      "confirmUid"
-    ).value.trim();
-
-  const packSelect =
-    document.getElementById(
-      "pack"
-    );
-
-  const pack =
-    packSelect.value;
-
-  const selected =
-    packSelect.options[
-      packSelect.selectedIndex
-    ];
-
-  const price =
-    selected
-      ? selected.getAttribute(
-          "data-price"
-        )
-      : null;
-
-  const senderNumber =
-    document.getElementById(
-      "senderNumber"
-    ).value.trim();
-
-  const transactionId =
-    document.getElementById(
-      "transactionId"
-    ).value.trim();
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-  const orderBtn =
-    document.getElementById(
-      "orderBtn"
-    );
-
-
-  message.style.display = "block";
-
-
-  if (
-    !uid ||
-    !confirmUid ||
-    uid !== confirmUid
-  ) {
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ Tanpri verifye UID la anvan ou fè kòmand lan.";
-
-    return;
-  }
-
-
-  if (!/^[0-9]+$/.test(uid)) {
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ UID la dwe genyen sèlman chif.";
-
-    return;
-  }
-
-
-  if (!pack || !price) {
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Tanpri chwazi yon pack.";
-
-    return;
-  }
-
-
-  if (!senderNumber) {
-
-    message.style.color =
-      "#ffcc00";
-
-    message.textContent =
-      "⚠️ Mete nimewo ki voye kòb la oswa non ki sou NatCash la.";
-
-    return;
-  }
-
-
-  if (!transactionId) {
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ ID Tranzaksyon an obligatwa.";
-
-    document.getElementById(
-      "transactionId"
-    ).focus();
-
-    return;
-  }
-
-
-  /*
-   * Bloke fòm nan pandan
-   * demann lan ap ale backend.
-   */
-  orderBtn.disabled = true;
-
-  message.classList.add(
-    "processing"
-  );
-
-  message.style.color =
-    "#00e5ff";
-
-  message.textContent =
-    "⏳ N ap prepare kòmand ou an...";
-
-
-  try {
-
-    const response =
-      await fetch(
-        `${API}/create-order`,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-
-            uid: uid,
-
-            pack: pack,
-
-            price: Number(price),
-
-            senderNumber:
-              senderNumber,
-
-            transactionId:
-              transactionId,
-
-            server:
-              "NA — Amérique du Nord"
-
-          })
-        }
-      );
-
-
-    let result;
-
-    try {
-
-      result =
-        await response.json();
-
-    } catch {
-
-      throw new Error(
-        "Backend la pa voye JSON."
-      );
-
-    }
-
-
-    if (
-      !response.ok ||
-      !result.success
-    ) {
-
-      throw new Error(
-        result.message ||
-        "Kòmand lan pa antre."
-      );
-
-    }
-
-
-    /*
-     * KÒMAND LAN FÈT.
-     */
-    currentOrderId =
-      result.order &&
-      result.order.id
-        ? result.order.id
-        : null;
-
-
-    /*
-     * Make orderSubmitted true.
-     * Sa anpeche kliyan an fèmen
-     * fòm nan pandan l ap tann admin.
-     */
-    orderSubmitted = true;
-
-
-    /*
-     * Bloke bouton Retounen/Fèmen.
-     */
-    setFormLocked(true);
-
-
-    message.style.color =
-      "#00e5ff";
-
-    message.classList.add(
-      "processing"
-    );
-
-    message.innerHTML =
-      "⏳ <strong>KÒMAND OU AN ANTRE</strong><br>" +
-      "💎 N ap verifye enfòmasyon peman ou yo.<br>" +
-      "🙏 Tanpri tann admin lan trete kòmand lan.";
-
-
-    if (currentOrderId) {
-
-      message.innerHTML +=
-        "<br><small>ID Kòmand: " +
-        escapeHtml(
-          currentOrderId
-        ) +
-        "</small>";
-
-
-      /*
-       * Kòmanse siveyans.
-       */
-      startOrderStatusCheck(
-        currentOrderId
-      );
-
-    } else {
-
-      /*
-       * Si backend lan pa retounen ID,
-       * nou pa ka siveye kòmand lan.
-       */
-      message.classList.remove(
-        "processing"
-      );
-
-      message.style.color =
-        "#ffcc00";
-
-      message.innerHTML =
-        "⚠️ Kòmand lan antre, men pa gen ID kòmand pou siveyans.";
-
-    }
-
-
-  } catch (error) {
-
-    console.error(
-      "CREATE ORDER ERROR:",
-      error
-    );
-
-    message.classList.remove(
-      "processing"
-    );
-
-    message.style.color =
-      "#ff4d4d";
-
-    message.textContent =
-      "❌ Kòmand lan pa antre. Eseye ankò.";
-
-    orderBtn.disabled = false;
-
-    orderSubmitted = false;
-
-    setFormLocked(false);
-
-  }
-
-}
-
-
-/* =========================
-   START STATUS CHECK
-========================= */
-
-function startOrderStatusCheck(
-  orderId
-) {
-
-  if (orderStatusTimer) {
-
-    clearInterval(
-      orderStatusTimer
-    );
-
-  }
-
-
-  checkOrderStatus(
-    orderId
+function showPage(page){
+
+ document.querySelectorAll(".page")
+  .forEach(
+   p=>p.classList.remove("active")
   );
 
 
-  orderStatusTimer =
-    setInterval(
-      () => {
+ const target=
+  document.getElementById(page);
 
-        checkOrderStatus(
-          orderId
-        );
+ if(target)
+  target.classList.add("active");
 
-      },
-      5000
-    );
 
-}
-
-
-/* =========================
-   GET ORDER STATUS
-========================= */
-
-async function checkOrderStatus(
-  orderId
-) {
-
-  if (!orderId) {
-    return;
-  }
-
-
-  try {
-
-    const response =
-      await fetch(
-        `${API}/get-order?id=${encodeURIComponent(orderId)}&t=${Date.now()}`,
-        {
-          method: "GET",
-
-          cache: "no-store",
-
-          headers: {
-            "Cache-Control":
-              "no-cache"
-          }
-        }
-      );
-
-
-    if (!response.ok) {
-      return;
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if (!result.success) {
-      return;
-    }
-
-
-    const order =
-      result.order;
-
-
-    if (!order) {
-      return;
-    }
-
-
-    /*
-     * ÉCHEC
-     */
-    if (
-      order.status === "failed"
-    ) {
-
-      stopOrderStatusCheck();
-
-
-      showCustomerResult(
-        order.customerMessage ||
-        "Nou pa resevwa peman an."
-      );
-
-
-      return;
-    }
-
-
-    /*
-     * SIKSÈ
-     */
-    if (
-      order.status === "success"
-    ) {
-
-      stopOrderStatusCheck();
-
-
-      showCustomerSuccess(
-        order.customerMessage
-      );
-
-
-      return;
-    }
-
-
-    /*
-     * PROCESSING
-     */
-    if (
-      order.status === "processing"
-    ) {
-
-      const message =
-        document.getElementById(
-          "message"
-        );
-
-
-      message.style.display =
-        "block";
-
-      message.classList.add(
-        "processing"
-      );
-
-      message.style.color =
-        "#00e5ff";
-
-      message.style.background =
-        "";
-
-      message.style.border =
-        "";
-
-      message.innerHTML =
-        "⏳ <strong>KÒMAND OU AN AP TRETE</strong><br>" +
-        (
-          order.customerMessage ||
-          "💎 Tanpri tann kèk moman."
-        );
-
-    }
-
-
-  } catch (error) {
-
-    console.log(
-      "ORDER STATUS CHECK:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================
-   STOP STATUS CHECK
-========================= */
-
-function stopOrderStatusCheck() {
-
-  if (orderStatusTimer) {
-
-    clearInterval(
-      orderStatusTimer
-    );
-
-    orderStatusTimer = null;
-
-  }
-
-}
-
-
-/* =========================
-   CUSTOMER FAILED
-========================= */
-
-function showCustomerResult(
-  customerMessage
-) {
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-  const orderBtn =
-    document.getElementById(
-      "orderBtn"
-    );
-
-
-  /*
-   * Kòmand lan fini.
-   * Kounye a kliyan an ka fèmen.
-   */
-  orderSubmitted = false;
-
-
-  setFormLocked(false);
-
-
-  message.classList.remove(
-    "processing"
+ document.querySelectorAll(".navItem")
+  .forEach(
+   n=>n.classList.remove("active")
   );
 
-  message.style.display =
-    "block";
 
-  message.style.color =
-    "#ff7777";
+ const nav=
+  document.querySelector(
+   `.navItem[data-page="${page}"]`
+  );
 
-  message.style.background =
-    "#4a1717";
-
-  message.style.border =
-    "1px solid #d32f2f";
-
-  message.innerHTML =
-    "❌ <strong>ÉCHEC</strong><br>" +
-    escapeHtml(
-      customerMessage ||
-      "Nou pa resevwa peman an."
-    );
+ if(nav)
+  nav.classList.add("active");
 
 
-  orderBtn.disabled = false;
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
 
 }
 
 
 /* =========================
-   CUSTOMER SUCCESS
+   LOGIN CHECK
 ========================= */
 
-function showCustomerSuccess(
-  customerMessage
-) {
+function requireLogin(){
 
-  const message =
-    document.getElementById(
-      "message"
-    );
+ if(!loggedIn){
 
-
-  /*
-   * Kòmand lan fini.
-   * Kounye a kliyan an ka fèmen
-   * oswa retounen nan meni.
-   */
-  orderSubmitted = false;
-
-
-  setFormLocked(false);
-
-
-  message.classList.remove(
-    "processing"
+  toast(
+   "Tanpri konekte ak kont ou avan."
   );
 
-  message.style.display =
-    "block";
+  setTimeout(
+   ()=>openLogin(),
+   400
+  );
 
-  message.style.color =
-    "#5ee39a";
+  return false;
+ }
 
-  message.style.background =
-    "#10251c";
+ return true;
+}
 
-  message.style.border =
-    "1px solid #168c4a";
 
-  message.innerHTML =
-    "✅ <strong>KÒMAND LA REYISI</strong><br>" +
-    escapeHtml(
-      customerMessage ||
-      "Pwodui ou an te trete avèk siksè!"
-    );
+function privatePage(page){
+
+ if(!requireLogin())
+  return;
+
+ showPage(page);
 
 }
 
 
 /* =========================
-   TEMPORARY MESSAGE
+   WALLET
 ========================= */
 
-function showTemporaryMessage(
-  text,
-  color
-) {
+function openWallet(){
 
-  const message =
-    document.getElementById(
-      "message"
-    );
+ if(!requireLogin())
+  return;
 
-  message.style.display =
-    "block";
+ showPage("wallet");
 
-  message.style.color =
-    color;
+}
 
-  message.style.background =
-    "";
 
-  message.style.border =
-    "";
+function updateUI(){
 
-  message.classList.remove(
-    "processing"
+ const amount=
+  balance.toLocaleString("fr-FR")+" HTG";
+
+
+ document.getElementById(
+  "headerBalance"
+ ).textContent=amount;
+
+
+ document.getElementById(
+  "walletBalance"
+ ).textContent=amount;
+
+
+ document.getElementById(
+  "profileBalance"
+ ).textContent=amount;
+
+
+ const loginButton=
+  document.getElementById("loginButton");
+
+
+ if(loggedIn){
+
+  const email=
+   localStorage.getItem("ta_email")||"";
+
+
+  document.getElementById(
+   "profileName"
+  ).textContent=
+   localStorage.getItem("ta_name")||OWNER_NAME;
+
+
+  document.getElementById(
+   "profileEmail"
+  ).textContent=email;
+
+
+  loginButton.textContent=
+   "Mon compte";
+
+ }else{
+
+  document.getElementById(
+   "profileName"
+  ).textContent="Visiteur";
+
+
+  document.getElementById(
+   "profileEmail"
+  ).textContent=
+   "Connectez-vous pour accéder à votre compte";
+
+
+  loginButton.textContent=
+   "Se connecter";
+
+ }
+
+
+ updateNotificationBadge();
+
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function updateNotificationBadge(){
+
+ const badge=
+  document.getElementById(
+   "notificationBadge"
   );
 
-  message.textContent =
-    text;
+
+ const unread=
+  notifications.filter(
+   n=>!n.read
+  ).length;
+
+
+ if(unread>0){
+
+  badge.textContent=
+   unread>99 ? "99+" : unread;
+
+  badge.style.display="flex";
+
+ }else{
+
+  badge.style.display="none";
+
+ }
+
+
+ const unreadText=
+  document.getElementById(
+   "unreadText"
+  );
+
+ if(unreadText){
+
+  unreadText.textContent=
+   unread+
+   (unread===1
+    ?" nouvelle"
+    :" nouvelles"
+   );
+
+ }
+
+}
+
+
+function renderNotifications(){
+
+ const box=
+  document.getElementById(
+   "notificationsList"
+  );
+
+ if(!box)
+  return;
+
+
+ if(!notifications.length){
+
+  box.innerHTML=`
+
+   <div class="emptyNotifications">
+
+    🔕
+    <br><br>
+
+    <b>Aucune notification</b>
+
+    <br>
+
+    <small>
+     Ou pa gen okenn notification.
+    </small>
+
+   </div>
+
+  `;
+
+  updateNotificationBadge();
+
+  return;
+ }
+
+
+ box.innerHTML=
+  notifications.map(n=>`
+
+   <div
+    class="notification ${n.read?"read":"unread"}"
+    onclick="readNotification(${n.id})">
+
+    <div class="notificationTop">
+
+     <div>
+
+      <div class="notificationTitle">
+       ${escapeHTML(n.title)}
+      </div>
+
+      <div class="notificationText">
+       ${escapeHTML(n.text)}
+      </div>
+
+      <div class="notificationTime">
+       ${escapeHTML(n.time)}
+      </div>
+
+     </div>
+
+     ${
+      n.read
+      ?""
+      :'<div class="unreadDot"></div>'
+     }
+
+    </div>
+
+   </div>
+
+  `).join("");
+
+
+ updateNotificationBadge();
+
+}
+
+
+function showNotifications(){
+
+ showPage("notifications");
+
+ renderNotifications();
+
+}
+
+
+function readNotification(id){
+
+ const notification=
+  notifications.find(
+   n=>n.id===id
+  );
+
+
+ if(!notification)
+  return;
+
+
+ notification.read=true;
+
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(notifications)
+ );
+
+
+ renderNotifications();
+
+ toast("Notification lue.");
+
+}
+
+
+function readAllNotifications(){
+
+ if(!notifications.length){
+
+  toast("Pa gen notification.");
+
+  return;
+ }
+
+
+ notifications.forEach(
+  n=>n.read=true
+ );
+
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(notifications)
+ );
+
+
+ renderNotifications();
+
+ toast("Tout notifications lues.");
+
+}
+
+
+function clearAllNotifications(){
+
+ if(!notifications.length){
+
+  toast("Pa gen notification pou efase.");
+
+  return;
+ }
+
+
+ notifications=[];
+
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(notifications)
+ );
+
+
+ renderNotifications();
+
+ toast("Tout notifications efase.");
+
+}
+
+
+function addNotification(title,text){
+
+ notifications.unshift({
+
+  id:Date.now(),
+
+  title:title,
+
+  text:text,
+
+  time:"À l'instant",
+
+  read:false
+
+ });
+
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(notifications)
+ );
+
+
+ renderNotifications();
+
+}
+
+
+/* =========================
+   BANNER
+========================= */
+
+let slideIndex=0;
+
+setInterval(()=>{
+
+ const slides=
+  document.querySelectorAll(".slide");
+
+ const dots=
+  document.querySelectorAll(".dot");
+
+
+ if(!slides.length)
+  return;
+
+
+ slides.forEach(
+  s=>s.classList.remove("active")
+ );
+
+ dots.forEach(
+  d=>d.classList.remove("active")
+ );
+
+
+ slideIndex++;
+
+
+ if(slideIndex>=slides.length)
+  slideIndex=0;
+
+
+ slides[slideIndex]
+  .classList.add("active");
+
+
+ dots[slideIndex]
+  .classList.add("active");
+
+},4500);
+
+
+/* =========================
+   UID
+========================= */
+
+function verifyUID(){
+
+ const uid=
+  document.getElementById("uid")
+   .value.trim();
+
+
+ if(!uid){
+
+  toast(
+   "Tanpri antre UID Free Fire ou."
+  );
+
+  return;
+ }
+
+
+ if(uid.length<5){
+
+  toast(
+   "UID la pa sanble valid."
+  );
+
+  return;
+ }
+
+
+ const btn=
+  document.querySelector(".verifyBtn");
+
+
+ btn.disabled=true;
+
+ btn.textContent=
+  "Vérification...";
+
+
+ document.getElementById(
+  "playerResult"
+ ).style.display="none";
+
+
+ document.getElementById(
+  "packsArea"
+ ).style.display="none";
+
+
+ setTimeout(()=>{
+
+  document.getElementById(
+   "playerName"
+  ).textContent=
+   "UID "+uid;
+
+
+  document.getElementById(
+   "playerResult"
+  ).style.display="block";
+
+
+  document.getElementById(
+   "packsArea"
+  ).style.display="block";
+
+
+  btn.disabled=false;
+
+  btn.textContent=
+   "Vérifier le joueur";
+
+
+  toast(
+   "UID prepare pou verification."
+  );
+
+ },1400);
+
+}
+
+
+/* =========================
+   PACK
+========================= */
+
+function selectPack(element,name,price){
+
+ document.querySelectorAll(".pack")
+  .forEach(
+   p=>p.classList.remove("selected")
+  );
+
+
+ element.classList.add("selected");
+
+
+ selectedPack=name;
+
+ selectedPrice=price;
+
+
+ toast(
+  name+" sélectionné."
+ );
+
+}
+
+
+/* =========================
+   BUY
+========================= */
+
+function buyNow(){
+
+ if(!requireLogin())
+  return;
+
+
+ if(!selectedPack){
+
+  toast(
+   "Chwazi yon pack avan."
+  );
+
+  return;
+ }
+
+
+ const uid=
+  document.getElementById("uid")
+   .value.trim();
+
+
+ if(!uid){
+
+  toast(
+   "UID la obligatwa."
+  );
+
+  return;
+ }
+
+
+ if(balance<selectedPrice){
+
+  toast(
+   "Solde insuffisant. Recharger Wallet."
+  );
+
+  setTimeout(
+   ()=>openRecharge(),
+   600
+  );
+
+  return;
+ }
+
+
+ const order={
+
+  id:"TA-"+Date.now(),
+
+  type:"Free Fire",
+
+  uid:uid,
+
+  server:"NA — North America",
+
+  pack:selectedPack,
+
+  price:selectedPrice,
+
+  status:"En attente",
+
+  date:new Date()
+   .toLocaleString("fr-FR")
+
+ };
+
+
+ orders.unshift(order);
+
+
+ localStorage.setItem(
+  "ta_orders",
+  JSON.stringify(orders)
+ );
+
+
+ renderOrders();
+
+
+ addNotification(
+  "Nouvelle commande",
+  "Votre commande Free Fire a été créée et attend la validation."
+ );
+
+
+ toast(
+  "Commande préparée."
+ );
+
+
+ showPage("orders");
+
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+function renderOrders(){
+
+ const box=
+  document.getElementById(
+   "ordersList"
+  );
+
+
+ if(!orders.length){
+
+  box.innerHTML=`
+
+   <div class="ffBox">
+
+    <p
+     style="text-align:center;color:var(--muted);font-size:12px">
+
+     Aucune commande pour le moment.
+
+    </p>
+
+   </div>
+
+  `;
+
+  return;
+ }
+
+
+ box.innerHTML=
+  orders.map(
+   order=>`
+
+   <div class="order">
+
+    <div class="orderTop">
+
+     <strong>
+      💎 ${escapeHTML(order.type)}
+     </strong>
+
+     <span class="status">
+      ${escapeHTML(order.status)}
+     </span>
+
+    </div>
+
+
+    <div style="margin-top:10px;font-size:11px">
+     <b>UID:</b>
+     ${escapeHTML(order.uid)}
+    </div>
+
+
+    <div style="margin-top:5px;font-size:11px">
+     <b>Serveur:</b>
+     ${escapeHTML(order.server)}
+    </div>
+
+
+    <div style="margin-top:5px;font-size:11px">
+     <b>Pack:</b>
+     ${escapeHTML(order.pack)}
+    </div>
+
+
+    <div style="margin-top:5px;font-size:11px">
+     <b>Prix:</b>
+     ${Number(order.price).toLocaleString("fr-FR")}
+     HTG
+    </div>
+
+
+    <div style="margin-top:5px;font-size:9px;color:var(--muted)">
+     ${escapeHTML(order.date)}
+    </div>
+
+   </div>
+
+  `
+  ).join("");
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function openLogin(){
+
+ document.getElementById(
+  "loginModal"
+ ).classList.add("show");
+
+}
+
+
+function googleLogin(){
+
+ /*
+  GOOGLE/FIREBASE CONNECTION
+
+  Lè nou pare pou Firebase,
+  n ap mete signInWithPopup()
+  ak GoogleAuthProvider() isit la.
+
+  Pa mete API Secret Jeffry Tech la isit la.
+ */
+
+ toast(
+  "Google Login ap tann configuration Firebase."
+ );
+
+}
+
+
+/*
+ DEMO CONNECTION RETIRE.
+ Nou pa itilize fo email ankò.
+*/
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+ if(!loggedIn){
+
+  toast(
+   "Ou pa konekte."
+  );
+
+  return;
+ }
+
+
+ loggedIn=false;
+
+
+ localStorage.removeItem(
+  "ta_logged"
+ );
+
+ localStorage.removeItem(
+  "ta_email"
+ );
+
+ localStorage.removeItem(
+  "ta_name"
+ );
+
+
+ updateUI();
+
+
+ showPage("home");
+
+
+ toast(
+  "Déconnexion réussie."
+ );
+
+}
+
+
+/* =========================
+   RECHARGE
+========================= */
+
+function openRecharge(){
+
+ if(!requireLogin())
+  return;
+
+
+ document.getElementById(
+  "rechargeModal"
+ ).classList.add("show");
+
+}
+
+
+function startRecharge(){
+
+ if(!requireLogin()){
+
+  closeModal(
+   "rechargeModal"
+  );
+
+  return;
+ }
+
+
+ const amount=
+  Number(
+   document.getElementById(
+    "rechargeAmount"
+   ).value
+  );
+
+
+ if(!amount || amount<50){
+
+  toast(
+   "Minimum recharge : 50 HTG."
+  );
+
+  return;
+ }
+
+
+ closeModal(
+  "rechargeModal"
+ );
+
+
+ addNotification(
+  "Recharge Wallet",
+  "Votre demande de recharge a été préparée."
+ );
+
+
+ toast(
+  "Demande de recharge prepare."
+ );
+
+}
+
+
+/* =========================
+   TRANSFER
+========================= */
+
+function transferMoney(){
+
+ if(!requireLogin())
+  return;
+
+
+ document.getElementById(
+  "transferModal"
+ ).classList.add("show");
+
+}
+
+
+function submitTransfer(){
+
+ const email=
+  document.getElementById(
+   "transferEmail"
+  ).value.trim();
+
+
+ const amount=
+  Number(
+   document.getElementById(
+    "transferAmount"
+  ).value
+  );
+
+
+ if(!email){
+
+  toast(
+   "Antre email moun nan."
+  );
+
+  return;
+ }
+
+
+ if(amount<50){
+
+  toast(
+   "Minimum transfè : 50 HTG."
+  );
+
+  return;
+ }
+
+
+ if(amount>balance){
+
+  toast(
+   "Solde insuffisant."
+  );
+
+  return;
+ }
+
+
+ closeModal(
+  "transferModal"
+ );
+
+
+ addNotification(
+  "Transfert",
+  "Votre demande de transfert a été préparée."
+ );
+
+
+ toast(
+  "Demann transfè prepare."
+ );
+
+}
+
+
+/* =========================
+   WITHDRAW
+========================= */
+
+function withdrawMoney(){
+
+ if(!requireLogin())
+  return;
+
+
+ document.getElementById(
+  "withdrawModal"
+ ).classList.add("show");
+
+}
+
+
+function submitWithdraw(){
+
+ const phone=
+  document.getElementById(
+   "withdrawPhone"
+  ).value.trim();
+
+
+ const amount=
+  Number(
+   document.getElementById(
+    "withdrawAmount"
+  ).value
+  );
+
+
+ if(!phone){
+
+  toast(
+   "Antre nimewo retrè a."
+  );
+
+  return;
+ }
+
+
+ if(amount<5000){
+
+  toast(
+   "Minimum retrè : 5,000 HTG."
+  );
+
+  return;
+ }
+
+
+ if(amount>balance){
+
+  toast(
+   "Solde insuffisant."
+  );
+
+  return;
+ }
+
+
+ closeModal(
+  "withdrawModal"
+ );
+
+
+ addNotification(
+  "Demande de retrait",
+  "Votre demande de retrait a été enregistrée."
+ );
+
+
+ toast(
+  "Demann retrè prepare."
+ );
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+function contactCard(){
+
+ window.open(
+  "https://wa.me/50932694670",
+  "_blank"
+ );
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function changeLanguage(){
+
+ const current=
+  localStorage.getItem("ta_language")||"fr";
+
+
+ const next=
+  current==="fr"
+   ?"ht"
+   :"fr";
+
+
+ localStorage.setItem(
+  "ta_language",
+  next
+ );
+
+
+ document.getElementById(
+  "languageText"
+ ).textContent=
+  next==="fr"
+   ?"Français / Kreyòl ›"
+   :"Kreyòl / Français ›";
+
+
+ toast(
+  next==="fr"
+   ?"Langue : Français"
+   :"Lang : Kreyòl"
+ );
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+function closeModal(id){
+
+ document.getElementById(id)
+  .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".modal")
+ .forEach(modal=>{
+
+  modal.addEventListener(
+   "click",
+   e=>{
+
+    if(e.target===modal){
+
+     modal.classList.remove("show");
+
+    }
+
+   }
+  );
+
+ });
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+
+function toast(message){
+
+ const t=
+  document.getElementById("toast");
+
+
+ t.textContent=message;
+
+
+ t.classList.add("show");
+
+
+ clearTimeout(
+  toastTimer
+ );
+
+
+ toastTimer=setTimeout(
+  ()=>{
+   t.classList.remove("show");
+  },
+  2600
+ );
 
 }
 
@@ -1713,45 +3567,42 @@ function showTemporaryMessage(
    ESCAPE HTML
 ========================= */
 
-function escapeHtml(
-  value
-) {
+function escapeHTML(value){
 
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+ return String(value)
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================
-   START
+   LOAD LANGUAGE
 ========================= */
 
-checkSiteStatus();
+(function(){
+
+ const lang=
+  localStorage.getItem("ta_language")||"fr";
+
+
+ const el=
+  document.getElementById("languageText");
+
+
+ if(el){
+
+  el.textContent=
+   lang==="ht"
+    ?"Kreyòl / Français ›"
+    :"Français / Kreyòl ›";
+
+ }
+
+})();
 
 </script>
 
