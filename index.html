@@ -52,7 +52,14 @@ button{
  cursor:pointer;
 }
 
-/* SITE OFF */
+button:disabled{
+ cursor:not-allowed;
+ opacity:.65;
+}
+
+/* =========================
+   SITE CLOSED
+========================= */
 
 #siteClosed{
  position:fixed;
@@ -105,7 +112,9 @@ button{
  font-weight:800;
 }
 
-/* SPLASH */
+/* =========================
+   SPLASH
+========================= */
 
 #splash{
  position:fixed;
@@ -173,11 +182,112 @@ body.dark #splash{
 }
 
 @keyframes fadeUp{
- from{opacity:0;transform:translateY(15px);}
- to{opacity:1;transform:none;}
+ from{
+  opacity:0;
+  transform:translateY(15px);
+ }
+ to{
+  opacity:1;
+  transform:none;
+ }
 }
 
-/* APP */
+/* =========================
+   PURCHASE LOADING
+========================= */
+
+#purchaseLoading{
+ position:fixed;
+ inset:0;
+ z-index:25000;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ background:rgba(10,12,20,.68);
+ backdrop-filter:blur(7px);
+}
+
+#purchaseLoading.show{
+ display:flex;
+}
+
+.loadingBox{
+ width:210px;
+ padding:24px 18px;
+ border-radius:24px;
+ background:var(--card);
+ text-align:center;
+ box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.loadingLogo{
+ position:relative;
+ width:78px;
+ height:78px;
+ margin:0 auto 16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.loadingLogo:before{
+ content:"";
+ position:absolute;
+ inset:0;
+ border-radius:50%;
+ border:3px solid transparent;
+ border-top-color:#635bff;
+ border-right-color:#8b5cf6;
+ animation:spin 1s linear infinite;
+}
+
+.loadingLogo:after{
+ content:"";
+ position:absolute;
+ inset:7px;
+ border-radius:50%;
+ border:2px solid transparent;
+ border-bottom-color:#7c3aed;
+ animation:spinReverse 1.3s linear infinite;
+}
+
+.loadingLogoInner{
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:linear-gradient(135deg,#635bff,#7c3aed);
+ color:#fff;
+ font-size:10px;
+ font-weight:1000;
+ letter-spacing:.5px;
+ z-index:2;
+ box-shadow:0 8px 25px rgba(99,91,255,.3);
+}
+
+@keyframes spinReverse{
+ to{
+  transform:rotate(-360deg);
+ }
+}
+
+.loadingTitle{
+ font-weight:900;
+ font-size:14px;
+}
+
+.loadingText{
+ margin-top:6px;
+ color:var(--muted);
+ font-size:10px;
+ line-height:1.5;
+}
+
+/* =========================
+   APP
+========================= */
 
 #app{
  display:none;
@@ -189,7 +299,9 @@ body.dark #splash{
  margin:auto;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
  height:72px;
@@ -267,7 +379,9 @@ header{
  font-size:11px;
 }
 
-/* WALLET MINI */
+/* =========================
+   WALLET MINI
+========================= */
 
 .walletMini{
  background:var(--card);
@@ -304,14 +418,16 @@ header{
  border-radius:10px;
 }
 
-/* BANNER */
+/* =========================
+   BANNER
+========================= */
 
 .banner{
  margin-top:16px;
  position:relative;
  overflow:hidden;
  border-radius:20px;
- height:180px;
+ height:200px;
  box-shadow:var(--shadow);
 }
 
@@ -321,7 +437,7 @@ header{
  opacity:0;
  transform:scale(1.02);
  transition:.6s;
- padding:24px;
+ padding:22px;
  display:flex;
  align-items:center;
  justify-content:space-between;
@@ -338,37 +454,110 @@ header{
 }
 
 .slide:nth-child(2){
- background:linear-gradient(120deg,#071e34,#087f8c);
+ background:linear-gradient(120deg,#151515,#581c87);
  color:#fff;
 }
 
 .slide:nth-child(3){
- background:linear-gradient(120deg,#40106e,#7c1d4d);
+ background:linear-gradient(120deg,#071e34,#087f8c);
  color:#fff;
 }
 
 .slideText{
- max-width:70%;
+ max-width:63%;
 }
 
 .slideText small{
  opacity:.75;
  font-weight:700;
+ font-size:9px;
 }
 
 .slideText h2{
  margin:7px 0;
- font-size:20px;
+ font-size:19px;
 }
 
 .slideText p{
- font-size:11px;
+ font-size:10px;
  opacity:.88;
  line-height:1.5;
 }
 
-.bannerArt{
- font-size:54px;
+/* HIT VISUAL */
+
+.hitScene{
+ width:135px;
+ height:150px;
+ position:relative;
+ flex-shrink:0;
+}
+
+.shooter{
+ position:absolute;
+ left:8px;
+ bottom:16px;
+ font-size:48px;
+ transform:scaleX(-1);
+}
+
+.enemy{
+ position:absolute;
+ right:8px;
+ bottom:18px;
+ font-size:46px;
+}
+
+.bulletLine{
+ position:absolute;
+ left:45px;
+ top:63px;
+ width:70px;
+ height:3px;
+ background:#fff;
+ transform:rotate(-7deg);
+ box-shadow:0 0 8px rgba(255,255,255,.8);
+}
+
+.cross{
+ position:absolute;
+ right:34px;
+ top:53px;
+ color:#ff1f1f;
+ font-size:25px;
+ font-weight:1000;
+ text-shadow:0 0 8px rgba(255,0,0,.8);
+}
+
+.hp{
+ position:absolute;
+ right:2px;
+ top:17px;
+ color:#ff3333;
+ font-size:16px;
+ font-weight:1000;
+ animation:hpFloat 1.4s infinite;
+}
+
+@keyframes hpFloat{
+ 0%,100%{
+  transform:translateY(5px);
+  opacity:.5;
+ }
+ 50%{
+  transform:translateY(-5px);
+  opacity:1;
+ }
+}
+
+.damage{
+ position:absolute;
+ left:43px;
+ top:40px;
+ color:#ff3131;
+ font-size:18px;
+ font-weight:1000;
+ transform:rotate(-5deg);
 }
 
 .dots{
@@ -393,7 +582,9 @@ header{
  background:#fff;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
  margin-top:24px;
@@ -415,7 +606,9 @@ header{
  line-height:1.6;
 }
 
-/* CATEGORIES */
+/* =========================
+   CATEGORIES
+========================= */
 
 .sectionTitle{
  display:flex;
@@ -483,7 +676,9 @@ header{
  font-size:10px;
 }
 
-/* PAGES */
+/* =========================
+   PAGES
+========================= */
 
 .page{
  display:none;
@@ -502,7 +697,9 @@ header{
  margin:10px 0 18px;
 }
 
-/* GAMES */
+/* =========================
+   GAMES
+========================= */
 
 .gamesGrid{
  display:grid;
@@ -600,7 +797,9 @@ header{
  font-weight:800;
 }
 
-/* FREE FIRE */
+/* =========================
+   FREE FIRE
+========================= */
 
 .ffBox{
  background:var(--card);
@@ -658,10 +857,6 @@ body.dark .instruction{
  font-weight:900;
 }
 
-.verifyBtn:disabled{
- opacity:.65;
-}
-
 .playerResult{
  display:none;
  margin-top:15px;
@@ -672,41 +867,62 @@ body.dark .instruction{
  color:#087443;
 }
 
-.packs{
- display:grid;
- gap:10px;
+/* =========================
+   SENSITIVITY
+========================= */
+
+.sensitivityCard{
  margin-top:15px;
-}
-
-.pack{
  border:1px solid var(--border);
+ border-radius:18px;
+ padding:15px;
  background:var(--card);
- border-radius:15px;
- padding:14px;
+}
+
+.sensitivityHeader{
  display:flex;
- align-items:center;
  justify-content:space-between;
+ align-items:center;
+ margin-bottom:12px;
 }
 
-.pack.selected{
- border:2px solid var(--primary);
- background:#f2f0ff;
+.sensitivityHeader strong{
+ font-size:14px;
 }
 
-body.dark .pack.selected{
- background:#211d39;
+.sensitivityPrice{
+ color:var(--primary);
+ font-weight:1000;
+ font-size:16px;
 }
 
-.diamonds{
- font-weight:900;
+.sensitivityRows{
+ display:grid;
+ gap:7px;
 }
 
-.price{
- font-weight:900;
+.sensitivityRow{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:var(--bg);
+ border-radius:10px;
+ padding:9px 11px;
+ font-size:11px;
+}
+
+.sensitivityRow span:last-child{
+ font-weight:1000;
  color:var(--primary);
 }
 
-/* CARD */
+.buySensitivity{
+ margin-top:13px;
+}
+
+/* =========================
+   VIRTUAL CARD
+========================= */
 
 .virtualCard{
  background:linear-gradient(135deg,#111827,#4f46e5);
@@ -757,7 +973,9 @@ body.dark .pack.selected{
  font-size:9px;
 }
 
-/* WALLET */
+/* =========================
+   WALLET
+========================= */
 
 .balanceBox{
  background:linear-gradient(135deg,#635bff,#7c3aed);
@@ -789,6 +1007,7 @@ body.dark .pack.selected{
  border:1px solid var(--border);
  border-radius:17px;
  box-shadow:var(--shadow);
+ cursor:pointer;
 }
 
 .actionCard strong{
@@ -801,7 +1020,9 @@ body.dark .pack.selected{
  color:var(--muted);
 }
 
-/* ORDERS */
+/* =========================
+   ORDERS
+========================= */
 
 .order{
  background:var(--card);
@@ -826,7 +1047,18 @@ body.dark .pack.selected{
  font-weight:800;
 }
 
-/* PROFILE */
+.orderSensitivity{
+ margin-top:9px;
+ background:var(--bg);
+ padding:10px;
+ border-radius:11px;
+ font-size:10px;
+ line-height:1.7;
+}
+
+/* =========================
+   PROFILE
+========================= */
 
 .profileBox{
  background:var(--card);
@@ -876,7 +1108,9 @@ body.dark .pack.selected{
  color:#f04438;
 }
 
-/* NOTIFICATIONS */
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 .notification{
  background:var(--card);
@@ -885,7 +1119,6 @@ body.dark .pack.selected{
  padding:15px;
  margin-bottom:10px;
  cursor:pointer;
- transition:.2s;
 }
 
 .notification.unread{
@@ -977,7 +1210,9 @@ body.dark .clearNotifications{
  border-radius:18px;
 }
 
-/* WHATSAPP */
+/* =========================
+   WHATSAPP
+========================= */
 
 .whatsapp{
  position:fixed;
@@ -997,7 +1232,9 @@ body.dark .clearNotifications{
  text-decoration:none;
 }
 
-/* NAV */
+/* =========================
+   NAV
+========================= */
 
 .bottomNav{
  position:fixed;
@@ -1039,7 +1276,9 @@ body.dark .bottomNav{
  font-weight:900;
 }
 
-/* MODAL */
+/* =========================
+   MODALS
+========================= */
 
 .modal{
  position:fixed;
@@ -1064,8 +1303,12 @@ body.dark .bottomNav{
 }
 
 @keyframes slideUp{
- from{transform:translateY(100%);}
- to{transform:none;}
+ from{
+  transform:translateY(100%);
+ }
+ to{
+  transform:none;
+ }
 }
 
 .modalHeader{
@@ -1084,8 +1327,6 @@ body.dark .bottomNav{
  border-radius:10px;
 }
 
-/* GOOGLE */
-
 .googleBtn{
  width:100%;
  border:1px solid var(--border);
@@ -1097,7 +1338,28 @@ body.dark .bottomNav{
  margin-top:10px;
 }
 
-/* TOAST */
+.paymentOption{
+ width:100%;
+ border:1px solid var(--border);
+ background:var(--card);
+ color:var(--text);
+ padding:14px;
+ border-radius:13px;
+ margin-top:9px;
+ text-align:left;
+}
+
+.paymentOption strong{
+ display:block;
+}
+
+.paymentOption small{
+ color:var(--muted);
+}
+
+/* =========================
+   TOAST
+========================= */
 
 .toast{
  position:fixed;
@@ -1122,6 +1384,10 @@ body.dark .bottomNav{
  transform:translateX(-50%) translateY(0);
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(min-width:700px){
 
  .categories{
@@ -1133,7 +1399,7 @@ body.dark .bottomNav{
  }
 
  .banner{
-  height:210px;
+  height:220px;
  }
 
 }
@@ -1142,15 +1408,21 @@ body.dark .bottomNav{
 
 <body>
 
-<!-- SITE CLOSED -->
+<!-- =========================
+     SITE CLOSED
+========================= -->
 
 <div id="siteClosed">
 
  <div class="siteClosedBox">
 
-  <div class="siteClosedIcon">🔒</div>
+  <div class="siteClosedIcon">
+   🔒
+  </div>
 
-  <h2>TRUE ALPHA fèmen pou kounye a</h2>
+  <h2>
+   TRUE ALPHA fèmen pou kounye a
+  </h2>
 
   <p id="siteClosedMessage">
    Sit la pa disponib pou kounye a.
@@ -1164,13 +1436,17 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- SPLASH -->
+<!-- =========================
+     SPLASH
+========================= -->
 
 <div id="splash">
 
  <div class="splashBox">
 
-  <div class="alphaLogo">TA</div>
+  <div class="alphaLogo">
+   TA
+  </div>
 
   <div class="splashTitle">
    TRUE ALPHA
@@ -1186,6 +1462,38 @@ body.dark .bottomNav{
 
 </div>
 
+<!-- =========================
+     PURCHASE LOADING
+========================= -->
+
+<div id="purchaseLoading">
+
+ <div class="loadingBox">
+
+  <div class="loadingLogo">
+
+   <div class="loadingLogoInner">
+    TRUE ALPHA
+   </div>
+
+  </div>
+
+  <div class="loadingTitle">
+   Traitement de l'achat
+  </div>
+
+  <div class="loadingText">
+   Vérification du Wallet et préparation de votre commande...
+  </div>
+
+ </div>
+
+</div>
+
+<!-- =========================
+     APP
+========================= -->
+
 <div id="app">
 
 <div class="container">
@@ -1199,30 +1507,35 @@ body.dark .bottomNav{
   </div>
 
   <div class="brandText">
-
    <strong>TRUE ALPHA</strong>
-
    <span>TopUp & Digital Services</span>
-
   </div>
 
  </div>
 
  <div class="headerRight">
 
-  <button class="iconBtn" onclick="openWallet()">
+  <button
+   class="iconBtn"
+   onclick="openWallet()">
    💰
   </button>
 
-  <button class="iconBtn" onclick="toggleDark()">
+  <button
+   class="iconBtn"
+   onclick="toggleDark()">
    🌙
   </button>
 
-  <button class="iconBtn" onclick="showNotifications()">
+  <button
+   class="iconBtn"
+   onclick="showNotifications()">
 
    🔔
 
-   <span class="badge" id="notificationBadge">
+   <span
+    class="badge"
+    id="notificationBadge">
     0
    </span>
 
@@ -1232,14 +1545,14 @@ body.dark .bottomNav{
    class="loginBtn"
    id="loginButton"
    onclick="openLogin()">
-
    Se connecter
-
   </button>
 
  </div>
 
 </header>
+
+<!-- WALLET MINI -->
 
 <div class="walletMini">
 
@@ -1251,13 +1564,17 @@ body.dark .bottomNav{
     Solde Wallet
    </div>
 
-   <div class="walletAmount" id="headerBalance">
+   <div
+    class="walletAmount"
+    id="headerBalance">
     0 HTG
    </div>
 
   </div>
 
-  <button class="recharge" onclick="openRecharge()">
+  <button
+   class="recharge"
+   onclick="openRecharge()">
    + Recharger
   </button>
 
@@ -1265,73 +1582,124 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
-<section id="home" class="page active">
+<section
+ id="home"
+ class="page active">
 
  <div class="banner">
+
+  <!-- SLIDE 1 -->
 
   <div class="slide active">
 
    <div class="slideText">
 
-    <small>PAIEMENT MOBILE</small>
+    <small>
+     FREE FIRE • HIT
+    </small>
 
-    <h2>NatCash & MonCash</h2>
+    <h2>
+     Un tir précis 🎯
+    </h2>
 
     <p>
-     Le paiement mobile simple et sécurisé.
-     Votre argent, toujours à portée de main !
+     312 HP de dégâts affichés
+     avec le hitmarker rouge.
      <br><br>
-     Transferts rapides • Paiements sécurisés • Recharge facile
+     TRUE ALPHA — Gaming Services.
     </p>
 
    </div>
 
-   <div class="bannerArt">
+   <div class="hitScene">
+
+    <div class="shooter">
+     🧍
+    </div>
+
+    <div class="enemy">
+     🧍
+    </div>
+
+    <div class="bulletLine"></div>
+
+    <div class="cross">
+     ✚
+    </div>
+
+    <div class="hp">
+     -312 HP
+    </div>
+
+    <div class="damage">
+     312
+    </div>
+
+   </div>
+
+  </div>
+
+  <!-- SLIDE 2 -->
+
+  <div class="slide">
+
+   <div class="slideText">
+
+    <small>
+     SENSIBILITÉ FREE FIRE
+    </small>
+
+    <h2>
+     Réglages prêts 🎮
+    </h2>
+
+    <p>
+     Une configuration complète
+     de sensibilité à 200 HTG.
+     <br><br>
+     Disponible immédiatement après achat.
+    </p>
+
+   </div>
+
+   <div class="bannerArt"
+    style="font-size:55px">
+    🎯
+   </div>
+
+  </div>
+
+  <!-- SLIDE 3 -->
+
+  <div class="slide">
+
+   <div class="slideText">
+
+    <small>
+     PAIEMENT MOBILE
+    </small>
+
+    <h2>
+     NatCash disponible
+    </h2>
+
+    <p>
+     Rechargez votre Wallet
+     avec NatCash.
+     <br><br>
+     MonCash et Digicel :
+     bientôt disponibles.
+    </p>
+
+   </div>
+
+   <div class="bannerArt"
+    style="font-size:50px">
     📱💸
-   </div>
-
-  </div>
-
-  <div class="slide">
-
-   <div class="slideText">
-
-    <small>CARTE VIRTUELLE</small>
-
-    <h2>Créez votre carte Visa virtuelle</h2>
-
-    <p>
-     Créez votre carte virtuelle avec Kirikou
-     pour vos paiements en ligne.
-    </p>
-
-   </div>
-
-   <div class="bannerArt">
-    💳✨
-   </div>
-
-  </div>
-
-  <div class="slide">
-
-   <div class="slideText">
-
-    <small>FREE FIRE</small>
-
-    <h2>Rechargez vos Diamonds 💎</h2>
-
-    <p>
-     Entrez votre UID, choisissez votre pack
-     et préparez votre commande.
-    </p>
-
-   </div>
-
-   <div class="bannerArt">
-    💎🔥
    </div>
 
   </div>
@@ -1353,8 +1721,8 @@ body.dark .bottomNav{
   </h1>
 
   <p>
-   Rechaje jwèt, kat kado ak sèvis dijital nan yon sèl klik.
-   Peman rapid ak sekirize.
+   Rechaje jwèt, sèvis gaming ak sèvis dijital
+   nan yon sèl kote.
    <br><br>
    <b>
     True Alpha — solisyon dijital ou ka konte sou li.
@@ -1365,9 +1733,13 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Catégories</h2>
+  <h2>
+   Catégories
+  </h2>
 
-  <span>Tout services</span>
+  <span>
+   Tout services
+  </span>
 
  </div>
 
@@ -1381,7 +1753,9 @@ body.dark .bottomNav{
     🎮
    </div>
 
-   <strong>Jwèt</strong>
+   <strong>
+    Jwèt
+   </strong>
 
    <small>
     TopUp & services gaming
@@ -1397,7 +1771,9 @@ body.dark .bottomNav{
     💳
    </div>
 
-   <strong>Kat</strong>
+   <strong>
+    Kat
+   </strong>
 
    <small>
     Cartes virtuelles
@@ -1409,13 +1785,17 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- GAMES -->
+<!-- =========================
+     GAMES
+========================= -->
 
-<section id="games" class="page">
+<section
+ id="games"
+ class="page">
 
  <button
   class="backBtn"
-  onclick="showPage('home')">
+  onclick="goBackAndReset('home')">
 
   ← Retour
 
@@ -1423,13 +1803,19 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Jeux & services</h2>
+  <h2>
+   Jeux & services
+  </h2>
 
-  <span>6 services</span>
+  <span>
+   6 services
+  </span>
 
  </div>
 
  <div class="gamesGrid">
+
+  <!-- FREE FIRE -->
 
   <div
    class="gameCard"
@@ -1446,16 +1832,18 @@ body.dark .bottomNav{
    <div class="gameInfo">
 
     <strong>
-     Free Fire TopUp par UID
+     Free Fire
     </strong>
 
     <small class="available">
-     ● Disponible • NA — North America
+     ● Disponible • NA
     </small>
 
    </div>
 
   </div>
+
+  <!-- DLS -->
 
   <div class="gameCard">
 
@@ -1466,14 +1854,18 @@ body.dark .bottomNav{
     </div>
 
     <div class="soonLayer">
-     <span>Bientôt disponible</span>
+     <span>
+      Bientôt disponible
+     </span>
     </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>DLS</strong>
+    <strong>
+     DLS
+    </strong>
 
     <small class="soon">
      Bientôt disponible
@@ -1482,6 +1874,8 @@ body.dark .bottomNav{
    </div>
 
   </div>
+
+  <!-- EUROPE -->
 
   <div class="gameCard">
 
@@ -1492,14 +1886,18 @@ body.dark .bottomNav{
     </div>
 
     <div class="soonLayer">
-     <span>Bientôt disponible</span>
+     <span>
+      Bientôt disponible
+     </span>
     </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>Free Fire Europe</strong>
+    <strong>
+     Free Fire Europe
+    </strong>
 
     <small class="soon">
      Bientôt disponible
@@ -1508,6 +1906,8 @@ body.dark .bottomNav{
    </div>
 
   </div>
+
+  <!-- LATAM -->
 
   <div class="gameCard">
 
@@ -1518,14 +1918,18 @@ body.dark .bottomNav{
     </div>
 
     <div class="soonLayer">
-     <span>Bientôt disponible</span>
+     <span>
+      Bientôt disponible
+     </span>
     </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>Free Fire PIN LATAM</strong>
+    <strong>
+     Free Fire PIN LATAM
+    </strong>
 
     <small class="soon">
      Bientôt disponible
@@ -1534,6 +1938,8 @@ body.dark .bottomNav{
    </div>
 
   </div>
+
+  <!-- BOOYAH -->
 
   <div class="gameCard">
 
@@ -1544,14 +1950,18 @@ body.dark .bottomNav{
     </div>
 
     <div class="soonLayer">
-     <span>Bientôt disponible</span>
+     <span>
+      Bientôt disponible
+     </span>
     </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>Pass Booyah</strong>
+    <strong>
+     Pass Booyah
+    </strong>
 
     <small class="soon">
      Bientôt disponible
@@ -1560,6 +1970,8 @@ body.dark .bottomNav{
    </div>
 
   </div>
+
+  <!-- AUTRES -->
 
   <div class="gameCard">
 
@@ -1570,14 +1982,18 @@ body.dark .bottomNav{
     </div>
 
     <div class="soonLayer">
-     <span>Bientôt disponible</span>
+     <span>
+      Bientôt disponible
+     </span>
     </div>
 
    </div>
 
    <div class="gameInfo">
 
-    <strong>Autres jeux</strong>
+    <strong>
+     Autres jeux
+    </strong>
 
     <small class="soon">
      Bientôt disponible
@@ -1591,13 +2007,17 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- FREE FIRE -->
+<!-- =========================
+     FREE FIRE
+========================= -->
 
-<section id="freefire" class="page">
+<section
+ id="freefire"
+ class="page">
 
  <button
   class="backBtn"
-  onclick="showPage('games')">
+  onclick="goBackAndReset('games')">
 
   ← Retour aux jeux
 
@@ -1605,7 +2025,9 @@ body.dark .bottomNav{
 
  <div class="sectionTitle">
 
-  <h2>Free Fire TopUp 💎</h2>
+  <h2>
+   Free Fire
+  </h2>
 
   <span>
    NA — North America
@@ -1617,18 +2039,16 @@ body.dark .bottomNav{
 
   <div class="instruction">
 
-   🇭🇹
-   <b>Antre UID Free Fire ou.</b>
-
-   <br>
-
-   Mete UID ou epi verifye enfòmasyon joueur la.
-
-   <br>
-
+   🇺🇸
    <b>
-    Serveur : NA — North America 🇺🇸
+    Free Fire — NA
    </b>
+
+   <br><br>
+
+   Antre UID Free Fire ou.
+   <br>
+   Verifye UID la avan ou chwazi sèvis la.
 
   </div>
 
@@ -1658,7 +2078,9 @@ body.dark .bottomNav{
    class="playerResult"
    id="playerResult">
 
-   <b>✓ Joueur vérifié</b>
+   <b>
+    ✓ UID prepare
+   </b>
 
    <br>
 
@@ -1674,161 +2096,103 @@ body.dark .bottomNav{
 
   </div>
 
+  <!-- SENSITIVITY -->
+
   <div
-   id="packsArea"
+   class="sensitivityCard"
+   id="sensitivityCard"
    style="display:none">
 
-   <div class="sectionTitle">
+   <div class="sensitivityHeader">
 
-    <h2>
-     Choisissez votre pack
-    </h2>
+    <strong>
+     🎯 Sensibilité Free Fire
+    </strong>
+
+    <div class="sensitivityPrice">
+     200 HTG
+    </div>
 
    </div>
 
-   <div class="packs">
+   <div class="sensitivityRows">
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'100 + 10 💎',200)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 100 + 10
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      200 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Général
+     </span>
+     <span>
+      100
+     </span>
     </div>
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'310 + 32 💎',450)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 310 + 32
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      450 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Point rouge
+     </span>
+     <span>
+      95
+     </span>
     </div>
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'520 + 52 💎',750)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 520 + 52
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      750 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Lunette 2x
+     </span>
+     <span>
+      90
+     </span>
     </div>
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'1,060 + 106 💎',1350)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 1,060 + 106
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      1,350 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Lunette 4x
+     </span>
+     <span>
+      80
+     </span>
     </div>
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'2,180 + 218 💎',3000)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 2,180 + 218
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      3,000 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Lunette AWM
+     </span>
+     <span>
+      60
+     </span>
     </div>
 
-    <div
-     class="pack"
-     onclick="selectPack(this,'5,600 + 560 💎',8000)">
-
-     <div>
-
-      <div class="diamonds">
-       💎 5,600 + 560
-      </div>
-
-      <small>
-       Bonus inclus
-      </small>
-
-     </div>
-
-     <div class="price">
-      8,000 HTG
-     </div>
-
+    <div class="sensitivityRow">
+     <span>
+      Vue libre
+     </span>
+     <span>
+      75
+     </span>
     </div>
 
    </div>
 
    <button
-    class="buyBtn"
-    onclick="buyNow()">
+    class="buyBtn buySensitivity"
+    id="sensitivityBuyButton"
+    onclick="buySensitivity()">
 
-    Acheter maintenant
+    Acheter — 200 HTG
 
    </button>
+
+   <div
+    id="sensitivityCooldown"
+    style="
+     display:none;
+     margin-top:10px;
+     text-align:center;
+     color:var(--warning);
+     font-size:10px;
+     font-weight:800;
+    ">
+   </div>
 
   </div>
 
@@ -1836,9 +2200,13 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- CARDS -->
+<!-- =========================
+     CARDS
+========================= -->
 
-<section id="cards" class="page">
+<section
+ id="cards"
+ class="page">
 
  <button
   class="backBtn"
@@ -1859,10 +2227,8 @@ body.dark .bottomNav{
  <div class="virtualCard">
 
   <div class="cardBrand">
-
    <span>KIRIKOU</span>
    <span>VISA</span>
-
   </div>
 
   <div class="chip"></div>
@@ -1872,10 +2238,8 @@ body.dark .bottomNav{
   </div>
 
   <div class="cardBottom">
-
    <span>TRUE ALPHA</span>
    <span>VIRTUAL CARD</span>
-
   </div>
 
  </div>
@@ -1889,7 +2253,11 @@ body.dark .bottomNav{
   </h3>
 
   <p
-   style="font-size:12px;color:var(--muted);line-height:1.6;margin:10px 0 18px">
+   style="
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.6;
+    margin:10px 0 18px">
 
    Créez votre carte virtuelle avec Kirikou
    pour vos paiements en ligne.
@@ -1908,9 +2276,13 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- ORDERS -->
+<!-- =========================
+     ORDERS
+========================= -->
 
-<section id="orders" class="page">
+<section
+ id="orders"
+ class="page">
 
  <div class="sectionTitle">
 
@@ -1924,9 +2296,13 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- WALLET -->
+<!-- =========================
+     WALLET
+========================= -->
 
-<section id="wallet" class="page">
+<section
+ id="wallet"
+ class="page">
 
  <div class="sectionTitle">
 
@@ -1963,46 +2339,46 @@ body.dark .bottomNav{
     </strong>
 
     <small>
-     NatCash / MonCash
+     NatCash disponible
     </small>
 
    </div>
 
    <div
     class="actionCard"
-    onclick="transferMoney()">
+    onclick="showPaymentSoon('MonCash')">
 
-    ↗️
+    📱
 
     <strong>
-     Transférer
+     MonCash
     </strong>
 
     <small>
-     Minimum 50 HTG
+     Bientôt disponible
     </small>
 
    </div>
 
    <div
     class="actionCard"
-    onclick="withdrawMoney()">
+    onclick="showPaymentSoon('Digicel')">
 
-    🏦
+    📲
 
     <strong>
-     Retrait
+     Digicel
     </strong>
 
     <small>
-     Minimum 5,000 HTG
+     Bientôt disponible
     </small>
 
    </div>
 
    <div
     class="actionCard"
-    onclick="privatePage('orders')">
+    onclick="showPage('orders')">
 
     📋
 
@@ -2022,9 +2398,13 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- NOTIFICATIONS -->
+<!-- =========================
+     NOTIFICATIONS
+========================= -->
 
-<section id="notifications" class="page">
+<section
+ id="notifications"
+ class="page">
 
  <div class="sectionTitle">
 
@@ -2062,9 +2442,13 @@ body.dark .bottomNav{
 
 </section>
 
-<!-- PROFILE -->
+<!-- =========================
+     PROFILE
+========================= -->
 
-<section id="profile" class="page">
+<section
+ id="profile"
+ class="page">
 
  <div class="sectionTitle">
 
@@ -2079,25 +2463,19 @@ body.dark .bottomNav{
   <div
    class="avatar"
    id="profileAvatar">
-
    TA
-
   </div>
 
   <div
    class="profileName"
    id="profileName">
-
    Visiteur
-
   </div>
 
   <div
    class="profileEmail"
    id="profileEmail">
-
    Connectez-vous pour accéder à votre compte
-
   </div>
 
   <div style="height:15px"></div>
@@ -2110,7 +2488,9 @@ body.dark .bottomNav{
     👤 Compte
    </span>
 
-   <span>›</span>
+   <span>
+    ›
+   </span>
 
   </div>
 
@@ -2122,7 +2502,9 @@ body.dark .bottomNav{
     🛒 Mes commandes
    </span>
 
-   <span>›</span>
+   <span>
+    ›
+   </span>
 
   </div>
 
@@ -2134,7 +2516,9 @@ body.dark .bottomNav{
     💰 Recharger Wallet
    </span>
 
-   <span>›</span>
+   <span>
+    ›
+   </span>
 
   </div>
 
@@ -2166,14 +2550,15 @@ body.dark .bottomNav{
 
   <div
    class="menuItem logout"
-   id="logoutItem"
    onclick="logout()">
 
    <span>
     🚪 Déconnexion
    </span>
 
-   <span>›</span>
+   <span>
+    ›
+   </span>
 
   </div>
 
@@ -2183,19 +2568,21 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- WHATSAPP -->
+<!-- =========================
+     WHATSAPP
+========================= -->
 
 <a
  class="whatsapp"
  href="https://wa.me/50941515802"
  target="_blank"
  rel="noopener">
-
  ☎
-
 </a>
 
-<!-- BOTTOM NAV -->
+<!-- =========================
+     NAV
+========================= -->
 
 <nav class="bottomNav">
 
@@ -2253,7 +2640,9 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN MODAL
+========================= -->
 
 <div
  class="modal"
@@ -2270,17 +2659,16 @@ body.dark .bottomNav{
    <button
     class="close"
     onclick="closeModal('loginModal')">
-
     ✕
-
    </button>
 
   </div>
 
   <div class="instruction">
 
-   🔐 Konekte pou jwenn aksè ak Wallet,
-   kòmand ou yo epi pou kontinye yon achat.
+   🔐 Konekte ak Google pou jwenn aksè
+   ak Wallet ou, commandes ou yo
+   ak sèvis TRUE ALPHA yo.
 
   </div>
 
@@ -2288,7 +2676,22 @@ body.dark .bottomNav{
    class="googleBtn"
    onclick="googleLogin()">
 
-   🇬 Connexion avec Google
+   <span
+    style="
+     display:inline-flex;
+     align-items:center;
+     justify-content:center;
+     width:22px;
+     height:22px;
+     border-radius:50%;
+     margin-right:6px;
+     background:#fff;
+     color:#4285f4;
+     font-weight:1000">
+    G
+   </span>
+
+   Connexion avec Google
 
   </button>
 
@@ -2296,7 +2699,9 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- RECHARGE -->
+<!-- =========================
+     RECHARGE MODAL
+========================= -->
 
 <div
  class="modal"
@@ -2313,21 +2718,25 @@ body.dark .bottomNav{
    <button
     class="close"
     onclick="closeModal('rechargeModal')">
-
-   ✕
-
+    ✕
    </button>
 
   </div>
 
   <div class="instruction">
 
-   💡 Ou dwe konekte pou rechaje Wallet ou.
+   💚
+   <b>NatCash disponible</b>
 
    <br><br>
 
    Minimum :
    <b>50 HTG</b>
+
+   <br><br>
+
+   MonCash ak Digicel:
+   <b>Bientôt disponible.</b>
 
   </div>
 
@@ -2349,7 +2758,7 @@ body.dark .bottomNav{
    class="primaryBtn"
    onclick="startRecharge()">
 
-   Continuer
+   Continuer avec NatCash
 
   </button>
 
@@ -2357,146 +2766,57 @@ body.dark .bottomNav{
 
 </div>
 
-<!-- TRANSFER -->
+<!-- =========================
+     PAYMENT SOON MODAL
+========================= -->
 
 <div
  class="modal"
- id="transferModal">
+ id="soonPaymentModal">
 
  <div class="modalBox">
 
   <div class="modalHeader">
 
    <h3>
-    Transférer
+    Paiement
    </h3>
 
    <button
     class="close"
-    onclick="closeModal('transferModal')">
-
+    onclick="closeModal('soonPaymentModal')">
     ✕
-
    </button>
 
   </div>
 
   <div class="instruction">
 
-   ↗️ Minimum transfè :
-   <b>50 HTG</b>
+   📱
+   <b id="soonPaymentName">
+    Service
+   </b>
+
+   <br><br>
+
+   Ce moyen de paiement sera
+   <b>bientôt disponible</b>
+   sur TRUE ALPHA.
+
+   <br><br>
+
+   Pour le moment,
+   <b>NatCash</b> est disponible.
 
   </div>
-
-  <div class="field">
-
-   <label>
-    Email du destinataire
-   </label>
-
-   <input
-    id="transferEmail"
-    type="email"
-    placeholder="Email">
-
-  </div>
-
-  <div class="field">
-
-   <label>
-    Montant HTG
-   </label>
-
-   <input
-    id="transferAmount"
-    type="number"
-    min="50"
-    placeholder="Minimum 50">
-
-  </div>
-
-  <button
-   class="primaryBtn"
-   onclick="submitTransfer()">
-
-   Continuer
-
-  </button>
 
  </div>
 
 </div>
 
-<!-- WITHDRAW -->
-
-<div
- class="modal"
- id="withdrawModal">
-
- <div class="modalBox">
-
-  <div class="modalHeader">
-
-   <h3>
-    Retrait Wallet
-   </h3>
-
-   <button
-    class="close"
-    onclick="closeModal('withdrawModal')">
-
-    ✕
-
-   </button>
-
-  </div>
-
-  <div class="instruction">
-
-   🏦 Montant minimum :
-   <b>5,000 HTG</b>
-
-  </div>
-
-  <div class="field">
-
-   <label>
-    Numéro de retrait
-   </label>
-
-   <input
-    id="withdrawPhone"
-    type="tel"
-    inputmode="numeric"
-    placeholder="Numéro NatCash">
-
-  </div>
-
-  <div class="field">
-
-   <label>
-    Montant HTG
-   </label>
-
-   <input
-    id="withdrawAmount"
-    type="number"
-    min="5000"
-    placeholder="Minimum 5000">
-
-  </div>
-
-  <button
-   class="primaryBtn"
-   onclick="submitWithdraw()">
-
-   Demander le retrait
-
-  </button>
-
- </div>
-
-</div>
+<!-- =========================
+     TOAST
+========================= -->
 
 <div
  class="toast"
@@ -2504,6 +2824,31 @@ body.dark .bottomNav{
 </div>
 
 <script>
+
+/* =========================
+   CONFIG
+========================= */
+
+const OWNER_NAME="Manuel Pluviose";
+
+const SENSITIVITY_PRICE=200;
+
+const SENSITIVITY_COOLDOWN=30*60*1000;
+
+/*
+ * Backend endpoint.
+ *
+ * Se backend la ki dwe:
+ * - verifye user la
+ * - verifye Wallet la
+ * - retire 200 HTG
+ * - kreye command lan
+ * - anrejistre cooldown lan
+ *
+ * Pa mete API secret ladan.
+ */
+
+const API_BASE="";
 
 /* =========================
    SITE STATUS
@@ -2517,13 +2862,12 @@ async function loadSiteStatus(){
  try{
 
   const response=await fetch(
-   "/api/site-status?t="+Date.now(),
+   API_BASE+"/api/site-status?t="+Date.now(),
    {
     method:"GET",
     cache:"no-store",
     headers:{
-     "Cache-Control":"no-cache",
-     "Pragma":"no-cache"
+     "Cache-Control":"no-cache"
     }
    }
   );
@@ -2545,8 +2889,8 @@ async function loadSiteStatus(){
    error
   );
 
-  siteStatusLoaded=false;
   siteEnabled=true;
+  siteStatusLoaded=false;
 
  }
 
@@ -2571,7 +2915,7 @@ function applySiteStatus(data){
 
    message.textContent=
     data.message ||
-    "Sit la fèmen pou kounye a. Tanpri retounen pita.";
+    "Sit la fèmen pou kounye a.";
 
   }
 
@@ -2580,16 +2924,16 @@ function applySiteStatus(data){
  }else{
 
   closed.style.display="none";
-
   document.body.style.overflow="";
 
  }
 
 }
 
-async function refreshSiteStatus(){
- await loadSiteStatus();
-}
+setInterval(
+ loadSiteStatus,
+ 30000
+);
 
 function canUseSite(){
 
@@ -2607,89 +2951,53 @@ function canUseSite(){
 
 }
 
-setInterval(
- refreshSiteStatus,
- 30000
-);
-
-
 /* =========================
    DATA
 ========================= */
 
-const OWNER_NAME=
- "Manuel Pluviose";
-
-let selectedPack=null;
-let selectedPrice=0;
-
-
-/*
- * Firebase se sous verite
- * pou login.
- */
-
-let loggedIn=false;
 let firebaseUser=null;
+let loggedIn=false;
 
+let balance=0;
 
-/*
- * Wallet ak command yo
- * toujou local pou moman sa a.
- */
-
-let balance=
- Number(
-  localStorage.getItem("ta_balance")||0
- );
-
-let orders=
- JSON.parse(
-  localStorage.getItem("ta_orders")||"[]"
- );
-
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-const defaultNotifications=[
-
- {
-  id:1,
-  title:"Bienvenue sur True Alpha",
-  text:"Bienvenue sur votre plateforme de services digitaux.",
-  time:"Aujourd'hui",
-  read:false
- },
-
- {
-  id:2,
-  title:"Free Fire TopUp disponible",
-  text:"Free Fire TopUp par UID — serveur NA North America.",
-  time:"Aujourd'hui",
-  read:false
- },
-
- {
-  id:3,
-  title:"Carte virtuelle",
-  text:"Vous pouvez contacter True Alpha pour créer votre carte virtuelle.",
-  time:"Aujourd'hui",
-  read:false
- }
-
-];
+let orders=[];
 
 let notifications=
  JSON.parse(
-  localStorage.getItem("ta_notifications")||"null"
+  localStorage.getItem(
+   "ta_notifications"
+  )||"null"
  );
 
 if(!notifications){
 
- notifications=
-  defaultNotifications;
+ notifications=[
+
+  {
+   id:1,
+   title:"Bienvenue sur TRUE ALPHA",
+   text:"Bienvenue sur votre plateforme de services digitaux.",
+   time:"Aujourd'hui",
+   read:false
+  },
+
+  {
+   id:2,
+   title:"Sensibilité Free Fire disponible",
+   text:"La configuration complète de sensibilité est disponible à 200 HTG.",
+   time:"Aujourd'hui",
+   read:false
+  },
+
+  {
+   id:3,
+   title:"NatCash disponible",
+   text:"Vous pouvez recharger votre Wallet avec NatCash.",
+   time:"Aujourd'hui",
+   read:false
+  }
+
+ ];
 
  localStorage.setItem(
   "ta_notifications",
@@ -2698,6 +3006,7 @@ if(!notifications){
 
 }
 
+let selectedUID="";
 
 /* =========================
    SPLASH
@@ -2714,32 +3023,27 @@ window.addEventListener(
    const splash=
     document.getElementById("splash");
 
-   if(splash){
+   splash.style.opacity="0";
 
-    splash.style.opacity="0";
+   setTimeout(()=>{
 
-    setTimeout(()=>{
+    splash.style.display="none";
 
-     splash.style.display="none";
+    document.getElementById(
+     "app"
+    ).style.display="block";
 
-     const app=
-      document.getElementById("app");
+   },500);
 
-     if(app)
-      app.style.display="block";
+  },1500);
 
-    },500);
-
-   }
-
-  },1800);
-
-  updateUI();
-  renderOrders();
   renderNotifications();
+  updateUI();
+  loadWalletFromBackend();
+  loadOrdersFromBackend();
+  updateSensitivityCooldown();
 
  });
-
 
 /* =========================
    DARK MODE
@@ -2765,7 +3069,6 @@ if(
  document.body.classList.add("dark");
 
 }
-
 
 /* =========================
    PAGE
@@ -2809,9 +3112,16 @@ function showPage(page){
 
 }
 
+function goBackAndReset(page){
+
+ resetPurchaseForm();
+
+ showPage(page);
+
+}
 
 /* =========================
-   FIREBASE LOGIN CHECK
+   LOGIN
 ========================= */
 
 function requireLogin(){
@@ -2819,11 +3129,11 @@ function requireLogin(){
  if(!firebaseUser){
 
   toast(
-   "Tanpri konekte ak kont ou avan."
+   "Tanpri konekte ak Google avan."
   );
 
   setTimeout(
-   ()=>openLogin(),
+   openLogin,
    400
   );
 
@@ -2847,76 +3157,171 @@ function privatePage(page){
 
 }
 
+function openLogin(){
+
+ if(firebaseUser){
+
+  showPage("profile");
+
+  return;
+
+ }
+
+ document.getElementById(
+  "loginModal"
+ ).classList.add("show");
+
+}
 
 /* =========================
-   WALLET
+   GOOGLE
 ========================= */
 
-function openWallet(){
+async function googleLogin(){
 
  if(!canUseSite())
   return;
 
- if(!requireLogin())
+ if(!window.TA_FIREBASE){
+
+  toast(
+   "❌ Firebase pa chaje."
+  );
+
   return;
 
- showPage("wallet");
+ }
+
+ try{
+
+  toast(
+   "⏳ Connexion Google..."
+  );
+
+  const result=
+   await window.TA_FIREBASE.signInWithPopup(
+    window.TA_FIREBASE.auth,
+    window.TA_FIREBASE.googleProvider
+   );
+
+  firebaseUser=result.user;
+  loggedIn=true;
+
+  updateUI();
+
+  closeModal(
+   "loginModal"
+  );
+
+  addNotification(
+   "Connexion réussie",
+   "Bienvenue sur TRUE ALPHA, "+
+   (
+    result.user.displayName ||
+    result.user.email ||
+    "Utilisateur"
+   )+
+   "."
+  );
+
+  await loadWalletFromBackend();
+  await loadOrdersFromBackend();
+
+  toast(
+   "✅ Connexion réussie."
+  );
+
+ }catch(error){
+
+  console.error(error);
+
+  toast(
+   "❌ Google Login: "+
+   (
+    error.code ||
+    "erreur inconnue"
+   )
+  );
+
+ }
 
 }
 
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+ if(!firebaseUser){
+
+  toast(
+   "Ou pa konekte."
+  );
+
+  return;
+
+ }
+
+ try{
+
+  await window.TA_FIREBASE.signOut(
+   window.TA_FIREBASE.auth
+  );
+
+  firebaseUser=null;
+  loggedIn=false;
+  balance=0;
+  orders=[];
+
+  updateUI();
+  renderOrders();
+
+  showPage("home");
+
+  toast(
+   "✅ Déconnexion réussie."
+  );
+
+ }catch(error){
+
+  console.error(error);
+
+  toast(
+   "❌ Erè pandan déconnexion."
+  );
+
+ }
+
+}
 
 /* =========================
-   UPDATE UI
+   UI
 ========================= */
 
 function updateUI(){
 
- const amount=
-  balance.toLocaleString("fr-FR")+
+ const formatted=
+  Number(balance||0).toLocaleString(
+   "fr-FR"
+  )+
   " HTG";
 
- const headerBalance=
-  document.getElementById(
-   "headerBalance"
-  );
+ document.getElementById(
+  "headerBalance"
+ ).textContent=formatted;
 
- const walletBalance=
-  document.getElementById(
-   "walletBalance"
-  );
+ document.getElementById(
+  "walletBalance"
+ ).textContent=formatted;
 
- const profileBalance=
-  document.getElementById(
-   "profileBalance"
-  );
-
- if(headerBalance)
-  headerBalance.textContent=amount;
-
- if(walletBalance)
-  walletBalance.textContent=amount;
-
- if(profileBalance)
-  profileBalance.textContent=amount;
+ document.getElementById(
+  "profileBalance"
+ ).textContent=formatted;
 
  const loginButton=
   document.getElementById(
    "loginButton"
-  );
-
- const profileName=
-  document.getElementById(
-   "profileName"
-  );
-
- const profileEmail=
-  document.getElementById(
-   "profileEmail"
-  );
-
- const profileAvatar=
-  document.getElementById(
-   "profileAvatar"
   );
 
  if(firebaseUser){
@@ -2926,359 +3331,160 @@ function updateUI(){
    firebaseUser.email ||
    "Utilisateur";
 
-  const email=
-   firebaseUser.email ||
-   "";
+  document.getElementById(
+   "profileName"
+  ).textContent=name;
 
-  if(profileName)
-   profileName.textContent=name;
+  document.getElementById(
+   "profileEmail"
+  ).textContent=
+   firebaseUser.email || "";
 
-  if(profileEmail)
-   profileEmail.textContent=email;
+  document.getElementById(
+   "profileAvatar"
+  ).textContent=
+   name.trim().charAt(0).toUpperCase() ||
+   "TA";
 
-  if(profileAvatar){
+  loginButton.textContent=
+   "Mon compte";
 
-   const firstLetter=
-    name.trim().charAt(0).toUpperCase() ||
-    "TA";
+ }else{
 
-   profileAvatar.textContent=
-    firstLetter;
+  document.getElementById(
+   "profileName"
+  ).textContent=
+   "Visiteur";
+
+  document.getElementById(
+   "profileEmail"
+  ).textContent=
+   "Connectez-vous pour accéder à votre compte";
+
+  document.getElementById(
+   "profileAvatar"
+  ).textContent="TA";
+
+  loginButton.textContent=
+   "Se connecter";
+
+ }
+
+ updateNotificationBadge();
+
+}
+
+/* =========================
+   WALLET FROM BACKEND
+========================= */
+
+async function loadWalletFromBackend(){
+
+ if(!firebaseUser)
+  return;
+
+ try{
+
+  const token=
+   await firebaseUser.getIdToken();
+
+  const response=
+   await fetch(
+    API_BASE+"/api/wallet",
+    {
+     headers:{
+      Authorization:
+       "Bearer "+token
+     }
+    }
+   );
+
+  if(!response.ok)
+   return;
+
+  const data=
+   await response.json();
+
+  if(
+   typeof data.balance==="number"
+  ){
+
+   balance=data.balance;
+
+   updateUI();
 
   }
 
-  if(loginButton)
-   loginButton.textContent=
-    "Mon compte";
+ }catch(error){
 
- }else{
-
-  if(profileName)
-   profileName.textContent=
-    "Visiteur";
-
-  if(profileEmail)
-   profileEmail.textContent=
-    "Connectez-vous pour accéder à votre compte";
-
-  if(profileAvatar)
-   profileAvatar.textContent="TA";
-
-  if(loginButton)
-   loginButton.textContent=
-    "Se connecter";
+  console.warn(
+   "Wallet backend non disponible:",
+   error
+  );
 
  }
-
- updateNotificationBadge();
 
 }
 
-
 /* =========================
-   NOTIFICATIONS
+   ORDERS FROM BACKEND
 ========================= */
 
-function updateNotificationBadge(){
+async function loadOrdersFromBackend(){
 
- const badge=
-  document.getElementById(
-   "notificationBadge"
-  );
+ if(!firebaseUser)
+  return;
 
- const unread=
-  notifications.filter(
-   n=>!n.read
-  ).length;
+ try{
 
- if(unread>0){
+  const token=
+   await firebaseUser.getIdToken();
 
-  badge.textContent=
-   unread>99?"99+":unread;
-
-  badge.style.display="flex";
-
- }else{
-
-  badge.style.display="none";
-
- }
-
- const unreadText=
-  document.getElementById(
-   "unreadText"
-  );
-
- if(unreadText){
-
-  unreadText.textContent=
-   unread+
-   (
-    unread===1
-     ?" nouvelle"
-     :" nouvelles"
+  const response=
+   await fetch(
+    API_BASE+"/api/orders",
+    {
+     headers:{
+      Authorization:
+       "Bearer "+token
+     }
+    }
    );
 
- }
+  if(!response.ok)
+   return;
 
-}
+  const data=
+   await response.json();
 
-function renderNotifications(){
+  if(Array.isArray(data.orders)){
 
- const box=
-  document.getElementById(
-   "notificationsList"
+   orders=data.orders;
+
+   renderOrders();
+
+  }
+
+ }catch(error){
+
+  console.warn(
+   "Orders backend non disponible:",
+   error
   );
-
- if(!box)
-  return;
-
- if(!notifications.length){
-
-  box.innerHTML=`
-
-   <div class="emptyNotifications">
-
-    🔕
-    <br><br>
-
-    <b>Aucune notification</b>
-
-    <br>
-
-    <small>
-     Ou pa gen okenn notification.
-    </small>
-
-   </div>
-
-  `;
-
-  updateNotificationBadge();
-
-  return;
 
  }
 
- box.innerHTML=
-  notifications.map(
-   n=>`
-
-   <div
-    class="notification ${n.read?"read":"unread"}"
-    onclick="readNotification(${n.id})">
-
-    <div class="notificationTop">
-
-     <div>
-
-      <div class="notificationTitle">
-       ${escapeHTML(n.title)}
-      </div>
-
-      <div class="notificationText">
-       ${escapeHTML(n.text)}
-      </div>
-
-      <div class="notificationTime">
-       ${escapeHTML(n.time)}
-      </div>
-
-     </div>
-
-     ${
-      n.read
-       ?""
-       :'<div class="unreadDot"></div>'
-     }
-
-    </div>
-
-   </div>
-
-  `
-  ).join("");
-
- updateNotificationBadge();
+/*
+ * Pa gen fallback ki fè fo kòmand.
+ */
 
 }
-
-function showNotifications(){
-
- if(!canUseSite())
-  return;
-
- showPage("notifications");
-
- renderNotifications();
-
-}
-
-function readNotification(id){
-
- const notification=
-  notifications.find(
-   n=>n.id===id
-  );
-
- if(!notification)
-  return;
-
- if(notification.read)
-  return;
-
- notification.read=true;
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(notifications)
- );
-
- renderNotifications();
-
- toast(
-  "Notification lue."
- );
-
-}
-
-function readAllNotifications(){
-
- if(!notifications.length){
-
-  toast(
-   "Pa gen notification."
-  );
-
-  return;
-
- }
-
- notifications.forEach(
-  n=>n.read=true
- );
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(notifications)
- );
-
- renderNotifications();
-
- toast(
-  "Tout notifications lues."
- );
-
-}
-
-function clearAllNotifications(){
-
- if(!notifications.length){
-
-  toast(
-   "Pa gen notification pou efase."
-  );
-
-  return;
-
- }
-
- notifications=[];
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(notifications)
- );
-
- renderNotifications();
-
- toast(
-  "Tout notifications efase."
- );
-
-}
-
-function addNotification(
- title,
- text
-){
-
- notifications.unshift({
-
-  id:Date.now(),
-
-  title:title,
-
-  text:text,
-
-  time:"À l'instant",
-
-  read:false
-
- });
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(notifications)
- );
-
- renderNotifications();
-
-}
-
-
-/* =========================
-   BANNER
-========================= */
-
-let slideIndex=0;
-
-setInterval(()=>{
-
- const slides=
-  document.querySelectorAll(
-   ".slide"
-  );
-
- const dots=
-  document.querySelectorAll(
-   ".dot"
-  );
-
- if(!slides.length)
-  return;
-
- slides.forEach(
-  s=>s.classList.remove("active")
- );
-
- dots.forEach(
-  d=>d.classList.remove("active")
- );
-
- slideIndex++;
-
- if(
-  slideIndex>=slides.length
- )
-  slideIndex=0;
-
- slides[slideIndex].classList.add(
-  "active"
- );
-
- dots[slideIndex].classList.add(
-  "active"
- );
-
-},4500);
-
 
 /* =========================
    UID
 ========================= */
 
-function verifyUID(){
+async function verifyUID(){
 
  if(!canUseSite())
   return;
@@ -3323,75 +3529,234 @@ function verifyUID(){
  ).style.display="none";
 
  document.getElementById(
-  "packsArea"
+  "sensitivityCard"
  ).style.display="none";
 
- setTimeout(()=>{
+ /*
+  * Si backend verify UID disponib,
+  * nou rele li.
+  */
 
-  document.getElementById(
-   "playerName"
-  ).textContent=
-   "UID "+uid;
+ try{
 
-  document.getElementById(
-   "playerResult"
-  ).style.display="block";
+  if(firebaseUser){
 
-  document.getElementById(
-   "packsArea"
-  ).style.display="block";
+   const token=
+    await firebaseUser.getIdToken();
 
-  btn.disabled=false;
+   const response=
+    await fetch(
+     API_BASE+"/api/freefire/verify-uid",
+     {
+      method:"POST",
+      headers:{
+       "Content-Type":
+        "application/json",
+       Authorization:
+        "Bearer "+token
+      },
+      body:JSON.stringify({
+       uid:uid,
+       server:"NA"
+      })
+     }
+    );
 
-  btn.textContent=
-   "Vérifier le joueur";
+   if(response.ok){
 
-  toast(
-   "UID prepare pou verification."
+    const data=
+     await response.json();
+
+    selectedUID=uid;
+
+    document.getElementById(
+     "playerName"
+    ).textContent=
+     data.playerName ||
+     "UID "+uid;
+
+    document.getElementById(
+     "playerResult"
+    ).style.display="block";
+
+    document.getElementById(
+     "sensitivityCard"
+    ).style.display="block";
+
+    btn.disabled=false;
+
+    btn.textContent=
+     "Vérifier le joueur";
+
+    toast(
+     "✓ Joueur vérifié."
+    );
+
+    return;
+
+   }
+
+  }
+
+ }catch(error){
+
+  console.warn(
+   "UID API non disponible:",
+   error
   );
 
- },1400);
+ }
 
-}
+ /*
+  * Backend ka retounen verification
+  * lè endpoint la poko branche.
+  * Nou montre sèlman UID prepare,
+  * nou pa pretann li verifye pa API.
+  */
 
+ selectedUID=uid;
 
-/* =========================
-   PACK
-========================= */
+ document.getElementById(
+  "playerName"
+ ).textContent=
+  "UID "+uid;
 
-function selectPack(
- element,
- name,
- price
-){
+ document.getElementById(
+  "playerResult"
+ ).style.display="block";
 
- if(!canUseSite())
-  return;
+ document.getElementById(
+  "sensitivityCard"
+ ).style.display="block";
 
- document.querySelectorAll(
-  ".pack"
- ).forEach(
-  p=>p.classList.remove("selected")
- );
+ btn.disabled=false;
 
- element.classList.add("selected");
-
- selectedPack=name;
-
- selectedPrice=price;
+ btn.textContent=
+  "Vérifier le joueur";
 
  toast(
-  name+" sélectionné."
+  "UID prepare. Verifye l avan livraison."
  );
 
 }
 
-
 /* =========================
-   BUY
+   SENSITIVITY COOLDOWN
 ========================= */
 
-function buyNow(){
+function getSensitivityCooldownKey(){
+
+ if(!firebaseUser)
+  return null;
+
+ return "ta_sensitivity_last_"+firebaseUser.uid;
+
+}
+
+function getSensitivityRemaining(){
+
+ const key=
+  getSensitivityCooldownKey();
+
+ if(!key)
+  return 0;
+
+ const last=
+  Number(
+   localStorage.getItem(key)||0
+  );
+
+ if(!last)
+  return 0;
+
+ const remaining=
+  SENSITIVITY_COOLDOWN-
+  (Date.now()-last);
+
+ return Math.max(
+  0,
+  remaining
+ );
+
+}
+
+function formatRemaining(ms){
+
+ const totalSeconds=
+  Math.ceil(ms/1000);
+
+ const minutes=
+  Math.floor(
+   totalSeconds/60
+  );
+
+ const seconds=
+  totalSeconds%60;
+
+ return (
+  String(minutes).padStart(2,"0")+
+  ":"+
+  String(seconds).padStart(2,"0")
+ );
+
+}
+
+function updateSensitivityCooldown(){
+
+ const button=
+  document.getElementById(
+   "sensitivityBuyButton"
+  );
+
+ const label=
+  document.getElementById(
+   "sensitivityCooldown"
+  );
+
+ if(!button || !label)
+  return;
+
+ const remaining=
+  getSensitivityRemaining();
+
+ if(remaining>0){
+
+  button.disabled=true;
+
+  button.textContent=
+   "Disponible dans "+formatRemaining(
+    remaining
+   );
+
+  label.style.display="block";
+
+  label.textContent=
+   "⏱️ Ou ka achte Sensibilité a ankò apre "+
+   formatRemaining(remaining);
+
+ }else{
+
+  button.disabled=false;
+
+  button.textContent=
+   "Acheter — 200 HTG";
+
+  label.style.display="none";
+
+ }
+
+}
+
+setInterval(
+ updateSensitivityCooldown,
+ 1000
+);
+
+/* =========================
+   BUY SENSITIVITY
+========================= */
+
+async function buySensitivity(){
 
  if(!canUseSite())
   return;
@@ -3399,10 +3764,10 @@ function buyNow(){
  if(!requireLogin())
   return;
 
- if(!selectedPack){
+ if(getSensitivityRemaining()>0){
 
   toast(
-   "Chwazi yon pack avan."
+   "⏱️ Ou dwe tann 30 minit avan pwochen achat la."
   );
 
   return;
@@ -3410,6 +3775,7 @@ function buyNow(){
  }
 
  const uid=
+  selectedUID ||
   document.getElementById(
    "uid"
   ).value.trim();
@@ -3417,80 +3783,189 @@ function buyNow(){
  if(!uid){
 
   toast(
-   "UID la obligatwa."
+   "Tanpri verifye UID ou avan."
   );
 
   return;
 
  }
 
- if(balance<selectedPrice){
+ if(balance<SENSITIVITY_PRICE){
 
   toast(
    "Solde insuffisant. Recharger Wallet."
   );
 
   setTimeout(
-   ()=>openRecharge(),
-   600
+   openRecharge,
+   500
   );
 
   return;
 
  }
 
- const order={
+ showPurchaseLoading();
 
-  id:
-   "TA-"+Date.now(),
+ try{
 
-  type:
-   "Free Fire",
+  /*
+   * Vrè operasyon an dwe fèt nan backend.
+   * Backend la dwe retire 200 HTG atomikman
+   * epi kreye command lan.
+   */
 
-  uid:
-   uid,
+  const token=
+   await firebaseUser.getIdToken();
 
-  server:
-   "NA — North America",
+  const response=
+   await fetch(
+    API_BASE+"/api/orders",
+    {
+     method:"POST",
+     headers:{
+      "Content-Type":
+       "application/json",
+      Authorization:
+       "Bearer "+token
+     },
+     body:JSON.stringify({
 
-  pack:
-   selectedPack,
+      type:"freefire_sensitivity",
 
-  price:
-   selectedPrice,
+      uid:uid,
 
-  status:
-   "En attente",
+      server:"NA",
 
-  date:
-   new Date().toLocaleString(
-    "fr-FR"
+      product:
+       "Free Fire Sensibilité",
+
+      price:
+       SENSITIVITY_PRICE,
+
+      sensitivity:{
+       general:100,
+       redDot:95,
+       scope2x:90,
+       scope4x:80,
+       awm:60,
+       freeLook:75
+      }
+
+     })
+    }
+   );
+
+  const data=
+   await response.json().catch(
+    ()=>({})
+   );
+
+  if(!response.ok){
+
+   throw new Error(
+    data.message ||
+    "Achat impossible"
+   );
+
+  }
+
+  /*
+   * Backend se sous verite.
+   * Nou pa retire lajan lokalman.
+   */
+
+  if(
+   typeof data.balance==="number"
+  ){
+
+   balance=data.balance;
+
+  }else{
+
+   await loadWalletFromBackend();
+
+  }
+
+  await loadOrdersFromBackend();
+
+  /*
+   * Nou make cooldown lan sèlman
+   * apre backend konfime acha a.
+   */
+
+  const key=
+   getSensitivityCooldownKey();
+
+  if(key){
+
+   localStorage.setItem(
+    key,
+    String(Date.now())
+   );
+
+  }
+
+  addNotification(
+   "Sensibilité achetée",
+   "Votre achat de sensibilité Free Fire à 200 HTG a été enregistré. Votre commande est visible dans Mes commandes."
+  );
+
+  hidePurchaseLoading();
+
+  updateSensitivityCooldown();
+  updateUI();
+
+  toast(
+   "✅ Achat réussi. 200 HTG ont été débités du Wallet."
+  );
+
+  showPage("orders");
+
+ }catch(error){
+
+  console.error(
+   "PURCHASE ERROR:",
+   error
+  );
+
+  hidePurchaseLoading();
+
+  toast(
+   "❌ "+
+   (
+    error.message ||
+    "Achat impossible."
    )
+  );
 
- };
-
- orders.unshift(order);
-
- localStorage.setItem(
-  "ta_orders",
-  JSON.stringify(orders)
- );
-
- renderOrders();
-
- addNotification(
-  "Nouvelle commande",
-  "Votre commande Free Fire a été créée et attend la validation."
- );
-
- toast(
-  "Commande préparée."
- );
-
- showPage("orders");
+ }
 
 }
 
+/* =========================
+   LOADING
+========================= */
+
+function showPurchaseLoading(){
+
+ document.getElementById(
+  "purchaseLoading"
+ ).classList.add("show");
+
+ document.body.style.overflow="hidden";
+
+}
+
+function hidePurchaseLoading(){
+
+ document.getElementById(
+  "purchaseLoading"
+ ).classList.remove("show");
+
+ document.body.style.overflow="";
+
+}
 
 /* =========================
    ORDERS
@@ -3506,6 +3981,31 @@ function renderOrders(){
  if(!box)
   return;
 
+ if(!firebaseUser){
+
+  box.innerHTML=`
+
+   <div class="ffBox">
+
+    <p
+     style="
+      text-align:center;
+      color:var(--muted);
+      font-size:12px">
+
+     Konekte ak Google pou wè
+     commandes ou yo.
+
+    </p>
+
+   </div>
+
+  `;
+
+  return;
+
+ }
+
  if(!orders.length){
 
   box.innerHTML=`
@@ -3513,7 +4013,10 @@ function renderOrders(){
    <div class="ffBox">
 
     <p
-     style="text-align:center;color:var(--muted);font-size:12px">
+     style="
+      text-align:center;
+      color:var(--muted);
+      font-size:12px">
 
      Aucune commande pour le moment.
 
@@ -3529,308 +4032,174 @@ function renderOrders(){
 
  box.innerHTML=
   orders.map(
-   order=>`
+   order=>{
 
-   <div class="order">
+    const isSensitivity=
+     order.type===
+     "freefire_sensitivity" ||
+     order.product===
+     "Free Fire Sensibilité";
 
-    <div class="orderTop">
+    return `
 
-     <strong>
-      💎 ${escapeHTML(order.type)}
-     </strong>
+    <div class="order">
 
-     <span class="status">
-      ${escapeHTML(order.status)}
-     </span>
+     <div class="orderTop">
+
+      <strong>
+       ${
+        isSensitivity
+         ?"🎯 Sensibilité Free Fire"
+         :"💎 "+escapeHTML(
+          order.type||"Commande"
+         )
+       }
+      </strong>
+
+      <span class="status">
+       ${escapeHTML(
+        order.status||
+        "En attente"
+       )}
+      </span>
+
+     </div>
+
+     <div
+      style="
+       margin-top:10px;
+       font-size:11px">
+
+      <b>UID:</b>
+      ${escapeHTML(order.uid||"—")}
+
+     </div>
+
+     <div
+      style="
+       margin-top:5px;
+       font-size:11px">
+
+      <b>Serveur:</b>
+      ${escapeHTML(
+       order.server||
+       "NA — North America"
+      )}
+
+     </div>
+
+     <div
+      style="
+       margin-top:5px;
+       font-size:11px">
+
+      <b>Prix:</b>
+      ${Number(
+       order.price||0
+      ).toLocaleString("fr-FR")}
+      HTG
+
+     </div>
+
+     ${
+      isSensitivity
+       ?`
+       <div class="orderSensitivity">
+
+        <b>Sensibilité :</b>
+
+        <br>
+        Général : 100
+        <br>
+        Point rouge : 95
+        <br>
+        Lunette 2x : 90
+        <br>
+        Lunette 4x : 80
+        <br>
+        Lunette AWM : 60
+        <br>
+        Vue libre : 75
+
+       </div>
+       `
+       :""
+     }
+
+     <div
+      style="
+       margin-top:7px;
+       font-size:9px;
+       color:var(--muted)">
+
+      ${escapeHTML(
+       order.date||
+       order.createdAt||
+       ""
+      )}
+
+     </div>
 
     </div>
 
-    <div
-     style="margin-top:10px;font-size:11px">
+    `;
 
-     <b>UID:</b>
-     ${escapeHTML(order.uid)}
-
-    </div>
-
-    <div
-     style="margin-top:5px;font-size:11px">
-
-     <b>Serveur:</b>
-     ${escapeHTML(order.server)}
-
-    </div>
-
-    <div
-     style="margin-top:5px;font-size:11px">
-
-     <b>Pack:</b>
-     ${escapeHTML(order.pack)}
-
-    </div>
-
-    <div
-     style="margin-top:5px;font-size:11px">
-
-     <b>Prix:</b>
-
-     ${Number(order.price).toLocaleString("fr-FR")}
-
-     HTG
-
-    </div>
-
-    <div
-     style="margin-top:5px;font-size:9px;color:var(--muted)">
-
-     ${escapeHTML(order.date)}
-
-    </div>
-
-   </div>
-
-  `
+   }
   ).join("");
 
 }
 
-
 /* =========================
-   FIREBASE LOGIN
+   RESET FORM
 ========================= */
 
-function openLogin(){
+function resetPurchaseForm(){
 
- if(firebaseUser){
+ const uid=
+  document.getElementById("uid");
 
-  showPage("profile");
+ if(uid)
+  uid.value="";
 
-  return;
-
- }
-
- const modal=
+ const result=
   document.getElementById(
-   "loginModal"
+   "playerResult"
   );
 
- if(modal)
-  modal.classList.add("show");
+ const sensitivity=
+  document.getElementById(
+   "sensitivityCard"
+  );
+
+ if(result)
+  result.style.display="none";
+
+ if(sensitivity)
+  sensitivity.style.display="none";
+
+ selectedUID="";
+
+ updateSensitivityCooldown();
 
 }
 
+/* =========================
+   WALLET
+========================= */
 
-/*
- * GOOGLE LOGIN
- *
- * Firebase se nan firebase.js.
- *
- * Nou montre erè Firebase egzak la
- * pou konnen poukisa login lan echwe.
- */
-
-async function googleLogin(){
+function openWallet(){
 
  if(!canUseSite())
   return;
 
- if(!window.TA_FIREBASE){
-
-  console.error(
-   "Firebase pa chaje."
-  );
-
-  toast(
-   "❌ Firebase pa chaje. Verifye firebase.js."
-  );
-
+ if(!requireLogin())
   return;
 
- }
+ showPage("wallet");
 
- try{
-
-  toast(
-   "⏳ Connexion Google..."
-  );
-
-  const result=
-   await window.TA_FIREBASE.signInWithPopup(
-    window.TA_FIREBASE.auth,
-    window.TA_FIREBASE.googleProvider
-   );
-
-  const user=
-   result.user;
-
-  firebaseUser=user;
-
-  loggedIn=true;
-
-  updateUI();
-
-  closeModal(
-   "loginModal"
-  );
-
-  const userName=
-   user.displayName ||
-   user.email ||
-   "Utilisateur";
-
-  addNotification(
-   "Connexion réussie",
-   "Bienvenue sur TRUE ALPHA, "+
-   userName+
-   "."
-  );
-
-  toast(
-   "✅ Bienvenue "+
-   userName
-  );
-
- }catch(error){
-
-  console.error(
-   "GOOGLE LOGIN ERROR:",
-   error
-  );
-
-  console.error(
-   "GOOGLE ERROR CODE:",
-   error.code
-  );
-
-  console.error(
-   "GOOGLE ERROR MESSAGE:",
-   error.message
-  );
-
-  if(
-   error.code===
-   "auth/popup-closed-by-user"
-  ){
-
-   toast(
-    "Fenèt Google la fèmen."
-   );
-
-  }else if(
-   error.code===
-   "auth/popup-blocked"
-  ){
-
-   toast(
-    "❌ Navigatè a bloke fenèt Google la."
-   );
-
-  }else if(
-   error.code===
-   "auth/unauthorized-domain"
-  ){
-
-   toast(
-    "❌ Domèn Vercel la poko otorize nan Firebase."
-   );
-
-  }else if(
-   error.code===
-   "auth/operation-not-allowed"
-  ){
-
-   toast(
-    "❌ Google Login pa aktive nan Firebase."
-   );
-
-  }else if(
-   error.code===
-   "auth/network-request-failed"
-  ){
-
-   toast(
-    "❌ Pwoblèm entènèt. Eseye ankò."
-   );
-
-  }else if(
-   error.code===
-   "auth/cancelled-popup-request"
-  ){
-
-   toast(
-    "❌ Yon lòt fenèt Google deja louvri."
-   );
-
-  }else{
-
-   toast(
-    "❌ Google Login: "+
-    (
-     error.code ||
-     "erè enkoni"
-    )
-   );
-
-  }
-
- }
+ loadWalletFromBackend();
 
 }
-
-
-/* =========================
-   LOGOUT FIREBASE
-========================= */
-
-async function logout(){
-
- if(!firebaseUser){
-
-  toast(
-   "Ou pa konekte."
-  );
-
-  return;
-
- }
-
- try{
-
-  await window.TA_FIREBASE.signOut(
-   window.TA_FIREBASE.auth
-  );
-
-  firebaseUser=null;
-
-  loggedIn=false;
-
-  updateUI();
-
-  showPage("home");
-
-  toast(
-   "✅ Déconnexion réussie."
-  );
-
- }catch(error){
-
-  console.error(
-   "LOGOUT ERROR:",
-   error
-  );
-
-  toast(
-   "❌ Erè pandan déconnexion."
-  );
-
- }
-
-}
-
-
-/* =========================
-   RECHARGE
-========================= */
 
 function openRecharge(){
 
@@ -3846,7 +4215,7 @@ function openRecharge(){
 
 }
 
-function startRecharge(){
+async function startRecharge(){
 
  if(!canUseSite())
   return;
@@ -3885,179 +4254,93 @@ function startRecharge(){
   "rechargeModal"
  );
 
- addNotification(
-  "Recharge Wallet",
-  "Votre demande de recharge a été préparée."
- );
+ /*
+  * Backend la dwe kreye tranzaksyon NatCash
+  * epi verifye payment la.
+  */
 
- toast(
-  "Demande de recharge prepare."
- );
+ try{
+
+  const token=
+   await firebaseUser.getIdToken();
+
+  const response=
+   await fetch(
+    API_BASE+"/api/wallet/recharge",
+    {
+     method:"POST",
+     headers:{
+      "Content-Type":
+       "application/json",
+      Authorization:
+       "Bearer "+token
+     },
+     body:JSON.stringify({
+      amount:amount,
+      method:"natcash"
+     })
+    }
+   );
+
+  const data=
+   await response.json().catch(
+    ()=>({})
+   );
+
+  if(!response.ok){
+
+   throw new Error(
+    data.message||
+    "Recharge impossible"
+   );
+
+  }
+
+  addNotification(
+   "Recharge NatCash",
+   "Votre demande de recharge de "+
+   amount+
+   " HTG a été enregistrée."
+  );
+
+  toast(
+   "✅ Demande NatCash enregistrée."
+  );
+
+ }catch(error){
+
+  console.error(error);
+
+  toast(
+   "❌ "+
+   (
+    error.message||
+    "NatCash pa disponib ankò."
+   )
+  );
+
+ }
 
 }
 
-
 /* =========================
-   TRANSFER
+   PAYMENT SOON
 ========================= */
 
-function transferMoney(){
+function showPaymentSoon(name){
 
  if(!canUseSite())
   return;
 
- if(!requireLogin())
-  return;
+ document.getElementById(
+  "soonPaymentName"
+ ).textContent=name;
 
  document.getElementById(
-  "transferModal"
+  "soonPaymentModal"
  ).classList.add("show");
 
 }
-
-function submitTransfer(){
-
- if(!requireLogin())
-  return;
-
- const email=
-  document.getElementById(
-   "transferEmail"
-  ).value.trim();
-
- const amount=
-  Number(
-   document.getElementById(
-    "transferAmount"
-   ).value
-  );
-
- if(!email){
-
-  toast(
-   "Antre email moun nan."
-  );
-
-  return;
-
- }
-
- if(amount<50){
-
-  toast(
-   "Minimum transfè : 50 HTG."
-  );
-
-  return;
-
- }
-
- if(amount>balance){
-
-  toast(
-   "Solde insuffisant."
-  );
-
-  return;
-
- }
-
- closeModal(
-  "transferModal"
- );
-
- addNotification(
-  "Transfert",
-  "Votre demande de transfert a été préparée."
- );
-
- toast(
-  "Demann transfè prepare."
- );
-
-}
-
-
-/* =========================
-   WITHDRAW
-========================= */
-
-function withdrawMoney(){
-
- if(!canUseSite())
-  return;
-
- if(!requireLogin())
-  return;
-
- document.getElementById(
-  "withdrawModal"
- ).classList.add("show");
-
-}
-
-function submitWithdraw(){
-
- if(!requireLogin())
-  return;
-
- const phone=
-  document.getElementById(
-   "withdrawPhone"
-  ).value.trim();
-
- const amount=
-  Number(
-   document.getElementById(
-    "withdrawAmount"
-   ).value
-  );
-
- if(!phone){
-
-  toast(
-   "Antre nimewo retrè a."
-  );
-
-  return;
-
- }
-
- if(amount<5000){
-
-  toast(
-   "Minimum retrè : 5,000 HTG."
-  );
-
-  return;
-
- }
-
- if(amount>balance){
-
-  toast(
-   "Solde insuffisant."
-  );
-
-  return;
-
- }
-
- closeModal(
-  "withdrawModal"
- );
-
- addNotification(
-  "Demande de retrait",
-  "Votre demande de retrait a été enregistrée."
- );
-
- toast(
-  "Demann retrè prepare."
- );
-
-}
-
 
 /* =========================
    CARD
@@ -4075,6 +4358,285 @@ function contactCard(){
 
 }
 
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function updateNotificationBadge(){
+
+ const badge=
+  document.getElementById(
+   "notificationBadge"
+  );
+
+ const unread=
+  notifications.filter(
+   n=>!n.read
+  ).length;
+
+ if(unread){
+
+  badge.textContent=
+   unread>99?"99+":unread;
+
+  badge.style.display="flex";
+
+ }else{
+
+  badge.style.display="none";
+
+ }
+
+ const text=
+  document.getElementById(
+   "unreadText"
+  );
+
+ if(text){
+
+  text.textContent=
+   unread+
+   (
+    unread===1
+     ?" nouvelle"
+     :" nouvelles"
+   );
+
+ }
+
+}
+
+function renderNotifications(){
+
+ const box=
+  document.getElementById(
+   "notificationsList"
+  );
+
+ if(!box)
+  return;
+
+ if(!notifications.length){
+
+  box.innerHTML=`
+
+   <div class="emptyNotifications">
+
+    🔕
+    <br><br>
+
+    <b>Aucune notification</b>
+
+    <br>
+
+    <small>
+     Ou pa gen notification.
+    </small>
+
+   </div>
+
+  `;
+
+  updateNotificationBadge();
+
+  return;
+
+ }
+
+ box.innerHTML=
+  notifications.map(
+   n=>`
+
+   <div
+    class="notification ${
+     n.read?"read":"unread"
+    }"
+    onclick="readNotification(${n.id})">
+
+    <div class="notificationTop">
+
+     <div>
+
+      <div class="notificationTitle">
+       ${escapeHTML(n.title)}
+      </div>
+
+      <div class="notificationText">
+       ${escapeHTML(n.text)}
+      </div>
+
+      <div class="notificationTime">
+       ${escapeHTML(n.time)}
+      </div>
+
+     </div>
+
+     ${
+      n.read
+       ?""
+       :'<div class="unreadDot"></div>'
+     }
+
+    </div>
+
+   </div>
+
+  `
+  ).join("");
+
+ updateNotificationBadge();
+
+}
+
+function showNotifications(){
+
+ if(!canUseSite())
+  return;
+
+ showPage(
+  "notifications"
+ );
+
+ renderNotifications();
+
+}
+
+function readNotification(id){
+
+ const n=
+  notifications.find(
+   x=>x.id===id
+  );
+
+ if(!n)
+  return;
+
+ n.read=true;
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(
+   notifications
+  )
+ );
+
+ renderNotifications();
+
+}
+
+function readAllNotifications(){
+
+ notifications.forEach(
+  n=>n.read=true
+ );
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(
+   notifications
+  )
+ );
+
+ renderNotifications();
+
+ toast(
+  "Tout notifications lues."
+ );
+
+}
+
+function clearAllNotifications(){
+
+ notifications=[];
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(
+   notifications
+  )
+ );
+
+ renderNotifications();
+
+ toast(
+  "Tout notifications efase."
+ );
+
+}
+
+function addNotification(
+ title,
+ text
+){
+
+ notifications.unshift({
+
+  id:Date.now(),
+
+  title:title,
+
+  text:text,
+
+  time:"À l'instant",
+
+  read:false
+
+ });
+
+ localStorage.setItem(
+  "ta_notifications",
+  JSON.stringify(
+   notifications
+  )
+ );
+
+ renderNotifications();
+
+}
+
+/* =========================
+   BANNER
+========================= */
+
+let slideIndex=0;
+
+setInterval(()=>{
+
+ const slides=
+  document.querySelectorAll(
+   ".slide"
+  );
+
+ const dots=
+  document.querySelectorAll(
+   ".dot"
+  );
+
+ if(!slides.length)
+  return;
+
+ slides.forEach(
+  s=>s.classList.remove("active")
+ );
+
+ dots.forEach(
+  d=>d.classList.remove("active")
+ );
+
+ slideIndex++;
+
+ if(slideIndex>=slides.length)
+  slideIndex=0;
+
+ slides[slideIndex].classList.add(
+  "active"
+ );
+
+ dots[slideIndex].classList.add(
+  "active"
+ );
+
+},4500);
 
 /* =========================
    LANGUAGE
@@ -4097,19 +4659,12 @@ function changeLanguage(){
   next
  );
 
- const el=
-  document.getElementById(
-   "languageText"
-  );
-
- if(el){
-
-  el.textContent=
-   next==="fr"
-    ?"Français / Kreyòl ›"
-    :"Kreyòl / Français ›";
-
- }
+ document.getElementById(
+  "languageText"
+ ).textContent=
+  next==="fr"
+   ?"Français / Kreyòl ›"
+   :"Kreyòl / Français ›";
 
  toast(
   next==="fr"
@@ -4118,7 +4673,6 @@ function changeLanguage(){
  );
 
 }
-
 
 /* =========================
    MODALS
@@ -4130,9 +4684,7 @@ function closeModal(id){
   document.getElementById(id);
 
  if(modal)
-  modal.classList.remove(
-   "show"
-  );
+  modal.classList.remove("show");
 
 }
 
@@ -4145,17 +4697,19 @@ document.querySelectorAll(
    "click",
    e=>{
 
-    if(e.target===modal)
+    if(e.target===modal){
+
      modal.classList.remove(
       "show"
      );
+
+    }
 
    }
   );
 
  }
 );
-
 
 /* =========================
    TOAST
@@ -4183,46 +4737,27 @@ function toast(message){
 
  toastTimer=setTimeout(
   ()=>{
-   t.classList.remove(
-    "show"
-   );
+   t.classList.remove("show");
   },
-  3000
+  3500
  );
 
 }
 
-
 /* =========================
-   ESCAPE HTML
+   ESCAPE
 ========================= */
 
 function escapeHTML(value){
 
  return String(value)
-  .replace(
-   /&/g,
-   "&amp;"
-  )
-  .replace(
-   /</g,
-   "&lt;"
-  )
-  .replace(
-   />/g,
-   "&gt;"
-  )
-  .replace(
-   /"/g,
-   "&quot;"
-  )
-  .replace(
-   /'/g,
-   "&#039;"
-  );
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
-
 
 /* =========================
    LANGUAGE LOAD
@@ -4253,7 +4788,6 @@ function escapeHTML(value){
 
 </script>
 
-
 <!-- =========================
      FIREBASE
 ========================= -->
@@ -4268,32 +4802,24 @@ import {
  onAuthStateChanged
 } from "./firebase.js";
 
-
-/*
- * Firebase sou window pou
- * script prensipal la ka itilize li.
- */
-
 window.TA_FIREBASE={
 
  auth:auth,
 
- googleProvider:googleProvider,
+ googleProvider:
+  googleProvider,
 
- signInWithPopup:signInWithPopup,
+ signInWithPopup:
+  signInWithPopup,
 
- signOut:signOut
+ signOut:
+  signOut
 
 };
 
-
-/*
- * Firebase ap kontwole login/logout.
- */
-
 onAuthStateChanged(
  auth,
- (user)=>{
+ async(user)=>{
 
   firebaseUser=
    user || null;
@@ -4303,12 +4829,19 @@ onAuthStateChanged(
 
   updateUI();
 
+  renderOrders();
+
+  updateSensitivityCooldown();
+
   if(user){
 
    console.log(
     "TRUE ALPHA user connecté:",
     user.email
    );
+
+   await loadWalletFromBackend();
+   await loadOrdersFromBackend();
 
   }else{
 
@@ -4324,4 +4857,4 @@ onAuthStateChanged(
 </script>
 
 </body>
-</html>
+ </html>
