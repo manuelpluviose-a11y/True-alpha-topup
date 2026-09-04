@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ht">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -8,53 +8,52 @@
 
 <style>
 *{
- margin:0;
- padding:0;
- box-sizing:border-box;
- font-family:Inter,Arial,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,Arial,sans-serif
 }
 
 :root{
- --bg:#f6f8fc;
- --card:#fff;
- --text:#101828;
- --muted:#667085;
- --primary:#635bff;
- --primary2:#7c3aed;
- --border:#e7eaf0;
- --success:#12b76a;
- --danger:#f04438;
- --warning:#f79009;
- --shadow:0 10px 30px rgba(16,24,40,.07);
+  --bg:#f6f8fc;
+  --card:#fff;
+  --text:#101828;
+  --muted:#667085;
+  --primary:#635bff;
+  --primary2:#7c3aed;
+  --border:#e7eaf0;
+  --success:#12b76a;
+  --danger:#f04438;
+  --warning:#f79009;
+  --shadow:0 10px 30px rgba(16,24,40,.07)
 }
 
 body.dark{
- --bg:#0b0d13;
- --card:#151821;
- --text:#f5f7fa;
- --muted:#98a2b3;
- --border:#272b36;
- --shadow:0 10px 30px rgba(0,0,0,.25);
+  --bg:#0b0d13;
+  --card:#151821;
+  --text:#f5f7fa;
+  --muted:#98a2b3;
+  --border:#272b36;
+  --shadow:0 10px 30px rgba(0,0,0,.25)
 }
 
 body{
- background:var(--bg);
- color:var(--text);
- min-height:100vh;
- transition:.25s;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  transition:.25s
 }
 
-button,input{
- font:inherit;
+button,input,select{
+  font:inherit
 }
 
 button{
- cursor:pointer;
+  cursor:pointer
 }
 
-button:disabled{
- cursor:not-allowed;
- opacity:.65;
+.hidden{
+  display:none!important
 }
 
 /* =========================
@@ -62,54 +61,54 @@ button:disabled{
 ========================= */
 
 #siteClosed{
- position:fixed;
- inset:0;
- z-index:20000;
- background:var(--bg);
- display:none;
- align-items:center;
- justify-content:center;
- padding:20px;
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  background:var(--bg);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px
 }
 
 .siteClosedBox{
- width:min(100%,430px);
- background:var(--card);
- border:1px solid var(--border);
- border-radius:24px;
- padding:28px 22px;
- text-align:center;
- box-shadow:var(--shadow);
+  width:min(100%,430px);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px 22px;
+  text-align:center;
+  box-shadow:var(--shadow)
 }
 
 .siteClosedIcon{
- width:70px;
- height:70px;
- margin:0 auto 16px;
- border-radius:22px;
- background:#fff0ef;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:34px;
+  width:70px;
+  height:70px;
+  margin:0 auto 16px;
+  border-radius:22px;
+  background:#fff0ef;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px
 }
 
 .siteClosedBox h2{
- font-size:22px;
- margin-bottom:9px;
+  font-size:22px;
+  margin-bottom:9px
 }
 
 .siteClosedBox p{
- color:var(--muted);
- font-size:12px;
- line-height:1.6;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6
 }
 
 .siteClosedBrand{
- margin-top:20px;
- font-size:11px;
- color:var(--muted);
- font-weight:800;
+  margin-top:20px;
+  font-size:11px;
+  color:var(--muted);
+  font-weight:800
 }
 
 /* =========================
@@ -117,266 +116,168 @@ button:disabled{
 ========================= */
 
 #splash{
- position:fixed;
- inset:0;
- z-index:9999;
- background:#fff;
- display:flex;
- justify-content:center;
- align-items:center;
- transition:.5s;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:.5s
 }
 
 body.dark #splash{
- background:#0b0d13;
+  background:#0b0d13
 }
 
 .splashBox{
- text-align:center;
- animation:fadeUp .7s ease;
-}
-
-.alphaLogo,
-.brandLogo{
- background:linear-gradient(135deg,#635bff,#8b5cf6);
- color:#fff;
- font-weight:900;
+  text-align:center;
+  animation:fadeUp .7s ease
 }
 
 .alphaLogo{
- width:70px;
- height:70px;
- border-radius:22px;
- margin:auto;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:34px;
- box-shadow:0 15px 35px rgba(99,91,255,.3);
+  width:80px;
+  height:80px;
+  border-radius:24px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#635bff,#8b5cf6);
+  color:#fff;
+  font-weight:900;
+  font-size:34px;
+  box-shadow:0 15px 35px rgba(99,91,255,.3)
 }
 
 .splashTitle{
- margin-top:14px;
- font-size:23px;
- font-weight:900;
+  margin-top:14px;
+  font-size:23px;
+  font-weight:900
 }
 
 .splashName{
- margin-top:5px;
- color:#667085;
- font-size:14px;
+  margin-top:5px;
+  color:#667085;
+  font-size:14px
 }
 
 .loader{
- width:35px;
- height:35px;
- border:3px solid #e6e8ef;
- border-top-color:#635bff;
- border-radius:50%;
- margin:22px auto 0;
- animation:spin .8s linear infinite;
+  width:35px;
+  height:35px;
+  border:3px solid #e6e8ef;
+  border-top-color:#635bff;
+  border-radius:50%;
+  margin:22px auto 0;
+  animation:spin .8s linear infinite
 }
 
 @keyframes spin{
- to{transform:rotate(360deg);}
+  to{transform:rotate(360deg)}
 }
 
 @keyframes fadeUp{
- from{
-  opacity:0;
-  transform:translateY(15px);
- }
- to{
-  opacity:1;
-  transform:none;
- }
+  from{
+    opacity:0;
+    transform:translateY(15px)
+  }
+  to{
+    opacity:1;
+    transform:none
+  }
 }
 
 /* =========================
-   PURCHASE LOADING
-========================= */
-
-#purchaseLoading{
- position:fixed;
- inset:0;
- z-index:25000;
- display:none;
- align-items:center;
- justify-content:center;
- background:rgba(10,12,20,.68);
- backdrop-filter:blur(7px);
-}
-
-#purchaseLoading.show{
- display:flex;
-}
-
-.loadingBox{
- width:210px;
- padding:24px 18px;
- border-radius:24px;
- background:var(--card);
- text-align:center;
- box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
-
-.loadingLogo{
- position:relative;
- width:78px;
- height:78px;
- margin:0 auto 16px;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-
-.loadingLogo:before{
- content:"";
- position:absolute;
- inset:0;
- border-radius:50%;
- border:3px solid transparent;
- border-top-color:#635bff;
- border-right-color:#8b5cf6;
- animation:spin 1s linear infinite;
-}
-
-.loadingLogo:after{
- content:"";
- position:absolute;
- inset:7px;
- border-radius:50%;
- border:2px solid transparent;
- border-bottom-color:#7c3aed;
- animation:spinReverse 1.3s linear infinite;
-}
-
-.loadingLogoInner{
- width:58px;
- height:58px;
- border-radius:50%;
- display:flex;
- align-items:center;
- justify-content:center;
- background:linear-gradient(135deg,#635bff,#7c3aed);
- color:#fff;
- font-size:10px;
- font-weight:1000;
- letter-spacing:.5px;
- z-index:2;
- box-shadow:0 8px 25px rgba(99,91,255,.3);
-}
-
-@keyframes spinReverse{
- to{
-  transform:rotate(-360deg);
- }
-}
-
-.loadingTitle{
- font-weight:900;
- font-size:14px;
-}
-
-.loadingText{
- margin-top:6px;
- color:var(--muted);
- font-size:10px;
- line-height:1.5;
-}
-
-/* =========================
-   APP
+   APP / HEADER
 ========================= */
 
 #app{
- display:none;
- padding-bottom:90px;
+  display:none;
+  padding-bottom:90px
 }
 
 .container{
- width:min(100% - 28px,1100px);
- margin:auto;
+  width:min(100% - 28px,1100px);
+  margin:auto
 }
 
-/* =========================
-   HEADER
-========================= */
-
 header{
- height:72px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px
 }
 
 .brand{
- display:flex;
- align-items:center;
- gap:9px;
+  display:flex;
+  align-items:center;
+  gap:9px
 }
 
 .brandLogo{
- width:40px;
- height:40px;
- border-radius:13px;
- display:flex;
- align-items:center;
- justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#635bff,#8b5cf6);
+  color:#fff;
+  font-weight:900
 }
 
 .brandText strong{
- display:block;
- font-size:15px;
+  display:block;
+  font-size:15px
 }
 
 .brandText span{
- font-size:10px;
- color:var(--muted);
+  font-size:10px;
+  color:var(--muted)
 }
 
 .headerRight{
- display:flex;
- align-items:center;
- gap:7px;
+  display:flex;
+  align-items:center;
+  gap:7px
 }
 
 .iconBtn{
- width:38px;
- height:38px;
- border:1px solid var(--border);
- background:var(--card);
- border-radius:12px;
- color:var(--text);
- position:relative;
+  width:38px;
+  height:38px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:12px;
+  color:var(--text);
+  position:relative
 }
 
 .badge{
- position:absolute;
- right:-4px;
- top:-4px;
- background:#f04438;
- color:#fff;
- font-size:8px;
- min-width:16px;
- height:16px;
- padding:0 4px;
- border-radius:20px;
- display:none;
- align-items:center;
- justify-content:center;
- font-weight:900;
+  position:absolute;
+  right:-4px;
+  top:-4px;
+  background:#f04438;
+  color:#fff;
+  font-size:8px;
+  min-width:16px;
+  height:16px;
+  padding:0 4px;
+  border-radius:20px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-weight:900
 }
 
 .loginBtn{
- border:0;
- color:#fff;
- background:linear-gradient(135deg,#635bff,#7c3aed);
- border-radius:12px;
- padding:10px 12px;
- font-weight:800;
- font-size:11px;
+  border:0;
+  color:#fff;
+  background:linear-gradient(135deg,#635bff,#7c3aed);
+  border-radius:12px;
+  padding:10px 12px;
+  font-weight:800;
+  font-size:11px
 }
 
 /* =========================
@@ -384,38 +285,39 @@ header{
 ========================= */
 
 .walletMini{
- background:var(--card);
- border:1px solid var(--border);
- box-shadow:var(--shadow);
- border-radius:18px;
- padding:15px;
- margin-top:5px;
+  background:var(--card);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  border-radius:18px;
+  padding:15px;
+  margin-top:5px
 }
 
 .walletTop{
- display:flex;
- justify-content:space-between;
- align-items:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
 }
 
 .walletLabel{
- color:var(--muted);
- font-size:11px;
+  color:var(--muted);
+  font-size:11px
 }
 
 .walletAmount{
- font-size:21px;
- font-weight:900;
- margin-top:3px;
+  font-size:21px;
+  font-weight:900;
+  margin-top:3px
 }
 
 .recharge{
- border:0;
- background:#eeeafe;
- color:#635bff;
- font-weight:800;
- padding:9px 11px;
- border-radius:10px;
+  border:0;
+  background:#eeeafe;
+  color:#635bff;
+  font-weight:800;
+  padding:9px 11px;
+  border-radius:10px
 }
 
 /* =========================
@@ -423,257 +325,225 @@ header{
 ========================= */
 
 .banner{
- margin-top:16px;
- position:relative;
- overflow:hidden;
- border-radius:20px;
- height:200px;
- box-shadow:var(--shadow);
+  margin-top:16px;
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  height:190px;
+  box-shadow:var(--shadow)
 }
 
 .slide{
- position:absolute;
- inset:0;
- opacity:0;
- transform:scale(1.02);
- transition:.6s;
- padding:22px;
- display:flex;
- align-items:center;
- justify-content:space-between;
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(1.02);
+  transition:.6s;
+  padding:24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
 }
 
 .slide.active{
- opacity:1;
- transform:scale(1);
+  opacity:1;
+  transform:scale(1)
 }
 
 .slide:nth-child(1){
- background:linear-gradient(120deg,#111827,#312e81);
- color:#fff;
+  background:linear-gradient(120deg,#111827,#312e81);
+  color:#fff
 }
 
 .slide:nth-child(2){
- background:linear-gradient(120deg,#151515,#581c87);
- color:#fff;
+  background:linear-gradient(120deg,#061b35,#087f8c);
+  color:#fff
 }
 
 .slide:nth-child(3){
- background:linear-gradient(120deg,#071e34,#087f8c);
- color:#fff;
+  background:linear-gradient(120deg,#40106e,#7c1d4d);
+  color:#fff
 }
 
 .slideText{
- max-width:63%;
+  max-width:70%
 }
 
 .slideText small{
- opacity:.75;
- font-weight:700;
- font-size:9px;
+  opacity:.75;
+  font-weight:700
 }
 
 .slideText h2{
- margin:7px 0;
- font-size:19px;
+  margin:7px 0;
+  font-size:20px
 }
 
 .slideText p{
- font-size:10px;
- opacity:.88;
- line-height:1.5;
+  font-size:11px;
+  opacity:.88;
+  line-height:1.5
 }
 
-/* HIT VISUAL */
-
-.hitScene{
- width:135px;
- height:150px;
- position:relative;
- flex-shrink:0;
+.bannerArt{
+  font-size:50px;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.2))
 }
 
-.shooter{
- position:absolute;
- left:8px;
- bottom:16px;
- font-size:48px;
- transform:scaleX(-1);
+.bannerCard{
+  width:115px;
+  height:72px;
+  border-radius:13px;
+  padding:10px;
+  background:linear-gradient(135deg,#111827,#4f46e5);
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 12px 25px rgba(0,0,0,.3);
+  color:#fff;
+  flex-shrink:0
 }
 
-.enemy{
- position:absolute;
- right:8px;
- bottom:18px;
- font-size:46px;
+.bannerCardTop{
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  font-weight:900
 }
 
-.bulletLine{
- position:absolute;
- left:45px;
- top:63px;
- width:70px;
- height:3px;
- background:#fff;
- transform:rotate(-7deg);
- box-shadow:0 0 8px rgba(255,255,255,.8);
+.bannerChip{
+  width:20px;
+  height:14px;
+  background:#e4c65d;
+  border-radius:4px;
+  margin-top:10px
 }
 
-.cross{
- position:absolute;
- right:34px;
- top:53px;
- color:#ff1f1f;
- font-size:25px;
- font-weight:1000;
- text-shadow:0 0 8px rgba(255,0,0,.8);
-}
-
-.hp{
- position:absolute;
- right:2px;
- top:17px;
- color:#ff3333;
- font-size:16px;
- font-weight:1000;
- animation:hpFloat 1.4s infinite;
-}
-
-@keyframes hpFloat{
- 0%,100%{
-  transform:translateY(5px);
-  opacity:.5;
- }
- 50%{
-  transform:translateY(-5px);
-  opacity:1;
- }
-}
-
-.damage{
- position:absolute;
- left:43px;
- top:40px;
- color:#ff3131;
- font-size:18px;
- font-weight:1000;
- transform:rotate(-5deg);
+.bannerCardBottom{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-size:6px
 }
 
 .dots{
- position:absolute;
- bottom:10px;
- left:50%;
- transform:translateX(-50%);
- display:flex;
- gap:5px;
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:5px
 }
 
 .dot{
- width:6px;
- height:6px;
- border-radius:50%;
- background:rgba(255,255,255,.4);
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.4)
 }
 
 .dot.active{
- width:18px;
- border-radius:10px;
- background:#fff;
+  width:18px;
+  border-radius:10px;
+  background:#fff
 }
 
 /* =========================
-   HERO
+   HOME
 ========================= */
 
 .hero{
- margin-top:24px;
+  margin-top:24px
 }
 
 .hero h1{
- font-size:27px;
- line-height:1.15;
+  font-size:27px;
+  line-height:1.15
 }
 
 .hero h1 span{
- color:var(--primary);
+  color:var(--primary)
 }
 
 .hero p{
- margin-top:8px;
- color:var(--muted);
- font-size:13px;
- line-height:1.6;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6
 }
 
-/* =========================
-   CATEGORIES
-========================= */
-
 .sectionTitle{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin:25px 0 13px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:25px 0 13px
 }
 
 .sectionTitle h2{
- font-size:17px;
+  font-size:17px
 }
 
 .sectionTitle span{
- color:var(--primary);
- font-size:11px;
- font-weight:800;
+  color:var(--primary);
+  font-size:11px;
+  font-weight:800
 }
 
 .categories{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:13px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px
 }
 
 .category{
- min-height:125px;
- border:1px solid var(--border);
- background:var(--card);
- border-radius:20px;
- padding:17px;
- box-shadow:var(--shadow);
- transition:.2s;
+  min-height:125px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:20px;
+  padding:17px;
+  box-shadow:var(--shadow);
+  transition:.2s;
+  cursor:pointer
 }
 
 .category:hover{
- transform:translateY(-3px);
+  transform:translateY(-3px)
 }
 
 .categoryIcon{
- width:52px;
- height:52px;
- border-radius:17px;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:28px;
- margin-bottom:12px;
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin-bottom:12px
 }
 
 .gamesIcon{
- background:#eeeafe;
+  background:#eeeafe
 }
 
 .cardsIcon{
- background:#e7f8ef;
+  background:#e7f8ef
+}
+
+.activityIcon{
+  background:#fff4df
+}
+
+.pointsIcon{
+  background:#e9f2ff
 }
 
 .category strong{
- display:block;
- font-size:15px;
+  display:block;
+  font-size:15px
 }
 
 .category small{
- color:var(--muted);
- font-size:10px;
+  color:var(--muted);
+  font-size:10px
 }
 
 /* =========================
@@ -681,20 +551,21 @@ header{
 ========================= */
 
 .page{
- display:none;
- animation:fadeUp .3s ease;
+  display:none;
+  animation:fadeUp .3s ease
 }
 
 .page.active{
- display:block;
+  display:block
 }
 
 .backBtn{
- border:0;
- background:transparent;
- color:var(--primary);
- font-weight:800;
- margin:10px 0 18px;
+  border:0;
+  background:transparent;
+  color:var(--primary);
+  font-weight:800;
+  margin:10px 0 18px;
+  padding:8px 0
 }
 
 /* =========================
@@ -702,99 +573,100 @@ header{
 ========================= */
 
 .gamesGrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:13px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px
 }
 
 .gameCard{
- position:relative;
- overflow:hidden;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:20px;
- box-shadow:var(--shadow);
- min-height:185px;
+  position:relative;
+  overflow:hidden;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  min-height:185px;
+  cursor:pointer
 }
 
 .gameVisual{
- height:105px;
- display:flex;
- align-items:center;
- justify-content:center;
- position:relative;
- overflow:hidden;
+  height:105px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden
 }
 
 .freefireBg{
- background:linear-gradient(135deg,#ff6b00,#ef2020);
+  background:linear-gradient(135deg,#ff6b00,#ef2020)
 }
 
 .dlsBg{
- background:linear-gradient(135deg,#0066ff,#101a62);
+  background:linear-gradient(135deg,#0066ff,#101a62)
 }
 
 .europeBg{
- background:linear-gradient(135deg,#243b55,#141e30);
+  background:linear-gradient(135deg,#243b55,#141e30)
 }
 
 .latamBg{
- background:linear-gradient(135deg,#11998e,#38ef7d);
+  background:linear-gradient(135deg,#11998e,#38ef7d)
 }
 
 .booyahBg{
- background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  background:linear-gradient(135deg,#ff416c,#ff4b2b)
 }
 
 .otherBg{
- background:linear-gradient(135deg,#667eea,#764ba2);
+  background:linear-gradient(135deg,#667eea,#764ba2)
 }
 
 .gameEmoji{
- font-size:48px;
- filter:drop-shadow(0 8px 8px rgba(0,0,0,.25));
+  font-size:48px;
+  filter:drop-shadow(0 8px 8px rgba(0,0,0,.25))
 }
 
 .gameInfo{
- padding:12px;
+  padding:12px
 }
 
 .gameInfo strong{
- display:block;
- font-size:13px;
+  display:block;
+  font-size:13px
 }
 
 .gameInfo small{
- color:var(--muted);
- font-size:10px;
+  color:var(--muted);
+  font-size:10px
 }
 
 .available{
- color:var(--success)!important;
- font-weight:800;
+  color:var(--success)!important;
+  font-weight:800
 }
 
 .soon{
- color:var(--warning)!important;
- font-weight:800;
+  color:var(--warning)!important;
+  font-weight:800
 }
 
 .soonLayer{
- position:absolute;
- inset:0;
- background:rgba(0,0,0,.38);
- display:flex;
- align-items:center;
- justify-content:center;
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.38);
+  display:flex;
+  align-items:center;
+  justify-content:center
 }
 
 .soonLayer span{
- color:#fff;
- background:rgba(0,0,0,.58);
- padding:6px 9px;
- border-radius:8px;
- font-size:10px;
- font-weight:800;
+  color:#fff;
+  background:rgba(0,0,0,.58);
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:800
 }
 
 /* =========================
@@ -802,175 +674,183 @@ header{
 ========================= */
 
 .ffBox{
- background:var(--card);
- border:1px solid var(--border);
- box-shadow:var(--shadow);
- border-radius:20px;
- padding:18px;
+  background:var(--card);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  border-radius:20px;
+  padding:18px
 }
 
 .instruction{
- background:#eeeafe;
- color:#5147c8;
- border-radius:13px;
- padding:12px;
- font-size:12px;
- line-height:1.5;
- margin-bottom:15px;
+  background:#eeeafe;
+  color:#5147c8;
+  border-radius:13px;
+  padding:12px;
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:15px
 }
 
 body.dark .instruction{
- background:#211d39;
- color:#c8c2ff;
+  background:#211d39;
+  color:#c8c2ff
 }
 
 .field{
- margin-bottom:14px;
+  margin-bottom:14px
 }
 
 .field label{
- display:block;
- font-size:11px;
- font-weight:800;
- margin-bottom:6px;
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:6px
 }
 
-.field input{
- width:100%;
- border:1px solid var(--border);
- background:var(--bg);
- color:var(--text);
- padding:13px;
- border-radius:12px;
- outline:none;
+.field input,
+.field select{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  padding:13px;
+  border-radius:12px;
+  outline:none
 }
 
 .verifyBtn,
 .buyBtn,
 .primaryBtn{
- width:100%;
- border:0;
- background:linear-gradient(135deg,#635bff,#7c3aed);
- color:#fff;
- padding:14px;
- border-radius:13px;
- font-weight:900;
+  width:100%;
+  border:0;
+  background:linear-gradient(135deg,#635bff,#7c3aed);
+  color:#fff;
+  padding:14px;
+  border-radius:13px;
+  font-weight:900
+}
+
+.verifyBtn:disabled,
+.buyBtn:disabled{
+  opacity:.65
 }
 
 .playerResult{
- display:none;
- margin-top:15px;
- padding:13px;
- border-radius:13px;
- background:#eafaf2;
- border:1px solid #c6f0d9;
- color:#087443;
+  display:none;
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#eafaf2;
+  border:1px solid #c6f0d9;
+  color:#087443
+}
+
+.packs{
+  display:grid;
+  gap:10px;
+  margin-top:15px
+}
+
+.pack{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:15px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  cursor:pointer;
+  transition:.2s
+}
+
+.pack:hover{
+  transform:translateY(-2px)
+}
+
+.pack.selected{
+  border:2px solid var(--primary);
+  background:#f2f0ff
+}
+
+body.dark .pack.selected{
+  background:#211d39
+}
+
+.diamonds{
+  font-weight:900
+}
+
+.price{
+  font-weight:900;
+  color:var(--primary);
+  white-space:nowrap
+}
+
+.selectedPackBox{
+  margin-top:15px;
+  background:#111827;
+  color:#fff;
+  border-radius:15px;
+  padding:15px;
+  display:none
+}
+
+.selectedPackBox strong{
+  font-size:20px
 }
 
 /* =========================
-   SENSITIVITY
-========================= */
-
-.sensitivityCard{
- margin-top:15px;
- border:1px solid var(--border);
- border-radius:18px;
- padding:15px;
- background:var(--card);
-}
-
-.sensitivityHeader{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:12px;
-}
-
-.sensitivityHeader strong{
- font-size:14px;
-}
-
-.sensitivityPrice{
- color:var(--primary);
- font-weight:1000;
- font-size:16px;
-}
-
-.sensitivityRows{
- display:grid;
- gap:7px;
-}
-
-.sensitivityRow{
- display:flex;
- justify-content:space-between;
- align-items:center;
- background:var(--bg);
- border-radius:10px;
- padding:9px 11px;
- font-size:11px;
-}
-
-.sensitivityRow span:last-child{
- font-weight:1000;
- color:var(--primary);
-}
-
-.buySensitivity{
- margin-top:13px;
-}
-
-/* =========================
-   VIRTUAL CARD
+   CARD
 ========================= */
 
 .virtualCard{
- background:linear-gradient(135deg,#111827,#4f46e5);
- height:190px;
- border-radius:22px;
- padding:22px;
- color:#fff;
- position:relative;
- overflow:hidden;
- box-shadow:0 18px 35px rgba(79,70,229,.25);
+  background:linear-gradient(135deg,#111827,#4f46e5);
+  height:190px;
+  border-radius:22px;
+  padding:22px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 18px 35px rgba(79,70,229,.25)
 }
 
 .virtualCard:after{
- content:"";
- position:absolute;
- width:180px;
- height:180px;
- border-radius:50%;
- background:rgba(255,255,255,.08);
- right:-50px;
- top:-40px;
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  right:-50px;
+  top:-40px
 }
 
 .cardBrand{
- display:flex;
- justify-content:space-between;
- font-weight:900;
+  display:flex;
+  justify-content:space-between;
+  font-weight:900
 }
 
 .chip{
- width:40px;
- height:30px;
- border-radius:7px;
- background:#d8b65a;
- margin-top:35px;
+  width:40px;
+  height:30px;
+  border-radius:7px;
+  background:#d8b65a;
+  margin-top:35px
 }
 
 .cardNumber{
- margin-top:25px;
- letter-spacing:3px;
- font-size:14px;
+  margin-top:25px;
+  letter-spacing:3px;
+  font-size:14px
 }
 
 .cardBottom{
- display:flex;
- justify-content:space-between;
- margin-top:17px;
- font-size:9px;
+  display:flex;
+  justify-content:space-between;
+  margin-top:17px;
+  font-size:9px
 }
 
 /* =========================
@@ -978,46 +858,46 @@ body.dark .instruction{
 ========================= */
 
 .balanceBox{
- background:linear-gradient(135deg,#635bff,#7c3aed);
- color:#fff;
- border-radius:22px;
- padding:23px;
- box-shadow:0 18px 35px rgba(99,91,255,.25);
+  background:linear-gradient(135deg,#635bff,#7c3aed);
+  color:#fff;
+  border-radius:22px;
+  padding:23px;
+  box-shadow:0 18px 35px rgba(99,91,255,.25)
 }
 
 .balanceBox small{
- opacity:.8;
+  opacity:.8
 }
 
 .balanceBox h2{
- margin-top:7px;
- font-size:30px;
+  margin-top:7px;
+  font-size:30px
 }
 
 .walletActions{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
- margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px
 }
 
 .actionCard{
- padding:16px;
- background:var(--card);
- border:1px solid var(--border);
- border-radius:17px;
- box-shadow:var(--shadow);
- cursor:pointer;
+  padding:16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  box-shadow:var(--shadow);
+  cursor:pointer
 }
 
 .actionCard strong{
- display:block;
- margin-top:8px;
- font-size:13px;
+  display:block;
+  margin-top:8px;
+  font-size:13px
 }
 
 .actionCard small{
- color:var(--muted);
+  color:var(--muted)
 }
 
 /* =========================
@@ -1025,35 +905,134 @@ body.dark .instruction{
 ========================= */
 
 .order{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:17px;
- padding:15px;
- margin-bottom:10px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:15px;
+  margin-bottom:10px
 }
 
 .orderTop{
- display:flex;
- justify-content:space-between;
- gap:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px
 }
 
 .status{
- font-size:9px;
- padding:5px 8px;
- border-radius:20px;
- background:#fff3e8;
- color:#d66b00;
- font-weight:800;
+  font-size:9px;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#fff3e8;
+  color:#d66b00;
+  font-weight:800
 }
 
-.orderSensitivity{
- margin-top:9px;
- background:var(--bg);
- padding:10px;
- border-radius:11px;
- font-size:10px;
- line-height:1.7;
+/* =========================
+   ACTIVITIES
+========================= */
+
+.activityList{
+  display:grid;
+  gap:12px
+}
+
+.activityCard{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  cursor:pointer
+}
+
+.activityTop{
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+
+.activityEmoji{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  background:#eeeafe;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  flex-shrink:0
+}
+
+.activityCard strong{
+  font-size:14px
+}
+
+.activityCard small{
+  color:var(--muted);
+  display:block;
+  margin-top:4px;
+  line-height:1.4
+}
+
+.activityReward{
+  margin-top:12px;
+  padding:9px;
+  border-radius:10px;
+  background:#fff8e7;
+  color:#a15c00;
+  font-size:11px;
+  font-weight:800
+}
+
+.emptyActivity{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:30px 17px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.6
+}
+
+/* =========================
+   POINTS
+========================= */
+
+.pointsBox{
+  background:linear-gradient(135deg,#f59e0b,#f97316);
+  color:#fff;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 18px 35px rgba(249,115,22,.2)
+}
+
+.pointsBox small{
+  opacity:.85
+}
+
+.pointsBox h2{
+  margin-top:5px;
+  font-size:30px
+}
+
+.rewardCard{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:15px;
+  margin-top:11px
+}
+
+.rewardCardTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px
+}
+
+.rewardCard small{
+  color:var(--muted);
+  display:block;
+  margin-top:5px
 }
 
 /* =========================
@@ -1061,51 +1040,51 @@ body.dark .instruction{
 ========================= */
 
 .profileBox{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:20px;
- padding:18px;
- box-shadow:var(--shadow);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:var(--shadow)
 }
 
 .avatar{
- width:65px;
- height:65px;
- border-radius:50%;
- background:linear-gradient(135deg,#635bff,#7c3aed);
- display:flex;
- align-items:center;
- justify-content:center;
- color:#fff;
- font-size:24px;
- font-weight:900;
- margin-bottom:12px;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#635bff,#7c3aed);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:24px;
+  font-weight:900;
+  margin-bottom:12px
 }
 
 .profileName{
- font-size:19px;
- font-weight:900;
+  font-size:19px;
+  font-weight:900
 }
 
 .profileEmail{
- color:var(--muted);
- font-size:11px;
+  color:var(--muted);
+  font-size:11px
 }
 
 .menuItem{
- padding:14px 0;
- border-bottom:1px solid var(--border);
- display:flex;
- justify-content:space-between;
- cursor:pointer;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer
 }
 
 .menuItem:last-child{
- border-bottom:0;
+  border-bottom:0
 }
 
 .logout{
- color:#f04438;
+  color:#f04438
 }
 
 /* =========================
@@ -1113,101 +1092,93 @@ body.dark .instruction{
 ========================= */
 
 .notification{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:16px;
- padding:15px;
- margin-bottom:10px;
- cursor:pointer;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:10px;
+  cursor:pointer
 }
 
 .notification.unread{
- border-left:4px solid var(--primary);
- background:#f7f6ff;
+  border-left:4px solid var(--primary);
+  background:#f7f6ff
 }
 
 body.dark .notification.unread{
- background:#1d1a30;
+  background:#1d1a30
 }
 
 .notification.read{
- opacity:.78;
+  opacity:.78
 }
 
 .notificationTop{
- display:flex;
- align-items:flex-start;
- justify-content:space-between;
- gap:10px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px
 }
 
 .notificationTitle{
- font-size:13px;
- font-weight:900;
+  font-size:13px;
+  font-weight:900
 }
 
 .notificationText{
- font-size:11px;
- color:var(--muted);
- margin-top:6px;
- line-height:1.5;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:6px;
+  line-height:1.5
 }
 
 .notificationTime{
- font-size:9px;
- color:var(--muted);
- margin-top:7px;
+  font-size:9px;
+  color:var(--muted);
+  margin-top:7px
 }
 
 .unreadDot{
- width:8px;
- height:8px;
- border-radius:50%;
- background:#635bff;
- flex-shrink:0;
- margin-top:4px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#635bff;
+  flex-shrink:0;
+  margin-top:4px
 }
 
 .notificationActions{
- display:flex;
- gap:8px;
- margin-bottom:13px;
+  display:flex;
+  gap:8px;
+  margin-bottom:13px
 }
 
 .notificationActions button{
- flex:1;
- border:0;
- padding:11px;
- border-radius:12px;
- font-size:10px;
- font-weight:900;
+  flex:1;
+  border:0;
+  padding:11px;
+  border-radius:12px;
+  font-size:10px;
+  font-weight:900
 }
 
 .readAll{
- background:#eeeafe;
- color:#5147c8;
+  background:#eeeafe;
+  color:#5147c8
 }
 
 .clearNotifications{
- background:#fff0ef;
- color:#d92d20;
-}
-
-body.dark .readAll{
- background:#211d39;
-}
-
-body.dark .clearNotifications{
- background:#32191a;
+  background:#fff0ef;
+  color:#d92d20
 }
 
 .emptyNotifications{
- text-align:center;
- padding:35px 15px;
- color:var(--muted);
- background:var(--card);
- border:1px solid var(--border);
- border-radius:18px;
+  text-align:center;
+  padding:35px 15px;
+  color:var(--muted);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px
 }
 
 /* =========================
@@ -1215,65 +1186,65 @@ body.dark .clearNotifications{
 ========================= */
 
 .whatsapp{
- position:fixed;
- right:17px;
- bottom:83px;
- width:51px;
- height:51px;
- border-radius:50%;
- background:#25d366;
- color:#fff;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:25px;
- box-shadow:0 10px 25px rgba(37,211,102,.3);
- z-index:90;
- text-decoration:none;
+  position:fixed;
+  right:17px;
+  bottom:83px;
+  width:51px;
+  height:51px;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  box-shadow:0 10px 25px rgba(37,211,102,.3);
+  z-index:90;
+  text-decoration:none
 }
 
 /* =========================
-   NAV
+   BOTTOM NAV
 ========================= */
 
 .bottomNav{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- height:70px;
- background:rgba(255,255,255,.94);
- backdrop-filter:blur(15px);
- border-top:1px solid #e7eaf0;
- display:flex;
- justify-content:space-around;
- align-items:center;
- z-index:80;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(15px);
+  border-top:1px solid #e7eaf0;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:80
 }
 
 body.dark .bottomNav{
- background:rgba(21,24,33,.94);
- border-color:#272b36;
+  background:rgba(21,24,33,.94);
+  border-color:#272b36
 }
 
 .navItem{
- border:0;
- background:transparent;
- color:var(--muted);
- font-size:10px;
- display:flex;
- flex-direction:column;
- align-items:center;
- gap:4px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px
 }
 
 .navItem span{
- font-size:19px;
+  font-size:19px
 }
 
 .navItem.active{
- color:var(--primary);
- font-weight:900;
+  color:var(--primary);
+  font-weight:900
 }
 
 /* =========================
@@ -1281,107 +1252,194 @@ body.dark .bottomNav{
 ========================= */
 
 .modal{
- position:fixed;
- inset:0;
- z-index:500;
- background:rgba(0,0,0,.55);
- display:none;
- align-items:flex-end;
- justify-content:center;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  background:rgba(0,0,0,.58);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px
 }
 
 .modal.show{
- display:flex;
+  display:flex
 }
 
 .modalBox{
- width:min(100%,500px);
- background:var(--card);
- border-radius:25px 25px 0 0;
- padding:22px;
- animation:slideUp .3s ease;
+  width:min(100%,500px);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  color:var(--text);
+  border-radius:25px;
+  padding:22px;
+  box-shadow:0 20px 70px rgba(0,0,0,.3);
+  animation:modalIn .25s ease
 }
 
-@keyframes slideUp{
- from{
-  transform:translateY(100%);
- }
- to{
-  transform:none;
- }
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:scale(.96) translateY(10px)
+  }
+  to{
+    opacity:1;
+    transform:none
+  }
 }
 
 .modalHeader{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px
 }
 
 .close{
- border:0;
- background:var(--bg);
- color:var(--text);
- width:34px;
- height:34px;
- border-radius:10px;
+  border:0;
+  background:var(--bg);
+  color:var(--text);
+  width:36px;
+  height:36px;
+  border-radius:10px
 }
 
 .googleBtn{
- width:100%;
- border:1px solid var(--border);
- background:var(--card);
- color:var(--text);
- padding:13px;
- border-radius:13px;
- font-weight:900;
- margin-top:10px;
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:13px;
+  border-radius:13px;
+  font-weight:900;
+  margin-top:10px
 }
 
-.paymentOption{
- width:100%;
- border:1px solid var(--border);
- background:var(--card);
- color:var(--text);
- padding:14px;
- border-radius:13px;
- margin-top:9px;
- text-align:left;
+.providerCard{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:15px;
+  padding:13px;
+  margin:8px 0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:12px
 }
 
-.paymentOption strong{
- display:block;
+.providerCard.disabled{
+  opacity:.5;
+  cursor:not-allowed
 }
 
-.paymentOption small{
- color:var(--muted);
+.providerLogo{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px
 }
 
-/* =========================
-   TOAST
-========================= */
+.nat{
+  background:#fff2e8
+}
+
+.mon{
+  background:#eaf2ff
+}
+
+.step{
+  display:none
+}
+
+.step.active{
+  display:block
+}
+
+.stepTitle{
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:8px
+}
+
+.stepText{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-bottom:15px
+}
+
+.successBox{
+  background:#eafaf2;
+  color:#087443;
+  border:1px solid #c6f0d9;
+  border-radius:14px;
+  padding:14px;
+  font-size:12px;
+  line-height:1.5
+}
+
+.errorBox{
+  background:#fff0ef;
+  color:#b42318;
+  border:1px solid #ffd6d2;
+  border-radius:14px;
+  padding:14px;
+  font-size:12px;
+  line-height:1.5
+}
 
 .toast{
- position:fixed;
- top:85px;
- left:50%;
- transform:translateX(-50%) translateY(-20px);
- background:#101828;
- color:#fff;
- padding:12px 15px;
- border-radius:12px;
- font-size:11px;
- opacity:0;
- pointer-events:none;
- transition:.3s;
- z-index:30000;
- max-width:90%;
- text-align:center;
+  position:fixed;
+  top:85px;
+  left:50%;
+  transform:translateX(-50%) translateY(-20px);
+  background:#101828;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:12px;
+  font-size:11px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:30000;
+  max-width:90%;
+  text-align:center
 }
 
 .toast.show{
- opacity:1;
- transform:translateX(-50%) translateY(0);
+  opacity:1;
+  transform:translateX(-50%) translateY(0)
+}
+
+/* =========================
+   ACTIVITY MODAL CONTENT
+========================= */
+
+.activityDetail{
+  text-align:center
+}
+
+.activityDetailIcon{
+  width:70px;
+  height:70px;
+  margin:0 auto 12px;
+  border-radius:20px;
+  background:#eeeafe;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px
+}
+
+.activityDetail p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  margin:10px 0
 }
 
 /* =========================
@@ -1389,19 +1447,57 @@ body.dark .bottomNav{
 ========================= */
 
 @media(min-width:700px){
+  .categories{
+    grid-template-columns:repeat(3,1fr)
+  }
 
- .categories{
-  grid-template-columns:repeat(2,280px);
- }
+  .gamesGrid{
+    grid-template-columns:repeat(3,1fr)
+  }
 
- .gamesGrid{
-  grid-template-columns:repeat(3,1fr);
- }
+  .banner{
+    height:210px
+  }
+}
 
- .banner{
-  height:220px;
- }
+@media(max-width:520px){
+  .brandText{
+    display:none
+  }
 
+  .headerRight{
+    gap:5px
+  }
+
+  .loginBtn{
+    padding:9px 10px
+  }
+}
+
+@media(max-width:420px){
+  .gamesGrid{
+    grid-template-columns:1fr 1fr
+  }
+
+  .walletActions{
+    grid-template-columns:1fr 1fr
+  }
+
+  .banner{
+    height:195px
+  }
+
+  .slide{
+    padding:18px
+  }
+
+  .slideText h2{
+    font-size:17px
+  }
+
+  .bannerArt{
+    font-size:40px
+  }
 }
 </style>
 </head>
@@ -1413,27 +1509,16 @@ body.dark .bottomNav{
 ========================= -->
 
 <div id="siteClosed">
-
- <div class="siteClosedBox">
-
-  <div class="siteClosedIcon">
-   🔒
+  <div class="siteClosedBox">
+    <div class="siteClosedIcon">🔒</div>
+    <h2>TRUE ALPHA fèmen pou kounye a</h2>
+    <p id="siteClosedMessage">
+      Sit la pa disponib pou kounye a.
+    </p>
+    <div class="siteClosedBrand">
+      TRUE ALPHA TopUp 💎
+    </div>
   </div>
-
-  <h2>
-   TRUE ALPHA fèmen pou kounye a
-  </h2>
-
-  <p id="siteClosedMessage">
-   Sit la pa disponib pou kounye a.
-  </p>
-
-  <div class="siteClosedBrand">
-   TRUE ALPHA TopUp 💎
-  </div>
-
- </div>
-
 </div>
 
 <!-- =========================
@@ -1441,144 +1526,86 @@ body.dark .bottomNav{
 ========================= -->
 
 <div id="splash">
-
- <div class="splashBox">
-
-  <div class="alphaLogo">
-   TA
+  <div class="splashBox">
+    <div class="alphaLogo">TA</div>
+    <div class="splashTitle">TRUE ALPHA</div>
+    <div class="splashName">Manuel Pluviose</div>
+    <div class="loader"></div>
   </div>
-
-  <div class="splashTitle">
-   TRUE ALPHA
-  </div>
-
-  <div class="splashName">
-   Manuel Pluviose
-  </div>
-
-  <div class="loader"></div>
-
- </div>
-
 </div>
-
-<!-- =========================
-     PURCHASE LOADING
-========================= -->
-
-<div id="purchaseLoading">
-
- <div class="loadingBox">
-
-  <div class="loadingLogo">
-
-   <div class="loadingLogoInner">
-    TRUE ALPHA
-   </div>
-
-  </div>
-
-  <div class="loadingTitle">
-   Traitement de l'achat
-  </div>
-
-  <div class="loadingText">
-   Vérification du Wallet et préparation de votre commande...
-  </div>
-
- </div>
-
-</div>
-
-<!-- =========================
-     APP
-========================= -->
 
 <div id="app">
 
 <div class="container">
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
- <div class="brand">
+  <div class="brand">
+    <div class="brandLogo">TA</div>
 
-  <div class="brandLogo">
-   TA
+    <div class="brandText">
+      <strong>TRUE ALPHA</strong>
+      <span>TopUp & Digital Services</span>
+    </div>
   </div>
 
-  <div class="brandText">
-   <strong>TRUE ALPHA</strong>
-   <span>TopUp & Digital Services</span>
+  <div class="headerRight">
+
+    <button class="iconBtn" onclick="openWallet()">
+      💰
+    </button>
+
+    <button class="iconBtn" onclick="toggleDark()">
+      🌙
+    </button>
+
+    <button class="iconBtn" onclick="showNotifications()">
+      🔔
+      <span class="badge" id="notificationBadge">0</span>
+    </button>
+
+    <button
+      class="loginBtn"
+      id="loginButton"
+      onclick="openLogin()">
+      Se connecter
+    </button>
+
   </div>
-
- </div>
-
- <div class="headerRight">
-
-  <button
-   class="iconBtn"
-   onclick="openWallet()">
-   💰
-  </button>
-
-  <button
-   class="iconBtn"
-   onclick="toggleDark()">
-   🌙
-  </button>
-
-  <button
-   class="iconBtn"
-   onclick="showNotifications()">
-
-   🔔
-
-   <span
-    class="badge"
-    id="notificationBadge">
-    0
-   </span>
-
-  </button>
-
-  <button
-   class="loginBtn"
-   id="loginButton"
-   onclick="openLogin()">
-   Se connecter
-  </button>
-
- </div>
 
 </header>
 
-<!-- WALLET MINI -->
+<!-- =========================
+     WALLET MINI
+========================= -->
 
 <div class="walletMini">
 
- <div class="walletTop">
+  <div class="walletTop">
 
-  <div>
+    <div>
+      <div class="walletLabel">
+        Solde Wallet
+      </div>
 
-   <div class="walletLabel">
-    Solde Wallet
-   </div>
+      <div
+        class="walletAmount"
+        id="headerBalance">
+        — HTG
+      </div>
+    </div>
 
-   <div
-    class="walletAmount"
-    id="headerBalance">
-    0 HTG
-   </div>
+    <button
+      class="recharge"
+      onclick="openRecharge()">
+      + Recharger
+    </button>
 
   </div>
-
-  <button
-   class="recharge"
-   onclick="openRecharge()">
-   + Recharger
-  </button>
-
- </div>
 
 </div>
 
@@ -1586,3275 +1613,5024 @@ body.dark .bottomNav{
      HOME
 ========================= -->
 
-<section
- id="home"
- class="page active">
+<section id="home" class="page active">
 
- <div class="banner">
+  <!-- BANNER -->
 
-  <!-- SLIDE 1 -->
+  <div class="banner">
 
-  <div class="slide active">
+    <div class="slide active">
 
-   <div class="slideText">
+      <div class="slideText">
 
-    <small>
-     FREE FIRE • HIT
-    </small>
+        <small>PAIEMENT MOBILE</small>
 
-    <h2>
-     Un tir précis 🎯
-    </h2>
+        <h2>
+          NatCash & MonCash
+        </h2>
+
+        <p>
+          Rechaje Wallet ou ak sèvis peman ki disponib yo.
+          <br><br>
+          Peman an ap vin otomatik lè API yo konekte.
+        </p>
+
+      </div>
+
+      <div class="bannerArt">
+        📱💸
+      </div>
+
+    </div>
+
+
+    <div class="slide">
+
+      <div class="slideText">
+
+        <small>CARTE VIRTUELLE</small>
+
+        <h2>
+          TRUE ALPHA Virtual Card 💳
+        </h2>
+
+        <p>
+          Peye fasil sou entènèt ak yon kat virtuel.
+          <br><br>
+          Kontakte TRUE ALPHA pou sèvis kat la.
+        </p>
+
+      </div>
+
+      <div class="bannerCard">
+
+        <div class="bannerCardTop">
+          <span>TRUE ALPHA</span>
+          <span>VISA</span>
+        </div>
+
+        <div class="bannerChip"></div>
+
+        <div class="bannerCardBottom">
+          <span>VIRTUAL</span>
+          <span>💳</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="slide">
+
+      <div class="slideText">
+
+        <small>FREE FIRE</small>
+
+        <h2>
+          Rechargez vos Diamonds 💎
+        </h2>
+
+        <p>
+          Antre UID ou, verifye joueur la,
+          chwazi pack ou epi peye ak Wallet ou.
+        </p>
+
+      </div>
+
+      <div class="bannerArt">
+        💎🔥
+      </div>
+
+    </div>
+
+
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+  </div>
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <h1>
+      Dijital
+      <span>san limit.</span>
+    </h1>
 
     <p>
-     312 HP de dégâts affichés
-     avec le hitmarker rouge.
-     <br><br>
-     TRUE ALPHA — Gaming Services.
+      Rechaje jwèt, jwenn kat virtuel,
+      patisipe nan aktivite epi jere Wallet ou
+      nan yon sèl kote.
+      <br><br>
+
+      <b>
+        TRUE ALPHA — solisyon dijital ou ka konte sou li.
+      </b>
     </p>
 
-   </div>
+  </div>
 
-   <div class="hitScene">
 
-    <div class="shooter">
-     🧍
+  <!-- CATEGORIES -->
+
+  <div class="sectionTitle">
+    <h2>Catégories</h2>
+    <span>Tout services</span>
+  </div>
+
+  <div class="categories">
+
+    <div
+      class="category"
+      onclick="showPage('games')">
+
+      <div class="categoryIcon gamesIcon">
+        🎮
+      </div>
+
+      <strong>Jwèt</strong>
+
+      <small>
+        TopUp & services gaming
+      </small>
+
     </div>
 
-    <div class="enemy">
-     🧍
+
+    <div
+      class="category"
+      onclick="showPage('cards')">
+
+      <div class="categoryIcon cardsIcon">
+        💳
+      </div>
+
+      <strong>Kat</strong>
+
+      <small>
+        Cartes virtuelles
+      </small>
+
     </div>
 
-    <div class="bulletLine"></div>
 
-    <div class="cross">
-     ✚
+    <div
+      class="category"
+      onclick="showPage('activities')">
+
+      <div class="categoryIcon activityIcon">
+        🎁
+      </div>
+
+      <strong>Jwèt & Aktivite ALPHA</strong>
+
+      <small>
+        Aktivite ak rekonpans
+      </small>
+
     </div>
 
-    <div class="hp">
-     -312 HP
+
+    <div
+      class="category"
+      onclick="showPage('points')">
+
+      <div class="categoryIcon pointsIcon">
+        ⭐
+      </div>
+
+      <strong>TA Points</strong>
+
+      <small>
+        Pwen ak rekonpans
+      </small>
+
     </div>
 
-    <div class="damage">
-     312
+  </div>
+
+
+  <!-- ALPHA FEATURES -->
+
+  <div class="sectionTitle">
+    <h2>✨ Tout sèvis TRUE ALPHA</h2>
+  </div>
+
+  <div class="activityList">
+
+    <div class="activityCard">
+      <div class="activityTop">
+        <div class="activityEmoji">🎮</div>
+        <div>
+          <strong>Free Fire TopUp</strong>
+          <small>
+            TopUp Diamonds par UID.
+          </small>
+        </div>
+      </div>
     </div>
 
-   </div>
+    <div class="activityCard">
+      <div class="activityTop">
+        <div class="activityEmoji">💳</div>
+        <div>
+          <strong>Virtual Card</strong>
+          <small>
+            Sèvis kat virtuel TRUE ALPHA / KIRIKOU.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="activityCard">
+      <div class="activityTop">
+        <div class="activityEmoji">💰</div>
+        <div>
+          <strong>Wallet</strong>
+          <small>
+            Rechaje, transfè ak retrè lè sèvis API yo disponib.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="activityCard">
+      <div class="activityTop">
+        <div class="activityEmoji">🎁</div>
+        <div>
+          <strong>Aktivite ALPHA</strong>
+          <small>
+            Mission, Quiz, Giveaway, Challenge, Taptap Kado
+            ak lòt aktivite Admin pibliye.
+          </small>
+        </div>
+      </div>
+    </div>
 
   </div>
-
-  <!-- SLIDE 2 -->
-
-  <div class="slide">
-
-   <div class="slideText">
-
-    <small>
-     SENSIBILITÉ FREE FIRE
-    </small>
-
-    <h2>
-     Réglages prêts 🎮
-    </h2>
-
-    <p>
-     Une configuration complète
-     de sensibilité à 200 HTG.
-     <br><br>
-     Disponible immédiatement après achat.
-    </p>
-
-   </div>
-
-   <div class="bannerArt"
-    style="font-size:55px">
-    🎯
-   </div>
-
-  </div>
-
-  <!-- SLIDE 3 -->
-
-  <div class="slide">
-
-   <div class="slideText">
-
-    <small>
-     PAIEMENT MOBILE
-    </small>
-
-    <h2>
-     NatCash disponible
-    </h2>
-
-    <p>
-     Rechargez votre Wallet
-     avec NatCash.
-     <br><br>
-     MonCash et Digicel :
-     bientôt disponibles.
-    </p>
-
-   </div>
-
-   <div class="bannerArt"
-    style="font-size:50px">
-    📱💸
-   </div>
-
-  </div>
-
-  <div class="dots">
-
-   <div class="dot active"></div>
-   <div class="dot"></div>
-   <div class="dot"></div>
-
-  </div>
-
- </div>
-
- <div class="hero">
-
-  <h1>
-   Dijital <span>san limit.</span>
-  </h1>
-
-  <p>
-   Rechaje jwèt, sèvis gaming ak sèvis dijital
-   nan yon sèl kote.
-   <br><br>
-   <b>
-    True Alpha — solisyon dijital ou ka konte sou li.
-   </b>
-  </p>
-
- </div>
-
- <div class="sectionTitle">
-
-  <h2>
-   Catégories
-  </h2>
-
-  <span>
-   Tout services
-  </span>
-
- </div>
-
- <div class="categories">
-
-  <div
-   class="category"
-   onclick="showPage('games')">
-
-   <div class="categoryIcon gamesIcon">
-    🎮
-   </div>
-
-   <strong>
-    Jwèt
-   </strong>
-
-   <small>
-    TopUp & services gaming
-   </small>
-
-  </div>
-
-  <div
-   class="category"
-   onclick="showPage('cards')">
-
-   <div class="categoryIcon cardsIcon">
-    💳
-   </div>
-
-   <strong>
-    Kat
-   </strong>
-
-   <small>
-    Cartes virtuelles
-   </small>
-
-  </div>
-
- </div>
 
 </section>
+
 
 <!-- =========================
      GAMES
 ========================= -->
 
-<section
- id="games"
- class="page">
+<section id="games" class="page">
 
- <button
-  class="backBtn"
-  onclick="goBackAndReset('home')">
+  <button
+    class="backBtn"
+    onclick="backFromGames()">
+    ← Retour
+  </button>
 
-  ← Retour
-
- </button>
-
- <div class="sectionTitle">
-
-  <h2>
-   Jeux & services
-  </h2>
-
-  <span>
-   6 services
-  </span>
-
- </div>
-
- <div class="gamesGrid">
-
-  <!-- FREE FIRE -->
-
-  <div
-   class="gameCard"
-   onclick="showPage('freefire')">
-
-   <div class="gameVisual freefireBg">
-
-    <div class="gameEmoji">
-     🔥
-    </div>
-
-   </div>
-
-   <div class="gameInfo">
-
-    <strong>
-     Free Fire
-    </strong>
-
-    <small class="available">
-     ● Disponible • NA
-    </small>
-
-   </div>
-
+  <div class="sectionTitle">
+    <h2>🎮 Jeux & services</h2>
+    <span>6 services</span>
   </div>
 
-  <!-- DLS -->
+  <div class="gamesGrid">
 
-  <div class="gameCard">
+    <div
+      class="gameCard"
+      onclick="openFreeFire()">
 
-   <div class="gameVisual dlsBg">
+      <div class="gameVisual freefireBg">
+        <div class="gameEmoji">
+          🔥
+        </div>
+      </div>
 
-    <div class="gameEmoji">
-     ⚽
+      <div class="gameInfo">
+
+        <strong>
+          Free Fire TopUp par UID
+        </strong>
+
+        <small class="available">
+          ● Disponible • NA — North America
+        </small>
+
+      </div>
+
     </div>
 
-    <div class="soonLayer">
-     <span>
-      Bientôt disponible
-     </span>
+
+    <div class="gameCard">
+
+      <div class="gameVisual dlsBg">
+        <div class="gameEmoji">⚽</div>
+
+        <div class="soonLayer">
+          <span>
+            Bientôt disponible
+          </span>
+        </div>
+      </div>
+
+      <div class="gameInfo">
+        <strong>DLS</strong>
+        <small class="soon">
+          Bientôt disponible
+        </small>
+      </div>
+
     </div>
 
-   </div>
 
-   <div class="gameInfo">
+    <div class="gameCard">
 
-    <strong>
-     DLS
-    </strong>
+      <div class="gameVisual europeBg">
+        <div class="gameEmoji">🌍</div>
 
-    <small class="soon">
-     Bientôt disponible
-    </small>
+        <div class="soonLayer">
+          <span>
+            Bientôt disponible
+          </span>
+        </div>
+      </div>
 
-   </div>
+      <div class="gameInfo">
+        <strong>Free Fire Europe</strong>
+        <small class="soon">
+          Bientôt disponible
+        </small>
+      </div>
+
+    </div>
+
+
+    <div class="gameCard">
+
+      <div class="gameVisual latamBg">
+        <div class="gameEmoji">🌎</div>
+
+        <div class="soonLayer">
+          <span>
+            Bientôt disponible
+          </span>
+        </div>
+      </div>
+
+      <div class="gameInfo">
+        <strong>Free Fire PIN LATAM</strong>
+        <small class="soon">
+          Bientôt disponible
+        </small>
+      </div>
+
+    </div>
+
+
+    <div class="gameCard">
+
+      <div class="gameVisual booyahBg">
+        <div class="gameEmoji">🏆</div>
+
+        <div class="soonLayer">
+          <span>
+            Bientôt disponible
+          </span>
+        </div>
+      </div>
+
+      <div class="gameInfo">
+        <strong>Pass Booyah</strong>
+        <small class="soon">
+          Bientôt disponible
+        </small>
+      </div>
+
+    </div>
+
+
+    <div class="gameCard">
+
+      <div class="gameVisual otherBg">
+        <div class="gameEmoji">🎮</div>
+
+        <div class="soonLayer">
+          <span>
+            Bientôt disponible
+          </span>
+        </div>
+      </div>
+
+      <div class="gameInfo">
+        <strong>Autres jeux</strong>
+        <small class="soon">
+          Bientôt disponible
+        </small>
+      </div>
+
+    </div>
 
   </div>
-
-  <!-- EUROPE -->
-
-  <div class="gameCard">
-
-   <div class="gameVisual europeBg">
-
-    <div class="gameEmoji">
-     🌍
-    </div>
-
-    <div class="soonLayer">
-     <span>
-      Bientôt disponible
-     </span>
-    </div>
-
-   </div>
-
-   <div class="gameInfo">
-
-    <strong>
-     Free Fire Europe
-    </strong>
-
-    <small class="soon">
-     Bientôt disponible
-    </small>
-
-   </div>
-
-  </div>
-
-  <!-- LATAM -->
-
-  <div class="gameCard">
-
-   <div class="gameVisual latamBg">
-
-    <div class="gameEmoji">
-     🌎
-    </div>
-
-    <div class="soonLayer">
-     <span>
-      Bientôt disponible
-     </span>
-    </div>
-
-   </div>
-
-   <div class="gameInfo">
-
-    <strong>
-     Free Fire PIN LATAM
-    </strong>
-
-    <small class="soon">
-     Bientôt disponible
-    </small>
-
-   </div>
-
-  </div>
-
-  <!-- BOOYAH -->
-
-  <div class="gameCard">
-
-   <div class="gameVisual booyahBg">
-
-    <div class="gameEmoji">
-     🏆
-    </div>
-
-    <div class="soonLayer">
-     <span>
-      Bientôt disponible
-     </span>
-    </div>
-
-   </div>
-
-   <div class="gameInfo">
-
-    <strong>
-     Pass Booyah
-    </strong>
-
-    <small class="soon">
-     Bientôt disponible
-    </small>
-
-   </div>
-
-  </div>
-
-  <!-- AUTRES -->
-
-  <div class="gameCard">
-
-   <div class="gameVisual otherBg">
-
-    <div class="gameEmoji">
-     🎮
-    </div>
-
-    <div class="soonLayer">
-     <span>
-      Bientôt disponible
-     </span>
-    </div>
-
-   </div>
-
-   <div class="gameInfo">
-
-    <strong>
-     Autres jeux
-    </strong>
-
-    <small class="soon">
-     Bientôt disponible
-    </small>
-
-   </div>
-
-  </div>
-
- </div>
 
 </section>
+
 
 <!-- =========================
      FREE FIRE
 ========================= -->
 
-<section
- id="freefire"
- class="page">
-
- <button
-  class="backBtn"
-  onclick="goBackAndReset('games')">
-
-  ← Retour aux jeux
-
- </button>
-
- <div class="sectionTitle">
-
-  <h2>
-   Free Fire
-  </h2>
-
-  <span>
-   NA — North America
-  </span>
-
- </div>
-
- <div class="ffBox">
-
-  <div class="instruction">
-
-   🇺🇸
-   <b>
-    Free Fire — NA
-   </b>
-
-   <br><br>
-
-   Antre UID Free Fire ou.
-   <br>
-   Verifye UID la avan ou chwazi sèvis la.
-
-  </div>
-
-  <div class="field">
-
-   <label>
-    UID Free Fire
-   </label>
-
-   <input
-    id="uid"
-    type="number"
-    inputmode="numeric"
-    placeholder="Antre UID ou">
-
-  </div>
+<section id="freefire" class="page">
 
   <button
-   class="verifyBtn"
-   onclick="verifyUID()">
-
-   Vérifier le joueur
-
+    class="backBtn"
+    onclick="backFromFreeFire()">
+    ← Retour aux jeux
   </button>
 
-  <div
-   class="playerResult"
-   id="playerResult">
+  <div class="sectionTitle">
 
-   <b>
-    ✓ UID prepare
-   </b>
+    <h2>
+      Free Fire TopUp 💎
+    </h2>
 
-   <br>
-
-   <span id="playerName">
-    —
-   </span>
-
-   <br>
-
-   <small>
-    Serveur : NA — North America
-   </small>
+    <span>
+      NA — North America
+    </span>
 
   </div>
 
-  <!-- SENSITIVITY -->
 
-  <div
-   class="sensitivityCard"
-   id="sensitivityCard"
-   style="display:none">
+  <div class="ffBox">
 
-   <div class="sensitivityHeader">
+    <div class="instruction">
 
-    <strong>
-     🎯 Sensibilité Free Fire
-    </strong>
+      🇭🇹
+      <b>Antre UID Free Fire ou.</b>
 
-    <div class="sensitivityPrice">
-     200 HTG
+      <br>
+
+      Mete UID ou epi verifye enfòmasyon joueur la.
+
+      <br>
+
+      <b>
+        Serveur : NA — North America 🇺🇸
+      </b>
+
     </div>
 
-   </div>
 
-   <div class="sensitivityRows">
+    <div class="field">
 
-    <div class="sensitivityRow">
-     <span>
-      Général
-     </span>
-     <span>
-      100
-     </span>
+      <label>
+        UID Free Fire
+      </label>
+
+      <input
+        id="uid"
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        placeholder="Antre UID ou">
+
     </div>
 
-    <div class="sensitivityRow">
-     <span>
-      Point rouge
-     </span>
-     <span>
-      95
-     </span>
+
+    <button
+      class="verifyBtn"
+      id="verifyBtn"
+      onclick="verifyUID()">
+
+      🔐 Verifye joueur la
+
+    </button>
+
+
+    <div
+      class="playerResult"
+      id="playerResult">
+
+      <b>
+        ✓ Joueur verifye
+      </b>
+
+      <br>
+
+      <span id="playerName">
+        —
+      </span>
+
+      <br>
+
+      <small>
+        Serveur : NA — North America
+      </small>
+
     </div>
 
-    <div class="sensitivityRow">
-     <span>
-      Lunette 2x
-     </span>
-     <span>
-      90
-     </span>
+
+    <!-- PACK PRICES -->
+
+    <div
+      id="packsArea"
+      style="display:none">
+
+      <div class="sectionTitle">
+
+        <h2>
+          💎 Chwazi Pack
+        </h2>
+
+        <span>
+          Prix
+        </span>
+
+      </div>
+
+
+      <div class="packs">
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'100 + 10 💎',200)">
+
+          <div>
+            <div class="diamonds">
+              💎 100 + 10
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            200 HTG
+          </div>
+
+        </div>
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'310 + 32 💎',450)">
+
+          <div>
+            <div class="diamonds">
+              💎 310 + 32
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            450 HTG
+          </div>
+
+        </div>
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'520 + 52 💎',750)">
+
+          <div>
+            <div class="diamonds">
+              💎 520 + 52
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            750 HTG
+          </div>
+
+        </div>
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'1,060 + 106 💎',1350)">
+
+          <div>
+            <div class="diamonds">
+              💎 1,060 + 106
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            1,350 HTG
+          </div>
+
+        </div>
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'2,180 + 218 💎',3000)">
+
+          <div>
+            <div class="diamonds">
+              💎 2,180 + 218
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            3,000 HTG
+          </div>
+
+        </div>
+
+
+        <div
+          class="pack"
+          onclick="selectPack(this,'5,600 + 560 💎',8000)">
+
+          <div>
+            <div class="diamonds">
+              💎 5,600 + 560
+            </div>
+
+            <small>
+              Bonus inclus
+            </small>
+          </div>
+
+          <div class="price">
+            8,000 HTG
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="selectedPackBox"
+        class="selectedPackBox">
+
+        <small>
+          Pack chwazi
+        </small>
+
+        <br>
+
+        <strong id="selectedPackText">
+          —
+        </strong>
+
+        <br>
+
+        <span>
+          Pri :
+          <b id="selectedPackPrice">
+            0 HTG
+          </b>
+        </span>
+
+      </div>
+
+
+      <button
+        class="buyBtn"
+        style="margin-top:14px"
+        onclick="buyNow()">
+
+        💎 Achte kounye a
+
+      </button>
+
     </div>
-
-    <div class="sensitivityRow">
-     <span>
-      Lunette 4x
-     </span>
-     <span>
-      80
-     </span>
-    </div>
-
-    <div class="sensitivityRow">
-     <span>
-      Lunette AWM
-     </span>
-     <span>
-      60
-     </span>
-    </div>
-
-    <div class="sensitivityRow">
-     <span>
-      Vue libre
-     </span>
-     <span>
-      75
-     </span>
-    </div>
-
-   </div>
-
-   <button
-    class="buyBtn buySensitivity"
-    id="sensitivityBuyButton"
-    onclick="buySensitivity()">
-
-    Acheter — 200 HTG
-
-   </button>
-
-   <div
-    id="sensitivityCooldown"
-    style="
-     display:none;
-     margin-top:10px;
-     text-align:center;
-     color:var(--warning);
-     font-size:10px;
-     font-weight:800;
-    ">
-   </div>
 
   </div>
-
- </div>
 
 </section>
+
 
 <!-- =========================
      CARDS
 ========================= -->
 
-<section
- id="cards"
- class="page">
-
- <button
-  class="backBtn"
-  onclick="showPage('home')">
-
-  ← Retour
-
- </button>
-
- <div class="sectionTitle">
-
-  <h2>
-   Cartes virtuelles
-  </h2>
-
- </div>
-
- <div class="virtualCard">
-
-  <div class="cardBrand">
-   <span>KIRIKOU</span>
-   <span>VISA</span>
-  </div>
-
-  <div class="chip"></div>
-
-  <div class="cardNumber">
-   •••• •••• •••• 0000
-  </div>
-
-  <div class="cardBottom">
-   <span>TRUE ALPHA</span>
-   <span>VIRTUAL CARD</span>
-  </div>
-
- </div>
-
- <div style="height:15px"></div>
-
- <div class="ffBox">
-
-  <h3>
-   Créer une carte Visa virtuelle
-  </h3>
-
-  <p
-   style="
-    font-size:12px;
-    color:var(--muted);
-    line-height:1.6;
-    margin:10px 0 18px">
-
-   Créez votre carte virtuelle avec Kirikou
-   pour vos paiements en ligne.
-
-  </p>
+<section id="cards" class="page">
 
   <button
-   class="primaryBtn"
-   onclick="contactCard()">
-
-   Contacter pour créer la carte
-
+    class="backBtn"
+    onclick="backFromCards()">
+    ← Retour
   </button>
 
- </div>
+  <div class="sectionTitle">
+    <h2>💳 Cartes virtuelles</h2>
+  </div>
+
+
+  <div class="virtualCard">
+
+    <div class="cardBrand">
+
+      <span>
+        KIRIKOU
+      </span>
+
+      <span>
+        VISA
+      </span>
+
+    </div>
+
+    <div class="chip"></div>
+
+    <div class="cardNumber">
+      •••• •••• •••• 0000
+    </div>
+
+    <div class="cardBottom">
+
+      <span>
+        TRUE ALPHA
+      </span>
+
+      <span>
+        VIRTUAL CARD
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div style="height:15px"></div>
+
+
+  <div class="ffBox">
+
+    <h3>
+      Créer une carte Visa virtuelle
+    </h3>
+
+    <p
+      style="
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.6;
+      margin:10px 0 18px">
+
+      Peye fasil sou entènèt ak
+      TRUE ALPHA Virtual Card 💳.
+      Sèvis kat la fèt avèk patnè KIRIKOU.
+
+    </p>
+
+    <button
+      class="primaryBtn"
+      onclick="contactCard()">
+
+      💳 Kontakte pou kreye kat la
+
+    </button>
+
+  </div>
 
 </section>
+
+
+<!-- =========================
+     ACTIVITIES
+========================= -->
+
+<section id="activities" class="page">
+
+  <button
+    class="backBtn"
+    onclick="backFromActivities()">
+    ← Retour
+  </button>
+
+  <div class="sectionTitle">
+
+    <h2>
+      🎮 Jwèt & Aktivite ALPHA
+    </h2>
+
+    <span>
+      ALPHA
+    </span>
+
+  </div>
+
+
+  <div id="activitiesList">
+
+    <div class="emptyActivity">
+
+      ✨
+
+      <br><br>
+
+      <b>
+        TRUE ALPHA poko ajoute okenn aktivite
+        pou kounye a.
+      </b>
+
+      <br>
+
+      Tounen pita pou dekouvri nouvo aktivite ALPHA. 💎
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     TA POINTS
+========================= -->
+
+<section id="points" class="page">
+
+  <button
+    class="backBtn"
+    onclick="backFromPoints()">
+    ← Retour
+  </button>
+
+  <div class="sectionTitle">
+
+    <h2>
+      ⭐ TA Points
+    </h2>
+
+  </div>
+
+
+  <div class="pointsBox">
+
+    <small>
+      Pwen ou
+    </small>
+
+    <h2 id="pointsBalance">
+      0
+    </h2>
+
+    <p style="margin-top:7px;font-size:11px">
+      Fè aktivite ALPHA pou jwenn plis pwen.
+    </p>
+
+  </div>
+
+
+  <div class="sectionTitle">
+
+    <h2>
+      🎁 Rekonpans
+    </h2>
+
+  </div>
+
+
+  <div id="rewardsList">
+
+    <div class="emptyActivity">
+
+      🎁
+
+      <br><br>
+
+      Rekonpans yo ap parèt isit la
+      lè Admin pibliye yo.
+
+    </div>
+
+  </div>
+
+</section>
+
 
 <!-- =========================
      ORDERS
 ========================= -->
 
-<section
- id="orders"
- class="page">
+<section id="orders" class="page">
 
- <div class="sectionTitle">
+  <button
+    class="backBtn"
+    onclick="backFromOrders()">
+    ← Retour
+  </button>
 
-  <h2>
-   Mes commandes
-  </h2>
+  <div class="sectionTitle">
 
- </div>
+    <h2>
+      📋 Mes commandes
+    </h2>
 
- <div id="ordersList"></div>
+  </div>
+
+  <div id="ordersList"></div>
 
 </section>
+
 
 <!-- =========================
      WALLET
 ========================= -->
 
-<section
- id="wallet"
- class="page">
+<section id="wallet" class="page">
 
- <div class="sectionTitle">
+  <button
+    class="backBtn"
+    onclick="backFromWallet()">
+    ← Retour
+  </button>
 
-  <h2>
-   Mon Wallet
-  </h2>
-
- </div>
-
- <div id="privateWallet">
-
-  <div class="balanceBox">
-
-   <small>
-    Solde disponible
-   </small>
-
-   <h2 id="walletBalance">
-    0 HTG
-   </h2>
-
+  <div class="sectionTitle">
+    <h2>💰 Mon Wallet</h2>
   </div>
 
-  <div class="walletActions">
 
-   <div
-    class="actionCard"
-    onclick="openRecharge()">
+  <div id="privateWallet">
 
-    💰
+    <div class="balanceBox">
 
-    <strong>
-     Recharger
-    </strong>
+      <small>
+        Solde disponible
+      </small>
 
-    <small>
-     NatCash disponible
-    </small>
+      <h2 id="walletBalance">
+        — HTG
+      </h2>
 
-   </div>
+    </div>
 
-   <div
-    class="actionCard"
-    onclick="showPaymentSoon('MonCash')">
 
-    📱
+    <div class="walletActions">
 
-    <strong>
-     MonCash
-    </strong>
 
-    <small>
-     Bientôt disponible
-    </small>
+      <div
+        class="actionCard"
+        onclick="openRecharge()">
 
-   </div>
+        💰
 
-   <div
-    class="actionCard"
-    onclick="showPaymentSoon('Digicel')">
+        <strong>
+          Recharger
+        </strong>
 
-    📲
+        <small>
+          NatCash / MonCash
+        </small>
 
-    <strong>
-     Digicel
-    </strong>
+      </div>
 
-    <small>
-     Bientôt disponible
-    </small>
 
-   </div>
+      <div
+        class="actionCard"
+        onclick="transferMoney()">
 
-   <div
-    class="actionCard"
-    onclick="showPage('orders')">
+        ↗️
 
-    📋
+        <strong>
+          Transférer
+        </strong>
 
-    <strong>
-     Historique
-    </strong>
+        <small>
+          Minimum 50 HTG
+        </small>
 
-    <small>
-     Voir les commandes
-    </small>
+      </div>
 
-   </div>
+
+      <div
+        class="actionCard"
+        onclick="withdrawMoney()">
+
+        🏦
+
+        <strong>
+          Retrait
+        </strong>
+
+        <small>
+          Minimum 5,000 HTG
+        </small>
+
+      </div>
+
+
+      <div
+        class="actionCard"
+        onclick="privatePage('orders')">
+
+        📋
+
+        <strong>
+          Historique
+        </strong>
+
+        <small>
+          Voir les commandes
+        </small>
+
+      </div>
+
+    </div>
 
   </div>
-
- </div>
 
 </section>
+
 
 <!-- =========================
      NOTIFICATIONS
 ========================= -->
 
-<section
- id="notifications"
- class="page">
-
- <div class="sectionTitle">
-
-  <h2>
-   Notifications
-  </h2>
-
-  <span id="unreadText">
-   0 nouvelles
-  </span>
-
- </div>
-
- <div class="notificationActions">
+<section id="notifications" class="page">
 
   <button
-   class="readAll"
-   onclick="readAllNotifications()">
-
-   ✓ Lire tout
-
+    class="backBtn"
+    onclick="backFromNotifications()">
+    ← Retour
   </button>
 
-  <button
-   class="clearNotifications"
-   onclick="clearAllNotifications()">
+  <div class="sectionTitle">
 
-   🗑️ Efacer tout
+    <h2>
+      🔔 Notifications
+    </h2>
 
-  </button>
+    <span id="unreadText">
+      0 nouvelles
+    </span>
 
- </div>
+  </div>
 
- <div id="notificationsList"></div>
+
+  <div class="notificationActions">
+
+    <button
+      class="readAll"
+      onclick="readAllNotifications()">
+
+      ✓ Lire tout
+
+    </button>
+
+    <button
+      class="clearNotifications"
+      onclick="clearAllNotifications()">
+
+      🗑️ Efacer tout
+
+    </button>
+
+  </div>
+
+
+  <div id="notificationsList"></div>
 
 </section>
+
 
 <!-- =========================
      PROFILE
 ========================= -->
 
-<section
- id="profile"
- class="page">
+<section id="profile" class="page">
 
- <div class="sectionTitle">
+  <button
+    class="backBtn"
+    onclick="backFromProfile()">
+    ← Retour
+  </button>
 
-  <h2>
-   Profil
-  </h2>
-
- </div>
-
- <div class="profileBox">
-
-  <div
-   class="avatar"
-   id="profileAvatar">
-   TA
+  <div class="sectionTitle">
+    <h2>👤 Profil</h2>
   </div>
 
-  <div
-   class="profileName"
-   id="profileName">
-   Visiteur
+
+  <div class="profileBox">
+
+    <div
+      class="avatar"
+      id="profileAvatar">
+      ?
+    </div>
+
+    <div
+      class="profileName"
+      id="profileName">
+      Visiteur
+    </div>
+
+    <div
+      class="profileEmail"
+      id="profileEmail">
+      Konekte pou jwenn aksè ak kont ou.
+    </div>
+
+
+    <div style="height:15px"></div>
+
+
+    <div
+      class="menuItem"
+      onclick="openLogin()">
+
+      <span>
+        👤 Kont
+      </span>
+
+      <span>
+        ›
+      </span>
+
+    </div>
+
+
+    <div
+      class="menuItem"
+      onclick="privatePage('orders')">
+
+      <span>
+        🛒 Mes commandes
+      </span>
+
+      <span>
+        ›
+      </span>
+
+    </div>
+
+
+    <div
+      class="menuItem"
+      onclick="openRecharge()">
+
+      <span>
+        💰 Recharger Wallet
+      </span>
+
+      <span>
+        ›
+      </span>
+
+    </div>
+
+
+    <div class="menuItem">
+
+      <span>
+        ⭐ TA Points
+      </span>
+
+      <strong id="profilePoints">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="menuItem">
+
+      <span>
+        💵 Wallet disponible
+      </span>
+
+      <strong id="profileBalance">
+        — HTG
+      </strong>
+
+    </div>
+
+
+    <div
+      class="menuItem"
+      onclick="changeLanguage()">
+
+      <span>
+        🌐 Langue
+      </span>
+
+      <span id="languageText">
+        Français / Kreyòl ›
+      </span>
+
+    </div>
+
+
+    <div
+      class="menuItem"
+      onclick="toggleDark()">
+
+      <span>
+        🎨 Thème
+      </span>
+
+      <span>
+        Clair / Sombre
+      </span>
+
+    </div>
+
+
+    <div
+      class="menuItem logout"
+      onclick="logout()">
+
+      <span>
+        🚪 Déconnexion
+      </span>
+
+      <span>
+        ›
+      </span>
+
+    </div>
+
   </div>
-
-  <div
-   class="profileEmail"
-   id="profileEmail">
-   Connectez-vous pour accéder à votre compte
-  </div>
-
-  <div style="height:15px"></div>
-
-  <div
-   class="menuItem"
-   onclick="openLogin()">
-
-   <span>
-    👤 Compte
-   </span>
-
-   <span>
-    ›
-   </span>
-
-  </div>
-
-  <div
-   class="menuItem"
-   onclick="privatePage('orders')">
-
-   <span>
-    🛒 Mes commandes
-   </span>
-
-   <span>
-    ›
-   </span>
-
-  </div>
-
-  <div
-   class="menuItem"
-   onclick="openRecharge()">
-
-   <span>
-    💰 Recharger Wallet
-   </span>
-
-   <span>
-    ›
-   </span>
-
-  </div>
-
-  <div class="menuItem">
-
-   <span>
-    💵 Wallet disponible
-   </span>
-
-   <strong id="profileBalance">
-    0 HTG
-   </strong>
-
-  </div>
-
-  <div
-   class="menuItem"
-   onclick="changeLanguage()">
-
-   <span>
-    🌐 Langue
-   </span>
-
-   <span id="languageText">
-    Français / Kreyòl ›
-   </span>
-
-  </div>
-
-  <div
-   class="menuItem logout"
-   onclick="logout()">
-
-   <span>
-    🚪 Déconnexion
-   </span>
-
-   <span>
-    ›
-   </span>
-
-  </div>
-
- </div>
 
 </section>
 
 </div>
+
 
 <!-- =========================
      WHATSAPP
 ========================= -->
 
 <a
- class="whatsapp"
- href="https://wa.me/50941515802"
- target="_blank"
- rel="noopener">
- ☎
+  class="whatsapp"
+  href="https://wa.me/50941515802"
+  target="_blank"
+  rel="noopener">
+
+  ☎
+
 </a>
 
+
 <!-- =========================
-     NAV
+     BOTTOM NAV
 ========================= -->
 
 <nav class="bottomNav">
 
- <button
-  class="navItem active"
-  data-page="home"
-  onclick="showPage('home')">
+  <button
+    class="navItem active"
+    data-page="home"
+    onclick="goHome()">
 
-  <span>⌂</span>
-  Akèy
+    <span>⌂</span>
+    Akèy
 
- </button>
+  </button>
 
- <button
-  class="navItem"
-  data-page="games"
-  onclick="showPage('games')">
 
-  <span>🎮</span>
-  Boutik
+  <button
+    class="navItem"
+    data-page="games"
+    onclick="goGames()">
 
- </button>
+    <span>🎮</span>
+    Boutik
 
- <button
-  class="navItem"
-  data-page="cards"
-  onclick="showPage('cards')">
+  </button>
 
-  <span>💳</span>
-  Kat
 
- </button>
+  <button
+    class="navItem"
+    data-page="cards"
+    onclick="goCards()">
 
- <button
-  class="navItem"
-  data-page="orders"
-  onclick="privatePage('orders')">
+    <span>💳</span>
+    Kat
 
-  <span>🛒</span>
-  Achat
+  </button>
 
- </button>
 
- <button
-  class="navItem"
-  data-page="wallet"
-  onclick="openWallet()">
+  <button
+    class="navItem"
+    data-page="orders"
+    onclick="privatePage('orders')">
 
-  <span>💰</span>
-  Wallet
+    <span>🛒</span>
+    Achat
 
- </button>
+  </button>
+
+
+  <button
+    class="navItem"
+    data-page="wallet"
+    onclick="openWallet()">
+
+    <span>💰</span>
+    Wallet
+
+  </button>
 
 </nav>
 
 </div>
+
 
 <!-- =========================
      LOGIN MODAL
 ========================= -->
 
 <div
- class="modal"
- id="loginModal">
+  class="modal"
+  id="loginModal">
 
- <div class="modalBox">
+  <div class="modalBox">
 
-  <div class="modalHeader">
+    <div class="modalHeader">
 
-   <h3>
-    Se connecter
-   </h3>
+      <h3>
+        🔐 Konekte / Kreye kont
+      </h3>
 
-   <button
-    class="close"
-    onclick="closeModal('loginModal')">
-    ✕
-   </button>
+      <button
+        class="close"
+        onclick="closeModal('loginModal')">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div class="instruction">
+
+      🔐 Konekte ak Google pou kreye oswa
+      antre sou kont TRUE ALPHA ou.
+
+      <br><br>
+
+      Kont ou ap sèvi pou Wallet,
+      kòmand, TA Points ak aktivite yo.
+
+    </div>
+
+
+    <button
+      class="googleBtn"
+      onclick="googleLogin()">
+
+      🇬 Kontinye ak Google
+
+    </button>
+
+
+    <button
+      class="backBtn"
+      style="margin-top:15px"
+      onclick="closeLoginAndReset()">
+
+      ← Retour
+
+    </button>
 
   </div>
-
-  <div class="instruction">
-
-   🔐 Konekte ak Google pou jwenn aksè
-   ak Wallet ou, commandes ou yo
-   ak sèvis TRUE ALPHA yo.
-
-  </div>
-
-  <button
-   class="googleBtn"
-   onclick="googleLogin()">
-
-   <span
-    style="
-     display:inline-flex;
-     align-items:center;
-     justify-content:center;
-     width:22px;
-     height:22px;
-     border-radius:50%;
-     margin-right:6px;
-     background:#fff;
-     color:#4285f4;
-     font-weight:1000">
-    G
-   </span>
-
-   Connexion avec Google
-
-  </button>
-
- </div>
 
 </div>
+
 
 <!-- =========================
      RECHARGE MODAL
 ========================= -->
 
 <div
- class="modal"
- id="rechargeModal">
+  class="modal"
+  id="rechargeModal">
 
- <div class="modalBox">
+  <div class="modalBox">
 
-  <div class="modalHeader">
+    <div class="modalHeader">
 
-   <h3>
-    Recharger Wallet
-   </h3>
+      <h3>
+        💰 Recharger Wallet
+      </h3>
 
-   <button
-    class="close"
-    onclick="closeModal('rechargeModal')">
-    ✕
-   </button>
+      <button
+        class="close"
+        onclick="closeRechargeReset()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="depositStep1"
+      class="step active">
+
+      <div class="stepTitle">
+        1. Chwazi sèvis la
+      </div>
+
+      <div class="stepText">
+
+        Minimum rechaj :
+        <b>50 HTG</b>.
+
+        <br><br>
+
+        Peman otomatik ap aktive lè
+        API peman yo konekte ak TRUE ALPHA.
+
+      </div>
+
+
+      <div
+        class="providerCard"
+        onclick="chooseDepositProvider('natcash')">
+
+        <div class="providerLogo nat">
+          💰
+        </div>
+
+        <div>
+
+          <b>
+            NatCash
+          </b>
+
+          <br>
+
+          <small>
+            Disponib apre koneksyon API
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="providerCard"
+        onclick="chooseDepositProvider('moncash')">
+
+        <div class="providerLogo mon">
+          📱
+        </div>
+
+        <div>
+
+          <b>
+            MonCash
+          </b>
+
+          <br>
+
+          <small>
+            Disponib apre koneksyon API
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="depositStep2"
+      class="step">
+
+      <div class="stepTitle">
+        2. Montan
+      </div>
+
+      <div class="stepText">
+
+        Antre kantite ou vle mete nan
+        Wallet ou.
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Montant HTG
+        </label>
+
+        <input
+          id="depositAmount"
+          type="number"
+          min="50"
+          inputmode="numeric"
+          placeholder="Ex: 500">
+
+      </div>
+
+
+      <button
+        class="primaryBtn"
+        onclick="depositContinue()">
+
+        Continuer
+
+      </button>
+
+
+      <button
+        class="backBtn"
+        onclick="resetDeposit()">
+
+        ← Retour
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="depositUnavailable"
+      class="step">
+
+      <div class="errorBox">
+
+        ⚠️
+
+        <b>
+          Service indisponible pou kounye a.
+        </b>
+
+        <br><br>
+
+        API peman an poko konekte ak
+        TRUE ALPHA.
+
+        <br><br>
+
+        Pa gen okenn lajan ki pran nan
+        kont ou.
+
+        <br><br>
+
+        Lè API a konekte, peman an ap
+        verifye otomatikman epi Wallet la
+        ap kredite apre konfimasyon backend la.
+
+      </div>
+
+
+      <button
+        class="primaryBtn"
+        style="margin-top:12px"
+        onclick="closeRechargeReset()">
+
+        Fèmen
+
+      </button>
+
+    </div>
 
   </div>
-
-  <div class="instruction">
-
-   💚
-   <b>NatCash disponible</b>
-
-   <br><br>
-
-   Minimum :
-   <b>50 HTG</b>
-
-   <br><br>
-
-   MonCash ak Digicel:
-   <b>Bientôt disponible.</b>
-
-  </div>
-
-  <div class="field">
-
-   <label>
-    Montant HTG
-   </label>
-
-   <input
-    id="rechargeAmount"
-    type="number"
-    min="50"
-    placeholder="Ex: 500">
-
-  </div>
-
-  <button
-   class="primaryBtn"
-   onclick="startRecharge()">
-
-   Continuer avec NatCash
-
-  </button>
-
- </div>
 
 </div>
 
+
 <!-- =========================
-     PAYMENT SOON MODAL
+     TRANSFER MODAL
 ========================= -->
 
 <div
- class="modal"
- id="soonPaymentModal">
+  class="modal"
+  id="transferModal">
 
- <div class="modalBox">
+  <div class="modalBox">
 
-  <div class="modalHeader">
+    <div class="modalHeader">
 
-   <h3>
-    Paiement
-   </h3>
+      <h3>
+        ↗️ Transférer
+      </h3>
 
-   <button
-    class="close"
-    onclick="closeModal('soonPaymentModal')">
-    ✕
-   </button>
+      <button
+        class="close"
+        onclick="closeTransferReset()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div class="instruction">
+
+      Minimum transfè :
+      <b>50 HTG</b>.
+
+      <br><br>
+
+      Transfè a pral pase atravè
+      backend TRUE ALPHA lè sistèm lan konekte.
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Email du destinataire
+      </label>
+
+      <input
+        id="transferEmail"
+        type="email"
+        autocomplete="off"
+        placeholder="Email">
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Montant HTG
+      </label>
+
+      <input
+        id="transferAmount"
+        type="number"
+        min="50"
+        inputmode="numeric"
+        placeholder="Minimum 50">
+
+    </div>
+
+
+    <button
+      class="primaryBtn"
+      onclick="submitTransfer()">
+
+      Continuer
+
+    </button>
+
+
+    <button
+      class="backBtn"
+      onclick="closeTransferReset()">
+
+      ← Retour
+
+    </button>
 
   </div>
-
-  <div class="instruction">
-
-   📱
-   <b id="soonPaymentName">
-    Service
-   </b>
-
-   <br><br>
-
-   Ce moyen de paiement sera
-   <b>bientôt disponible</b>
-   sur TRUE ALPHA.
-
-   <br><br>
-
-   Pour le moment,
-   <b>NatCash</b> est disponible.
-
-  </div>
-
- </div>
 
 </div>
 
+
 <!-- =========================
-     TOAST
+     WITHDRAW MODAL
 ========================= -->
 
 <div
- class="toast"
- id="toast">
+  class="modal"
+  id="withdrawModal">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h3>
+        🏦 Retrait Wallet
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeWithdrawReset()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="withdrawStep1">
+
+      <div class="instruction">
+
+        Minimum retrè :
+        <b>5,000 HTG</b>.
+
+        <br><br>
+
+        Retrè otomatik ap disponib lè
+        API peman yo konekte.
+
+      </div>
+
+
+      <div
+        class="providerCard"
+        onclick="setWithdrawProvider('natcash')">
+
+        <div class="providerLogo nat">
+          💰
+        </div>
+
+        <div>
+
+          <b>
+            NatCash
+          </b>
+
+          <br>
+
+          <small>
+            Retrè otomatik
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="providerCard"
+        onclick="setWithdrawProvider('moncash')">
+
+        <div class="providerLogo mon">
+          📱
+        </div>
+
+        <div>
+
+          <b>
+            MonCash
+          </b>
+
+          <br>
+
+          <small>
+            Retrè otomatik
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="withdrawStep2"
+      style="display:none">
+
+      <div class="field">
+
+        <label>
+          Numéro
+        </label>
+
+        <input
+          id="withdrawPhone"
+          type="tel"
+          inputmode="numeric"
+          placeholder="Numéro">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Montant HTG
+        </label>
+
+        <input
+          id="withdrawAmount"
+          type="number"
+          min="5000"
+          inputmode="numeric"
+          placeholder="Minimum 5,000">
+
+      </div>
+
+
+      <button
+        class="primaryBtn"
+        onclick="submitWithdraw()">
+
+        Demander le retrait
+
+      </button>
+
+
+      <button
+        class="backBtn"
+        onclick="resetWithdraw()">
+
+        ← Retour
+
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
+
+
+<!-- =========================
+     ACTIVITY MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="activityModal">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h3 id="activityModalTitle">
+        Aktivite
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeActivityModal()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+
+    <div class="activityDetail">
+
+      <div
+        class="activityDetailIcon"
+        id="activityModalIcon">
+
+        🎁
+
+      </div>
+
+      <h3 id="activityDetailName">
+        Aktivite
+      </h3>
+
+      <p id="activityDetailDescription">
+        —
+      </p>
+
+      <div
+        class="successBox"
+        id="activityDetailReward">
+
+        ⭐ Rekonpans:
+        0 TA Points
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="primaryBtn"
+      style="margin-top:15px"
+      onclick="completeActivity()">
+
+      🎯 Fè aktivite a
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     INFO MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="infoModal">
+
+  <div class="modalBox">
+
+    <div class="modalHeader">
+
+      <h3 id="infoTitle">
+        Information
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('infoModal')">
+
+        ✕
+
+      </button>
+
+    </div>
+
+    <div id="infoContent"></div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
 
 <script>
 
-/* =========================
-   CONFIG
-========================= */
-
-const OWNER_NAME="Manuel Pluviose";
-
-const SENSITIVITY_PRICE=200;
-
-const SENSITIVITY_COOLDOWN=30*60*1000;
-
-/*
- * Backend endpoint.
- *
- * Se backend la ki dwe:
- * - verifye user la
- * - verifye Wallet la
- * - retire 200 HTG
- * - kreye command lan
- * - anrejistre cooldown lan
- *
- * Pa mete API secret ladan.
- */
-
-const API_BASE="";
-
-/* =========================
-   SITE STATUS
-========================= */
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
 
 let siteEnabled=true;
 let siteStatusLoaded=false;
 
-async function loadSiteStatus(){
-
- try{
-
-  const response=await fetch(
-   API_BASE+"/api/site-status?t="+Date.now(),
-   {
-    method:"GET",
-    cache:"no-store",
-    headers:{
-     "Cache-Control":"no-cache"
-    }
-   }
-  );
-
-  if(!response.ok)
-   throw new Error("Site status API error");
-
-  const data=await response.json();
-
-  siteEnabled=data.enabled===true;
-  siteStatusLoaded=true;
-
-  applySiteStatus(data);
-
- }catch(error){
-
-  console.error(
-   "SITE STATUS ERROR:",
-   error
-  );
-
-  siteEnabled=true;
-  siteStatusLoaded=false;
-
- }
-
-}
-
-function applySiteStatus(data){
-
- const closed=
-  document.getElementById("siteClosed");
-
- const message=
-  document.getElementById("siteClosedMessage");
-
- if(!closed)
-  return;
-
- if(data.enabled===false){
-
-  closed.style.display="flex";
-
-  if(message){
-
-   message.textContent=
-    data.message ||
-    "Sit la fèmen pou kounye a.";
-
-  }
-
-  document.body.style.overflow="hidden";
-
- }else{
-
-  closed.style.display="none";
-  document.body.style.overflow="";
-
- }
-
-}
-
-setInterval(
- loadSiteStatus,
- 30000
-);
-
-function canUseSite(){
-
- if(siteEnabled===false){
-
-  toast(
-   "🔒 TRUE ALPHA fèmen pou kounye a."
-  );
-
-  return false;
-
- }
-
- return true;
-
-}
-
-/* =========================
-   DATA
-========================= */
+let selectedPack=null;
+let selectedPrice=0;
 
 let firebaseUser=null;
 let loggedIn=false;
 
-let balance=0;
+let balance=null;
+let points=0;
 
 let orders=[];
+let notifications=[];
 
-let notifications=
- JSON.parse(
-  localStorage.getItem(
-   "ta_notifications"
-  )||"null"
- );
+let activities=[];
+let rewards=[];
+
+let depositProvider=null;
+let depositAmount=0;
+
+let withdrawProvider=null;
+
+let selectedActivity=null;
+
+
+/* =====================================================
+   DEFAULT NOTIFICATIONS
+===================================================== */
+
+const defaultNotifications=[
+  {
+    id:1,
+    title:"Bienvenue sur TRUE ALPHA",
+    text:"Bienvenue sou TRUE ALPHA TopUp.",
+    time:"Aujourd'hui",
+    read:false
+  },
+  {
+    id:2,
+    title:"Free Fire TopUp disponible",
+    text:"Free Fire TopUp par UID — serveur NA North America.",
+    time:"Aujourd'hui",
+    read:false
+  },
+  {
+    id:3,
+    title:"Wallet",
+    text:"Rechaj Wallet la ap aktive apre koneksyon API peman an.",
+    time:"Aujourd'hui",
+    read:false
+  }
+];
+
+notifications=
+JSON.parse(
+  localStorage.getItem("ta_notifications")||"null"
+);
 
 if(!notifications){
-
- notifications=[
-
-  {
-   id:1,
-   title:"Bienvenue sur TRUE ALPHA",
-   text:"Bienvenue sur votre plateforme de services digitaux.",
-   time:"Aujourd'hui",
-   read:false
-  },
-
-  {
-   id:2,
-   title:"Sensibilité Free Fire disponible",
-   text:"La configuration complète de sensibilité est disponible à 200 HTG.",
-   time:"Aujourd'hui",
-   read:false
-  },
-
-  {
-   id:3,
-   title:"NatCash disponible",
-   text:"Vous pouvez recharger votre Wallet avec NatCash.",
-   time:"Aujourd'hui",
-   read:false
-  }
-
- ];
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(notifications)
- );
-
+  notifications=defaultNotifications;
+  localStorage.setItem(
+    "ta_notifications",
+    JSON.stringify(notifications)
+  );
 }
 
-let selectedUID="";
 
-/* =========================
-   SPLASH
-========================= */
+/* =====================================================
+   SITE STATUS
+===================================================== */
 
-window.addEventListener(
- "load",
- async()=>{
+async function loadSiteStatus(){
 
-  await loadSiteStatus();
+  try{
 
-  setTimeout(()=>{
-
-   const splash=
-    document.getElementById("splash");
-
-   splash.style.opacity="0";
-
-   setTimeout(()=>{
-
-    splash.style.display="none";
-
-    document.getElementById(
-     "app"
-    ).style.display="block";
-
-   },500);
-
-  },1500);
-
-  renderNotifications();
-  updateUI();
-  loadWalletFromBackend();
-  loadOrdersFromBackend();
-  updateSensitivityCooldown();
-
- });
-
-/* =========================
-   DARK MODE
-========================= */
-
-function toggleDark(){
-
- document.body.classList.toggle(
-  "dark"
- );
-
- localStorage.setItem(
-  "ta_dark",
-  document.body.classList.contains("dark")
- );
-
-}
-
-if(
- localStorage.getItem("ta_dark")==="true"
-){
-
- document.body.classList.add("dark");
-
-}
-
-/* =========================
-   PAGE
-========================= */
-
-function showPage(page){
-
- if(!canUseSite())
-  return;
-
- document.querySelectorAll(
-  ".page"
- ).forEach(
-  p=>p.classList.remove("active")
- );
-
- const target=
-  document.getElementById(page);
-
- if(target)
-  target.classList.add("active");
-
- document.querySelectorAll(
-  ".navItem"
- ).forEach(
-  n=>n.classList.remove("active")
- );
-
- const nav=
-  document.querySelector(
-   `.navItem[data-page="${page}"]`
-  );
-
- if(nav)
-  nav.classList.add("active");
-
- window.scrollTo({
-  top:0,
-  behavior:"smooth"
- });
-
-}
-
-function goBackAndReset(page){
-
- resetPurchaseForm();
-
- showPage(page);
-
-}
-
-/* =========================
-   LOGIN
-========================= */
-
-function requireLogin(){
-
- if(!firebaseUser){
-
-  toast(
-   "Tanpri konekte ak Google avan."
-  );
-
-  setTimeout(
-   openLogin,
-   400
-  );
-
-  return false;
-
- }
-
- return true;
-
-}
-
-function privatePage(page){
-
- if(!canUseSite())
-  return;
-
- if(!requireLogin())
-  return;
-
- showPage(page);
-
-}
-
-function openLogin(){
-
- if(firebaseUser){
-
-  showPage("profile");
-
-  return;
-
- }
-
- document.getElementById(
-  "loginModal"
- ).classList.add("show");
-
-}
-
-/* =========================
-   GOOGLE
-========================= */
-
-async function googleLogin(){
-
- if(!canUseSite())
-  return;
-
- if(!window.TA_FIREBASE){
-
-  toast(
-   "❌ Firebase pa chaje."
-  );
-
-  return;
-
- }
-
- try{
-
-  toast(
-   "⏳ Connexion Google..."
-  );
-
-  const result=
-   await window.TA_FIREBASE.signInWithPopup(
-    window.TA_FIREBASE.auth,
-    window.TA_FIREBASE.googleProvider
-   );
-
-  firebaseUser=result.user;
-  loggedIn=true;
-
-  updateUI();
-
-  closeModal(
-   "loginModal"
-  );
-
-  addNotification(
-   "Connexion réussie",
-   "Bienvenue sur TRUE ALPHA, "+
-   (
-    result.user.displayName ||
-    result.user.email ||
-    "Utilisateur"
-   )+
-   "."
-  );
-
-  await loadWalletFromBackend();
-  await loadOrdersFromBackend();
-
-  toast(
-   "✅ Connexion réussie."
-  );
-
- }catch(error){
-
-  console.error(error);
-
-  toast(
-   "❌ Google Login: "+
-   (
-    error.code ||
-    "erreur inconnue"
-   )
-  );
-
- }
-
-}
-
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout(){
-
- if(!firebaseUser){
-
-  toast(
-   "Ou pa konekte."
-  );
-
-  return;
-
- }
-
- try{
-
-  await window.TA_FIREBASE.signOut(
-   window.TA_FIREBASE.auth
-  );
-
-  firebaseUser=null;
-  loggedIn=false;
-  balance=0;
-  orders=[];
-
-  updateUI();
-  renderOrders();
-
-  showPage("home");
-
-  toast(
-   "✅ Déconnexion réussie."
-  );
-
- }catch(error){
-
-  console.error(error);
-
-  toast(
-   "❌ Erè pandan déconnexion."
-  );
-
- }
-
-}
-
-/* =========================
-   UI
-========================= */
-
-function updateUI(){
-
- const formatted=
-  Number(balance||0).toLocaleString(
-   "fr-FR"
-  )+
-  " HTG";
-
- document.getElementById(
-  "headerBalance"
- ).textContent=formatted;
-
- document.getElementById(
-  "walletBalance"
- ).textContent=formatted;
-
- document.getElementById(
-  "profileBalance"
- ).textContent=formatted;
-
- const loginButton=
-  document.getElementById(
-   "loginButton"
-  );
-
- if(firebaseUser){
-
-  const name=
-   firebaseUser.displayName ||
-   firebaseUser.email ||
-   "Utilisateur";
-
-  document.getElementById(
-   "profileName"
-  ).textContent=name;
-
-  document.getElementById(
-   "profileEmail"
-  ).textContent=
-   firebaseUser.email || "";
-
-  document.getElementById(
-   "profileAvatar"
-  ).textContent=
-   name.trim().charAt(0).toUpperCase() ||
-   "TA";
-
-  loginButton.textContent=
-   "Mon compte";
-
- }else{
-
-  document.getElementById(
-   "profileName"
-  ).textContent=
-   "Visiteur";
-
-  document.getElementById(
-   "profileEmail"
-  ).textContent=
-   "Connectez-vous pour accéder à votre compte";
-
-  document.getElementById(
-   "profileAvatar"
-  ).textContent="TA";
-
-  loginButton.textContent=
-   "Se connecter";
-
- }
-
- updateNotificationBadge();
-
-}
-
-/* =========================
-   WALLET FROM BACKEND
-========================= */
-
-async function loadWalletFromBackend(){
-
- if(!firebaseUser)
-  return;
-
- try{
-
-  const token=
-   await firebaseUser.getIdToken();
-
-  const response=
-   await fetch(
-    API_BASE+"/api/wallet",
-    {
-     headers:{
-      Authorization:
-       "Bearer "+token
-     }
-    }
-   );
-
-  if(!response.ok)
-   return;
-
-  const data=
-   await response.json();
-
-  if(
-   typeof data.balance==="number"
-  ){
-
-   balance=data.balance;
-
-   updateUI();
-
-  }
-
- }catch(error){
-
-  console.warn(
-   "Wallet backend non disponible:",
-   error
-  );
-
- }
-
-}
-
-/* =========================
-   ORDERS FROM BACKEND
-========================= */
-
-async function loadOrdersFromBackend(){
-
- if(!firebaseUser)
-  return;
-
- try{
-
-  const token=
-   await firebaseUser.getIdToken();
-
-  const response=
-   await fetch(
-    API_BASE+"/api/orders",
-    {
-     headers:{
-      Authorization:
-       "Bearer "+token
-     }
-    }
-   );
-
-  if(!response.ok)
-   return;
-
-  const data=
-   await response.json();
-
-  if(Array.isArray(data.orders)){
-
-   orders=data.orders;
-
-   renderOrders();
-
-  }
-
- }catch(error){
-
-  console.warn(
-   "Orders backend non disponible:",
-   error
-  );
-
- }
-
-/*
- * Pa gen fallback ki fè fo kòmand.
- */
-
-}
-
-/* =========================
-   UID
-========================= */
-
-async function verifyUID(){
-
- if(!canUseSite())
-  return;
-
- const uid=
-  document.getElementById(
-   "uid"
-  ).value.trim();
-
- if(!uid){
-
-  toast(
-   "Tanpri antre UID Free Fire ou."
-  );
-
-  return;
-
- }
-
- if(uid.length<5){
-
-  toast(
-   "UID la pa sanble valid."
-  );
-
-  return;
-
- }
-
- const btn=
-  document.querySelector(
-   ".verifyBtn"
-  );
-
- btn.disabled=true;
-
- btn.textContent=
-  "Vérification...";
-
- document.getElementById(
-  "playerResult"
- ).style.display="none";
-
- document.getElementById(
-  "sensitivityCard"
- ).style.display="none";
-
- /*
-  * Si backend verify UID disponib,
-  * nou rele li.
-  */
-
- try{
-
-  if(firebaseUser){
-
-   const token=
-    await firebaseUser.getIdToken();
-
-   const response=
-    await fetch(
-     API_BASE+"/api/freefire/verify-uid",
-     {
-      method:"POST",
-      headers:{
-       "Content-Type":
-        "application/json",
-       Authorization:
-        "Bearer "+token
-      },
-      body:JSON.stringify({
-       uid:uid,
-       server:"NA"
-      })
-     }
+    const r=await fetch(
+      "/api/site-status?t="+Date.now(),
+      {
+        cache:"no-store"
+      }
     );
 
-   if(response.ok){
+    if(!r.ok)throw Error();
 
-    const data=
-     await response.json();
+    const d=await r.json();
 
-    selectedUID=uid;
+    siteEnabled=d.enabled===true;
+    siteStatusLoaded=true;
 
-    document.getElementById(
-     "playerName"
-    ).textContent=
-     data.playerName ||
-     "UID "+uid;
+    applySiteStatus(d);
 
-    document.getElementById(
-     "playerResult"
-    ).style.display="block";
+  }catch(e){
 
-    document.getElementById(
-     "sensitivityCard"
-    ).style.display="block";
-
-    btn.disabled=false;
-
-    btn.textContent=
-     "Vérifier le joueur";
-
-    toast(
-     "✓ Joueur vérifié."
-    );
-
-    return;
-
-   }
+    siteEnabled=true;
+    siteStatusLoaded=false;
 
   }
 
- }catch(error){
-
-  console.warn(
-   "UID API non disponible:",
-   error
-  );
-
- }
-
- /*
-  * Backend ka retounen verification
-  * lè endpoint la poko branche.
-  * Nou montre sèlman UID prepare,
-  * nou pa pretann li verifye pa API.
-  */
-
- selectedUID=uid;
-
- document.getElementById(
-  "playerName"
- ).textContent=
-  "UID "+uid;
-
- document.getElementById(
-  "playerResult"
- ).style.display="block";
-
- document.getElementById(
-  "sensitivityCard"
- ).style.display="block";
-
- btn.disabled=false;
-
- btn.textContent=
-  "Vérifier le joueur";
-
- toast(
-  "UID prepare. Verifye l avan livraison."
- );
-
 }
 
-/* =========================
-   SENSITIVITY COOLDOWN
-========================= */
+function applySiteStatus(d){
 
-function getSensitivityCooldownKey(){
+  const c=document.getElementById("siteClosed");
+  const m=document.getElementById("siteClosedMessage");
 
- if(!firebaseUser)
-  return null;
+  if(!c)return;
 
- return "ta_sensitivity_last_"+firebaseUser.uid;
+  if(d.enabled===false){
 
-}
+    c.style.display="flex";
 
-function getSensitivityRemaining(){
+    m.textContent=
+      d.message||
+      "Sit la fèmen pou kounye a.";
 
- const key=
-  getSensitivityCooldownKey();
+    document.body.style.overflow="hidden";
 
- if(!key)
-  return 0;
+  }else{
 
- const last=
-  Number(
-   localStorage.getItem(key)||0
-  );
+    c.style.display="none";
 
- if(!last)
-  return 0;
+    document.body.style.overflow="";
 
- const remaining=
-  SENSITIVITY_COOLDOWN-
-  (Date.now()-last);
-
- return Math.max(
-  0,
-  remaining
- );
-
-}
-
-function formatRemaining(ms){
-
- const totalSeconds=
-  Math.ceil(ms/1000);
-
- const minutes=
-  Math.floor(
-   totalSeconds/60
-  );
-
- const seconds=
-  totalSeconds%60;
-
- return (
-  String(minutes).padStart(2,"0")+
-  ":"+
-  String(seconds).padStart(2,"0")
- );
-
-}
-
-function updateSensitivityCooldown(){
-
- const button=
-  document.getElementById(
-   "sensitivityBuyButton"
-  );
-
- const label=
-  document.getElementById(
-   "sensitivityCooldown"
-  );
-
- if(!button || !label)
-  return;
-
- const remaining=
-  getSensitivityRemaining();
-
- if(remaining>0){
-
-  button.disabled=true;
-
-  button.textContent=
-   "Disponible dans "+formatRemaining(
-    remaining
-   );
-
-  label.style.display="block";
-
-  label.textContent=
-   "⏱️ Ou ka achte Sensibilité a ankò apre "+
-   formatRemaining(remaining);
-
- }else{
-
-  button.disabled=false;
-
-  button.textContent=
-   "Acheter — 200 HTG";
-
-  label.style.display="none";
-
- }
+  }
 
 }
 
 setInterval(
- updateSensitivityCooldown,
- 1000
+  loadSiteStatus,
+  30000
 );
 
-/* =========================
-   BUY SENSITIVITY
-========================= */
 
-async function buySensitivity(){
+/* =====================================================
+   SITE ACCESS
+===================================================== */
 
- if(!canUseSite())
-  return;
+function canUseSite(){
 
- if(!requireLogin())
-  return;
+  if(!siteEnabled){
 
- if(getSensitivityRemaining()>0){
+    toast(
+      "🔒 TRUE ALPHA fèmen pou kounye a."
+    );
 
-  toast(
-   "⏱️ Ou dwe tann 30 minit avan pwochen achat la."
+    return false;
+  }
+
+  return true;
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+window.addEventListener(
+  "load",
+  async()=>{
+
+    await loadSiteStatus();
+
+    loadTheme();
+
+    updateUI();
+
+    renderOrders();
+
+    renderNotifications();
+
+    loadActivities();
+
+    loadRewards();
+
+    setTimeout(()=>{
+
+      const s=
+        document.getElementById("splash");
+
+      s.style.opacity="0";
+
+      setTimeout(()=>{
+
+        s.style.display="none";
+
+        document.getElementById(
+          "app"
+        ).style.display="block";
+
+      },500);
+
+    },1200);
+
+  }
+);
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDark(){
+
+  document.body.classList.toggle(
+    "dark"
   );
 
-  return;
-
- }
-
- const uid=
-  selectedUID ||
-  document.getElementById(
-   "uid"
-  ).value.trim();
-
- if(!uid){
-
-  toast(
-   "Tanpri verifye UID ou avan."
+  localStorage.setItem(
+    "ta_dark",
+    document.body.classList.contains("dark")
   );
 
-  return;
+}
 
- }
 
- if(balance<SENSITIVITY_PRICE){
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
 
-  toast(
-   "Solde insuffisant. Recharger Wallet."
-  );
+function showPage(page){
 
-  setTimeout(
-   openRecharge,
-   500
-  );
+  if(!canUseSite())return;
 
-  return;
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>
+      p.classList.remove("active")
+    );
 
- }
+  const target=
+    document.getElementById(page);
 
- showPurchaseLoading();
+  if(!target)return;
 
- try{
+  target.classList.add("active");
 
-  /*
-   * Vrè operasyon an dwe fèt nan backend.
-   * Backend la dwe retire 200 HTG atomikman
-   * epi kreye command lan.
-   */
+  document
+    .querySelectorAll(".navItem")
+    .forEach(n=>
+      n.classList.remove("active")
+    );
 
-  const token=
-   await firebaseUser.getIdToken();
+  const nav=
+    document.querySelector(
+      `.navItem[data-page="${page}"]`
+    );
 
-  const response=
-   await fetch(
-    API_BASE+"/api/orders",
-    {
-     method:"POST",
-     headers:{
-      "Content-Type":
-       "application/json",
-      Authorization:
-       "Bearer "+token
-     },
-     body:JSON.stringify({
+  if(nav)
+    nav.classList.add("active");
 
-      type:"freefire_sensitivity",
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-      uid:uid,
+  if(page==="orders")
+    refreshOrders();
 
-      server:"NA",
+  if(page==="notifications")
+    loadNotificationsFromBackend();
 
-      product:
-       "Free Fire Sensibilité",
+  if(page==="activities")
+    loadActivities();
 
-      price:
-       SENSITIVITY_PRICE,
+  if(page==="points")
+    loadPoints();
 
-      sensitivity:{
-       general:100,
-       redDot:95,
-       scope2x:90,
-       scope4x:80,
-       awm:60,
-       freeLook:75
-      }
+  if(page==="profile")
+    updateProfile();
 
-     })
-    }
-   );
+}
 
-  const data=
-   await response.json().catch(
-    ()=>({})
-   );
 
-  if(!response.ok){
+/* =====================================================
+   BACK BUTTONS
+   ALL DATA RESET
+===================================================== */
 
-   throw new Error(
-    data.message ||
-    "Achat impossible"
-   );
+function resetTopupFlow(){
+
+  selectedPack=null;
+  selectedPrice=0;
+
+  const uid=
+    document.getElementById("uid");
+
+  if(uid)
+    uid.value="";
+
+  const result=
+    document.getElementById("playerResult");
+
+  if(result)
+    result.style.display="none";
+
+  const packs=
+    document.getElementById("packsArea");
+
+  if(packs)
+    packs.style.display="none";
+
+  const selectedBox=
+    document.getElementById("selectedPackBox");
+
+  if(selectedBox)
+    selectedBox.style.display="none";
+
+  const selectedText=
+    document.getElementById("selectedPackText");
+
+  if(selectedText)
+    selectedText.textContent="—";
+
+  const selectedPriceText=
+    document.getElementById("selectedPackPrice");
+
+  if(selectedPriceText)
+    selectedPriceText.textContent="0 HTG";
+
+  document
+    .querySelectorAll(".pack")
+    .forEach(p=>
+      p.classList.remove("selected")
+    );
+
+}
+
+
+function backFromGames(){
+
+  resetTopupFlow();
+
+  showPage("home");
+
+}
+
+
+function backFromFreeFire(){
+
+  resetTopupFlow();
+
+  showPage("games");
+
+}
+
+
+function backFromCards(){
+
+  showPage("home");
+
+}
+
+
+function backFromActivities(){
+
+  selectedActivity=null;
+
+  showPage("home");
+
+}
+
+
+function backFromPoints(){
+
+  showPage("home");
+
+}
+
+
+function backFromOrders(){
+
+  showPage("home");
+
+}
+
+
+function backFromWallet(){
+
+  showPage("home");
+
+}
+
+
+function backFromNotifications(){
+
+  showPage("home");
+
+}
+
+
+function backFromProfile(){
+
+  showPage("home");
+
+}
+
+
+function goHome(){
+
+  resetTopupFlow();
+
+  showPage("home");
+
+}
+
+
+function goGames(){
+
+  resetTopupFlow();
+
+  showPage("games");
+
+}
+
+
+function goCards(){
+
+  showPage("cards");
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function requireLogin(){
+
+  if(!firebaseUser){
+
+    toast(
+      "🔐 Konekte oswa kreye kont ou avan."
+    );
+
+    setTimeout(
+      openLogin,
+      350
+    );
+
+    return false;
 
   }
 
-  /*
-   * Backend se sous verite.
-   * Nou pa retire lajan lokalman.
-   */
+  return true;
+
+}
+
+
+function privatePage(page){
 
   if(
-   typeof data.balance==="number"
+    canUseSite() &&
+    requireLogin()
   ){
 
-   balance=data.balance;
+    showPage(page);
+
+  }
+
+}
+
+
+function openLogin(){
+
+  if(firebaseUser){
+
+    showPage("profile");
+
+    return;
+
+  }
+
+  document
+    .getElementById("loginModal")
+    .classList.add("show");
+
+}
+
+
+function closeLoginAndReset(){
+
+  closeModal("loginModal");
+
+  showPage("home");
+
+}
+
+
+async function googleLogin(){
+
+  if(
+    !canUseSite() ||
+    !window.TA_FIREBASE
+  ){
+
+    toast(
+      "❌ Firebase pa chaje."
+    );
+
+    return;
+
+  }
+
+  try{
+
+    toast(
+      "⏳ Connexion Google..."
+    );
+
+    const r=
+      await window.TA_FIREBASE.signInWithPopup(
+        window.TA_FIREBASE.auth,
+        window.TA_FIREBASE.googleProvider
+      );
+
+    firebaseUser=r.user;
+
+    loggedIn=true;
+
+    updateUI();
+
+    closeModal("loginModal");
+
+    addNotification(
+      "Connexion réussie",
+      "Bienvenue sur TRUE ALPHA."
+    );
+
+    toast(
+      "✅ Kont konekte avèk siksè."
+    );
+
+  }catch(e){
+
+    console.error(e);
+
+    toast(
+      "❌ Google Login pa reyisi."
+    );
+
+  }
+
+}
+
+
+async function logout(){
+
+  if(!firebaseUser)return;
+
+  try{
+
+    await window.TA_FIREBASE.signOut(
+      window.TA_FIREBASE.auth
+    );
+
+    firebaseUser=null;
+    loggedIn=false;
+
+    balance=null;
+    points=0;
+
+    updateUI();
+
+    resetTopupFlow();
+
+    showPage("home");
+
+    toast(
+      "✅ Déconnexion réussie."
+    );
+
+  }catch(e){
+
+    toast(
+      "❌ Erè pandan déconnexion."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   UI USER
+===================================================== */
+
+function updateUI(){
+
+  const balanceText=
+    balance===null
+      ? "— HTG"
+      : Number(balance)
+          .toLocaleString("fr-FR")
+          +" HTG";
+
+
+  [
+    "headerBalance",
+    "walletBalance",
+    "profileBalance"
+  ]
+  .forEach(id=>{
+
+    const e=
+      document.getElementById(id);
+
+    if(e)
+      e.textContent=balanceText;
+
+  });
+
+
+  const loginButton=
+    document.getElementById(
+      "loginButton"
+    );
+
+  const nameElement=
+    document.getElementById(
+      "profileName"
+    );
+
+  const emailElement=
+    document.getElementById(
+      "profileEmail"
+    );
+
+  const avatar=
+    document.getElementById(
+      "profileAvatar"
+    );
+
+
+  if(firebaseUser){
+
+    const name=
+      firebaseUser.displayName ||
+      firebaseUser.email ||
+      "Utilisateur";
+
+    nameElement.textContent=name;
+
+    emailElement.textContent=
+      firebaseUser.email||
+      "";
+
+    avatar.textContent=
+      name.trim()
+        .charAt(0)
+        .toUpperCase() ||
+      "T";
+
+    loginButton.textContent=
+      "👤 Mon compte";
 
   }else{
 
-   await loadWalletFromBackend();
+    nameElement.textContent=
+      "Visiteur";
+
+    emailElement.textContent=
+      "Konekte pou jwenn aksè ak kont ou.";
+
+    avatar.textContent="?";
+
+    loginButton.textContent=
+      "Se connecter";
 
   }
 
-  await loadOrdersFromBackend();
 
-  /*
-   * Nou make cooldown lan sèlman
-   * apre backend konfime acha a.
-   */
-
-  const key=
-   getSensitivityCooldownKey();
-
-  if(key){
-
-   localStorage.setItem(
-    key,
-    String(Date.now())
-   );
-
-  }
-
-  addNotification(
-   "Sensibilité achetée",
-   "Votre achat de sensibilité Free Fire à 200 HTG a été enregistré. Votre commande est visible dans Mes commandes."
-  );
-
-  hidePurchaseLoading();
-
-  updateSensitivityCooldown();
-  updateUI();
-
-  toast(
-   "✅ Achat réussi. 200 HTG ont été débités du Wallet."
-  );
-
-  showPage("orders");
-
- }catch(error){
-
-  console.error(
-   "PURCHASE ERROR:",
-   error
-  );
-
-  hidePurchaseLoading();
-
-  toast(
-   "❌ "+
-   (
-    error.message ||
-    "Achat impossible."
-   )
-  );
-
- }
-
-}
-
-/* =========================
-   LOADING
-========================= */
-
-function showPurchaseLoading(){
-
- document.getElementById(
-  "purchaseLoading"
- ).classList.add("show");
-
- document.body.style.overflow="hidden";
-
-}
-
-function hidePurchaseLoading(){
-
- document.getElementById(
-  "purchaseLoading"
- ).classList.remove("show");
-
- document.body.style.overflow="";
-
-}
-
-/* =========================
-   ORDERS
-========================= */
-
-function renderOrders(){
-
- const box=
-  document.getElementById(
-   "ordersList"
-  );
-
- if(!box)
-  return;
-
- if(!firebaseUser){
-
-  box.innerHTML=`
-
-   <div class="ffBox">
-
-    <p
-     style="
-      text-align:center;
-      color:var(--muted);
-      font-size:12px">
-
-     Konekte ak Google pou wè
-     commandes ou yo.
-
-    </p>
-
-   </div>
-
-  `;
-
-  return;
-
- }
-
- if(!orders.length){
-
-  box.innerHTML=`
-
-   <div class="ffBox">
-
-    <p
-     style="
-      text-align:center;
-      color:var(--muted);
-      font-size:12px">
-
-     Aucune commande pour le moment.
-
-    </p>
-
-   </div>
-
-  `;
-
-  return;
-
- }
-
- box.innerHTML=
-  orders.map(
-   order=>{
-
-    const isSensitivity=
-     order.type===
-     "freefire_sensitivity" ||
-     order.product===
-     "Free Fire Sensibilité";
-
-    return `
-
-    <div class="order">
-
-     <div class="orderTop">
-
-      <strong>
-       ${
-        isSensitivity
-         ?"🎯 Sensibilité Free Fire"
-         :"💎 "+escapeHTML(
-          order.type||"Commande"
-         )
-       }
-      </strong>
-
-      <span class="status">
-       ${escapeHTML(
-        order.status||
-        "En attente"
-       )}
-      </span>
-
-     </div>
-
-     <div
-      style="
-       margin-top:10px;
-       font-size:11px">
-
-      <b>UID:</b>
-      ${escapeHTML(order.uid||"—")}
-
-     </div>
-
-     <div
-      style="
-       margin-top:5px;
-       font-size:11px">
-
-      <b>Serveur:</b>
-      ${escapeHTML(
-       order.server||
-       "NA — North America"
-      )}
-
-     </div>
-
-     <div
-      style="
-       margin-top:5px;
-       font-size:11px">
-
-      <b>Prix:</b>
-      ${Number(
-       order.price||0
-      ).toLocaleString("fr-FR")}
-      HTG
-
-     </div>
-
-     ${
-      isSensitivity
-       ?`
-       <div class="orderSensitivity">
-
-        <b>Sensibilité :</b>
-
-        <br>
-        Général : 100
-        <br>
-        Point rouge : 95
-        <br>
-        Lunette 2x : 90
-        <br>
-        Lunette 4x : 80
-        <br>
-        Lunette AWM : 60
-        <br>
-        Vue libre : 75
-
-       </div>
-       `
-       :""
-     }
-
-     <div
-      style="
-       margin-top:7px;
-       font-size:9px;
-       color:var(--muted)">
-
-      ${escapeHTML(
-       order.date||
-       order.createdAt||
-       ""
-      )}
-
-     </div>
-
-    </div>
-
-    `;
-
-   }
-  ).join("");
-
-}
-
-/* =========================
-   RESET FORM
-========================= */
-
-function resetPurchaseForm(){
-
- const uid=
-  document.getElementById("uid");
-
- if(uid)
-  uid.value="";
-
- const result=
-  document.getElementById(
-   "playerResult"
-  );
-
- const sensitivity=
-  document.getElementById(
-   "sensitivityCard"
-  );
-
- if(result)
-  result.style.display="none";
-
- if(sensitivity)
-  sensitivity.style.display="none";
-
- selectedUID="";
-
- updateSensitivityCooldown();
-
-}
-
-/* =========================
-   WALLET
-========================= */
-
-function openWallet(){
-
- if(!canUseSite())
-  return;
-
- if(!requireLogin())
-  return;
-
- showPage("wallet");
-
- loadWalletFromBackend();
-
-}
-
-function openRecharge(){
-
- if(!canUseSite())
-  return;
-
- if(!requireLogin())
-  return;
-
- document.getElementById(
-  "rechargeModal"
- ).classList.add("show");
-
-}
-
-async function startRecharge(){
-
- if(!canUseSite())
-  return;
-
- if(!requireLogin()){
-
-  closeModal(
-   "rechargeModal"
-  );
-
-  return;
-
- }
-
- const amount=
-  Number(
-   document.getElementById(
-    "rechargeAmount"
-   ).value
-  );
-
- if(
-  !amount ||
-  amount<50
- ){
-
-  toast(
-   "Minimum recharge : 50 HTG."
-  );
-
-  return;
-
- }
-
- closeModal(
-  "rechargeModal"
- );
-
- /*
-  * Backend la dwe kreye tranzaksyon NatCash
-  * epi verifye payment la.
-  */
-
- try{
-
-  const token=
-   await firebaseUser.getIdToken();
-
-  const response=
-   await fetch(
-    API_BASE+"/api/wallet/recharge",
-    {
-     method:"POST",
-     headers:{
-      "Content-Type":
-       "application/json",
-      Authorization:
-       "Bearer "+token
-     },
-     body:JSON.stringify({
-      amount:amount,
-      method:"natcash"
-     })
-    }
-   );
-
-  const data=
-   await response.json().catch(
-    ()=>({})
-   );
-
-  if(!response.ok){
-
-   throw new Error(
-    data.message||
-    "Recharge impossible"
-   );
-
-  }
-
-  addNotification(
-   "Recharge NatCash",
-   "Votre demande de recharge de "+
-   amount+
-   " HTG a été enregistrée."
-  );
-
-  toast(
-   "✅ Demande NatCash enregistrée."
-  );
-
- }catch(error){
-
-  console.error(error);
-
-  toast(
-   "❌ "+
-   (
-    error.message||
-    "NatCash pa disponib ankò."
-   )
-  );
-
- }
-
-}
-
-/* =========================
-   PAYMENT SOON
-========================= */
-
-function showPaymentSoon(name){
-
- if(!canUseSite())
-  return;
-
- document.getElementById(
-  "soonPaymentName"
- ).textContent=name;
-
- document.getElementById(
-  "soonPaymentModal"
- ).classList.add("show");
-
-}
-
-/* =========================
-   CARD
-========================= */
-
-function contactCard(){
-
- if(!canUseSite())
-  return;
-
- window.open(
-  "https://wa.me/50932694670",
-  "_blank"
- );
-
-}
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-function updateNotificationBadge(){
-
- const badge=
-  document.getElementById(
-   "notificationBadge"
-  );
-
- const unread=
-  notifications.filter(
-   n=>!n.read
-  ).length;
-
- if(unread){
-
-  badge.textContent=
-   unread>99?"99+":unread;
-
-  badge.style.display="flex";
-
- }else{
-
-  badge.style.display="none";
-
- }
-
- const text=
-  document.getElementById(
-   "unreadText"
-  );
-
- if(text){
-
-  text.textContent=
-   unread+
-   (
-    unread===1
-     ?" nouvelle"
-     :" nouvelles"
-   );
-
- }
-
-}
-
-function renderNotifications(){
-
- const box=
-  document.getElementById(
-   "notificationsList"
-  );
-
- if(!box)
-  return;
-
- if(!notifications.length){
-
-  box.innerHTML=`
-
-   <div class="emptyNotifications">
-
-    🔕
-    <br><br>
-
-    <b>Aucune notification</b>
-
-    <br>
-
-    <small>
-     Ou pa gen notification.
-    </small>
-
-   </div>
-
-  `;
+  updatePointsUI();
 
   updateNotificationBadge();
 
-  return;
+}
 
- }
 
- box.innerHTML=
-  notifications.map(
-   n=>`
+/* =====================================================
+   FREE FIRE
+===================================================== */
 
-   <div
-    class="notification ${
-     n.read?"read":"unread"
-    }"
-    onclick="readNotification(${n.id})">
+function openFreeFire(){
 
-    <div class="notificationTop">
+  resetTopupFlow();
 
-     <div>
-
-      <div class="notificationTitle">
-       ${escapeHTML(n.title)}
-      </div>
-
-      <div class="notificationText">
-       ${escapeHTML(n.text)}
-      </div>
-
-      <div class="notificationTime">
-       ${escapeHTML(n.time)}
-      </div>
-
-     </div>
-
-     ${
-      n.read
-       ?""
-       :'<div class="unreadDot"></div>'
-     }
-
-    </div>
-
-   </div>
-
-  `
-  ).join("");
-
- updateNotificationBadge();
+  showPage("freefire");
 
 }
+
+
+async function verifyUID(){
+
+  if(!canUseSite())return;
+
+  const uid=
+    document
+      .getElementById("uid")
+      .value
+      .trim();
+
+  if(!uid){
+
+    toast(
+      "⚠️ Antre UID Free Fire ou."
+    );
+
+    return;
+
+  }
+
+  if(!/^[0-9]+$/.test(uid)){
+
+    toast(
+      "⚠️ UID la dwe gen chif sèlman."
+    );
+
+    return;
+
+  }
+
+  if(uid.length<5){
+
+    toast(
+      "⚠️ UID la pa sanble valid."
+    );
+
+    return;
+
+  }
+
+
+  const btn=
+    document.getElementById(
+      "verifyBtn"
+    );
+
+  btn.disabled=true;
+
+  btn.textContent=
+    "⏳ Vérification...";
+
+
+  const result=
+    document.getElementById(
+      "playerResult"
+    );
+
+  const packs=
+    document.getElementById(
+      "packsArea"
+    );
+
+
+  result.style.display="none";
+
+  packs.style.display="none";
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/freefire/verify-uid",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+            uid:uid,
+            server:"NA"
+          })
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    if(data.valid===false)
+      throw new Error();
+
+
+    document.getElementById(
+      "playerName"
+    ).textContent=
+      data.nickname ||
+      data.name ||
+      ("UID "+uid);
+
+    result.style.display="block";
+
+    packs.style.display="block";
+
+
+  }catch(e){
+
+    /*
+      Nou pa make yon fo verifikasyon.
+      Si API a poko konekte, nou di kliyan an
+      verifikasyon an poko disponib.
+    */
+
+    toast(
+      "⚠️ Verifikasyon UID la poko disponib. API Free Fire la poko konekte."
+    );
+
+  }finally{
+
+    btn.disabled=false;
+
+    btn.textContent=
+      "🔐 Verifye joueur la";
+
+  }
+
+}
+
+
+/* =====================================================
+   PACK SELECTION
+===================================================== */
+
+function selectPack(
+  element,
+  name,
+  price
+){
+
+  if(!canUseSite())return;
+
+  document
+    .querySelectorAll(".pack")
+    .forEach(p=>
+      p.classList.remove("selected")
+    );
+
+  element.classList.add(
+    "selected"
+  );
+
+  selectedPack=name;
+  selectedPrice=Number(price);
+
+
+  document.getElementById(
+    "selectedPackBox"
+  ).style.display="block";
+
+
+  document.getElementById(
+    "selectedPackText"
+  ).textContent=name;
+
+
+  document.getElementById(
+    "selectedPackPrice"
+  ).textContent=
+    selectedPrice
+      .toLocaleString("fr-FR")
+      +" HTG";
+
+}
+
+
+async function buyNow(){
+
+  if(!canUseSite())return;
+
+  if(!requireLogin())return;
+
+
+  if(!selectedPack){
+
+    toast(
+      "⚠️ Chwazi yon pack avan."
+    );
+
+    return;
+
+  }
+
+
+  const uid=
+    document
+      .getElementById("uid")
+      .value
+      .trim();
+
+
+  if(!uid){
+
+    toast(
+      "⚠️ UID obligatwa."
+    );
+
+    return;
+
+  }
+
+
+  if(balance===null){
+
+    toast(
+      "⚠️ Wallet ou poko disponib."
+    );
+
+    return;
+
+  }
+
+
+  if(balance<selectedPrice){
+
+    toast(
+      "❌ Solde insuffisant. Rechaje Wallet pou kontinye."
+    );
+
+    setTimeout(
+      openRecharge,
+      500
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Backend lan dwe fè debit atomik la.
+    Nou pa modifye balance lokalman kòm verite.
+  */
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/orders",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+
+            uid:uid,
+
+            server:"NA",
+
+            pack:selectedPack,
+
+            price:selectedPrice,
+
+            paymentMethod:"wallet",
+
+            customerEmail:
+              firebaseUser?.email||"",
+
+            customerName:
+              firebaseUser?.displayName||
+              firebaseUser?.email||
+              "Client"
+
+          })
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    const order={
+      id:
+        data.id||
+        data.orderId||
+        ("TA-"+Date.now()),
+
+      type:"Free Fire",
+
+      uid:uid,
+
+      server:"NA — North America",
+
+      pack:selectedPack,
+
+      price:selectedPrice,
+
+      status:
+        data.status||
+        "En attente",
+
+      date:
+        new Date()
+          .toLocaleString("fr-FR")
+    };
+
+
+    orders.unshift(order);
+
+    localStorage.setItem(
+      "ta_orders",
+      JSON.stringify(orders)
+    );
+
+
+    addNotification(
+      "Nouvelle commande",
+      "Kòmand Free Fire ou resevwa. N ap trete l."
+    );
+
+
+    resetTopupFlow();
+
+    showPage("orders");
+
+    toast(
+      "✅ Kòmand lan resevwa."
+    );
+
+
+    loadWallet();
+
+
+  }catch(e){
+
+    toast(
+      "❌ Backend lan pa reponn. Kòmand lan pa voye."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   WALLET
+===================================================== */
+
+function openWallet(){
+
+  if(
+    canUseSite() &&
+    requireLogin()
+  ){
+
+    loadWallet();
+
+    showPage("wallet");
+
+  }
+
+}
+
+
+async function loadWallet(){
+
+  if(!firebaseUser){
+
+    balance=null;
+
+    updateUI();
+
+    return;
+
+  }
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/wallet",
+        {
+          headers:{
+            "X-Customer":
+              firebaseUser.email||
+              firebaseUser.uid
+          }
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    if(
+      typeof data.balance==="number"
+    ){
+
+      balance=data.balance;
+
+    }else if(
+      typeof data.balance==="string"
+    ){
+
+      balance=Number(
+        data.balance
+      );
+
+    }else{
+
+      balance=null;
+
+    }
+
+
+    updateUI();
+
+
+  }catch(e){
+
+    /*
+      Pa mete 0 kòm fo balans.
+    */
+
+    balance=null;
+
+    updateUI();
+
+  }
+
+}
+
+
+/* =====================================================
+   RECHARGE
+===================================================== */
+
+function openRecharge(){
+
+  if(
+    canUseSite() &&
+    requireLogin()
+  ){
+
+    resetDeposit();
+
+    document
+      .getElementById(
+        "rechargeModal"
+      )
+      .classList.add("show");
+
+  }
+
+}
+
+
+function resetDeposit(){
+
+  depositProvider=null;
+
+  depositAmount=0;
+
+
+  [
+    "depositStep1",
+    "depositStep2",
+    "depositUnavailable"
+  ]
+  .forEach(id=>{
+
+    const e=
+      document.getElementById(id);
+
+    if(e)
+      e.classList.remove("active");
+
+  });
+
+
+  document
+    .getElementById(
+      "depositStep1"
+    )
+    .classList.add("active");
+
+
+  const amount=
+    document.getElementById(
+      "depositAmount"
+    );
+
+  if(amount)
+    amount.value="";
+
+}
+
+
+function chooseDepositProvider(
+  provider
+){
+
+  depositProvider=provider;
+
+  showDepositStep(
+    "depositStep2"
+  );
+
+}
+
+
+function showDepositStep(id){
+
+  document
+    .querySelectorAll(
+      "#rechargeModal .step"
+    )
+    .forEach(x=>
+      x.classList.remove("active")
+    );
+
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+
+async function depositContinue(){
+
+  const amount=
+    Number(
+      document
+        .getElementById(
+          "depositAmount"
+        )
+        .value
+    );
+
+
+  if(amount<50){
+
+    toast(
+      "⚠️ Minimum rechaj : 50 HTG."
+    );
+
+    return;
+
+  }
+
+
+  depositAmount=amount;
+
+
+  /*
+    Pa gen OTP/PIN fo isit la.
+    Payment provider lan ap jere otorizasyon
+    lè API/checkout la konekte.
+  */
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/wallet/recharge",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+
+            method:depositProvider,
+
+            amount:depositAmount,
+
+            customerEmail:
+              firebaseUser?.email||
+              "",
+
+            customerUid:
+              firebaseUser?.uid||
+              ""
+
+          })
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    if(data.checkoutUrl){
+
+      window.location.href=
+        data.checkoutUrl;
+
+      return;
+
+    }
+
+
+    if(data.status==="pending"){
+
+      showDepositStep(
+        "depositUnavailable"
+      );
+
+      return;
+
+    }
+
+
+    throw new Error();
+
+
+  }catch(e){
+
+    showDepositStep(
+      "depositUnavailable"
+    );
+
+  }
+
+}
+
+
+function closeRechargeReset(){
+
+  resetDeposit();
+
+  closeModal(
+    "rechargeModal"
+  );
+
+}
+
+
+/* =====================================================
+   TRANSFER
+===================================================== */
+
+function transferMoney(){
+
+  if(
+    canUseSite() &&
+    requireLogin()
+  ){
+
+    document
+      .getElementById(
+        "transferModal"
+      )
+      .classList.add("show");
+
+  }
+
+}
+
+
+function submitTransfer(){
+
+  const email=
+    document
+      .getElementById(
+        "transferEmail"
+      )
+      .value
+      .trim();
+
+  const amount=
+    Number(
+      document
+        .getElementById(
+          "transferAmount"
+        )
+        .value
+    );
+
+
+  if(!email){
+
+    toast(
+      "⚠️ Antre email destinatè a."
+    );
+
+    return;
+
+  }
+
+
+  if(amount<50){
+
+    toast(
+      "⚠️ Minimum transfè : 50 HTG."
+    );
+
+    return;
+
+  }
+
+
+  if(balance===null){
+
+    toast(
+      "⚠️ Wallet ou poko disponib."
+    );
+
+    return;
+
+  }
+
+
+  if(amount>balance){
+
+    toast(
+      "❌ Solde insuffisant."
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    "⏳ Transfè a pral disponib lè backend Wallet la konekte."
+  );
+
+}
+
+
+function closeTransferReset(){
+
+  document.getElementById(
+    "transferEmail"
+  ).value="";
+
+  document.getElementById(
+    "transferAmount"
+  ).value="";
+
+  closeModal(
+    "transferModal"
+  );
+
+}
+
+
+/* =====================================================
+   WITHDRAW
+===================================================== */
+
+function withdrawMoney(){
+
+  if(
+    canUseSite() &&
+    requireLogin()
+  ){
+
+    resetWithdraw();
+
+    document
+      .getElementById(
+        "withdrawModal"
+      )
+      .classList.add("show");
+
+  }
+
+}
+
+
+function resetWithdraw(){
+
+  withdrawProvider=null;
+
+  document.getElementById(
+    "withdrawStep1"
+  ).style.display="block";
+
+  document.getElementById(
+    "withdrawStep2"
+  ).style.display="none";
+
+  document.getElementById(
+    "withdrawPhone"
+  ).value="";
+
+  document.getElementById(
+    "withdrawAmount"
+  ).value="";
+
+}
+
+
+function setWithdrawProvider(
+  provider
+){
+
+  withdrawProvider=provider;
+
+  document.getElementById(
+    "withdrawStep1"
+  ).style.display="none";
+
+  document.getElementById(
+    "withdrawStep2"
+  ).style.display="block";
+
+}
+
+
+function submitWithdraw(){
+
+  const phone=
+    document
+      .getElementById(
+        "withdrawPhone"
+      )
+      .value
+      .trim();
+
+  const amount=
+    Number(
+      document
+        .getElementById(
+          "withdrawAmount"
+        )
+        .value
+    );
+
+
+  if(phone.length<8){
+
+    toast(
+      "⚠️ Antre yon nimewo valid."
+    );
+
+    return;
+
+  }
+
+
+  if(amount<5000){
+
+    toast(
+      "⚠️ Minimum retrè : 5,000 HTG."
+    );
+
+    return;
+
+  }
+
+
+  if(balance===null){
+
+    toast(
+      "⚠️ Wallet ou poko disponib."
+    );
+
+    return;
+
+  }
+
+
+  if(amount>balance){
+
+    toast(
+      "❌ Balans Wallet ou pa ase."
+    );
+
+    return;
+
+  }
+
+
+  showInfo(
+    "Service indisponible",
+    `
+    <div class="errorBox">
+      ⚠️ Retrè otomatik poko disponib.
+      <br><br>
+      API peman an poko konekte ak TRUE ALPHA.
+      <br><br>
+      Pa gen okenn lajan ki retire nan Wallet ou.
+    </div>
+    `
+  );
+
+}
+
+
+function closeWithdrawReset(){
+
+  resetWithdraw();
+
+  closeModal(
+    "withdrawModal"
+  );
+
+}
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+async function refreshOrders(){
+
+  if(!firebaseUser)return;
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/orders?customer="+
+        encodeURIComponent(
+          firebaseUser.email||
+          firebaseUser.uid
+        )
+      );
+
+
+    if(response.ok){
+
+      const data=
+        await response.json();
+
+
+      if(Array.isArray(data)){
+
+        orders=data;
+
+      }else if(
+        Array.isArray(data.orders)
+      ){
+
+        orders=data.orders;
+
+      }
+
+
+      localStorage.setItem(
+        "ta_orders",
+        JSON.stringify(orders)
+      );
+
+    }
+
+  }catch(e){}
+
+
+  renderOrders();
+
+}
+
+
+function renderOrders(){
+
+  const box=
+    document.getElementById(
+      "ordersList"
+    );
+
+  if(!box)return;
+
+
+  if(!orders.length){
+
+    box.innerHTML=`
+      <div class="ffBox">
+        <p style="
+          text-align:center;
+          color:var(--muted);
+          font-size:12px">
+
+          📭 Ou poko gen kòmand.
+
+        </p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML=
+    orders
+      .map(o=>`
+
+      <div class="order">
+
+        <div class="orderTop">
+
+          <strong>
+            💎 ${escapeHTML(o.type||"Free Fire")}
+          </strong>
+
+          <span class="status">
+            ${escapeHTML(o.status||"En attente")}
+          </span>
+
+        </div>
+
+        <div style="margin-top:10px;font-size:11px">
+          <b>UID:</b>
+          ${escapeHTML(o.uid||"N/A")}
+        </div>
+
+        <div style="margin-top:5px;font-size:11px">
+          <b>Serveur:</b>
+          ${escapeHTML(o.server||"NA")}
+        </div>
+
+        <div style="margin-top:5px;font-size:11px">
+          <b>Pack:</b>
+          ${escapeHTML(o.pack||"N/A")}
+        </div>
+
+        <div style="margin-top:5px;font-size:11px">
+          <b>Prix:</b>
+          ${Number(o.price||0).toLocaleString("fr-FR")}
+          HTG
+        </div>
+
+        <div style="
+          margin-top:5px;
+          font-size:9px;
+          color:var(--muted)">
+
+          ${escapeHTML(o.date||o.createdAt||"")}
+
+        </div>
+
+      </div>
+
+    `)
+    .join("");
+
+}
+
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
 
 function showNotifications(){
 
- if(!canUseSite())
-  return;
+  if(
+    canUseSite() &&
+    requireLogin()
+  ){
 
- showPage(
-  "notifications"
- );
+    showPage("notifications");
 
- renderNotifications();
+  }
 
 }
+
+
+function updateNotificationBadge(){
+
+  const unread=
+    notifications
+      .filter(n=>!n.read)
+      .length;
+
+
+  const badge=
+    document.getElementById(
+      "notificationBadge"
+    );
+
+  const text=
+    document.getElementById(
+      "unreadText"
+    );
+
+
+  if(badge){
+
+    badge.textContent=
+      unread>99
+        ?"99+"
+        :unread;
+
+    badge.style.display=
+      unread
+        ?"flex"
+        :"none";
+
+  }
+
+
+  if(text){
+
+    text.textContent=
+      unread+
+      (
+        unread===1
+          ?" nouvelle"
+          :" nouvelles"
+      );
+
+  }
+
+}
+
+
+function renderNotifications(){
+
+  const box=
+    document.getElementById(
+      "notificationsList"
+    );
+
+  if(!box)return;
+
+
+  if(!notifications.length){
+
+    box.innerHTML=`
+      <div class="emptyNotifications">
+        🔕
+        <br><br>
+        <b>Aucune notification</b>
+        <br>
+        <small>
+          Ou pa gen okenn notification.
+        </small>
+      </div>
+    `;
+
+    updateNotificationBadge();
+
+    return;
+
+  }
+
+
+  box.innerHTML=
+    notifications
+      .map(n=>`
+
+      <div
+        class="notification ${
+          n.read
+            ?"read"
+            :"unread"
+        }"
+        onclick="readNotification('${escapeJS(n.id)}')">
+
+        <div class="notificationTop">
+
+          <div>
+
+            <div class="notificationTitle">
+              ${escapeHTML(n.title||"Notification")}
+            </div>
+
+            <div class="notificationText">
+              ${escapeHTML(n.text||n.message||"")}
+            </div>
+
+            <div class="notificationTime">
+              ${escapeHTML(n.time||n.createdAt||"")}
+            </div>
+
+          </div>
+
+          ${
+            n.read
+              ?""
+              :'<div class="unreadDot"></div>'
+          }
+
+        </div>
+
+      </div>
+
+    `)
+    .join("");
+
+
+  updateNotificationBadge();
+
+}
+
+
+async function loadNotificationsFromBackend(){
+
+  if(!firebaseUser){
+
+    renderNotifications();
+
+    return;
+
+  }
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/notifications?customer="+
+        encodeURIComponent(
+          firebaseUser.email||
+          firebaseUser.uid
+        )
+      );
+
+
+    if(response.ok){
+
+      const data=
+        await response.json();
+
+
+      if(Array.isArray(data)){
+
+        notifications=data;
+
+      }else if(
+        Array.isArray(data.notifications)
+      ){
+
+        notifications=
+          data.notifications;
+
+      }
+
+
+      localStorage.setItem(
+        "ta_notifications",
+        JSON.stringify(notifications)
+      );
+
+    }
+
+  }catch(e){}
+
+
+  renderNotifications();
+
+}
+
 
 function readNotification(id){
 
- const n=
-  notifications.find(
-   x=>x.id===id
+  const item=
+    notifications.find(
+      n=>String(n.id)===String(id)
+    );
+
+  if(!item)return;
+
+  item.read=true;
+
+  localStorage.setItem(
+    "ta_notifications",
+    JSON.stringify(notifications)
   );
 
- if(!n)
-  return;
-
- n.read=true;
-
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(
-   notifications
-  )
- );
-
- renderNotifications();
+  renderNotifications();
 
 }
+
 
 function readAllNotifications(){
 
- notifications.forEach(
-  n=>n.read=true
- );
+  notifications.forEach(
+    n=>n.read=true
+  );
 
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(
-   notifications
-  )
- );
+  localStorage.setItem(
+    "ta_notifications",
+    JSON.stringify(notifications)
+  );
 
- renderNotifications();
+  renderNotifications();
 
- toast(
-  "Tout notifications lues."
- );
+  toast(
+    "✅ Tout notifications lues."
+  );
 
 }
+
 
 function clearAllNotifications(){
 
- notifications=[];
+  notifications=[];
 
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(
-   notifications
-  )
- );
+  localStorage.setItem(
+    "ta_notifications",
+    "[]"
+  );
 
- renderNotifications();
+  renderNotifications();
 
- toast(
-  "Tout notifications efase."
- );
+  toast(
+    "🗑️ Tout notifications efase."
+  );
 
 }
+
 
 function addNotification(
- title,
- text
+  title,
+  text
 ){
 
- notifications.unshift({
+  notifications.unshift({
 
-  id:Date.now(),
+    id:Date.now(),
 
-  title:title,
+    title:title,
 
-  text:text,
+    text:text,
 
-  time:"À l'instant",
+    time:"À l'instant",
 
-  read:false
+    read:false
 
- });
+  });
 
- localStorage.setItem(
-  "ta_notifications",
-  JSON.stringify(
-   notifications
-  )
- );
 
- renderNotifications();
+  localStorage.setItem(
+    "ta_notifications",
+    JSON.stringify(notifications)
+  );
+
+  renderNotifications();
 
 }
 
-/* =========================
-   BANNER
-========================= */
+
+/* =====================================================
+   ACTIVITIES
+===================================================== */
+
+async function loadActivities(){
+
+  const box=
+    document.getElementById(
+      "activitiesList"
+    );
+
+  if(!box)return;
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/activities?active=true"
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    activities=
+      Array.isArray(data)
+        ?data
+        :(data.activities||[]);
+
+
+  }catch(e){
+
+    activities=[];
+
+  }
+
+
+  renderActivities();
+
+}
+
+
+function renderActivities(){
+
+  const box=
+    document.getElementById(
+      "activitiesList"
+    );
+
+  if(!box)return;
+
+
+  const active=
+    activities.filter(
+      a=>
+        a.active!==false &&
+        a.published!==false
+    );
+
+
+  if(!active.length){
+
+    box.innerHTML=`
+
+      <div class="emptyActivity">
+
+        ✨
+
+        <br><br>
+
+        <b>
+          TRUE ALPHA poko ajoute okenn
+          aktivite pou kounye a.
+        </b>
+
+        <br>
+
+        Tounen pita pou dekouvri
+        nouvo aktivite ALPHA. 💎
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML=
+    active
+      .map((a,index)=>`
+
+      <div
+        class="activityCard"
+        onclick="openActivity(${index})">
+
+        <div class="activityTop">
+
+          <div class="activityEmoji">
+            ${escapeHTML(
+              a.icon||
+              a.emoji||
+              "🎁"
+            )}
+          </div>
+
+          <div>
+
+            <strong>
+              ${escapeHTML(
+                a.name||
+                a.title||
+                "Aktivite ALPHA"
+              )}
+            </strong>
+
+            <small>
+              ${escapeHTML(
+                a.description||
+                "Dekouvri aktivite sa a."
+              )}
+            </small>
+
+          </div>
+
+        </div>
+
+        <div class="activityReward">
+
+          ⭐
+          +
+          ${Number(
+            a.points||
+            a.rewardPoints||
+            0
+          )}
+
+          TA Points
+
+        </div>
+
+      </div>
+
+    `)
+    .join("");
+
+}
+
+
+function openActivity(index){
+
+  const active=
+    activities.filter(
+      a=>
+        a.active!==false &&
+        a.published!==false
+    );
+
+
+  selectedActivity=
+    active[index];
+
+
+  if(!selectedActivity)return;
+
+
+  document.getElementById(
+    "activityModalTitle"
+  ).textContent=
+    selectedActivity.name||
+    selectedActivity.title||
+    "Aktivite";
+
+
+  document.getElementById(
+    "activityModalIcon"
+  ).textContent=
+    selectedActivity.icon||
+    selectedActivity.emoji||
+    "🎁";
+
+
+  document.getElementById(
+    "activityDetailName"
+  ).textContent=
+    selectedActivity.name||
+    selectedActivity.title||
+    "Aktivite";
+
+
+  document.getElementById(
+    "activityDetailDescription"
+  ).textContent=
+    selectedActivity.description||
+    "Swiv enstriksyon aktivite a.";
+
+
+  document.getElementById(
+    "activityDetailReward"
+  ).textContent=
+    "⭐ Rekonpans: +"+
+    Number(
+      selectedActivity.points||
+      selectedActivity.rewardPoints||
+      0
+    )+
+    " TA Points";
+
+
+  document
+    .getElementById(
+      "activityModal"
+    )
+    .classList.add("show");
+
+}
+
+
+async function completeActivity(){
+
+  if(!selectedActivity){
+
+    return;
+
+  }
+
+
+  if(!requireLogin()){
+
+    closeActivityModal();
+
+    return;
+
+  }
+
+
+  toast(
+    "⏳ Aktivite a ap valide..."
+  );
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/activities/complete",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+
+            activityId:
+              selectedActivity.id,
+
+            customerUid:
+              firebaseUser.uid,
+
+            customerEmail:
+              firebaseUser.email||
+
+              ""
+
+          })
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    points=
+      Number(
+        data.points||
+        data.balance||
+        points
+      );
+
+
+    updatePointsUI();
+
+
+    addNotification(
+      "Aktivite konplè",
+      "Ou resevwa TA Points."
+    );
+
+
+    closeActivityModal();
+
+
+    toast(
+      "✅ Aktivite valide. TA Points ajoute."
+    );
+
+
+  }catch(e){
+
+    toast(
+      "⚠️ Aktivite a poko konekte ak backend."
+    );
+
+  }
+
+}
+
+
+function closeActivityModal(){
+
+  selectedActivity=null;
+
+  closeModal(
+    "activityModal"
+  );
+
+}
+
+
+/* =====================================================
+   TA POINTS
+===================================================== */
+
+async function loadPoints(){
+
+  if(!firebaseUser){
+
+    points=0;
+
+    updatePointsUI();
+
+    return;
+
+  }
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/points?customer="+
+        encodeURIComponent(
+          firebaseUser.email||
+          firebaseUser.uid
+        )
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    points=
+      Number(
+        data.points||
+        data.balance||
+        0
+      );
+
+
+  }catch(e){
+
+    points=0;
+
+  }
+
+
+  updatePointsUI();
+
+}
+
+
+function updatePointsUI(){
+
+  const p=
+    Number(points||0)
+      .toLocaleString("fr-FR");
+
+
+  const a=
+    document.getElementById(
+      "pointsBalance"
+    );
+
+  const b=
+    document.getElementById(
+      "profilePoints"
+    );
+
+
+  if(a)
+    a.textContent=p;
+
+  if(b)
+    b.textContent=p;
+
+}
+
+
+async function loadRewards(){
+
+  const box=
+    document.getElementById(
+      "rewardsList"
+    );
+
+  if(!box)return;
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/rewards?active=true"
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    rewards=
+      Array.isArray(data)
+        ?data
+        :(data.rewards||[]);
+
+
+  }catch(e){
+
+    rewards=[];
+
+  }
+
+
+  renderRewards();
+
+}
+
+
+function renderRewards(){
+
+  const box=
+    document.getElementById(
+      "rewardsList"
+    );
+
+  if(!box)return;
+
+
+  if(!rewards.length){
+
+    box.innerHTML=`
+
+      <div class="emptyActivity">
+
+        🎁
+
+        <br><br>
+
+        Rekonpans yo ap parèt isit la
+        lè Admin pibliye yo.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML=
+    rewards
+      .map(r=>`
+
+      <div class="rewardCard">
+
+        <div class="rewardCardTop">
+
+          <strong>
+            🎁
+            ${escapeHTML(
+              r.name||
+              "Rekonpans"
+            )}
+          </strong>
+
+          <strong>
+            ${Number(
+              r.requiredPoints||
+              r.points||
+              0
+            ).toLocaleString("fr-FR")}
+            ⭐
+          </strong>
+
+        </div>
+
+        <small>
+          Valeur:
+          ${Number(
+            r.value||
+            r.amount||
+            0
+          ).toLocaleString("fr-FR")}
+          HTG
+        </small>
+
+        <button
+          class="primaryBtn"
+          style="margin-top:12px"
+          onclick="claimReward('${escapeJS(r.id)}')">
+
+          🎁 Rachte rekonpans
+
+        </button>
+
+      </div>
+
+    `)
+    .join("");
+
+}
+
+
+async function claimReward(id){
+
+  if(!requireLogin())return;
+
+
+  const reward=
+    rewards.find(
+      r=>String(r.id)===String(id)
+    );
+
+
+  if(!reward){
+
+    toast(
+      "❌ Rekonpans lan pa jwenn."
+    );
+
+    return;
+
+  }
+
+
+  const required=
+    Number(
+      reward.requiredPoints||
+      reward.points||
+      0
+    );
+
+
+  if(points<required){
+
+    toast(
+      "⭐ Ou poko gen ase TA Points."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/rewards/claim",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+
+            rewardId:id,
+
+            customerUid:
+              firebaseUser.uid,
+
+            customerEmail:
+              firebaseUser.email||
+
+              ""
+
+          })
+        }
+      );
+
+
+    if(!response.ok)
+      throw new Error();
+
+
+    const data=
+      await response.json();
+
+
+    points=
+      Number(
+        data.points||
+        points-required
+      );
+
+
+    updatePointsUI();
+
+    loadWallet();
+
+    addNotification(
+      "Rekonpans resevwa",
+      "Rekonpans ou a te kredite avèk siksè."
+    );
+
+    toast(
+      "🎉 Rekonpans lan resevwa."
+    );
+
+
+  }catch(e){
+
+    toast(
+      "⚠️ Rekonpans lan poko disponib."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function updateProfile(){
+
+  updateUI();
+
+}
+
+
+function changeLanguage(){
+
+  const current=
+    localStorage.getItem(
+      "ta_language"
+    )||"fr";
+
+
+  const next=
+    current==="fr"
+      ?"ht"
+      :"fr";
+
+
+  localStorage.setItem(
+    "ta_language",
+    next
+  );
+
+
+  const text=
+    document.getElementById(
+      "languageText"
+    );
+
+
+  if(text){
+
+    text.textContent=
+      next==="fr"
+        ?"Français / Kreyòl ›"
+        :"Kreyòl / Français ›";
+
+  }
+
+
+  toast(
+    next==="fr"
+      ?"Langue : Français"
+      :"Lang : Kreyòl"
+  );
+
+}
+
+
+/* =====================================================
+   CARD PARTNER
+===================================================== */
+
+function contactCard(){
+
+  window.open(
+    "https://wa.me/50932694670",
+    "_blank"
+  );
+
+}
+
+
+/* =====================================================
+   MODAL HELPERS
+===================================================== */
+
+function closeModal(id){
+
+  const modal=
+    document.getElementById(id);
+
+  if(modal)
+    modal.classList.remove("show");
+
+}
+
+
+function showInfo(
+  title,
+  content
+){
+
+  document.getElementById(
+    "infoTitle"
+  ).textContent=title;
+
+
+  document.getElementById(
+    "infoContent"
+  ).innerHTML=content;
+
+
+  document
+    .getElementById(
+      "infoModal"
+    )
+    .classList.add("show");
+
+}
+
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal=>{
+
+    modal.addEventListener(
+      "click",
+      e=>{
+
+        if(e.target===modal){
+
+          modal.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function toast(msg){
+
+  const t=
+    document.getElementById(
+      "toast"
+    );
+
+  t.textContent=msg;
+
+  t.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=
+    setTimeout(
+      ()=>t.classList.remove("show"),
+      3000
+    );
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function loadTheme(){
+
+  if(
+    localStorage.getItem(
+      "ta_dark"
+    )==="true"
+  ){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+(function(){
+
+  const l=
+    localStorage.getItem(
+      "ta_language"
+    )||"fr";
+
+
+  const text=
+    document.getElementById(
+      "languageText"
+    );
+
+
+  if(text){
+
+    text.textContent=
+      l==="ht"
+        ?"Kreyòl / Français ›"
+        :"Français / Kreyòl ›";
+
+  }
+
+})();
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(v){
+
+  return String(v??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJS(v){
+
+  return String(v??"")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* =====================================================
+   BANNER SLIDER
+===================================================== */
 
 let slideIndex=0;
 
 setInterval(()=>{
 
- const slides=
-  document.querySelectorAll(
-   ".slide"
+  const slides=
+    document.querySelectorAll(
+      ".slide"
+    );
+
+  const dots=
+    document.querySelectorAll(
+      ".dot"
+    );
+
+
+  if(!slides.length)return;
+
+
+  slides.forEach(
+    x=>x.classList.remove("active")
   );
 
- const dots=
-  document.querySelectorAll(
-   ".dot"
+  dots.forEach(
+    x=>x.classList.remove("active")
   );
 
- if(!slides.length)
-  return;
 
- slides.forEach(
-  s=>s.classList.remove("active")
- );
+  slideIndex=
+    (slideIndex+1)%
+    slides.length;
 
- dots.forEach(
-  d=>d.classList.remove("active")
- );
 
- slideIndex++;
+  slides[slideIndex]
+    .classList.add("active");
 
- if(slideIndex>=slides.length)
-  slideIndex=0;
 
- slides[slideIndex].classList.add(
-  "active"
- );
-
- dots[slideIndex].classList.add(
-  "active"
- );
+  dots[slideIndex]
+    .classList.add("active");
 
 },4500);
 
-/* =========================
-   LANGUAGE
-========================= */
 
-function changeLanguage(){
-
- const current=
-  localStorage.getItem(
-   "ta_language"
-  )||"fr";
-
- const next=
-  current==="fr"
-   ?"ht"
-   :"fr";
-
- localStorage.setItem(
-  "ta_language",
-  next
- );
-
- document.getElementById(
-  "languageText"
- ).textContent=
-  next==="fr"
-   ?"Français / Kreyòl ›"
-   :"Kreyòl / Français ›";
-
- toast(
-  next==="fr"
-   ?"Langue : Français"
-   :"Lang : Kreyòl"
- );
-
-}
-
-/* =========================
-   MODALS
-========================= */
-
-function closeModal(id){
-
- const modal=
-  document.getElementById(id);
-
- if(modal)
-  modal.classList.remove("show");
-
-}
-
-document.querySelectorAll(
- ".modal"
-).forEach(
- modal=>{
-
-  modal.addEventListener(
-   "click",
-   e=>{
-
-    if(e.target===modal){
-
-     modal.classList.remove(
-      "show"
-     );
-
-    }
-
-   }
-  );
-
- }
-);
-
-/* =========================
-   TOAST
-========================= */
-
-let toastTimer;
-
-function toast(message){
-
- const t=
-  document.getElementById(
-   "toast"
-  );
-
- if(!t)
-  return;
-
- t.textContent=message;
-
- t.classList.add("show");
-
- clearTimeout(
-  toastTimer
- );
-
- toastTimer=setTimeout(
-  ()=>{
-   t.classList.remove("show");
-  },
-  3500
- );
-
-}
-
-/* =========================
-   ESCAPE
-========================= */
-
-function escapeHTML(value){
-
- return String(value)
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-
-}
-
-/* =========================
-   LANGUAGE LOAD
-========================= */
-
-(function(){
-
- const lang=
-  localStorage.getItem(
-   "ta_language"
-  )||"fr";
-
- const el=
-  document.getElementById(
-   "languageText"
-  );
-
- if(el){
-
-  el.textContent=
-   lang==="ht"
-    ?"Kreyòl / Français ›"
-    :"Français / Kreyòl ›";
-
- }
-
-})();
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 </script>
 
-<!-- =========================
-     FIREBASE
-========================= -->
 
 <script type="module">
 
 import {
- auth,
- googleProvider,
- signInWithPopup,
- signOut,
- onAuthStateChanged
-} from "./firebase.js";
+  auth,
+  googleProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+}
+from "./firebase.js";
+
 
 window.TA_FIREBASE={
-
- auth:auth,
-
- googleProvider:
+  auth,
   googleProvider,
-
- signInWithPopup:
   signInWithPopup,
-
- signOut:
   signOut
-
 };
 
+
 onAuthStateChanged(
- auth,
- async(user)=>{
+  auth,
+  async user=>{
 
-  firebaseUser=
-   user || null;
+    firebaseUser=
+      user||null;
 
-  loggedIn=
-   !!user;
+    loggedIn=
+      !!user;
 
-  updateUI();
 
-  renderOrders();
+    if(user){
 
-  updateSensitivityCooldown();
+      await loadWallet();
 
-  if(user){
+      await loadPoints();
 
-   console.log(
-    "TRUE ALPHA user connecté:",
-    user.email
-   );
+      await loadNotificationsFromBackend();
 
-   await loadWalletFromBackend();
-   await loadOrdersFromBackend();
+      await refreshOrders();
 
-  }else{
+    }else{
 
-   console.log(
-    "TRUE ALPHA user non connecté"
-   );
+      balance=null;
+
+      points=0;
+
+    }
+
+
+    updateUI();
 
   }
-
- }
 );
 
 </script>
 
 </body>
- </html>
+</html>
