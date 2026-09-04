@@ -22,7 +22,7 @@ body{
 }
 
 .container{
-  max-width:700px;
+  max-width:760px;
   margin:auto;
 }
 
@@ -41,7 +41,8 @@ h1{
 }
 
 input,
-textarea{
+textarea,
+select{
   width:100%;
   padding:12px;
   margin:8px 0;
@@ -92,27 +93,63 @@ button:disabled{
   color:white;
 }
 
-.send{
+.primary{
   background:#00b8d4;
   color:white;
 }
 
-.validate{
+.success{
   background:#00c853;
   color:white;
 }
 
-.delete{
+.danger{
   background:#9b2226;
   color:white;
-  font-size:11px;
 }
 
-.message-choice{
-  background:#0e0e17;
-  border:1px solid #36364a;
-  color:white;
+.warning{
+  background:#f59e0b;
+  color:#111;
+}
+
+.menu-button{
+  background:#00e5ff;
+  color:#001014;
+  font-size:16px;
+}
+
+.menu{
+  display:none;
+  background:#10101b;
+  border:1px solid #303044;
+  border-radius:14px;
+  padding:8px;
+  margin-bottom:15px;
+}
+
+.menu.show{
+  display:block;
+}
+
+.menu button{
   text-align:left;
+  background:#181827;
+  color:white;
+  margin:4px 0;
+}
+
+.menu button.active{
+  background:#00e5ff;
+  color:#001014;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
 }
 
 .status{
@@ -121,6 +158,16 @@ button:disabled{
   text-align:center;
   font-weight:bold;
   margin-bottom:10px;
+}
+
+.status-on{
+  background:#123d25;
+  color:#5ee39a;
+}
+
+.status-off{
+  background:#4a1717;
+  color:#ff7777;
 }
 
 .status-pending{
@@ -138,61 +185,9 @@ button:disabled{
   color:#5ee39a;
 }
 
-.status-off{
-  background:#4a1717;
-  color:#ff7777;
-}
-
-.order{
-  background:#0e0e17;
-  border:1px solid #303044;
-  border-radius:13px;
-  padding:14px;
-  margin-top:10px;
-}
-
-.line{
-  margin:8px 0;
-  font-size:14px;
-}
-
-.line span{
-  color:#aaa;
-}
-
-.pack{
-  color:#00e5ff;
-  font-weight:bold;
-}
-
-.price{
-  color:#00e5ff;
-  font-weight:bold;
-}
-
-.cost{
-  color:#ffb74d;
-  font-weight:bold;
-}
-
-.profit{
-  color:#5ee39a;
-  font-weight:bold;
-}
-
-.order-buttons{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-}
-
-.order-buttons button{
-  flex:1;
-}
-
 .stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:8px;
   margin-bottom:15px;
 }
@@ -201,104 +196,80 @@ button:disabled{
   background:#0e0e17;
   border:1px solid #303044;
   border-radius:10px;
-  padding:12px 5px;
+  padding:14px 8px;
   text-align:center;
 }
 
 .stat-number{
   display:block;
-  font-size:23px;
+  font-size:24px;
   font-weight:bold;
+  color:#00e5ff;
   margin-bottom:4px;
 }
 
 .stat-label{
-  font-size:10px;
+  font-size:11px;
+  color:#aaa;
   font-weight:bold;
 }
 
-.pending-number{
-  color:#ffd54f;
-}
-
-.processing-number{
-  color:#5eeaff;
-}
-
-.success-number{
-  color:#5ee39a;
-}
-
-.tabs{
-  display:flex;
-  gap:6px;
-  margin:12px 0;
-  overflow-x:auto;
-}
-
-.tab{
-  width:auto;
-  margin:0;
-  padding:9px 13px;
-  background:#242438;
-  color:#aaa;
-  white-space:nowrap;
-}
-
-.tab.active{
-  background:#00e5ff;
-  color:#001014;
-}
-
 .section-title{
-  margin-top:15px;
-  margin-bottom:8px;
-  padding:10px;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding:11px;
   border-radius:9px;
   background:#10101b;
   font-weight:bold;
 }
 
-.pagination-controls{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
+.item{
+  background:#0e0e17;
+  border:1px solid #303044;
+  border-radius:13px;
+  padding:13px;
   margin-top:10px;
-  margin-bottom:10px;
 }
 
-.nav-btn{
-  background:#00e5ff;
-  color:#001014;
-  width:auto;
-  padding:8px 16px;
-  margin-top:0;
-}
-
-.nav-btn:disabled{
-  background:#252538;
-  color:#666;
-}
-
-.page-indicator{
-  font-size:14px;
-  color:#aaa;
+.item-title{
+  color:#00e5ff;
   font-weight:bold;
+  font-size:16px;
+  margin-bottom:7px;
 }
 
-#adminArea,
-#offArea,
-#message{
-  display:none;
+.item-line{
+  margin:5px 0;
+  font-size:13px;
 }
 
-#message{
-  background:#151520;
-  border-radius:9px;
-  padding:12px;
-  text-align:center;
-  margin-bottom:15px;
+.item-line span{
+  color:#999;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.check-row{
+  background:#0e0e17;
+  border:1px solid #303044;
+  border-radius:10px;
+  padding:10px;
+  margin-top:8px;
+}
+
+.check-row label{
+  display:block;
+  margin:5px 0;
+  font-size:13px;
+}
+
+.check-row input{
+  width:auto;
+  margin-right:7px;
 }
 
 .empty{
@@ -318,7 +289,7 @@ button:disabled{
 .money-row{
   display:flex;
   justify-content:space-between;
-  padding:6px 0;
+  padding:7px 0;
 }
 
 .money-row span{
@@ -336,6 +307,51 @@ button:disabled{
   line-height:1.5;
 }
 
+#adminArea,
+#offArea,
+#message{
+  display:none;
+}
+
+#message{
+  background:#151520;
+  border-radius:9px;
+  padding:12px;
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.small{
+  font-size:11px;
+  color:#888;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:7px;
+  background:#242438;
+  color:#aaa;
+  font-size:11px;
+  margin:2px;
+}
+
+.blue{
+  color:#00e5ff;
+}
+
+.green{
+  color:#5ee39a;
+}
+
+.yellow{
+  color:#ffd54f;
+}
+
+.red{
+  color:#ff7777;
+}
+
 </style>
 </head>
 
@@ -343,12 +359,9 @@ button:disabled{
 
 <div class="container">
 
-<h1>💎 TRUE ALPHA ADMIN</h1>
+<h1>TRUE ALPHA ADMIN</h1>
 
-
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div class="card" id="loginBox">
 
@@ -366,55 +379,295 @@ class="login"
 id="loginBtn"
 onclick="loginAdmin()"
 >
-🔓 ANTRE NAN ADMIN
+ANTRE NAN ADMIN
 </button>
 
 <div class="lock-note">
-🔒 Token admin lan rete sèlman nan sesyon navigatè sa a.
-Pa mete Jeffry Tech API Key oswa API Secret nan HTML sa a.
+Token admin lan rete sèlman nan sesyon navigatè sa a.
+Pa mete API Key oswa API Secret nan HTML sa a.
 </div>
 
 </div>
 
 
-<!-- =========================
-     ADMIN AREA
-========================= -->
+<!-- ADMIN -->
 
 <div id="adminArea">
 
 <div id="message"></div>
 
 
+<!-- MENU -->
+
+<button
+class="menu-button"
+onclick="toggleMenu()"
+>
+☰ MENI ADMIN
+</button>
+
+<div class="menu" id="adminMenu">
+
+<button
+class="active"
+onclick="openSection('dashboard',this)"
+>
+🏠 Dashboard
+</button>
+
+<button
+onclick="openSection('site',this)"
+>
+Kontwòl Sit la
+</button>
+
+<button
+onclick="openSection('activities',this)"
+>
+Jwèt & Aktivite ALPHA
+</button>
+
+<button
+onclick="openSection('points',this)"
+>
+Pwen ALPHA
+</button>
+
+<button
+onclick="openSection('rewards',this)"
+>
+Rekonpans & Bidjè
+</button>
+
+<button
+onclick="openSection('claims',this)"
+>
+Istwa Reklamasyon
+</button>
+
+<button
+onclick="openSection('codes',this)"
+>
+Redeem Codes
+</button>
+
+<button
+onclick="openSection('referral',this)"
+>
+Referral
+</button>
+
+<button
+onclick="openSection('vip',this)"
+>
+VIP
+</button>
+
+<button
+onclick="openSection('badges',this)"
+>
+Badges
+</button>
+
+<button
+onclick="openSection('leaderboard',this)"
+>
+Classement
+</button>
+
+<button
+onclick="openSection('notifications',this)"
+>
+Notifikasyon
+</button>
+
+<button
+onclick="openSection('banners',this)"
+>
+Banners
+</button>
+
+<button
+onclick="openSection('flash',this)"
+>
+Mesaj Flash
+</button>
+
+<button
+onclick="openSection('schedule',this)"
+>
+Evènman Pwograme
+</button>
+
+<button
+onclick="openSection('games',this)"
+>
+Manadjè Jwèt
+</button>
+
+<button
+onclick="openSection('users',this)"
+>
+Itilizatè & Online
+</button>
+
+<button
+onclick="openSection('logs',this)"
+>
+Activity Logs
+</button>
+
+<button
+onclick="openSection('settings',this)"
+>
+Paramèt
+</button>
+
+<button
+onclick="logoutAdmin()"
+>
+Dekonekte Admin
+</button>
+
+</div>
+
+
 <!-- =========================
-     SITE CONTROL
+     DASHBOARD
 ========================= -->
+
+<div
+class="section active"
+id="dashboard"
+>
 
 <div class="card">
 
-<h3>🌐 Kontwòl Sit la</h3>
+<h3>TRUE ALPHA DASHBOARD</h3>
+
+<div class="stats">
+
+<div class="stat">
+<span
+class="stat-number"
+id="totalUsers"
+>
+0
+</span>
+<span class="stat-label">
+Itilizatè
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="onlineUsers"
+>
+0
+</span>
+<span class="stat-label">
+Online
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="activeActivities"
+>
+0
+</span>
+<span class="stat-label">
+Aktivite Aktif
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="totalClaims"
+>
+0
+</span>
+<span class="stat-label">
+Reklamasyon
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="pointsDistributed"
+>
+0
+</span>
+<span class="stat-label">
+Pwen Distribye
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="rewardDistributed"
+>
+0 HTG
+</span>
+<span class="stat-label">
+Rekonpans
+</span>
+</div>
+
+</div>
+
+<button
+class="refresh"
+onclick="loadDashboard()"
+>
+RAFRECHI DASHBOARD
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     SITE CONTROL
+     KITE KONTWOL SIT LA
+     JAN LI TE YE
+========================= -->
+
+<div
+class="section"
+id="site"
+>
+
+<div class="card">
+
+<h3>Kontwòl Sit la</h3>
 
 <div
 id="siteStatus"
 class="status status-on"
 >
-🟢 SIT LA ON
+SIT LA ON
 </div>
 
 <button
 class="on"
 onclick="siteOn()"
 >
-🟢 SIT ON
+SIT ON
 </button>
 
 <button
 class="off"
 onclick="showOffArea()"
 >
-🔴 SIT OFF
+SIT OFF
 </button>
-
 
 <div id="offArea">
 
@@ -423,30 +676,32 @@ Chwazi youn oswa ekri pwòp mesaj ou:
 </p>
 
 <button
-class="message-choice"
-onclick="setOffMessage('⏳ Sit la ap disponib talè.')"
+class="refresh"
+onclick="setOffMessage('Sit la ap disponib talè.')"
 >
-⏳ Sit la ap disponib talè.
+Sit la ap disponib talè.
 </button>
 
 <button
-class="message-choice"
-onclick="setOffMessage('🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')"
+class="refresh"
+onclick="setOffMessage('Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.')"
 >
-🔧 Gen kèk bagay k ap ranje sou sit la. Li ap disponib talè.
+Gen kèk bagay k ap ranje sou sit la.
 </button>
 
 <textarea
 id="customMessage"
-placeholder="✍️ Ekri pwòp mesaj OFF ou..."
+placeholder="Ekri pwòp mesaj OFF ou..."
 ></textarea>
 
 <button
 class="off"
 onclick="setCustomOffMessage()"
 >
-🔴 METE SIT LA OFF AK MESAJ SA
+METE SIT LA OFF
 </button>
+
+</div>
 
 </div>
 
@@ -454,161 +709,234 @@ onclick="setCustomOffMessage()"
 
 
 <!-- =========================
-     ORDERS
+     ACTIVITIES
 ========================= -->
+
+<div
+class="section"
+id="activities"
+>
 
 <div class="card">
 
-<h3>📋 KÒMAND YO</h3>
+<h3>Jwèt & Aktivite ALPHA</h3>
 
+<div class="section-title">
+Nouvo Aktivite
+</div>
 
-<!-- STATS -->
+<select id="activityType">
 
-<div class="stats">
+<option value="daily-gift">
+Kado chak jou
+</option>
 
-<div class="stat">
+<option value="daily-mission">
+Misyon chak jou
+</option>
 
-<span
-id="pendingCount"
-class="stat-number pending-number"
+<option value="streak">
+Seri jou youn dèyè lòt
+</option>
+
+<option value="coupon">
+Koupon
+</option>
+
+<option value="bonus-day">
+Jou bonis
+</option>
+
+<option value="free-spin">
+Roue gratis
+</option>
+
+<option value="trivia">
+Kesyon rapid
+</option>
+
+<option value="achievement">
+Reyalizasyon
+</option>
+
+<option value="daily-checkin">
+Tcheke chak jou
+</option>
+
+<option value="seasonal-event">
+Evènman sezon
+</option>
+
+<option value="monthly-champion">
+Chanpyon mwa a
+</option>
+
+<option value="flash-promo">
+Promo rapid
+</option>
+
+<option value="surprise-reward">
+Kado sipriz
+</option>
+
+<option value="challenge">
+Defi
+</option>
+
+<option value="quiz">
+Tès kesyon
+</option>
+
+<option value="giveaway">
+Kado gratis
+</option>
+
+<option value="competition">
+Konpetisyon
+</option>
+
+<option value="event">
+Evènman
+</option>
+
+<option value="taptap">
+Taptap Kado
+</option>
+
+</select>
+
+<input
+id="activityName"
+placeholder="Non aktivite a"
 >
-0
-</span>
 
-<span class="stat-label">
-🟡 AN ATANT
-</span>
+<textarea
+id="activityDescription"
+placeholder="Deskripsyon aktivite a"
+></textarea>
 
-</div>
+<div class="grid">
 
-
-<div class="stat">
-
-<span
-id="processingCount"
-class="stat-number processing-number"
+<input
+type="number"
+id="activityPoints"
+placeholder="Pwen ALPHA"
+min="0"
 >
-0
-</span>
 
-<span class="stat-label">
-🟠 AP TRETE
-</span>
-
-</div>
-
-
-<div class="stat">
-
-<span
-id="successCount"
-class="stat-number success-number"
+<input
+type="number"
+id="activityLimit"
+placeholder="Kantite moun"
+min="1"
 >
-0
-</span>
-
-<span class="stat-label">
-🟢 VALIDE
-</span>
 
 </div>
 
+<div class="grid">
+
+<input
+type="number"
+id="activityPerUser"
+placeholder="Fwa chak moun"
+min="1"
+value="1"
+>
+
+<select id="activityStatus">
+
+<option value="active">
+Aktif
+</option>
+
+<option value="scheduled">
+Pwograme
+</option>
+
+<option value="inactive">
+Dezaktive
+</option>
+
+</select>
+
 </div>
 
+<div class="grid">
 
-<!-- FILTER TABS -->
+<input
+type="datetime-local"
+id="activityStart"
+>
 
-<div class="tabs">
+<input
+type="datetime-local"
+id="activityEnd"
+>
+
+</div>
+
+<div class="check-row">
+
+<strong>Kote aktivite a ap parèt:</strong>
+
+<label>
+<input
+type="checkbox"
+value="home"
+class="activityLocation"
+>
+Akèy
+</label>
+
+<label>
+<input
+type="checkbox"
+value="shop"
+class="activityLocation"
+>
+Boutik
+</label>
+
+<label>
+<input
+type="checkbox"
+value="activities"
+class="activityLocation"
+checked
+>
+Jwèt & Aktivite ALPHA
+</label>
+
+</div>
 
 <button
-class="tab active"
-id="tabPending"
-onclick="setFilter('pending')"
+class="primary"
+onclick="createActivity()"
 >
-🟡 An atant
-</button>
-
-<button
-class="tab"
-id="tabProcessing"
-onclick="setFilter('processing')"
->
-🟠 Ap trete
-</button>
-
-<button
-class="tab"
-id="tabSuccess"
-onclick="setFilter('success')"
->
-🟢 Valide
-</button>
-
-<button
-class="tab"
-id="tabAll"
-onclick="setFilter('all')"
->
-📋 Tout
+Pibliye Aktivite
 </button>
 
 </div>
 
 
-<!-- REFRESH -->
+<div class="card">
+
+<h3>Aktivite ki egziste yo</h3>
+
+<div
+id="activitiesList"
+>
+<div class="empty">
+Pa gen aktivite chaje.
+</div>
+</div>
 
 <button
 class="refresh"
-onclick="loadOrders()"
+onclick="loadActivities()"
 >
-🔄 RAFRECHI KÒMAND YO
+RAFRECHI AKTIVITE
 </button>
-
-
-<!-- PAGINATION -->
-
-<div
-class="pagination-controls"
-id="paginationBox"
-style="display:none;"
->
-
-<button
-class="nav-btn"
-id="prevBtn"
-onclick="changePage(-1)"
->
-◄ Prasa
-</button>
-
-<span
-class="page-indicator"
-id="pageIndicator"
->
-0 / 0
-</span>
-
-<button
-class="nav-btn"
-id="nextBtn"
-onclick="changePage(1)"
->
-Pwochen ►
-</button>
-
-</div>
-
-
-<!-- ORDER LIST -->
-
-<div
-id="ordersList"
-class="list"
->
-
-<div class="empty">
-📭 Pa gen kòmand.
-</div>
 
 </div>
 
@@ -616,42 +944,1024 @@ class="list"
 
 
 <!-- =========================
-     FINANCIAL OVERVIEW
+     POINTS
 ========================= -->
+
+<div
+class="section"
+id="points"
+>
 
 <div class="card">
 
-<h3>💰 FINANS TRUE ALPHA</h3>
+<h3>Pwen ALPHA</h3>
+
+<input
+type="number"
+id="minimumRedeemPoints"
+placeholder="Minimum Pwen pou reklame"
+value="500"
+>
+
+<input
+type="number"
+id="maximumRedeemPoints"
+placeholder="Maximum Pwen pa reklamasyon"
+value="5000"
+>
+
+<button
+class="success"
+onclick="savePointRules()"
+>
+Sove Règ Pwen yo
+</button>
 
 <div class="money-box">
 
 <div class="money-row">
-<span>💵 Revenue:</span>
-<strong id="revenueAmount">
+<span>Minimum:</span>
+<strong id="showMinPoints">
+500 Pwen
+</strong>
+</div>
+
+<div class="money-row">
+<span>Maximum:</span>
+<strong id="showMaxPoints">
+5,000 Pwen
+</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Ajoute Pwen</h3>
+
+<input
+id="pointUserId"
+placeholder="User ID"
+>
+
+<input
+type="number"
+id="manualPoints"
+placeholder="Kantite Pwen"
+min="1"
+>
+
+<input
+id="pointReason"
+placeholder="Rezon"
+>
+
+<button
+class="primary"
+onclick="addManualPoints()"
+>
+AJOUTE PWEN
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     REWARDS
+========================= -->
+
+<div
+class="section"
+id="rewards"
+>
+
+<div class="card">
+
+<h3>Rekonpans & Bidjè</h3>
+
+<div class="money-box">
+
+<div class="money-row">
+<span>Bidjè Total:</span>
+<strong id="rewardBudgetTotal">
 0 HTG
 </strong>
 </div>
 
 <div class="money-row">
-<span>🏦 Pri Jeffry Tech:</span>
-<strong id="supplierCostAmount">
+<span>Distribye:</span>
+<strong id="rewardBudgetUsed">
 0 HTG
 </strong>
 </div>
 
 <div class="money-row">
-<span>💎 Pwofi:</span>
-<strong id="profitAmount">
+<span>Disponib:</span>
+<strong id="rewardBudgetAvailable">
 0 HTG
 </strong>
 </div>
 
 </div>
 
-<div class="lock-note">
-🔐 Chif sa yo dwe soti nan backend/database la.
-Admin pa dwe kapab modifye yo dirèkteman nan browser la.
+<input
+type="number"
+id="budgetAmount"
+placeholder="Ajoute nan bidjè rekonpans"
+min="1"
+>
+
+<button
+class="primary"
+onclick="addRewardBudget()"
+>
+AJOUTE BIDJÈ
+</button>
+
 </div>
+
+
+<div class="card">
+
+<h3>Nouvo Rekonpans</h3>
+
+<input
+id="rewardName"
+placeholder="Non rekonpans"
+>
+
+<input
+type="number"
+id="rewardPoints"
+placeholder="Pwen nesesè"
+min="500"
+>
+
+<input
+type="number"
+id="rewardValue"
+placeholder="Valè HTG"
+min="1"
+>
+
+<input
+type="number"
+id="rewardLimit"
+placeholder="Limit reklamasyon"
+min="1"
+>
+
+<input
+type="datetime-local"
+id="rewardExpiry"
+>
+
+<button
+class="success"
+onclick="createReward()"
+>
+KREYE REKONPANS
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Rekonpans yo</h3>
+
+<div id="rewardsList">
+<div class="empty">
+Pa gen rekonpans chaje.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     CLAIMS
+========================= -->
+
+<div
+class="section"
+id="claims"
+>
+
+<div class="card">
+
+<h3>Istwa Reklamasyon</h3>
+
+<p class="small">
+Tout reklamasyon yo dwe soti nan backend/database la.
+</p>
+
+<div id="claimsList">
+<div class="empty">
+Pa gen reklamasyon chaje.
+</div>
+</div>
+
+<button
+class="refresh"
+onclick="loadClaims()"
+>
+RAFRECHI REKLAMASYON
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     REDEEM CODES
+========================= -->
+
+<div
+class="section"
+id="codes"
+>
+
+<div class="card">
+
+<h3>Redeem Codes</h3>
+
+<input
+id="codeValue"
+placeholder="Kòd la"
+>
+
+<input
+type="number"
+id="codeReward"
+placeholder="Rekonpans HTG"
+min="0"
+>
+
+<input
+type="number"
+id="codeUses"
+placeholder="Kantite itilizasyon"
+min="1"
+value="1"
+>
+
+<input
+type="datetime-local"
+id="codeExpiry"
+>
+
+<button
+class="primary"
+onclick="createRedeemCode()"
+>
+KREYE KÒD
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Kòd yo</h3>
+
+<div id="codesList">
+<div class="empty">
+Pa gen kòd chaje.
+</div>
+</div>
+
+<button
+class="refresh"
+onclick="loadRedeemCodes()"
+>
+RAFRECHI KÒD
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     REFERRAL
+========================= -->
+
+<div
+class="section"
+id="referral"
+>
+
+<div class="card">
+
+<h3>Referral</h3>
+
+<input
+type="number"
+id="referralPoints"
+placeholder="Pwen pou referral"
+min="0"
+>
+
+<select id="referralCondition">
+
+<option value="signup">
+Kreye kont
+</option>
+
+<option value="verified">
+Kont verifye
+</option>
+
+<option value="first-action">
+Premye aktivite
+</option>
+
+<option value="first-purchase">
+Premye acha
+</option>
+
+</select>
+
+<input
+type="number"
+id="referralMonthlyLimit"
+placeholder="Limit referral pa mwa"
+min="1"
+>
+
+<button
+class="success"
+onclick="saveReferralSettings()"
+>
+SOVE REFERRAL
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Referral yo</h3>
+
+<div id="referralList">
+<div class="empty">
+Pa gen done referral chaje.
+</div>
+</div>
+
+<button
+class="refresh"
+onclick="loadReferrals()"
+>
+RAFRECHI REFERRAL
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     VIP
+========================= -->
+
+<div
+class="section"
+id="vip"
+>
+
+<div class="card">
+
+<h3>VIP</h3>
+
+<input
+id="vipName"
+placeholder="Non nivo VIP"
+>
+
+<input
+type="number"
+id="vipPointsRequired"
+placeholder="Pwen pou nivo a"
+min="0"
+>
+
+<input
+id="vipBenefit"
+placeholder="Avantaj VIP"
+>
+
+<button
+class="primary"
+onclick="createVipLevel()"
+>
+AJOUTE NIVO VIP
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Nivo VIP</h3>
+
+<div id="vipList">
+<div class="empty">
+Pa gen nivo VIP.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     BADGES
+========================= -->
+
+<div
+class="section"
+id="badges"
+>
+
+<div class="card">
+
+<h3>Badges</h3>
+
+<input
+id="badgeName"
+placeholder="Non Badge"
+>
+
+<input
+id="badgeIcon"
+placeholder="Emoji/Icon"
+>
+
+<textarea
+id="badgeCondition"
+placeholder="Kondisyon pou jwenn badge la"
+></textarea>
+
+<button
+class="primary"
+onclick="createBadge()"
+>
+AJOUTE BADGE
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Badges yo</h3>
+
+<div id="badgesList">
+<div class="empty">
+Pa gen badges.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     LEADERBOARD
+========================= -->
+
+<div
+class="section"
+id="leaderboard"
+>
+
+<div class="card">
+
+<h3>Classement</h3>
+
+<select id="leaderboardPeriod">
+
+<option value="daily">
+Chak jou
+</option>
+
+<option value="weekly">
+Chak semèn
+</option>
+
+<option value="monthly">
+Chak mwa
+</option>
+
+<option value="all">
+Tout tan
+</option>
+
+</select>
+
+<button
+class="refresh"
+onclick="loadLeaderboard()"
+>
+RAFRECHI CLASSEMENT
+</button>
+
+<div id="leaderboardList">
+<div class="empty">
+Pa gen classement chaje.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     NOTIFICATIONS
+========================= -->
+
+<div
+class="section"
+id="notifications"
+>
+
+<div class="card">
+
+<h3>Notifikasyon</h3>
+
+<input
+id="notificationTitle"
+placeholder="Tit notifikasyon"
+>
+
+<textarea
+id="notificationMessage"
+placeholder="Mesaj notifikasyon an"
+></textarea>
+
+<select id="notificationTarget">
+
+<option value="all">
+Tout itilizatè
+</option>
+
+<option value="online">
+Itilizatè online
+</option>
+
+<option value="vip">
+VIP
+</option>
+
+</select>
+
+<button
+class="primary"
+onclick="sendNotification()"
+>
+PABLIYE NOTIFIKASYON
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Istwa Notifikasyon</h3>
+
+<div id="notificationsList">
+<div class="empty">
+Pa gen notifikasyon.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     BANNERS
+========================= -->
+
+<div
+class="section"
+id="banners"
+>
+
+<div class="card">
+
+<h3>Banners</h3>
+
+<input
+id="bannerTitle"
+placeholder="Tit banner"
+>
+
+<input
+id="bannerImage"
+placeholder="URL imaj"
+>
+
+<input
+id="bannerLink"
+placeholder="Kote bouton an mennen"
+>
+
+<select id="bannerStatus">
+
+<option value="active">
+Aktif
+</option>
+
+<option value="inactive">
+Dezaktive
+</option>
+
+</select>
+
+<button
+class="primary"
+onclick="createBanner()"
+>
+AJOUTE BANNER
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Banners yo</h3>
+
+<div id="bannersList">
+<div class="empty">
+Pa gen banners.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     FLASH MESSAGE
+========================= -->
+
+<div
+class="section"
+id="flash"
+>
+
+<div class="card">
+
+<h3>Mesaj Flash</h3>
+
+<textarea
+id="flashMessage"
+placeholder="Ekri mesaj flash la"
+></textarea>
+
+<select id="flashStatus">
+
+<option value="active">
+Aktif
+</option>
+
+<option value="inactive">
+Dezaktive
+</option>
+
+</select>
+
+<button
+class="primary"
+onclick="saveFlashMessage()"
+>
+PABLIYE MESAJ FLASH
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     SCHEDULE
+========================= -->
+
+<div
+class="section"
+id="schedule"
+>
+
+<div class="card">
+
+<h3>Evènman Pwograme</h3>
+
+<input
+id="scheduledName"
+placeholder="Non evènman"
+>
+
+<input
+type="datetime-local"
+id="scheduledStart"
+>
+
+<input
+type="datetime-local"
+id="scheduledEnd"
+>
+
+<textarea
+id="scheduledMessage"
+placeholder="Mesaj lè evènman an kòmanse"
+></textarea>
+
+<button
+class="primary"
+onclick="createScheduledEvent()"
+>
+PWOGRAME EVÈNMAN
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Evènman yo</h3>
+
+<div id="scheduleList">
+<div class="empty">
+Pa gen evènman pwograme.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     GAMES
+========================= -->
+
+<div
+class="section"
+id="games"
+>
+
+<div class="card">
+
+<h3>Manadjè Jwèt</h3>
+
+<input
+id="gameName"
+placeholder="Non jwèt la"
+>
+
+<input
+id="gameIcon"
+placeholder="Emoji / Icon"
+>
+
+<textarea
+id="gameDescription"
+placeholder="Deskripsyon jwèt la"
+></textarea>
+
+<select id="gameStatus">
+
+<option value="available">
+Disponib
+</option>
+
+<option value="soon">
+Bientôt disponible
+</option>
+
+<option value="inactive">
+Dezaktive
+</option>
+
+</select>
+
+<div class="check-row">
+
+<strong>Kote jwèt la parèt:</strong>
+
+<label>
+<input
+type="checkbox"
+value="home"
+class="gameLocation"
+>
+Akèy
+</label>
+
+<label>
+<input
+type="checkbox"
+value="shop"
+class="gameLocation"
+checked
+>
+Boutik
+</label>
+
+<label>
+<input
+type="checkbox"
+value="games"
+class="gameLocation"
+checked
+>
+Jwèt
+</label>
+
+</div>
+
+<button
+class="primary"
+onclick="createGame()"
+>
+AJOUTE JWÈT
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Jwèt yo</h3>
+
+<div id="gamesList">
+<div class="empty">
+Pa gen jwèt chaje.
+</div>
+</div>
+
+<button
+class="refresh"
+onclick="loadGames()"
+>
+RAFRECHI JWÈT
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     USERS
+========================= -->
+
+<div
+class="section"
+id="users"
+>
+
+<div class="card">
+
+<h3>Itilizatè & Online</h3>
+
+<div class="stats">
+
+<div class="stat">
+<span
+class="stat-number"
+id="usersTotal"
+>
+0
+</span>
+
+<span class="stat-label">
+TOTAL ITILIZATÈ
+</span>
+</div>
+
+<div class="stat">
+<span
+class="stat-number"
+id="usersOnline"
+>
+0
+</span>
+
+<span class="stat-label">
+ONLINE
+</span>
+</div>
+
+</div>
+
+<button
+class="refresh"
+onclick="loadUsers()"
+>
+RAFRECHI ITILIZATÈ
+</button>
+
+<div id="usersList">
+<div class="empty">
+Pa gen itilizatè chaje.
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     LOGS
+========================= -->
+
+<div
+class="section"
+id="logs"
+>
+
+<div class="card">
+
+<h3>Activity Logs</h3>
+
+<p class="small">
+Tout aksyon enpòtan Admin ak sistèm nan dwe anrejistre sou backend.
+</p>
+
+<div id="logsList">
+<div class="empty">
+Pa gen logs chaje.
+</div>
+</div>
+
+<button
+class="refresh"
+onclick="loadLogs()"
+>
+RAFRECHI LOGS
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     SETTINGS
+========================= -->
+
+<div
+class="section"
+id="settings"
+>
+
+<div class="card">
+
+<h3>Paramèt TRUE ALPHA</h3>
+
+<input
+id="siteName"
+placeholder="Non sit la"
+value="TRUE ALPHA"
+>
+
+<input
+id="supportNumber"
+placeholder="WhatsApp Support"
+>
+
+<select id="defaultLanguage">
+
+<option value="ht">
+Kreyòl
+</option>
+
+<option value="fr">
+Français
+</option>
+
+</select>
+
+<button
+class="success"
+onclick="saveSettings()"
+>
+SOVE PARAMÈT
+</button>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -662,38 +1972,136 @@ Admin pa dwe kapab modifye yo dirèkteman nan browser la.
 
 /* =====================================================
    TRUE ALPHA ADMIN
-   FRONTEND ONLY
-   API SECRETS MUST STAY ON VERCEL BACKEND
-===================================================== */
+   ===================================================== */
 
 const API = "/api";
 
 let ADMIN_TOKEN = "";
 
-let allOrdersList = [];
-
-let currentFilter = "pending";
-
-let currentIndex = 0;
+let currentSection = "dashboard";
 
 
 /* =========================
    MESSAGE
 ========================= */
 
-function showMessage(
-  text,
-  color = "#00e5ff"
-){
+function showMessage(text,color="#00e5ff"){
 
   const box =
     document.getElementById("message");
 
-  box.style.display = "block";
+  box.style.display="block";
+  box.style.color=color;
+  box.textContent=text;
 
-  box.style.color = color;
+}
 
-  box.textContent = text;
+
+/* =========================
+   MENU
+========================= */
+
+function toggleMenu(){
+
+  document
+    .getElementById("adminMenu")
+    .classList.toggle("show");
+
+}
+
+
+function openSection(id,button){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll(".menu button")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+
+  if(button){
+    button.classList.add("active");
+  }
+
+
+  currentSection=id;
+
+  document
+    .getElementById("adminMenu")
+    .classList.remove("show");
+
+
+  if(id==="dashboard"){
+    loadDashboard();
+  }
+
+  if(id==="activities"){
+    loadActivities();
+  }
+
+  if(id==="claims"){
+    loadClaims();
+  }
+
+  if(id==="rewards"){
+    loadRewards();
+  }
+
+  if(id==="codes"){
+    loadRedeemCodes();
+  }
+
+  if(id==="referral"){
+    loadReferrals();
+  }
+
+  if(id==="vip"){
+    loadVip();
+  }
+
+  if(id==="badges"){
+    loadBadges();
+  }
+
+  if(id==="leaderboard"){
+    loadLeaderboard();
+  }
+
+  if(id==="notifications"){
+    loadNotifications();
+  }
+
+  if(id==="banners"){
+    loadBanners();
+  }
+
+  if(id==="schedule"){
+    loadScheduledEvents();
+  }
+
+  if(id==="games"){
+    loadGames();
+  }
+
+  if(id==="users"){
+    loadUsers();
+  }
+
+  if(id==="logs"){
+    loadLogs();
+  }
 
 }
 
@@ -704,19 +2112,17 @@ function showMessage(
 
 async function loginAdmin(){
 
-  const input =
-    document.getElementById("adminToken");
-
-  const btn =
-    document.getElementById("loginBtn");
-
   const token =
-    input.value.trim();
+    document
+      .getElementById("adminToken")
+      .value
+      .trim();
+
 
   if(!token){
 
     alert(
-      "⚠️ Tanpri antre ADMIN_TOKEN ou."
+      "Tanpri antre ADMIN_TOKEN ou."
     );
 
     return;
@@ -724,10 +2130,14 @@ async function loginAdmin(){
   }
 
 
-  btn.disabled = true;
+  const btn =
+    document.getElementById("loginBtn");
 
-  btn.textContent =
-    "⏳ VERIFIKASYON...";
+
+  btn.disabled=true;
+
+  btn.textContent=
+    "VERIFIKASYON...";
 
 
   try{
@@ -754,7 +2164,7 @@ async function loginAdmin(){
 
 
     if(
-      response.status === 401
+      response.status===401
     ){
 
       throw new Error(
@@ -766,7 +2176,7 @@ async function loginAdmin(){
 
     if(
       !response.ok ||
-      result.success !== true
+      result.success!==true
     ){
 
       throw new Error(
@@ -777,65 +2187,133 @@ async function loginAdmin(){
     }
 
 
-    /*
-     * Nou sèlman kenbe token an
-     * nan memory JavaScript.
-     *
-     * Nou PA mete li nan localStorage.
-     */
-
-    ADMIN_TOKEN = token;
+    ADMIN_TOKEN=token;
 
 
     document
       .getElementById("loginBox")
-      .style.display = "none";
+      .style.display="none";
 
 
     document
       .getElementById("adminArea")
-      .style.display = "block";
+      .style.display="block";
 
 
     showMessage(
-      "✅ Admin konekte avèk siksè.",
+      "Admin konekte avèk siksè.",
       "#5ee39a"
     );
 
 
-    allOrdersList =
-      Array.isArray(result.orders)
-        ? result.orders
-        : [];
-
-
     await loadSiteStatus();
 
-    renderAll();
+    await loadDashboard();
 
 
   }catch(error){
 
     console.error(
-      "LOGIN ERROR:",
+      "LOGIN ERROR",
       error
     );
 
     alert(
-      "❌ " +
-      error.message
+      "❌ "+error.message
     );
 
-    ADMIN_TOKEN = "";
+    ADMIN_TOKEN="";
 
   }finally{
 
-    btn.disabled = false;
+    btn.disabled=false;
 
-    btn.textContent =
-      "🔓 ANTRE NAN ADMIN";
+    btn.textContent=
+      "ANTRE NAN ADMIN";
 
   }
+
+}
+
+
+/* =========================
+   API HELPER
+========================= */
+
+async function apiRequest(
+  endpoint,
+  options={}
+){
+
+  if(!ADMIN_TOKEN){
+
+    throw new Error(
+      "Admin pa konekte."
+    );
+
+  }
+
+
+  const headers={
+    ...(options.headers||{}),
+    "x-admin-token":ADMIN_TOKEN,
+    "Accept":"application/json"
+  };
+
+
+  const response =
+    await fetch(
+      `${API}${endpoint}`,
+      {
+        ...options,
+        headers,
+        cache:"no-store"
+      }
+    );
+
+
+  if(
+    response.status===401
+  ){
+
+    logoutAdmin();
+
+    throw new Error(
+      "Sesyon Admin lan pa valide ankò."
+    );
+
+  }
+
+
+  let result={};
+
+
+  try{
+
+    result=
+      await response.json();
+
+  }catch{
+
+    result={};
+
+  }
+
+
+  if(
+    !response.ok ||
+    result.success===false
+  ){
+
+    throw new Error(
+      result.message ||
+      "Backend la pa reponn byen."
+    );
+
+  }
+
+
+  return result;
 
 }
 
@@ -863,14 +2341,14 @@ async function loadSiteStatus(){
 
 
     updateSiteDisplay(
-      data.enabled !== false
+      data.enabled!==false
     );
 
 
   }catch(error){
 
     console.error(
-      "SITE STATUS ERROR:",
+      "SITE STATUS ERROR",
       error
     );
 
@@ -879,9 +2357,7 @@ async function loadSiteStatus(){
 }
 
 
-function updateSiteDisplay(
-  isOpen
-){
+function updateSiteDisplay(isOpen){
 
   const status =
     document.getElementById(
@@ -891,19 +2367,19 @@ function updateSiteDisplay(
 
   if(isOpen){
 
-    status.className =
+    status.className=
       "status status-on";
 
-    status.textContent =
-      "🟢 SIT LA ON";
+    status.textContent=
+      "SIT LA ON";
 
   }else{
 
-    status.className =
+    status.className=
       "status status-off";
 
-    status.textContent =
-      "🔴 SIT LA OFF";
+    status.textContent=
+      "SIT LA OFF";
 
   }
 
@@ -914,15 +2390,12 @@ function showOffArea(){
 
   document
     .getElementById("offArea")
-    .style.display =
-      "block";
+    .style.display="block";
 
 }
 
 
-async function setOffMessage(
-  message
-){
+async function setOffMessage(message){
 
   await saveSiteStatus(
     false,
@@ -936,9 +2409,7 @@ async function setCustomOffMessage(){
 
   const message =
     document
-      .getElementById(
-        "customMessage"
-      )
+      .getElementById("customMessage")
       .value
       .trim();
 
@@ -946,7 +2417,7 @@ async function setCustomOffMessage(){
   if(!message){
 
     alert(
-      "⚠️ Tanpri ekri yon mesaj."
+      "Tanpri ekri yon mesaj."
     );
 
     return;
@@ -967,58 +2438,24 @@ async function saveSiteStatus(
   message
 ){
 
-  if(!ADMIN_TOKEN){
-
-    alert(
-      "❌ Admin pa konekte."
-    );
-
-    return;
-
-  }
-
-
   try{
 
-    const response =
-      await fetch(
-        `${API}/site-status`,
-        {
-          method:"POST",
+    await apiRequest(
+      "/site-status",
+      {
+        method:"POST",
 
-          headers:{
-            "Content-Type":
-              "application/json",
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
 
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:JSON.stringify({
-            enabled,
-            message:
-              message || ""
-          })
-
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      !response.ok ||
-      !result.success
-    ){
-
-      throw new Error(
-        result.message ||
-        "Erè backend."
-      );
-
-    }
+        body:JSON.stringify({
+          enabled,
+          message:message||""
+        })
+      }
+    );
 
 
     updateSiteDisplay(
@@ -1028,19 +2465,18 @@ async function saveSiteStatus(
 
     document
       .getElementById("offArea")
-      .style.display =
-        "none";
+      .style.display="none";
 
 
     document
       .getElementById("customMessage")
-      .value = "";
+      .value="";
 
 
     showMessage(
       enabled
-        ? "🟢 Sit la ON."
-        : "🔴 Sit la OFF.",
+        ? "Sit la ON."
+        : "Sit la OFF.",
       enabled
         ? "#5ee39a"
         : "#ff7777"
@@ -1050,9 +2486,8 @@ async function saveSiteStatus(
   }catch(error){
 
     showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
+      "❌ "+error.message,
+      "#ff7777"
     );
 
   }
@@ -1071,711 +2506,145 @@ async function siteOn(){
 
 
 /* =========================
-   LOAD ORDERS
+   DASHBOARD
 ========================= */
 
-async function loadOrders(){
-
-  if(!ADMIN_TOKEN){
-
-    return;
-
-  }
-
+async function loadDashboard(){
 
   try{
 
-    const response =
-      await fetch(
-        `${API}/get-orders?t=${Date.now()}`,
-        {
-          method:"GET",
-
-          headers:{
-            "x-admin-token":
-              ADMIN_TOKEN,
-
-            "Accept":
-              "application/json",
-
-            "Cache-Control":
-              "no-cache"
-          },
-
-          cache:"no-store"
-        }
+    const data =
+      await apiRequest(
+        "/admin/dashboard"
       );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      response.status === 401
-    ){
-
-      logoutAdmin();
-
-      throw new Error(
-        "Sesyon admin lan pa valide ankò."
-      );
-
-    }
-
-
-    if(
-      !response.ok ||
-      !result.success
-    ){
-
-      throw new Error(
-        result.message ||
-        "Erè backend."
-      );
-
-    }
-
-
-    /*
-     * Backend lan se source of truth.
-     * Nou ranplase lis lokal la ak
-     * nouvo done server la.
-     */
-
-    allOrdersList =
-      Array.isArray(result.orders)
-        ? result.orders
-        : [];
-
-
-    currentIndex = 0;
-
-    renderAll();
-
-
-    showMessage(
-      "🔄 Kòmand yo rafrechi.",
-      "#00e5ff"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "LOAD ORDERS ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ " +
-      error.message,
-      "#ff4d4d"
-    );
-
-  }
-
-}
-
-
-/* =========================
-   FILTER
-========================= */
-
-function setFilter(
-  filter
-){
-
-  currentFilter =
-    filter;
-
-  currentIndex = 0;
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(
-      button =>
-        button.classList.remove(
-          "active"
-        )
-    );
-
-
-  const map = {
-    pending:"tabPending",
-    processing:"tabProcessing",
-    success:"tabSuccess",
-    all:"tabAll"
-  };
-
-
-  const selected =
-    document.getElementById(
-      map[filter]
-    );
-
-
-  if(selected){
-
-    selected.classList.add(
-      "active"
-    );
-
-  }
-
-
-  renderAll();
-
-}
-
-
-/* =========================
-   FILTER ORDERS
-========================= */
-
-function getFilteredOrders(){
-
-  if(
-    currentFilter ===
-    "pending"
-  ){
-
-    return allOrdersList.filter(
-      order =>
-        order.status ===
-        "pending"
-    );
-
-  }
-
-
-  if(
-    currentFilter ===
-    "processing"
-  ){
-
-    return allOrdersList.filter(
-      order =>
-        order.status ===
-        "processing"
-    );
-
-  }
-
-
-  if(
-    currentFilter ===
-    "success"
-  ){
-
-    return allOrdersList.filter(
-      order =>
-        order.status ===
-        "success"
-    );
-
-  }
-
-
-  return allOrdersList;
-
-}
-
-
-/* =========================
-   RENDER ALL
-========================= */
-
-function renderAll(){
-
-  const pending =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "pending"
-    );
-
-
-  const processing =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "processing"
-    );
-
-
-  const success =
-    allOrdersList.filter(
-      order =>
-        order.status ===
-        "success"
-    );
-
-
-  document
-    .getElementById(
-      "pendingCount"
-    )
-    .textContent =
-      pending.length;
-
-
-  document
-    .getElementById(
-      "processingCount"
-    )
-    .textContent =
-      processing.length;
-
-
-  document
-    .getElementById(
-      "successCount"
-    )
-    .textContent =
-      success.length;
-
-
-  /*
-   * Kalkil finans yo:
-   *
-   * Sa a se yon aperçu frontend.
-   * Vrè ledger la dwe fèt nan backend.
-   */
-
-  let revenue = 0;
-
-  let supplierCost = 0;
-
-  let profit = 0;
-
-
-  for(
-    const order of success
-  ){
-
-    const retail =
-      Number(order.price) || 0;
-
-    const cost =
-      Number(
-        order.supplierCost
-      ) || 0;
-
-
-    revenue += retail;
-
-    supplierCost += cost;
-
-    profit +=
-      Math.max(
-        0,
-        retail - cost
-      );
-
-  }
-
-
-  document
-    .getElementById(
-      "revenueAmount"
-    )
-    .textContent =
-      `${revenue} HTG`;
-
-
-  document
-    .getElementById(
-      "supplierCostAmount"
-    )
-    .textContent =
-      `${supplierCost} HTG`;
-
-
-  document
-    .getElementById(
-      "profitAmount"
-    )
-    .textContent =
-      `${profit} HTG`;
-
-
-  renderCurrentList();
-
-}
-
-
-/* =========================
-   RENDER CURRENT LIST
-========================= */
-
-function renderCurrentList(){
-
-  const orders =
-    getFilteredOrders();
-
-
-  const paginationBox =
-    document.getElementById(
-      "paginationBox"
-    );
-
-
-  if(
-    orders.length === 0
-  ){
-
-    paginationBox.style.display =
-      "none";
 
 
     document
-      .getElementById(
-        "ordersList"
-      )
-      .innerHTML =
-        `<div class="empty">
-          📭 Pa gen kòmand nan kategori sa a.
-        </div>`;
+      .getElementById("totalUsers")
+      .textContent=
+        data.totalUsers||0;
 
 
-    return;
+    document
+      .getElementById("onlineUsers")
+      .textContent=
+        data.onlineUsers||0;
+
+
+    document
+      .getElementById("activeActivities")
+      .textContent=
+        data.activeActivities||0;
+
+
+    document
+      .getElementById("totalClaims")
+      .textContent=
+        data.totalClaims||0;
+
+
+    document
+      .getElementById("pointsDistributed")
+      .textContent=
+        data.pointsDistributed||0;
+
+
+    document
+      .getElementById("rewardDistributed")
+      .textContent=
+        `${data.rewardDistributed||0} HTG`;
+
+
+  }catch(error){
+
+    console.error(
+      "DASHBOARD ERROR",
+      error
+    );
 
   }
-
-
-  paginationBox.style.display =
-    "flex";
-
-
-  if(
-    currentIndex >=
-    orders.length
-  ){
-
-    currentIndex =
-      orders.length - 1;
-
-  }
-
-
-  if(
-    currentIndex < 0
-  ){
-
-    currentIndex = 0;
-
-  }
-
-
-  document
-    .getElementById(
-      "pageIndicator"
-    )
-    .textContent =
-      `${currentIndex + 1} / ${orders.length}`;
-
-
-  document
-    .getElementById(
-      "prevBtn"
-    )
-    .disabled =
-      currentIndex === 0;
-
-
-  document
-    .getElementById(
-      "nextBtn"
-    )
-    .disabled =
-      currentIndex ===
-      orders.length - 1;
-
-
-  renderOrder(
-    orders[currentIndex]
-  );
 
 }
 
 
 /* =========================
-   PAGINATION
+   ACTIVITIES
 ========================= */
 
-function changePage(
-  direction
-){
+async function createActivity(){
 
-  currentIndex +=
-    direction;
-
-  renderCurrentList();
-
-}
+  const locations =
+    [...document.querySelectorAll(
+      ".activityLocation:checked"
+    )]
+    .map(input=>input.value);
 
 
-/* =========================
-   RENDER ONE ORDER
-========================= */
+  const data={
 
-function renderOrder(
-  order
-){
+    type:
+      document
+        .getElementById("activityType")
+        .value,
 
-  const box =
-    document.getElementById(
-      "ordersList"
-    );
+    name:
+      document
+        .getElementById("activityName")
+        .value
+        .trim(),
 
+    description:
+      document
+        .getElementById("activityDescription")
+        .value
+        .trim(),
 
-  box.innerHTML = "";
+    points:
+      Number(
+        document
+          .getElementById("activityPoints")
+          .value
+      )||0,
 
+    participantLimit:
+      Number(
+        document
+          .getElementById("activityLimit")
+          .value
+      )||0,
 
-  const div =
-    document.createElement(
-      "div"
-    );
+    perUserLimit:
+      Number(
+        document
+          .getElementById("activityPerUser")
+          .value
+      )||1,
 
+    status:
+      document
+        .getElementById("activityStatus")
+        .value,
 
-  div.className =
-    "order";
+    startAt:
+      document
+        .getElementById("activityStart")
+        .value,
 
+    endAt:
+      document
+        .getElementById("activityEnd")
+        .value,
 
-  const date =
-    order.createdAt
-      ? new Date(
-          order.createdAt
-        ).toLocaleString()
-      : "N/A";
+    locations
 
-
-  const status =
-    order.status ||
-    "pending";
-
-
-  let statusHtml = "";
-
-  let buttonHtml = "";
-
-
-  if(
-    status === "pending"
-  ){
-
-    statusHtml =
-      `<div class="status status-pending">
-        🟡 AN ATANT
-      </div>`;
-
-
-    buttonHtml =
-      `<button
-        class="send"
-        onclick="sendOrder('${escapeJs(order.id || "")}')"
-      >
-        🚀 ENVOYER BAY JEFFRY TECH
-      </button>`;
-
-  }
+  };
 
 
-  else if(
-    status === "processing"
-  ){
-
-    statusHtml =
-      `<div class="status status-processing">
-        🟠 AP TRETE
-      </div>`;
-
-
-    buttonHtml =
-      `<button
-        class="validate"
-        onclick="validateOrder('${escapeJs(order.id || "")}')"
-      >
-        ✅ VALIDER
-      </button>`;
-
-  }
-
-
-  else if(
-    status === "success"
-  ){
-
-    statusHtml =
-      `<div class="status status-success">
-        🟢 VALIDE
-      </div>`;
-
-  }
-
-
-  else{
-
-    statusHtml =
-      `<div class="status status-pending">
-        🟡 ${escapeHtml(status)}
-      </div>`;
-
-  }
-
-
-  div.innerHTML = `
-
-    ${statusHtml}
-
-    <div class="line">
-      <span>🆔 ID:</span>
-      <strong>
-        ${escapeHtml(order.id || "")}
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>👤 Kliyan:</span>
-      <strong>
-        ${escapeHtml(
-          order.userName ||
-          order.email ||
-          "Kliyan"
-        )}
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>🎮 UID:</span>
-      <strong>
-        ${escapeHtml(order.uid || "")}
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>💎 Pack:</span>
-      <strong class="pack">
-        ${escapeHtml(order.pack || "")}
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>💰 Pri kliyan:</span>
-      <strong class="price">
-        ${escapeHtml(
-          String(order.price || 0)
-        )} HTG
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>🏦 Pri Jeffry Tech:</span>
-      <strong class="cost">
-        ${escapeHtml(
-          String(
-            order.supplierCost || 0
-          )
-        )} HTG
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>💵 Pwofi:</span>
-      <strong class="profit">
-        ${calculateProfit(order)} HTG
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>🌎 Server:</span>
-      <strong>
-        ${escapeHtml(
-          order.server ||
-          "NA — North America"
-        )}
-      </strong>
-    </div>
-
-    <div class="line">
-      <span>🕐 Kòmand:</span>
-      <strong>
-        ${escapeHtml(date)}
-      </strong>
-    </div>
-
-    <div class="order-buttons">
-      ${buttonHtml}
-    </div>
-
-  `;
-
-
-  box.appendChild(div);
-
-}
-
-
-/* =========================
-   SEND ORDER
-========================= */
-
-async function sendOrder(
-  id
-){
-
-  if(!ADMIN_TOKEN){
+  if(!data.name){
 
     alert(
-      "❌ Admin pa konekte."
+      "Mete non aktivite a."
     );
-
-    return;
-
-  }
-
-
-  const target =
-    allOrdersList.find(
-      order =>
-        order.id === id
-    );
-
-
-  if(!target){
-
-    alert(
-      "❌ Kòmand lan pa jwenn."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    target.status !==
-    "pending"
-  ){
-
-    alert(
-      "⚠️ Kòmand sa a deja trete."
-    );
-
-    return;
-
-  }
-
-
-  const confirmed =
-    confirm(
-      "🚀 Voye kòmand sa a bay Jeffry Tech?"
-    );
-
-
-  if(!confirmed){
 
     return;
 
@@ -1784,109 +2653,44 @@ async function sendOrder(
 
   try{
 
-    showMessage(
-      "⏳ K ap voye kòmand lan bay Jeffry Tech...",
-      "#00e5ff"
-    );
+    await apiRequest(
+      "/admin/activities",
+      {
+        method:"POST",
 
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
 
-    const response =
-      await fetch(
-        `${API}/send-order`,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json",
-
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:JSON.stringify({
-            id
-          })
-
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      response.status === 401
-    ){
-
-      logoutAdmin();
-
-      throw new Error(
-        "Sesyon admin lan ekspire."
-      );
-
-    }
-
-
-    if(
-      !response.ok ||
-      !result.success
-    ){
-
-      throw new Error(
-        result.message ||
-        "Jeffry Tech pa aksepte kòmand lan."
-      );
-
-    }
-
-
-    /*
-     * Nou PA mete success isit la.
-     *
-     * Apre Envoyer, status la dwe
-     * AP TRETE.
-     */
-
-    target.status =
-      "processing";
-
-
-    if(result.order){
-
-      Object.assign(
-        target,
-        result.order
-      );
-
-    }
-
-
-    currentIndex = 0;
-
-    setFilter(
-      "processing"
+        body:JSON.stringify(data)
+      }
     );
 
 
     showMessage(
-      "🚀 Kòmand lan voye. Li kounye a AP TRETE.",
-      "#5eeaff"
+      "Aktivite a pibliye avèk siksè.",
+      "#5ee39a"
     );
+
+
+    document
+      .getElementById("activityName")
+      .value="";
+
+
+    document
+      .getElementById("activityDescription")
+      .value="";
+
+
+    await loadActivities();
 
 
   }catch(error){
 
-    console.error(
-      "SEND ORDER ERROR:",
-      error
-    );
-
-
     showMessage(
-      "❌ " +
-      error.message,
+      "❌ "+error.message,
       "#ff7777"
     );
 
@@ -1895,72 +2699,166 @@ async function sendOrder(
 }
 
 
+async function loadActivities(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/activities"
+      );
+
+
+    const list =
+      document.getElementById(
+        "activitiesList"
+      );
+
+
+    const items =
+      Array.isArray(data.activities)
+        ? data.activities
+        : [];
+
+
+    if(!items.length){
+
+      list.innerHTML=
+        `<div class="empty">
+          Pa gen aktivite.
+        </div>`;
+
+      return;
+
+    }
+
+
+    list.innerHTML=
+      items.map(activity=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              activity.name||"Aktivite"
+            )}
+          </div>
+
+          <div class="item-line">
+            <span>Tip:</span>
+            ${escapeHtml(
+              activity.type||""
+            )}
+          </div>
+
+          <div class="item-line">
+            <span>Pwen:</span>
+            ${Number(activity.points)||0}
+          </div>
+
+          <div class="item-line">
+            <span>Patisipan:</span>
+            ${Number(activity.claimedCount)||0}
+            /
+            ${Number(activity.participantLimit)||0}
+          </div>
+
+          <div class="item-line">
+            <span>Fwa/moun:</span>
+            ${Number(activity.perUserLimit)||1}
+          </div>
+
+          <div class="item-line">
+            <span>Status:</span>
+            ${escapeHtml(
+              activity.status||""
+            )}
+          </div>
+
+          <button
+            class="danger"
+            onclick="toggleActivity('${escapeJs(activity.id||"")}')"
+          >
+            Aktive / Dezaktive
+          </button>
+
+        </div>
+
+      `).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "ACTIVITIES ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+async function toggleActivity(id){
+
+  if(!id) return;
+
+
+  try{
+
+    await apiRequest(
+      `/admin/activities/${encodeURIComponent(id)}/toggle`,
+      {
+        method:"POST"
+      }
+    );
+
+
+    await loadActivities();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
 /* =========================
-   VALIDATE ORDER
+   POINT RULES
 ========================= */
 
-async function validateOrder(
-  id
-){
+async function savePointRules(){
 
-  if(!ADMIN_TOKEN){
+  const minimum =
+    Number(
+      document
+        .getElementById(
+          "minimumRedeemPoints"
+        )
+        .value
+    );
+
+
+  const maximum =
+    Number(
+      document
+        .getElementById(
+          "maximumRedeemPoints"
+        )
+        .value
+    );
+
+
+  if(minimum<1 || maximum<minimum){
 
     alert(
-      "❌ Admin pa konekte."
+      "Règ Pwen yo pa valab."
     );
-
-    return;
-
-  }
-
-
-  const target =
-    allOrdersList.find(
-      order =>
-        order.id === id
-    );
-
-
-  if(!target){
-
-    alert(
-      "❌ Kòmand lan pa jwenn."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    target.status !==
-    "processing"
-  ){
-
-    alert(
-      "⚠️ Kòmand lan pa nan AP TRETE."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * IMPORTANT:
-   *
-   * Backend lan dwe verifye ke
-   * Jeffry Tech konfime kòmand lan
-   * anvan li pèmèt status success.
-   */
-
-  const confirmed =
-    confirm(
-      "✅ Jeffry Tech konfime kòmand lan? Peze OK pou valide kliyan an."
-    );
-
-
-  if(!confirmed){
 
     return;
 
@@ -1969,102 +2867,50 @@ async function validateOrder(
 
   try{
 
-    showMessage(
-      "⏳ Validasyon an ap fèt...",
-      "#00e5ff"
+    await apiRequest(
+      "/admin/points/rules",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+          minimum,
+          maximum
+        })
+      }
     );
 
 
-    const response =
-      await fetch(
-        `${API}/validate-order`,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json",
-
-            "x-admin-token":
-              ADMIN_TOKEN
-          },
-
-          body:JSON.stringify({
-            id
-          })
-
-        }
-      );
+    document
+      .getElementById(
+        "showMinPoints"
+      )
+      .textContent=
+        `${minimum.toLocaleString()} Pwen`;
 
 
-    const result =
-      await response.json();
-
-
-    if(
-      response.status === 401
-    ){
-
-      logoutAdmin();
-
-      throw new Error(
-        "Sesyon admin lan ekspire."
-      );
-
-    }
-
-
-    if(
-      !response.ok ||
-      !result.success
-    ){
-
-      throw new Error(
-        result.message ||
-        "Backend lan poko pèmèt validasyon an."
-      );
-
-    }
-
-
-    target.status =
-      "success";
-
-
-    if(result.order){
-
-      Object.assign(
-        target,
-        result.order
-      );
-
-    }
-
-
-    currentIndex = 0;
-
-    setFilter(
-      "success"
-    );
+    document
+      .getElementById(
+        "showMaxPoints"
+      )
+      .textContent=
+        `${maximum.toLocaleString()} Pwen`;
 
 
     showMessage(
-      "✅ Kòmand lan VALIDE. Kliyan an ap wè li kòm Valide.",
+      "Règ Pwen yo sove.",
       "#5ee39a"
     );
 
 
   }catch(error){
 
-    console.error(
-      "VALIDATE ERROR:",
-      error
-    );
-
-
     showMessage(
-      "❌ " +
-      error.message,
+      "❌ "+error.message,
       "#ff7777"
     );
 
@@ -2073,27 +2919,1964 @@ async function validateOrder(
 }
 
 
+async function addManualPoints(){
+
+  const userId =
+    document
+      .getElementById("pointUserId")
+      .value
+      .trim();
+
+
+  const points =
+    Number(
+      document
+        .getElementById("manualPoints")
+        .value
+    );
+
+
+  const reason =
+    document
+      .getElementById("pointReason")
+      .value
+      .trim();
+
+
+  if(!userId || points<1){
+
+    alert(
+      "User ID ak Pwen yo obligatwa."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/points/add",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+          userId,
+          points,
+          reason
+        })
+      }
+    );
+
+
+    showMessage(
+      "Pwen yo ajoute.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
 /* =========================
-   PROFIT
+   REWARDS
 ========================= */
 
-function calculateProfit(
-  order
-){
+async function addRewardBudget(){
 
-  const retail =
-    Number(order.price) || 0;
-
-  const cost =
+  const amount =
     Number(
-      order.supplierCost
-    ) || 0;
+      document
+        .getElementById("budgetAmount")
+        .value
+    );
 
 
-  return Math.max(
-    0,
-    retail - cost
-  );
+  if(amount<1){
+
+    alert(
+      "Mete yon kantite valab."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/rewards/budget",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+          amount
+        })
+      }
+    );
+
+
+    await loadRewards();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function createReward(){
+
+  const data={
+
+    name:
+      document
+        .getElementById("rewardName")
+        .value
+        .trim(),
+
+    points:
+      Number(
+        document
+          .getElementById("rewardPoints")
+          .value
+      ),
+
+    value:
+      Number(
+        document
+          .getElementById("rewardValue")
+          .value
+      ),
+
+    limit:
+      Number(
+        document
+          .getElementById("rewardLimit")
+          .value
+      )||0,
+
+    expiry:
+      document
+        .getElementById("rewardExpiry")
+        .value
+
+  };
+
+
+  if(
+    !data.name ||
+    data.points<500 ||
+    data.value<1
+  ){
+
+    alert(
+      "Enfòmasyon rekonpans lan pa konplè."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/rewards",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadRewards();
+
+
+    showMessage(
+      "Rekonpans kreye.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadRewards(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/rewards"
+      );
+
+
+    document
+      .getElementById(
+        "rewardBudgetTotal"
+      )
+      .textContent=
+        `${data.budget?.total||0} HTG`;
+
+
+    document
+      .getElementById(
+        "rewardBudgetUsed"
+      )
+      .textContent=
+        `${data.budget?.used||0} HTG`;
+
+
+    document
+      .getElementById(
+        "rewardBudgetAvailable"
+      )
+      .textContent=
+        `${data.budget?.available||0} HTG`;
+
+
+    const list =
+      document.getElementById(
+        "rewardsList"
+      );
+
+
+    const rewards =
+      Array.isArray(data.rewards)
+        ? data.rewards
+        : [];
+
+
+    if(!rewards.length){
+
+      list.innerHTML=
+        `<div class="empty">
+          Pa gen rekonpans.
+        </div>`;
+
+      return;
+
+    }
+
+
+    list.innerHTML=
+      rewards.map(reward=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              reward.name||"Rekonpans"
+            )}
+          </div>
+
+          <div class="item-line">
+            ${Number(reward.points)||0}
+            Pwen =
+            ${Number(reward.value)||0} HTG
+          </div>
+
+          <div class="item-line">
+            Limit:
+            ${Number(reward.limit)||0}
+          </div>
+
+        </div>
+
+      `).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "REWARDS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   CLAIMS
+========================= */
+
+async function loadClaims(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/claims"
+      );
+
+
+    const list =
+      document.getElementById(
+        "claimsList"
+      );
+
+
+    const claims =
+      Array.isArray(data.claims)
+        ? data.claims
+        : [];
+
+
+    if(!claims.length){
+
+      list.innerHTML=
+        `<div class="empty">
+          Pa gen reklamasyon.
+        </div>`;
+
+      return;
+
+    }
+
+
+    list.innerHTML=
+      claims.map(claim=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              claim.userName||
+              claim.email||
+              "Itilizatè"
+            )}
+          </div>
+
+          <div class="item-line">
+            <span>Aktivite/Rekonpans:</span>
+            ${escapeHtml(
+              claim.rewardName||
+              claim.activityName||
+              ""
+            )}
+          </div>
+
+          <div class="item-line">
+            <span>Pwen:</span>
+            ${Number(claim.points)||0}
+          </div>
+
+          <div class="item-line">
+            <span>Valè:</span>
+            ${Number(claim.value)||0} HTG
+          </div>
+
+          <div class="item-line">
+            <span>Dat:</span>
+            ${escapeHtml(
+              claim.createdAt||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "CLAIMS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   REDEEM CODES
+========================= */
+
+async function createRedeemCode(){
+
+  const data={
+
+    code:
+      document
+        .getElementById("codeValue")
+        .value
+        .trim(),
+
+    reward:
+      Number(
+        document
+          .getElementById("codeReward")
+          .value
+      )||0,
+
+    uses:
+      Number(
+        document
+          .getElementById("codeUses")
+          .value
+      )||1,
+
+    expiry:
+      document
+        .getElementById("codeExpiry")
+        .value
+
+  };
+
+
+  if(!data.code){
+
+    alert(
+      "Mete kòd la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/redeem-codes",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadRedeemCodes();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadRedeemCodes(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/redeem-codes"
+      );
+
+
+    const list =
+      document.getElementById(
+        "codesList"
+      );
+
+
+    const codes =
+      Array.isArray(data.codes)
+        ? data.codes
+        : [];
+
+
+    if(!codes.length){
+
+      list.innerHTML=
+        `<div class="empty">
+          Pa gen kòd.
+        </div>`;
+
+      return;
+
+    }
+
+
+    list.innerHTML=
+      codes.map(code=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              code.code||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Rekonpans:
+            ${Number(code.reward)||0} HTG
+          </div>
+
+          <div class="item-line">
+            Itilizasyon:
+            ${Number(code.used)||0}
+            /
+            ${Number(code.uses)||0}
+          </div>
+
+          <div class="item-line">
+            Status:
+            ${escapeHtml(
+              code.status||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "CODES ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   REFERRAL
+========================= */
+
+async function saveReferralSettings(){
+
+  const data={
+
+    points:
+      Number(
+        document
+          .getElementById("referralPoints")
+          .value
+      )||0,
+
+    condition:
+      document
+        .getElementById("referralCondition")
+        .value,
+
+    monthlyLimit:
+      Number(
+        document
+          .getElementById("referralMonthlyLimit")
+          .value
+      )||0
+
+  };
+
+
+  try{
+
+    await apiRequest(
+      "/admin/referral/settings",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    showMessage(
+      "Règ referral yo sove.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadReferrals(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/referrals"
+      );
+
+
+    const list =
+      document.getElementById(
+        "referralList"
+      );
+
+
+    const referrals =
+      Array.isArray(data.referrals)
+        ? data.referrals
+        : [];
+
+
+    if(!referrals.length){
+
+      list.innerHTML=
+        `<div class="empty">
+          Pa gen referral.
+        </div>`;
+
+      return;
+
+    }
+
+
+    list.innerHTML=
+      referrals.map(item=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              item.referrerName||
+              "Itilizatè"
+            )}
+          </div>
+
+          <div class="item-line">
+            Moun envite:
+            ${Number(item.referredCount)||0}
+          </div>
+
+          <div class="item-line">
+            Pwen:
+            ${Number(item.points)||0}
+          </div>
+
+        </div>
+
+      `).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "REFERRAL ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   VIP
+========================= */
+
+async function createVipLevel(){
+
+  const data={
+
+    name:
+      document
+        .getElementById("vipName")
+        .value
+        .trim(),
+
+    points:
+      Number(
+        document
+          .getElementById("vipPointsRequired")
+          .value
+      )||0,
+
+    benefit:
+      document
+        .getElementById("vipBenefit")
+        .value
+        .trim()
+
+  };
+
+
+  if(!data.name){
+
+    alert(
+      "Mete non VIP la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/vip",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadVip();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadVip(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/vip"
+      );
+
+
+    const list =
+      document.getElementById(
+        "vipList"
+      );
+
+
+    const items =
+      Array.isArray(data.levels)
+        ? data.levels
+        : [];
+
+
+    list.innerHTML=
+      items.length
+      ? items.map(item=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              item.name||"VIP"
+            )}
+          </div>
+
+          <div class="item-line">
+            ${Number(item.points)||0}
+            Pwen
+          </div>
+
+          <div class="item-line">
+            ${escapeHtml(
+              item.benefit||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen nivo VIP.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "VIP ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+async function createBadge(){
+
+  const data={
+
+    name:
+      document
+        .getElementById("badgeName")
+        .value
+        .trim(),
+
+    icon:
+      document
+        .getElementById("badgeIcon")
+        .value
+        .trim(),
+
+    condition:
+      document
+        .getElementById("badgeCondition")
+        .value
+        .trim()
+
+  };
+
+
+  if(!data.name){
+
+    alert(
+      "Mete non badge la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/badges",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadBadges();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadBadges(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/badges"
+      );
+
+
+    const list =
+      document.getElementById(
+        "badgesList"
+      );
+
+
+    const badges =
+      Array.isArray(data.badges)
+        ? data.badges
+        : [];
+
+
+    list.innerHTML=
+      badges.length
+      ? badges.map(badge=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              badge.icon||""
+            )}
+            ${escapeHtml(
+              badge.name||""
+            )}
+          </div>
+
+          <div class="item-line">
+            ${escapeHtml(
+              badge.condition||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen badges.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "BADGES ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LEADERBOARD
+========================= */
+
+async function loadLeaderboard(){
+
+  try{
+
+    const period =
+      document
+        .getElementById(
+          "leaderboardPeriod"
+        )
+        .value;
+
+
+    const data =
+      await apiRequest(
+        `/admin/leaderboard?period=${encodeURIComponent(period)}`
+      );
+
+
+    const list =
+      document.getElementById(
+        "leaderboardList"
+      );
+
+
+    const users =
+      Array.isArray(data.users)
+        ? data.users
+        : [];
+
+
+    list.innerHTML=
+      users.length
+      ? users.map((user,index)=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            #${index+1}
+            ${escapeHtml(
+              user.name||
+              user.email||
+              "Itilizatè"
+            )}
+          </div>
+
+          <div class="item-line">
+            ${Number(user.points)||0}
+            Pwen ALPHA
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen classement.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "LEADERBOARD ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+async function sendNotification(){
+
+  const data={
+
+    title:
+      document
+        .getElementById("notificationTitle")
+        .value
+        .trim(),
+
+    message:
+      document
+        .getElementById("notificationMessage")
+        .value
+        .trim(),
+
+    target:
+      document
+        .getElementById("notificationTarget")
+        .value
+
+  };
+
+
+  if(!data.title || !data.message){
+
+    alert(
+      "Tit ak mesaj obligatwa."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/notifications",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    showMessage(
+      "Notifikasyon pibliye.",
+      "#5ee39a"
+    );
+
+
+    await loadNotifications();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadNotifications(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/notifications"
+      );
+
+
+    const list =
+      document.getElementById(
+        "notificationsList"
+      );
+
+
+    const items =
+      Array.isArray(data.notifications)
+        ? data.notifications
+        : [];
+
+
+    list.innerHTML=
+      items.length
+      ? items.map(item=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              item.title||""
+            )}
+          </div>
+
+          <div class="item-line">
+            ${escapeHtml(
+              item.message||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen notifikasyon.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "NOTIFICATIONS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   BANNERS
+========================= */
+
+async function createBanner(){
+
+  const data={
+
+    title:
+      document
+        .getElementById("bannerTitle")
+        .value
+        .trim(),
+
+    image:
+      document
+        .getElementById("bannerImage")
+        .value
+        .trim(),
+
+    link:
+      document
+        .getElementById("bannerLink")
+        .value
+        .trim(),
+
+    status:
+      document
+        .getElementById("bannerStatus")
+        .value
+
+  };
+
+
+  if(!data.title){
+
+    alert(
+      "Mete tit banner la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/banners",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadBanners();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadBanners(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/banners"
+      );
+
+
+    const list =
+      document.getElementById(
+        "bannersList"
+      );
+
+
+    const banners =
+      Array.isArray(data.banners)
+        ? data.banners
+        : [];
+
+
+    list.innerHTML=
+      banners.length
+      ? banners.map(banner=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              banner.title||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Status:
+            ${escapeHtml(
+              banner.status||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen banners.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "BANNERS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FLASH MESSAGE
+========================= */
+
+async function saveFlashMessage(){
+
+  const message =
+    document
+      .getElementById("flashMessage")
+      .value
+      .trim();
+
+
+  const status =
+    document
+      .getElementById("flashStatus")
+      .value;
+
+
+  if(!message){
+
+    alert(
+      "Ekri mesaj la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/flash-message",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+          message,
+          status
+        })
+      }
+    );
+
+
+    showMessage(
+      "Mesaj Flash sove.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SCHEDULE
+========================= */
+
+async function createScheduledEvent(){
+
+  const data={
+
+    name:
+      document
+        .getElementById("scheduledName")
+        .value
+        .trim(),
+
+    startAt:
+      document
+        .getElementById("scheduledStart")
+        .value,
+
+    endAt:
+      document
+        .getElementById("scheduledEnd")
+        .value,
+
+    message:
+      document
+        .getElementById("scheduledMessage")
+        .value
+        .trim()
+
+  };
+
+
+  if(!data.name || !data.startAt){
+
+    alert(
+      "Non ak lè kòmansman obligatwa."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/scheduled-events",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadScheduledEvents();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadScheduledEvents(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/scheduled-events"
+      );
+
+
+    const list =
+      document.getElementById(
+        "scheduleList"
+      );
+
+
+    const events =
+      Array.isArray(data.events)
+        ? data.events
+        : [];
+
+
+    list.innerHTML=
+      events.length
+      ? events.map(event=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              event.name||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Kòmanse:
+            ${escapeHtml(
+              event.startAt||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Fini:
+            ${escapeHtml(
+              event.endAt||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen evènman.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "SCHEDULE ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   GAMES
+========================= */
+
+async function createGame(){
+
+  const locations =
+    [...document.querySelectorAll(
+      ".gameLocation:checked"
+    )]
+    .map(input=>input.value);
+
+
+  const data={
+
+    name:
+      document
+        .getElementById("gameName")
+        .value
+        .trim(),
+
+    icon:
+      document
+        .getElementById("gameIcon")
+        .value
+        .trim(),
+
+    description:
+      document
+        .getElementById("gameDescription")
+        .value
+        .trim(),
+
+    status:
+      document
+        .getElementById("gameStatus")
+        .value,
+
+    locations
+
+  };
+
+
+  if(!data.name){
+
+    alert(
+      "Mete non jwèt la."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await apiRequest(
+      "/admin/games",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    await loadGames();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+async function loadGames(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/games"
+      );
+
+
+    const list =
+      document.getElementById(
+        "gamesList"
+      );
+
+
+    const games =
+      Array.isArray(data.games)
+        ? data.games
+        : [];
+
+
+    list.innerHTML=
+      games.length
+      ? games.map(game=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              game.icon||""
+            )}
+            ${escapeHtml(
+              game.name||""
+            )}
+          </div>
+
+          <div class="item-line">
+            ${escapeHtml(
+              game.description||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Status:
+            ${escapeHtml(
+              game.status||""
+            )}
+          </div>
+
+          <button
+            class="danger"
+            onclick="toggleGame('${escapeJs(game.id||"")}')"
+          >
+            Aktive / Dezaktive
+          </button>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen jwèt.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "GAMES ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+async function toggleGame(id){
+
+  try{
+
+    await apiRequest(
+      `/admin/games/${encodeURIComponent(id)}/toggle`,
+      {
+        method:"POST"
+      }
+    );
+
+
+    await loadGames();
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
+
+}
+
+
+/* =========================
+   USERS
+========================= */
+
+async function loadUsers(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/users"
+      );
+
+
+    document
+      .getElementById("usersTotal")
+      .textContent=
+        data.total||0;
+
+
+    document
+      .getElementById("usersOnline")
+      .textContent=
+        data.online||0;
+
+
+    document
+      .getElementById("totalUsers")
+      .textContent=
+        data.total||0;
+
+
+    document
+      .getElementById("onlineUsers")
+      .textContent=
+        data.online||0;
+
+
+    const list =
+      document.getElementById(
+        "usersList"
+      );
+
+
+    const users =
+      Array.isArray(data.users)
+        ? data.users
+        : [];
+
+
+    list.innerHTML=
+      users.length
+      ? users.map(user=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              user.name||
+              user.email||
+              "Itilizatè"
+            )}
+          </div>
+
+          <div class="item-line">
+            Email:
+            ${escapeHtml(
+              user.email||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Status:
+            ${user.online
+              ? "ONLINE"
+              : "OFFLINE"}
+          </div>
+
+          <div class="item-line">
+            Pwen:
+            ${Number(user.points)||0}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen itilizatè.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "USERS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LOGS
+========================= */
+
+async function loadLogs(){
+
+  try{
+
+    const data =
+      await apiRequest(
+        "/admin/logs"
+      );
+
+
+    const list =
+      document.getElementById(
+        "logsList"
+      );
+
+
+    const logs =
+      Array.isArray(data.logs)
+        ? data.logs
+        : [];
+
+
+    list.innerHTML=
+      logs.length
+      ? logs.map(log=>`
+
+        <div class="item">
+
+          <div class="item-title">
+            ${escapeHtml(
+              log.action||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Admin:
+            ${escapeHtml(
+              log.admin||""
+            )}
+          </div>
+
+          <div class="item-line">
+            Dat:
+            ${escapeHtml(
+              log.createdAt||""
+            )}
+          </div>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">
+          Pa gen logs.
+        </div>`;
+
+
+  }catch(error){
+
+    console.error(
+      "LOGS ERROR",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+async function saveSettings(){
+
+  const data={
+
+    siteName:
+      document
+        .getElementById("siteName")
+        .value
+        .trim(),
+
+    supportNumber:
+      document
+        .getElementById("supportNumber")
+        .value
+        .trim(),
+
+    defaultLanguage:
+      document
+        .getElementById("defaultLanguage")
+        .value
+
+  };
+
+
+  try{
+
+    await apiRequest(
+      "/admin/settings",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+
+    showMessage(
+      "Paramèt yo sove.",
+      "#5ee39a"
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ "+error.message
+    );
+
+  }
 
 }
 
@@ -2104,94 +4887,57 @@ function calculateProfit(
 
 function logoutAdmin(){
 
-  ADMIN_TOKEN = "";
+  ADMIN_TOKEN="";
 
-  allOrdersList = [];
 
   document
     .getElementById("adminArea")
-    .style.display =
-      "none";
+    .style.display="none";
+
 
   document
     .getElementById("loginBox")
-    .style.display =
-      "block";
+    .style.display="block";
+
 
   document
     .getElementById("adminToken")
-    .value = "";
+    .value="";
+
+
+  showMessage(
+    "Admin dekonekte.",
+    "#ffd54f"
+  );
 
 }
 
 
 /* =========================
-   ESCAPE HTML
+   ESCAPE
 ========================= */
 
-function escapeHtml(
-  value
-){
+function escapeHtml(value){
 
   return String(value)
 
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-/* =========================
-   ESCAPE JS
-========================= */
-
-function escapeJs(
-  value
-){
+function escapeJs(value){
 
   return String(value)
 
-    .replaceAll(
-      "\\",
-      "\\\\"
-    )
-
-    .replaceAll(
-      "'",
-      "\\'"
-    )
-
-    .replaceAll(
-      "\n",
-      "\\n"
-    )
-
-    .replaceAll(
-      "\r",
-      "\\r"
-    );
+    .replaceAll("\\","\\\\")
+    .replaceAll("'","\\'")
+    .replaceAll("\n","\\n")
+    .replaceAll("\r","\\r");
 
 }
 
