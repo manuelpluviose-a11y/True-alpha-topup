@@ -4338,31 +4338,43 @@ async function verifyUID(){
 
   try{
 
-    const response = await fetch(
-      `https://api.freefireapi.com/v1/checkuid?uid=${uid}&region=NA`
-    );
+    const response=
+      await fetch(
+        `https://www.freefireapi.me/info?uid=${uid}`
+      );
+
 
     if(!response.ok)
       throw new Error();
 
-    const data = await response.json();
 
-    if(!data || data.status !== "success" || !data.nickname){
+    const data=
+      await response.json();
+
+
+    if(!data.name && !data.nickname)
       throw new Error();
-    }
 
-    document.getElementById("playerName").textContent = data.nickname;
+
+    document.getElementById(
+      "playerName"
+    ).textContent=
+      data.name ||
+      data.nickname ||
+      ("UID "+uid);
 
     result.style.display="block";
 
     packs.style.display="block";
 
-    toast("✅ Joueur jwenn avèk siksè!");
+    toast(
+      "✅ Joueur verifye avèk siksè."
+    );
 
   }catch(e){
 
     toast(
-      "❌ UID sa pa egziste nan sèvè NA an oswa gen yon erè."
+      "⚠️ Verifikasyon UID la pa reyisi. Verifye si UID la eksizte."
     );
 
   }finally{
