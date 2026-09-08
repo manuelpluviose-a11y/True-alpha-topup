@@ -1496,6 +1496,7 @@ body.dark .paymentDetails{background:#2b2414;border-color:#5a481e;color:#f5d98b}
 .walletDualBox{margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:17px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:var(--shadow)}
 .walletDualBox small{display:block;color:var(--muted);font-size:10px}.walletDualBox strong{display:block;margin-top:4px;font-size:18px}.walletPointsFormula{font-size:10px;color:var(--primary);font-weight:900;text-align:right}
 .checkoutSummary{background:#f7f6ff;border:1px solid #dedaff;border-radius:15px;padding:14px;font-size:11px;line-height:1.8}.checkoutSummary b{font-weight:900}.checkoutTitle{margin-top:18px}.paymentChoiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paymentChoice{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:15px;padding:13px;text-align:left;display:grid;gap:4px;cursor:pointer}.paymentChoice span{font-size:20px}.paymentChoice strong{font-size:11px}.paymentChoice small{font-size:9px;color:var(--muted)}.paymentChoice.selected{border:2px solid var(--primary);background:#f2f0ff}.checkoutFormula{font-size:9px;color:var(--muted);line-height:1.5;margin:11px 0 14px}.onlinePresence{position:fixed;right:14px;top:74px;z-index:95;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:999px;padding:8px 11px;display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}.onlinePresence strong{font-size:10px;color:var(--text)}.onlineEye{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:11px;border:1px solid var(--border)}
+.fieldMessage{display:none;margin-top:7px;padding:8px 10px;border-radius:10px;font-size:10px;line-height:1.4;font-weight:800}.fieldMessage.show{display:block}.fieldMessage.error{background:#fff0ef;color:#b42318;border:1px solid #ffd6d2}.fieldMessage.ok{background:#eafaf2;color:#087443;border:1px solid #c6f0d9}body.dark .fieldMessage.error{background:#321716;color:#ffaaa3;border-color:#6b2925}body.dark .fieldMessage.ok{background:#10291f;color:#8be0b5;border-color:#235b40}
 .natcashCopyRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .copyNumberBtn{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:7px 9px;font-size:9px;font-weight:900;cursor:pointer}
 .copyNumberBtn:active{transform:scale(.97)}
@@ -1565,6 +1566,21 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
     font-size:40px
   }
 }
+.favoriteBtn{margin-top:8px;width:100%;font-weight:800}
+.messageHeaderBtn{position:relative}.messageHeaderBtn .badge{min-width:15px;height:15px;font-size:8px;top:-4px;right:-4px}
+
+.messageSupportFloat{
+  position:fixed;right:14px;bottom:142px;z-index:96;
+  border:1px solid var(--border);background:var(--card);color:var(--text);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);border-radius:999px;
+  min-height:42px;padding:0 13px;display:flex;align-items:center;gap:7px;
+  font-size:16px;font-weight:900;cursor:pointer;
+}
+.messageSupportLabel{font-size:10px}
+.messageSupportFloat:active{transform:scale(.97)}
+
+.messageComposerHint{margin-top:6px;font-size:9px;color:var(--muted);line-height:1.35}
+#sendCustomerMessageBtn{width:100%;margin-top:8px}
 </style>
 </head>
 
@@ -1679,6 +1695,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
         Solde Wallet
       </div>
 
+
       <div
         class="walletAmount"
         id="headerBalance">
@@ -1703,8 +1720,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 <section id="home" class="page active">
 
   <!-- BANNER -->
-
-  <div class="banner">
+<div class="banner">
 
     <div class="slide active">
 
@@ -1718,8 +1734,6 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
         <p>
           Rechaje Wallet ou ak sèvis peman ki disponib yo.
-          <br><br>
-          Les paiements seront automatisés lorsque les API seront connectées.
         </p>
 
       </div>
@@ -2178,6 +2192,8 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
         autocomplete="off"
         placeholder="Antre UID ou">
 
+      <div id="ffUidMessage" class="fieldMessage" aria-live="polite"></div>
+
     </div>
 
 
@@ -2396,6 +2412,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
         💎 Acheter maintenant
 
       </button>
+<button type="button" id="favoriteFreeFireBtn" class="secondaryBtn" onclick="toggleFavoriteFreeFire()" aria-pressed="false">♡ Ajouter aux favoris</button>
 
     </div>
 
@@ -2419,6 +2436,13 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
   <div class="messageComposer">
     <textarea id="customerMessageInput" rows="3" placeholder="Écrivez votre message à TRUE ALPHA..."></textarea>
+      <div class="messageComposerHint">
+        Écrivez votre message ici. / Ekri mesaj ou la isit la.
+      </div>
+      <button type="button" id="sendCustomerMessageBtn" class="primaryBtn"
+              onclick="sendCustomerMessage()">
+        📨 Envoyer le message / Voye mesaj la
+      </button>
       <div id="messageComposerStatus" class="composerStatus" aria-live="polite"></div>
     <button class="primaryBtn" onclick="sendCustomerMessage()">Envoyer le message</button>
   </div>
@@ -3035,6 +3059,10 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
      WHATSAPP
 ========================= -->
 
+<button type="button" id="siteMessageSupport" class="messageSupportFloat"
+  onclick="showMessages()" aria-label="Messages TRUE ALPHA — Chat avec l’Admin">
+  💬<span class="messageSupportLabel">Messages</span>
+</button>
 <a
   class="whatsapp"
   href="https://wa.me/50941515802"
@@ -3980,6 +4008,7 @@ window.addEventListener(
 
     loadBadges();
     startOnlinePresence();
+  syncFavoriteFreeFire();
 
     setTimeout(()=>{
 
@@ -4019,6 +4048,55 @@ function toggleDark(){
    PAGE NAVIGATION
 ===================================================== */
 
+
+function resetTAFormAndDraft(){
+  document.querySelectorAll("input, textarea, select").forEach(el=>{
+    if(el.type==="checkbox" || el.type==="radio") el.checked=false;
+    else el.value="";
+  });
+  ["playerName","playerServer"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent="";
+  });
+  ["playerResult","checkoutSummary","checkoutModal","rechargeDetails","withdrawDetails","transferDetails"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && id==="playerResult") el.style.display="none";
+  });
+  try{
+    sessionStorage.removeItem("taCheckoutDraft");
+    sessionStorage.removeItem("taCurrentForm");
+  }catch(e){}
+  if(typeof verifiedPlayerName!=="undefined") verifiedPlayerName="";
+  if(typeof verifiedServer!=="undefined") verifiedServer="";
+  if(typeof verifiedUid!=="undefined") verifiedUid="";
+  if(typeof paymentMethod!=="undefined") paymentMethod="";
+}
+function taBackReset(target="home"){
+  resetTAFormAndDraft();
+  if(typeof showPage==="function") showPage(target);
+}
+
+function resetCurrentFormFields(){
+  document.querySelectorAll("input, textarea, select").forEach(el=>{
+    if(el.type==="checkbox" || el.type==="radio") el.checked=false;
+    else el.value="";
+  });
+  const playerName=document.getElementById("playerName");
+  const playerServer=document.getElementById("playerServer");
+  const playerResult=document.getElementById("playerResult");
+  if(playerName) playerName.textContent="";
+  if(playerServer) playerServer.textContent="";
+  if(playerResult) playerResult.style.display="none";
+  if(typeof verifiedPlayerName!=="undefined") verifiedPlayerName="";
+  if(typeof verifiedServer!=="undefined") verifiedServer="";
+  if(typeof verifiedUid!=="undefined") verifiedUid="";
+  document.querySelectorAll(".composerStatus").forEach(x=>{x.textContent="";x.className="composerStatus";});
+}
+function resetAllFormsAndGoHome(){
+  resetCurrentFormFields();
+  try{sessionStorage.removeItem("taCheckoutDraft");}catch(e){}
+  showPage("home");
+}
 function showPage(page){
 
   if(!canUseSite())return;
@@ -4092,6 +4170,7 @@ function resetTopupFlow(){
 
   if(uid)
     uid.value="";
+  clearUIDMessage();
 
   const result=
     document.getElementById("playerResult");
@@ -4151,6 +4230,7 @@ function backFromFreeFire(){
 
 
 function backFromCards(){
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4158,6 +4238,7 @@ function backFromCards(){
 
 
 function backFromActivities(){
+  resetTopupFlow();
 
   selectedActivity=null;
 
@@ -4167,6 +4248,7 @@ function backFromActivities(){
 
 
 function backFromPoints(){
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4174,6 +4256,7 @@ function backFromPoints(){
 
 
 function backFromOrders(){
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4181,6 +4264,7 @@ function backFromOrders(){
 
 
 function backFromWallet(){
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4188,6 +4272,7 @@ function backFromWallet(){
 
 
 function backFromNotifications(){
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4195,6 +4280,8 @@ function backFromNotifications(){
 
 
 function backFromProfile(){
+
+  resetTopupFlow();
 
   showPage("home");
 
@@ -4284,11 +4371,9 @@ function openLogin(){
 
 
 function closeLoginAndReset(){
-
+  resetTAFormAndDraft();
   closeModal("loginModal");
-
   showPage("home");
-
 }
 
 
@@ -4500,15 +4585,30 @@ function openFreeFire(){
 }
 
 
+function showUIDMessage(message,type="error"){
+  const box=document.getElementById("ffUidMessage");
+  if(!box)return;
+  box.textContent=message;
+  box.className="fieldMessage show "+(type==="ok"?"ok":"error");
+}
+
+function clearUIDMessage(){
+  const box=document.getElementById("ffUidMessage");
+  if(!box)return;
+  box.textContent="";
+  box.className="fieldMessage";
+}
+
 async function verifyUID(){
 
   if(!canUseSite())return;
 
   const uid=document.getElementById("uid")?.value.trim();
 
-  if(!uid){ toast("⚠️ Entrez votre UID Free Fire."); return; }
-  if(!/^[0-9]+$/.test(uid)){ toast("⚠️ L’UID doit contenir uniquement des chiffres."); return; }
-  if(uid.length<5){ toast("⚠️ Cet UID ne semble pas valide."); return; }
+  clearUIDMessage();
+  if(!uid){ showUIDMessage("⚠️ Entrez votre UID Free Fire."); return; }
+  if(!/^[0-9]+$/.test(uid)){ showUIDMessage("⚠️ L’UID doit contenir uniquement des chiffres."); return; }
+  if(uid.length<5){ showUIDMessage("⚠️ Cet UID ne semble pas valide."); return; }
 
   const btn=document.getElementById("verifyBtn");
   const result=document.getElementById("playerResult");
@@ -4522,6 +4622,7 @@ async function verifyUID(){
   result.style.display="none";
   packs.style.display="none";
   if(errorBox) errorBox.remove();
+  clearUIDMessage();
   verifiedPlayerName=""; verifiedServer=""; verifiedUid="";
 
   try{
@@ -4553,7 +4654,7 @@ async function verifyUID(){
       err.className="serverError";
       err.textContent="❌ Le serveur n’est pas NA. Le joueur est sur le serveur "+verifiedServer+". Les packs ne sont pas disponibles pour ce serveur.";
       result.after(err);
-      toast("❌ Serveur non compatible avec le TopUp NA.");
+      showUIDMessage("❌ Serveur non compatible avec le TopUp NA. Le joueur est sur : "+verifiedServer+".");
       return;
     }
 
@@ -4561,9 +4662,10 @@ async function verifyUID(){
     if(serverEl) serverEl.textContent="Serveur : NA — North America";
     if(hint) hint.textContent="Serveur : NA — North America";
     packs.style.display="block";
+    showUIDMessage("✅ UID vérifié. Joueur trouvé : "+verifiedPlayerName,"ok");
 
   }catch(e){
-    toast("⚠️ Vérification UID indisponible pour le moment. Vérifiez que le backend GamesKinbo est connecté.");
+    showUIDMessage("⚠️ Impossible de vérifier cet UID pour le moment. Réessayez.");
   }finally{
     btn.disabled=false;
     btn.textContent="🔐 Vérifier le joueur";
@@ -4588,6 +4690,27 @@ function selectPack(element,name,price){
   document.getElementById("selectedPackBox").style.display="block";
   document.getElementById("selectedPackText").textContent=name;
   document.getElementById("selectedPackPrice").textContent=selectedPrice.toLocaleString("fr-FR")+" HTG";
+}
+
+
+function toggleFavoriteFreeFire(){
+  const key="ta_favorite_freefire";
+  const saved=localStorage.getItem(key)==="1";
+  localStorage.setItem(key,saved?"0":"1");
+  const btn=document.getElementById("favoriteFreeFireBtn");
+  if(btn){
+    btn.textContent=saved?"♡ Ajouter aux favoris":"♥ Retirer des favoris";
+    btn.setAttribute("aria-pressed",saved?"false":"true");
+  }
+  if(typeof toast==="function") toast(saved?"♡ Free Fire retiré des favoris.":"♥ Free Fire ajouté aux favoris.");
+}
+function syncFavoriteFreeFire(){
+  const saved=localStorage.getItem("ta_favorite_freefire")==="1";
+  const btn=document.getElementById("favoriteFreeFireBtn");
+  if(btn){
+    btn.textContent=saved?"♥ Retirer des favoris":"♡ Ajouter aux favoris";
+    btn.setAttribute("aria-pressed",saved?"true":"false");
+  }
 }
 
 function buyNow(){
@@ -4622,7 +4745,10 @@ function updateCheckoutUI(){
   if(pb) pb.textContent=Number(points||0).toLocaleString("fr-FR")+" ⭐";
 }
 
-function closeCheckout(){ closeModal("checkoutModal"); }
+function closeCheckout(){
+  resetTAFormAndDraft();
+  closeModal("checkoutModal");
+}
 
 async function confirmPurchase(){
   if(!requireLogin())return;
@@ -4909,13 +5035,9 @@ async function depositContinue(){
 
 
 function closeRechargeReset(){
-
   resetDeposit();
-
-  closeModal(
-    "rechargeModal"
-  );
-
+  resetTAFormAndDraft();
+  closeModal("rechargeModal");
 }
 
 
@@ -6206,13 +6328,19 @@ async function showMessages(){
   showPage("messages");
   await loadMessages();
 }
-function backFromMessages(){showPage("home");}
+function backFromMessages(){resetTopupFlow();showPage("home");}
 async function loadMessages(){
   const box=document.getElementById("messagesList"); if(!box||!firebaseUser)return;
   try{
     const r=await fetch("/api/messages?customer="+encodeURIComponent(firebaseUser.email||firebaseUser.uid));
     const data=await r.json().catch(()=>({messages:[]}));
     const list=Array.isArray(data)?data:(data.messages||[]);
+    const unread=list.filter(m=>m.from==="admin" && (m.read===false || m.unread===true)).length;
+    const badge=document.getElementById("messageBadge");
+    if(badge){
+      badge.textContent=unread>99?"99+":String(unread);
+      badge.style.display=unread?"inline-flex":"none";
+    }
     box.innerHTML=list.length?list.map(m=>`<div class="messageBubble ${m.from==="admin"?"admin":""}"><div><b>${escapeHTML(m.from==="admin"?"TRUE ALPHA":"Vous")}</b></div><div style="margin-top:5px;font-size:11px;line-height:1.5">${escapeHTML(m.text||m.message||"")}</div><div class="messageMeta">${escapeHTML(m.createdAt||m.time||"")}</div></div>`).join(""):"<div class='emptyActivity'>💬 Aucun message pour le moment.</div>";
   }catch(e){box.innerHTML="<div class='emptyActivity'>💬 Les messages sont momentanément indisponibles.</div>";}
 }
