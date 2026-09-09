@@ -1579,11 +1579,14 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 .messageSupportFloat:active{transform:scale(.97)}
 
 .messageComposerHint{margin-top:6px;font-size:9px;color:var(--muted);line-height:1.35}
+.messageDeleteBtn{border-color:#f5c2c0;color:#b42318;background:#fff5f4;font-weight:900}
+body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8a}
 
 
 /* =========================
    ALPHA HUB / EXTRA FEATURES
 ========================= */
+.birthdayDatePicker{display:grid;grid-template-columns:1fr 1.25fr 1.15fr;gap:7px;margin-top:8px}.birthdayPart{min-width:0}.birthdayYear{min-width:0}
 .alphaHub{margin-top:14px;display:grid;gap:12px}
 .alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer}
@@ -2453,6 +2456,10 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
 
   <div id="messagesList" class="messagesList"></div>
 
+  <div class="messageConversationActions" style="display:flex;justify-content:flex-end;margin:0 0 10px;">
+    <button type="button" class="backBtn messageDeleteBtn" onclick="deleteCustomerConversation()">🗑️ Effacer la conversation</button>
+  </div>
+
   <div class="messageComposer">
     <textarea id="customerMessageInput" rows="3" placeholder="Écrivez votre message à TRUE ALPHA..."></textarea>
       <div class="messageComposerHint">
@@ -2460,7 +2467,6 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
       </div>
       <div class="messageComposerActions" style="display:flex;gap:8px;margin-top:9px;">
         <button type="button" class="primaryBtn" onclick="sendCustomerMessage()">📨 Envoyer le message</button>
-        <button type="button" class="backBtn" onclick="clearCustomerMessage()">🗑️ Retirer</button>
       </div>
       <div id="messageComposerStatus" class="composerStatus" aria-live="polite"></div>
   </div>
@@ -3048,9 +3054,13 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
       <div class="alphaBirthday" id="birthdayCard">
         <h3 id="birthdayTitle">🎂 Mon anniversaire</h3>
         <p id="birthdayText">Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.</p>
-        <input class="alphaInput" id="birthDateInput" type="date" aria-label="Date de naissance">
+        <div class="birthdayDatePicker" id="birthdayDatePicker">
+          <select class="alphaInput birthdayPart" id="birthDayInput" aria-label="Jour"></select>
+          <select class="alphaInput birthdayPart" id="birthMonthInput" aria-label="Mois"></select>
+          <select class="alphaInput birthdayPart birthdayYear" id="birthYearInput" aria-label="Année"></select>
+        </div>
         <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button class="alphaBtn" type="button" onclick="saveBirthday()">Enregistrer</button>
+          <button class="alphaBtn" type="button" onclick="saveBirthday()">Définir la date</button>
           <button class="alphaBtn secondary" type="button" onclick="clearBirthday()">Effacer</button>
         </div>
       </div>
@@ -4090,6 +4100,7 @@ function toggleDark(){
 
 function resetTAFormAndDraft(){
   document.querySelectorAll("input, textarea, select").forEach(el=>{
+    if(el.closest("#birthdayCard") || el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
     if(el.type==="checkbox" || el.type==="radio") el.checked=false;
     else el.value="";
   });
@@ -4117,6 +4128,7 @@ function taBackReset(target="home"){
 
 function resetCurrentFormFields(){
   document.querySelectorAll("input, textarea, select").forEach(el=>{
+    if(el.closest("#birthdayCard") || el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
     if(el.type==="checkbox" || el.type==="radio") el.checked=false;
     else el.value="";
   });
@@ -4139,6 +4151,8 @@ function resetAllFormsAndGoHome(){
 function showPage(page){
 
   if(!canUseSite())return;
+  const currentPage=document.querySelector(".page.active")?.id;
+  if(currentPage && currentPage!==page) resetCurrentFormFields();
 
   document
     .querySelectorAll(".page")
@@ -6387,11 +6401,23 @@ function openArcadeAlpha(){
   toast("🕹️ Arcade Alpha est prêt. Les mini-jeux et défis seront gérés depuis l’Admin.");
 }
 
-function clearCustomerMessage(){
-  const input=document.getElementById("customerMessageInput");
-  if(input) input.value="";
-  const status=document.getElementById("messageComposerStatus");
-  if(status) status.classList.remove("show");
+async function deleteCustomerConversation(){
+  if(!requireLogin())return;
+  const ok=window.confirm(taT("Supprimer toute la conversation avec TRUE ALPHA ?","Efase tout konvèsasyon an ak TRUE ALPHA ?"));
+  if(!ok)return;
+  const customer=encodeURIComponent(firebaseUser.email||firebaseUser.uid);
+  try{
+    const r=await fetch("/api/messages?customer="+customer,{method:"DELETE",headers:{"Content-Type":"application/json"}});
+    if(!r.ok)throw new Error("delete_failed");
+    const box=document.getElementById("messagesList");
+    if(box)box.innerHTML="<div class='emptyActivity'>💬 Aucun message pour le moment.</div>";
+    const badge=document.getElementById("messageBadge");
+    if(badge){badge.textContent="0";badge.style.display="none";}
+    addNotification(taT("Conversation supprimée","Konvèsasyon an efase"),taT("Votre conversation avec TRUE ALPHA a été supprimée.","Konvèsasyon ou ak TRUE ALPHA efase."));
+    showComposerStatus(taT("✅ Conversation supprimée.","✅ Konvèsasyon an efase."),"ok");
+  }catch(e){
+    showComposerStatus(taT("❌ La suppression n’est pas disponible pour le moment. Le backend des messages doit accepter DELETE.","❌ Efase konvèsasyon an poko disponib. Backend mesaj yo dwe sipòte DELETE."),"error");
+  }
 }
 
 async function sendCustomerMessage(){
@@ -6573,7 +6599,7 @@ const TA_TRANSLATIONS={
     "Continuer":"Kontinye","Fermer":"Fèmen","Retrait Wallet":"Retrè Wallet","Numéro":"Nimewo","Montant HTG":"Montan HTG","Demander le retrait":"Mande retrè a",
     "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
     "Messages":"Mesaj","Écrivez votre message à TRUE ALPHA...":"Ekri mesaj ou bay TRUE ALPHA...","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.",
-    "Envoyer le message":"Voye mesaj la","Retirer":"Retire","Aucun message pour le moment.":"Pa gen mesaj pou kounye a.","Les messages sont momentanément indisponibles.":"Mesaj yo pa disponib pou kounye a.",
+    "Envoyer le message":"Voye mesaj la","Effacer la conversation":"Efase konvèsasyon an","Découvre TRUE ALPHA TopUp 💎":"Dekouvri TRUE ALPHA TopUp 💎","TRUE ALPHA partagé.":"TRUE ALPHA pataje.","Lien TRUE ALPHA copié.":"Lyen TRUE ALPHA kopye.","Impossible de copier le lien.":"Pa kapab kopye lyen an.","Copiez le lien du site pour le partager.":"Kopye lyen sit la pou pataje li.","Supprimer toute la conversation avec TRUE ALPHA ?":"Efase tout konvèsasyon an ak TRUE ALPHA ?","Aucun message pour le moment.":"Pa gen mesaj pou kounye a.","Les messages sont momentanément indisponibles.":"Mesaj yo pa disponib pou kounye a.",
     "Réclamer":"Ranmase","Progress":"Pwogrè","Progression":"Pwogrè","First Order":"Premye kòmand","Diamond Buyer":"Achtè Diamonds","Arcade Player":"Jwè Arcade","Daily Gift":"Kado chak jou",
     "Wallet TA Points":"Wallet TA Points","2 TA Points = 1 HTG":"2 TA Points = 1 HTG","Confirmer et payer":"Konfime epi peye","Validation...":"Validasyon...",
     "Aujourd’hui":"Jodi a","Aujourd'hui":"Jodi a","Bienvenue sur TRUE ALPHA":"Byenveni sou TRUE ALPHA","Free Fire TopUp disponible":"Free Fire TopUp disponib","Wallet":"Wallet",
@@ -6586,7 +6612,7 @@ const TA_TRANSLATIONS={
     "Cartes virtuelles":"Kat vityèl","Activité ak rekonpans":"Aktivite ak rekonpans","Pwen ak rekonpans":"Pwen ak rekonpans","✨ Tout sèvis TRUE ALPHA":"✨ Tout sèvis TRUE ALPHA",
     "Recharge de Diamonds par UID.":"Rechaj Diamonds ak UID.","Jeux & services":"Jwèt ak sèvis","6 services":"6 sèvis","Free Fire TopUp par UID":"Free Fire TopUp ak UID","Retour aux jeux":"Retounen nan jwèt yo",
     "Entrez votre UID Free Fire.":"Antre UID Free Fire ou.","Entrez votre UID puis vérifiez les informations du joueur.":"Antre UID ou epi voye l bay Admin pou verifye enfòmasyon jwè a.","Serveur : —":"Sèvè : —","UID Free Fire":"UID Free Fire","🔐 Vérifier le joueur":"🔐 Voye UID bay Admin","✓ Joueur verifye":"✓ Jwè verifye","💎 Choisir un pack":"💎 Chwazi yon pack","Bonus inclus":"Bonis ladan","Pack sélectionné":"Pack chwazi","💎 Acheter maintenant":"💎 Achte kounye a","♡ Ajouter aux favoris":"♡ Ajoute nan favoris","♥ Retirer des favoris":"♥ Retire nan favoris",
-    "💬 Messages":"💬 Mesaj","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.","📨 Envoyer le message":"📨 Voye mesaj la","🗑️ Retirer":"🗑️ Retire","💳 Cartes virtuelles":"💳 Kat vityèl","VIRTUAL CARD":"KAT VITYÈL","Créer une carte Visa virtuelle":"Kreye yon kat Visa vityèl","💳 Kontakte pou kreye kat la":"💳 Kontakte pou kreye kat la",
+    "💬 Messages":"💬 Mesaj","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.","📨 Envoyer le message":"📨 Voye mesaj la","🗑️ Effacer la conversation":"🗑️ Efase konvèsasyon an","💳 Cartes virtuelles":"💳 Kat vityèl","VIRTUAL CARD":"KAT VITYÈL","Créer une carte Visa virtuelle":"Kreye yon kat Visa vityèl","💳 Kontakte pou kreye kat la":"💳 Kontakte pou kreye kat la",
     "🎮 Jwèt & Aktivite ALPHA":"🎮 Jwèt & Aktivite ALPHA","Mini-jeux TRUE ALPHA, défis et activités ajoutés par l’Admin.":"Mini-jwèt TRUE ALPHA, defi ak aktivite Admin nan ajoute.","🎮 Arcade • Défis ALPHA":"🎮 Arcade • Defi ALPHA","🕹️ Jouer à Arcade Alpha":"🕹️ Jwe Arcade Alpha",
     "Réclamez votre cadeau quotidien une seule fois par jour.":"Ranmase kado chak jou ou yon sèl fwa pa jou.","TRUE ALPHA n’a ajouté aucune activité pour le moment.":"TRUE ALPHA poko ajoute okenn aktivite pou kounye a.","Revenez plus tard pour découvrir de nouvelles activités ALPHA. 💎":"Tounen pita pou dekouvri nouvo aktivite ALPHA. 💎","Les récompenses apparaîtront ici lorsque l’Admin les publiera.":"Rekonpans yo ap parèt isit la lè Admin nan pibliye yo.",
     "📋 Mes commandes":"📋 Kòmand mwen yo","🔔 Notifications":"🔔 Notifikasyon","0 nouvelles":"0 nouvo","✓ Tout lire":"✓ Li tout","🗑️ Tout effacer":"🗑️ Efase tout","👤 Profil":"👤 Pwofil","Visiteur":"Vizitè","Konekte pou jwenn aksè ak kont ou.":"Konekte pou jwenn aksè ak kont ou.","👤 Compte":"👤 Kont","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","🛒 Mes commandes":"🛒 Kòmand mwen yo","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib","🌐 Langue":"🌐 Lang","🏅 Badges & achievements":"🏅 Badges ak reyalizasyon","🎨 Thème":"🎨 Tèm","Clair / Sombre":"Limyè / Fènwa","✨ Alpha Center":"✨ Alpha Center",
@@ -6610,20 +6636,163 @@ const TA_TRANSLATIONS={
   }
 };
 
+const TA_ORIGINAL_TEXT = new WeakMap();
+const TA_ORIGINAL_ATTR = new WeakMap();
+
+function translateNodeText(node, dict){
+  if(!node || !node.parentElement || ["SCRIPT","STYLE","NOSCRIPT"].includes(node.parentElement.tagName)) return;
+  if(!TA_ORIGINAL_TEXT.has(node)) TA_ORIGINAL_TEXT.set(node, node.nodeValue);
+  const original=TA_ORIGINAL_TEXT.get(node);
+  const key=original.trim();
+  if(dict[key]){
+    const start=original.indexOf(key);
+    node.nodeValue=start>=0 ? original.slice(0,start)+dict[key]+original.slice(start+key.length) : dict[key];
+  }else{
+    node.nodeValue=original;
+  }
+}
+
+function translateElementAttributes(el, dict){
+  if(!el || ["SCRIPT","STYLE","NOSCRIPT"].includes(el.tagName)) return;
+  ["placeholder","aria-label","title"].forEach(attr=>{
+    if(!el.hasAttribute(attr)) return;
+    const key=attr+"\u0000"+el.getAttribute(attr);
+    if(!TA_ORIGINAL_ATTR.has(el)) TA_ORIGINAL_ATTR.set(el,{});
+    const store=TA_ORIGINAL_ATTR.get(el);
+    if(store[attr]===undefined) store[attr]=el.getAttribute(attr);
+    const original=store[attr];
+    const clean=original.trim();
+    if(dict[clean]) el.setAttribute(attr,dict[clean]); else el.setAttribute(attr,original);
+  });
+}
+
 function applyLanguage(lang){
   const dict=TA_TRANSLATIONS[lang]||TA_TRANSLATIONS.fr;
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  const nodes=[]; while(walker.nextNode())nodes.push(walker.currentNode);
-  nodes.forEach(node=>{
-    if(!node.parentElement || ["SCRIPT","STYLE"].includes(node.parentElement.tagName))return;
-    const raw=node.nodeValue;
-    const base=node.parentElement.dataset.taBaseText!==undefined ? node.parentElement.dataset.taBaseText : raw;
-    if(node.parentElement.dataset.taBaseText===undefined) node.parentElement.dataset.taBaseText=raw;
-    const key=base.trim();
-    if(dict[key]) node.nodeValue=base.replace(key,dict[key]);
-  });
+  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node=>translateNodeText(node,dict));
+  document.querySelectorAll("body *").forEach(el=>translateElementAttributes(el,dict));
   document.documentElement.lang=lang==="fr"?"fr":"ht";
-  const lt=document.getElementById("languageText"); if(lt)lt.textContent=lang==="fr"?"Français / Kreyòl ›":"Kreyòl / Français ›";
+  const lt=document.getElementById("languageText");
+  if(lt) lt.textContent=lang==="fr"?"Français / Kreyòl ›":"Kreyòl / Français ›";
+  updateBirthdayUI();
+}
+
+function initBirthdayPicker(){
+  const day=document.getElementById("birthDayInput");
+  const month=document.getElementById("birthMonthInput");
+  const year=document.getElementById("birthYearInput");
+  if(!day||!month||!year)return;
+  if(day.options.length===0){
+    day.innerHTML='<option value="">Jour</option>'+Array.from({length:31},(_,i)=>`<option value="${String(i+1).padStart(2,"0")}">${i+1}</option>`).join("");
+  }
+  const oldMonth=month.value;
+  const names=taLang()==="ht"?["Janvye","Fevriye","Mas","Avril","Me","Jen","Jiyè","Out","Septanm","Oktòb","Novanm","Desanm"]:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+  month.innerHTML='<option value="">'+(taLang()==="ht"?"Mwa":"Mois")+'</option>'+names.map((n,i)=>`<option value="${String(i+1).padStart(2,"0")}">${n}</option>`).join("");
+  if(oldMonth)month.value=oldMonth;
+  if(year.options.length===0){
+    const current=new Date().getFullYear();
+    year.innerHTML='<option value="">Année</option>'+Array.from({length:101},(_,i)=>{const y=current-i;return `<option value="${y}">${y}</option>`}).join("");
+  }
+}
+
+function setBirthdayPickerValue(iso){
+  initBirthdayPicker();
+  const parts=String(iso||"").split("-");
+  const day=document.getElementById("birthDayInput");
+  const month=document.getElementById("birthMonthInput");
+  const year=document.getElementById("birthYearInput");
+  if(day)day.value=parts[2]||"";
+  if(month)month.value=parts[1]||"";
+  if(year)year.value=parts[0]||"";
+}
+
+function getBirthdayPickerValue(){
+  initBirthdayPicker();
+  const day=document.getElementById("birthDayInput")?.value||"";
+  const month=document.getElementById("birthMonthInput")?.value||"";
+  const year=document.getElementById("birthYearInput")?.value||"";
+  if(!day||!month||!year)return "";
+  const d=new Date(Number(year),Number(month)-1,Number(day));
+  if(d.getFullYear()!==Number(year)||d.getMonth()!==Number(month)-1||d.getDate()!==Number(day))return "";
+  return `${year}-${month}-${day}`;
+}
+
+function updateBirthdayUI(){
+  initBirthdayPicker();
+  const ht=taLang()==="ht";
+  const title=document.getElementById("birthdayTitle");
+  const text=document.getElementById("birthdayText");
+  const buttons=document.querySelectorAll('#birthdayCard button');
+  const day=document.getElementById("birthDayInput");
+  const month=document.getElementById("birthMonthInput");
+  const year=document.getElementById("birthYearInput");
+  if(title) title.textContent=ht?"🎂 Anivèsè mwen":"🎂 Mon anniversaire";
+  if(text) text.textContent=localStorage.getItem("ta_birthday")
+    ? (ht?"Dat anivèsè ou anrejistre sou TRUE ALPHA. 🎉":"Votre date d’anniversaire est enregistrée sur TRUE ALPHA. 🎉")
+    : (ht?"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.":"Ajoutez votre date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.");
+  if(day)day.setAttribute("aria-label",ht?"Jou":"Jour");
+  if(month)month.setAttribute("aria-label",ht?"Mwa":"Mois");
+  if(year)year.setAttribute("aria-label",ht?"Ane":"Année");
+  if(day?.options[0])day.options[0].textContent=ht?"Jou":"Jour";
+  if(month?.options[0])month.options[0].textContent=ht?"Mwa":"Mois";
+  if(year?.options[0])year.options[0].textContent=ht?"Ane":"Année";
+  if(buttons[0]) buttons[0].textContent=ht?"Defini dat la":"Définir la date";
+  if(buttons[1]) buttons[1].textContent=ht?"Efase":"Effacer";
+}
+
+function saveBirthday(){
+  const iso=getBirthdayPickerValue();
+  if(!iso){
+    toast(taT("⚠️ Choisissez un jour, un mois et une année valides.","⚠️ Chwazi yon jou, yon mwa ak yon ane ki valab."));
+    return;
+  }
+  localStorage.setItem("ta_birthday",iso);
+  updateBirthdayUI();
+  const card=document.getElementById("birthdayCard");
+  if(card)card.classList.add("live");
+  toast(taT("✅ Date d’anniversaire enregistrée !","✅ Dat anivèsè a anrejistre !"));
+}
+
+function clearBirthday(){
+  localStorage.removeItem("ta_birthday");
+  setBirthdayPickerValue("");
+  const card=document.getElementById("birthdayCard");
+  if(card)card.classList.remove("live");
+  updateBirthdayUI();
+  toast(taT("🗑️ Date d’anniversaire supprimée.","🗑️ Dat anivèsè a efase."));
+}
+
+function loadBirthday(){
+  initBirthdayPicker();
+  setBirthdayPickerValue(localStorage.getItem("ta_birthday")||"");
+  const card=document.getElementById("birthdayCard");
+  if(card&&localStorage.getItem("ta_birthday"))card.classList.add("live");
+  updateBirthdayUI();
+}
+
+
+function shareTrueAlpha(){
+  const shareData={
+    title:"TRUE ALPHA TopUp",
+    text:taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎"),
+    url:window.location.href
+  };
+  if(navigator.share){
+    navigator.share(shareData).then(()=>{
+      toast(taT("✅ TRUE ALPHA partagé.","✅ TRUE ALPHA pataje."));
+    }).catch(()=>{});
+    return;
+  }
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));
+    }).catch(()=>{
+      toast(taT("⚠️ Impossible de copier le lien.","⚠️ Pa kapab kopye lyen an."));
+    });
+    return;
+  }
+  toast(taT("ℹ️ Copiez le lien du site pour le partager.","ℹ️ Kopye lyen sit la pou pataje li."));
 }
 
 
@@ -6639,6 +6808,9 @@ function changeLanguage(){
   const l=localStorage.getItem("ta_language")||"fr";
   applyLanguage(l);
 })();
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",loadBirthday);
+else loadBirthday();
 
 
 /* =====================================================
