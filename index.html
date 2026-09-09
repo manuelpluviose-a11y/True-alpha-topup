@@ -1495,7 +1495,7 @@ body.dark .paymentDetails{background:#2b2414;border-color:#5a481e;color:#f5d98b}
 .authActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.secondaryBtn{width:100%;border:1px solid var(--border);background:var(--card);color:var(--text);padding:14px;border-radius:13px;font-weight:900}
 .walletDualBox{margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:17px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:var(--shadow)}
 .walletDualBox small{display:block;color:var(--muted);font-size:10px}.walletDualBox strong{display:block;margin-top:4px;font-size:18px}.walletPointsFormula{font-size:10px;color:var(--primary);font-weight:900;text-align:right}
-.checkoutSummary{background:#f7f6ff;border:1px solid #dedaff;border-radius:15px;padding:14px;font-size:11px;line-height:1.8}.checkoutSummary b{font-weight:900}.checkoutTitle{margin-top:18px}.paymentChoiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paymentChoice{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:15px;padding:13px;text-align:left;display:grid;gap:4px;cursor:pointer}.paymentChoice span{font-size:20px}.paymentChoice strong{font-size:11px}.paymentChoice small{font-size:9px;color:var(--muted)}.paymentChoice.selected{border:2px solid var(--primary);background:#f2f0ff}.checkoutFormula{font-size:9px;color:var(--muted);line-height:1.5;margin:11px 0 14px}.onlinePresence{position:fixed;right:14px;top:74px;z-index:95;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:999px;padding:8px 11px;display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}.onlinePresence strong{font-size:10px;color:var(--text)}.onlineEye{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:11px;border:1px solid var(--border)}
+.checkoutSummary{background:#f7f6ff;border:1px solid #dedaff;border-radius:15px;padding:14px;font-size:11px;line-height:1.8}.checkoutSummary b{font-weight:900}.checkoutTitle{margin-top:18px}.paymentChoiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paymentChoice{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:15px;padding:13px;text-align:left;display:grid;gap:4px;cursor:pointer}.paymentChoice span{font-size:20px}.paymentChoice strong{font-size:11px}.paymentChoice small{font-size:9px;color:var(--muted)}.paymentChoice.selected{border:2px solid var(--primary);background:#f2f0ff}.checkoutFormula{font-size:9px;color:var(--muted);line-height:1.5;margin:11px 0 14px}.onlinePresence{display:none;position:fixed;right:14px;top:74px;z-index:95;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:999px;padding:8px 11px;display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}.onlinePresence strong{font-size:10px;color:var(--text)}.onlineEye{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:11px;border:1px solid var(--border)}.onlineHeader{border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow);border-radius:999px;min-height:38px;padding:6px 10px;display:flex;align-items:center;gap:6px;cursor:pointer}.onlineHeaderEye{width:24px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--primary)}.onlineHeaderEye svg{width:24px;height:16px}.onlineHeader strong{font-size:10px;color:var(--text)}
 .fieldMessage{display:none;margin-top:7px;padding:8px 10px;border-radius:10px;font-size:10px;line-height:1.4;font-weight:800}.fieldMessage.show{display:block}.fieldMessage.error{background:#fff0ef;color:#b42318;border:1px solid #ffd6d2}.fieldMessage.ok{background:#eafaf2;color:#087443;border:1px solid #c6f0d9}body.dark .fieldMessage.error{background:#321716;color:#ffaaa3;border-color:#6b2925}body.dark .fieldMessage.ok{background:#10291f;color:#8be0b5;border-color:#235b40}
 .natcashCopyRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .copyNumberBtn{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:7px 9px;font-size:9px;font-weight:900;cursor:pointer}
@@ -1567,7 +1567,6 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
   }
 }
 .favoriteBtn{margin-top:8px;width:100%;font-weight:800}
-.messageHeaderBtn{position:relative}.messageHeaderBtn .badge{min-width:15px;height:15px;font-size:8px;top:-4px;right:-4px}
 
 .messageSupportFloat{
   position:fixed;right:14px;bottom:142px;z-index:96;
@@ -1580,7 +1579,25 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 .messageSupportFloat:active{transform:scale(.97)}
 
 .messageComposerHint{margin-top:6px;font-size:9px;color:var(--muted);line-height:1.35}
-#sendCustomerMessageBtn{width:100%;margin-top:8px}
+
+
+/* =========================
+   ALPHA HUB / EXTRA FEATURES
+========================= */
+.alphaHub{margin-top:14px;display:grid;gap:12px}
+.alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer}
+.alphaFeature b{display:block;font-size:12px;margin-bottom:5px}.alphaFeature small{color:var(--muted);font-size:10px;line-height:1.45}
+.alphaProgress{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:9px}.alphaProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
+.alphaMiniStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.alphaStat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.alphaStat strong{display:block;font-size:15px}.alphaStat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.alphaList{display:grid;gap:8px;margin-top:10px}.alphaRow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+.alphaBtn{border:0;border-radius:12px;padding:9px 12px;background:var(--primary);color:#fff;font-weight:800;font-size:10px}.alphaBtn.secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.alphaInput{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);outline:none;margin-top:7px}.alphaNote{font-size:10px;color:var(--muted);line-height:1.5;margin-top:7px}
+.alphaBirthday{border-radius:18px;padding:15px;background:linear-gradient(135deg,#fff4fb,#f3f1ff);border:1px solid #eadcf5}.alphaBirthday h3{font-size:14px;margin-bottom:5px}.alphaBirthday p{font-size:10px;color:#667085;line-height:1.5}.alphaBirthday.live{animation:alphaPulse 1.8s infinite}
+@keyframes alphaPulse{50%{transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,91,255,.15)}}
+body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alphaBirthday p{color:var(--muted)}
+@media(max-width:420px){.alphaHubGrid{grid-template-columns:1fr 1fr}.alphaMiniStats{grid-template-columns:1fr 1fr 1fr}}
+
 </style>
 </head>
 
@@ -1637,10 +1654,6 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
   <div class="headerRight">
 
-    <button class="iconBtn" onclick="openWallet()">
-      💰
-    </button>
-
     <button
       class="iconBtn languageBtn"
       id="languageButton"
@@ -1652,8 +1665,8 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
     <button
       class="iconBtn profileHeaderBtn"
       onclick="openLogin()"
-      aria-label="Profil">
-      <span id="headerAvatar">👤</span>
+      aria-label="Mon compte">
+      <span>👤</span>
     </button>
 
     <button
@@ -1666,9 +1679,15 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
       <span class="themeSwitchIcon">🌙</span>
     </button>
 
-    <button class="iconBtn" onclick="showNotifications()">
-      🔔
-      <span class="badge" id="notificationBadge">0</span>
+    <button class="onlineHeader" type="button" onclick="showOnlineDetails()" aria-label="Utilisateurs en ligne">
+      <span class="onlineHeaderEye" aria-hidden="true">
+        <svg viewBox="0 0 32 20" role="img">
+          <path d="M2 10S6.5 2.5 16 2.5 30 10 30 10 25.5 17.5 16 17.5 2 10 2 10Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="16" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
+        </svg>
+      </span>
+      <strong id="onlineCountHeader">—</strong>
     </button>
 
     <button
@@ -2439,12 +2458,11 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
       <div class="messageComposerHint">
         Écrivez votre message ici. / Ekri mesaj ou la isit la.
       </div>
-      <button type="button" id="sendCustomerMessageBtn" class="primaryBtn"
-              onclick="sendCustomerMessage()">
-        📨 Envoyer le message / Voye mesaj la
-      </button>
+      <div class="messageComposerActions" style="display:flex;gap:8px;margin-top:9px;">
+        <button type="button" class="primaryBtn" onclick="sendCustomerMessage()">📨 Envoyer le message</button>
+        <button type="button" class="backBtn" onclick="clearCustomerMessage()">🗑️ Retirer</button>
+      </div>
       <div id="messageComposerStatus" class="composerStatus" aria-live="polite"></div>
-    <button class="primaryBtn" onclick="sendCustomerMessage()">Envoyer le message</button>
   </div>
 </section>
 
@@ -2580,7 +2598,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
         <small>Réclamez votre cadeau quotidien une seule fois par jour.</small>
       </div>
     </div>
-    <div class="activityReward">⭐ +250 TA Points</div>
+    <div class="activityReward">⭐ +20 TA Points</div>
     <button class="primaryBtn dailyGiftButton" onclick="claimDailyGift()">🎁 Réclamer</button>
   </div>
 
@@ -2720,7 +2738,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
     <div class="balanceBox">
 
       <small>
-        Solde disponiblele
+        Solde disponible
       </small>
 
       <h2 id="walletBalance">
@@ -3024,6 +3042,33 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
     </div>
 
 
+
+    <div class="alphaHub">
+      <div class="sectionTitle" style="margin-top:8px"><h3>✨ Alpha Center</h3></div>
+      <div class="alphaBirthday" id="birthdayCard">
+        <h3 id="birthdayTitle">🎂 Mon anniversaire</h3>
+        <p id="birthdayText">Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.</p>
+        <input class="alphaInput" id="birthDateInput" type="date" aria-label="Date de naissance">
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button class="alphaBtn" type="button" onclick="saveBirthday()">Enregistrer</button>
+          <button class="alphaBtn secondary" type="button" onclick="clearBirthday()">Effacer</button>
+        </div>
+      </div>
+      <div class="alphaMiniStats">
+        <div class="alphaStat"><strong id="alphaLevel">1</strong><span>Alpha Level</span></div>
+        <div class="alphaStat"><strong id="alphaStreak">0</strong><span>Streak</span></div>
+        <div class="alphaStat"><strong id="alphaBadgeCount">0</strong><span>Badges</span></div>
+      </div>
+      <div class="alphaHubGrid">
+        <div class="alphaFeature" onclick="openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></div>
+        <div class="alphaFeature" onclick="openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></div>
+        <div class="alphaFeature" onclick="openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></div>
+        <div class="alphaFeature" onclick="shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></div>
+      </div>
+      <div class="alphaFeature" onclick="openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></div>
+      <div class="alphaFeature" onclick="openAlphaStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></div>
+    </div>
+
     <div
       class="menuItem logout"
       onclick="logout()">
@@ -3042,16 +3087,6 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
 </section>
 
-</div>
-
-
-<!-- =========================
-     ONLINE PRESENCE
-========================= -->
-<div class="onlinePresence" id="onlinePresence" aria-label="Utilisateurs en ligne">
-  <span class="onlineEye" aria-hidden="true">●</span>
-  <strong id="onlineCount">1</strong>
-  <span data-i18n="en ligne">en ligne</span>
 </div>
 
 
@@ -3095,9 +3130,9 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
     Kòmand mwen yo
   </button>
 
-  <button class="navItem" data-page="notifications" onclick="showNotifications()">
-    <span class="navSvg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="navBadge" id="navNotificationBadge">0</span></span>
-    Notifications
+  <button class="navItem" data-page="wallet" onclick="openWallet()">
+    <span class="navSvg"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 13h5v4h-5a2 2 0 1 1 0-4Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6 6V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+    Wallet
   </button>
 
   <button class="navItem" data-page="profile" onclick="privatePage('profile')">
@@ -3109,6 +3144,17 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
 </div>
 
+
+
+<!-- =========================
+     ALPHA CENTER MODAL
+========================= -->
+<div class="modal" id="alphaCenterModal">
+  <div class="modalBox">
+    <div class="modalHeader"><h3 id="alphaCenterTitle">Alpha Center</h3><button class="closeBtn" onclick="closeAlphaCenter()">✕</button></div>
+    <div id="alphaCenterContent"></div>
+  </div>
+</div>
 
 <!-- =========================
      LOGIN MODAL
@@ -3416,19 +3462,12 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
         <br><br>
 
-        API peman an poko konekte ak
-        TRUE ALPHA.
+        Demann lan ale dirèkteman nan sistèm TRUE ALPHA.
 
         <br><br>
 
-        Aucun montant n’a été débité de
-        votre compte.
-
-        <br><br>
-
-        Lè API a konekte, peman an ap
-        verifye otomatikman epi Wallet la
-        ap kredite apre konfimasyon backend la.
+        Aucun montant n’est ajouté automatiquement.
+        L’Admin vérifie le paiement avant de créditer le Wallet.
 
       </div>
 
@@ -3579,8 +3618,8 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
         <br><br>
 
-        Retrè otomatik ap disponib lè
-        API peman yo konekte.
+        Retrè yo pase an atant epi Admin nan verifye yo manyèlman.
+        Pa gen retrè otomatik.
 
       </div>
 
@@ -3602,7 +3641,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
           <br>
 
           <small>
-            Retrè otomatik
+            Retrè ak verifikasyon Admin
           </small>
 
         </div>
@@ -3627,7 +3666,7 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
           <br>
 
           <small>
-            Retrè otomatik
+            Retrè ak verifikasyon Admin
           </small>
 
         </div>
@@ -3870,14 +3909,14 @@ const defaultNotifications=[
   {
     id:2,
     title:"Free Fire TopUp disponible",
-    text:"Free Fire TopUp par UID — serveur NA North America.",
+    text:"Free Fire TopUp pa UID — Admin verifye kòmand lan sou sèvè NA.",
     time:"Aujourd'hui",
     read:false
   },
   {
     id:3,
     title:"Wallet",
-    text:"Rechaj Wallet la ap aktive apre koneksyon API peman an.",
+    text:"Rechaj Wallet la pase ak verifikasyon Admin.",
     time:"Aujourd'hui",
     read:false
   }
@@ -4521,8 +4560,6 @@ function updateUI(){
       "profileAvatar"
     );
 
-  const headerAvatar=document.getElementById("headerAvatar");
-
 
   if(firebaseUser){
 
@@ -4542,7 +4579,6 @@ function updateUI(){
         .charAt(0)
         .toUpperCase() ||
       "T";
-    if(headerAvatar) headerAvatar.textContent=avatar.textContent;
 
     loginButton.textContent=
       "👤 Mon compte";
@@ -4556,7 +4592,6 @@ function updateUI(){
       "Konekte pou jwenn aksè ak kont ou.";
 
     avatar.textContent="?";
-    if(headerAvatar) headerAvatar.textContent="👤";
 
     loginButton.textContent=
       "Se connecter";
@@ -4604,11 +4639,13 @@ async function verifyUID(){
   if(!canUseSite())return;
 
   const uid=document.getElementById("uid")?.value.trim();
+  const isHT=(localStorage.getItem("ta_language")||"fr")==="ht";
+  const T=(fr,ht)=>isHT?ht:fr;
 
   clearUIDMessage();
-  if(!uid){ showUIDMessage("⚠️ Entrez votre UID Free Fire."); return; }
-  if(!/^[0-9]+$/.test(uid)){ showUIDMessage("⚠️ L’UID doit contenir uniquement des chiffres."); return; }
-  if(uid.length<5){ showUIDMessage("⚠️ Cet UID ne semble pas valide."); return; }
+  if(!uid){ showUIDMessage(T("⚠️ Entrez votre UID Free Fire.","⚠️ Antre UID Free Fire ou.")); return; }
+  if(!/^[0-9]+$/.test(uid)){ showUIDMessage(T("⚠️ L’UID doit contenir uniquement des chiffres.","⚠️ UID la dwe gen chif sèlman.")); return; }
+  if(uid.length<5){ showUIDMessage(T("⚠️ Cet UID ne semble pas valide.","⚠️ UID sa a pa sanble valab.")); return; }
 
   const btn=document.getElementById("verifyBtn");
   const result=document.getElementById("playerResult");
@@ -4618,60 +4655,29 @@ async function verifyUID(){
   const errorBox=document.getElementById("ffServerError");
 
   btn.disabled=true;
-  btn.textContent="⏳ Vérification...";
+  btn.textContent=T("⏳ Préparation...","⏳ Preparasyon...");
   result.style.display="none";
   packs.style.display="none";
   if(errorBox) errorBox.remove();
   clearUIDMessage();
   verifiedPlayerName=""; verifiedServer=""; verifiedUid="";
 
-  try{
-    const response=await fetch("/api/freefire/verify-uid",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({uid})
-    });
+  // Aucun appel API fournisseur ici : l'UID est envoyé à TRUE ALPHA
+  // et la vérification du joueur/serveur est faite par l'Admin.
+  verifiedUid=uid;
+  verifiedPlayerName=T("Joueur à vérifier par l’Admin","Jwè a pou Admin nan verifye");
+  verifiedServer="NA — North America";
 
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok || data.valid===false) throw new Error(data.message||"verification_failed");
+  document.getElementById("playerName").textContent=verifiedPlayerName;
+  if(serverEl) serverEl.textContent=T("Serveur : NA — North America","Sèvè : NA — North America");
+  if(hint) hint.textContent=T("Vérification manuelle par l’Admin","Admin nan ap fè verifikasyon an manyèlman");
+  result.style.display="block";
+  packs.style.display="block";
+  showUIDMessage(T("✅ UID enregistré. L’Admin vérifiera le joueur avant le traitement.","✅ UID la anrejistre. Admin nan ap verifye jwè a anvan l trete kòmand lan."),"ok");
 
-    const serverRaw=String(data.server||data.region||data.serverName||"").trim();
-    const serverNorm=serverRaw.toLowerCase().replace(/[_-]/g," ");
-    const isNA=serverNorm.includes("north america") || serverNorm==="na" || serverNorm.includes("northamerica");
-
-    verifiedPlayerName=data.nickname||data.playerName||data.name||("UID "+uid);
-    verifiedServer=serverRaw || "Serveur inconnu";
-    verifiedUid=uid;
-
-    document.getElementById("playerName").textContent=verifiedPlayerName;
-    if(serverEl) serverEl.textContent="Serveur : "+verifiedServer;
-    if(hint) hint.textContent="Serveur : "+verifiedServer;
-    result.style.display="block";
-
-    if(!isNA){
-      const err=document.createElement("div");
-      err.id="ffServerError";
-      err.className="serverError";
-      err.textContent="❌ Le serveur n’est pas NA. Le joueur est sur le serveur "+verifiedServer+". Les packs ne sont pas disponibles pour ce serveur.";
-      result.after(err);
-      showUIDMessage("❌ Serveur non compatible avec le TopUp NA. Le joueur est sur : "+verifiedServer+".");
-      return;
-    }
-
-    verifiedServer="NA — North America";
-    if(serverEl) serverEl.textContent="Serveur : NA — North America";
-    if(hint) hint.textContent="Serveur : NA — North America";
-    packs.style.display="block";
-    showUIDMessage("✅ UID vérifié. Joueur trouvé : "+verifiedPlayerName,"ok");
-
-  }catch(e){
-    showUIDMessage("⚠️ Impossible de vérifier cet UID pour le moment. Réessayez.");
-  }finally{
-    btn.disabled=false;
-    btn.textContent="🔐 Vérifier le joueur";
-  }
+  btn.disabled=false;
+  btn.textContent=T("🔐 Envoyer l’UID à l’Admin","🔐 Voye UID la bay Admin");
 }
-
 
 /* =====================================================
    PACK SELECTION
@@ -4679,8 +4685,8 @@ async function verifyUID(){
 
 function selectPack(element,name,price){
   if(!canUseSite())return;
-  if(!verifiedUid || !verifiedPlayerName || verifiedServer!=="NA — North America"){
-    toast("⚠️ Vérifiez d’abord un joueur sur le serveur NA.");
+  if(!verifiedUid || verifiedServer!=="NA — North America"){
+    toast((localStorage.getItem("ta_language")||"fr")==="ht"?"⚠️ Voye UID la bay Admin anvan ou chwazi yon pack.":"⚠️ Envoyez l’UID à l’Admin avant de choisir un pack.");
     return;
   }
   document.querySelectorAll(".pack").forEach(p=>p.classList.remove("selected"));
@@ -4716,7 +4722,7 @@ function syncFavoriteFreeFire(){
 function buyNow(){
   if(!canUseSite() || !requireLogin())return;
   if(!selectedPack){toast("⚠️ Sélectionnez un pack.");return;}
-  if(!verifiedUid || verifiedServer!=="NA — North America"){toast("⚠️ Vérifiez un UID sur le serveur NA avant de continuer.");return;}
+  if(!verifiedUid || verifiedServer!=="NA — North America"){toast((localStorage.getItem("ta_language")||"fr")==="ht"?"⚠️ Voye UID la bay Admin anvan ou kontinye.":"⚠️ Envoyez l’UID à l’Admin avant de continuer.");return;}
   paymentMethod="wallet";
   updateCheckoutUI();
   document.getElementById("checkoutModal").classList.add("show");
@@ -4756,7 +4762,7 @@ async function confirmPurchase(){
 
   const pointsValue=Number(points||0)/2;
   if(paymentMethod==="wallet" && (balance===null || Number(balance)<selectedPrice)){
-    toast("❌ Solde Wallet insuffisant.");
+    toast(taT("❌ Solde Wallet insuffisant.","❌ Solde Wallet la pa ase."));
     return;
   }
   if(paymentMethod==="wallet_points" && pointsValue<selectedPrice){
@@ -4797,11 +4803,11 @@ async function confirmPurchase(){
     resetTopupFlow();
     await loadWallet();
     await loadPoints();
-    addNotification("Commande reçue","Votre commande Free Fire est en attente de traitement.");
+    addNotification("Commande reçue",taT("Votre commande Free Fire est en attente de traitement.","Kòmand Free Fire ou a an atant pou Admin trete li."));
     showPage("orders");
     toast("✅ Commande reçue. Elle sera traitée par TRUE ALPHA.");
   }catch(e){
-    toast("❌ La commande n’a pas été validée. Le serveur a refusé ou n’a pas répondu.");
+    toast(taT("❌ La commande n’a pas été validée. Le serveur a refusé ou n’a pas répondu.","❌ Kòmand lan pa valide. Sèvè a refize li oswa li pa reponn."));
   }finally{
     if(btn){btn.disabled=false;btn.textContent="💎 Confirmer et payer";}
   }
@@ -4999,7 +5005,7 @@ function showDepositStep(id){
 async function depositContinue(){
   if(!requireLogin())return;
   if(depositProvider!=="natcash"){
-    toast("⚠️ MonCash est bientôt disponible.");
+    toast(taT("⚠️ MonCash est bientôt disponible.","⚠️ MonCash ap disponib talè."));
     return;
   }
 
@@ -5008,9 +5014,9 @@ async function depositContinue(){
   const transactionId=document.getElementById("depositTransactionId")?.value.trim();
   const accountName=document.getElementById("depositAccountName")?.value.trim();
 
-  if(!Number.isFinite(amount) || amount<50){toast("⚠️ Minimum de recharge : 50 HTG.");return;}
-  if(!phone){toast("⚠️ Entrez le numéro utilisé pour envoyer l’argent.");return;}
-  if(!transactionId){toast("⚠️ Entrez le Transaction ID.");return;}
+  if(!Number.isFinite(amount) || amount<50){toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));return;}
+  if(!phone){toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));return;}
+  if(!transactionId){toast(taT("⚠️ Entrez le Transaction ID.","⚠️ Antre ID tranzaksyon an."));return;}
 
   depositAmount=amount;
   try{
@@ -5025,11 +5031,11 @@ async function depositContinue(){
     if(!response.ok)throw new Error(data.message||"recharge_failed");
     if(data.status && String(data.status).toLowerCase()!="pending") throw new Error("unexpected_status");
     closeRechargeReset();
-    addNotification("Recharge en attente","Votre demande NatCash est en attente de vérification manuelle.");
-    toast("✅ Demande envoyée. Votre recharge est Pending jusqu’à validation Admin.");
+    addNotification("Recharge en attente",taT("Votre demande NatCash est en attente de vérification manuelle.","Demann NatCash ou a an atant pou Admin verifye li manyèlman."));
+    toast(taT("✅ Demande envoyée. Votre recharge est Pending jusqu’à validation Admin.","✅ Demann lan voye. Rechaj ou a an atant jouk Admin valide li."));
     await loadWallet();
   }catch(e){
-    toast("❌ Impossible d’envoyer la demande de recharge. Aucun crédit n’a été ajouté.");
+    toast(taT("❌ Impossible d’envoyer la demande de recharge. Aucun crédit n’a été ajouté.","❌ Demann rechaj la pa t kapab voye. Pa gen lajan ki ajoute."));
   }
 }
 
@@ -5066,7 +5072,7 @@ function transferMoney(){
 async function submitTransfer(){
   const email=document.getElementById("transferEmail")?.value.trim();
   const amount=Number(document.getElementById("transferAmount")?.value);
-  if(!email){toast("⚠️ Entrez l’email du destinataire.");return;}
+  if(!email){toast(taT("⚠️ Entrez l’email du destinataire.","⚠️ Antre imèl moun k ap resevwa a."));return;}
   if(amount<50){toast("⚠️ Minimum de transfert : 50 HTG.");return;}
   if(balance===null || amount>Number(balance)){toast("❌ Solde insuffisant.");return;}
   try{
@@ -5078,8 +5084,8 @@ async function submitTransfer(){
     if(!response.ok)throw new Error(data.message||"transfer_failed");
     closeTransferReset();
     await loadWallet();
-    addNotification("Transfert effectué","Votre transfert Wallet a été enregistré.");
-    toast("✅ Transfert envoyé.");
+    addNotification("Transfert en attente",taT("Votre demande de transfert a été envoyée et reste en attente de validation Admin.","Demann transfè ou a voye epi li rete an atant pou Admin valide li."));
+    toast((localStorage.getItem("ta_language")||"fr")==="ht"?"✅ Transfè a voye. Li an atant validasyon Admin.":"✅ Transfert envoyé. Il est en attente de validation Admin.");
   }catch(e){toast("❌ Le transfert n’a pas pu être effectué.");}
 }
 
@@ -5168,9 +5174,9 @@ function setWithdrawProvider(
 async function submitWithdraw(){
   const phone=document.getElementById("withdrawPhone")?.value.trim();
   const amount=Number(document.getElementById("withdrawAmount")?.value);
-  if(phone.length<8){toast("⚠️ Entrez un numéro valide.");return;}
+  if(phone.length<8){toast((localStorage.getItem("ta_language")||"fr")==="ht"?"⚠️ Antre yon nimewo ki valab.":taT("⚠️ Entrez un numéro valide.","⚠️ Antre yon nimewo ki valab."));return;}
   if(amount<5000){toast("⚠️ Minimum de retrait : 5 000 HTG.");return;}
-  if(balance===null || amount>Number(balance)){toast("❌ Solde Wallet insuffisant.");return;}
+  if(balance===null || amount>Number(balance)){toast(taT("❌ Solde Wallet insuffisant.","❌ Solde Wallet la pa ase."));return;}
   const fee=Math.round(amount*0.05*100)/100;
   const net=amount-fee;
   try{
@@ -5182,10 +5188,10 @@ async function submitWithdraw(){
     if(!response.ok)throw new Error(data.message||"withdraw_failed");
     if(data.status && !["pending","Pending"].includes(data.status))throw new Error("unexpected_status");
     closeWithdrawReset();
-    addNotification("Retrait en attente","Votre demande de retrait est en attente de traitement Admin.");
+    addNotification("Retrait en attente",taT("Votre demande de retrait est en attente de traitement Admin.","Demann retrè ou a an atant pou Admin trete li."));
     toast("✅ Retrait envoyé en Pending. Fee : "+fee.toLocaleString("fr-FR")+" HTG • Net : "+net.toLocaleString("fr-FR")+" HTG");
   }catch(e){
-    toast("❌ Le retrait n’a pas pu être envoyé.");
+    toast(taT("❌ Le retrait n’a pas pu être envoyé.","❌ Retrè a pa t kapab voye."));
   }
 }
 
@@ -5309,7 +5315,7 @@ function renderOrders(){
           </strong>
 
           <span class="status">
-            ${escapeHTML(o.status||"En attente")}
+            ${escapeHTML((()=>{const st=String(o.status||"En attente"); const m={"Pending":"An atant","pending":"An atant","Processing":"An tretman","processing":"An tretman","Completed":"Fini","completed":"Fini","Failed":"Echwe","failed":"Echwe","En attente":"An atant"}; return taLang()==="ht"?(m[st]||st):st;})())}
           </span>
 
         </div>
@@ -5342,7 +5348,7 @@ function renderOrders(){
         <div class="orderProgress">
           <span style="width:${orderProgress(o.status,o.progress)}%"></span>
         </div>
-        <div class="orderProgressLabel">Progress : ${orderProgress(o.status,o.progress)}%</div>
+        <div class="orderProgressLabel">${taLang()==="ht"?"Pwogrè":"Progress"} : ${orderProgress(o.status,o.progress)}%</div>
 
         <div style="margin-top:5px;font-size:9px;color:var(--muted)">
           ${escapeHTML(o.date||o.createdAt||"")}
@@ -6381,15 +6387,22 @@ function openArcadeAlpha(){
   toast("🕹️ Arcade Alpha est prêt. Les mini-jeux et défis seront gérés depuis l’Admin.");
 }
 
+function clearCustomerMessage(){
+  const input=document.getElementById("customerMessageInput");
+  if(input) input.value="";
+  const status=document.getElementById("messageComposerStatus");
+  if(status) status.classList.remove("show");
+}
+
 async function sendCustomerMessage(){
   if(!requireLogin())return;
   const input=document.getElementById("customerMessageInput"); const text=input?.value.trim();
-  if(!text){showComposerStatus("⚠️ Écrivez un message avant d’envoyer.","error");return;}
+  if(!text){showComposerStatus(taT("⚠️ Écrivez un message avant d’envoyer.","⚠️ Ekri yon mesaj anvan ou voye li."),"error");return;}
   try{
     const r=await fetch("/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
     if(!r.ok)throw new Error();
-    input.value=""; addNotification("Message envoyé","Votre message a été envoyé à TRUE ALPHA."); await loadMessages(); showComposerStatus("✅ Message envoyé à TRUE ALPHA.","ok");
-  }catch(e){showComposerStatus("❌ Le message n’a pas pu être envoyé. Réessayez.","error");}
+    input.value=""; addNotification(taT("Message envoyé","Mesaj voye"),taT("Votre message a été envoyé à TRUE ALPHA.","Mesaj ou a voye bay TRUE ALPHA.")); await loadMessages(); showComposerStatus(taT("✅ Message envoyé à TRUE ALPHA.","✅ Mesaj ou a voye bay TRUE ALPHA."),"ok");
+  }catch(e){showComposerStatus(taT("❌ Le message n’a pas pu être envoyé. Réessayez.","❌ Mesaj la pa t kapab voye. Eseye ankò."),"error");}
 }
 
 /* =====================================================
@@ -6403,14 +6416,14 @@ async function loadBadges(){
   }
   if(!badges.length){
     badges=[
-      {icon:"🏅",name:"First Order",progress:0},
-      {icon:"💎",name:"Diamond Buyer",progress:0},
+      {icon:"🏅",name:taT("First Order","Premye kòmand"),progress:0},
+      {icon:"💎",name:taT("Diamond Buyer","Achtè Diamonds"),progress:0},
       {icon:"⭐",name:"TA Points",progress:Math.min(100,Math.round(Number(points||0)/1000*100))},
-      {icon:"🎮",name:"Arcade Player",progress:0},
-      {icon:"🎁",name:"Daily Gift",progress:0}
+      {icon:"🎮",name:taT("Arcade Player","Jwè Arcade"),progress:0},
+      {icon:"🎁",name:taT("Daily Gift","Kado chak jou"),progress:0}
     ];
   }
-  box.innerHTML=badges.map(b=>`<div class="miniBadge"><div class="miniBadgeIcon">${escapeHTML(b.icon||b.emoji||"🏅")}</div><strong>${escapeHTML(b.name||b.title||"Achievement")}</strong><small>Progress ${Math.max(0,Math.min(100,Number(b.progress||0)))}%</small><div class="badgeProgress"><span style="width:${Math.max(0,Math.min(100,Number(b.progress||0)))}%"></span></div></div>`).join("");
+  box.innerHTML=badges.map(b=>`<div class="miniBadge"><div class="miniBadgeIcon">${escapeHTML(b.icon||b.emoji||"🏅")}</div><strong>${escapeHTML(b.name||b.title||"Achievement")}</strong><small>${taT("Progression","Pwogrè")} ${Math.max(0,Math.min(100,Number(b.progress||0)))}%</small><div class="badgeProgress"><span style="width:${Math.max(0,Math.min(100,Number(b.progress||0)))}%"></span></div></div>`).join("");
 }
 
 /* =====================================================
@@ -6418,17 +6431,17 @@ async function loadBadges(){
 ===================================================== */
 async function claimDailyGift(){
   if(!requireLogin())return;
-  const button=document.querySelector(".dailyGiftButton"); if(button){button.disabled=true;button.textContent="⏳ Vérification...";}
+  const button=document.querySelector(".dailyGiftButton"); if(button){button.disabled=true;button.textContent=taT("⏳ Vérification...","⏳ Verifikasyon...");}
   try{
-    const r=await fetch("/api/daily-gift/claim",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||"",rewardPoints:250})});
+    const r=await fetch("/api/daily-gift/claim",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||"",rewardPoints:20})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok)throw new Error(d.message||"daily_gift_failed");
-    points=Number(d.points??d.balance??points+250); updatePointsUI();
-    addNotification("Kado chak jou","+250 TA Points ont été ajoutés à votre compte.");
-    toast("🎁 +250 TA Points reçus.");
+    points=Number(d.points??d.balance??points+20); updatePointsUI();
+    addNotification(taT("Kado chak jou","Kado chak jou"),taT("+20 TA Points ont été ajoutés à votre compte.","+20 TA Points ajoute sou kont ou."));
+    toast(taT("🎁 +20 TA Points reçus.","🎁 Ou resevwa +20 TA Points."));
   }catch(e){
-    toast("⚠️ Ce cadeau a déjà été réclamé aujourd’hui ou le service est indisponible.");
-  }finally{if(button){button.disabled=false;button.textContent="🎁 Réclamer";}}
+    toast(taT("⚠️ Ce cadeau a déjà été réclamé aujourd’hui ou le service est indisponible.","⚠️ Ou deja pran kado sa a jodi a oswa sèvis la pa disponib."));
+  }finally{if(button){button.disabled=false;button.textContent=taT("🎁 Réclamer","🎁 Ranmase");}}
 }
 
 /* =====================================================
@@ -6452,8 +6465,7 @@ function getOnlinePresenceSessionId(){
 }
 
 async function updateOnlinePresence(){
-  const countEl=document.getElementById("onlineCount");
-  if(!countEl)return;
+    if(!countEl)return;
   if(!onlinePresenceSessionId)onlinePresenceSessionId=getOnlinePresenceSessionId();
   try{
     const r=await fetch("/api/presence",{
@@ -6470,11 +6482,19 @@ async function updateOnlinePresence(){
     const d=await r.json().catch(()=>({}));
     const count=Number(d.count??d.online);
     if(Number.isFinite(count)&&count>=0){
-      countEl.textContent=count.toLocaleString(currentLang==="fr"?"fr-FR":"ht-HT");
+      const formatted=count.toLocaleString(currentLang==="fr"?"fr-FR":"ht-HT");
+      countEl.textContent=formatted;
+      const headerEl=document.getElementById("onlineCountHeader");
+      if(headerEl)headerEl.textContent=formatted;
     }
   }catch(e){
     /* Keep the last real value; do not invent a new visitor count. */
   }
+}
+
+function showOnlineDetails(){
+  const count=document.getElementById("onlineCountHeader")?.textContent||"0";
+  toast(`👁️ ${count} utilisateur(s) en ligne sur TRUE ALPHA.`);
 }
 
 function startOnlinePresence(){
@@ -6531,7 +6551,62 @@ const TA_TRANSLATIONS={
     "Réclamer la récompense":"Rachte rekonpans","Faire l’activité":"Fè aktivite a","Cadeau quotidien":"Kado chak jou",
     "TRUE ALPHA n’a ajouté aucune activité pour le moment.":"TRUE ALPHA poko ajoute okenn aktivite pou kounye a.",
     "Revenez plus tard pour découvrir de nouvelles activités ALPHA. 💎":"Tounen pita pou dekouvri nouvo aktivite ALPHA. 💎",
-    "Vous n’avez pas assez de TA Points.":"Ou poko gen ase TA Points."
+    "Vous n’avez pas assez de TA Points.":"Ou poko gen ase TA Points.",
+    "Solde Wallet":"Solde Wallet","Recharger":"Recharger","Retrait Wallet":"Retire Wallet","Transfert Wallet":"Transfè Wallet",
+    "Réclamer":"Ranmase","Vérifier le joueur":"Verifye jwè a","Envoyer l’UID à l’Admin":"Voye UID la bay Admin",
+    "Joueur à vérifier par l’Admin":"Jwè a pou Admin nan verifye","Vérification manuelle par l’Admin":"Admin nan ap fè verifikasyon an manyèlman",
+    "Vérification Admin":"Verifikasyon Admin","Disponible — validation Admin":"Disponib — validasyon Admin",
+    "Commande reçue":"Kòmand resevwa","Commande en attente":"Kòmand an atant","Transfert en attente":"Transfè an atant",
+    "Recharge en attente":"Rechaj an atant","Retrait en attente":"Retrè an atant",
+    "Progress":"Pwogrè","Prix":"Pri","Server":"Sèvè","Player Name":"Non jwè a","Pack":"Pack",
+    "Wallet TA Points":"Wallet TA Points","2 TA Points = 1 HTG":"2 TA Points = 1 HTG",
+    "Centre d’aide":"Sant èd","Événements TRUE ALPHA":"Evènman TRUE ALPHA","État des services":"Eta sèvis yo",
+    "Missions":"Misyon","Première commande":"Premye kòmand","Récompenses":"Rekonpans",
+    "Activités":"Aktivite","Annonce":"Anons","Nouveautés":"Nouvo bagay","Disponible":"Disponib",
+    "Bientôt disponible":"Talè disponib","Votre commande est en attente de traitement.":"Kòmand ou a an atant pou Admin trete li.",
+    "Solde disponible":"Solde disponib","Mon Wallet":"Wallet mwen","Recharger":"Rechaje","Transférer":"Transfè","Historique":"Istwa","Voir les commandes":"Gade kòmand yo",
+    "Recharger le Wallet":"Rechaje Wallet","Recharger le Wallet":"Rechaje Wallet","NatCash / MonCash":"NatCash / MonCash","Minimum 50 HTG":"Minimòm 50 HTG","Minimum 5,000 HTG":"Minimòm 5,000 HTG",
+    "Voir les commandes":"Gade kòmand yo","Mode de paiement":"Mòd peman","Confirmer et payer":"Konfime epi peye","Confirmation de commande":"Konfimasyon kòmand lan",
+    "Choisir un pack":"Chwazi yon pack","Pack sélectionné":"Pack chwazi","Prix":"Pri","Server":"Sèvè","Player Name":"Non jwè a",
+    "Recharger le Wallet":"Rechaje Wallet","Recharge minimum :":"Minimòm rechaj :","Choisir le service":"Chwazi sèvis la","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
+    "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
+    "Continuer":"Kontinye","Fermer":"Fèmen","Retrait Wallet":"Retrè Wallet","Numéro":"Nimewo","Montant HTG":"Montan HTG","Demander le retrait":"Mande retrè a",
+    "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
+    "Messages":"Mesaj","Écrivez votre message à TRUE ALPHA...":"Ekri mesaj ou bay TRUE ALPHA...","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.",
+    "Envoyer le message":"Voye mesaj la","Retirer":"Retire","Aucun message pour le moment.":"Pa gen mesaj pou kounye a.","Les messages sont momentanément indisponibles.":"Mesaj yo pa disponib pou kounye a.",
+    "Réclamer":"Ranmase","Progress":"Pwogrè","Progression":"Pwogrè","First Order":"Premye kòmand","Diamond Buyer":"Achtè Diamonds","Arcade Player":"Jwè Arcade","Daily Gift":"Kado chak jou",
+    "Wallet TA Points":"Wallet TA Points","2 TA Points = 1 HTG":"2 TA Points = 1 HTG","Confirmer et payer":"Konfime epi peye","Validation...":"Validasyon...",
+    "Aujourd’hui":"Jodi a","Aujourd'hui":"Jodi a","Bienvenue sur TRUE ALPHA":"Byenveni sou TRUE ALPHA","Free Fire TopUp disponible":"Free Fire TopUp disponib","Wallet":"Wallet",
+    "TopUp & Services numériques":"TopUp ak sèvis dijital","Se connecter":"Konekte","Solde Wallet":"Solde Wallet","BANNER":"BANNÈ","PAIEMENT MOBILE":"PEMAN MOBIL","NatCash & MonCash":"NatCash ak MonCash",
+    "Rechaje Wallet ou ak sèvis peman ki disponib yo.":"Rechaje Wallet ou ak sèvis peman ki disponib yo.","CARTE VIRTUELLE":"KAT VITYÈL","Peye fasil sou entènèt ak yon kat virtuel.":"Peye fasil sou entènèt ak yon kat vityèl.",
+    "Contactez TRUE ALPHA pour le service de carte.":"Kontakte TRUE ALPHA pou sèvis kat la.","Rechargez vos Diamonds 💎":"Rechaje Diamonds ou yo 💎","Entrez votre UID, verifye joueur la, chwazi pack ou epi peye ak Wallet ou.":"Antre UID ou, Admin verifye jwè a, chwazi pack ou epi peye ak Wallet ou.",
+    "Rechargez vos jeux, obtenez une carte virtuelle, participez aux activités et gérez votre Wallet nan yon sèl kote.":"Rechaje jwèt ou yo, jwenn yon kat vityèl, patisipe nan aktivite epi jere Wallet ou nan yon sèl kote.","TRUE ALPHA — votre solution numérique de confiance.":"TRUE ALPHA — solisyon dijital ou ka fè konfyans.",
+    "Service de carte virtuelle TRUE ALPHA / KIRIKOU.":"Sèvis kat vityèl TRUE ALPHA / KIRIKOU.","Recharge, transferts et retraits via les services disponibles.":"Rechaj, transfè ak retrè atravè sèvis ki disponib yo.",
+    "Missions, quiz, giveaways, défis, Taptap Kado et autres activités publiées par l’Admin.":"Misyon, quiz, kado, defi, Taptap Kado ak lòt aktivite Admin nan pibliye.","Catégories":"Kategori","Tout services":"Tout sèvis","TopUp & services gaming":"TopUp ak sèvis jwèt",
+    "Cartes virtuelles":"Kat vityèl","Activité ak rekonpans":"Aktivite ak rekonpans","Pwen ak rekonpans":"Pwen ak rekonpans","✨ Tout sèvis TRUE ALPHA":"✨ Tout sèvis TRUE ALPHA",
+    "Recharge de Diamonds par UID.":"Rechaj Diamonds ak UID.","Jeux & services":"Jwèt ak sèvis","6 services":"6 sèvis","Free Fire TopUp par UID":"Free Fire TopUp ak UID","Retour aux jeux":"Retounen nan jwèt yo",
+    "Entrez votre UID Free Fire.":"Antre UID Free Fire ou.","Entrez votre UID puis vérifiez les informations du joueur.":"Antre UID ou epi voye l bay Admin pou verifye enfòmasyon jwè a.","Serveur : —":"Sèvè : —","UID Free Fire":"UID Free Fire","🔐 Vérifier le joueur":"🔐 Voye UID bay Admin","✓ Joueur verifye":"✓ Jwè verifye","💎 Choisir un pack":"💎 Chwazi yon pack","Bonus inclus":"Bonis ladan","Pack sélectionné":"Pack chwazi","💎 Acheter maintenant":"💎 Achte kounye a","♡ Ajouter aux favoris":"♡ Ajoute nan favoris","♥ Retirer des favoris":"♥ Retire nan favoris",
+    "💬 Messages":"💬 Mesaj","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.","📨 Envoyer le message":"📨 Voye mesaj la","🗑️ Retirer":"🗑️ Retire","💳 Cartes virtuelles":"💳 Kat vityèl","VIRTUAL CARD":"KAT VITYÈL","Créer une carte Visa virtuelle":"Kreye yon kat Visa vityèl","💳 Kontakte pou kreye kat la":"💳 Kontakte pou kreye kat la",
+    "🎮 Jwèt & Aktivite ALPHA":"🎮 Jwèt & Aktivite ALPHA","Mini-jeux TRUE ALPHA, défis et activités ajoutés par l’Admin.":"Mini-jwèt TRUE ALPHA, defi ak aktivite Admin nan ajoute.","🎮 Arcade • Défis ALPHA":"🎮 Arcade • Defi ALPHA","🕹️ Jouer à Arcade Alpha":"🕹️ Jwe Arcade Alpha",
+    "Réclamez votre cadeau quotidien une seule fois par jour.":"Ranmase kado chak jou ou yon sèl fwa pa jou.","TRUE ALPHA n’a ajouté aucune activité pour le moment.":"TRUE ALPHA poko ajoute okenn aktivite pou kounye a.","Revenez plus tard pour découvrir de nouvelles activités ALPHA. 💎":"Tounen pita pou dekouvri nouvo aktivite ALPHA. 💎","Les récompenses apparaîtront ici lorsque l’Admin les publiera.":"Rekonpans yo ap parèt isit la lè Admin nan pibliye yo.",
+    "📋 Mes commandes":"📋 Kòmand mwen yo","🔔 Notifications":"🔔 Notifikasyon","0 nouvelles":"0 nouvo","✓ Tout lire":"✓ Li tout","🗑️ Tout effacer":"🗑️ Efase tout","👤 Profil":"👤 Pwofil","Visiteur":"Vizitè","Konekte pou jwenn aksè ak kont ou.":"Konekte pou jwenn aksè ak kont ou.","👤 Compte":"👤 Kont","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","🛒 Mes commandes":"🛒 Kòmand mwen yo","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib","🌐 Langue":"🌐 Lang","🏅 Badges & achievements":"🏅 Badges ak reyalizasyon","🎨 Thème":"🎨 Tèm","Clair / Sombre":"Limyè / Fènwa","✨ Alpha Center":"✨ Alpha Center",
+    "🎂 Mon anniversaire":"🎂 Anivèsè mwen","Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.":"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.","Enregistrer":"Anrejistre","Effacer":"Efase","Alpha Level":"Nivo Alpha","Streak":"Seri","Badges":"Badges","🎯 Missions":"🎯 Misyon","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","📅 Événements":"📅 Evènman","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","❓ Centre d’aide":"❓ Sant èd","FAQ et réponses rapides.":"FAQ ak repons rapid.","📤 Partager":"📤 Pataje","Invite tes amis sur TRUE ALPHA.":"Envite zanmi ou sou TRUE ALPHA.","🤝 Alpha Family":"🤝 Alpha Family","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","🟢 État des services":"🟢 Eta sèvis yo","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.","🚪 Déconnexion":"🚪 Dekonekte",
+    "🔐 Connexion / Créer un compte":"🔐 Konekte / Kreye kont","🔐 Connectez-vous avec Google pour créer ou accéder à votre compte TRUE ALPHA.":"🔐 Konekte ak Google pou kreye oswa antre nan kont TRUE ALPHA ou.","Votre compte sert pour le Wallet, les commandes, les TA Points et les activités.":"Kont ou sèvi pou Wallet, kòmand yo, TA Points ak aktivite yo.","Continuer avec Google":"Kontinye ak Google","Mot de passe":"Modpas","Se souvenir de moi":"Sonje mwen","Créer un compte":"Kreye kont",
+    "🧾 Confirmation de commande":"🧾 Konfimasyon kòmand lan","Mode de paiement":"Mòd peman","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
+    "1. Choisir le service":"1. Chwazi sèvis la","Recharge minimum :":"Minimòm rechaj :","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","MonCash — Bientôt disponible":"MonCash — Talè disponib","2. Montant":"2. Montan","Nom :":"Non :","📋 Copier":"📋 Kopi","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.","Email du destinataire":"Imèl moun k ap resevwa a","Minimum transfè :":"Minimòm transfè :",
+    "Transfè a pral pase atravè backend TRUE ALPHA lè sistèm lan konekte.":"Transfè a ap pase atravè sistèm TRUE ALPHA a epi li rete an atant pou Admin valide li.","📭 Vous n’avez aucune commande.":"📭 Ou poko gen okenn kòmand.","Aucune notification":"Pa gen notifikasyon","Vous n’avez aucune notification.":"Ou pa gen okenn notifikasyon.","Paiement":"Peman","En attente":"An atant",
+    "TRUE ALPHA fèmen pou kounye a":"TRUE ALPHA fèmen pou kounye a","+ Recharger":"+ Rechaje","Contactez TRUE ALPHA pour le service de carte.":"Kontakte TRUE ALPHA pou sèvis kat la.",
+    "Entrez votre UID, verifye joueur la, chwazi pack ou epi peye ak Wallet ou.":"Antre UID ou, Admin verifye jwè a, chwazi pack ou epi peye ak Wallet ou.","Rechargez vos jeux, obtenez une carte virtuelle, participez aux activités et gérez votre Wallet nan yon sèl kote.":"Rechaje jwèt ou yo, jwenn yon kat vityèl, patisipe nan aktivite epi jere Wallet ou nan yon sèl kote.",
+    "Recharge, transferts et retraits via les services disponibles.":"Rechaj, transfè ak retrè atravè sèvis ki disponib yo.","Missions, quiz, giveaways, défis, Taptap Kado et autres activités publiées par l’Admin.":"Misyon, quiz, kado, defi, Taptap Kado ak lòt aktivite Admin nan pibliye.","● Disponible":"● Disponib",
+    "Entrez votre UID Free Fire.":"Antre UID Free Fire ou.","Entrez votre UID puis vérifiez les informations du joueur.":"Antre UID ou epi voye l bay Admin pou verifye enfòmasyon jwè a.","💎 Choisir un pack":"💎 Chwazi yon pack","Créer une carte Visa virtuelle":"Kreye yon kat Visa vityèl",
+    "Payez facilement en ligne avec TRUE ALPHA Virtual Card 💳. Sèvis kat la fèt avèk patnè KIRIKOU.":"Peye fasil sou entènèt ak TRUE ALPHA Virtual Card 💳. Sèvis kat la fèt avèk patnè KIRIKOU.","Mini-jeux TRUE ALPHA, défis et activités ajoutés par l’Admin.":"Mini-jwèt TRUE ALPHA, defi ak aktivite Admin nan ajoute.",
+    "Réclamez votre cadeau quotidien une seule fois par jour.":"Ranmase kado chak jou ou yon sèl fwa pa jou.","🎁 Réclamer":"🎁 Ranmase","Les récompenses apparaîtront ici lorsque l’Admin les publiera.":"Rekonpans yo ap parèt isit la lè Admin nan pibliye yo.",
+    "🎁 Récompenses":"🎁 Rekonpans","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib",
+    "Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.":"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","FAQ et réponses rapides.":"FAQ ak repons rapid.","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.",
+    "Messages":"Mesaj","🇬 Continuer avec Google":"🇬 Kontinye ak Google","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
+    "💰 Recharger le Wallet":"💰 Rechaje Wallet","1. Choisir le service":"1. Chwazi sèvis la","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
+    "Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.",
+    "↗️ Transférer":"↗️ Transfè","🏦 Retrait Wallet":"🏦 Retrè Wallet","Minimum retrè :":"Minimòm retrè :","Retrè yo pase an atant epi Admin nan verifye yo manyèlman. Pa gen retrè otomatik.":"Retrè yo pase an atant epi Admin nan verifye yo manyèlman. Pa gen retrè otomatik.","Retrè ak verifikasyon Admin":"Retrè ak verifikasyon Admin","🎯 Fè aktivite a":"🎯 Fè aktivite a"
   }
 };
 
@@ -6540,12 +6615,17 @@ function applyLanguage(lang){
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   const nodes=[]; while(walker.nextNode())nodes.push(walker.currentNode);
   nodes.forEach(node=>{
-    const raw=node.nodeValue; const key=raw.trim();
-    if(dict[key])node.nodeValue=raw.replace(key,dict[key]);
+    if(!node.parentElement || ["SCRIPT","STYLE"].includes(node.parentElement.tagName))return;
+    const raw=node.nodeValue;
+    const base=node.parentElement.dataset.taBaseText!==undefined ? node.parentElement.dataset.taBaseText : raw;
+    if(node.parentElement.dataset.taBaseText===undefined) node.parentElement.dataset.taBaseText=raw;
+    const key=base.trim();
+    if(dict[key]) node.nodeValue=base.replace(key,dict[key]);
   });
   document.documentElement.lang=lang==="fr"?"fr":"ht";
   const lt=document.getElementById("languageText"); if(lt)lt.textContent=lang==="fr"?"Français / Kreyòl ›":"Kreyòl / Français ›";
 }
+
 
 function changeLanguage(){
   const current=localStorage.getItem("ta_language")||"fr";
@@ -6845,6 +6925,51 @@ onAuthStateChanged(
 
   }
 );
+
+
+
+/* =====================================================
+   ALPHA CENTER
+===================================================== */
+const alphaMissions=[
+  {title:"🎁 Daily Gift",titleHT:"🎁 Kado chak jou",text:"Réclame ton bonus quotidien.",textHT:"Ranmase kado ou chak jou.",reward:"+20 TA Points"},
+  {title:"🛒 Première commande",titleHT:"🛒 Premye kòmand",text:"Passe ta première commande TRUE ALPHA.",textHT:"Fè premye kòmand TRUE ALPHA ou.",reward:"Badge First Order"},
+  {title:"⭐ TA Points",titleHT:"⭐ TA Points",text:"Accumule des TA Points avec les activités disponibles.",textHT:"Rasanble TA Points ak aktivite ki disponib yo.",reward:"Récompenses"},
+  {title:"🎮 Arcade Alpha",titleHT:"🎮 Arcade Alpha",text:"Participe aux activités Arcade publiées par l’Admin.",textHT:"Patisipe nan aktivite Arcade Admin nan pibliye yo.",reward:"Badge Arcade Player"}
+];
+function taLang(){return localStorage.getItem("ta_language")||"fr";}
+function taT(fr,ht){return taLang()==="ht"?ht:fr;}
+function alphaModal(title,html){
+ const m=document.getElementById("alphaCenterModal"),t=document.getElementById("alphaCenterTitle"),c=document.getElementById("alphaCenterContent");
+ if(!m||!t||!c)return; t.textContent=title;c.innerHTML=html;m.classList.add("show");
+}
+function closeAlphaCenter(){document.getElementById("alphaCenterModal")?.classList.remove("show")}
+function openAlphaMissions(){
+ const ht=taLang()==="ht";
+ alphaModal(ht?"🎯 Misyon":"🎯 Missions",`<div class="alphaList">${alphaMissions.map(x=>`<div class="alphaRow"><div><b>${ht?x.titleHT:x.title}</b><div class="alphaNote">${ht?x.textHT:x.text}</div></div><strong>${x.reward}</strong></div>`).join("")}</div><p class="alphaNote">${ht?"Admin nan ka kontwole misyon ak rekonpans ki vrèman aktif yo.":"Les missions et récompenses réellement actives peuvent être contrôlées par l’Admin."}</p>`);
+}
+function openAlphaEvents(){
+ const ht=taLang()==="ht";
+ alphaModal(ht?"📅 Evènman TRUE ALPHA":"📅 Événements TRUE ALPHA",`<div class="alphaList"><div class="alphaRow"><b>🎮 Arcade Alpha</b><span>${ht?"Aktivite":"Activités"}</span></div><div class="alphaRow"><b>🎁 Taptap Kado</b><span>${ht?"Anons":"Annonce"}</span></div><div class="alphaRow"><b>🔥 Promos & Flash Deals</b><span>${ht?"Selon disponiblite":"Selon disponibilité"}</span></div><div class="alphaRow"><b>🆕 What’s New</b><span>${ht?"Nouvo bagay":"Nouveautés"}</span></div></div>`);
+}
+function openAlphaFAQ(){
+ const ht=taLang()==="ht";
+ alphaModal(ht?"❓ Sant èd":"❓ Centre d’aide",`<div class="alphaList"><div class="alphaRow"><div><b>${ht?"Kijan pou rechaje Wallet la?":"Comment recharger le Wallet ?"}</b><div class="alphaNote">${ht?"Ale nan Wallet → Rechaje. Minimòm 50 HTG. Demann lan ale bay Admin pou verifikasyon.":"Depuis Wallet → Recharger. Minimum 50 HTG. La demande passe par l’Admin pour vérification."}</div></div></div><div class="alphaRow"><div><b>${ht?"Kijan pou peye yon TopUp?":"Comment payer un TopUp ?"}</b><div class="alphaNote">${ht?"Chwazi Free Fire, voye UID ou, chwazi pack la, epi Admin nan verifye kòmand lan.":"Choisis Free Fire, envoie ton UID, sélectionne le pack, puis l’Admin vérifie la commande."}</div></div></div><div class="alphaRow"><div><b>${ht?"Èske mwen ka retire TA Points?":"Les TA Points sont-ils retirables ?"}</b><div class="alphaNote">${ht?"Non. TA Points sèvi sèlman pou itilizasyon ak rekonpans TRUE ALPHA.":"Non. Les TA Points servent uniquement aux usages et récompenses TRUE ALPHA."}</div></div></div><div class="alphaRow"><div><b>${ht?"Ou bezwen èd?":"Besoin d’aide ?"}</b><div class="alphaNote">${ht?"Sèvi ak Messages pou kontakte TRUE ALPHA.":"Utilise Messages pour contacter TRUE ALPHA."}</div></div></div></div>`);
+}
+function openAlphaReferral(){
+ const id=(firebaseUser?.uid||localStorage.getItem("ta_alpha_id")||( "TA-"+Math.random().toString(36).slice(2,8).toUpperCase()));
+ localStorage.setItem("ta_alpha_id",id);
+ alphaModal(taT("👥 Alpha ID & Parrainage","👥 Alpha ID & Parennaj"),`<div class="alphaList"><div class="alphaRow"><b>Alpha ID</b><strong>${escapeHTML(id)}</strong></div><p class="alphaNote">${taT("Le système de récompense du parrainage doit être validé par l’Admin.","Sistèm rekonpans parennaj la dwe valide pa Admin nan.")}</p></div>`);
+}
+function openAlphaBirthday(){
+ const input=document.getElementById("birthdayDate");
+ alphaModal(taT("🎂 Anniversaire","🎂 Anivèsè"),`<div class="alphaList"><div class="alphaRow"><div><b>${taT("Date d’anniversaire","Dat anivèsè")}</b><div class="alphaNote">${taT("Seul le jour/mois peut être utilisé pour le mode anniversaire.","Sèlman jou/mwa a ka sèvi pou mòd anivèsè a.")}</div></div></div></div>`);
+ if(input) setTimeout(()=>input.focus(),50);
+}
+function openAlphaServiceStatus(){
+ const ht=taLang()==="ht";
+ alphaModal(ht?"🟢 Eta sèvis yo":"🟢 État des services",`<div class="alphaList"><div class="alphaRow"><b>💎 Free Fire TopUp</b><span>${ht?"Admin ap verifye":"Vérification Admin"}</span></div><div class="alphaRow"><b>💰 Wallet</b><span>${ht?"Disponib — validasyon Admin":"Disponible — validation Admin"}</span></div><div class="alphaRow"><b>⭐ TA Points</b><span>${ht?"Disponib":"Disponible"}</span></div><div class="alphaRow"><b>💳 Virtual Card</b><span>KIRIKOU / VISA</span></div><div class="alphaRow"><b>📱 MonCash</b><span>${ht?"Talè disponib":"Bientôt disponible"}</span></div></div>`);
+}
 
 </script>
 
