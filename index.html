@@ -1005,6 +1005,7 @@ body.dark .pack.selected{
   margin-top:11px
 }
 
+.rewardClaimBtn{transition:.18s ease}.rewardClaimBtn.available{background:#16a34a!important;color:#fff!important;opacity:1;cursor:pointer}.rewardClaimBtn:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(.35)}
 .rewardCardTop{
   display:flex;
   justify-content:space-between;
@@ -1480,7 +1481,7 @@ body.dark .paymentDetails{background:#2b2414;border-color:#5a481e;color:#f5d98b}
 body.dark .composerStatus.ok{background:#10291f;color:#8be0b5;border-color:#235b40}
 body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6b2925}
 .arcadeAlphaCard{margin-bottom:12px}
-.messagesList{display:grid;gap:10px;margin-bottom:12px}.messageBubble{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:12px}.messageBubble.admin{border-left:4px solid var(--primary)}.messageMeta{font-size:9px;color:var(--muted);margin-top:6px}.messageComposer{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:13px}.messageComposer textarea{width:100%;resize:vertical;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:12px;padding:11px;outline:none;margin-bottom:9px}.badgesPanel{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}.badgesPanelTitle{font-size:12px;font-weight:900;margin-bottom:10px}.badgesGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.miniBadge{border:1px solid var(--border);background:var(--bg);border-radius:12px;padding:9px}.miniBadgeIcon{font-size:18px}.miniBadge strong{display:block;font-size:9px;margin-top:4px}.miniBadge small{display:block;font-size:8px;color:var(--muted);margin-top:2px}.badgeProgress{height:5px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:6px}.badgeProgress span{display:block;height:100%;background:var(--primary)}.pointsCashValue{margin-top:9px;font-size:11px;font-weight:900}.dailyGiftButton{margin-top:10px;padding:11px}.dailyGiftCard{margin-bottom:12px}.orderProgress{margin-top:10px;height:7px;background:var(--border);border-radius:99px;overflow:hidden}.orderProgress span{display:block;height:100%;background:var(--primary);border-radius:99px}.orderProgressLabel{font-size:9px;color:var(--muted);margin-top:5px}.serverError{margin-top:12px;background:#fff0ef;color:#b42318;border:1px solid #ffd6d2;border-radius:13px;padding:12px;font-size:11px;line-height:1.5}.serverOk{margin-top:12px}
+.messagesList{display:grid;gap:10px;margin-bottom:12px}.messageBubble{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:12px}.messageBubble.admin{border-left:4px solid var(--primary)}.messageMeta{font-size:9px;color:var(--muted);margin-top:6px}.messageComposer{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:13px}.messageComposer textarea{width:100%;resize:vertical;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:12px;padding:11px;outline:none;margin-bottom:9px}.badgesPanel{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}.badgesPanelTitle{font-size:12px;font-weight:900;margin-bottom:10px}.badgesGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.miniBadge{border:1px solid var(--border);background:var(--bg);border-radius:12px;padding:9px}.miniBadgeIcon{font-size:18px}.miniBadge strong{display:block;font-size:9px;margin-top:4px}.miniBadge small{display:block;font-size:8px;color:var(--muted);margin-top:2px}.badgeProgress{height:5px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:6px}.badgeProgress span{display:block;height:100%;background:var(--primary)}.pointsCashValue{margin-top:9px;font-size:11px;font-weight:900}.pointsRewardIntro{margin:0 0 12px;padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--card);font-size:10px;line-height:1.55}.dailyGiftButton{margin-top:10px;padding:11px}.dailyGiftCard{margin-bottom:12px}.orderProgress{margin-top:10px;height:7px;background:var(--border);border-radius:99px;overflow:hidden}.orderProgress span{display:block;height:100%;background:var(--primary);border-radius:99px}.orderProgressLabel{font-size:9px;color:var(--muted);margin-top:5px}.serverError{margin-top:12px;background:#fff0ef;color:#b42318;border:1px solid #ffd6d2;border-radius:13px;padding:12px;font-size:11px;line-height:1.5}.serverOk{margin-top:12px}
 
 /* =========================
    RESPONSIVE
@@ -1559,7 +1560,6 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 /* =========================
    ALPHA HUB / EXTRA FEATURES
 ========================= */
-.birthdayDatePicker{display:grid;grid-template-columns:1fr 1.25fr 1.15fr;gap:7px;margin-top:8px}.birthdayPart{min-width:0}.birthdayYear{min-width:0}
 .alphaHub{margin-top:14px;display:grid;gap:12px}
 .alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer}
@@ -1569,9 +1569,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 .alphaList{display:grid;gap:8px;margin-top:10px}.alphaRow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
 .alphaBtn{border:0;border-radius:12px;padding:9px 12px;background:var(--primary);color:#fff;font-weight:800;font-size:10px}.alphaBtn.secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
 .alphaInput{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);outline:none;margin-top:7px}.alphaNote{font-size:10px;color:var(--muted);line-height:1.5;margin-top:7px}
-.alphaBirthday{border-radius:18px;padding:15px;background:linear-gradient(135deg,#fff4fb,#f3f1ff);border:1px solid #eadcf5}.alphaBirthday h3{font-size:14px;margin-bottom:5px}.alphaBirthday p{font-size:10px;color:#667085;line-height:1.5}.alphaBirthday.live{animation:alphaPulse 1.8s infinite}
 @keyframes alphaPulse{50%{transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,91,255,.15)}}
-body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alphaBirthday p{color:var(--muted)}
 @media(max-width:420px){.alphaHubGrid{grid-template-columns:1fr 1fr}.alphaMiniStats{grid-template-columns:1fr 1fr 1fr}}
 
 </style>
@@ -2664,7 +2662,7 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
     </h2>
 
     <p style="margin-top:7px;font-size:11px">
-      2 TA Points = 1 HTG. Utilisez vos points uniquement sur TRUE ALPHA.
+      2 TA Points = 1 HTG. Reclamez vos TA Points pour recevoir du HTG dans ce Wallet, puis utilisez ce solde uniquement sur TRUE ALPHA.
     </p>
     <div class="pointsCashValue" id="pointsCashValue">Valeur : 0 HTG</div>
 
@@ -2674,23 +2672,95 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
   <div class="sectionTitle">
 
     <h2>
-      🎁 Récompenses
+      🎁 Récompenses TA Points
     </h2>
 
+  </div>
+
+  <div class="pointsRewardIntro">
+    ⭐ Accumulez vos TA Points, puis réclamez une récompense dès que vous atteignez le montant requis.
+    Le montant réclamé est crédité dans votre <b>Wallet TA Points</b> en HTG et peut ensuite servir uniquement aux achats TRUE ALPHA.
   </div>
 
 
   <div id="rewardsList">
 
-    <div class="emptyActivity">
+    <!-- Liste par défaut visible immédiatement, même si l'API Admin n'est pas disponible. -->
+    <div class="rewardCard" data-default-reward="100" data-reward-value="50">
+      <div class="rewardCardTop"><strong>🎁 100 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 100 TA Points <span style="opacity:.75">→ 50 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
 
-      🎁
+    <div class="rewardCard" data-default-reward="500" data-reward-value="250">
+      <div class="rewardCardTop"><strong>🎁 500 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 500 TA Points <span style="opacity:.75">→ 250 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
 
-      <br><br>
+    <div class="rewardCard" data-default-reward="1000" data-reward-value="500">
+      <div class="rewardCardTop"><strong>🎁 1 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 1 000 TA Points <span style="opacity:.75">→ 500 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
 
-      Les récompenses apparaîtront ici
-      lorsque l’Admin les publiera.
+    <div class="rewardCard" data-default-reward="1500" data-reward-value="750">
+      <div class="rewardCardTop"><strong>🎁 1 500 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 1 500 TA Points <span style="opacity:.75">→ 750 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
 
+    <div class="rewardCard" data-default-reward="2000" data-reward-value="1000">
+      <div class="rewardCardTop"><strong>🎁 2 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 2 000 TA Points <span style="opacity:.75">→ 1 000 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="2500" data-reward-value="1250">
+      <div class="rewardCardTop"><strong>🎁 2 500 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 2 500 TA Points <span style="opacity:.75">→ 1 250 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="5000" data-reward-value="2500">
+      <div class="rewardCardTop"><strong>🎁 5 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 5 000 TA Points <span style="opacity:.75">→ 2 500 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="10000" data-reward-value="5000">
+      <div class="rewardCardTop"><strong>🎁 10 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 10 000 TA Points <span style="opacity:.75">→ 5 000 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="25000" data-reward-value="12500">
+      <div class="rewardCardTop"><strong>🎁 25 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 25 000 TA Points <span style="opacity:.75">→ 12 500 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="50000" data-reward-value="25000">
+      <div class="rewardCardTop"><strong>🎁 50 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 50 000 TA Points <span style="opacity:.75">→ 25 000 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
+    </div>
+
+    <div class="rewardCard" data-default-reward="100000" data-reward-value="50000">
+      <div class="rewardCardTop"><strong>🎁 100 000 TA Points</strong></div>
+      <div style="margin-top:8px;font-weight:800">⭐ 100 000 TA Points <span style="opacity:.75">→ 50 000 HTG</span></div>
+      <small style="display:block;margin-top:6px">Vos TA Points : <b class="staticPointsBalance">0 TA Points</b></small>
+      <button class="primaryBtn rewardClaimBtn" type="button" disabled>🔒 Pas assez de TA Points</button>
     </div>
 
   </div>
@@ -2760,7 +2830,7 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
         <small>Wallet TA Points</small>
         <strong id="walletPointsValue">0 HTG</strong>
       </div>
-      <div class="walletPointsFormula">2 TA Points = 1 HTG</div>
+      <div class="walletPointsFormula"><span id="walletPointsHTG">0 HTG</span><br>Utilisable uniquement sur TRUE ALPHA</div>
     </div>
 
     <div class="walletActions">
@@ -3052,18 +3122,10 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
 
     <div class="alphaHub">
       <div class="sectionTitle" style="margin-top:8px"><h3>✨ Alpha Center</h3></div>
-      <div class="alphaBirthday" id="birthdayCard">
-        <h3 id="birthdayTitle">🎂 Mon anniversaire</h3>
-        <p id="birthdayText">Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.</p>
-        <div class="birthdayDatePicker" id="birthdayDatePicker">
-          <select class="alphaInput birthdayPart" id="birthDayInput" aria-label="Jour"></select>
-          <select class="alphaInput birthdayPart" id="birthMonthInput" aria-label="Mois"></select>
-          <select class="alphaInput birthdayPart birthdayYear" id="birthYearInput" aria-label="Année"></select>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button class="alphaBtn" type="button" onclick="saveBirthday()">Définir la date</button>
-          <button class="alphaBtn secondary" type="button" onclick="clearBirthday()">Effacer</button>
-        </div>
+      <div class="alphaFeature" id="surpriseBoxCard" style="margin-bottom:10px">
+        <b id="surpriseBoxTitle">🎁 Surprise Box</b>
+        <small id="surpriseBoxText">Une surprise peut être disponible selon les règles et récompenses publiées par l’Admin.</small>
+        <button class="alphaBtn" type="button" onclick="openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
       </div>
       <div class="alphaMiniStats">
         <div class="alphaStat"><strong id="alphaLevel">1</strong><span>Alpha Level</span></div>
@@ -3275,7 +3337,7 @@ body.dark .alphaBirthday{background:#201927;border-color:#382d40}.body.dark .alp
       </button>
     </div>
 
-    <div class="checkoutFormula">2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.</div>
+    <div class="checkoutFormula">Le Wallet TA Points contient du HTG obtenu après réclamation. Le serveur vérifie toujours le solde avant de valider la commande.</div>
 
     <button class="primaryBtn" id="confirmPurchaseBtn" onclick="confirmPurchase()">💎 Confirmer et payer</button>
   </div>
@@ -3877,6 +3939,7 @@ let loggedIn=false;
 
 let balance=null;
 let points=0;
+let taWalletHTG=0;
 
 let orders=[];
 let notifications=[];
@@ -4124,7 +4187,7 @@ function toggleDark(){
 
 function resetTAFormAndDraft(){
   document.querySelectorAll("input, textarea, select").forEach(el=>{
-    if(el.closest("#birthdayCard") || el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
+    if(el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
     if(el.type==="checkbox" || el.type==="radio") el.checked=false;
     else el.value="";
   });
@@ -4152,7 +4215,7 @@ function taBackReset(target="home"){
 
 function resetCurrentFormFields(){
   document.querySelectorAll("input, textarea, select").forEach(el=>{
-    if(el.closest("#birthdayCard") || el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
+    if(el.hasAttribute("data-ta-persistent") || el.id==="languageText") return;
     if(el.type==="checkbox" || el.type==="radio") el.checked=false;
     else el.value="";
   });
@@ -4786,7 +4849,7 @@ function updateCheckoutUI(){
   const wb=document.getElementById("checkoutWalletBalance");
   const pb=document.getElementById("checkoutPointsBalance");
   if(wb) wb.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
-  if(pb) pb.textContent=Number(points||0).toLocaleString("fr-FR")+" ⭐";
+  if(pb) pb.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
 }
 
 function closeCheckout(){
@@ -4798,13 +4861,13 @@ async function confirmPurchase(){
   if(!requireLogin())return;
   if(!selectedPack || !verifiedUid || verifiedServer!=="NA — North America")return;
 
-  const pointsValue=Number(points||0)/2;
+  const pointsValue=Number(taWalletHTG||0);
   if(paymentMethod==="wallet" && (balance===null || Number(balance)<selectedPrice)){
     toast(taT("❌ Solde Wallet insuffisant.","❌ Solde Wallet la pa ase."));
     return;
   }
   if(paymentMethod==="wallet_points" && pointsValue<selectedPrice){
-    toast("❌ TA Points insuffisants. Il faut "+(selectedPrice*2).toLocaleString("fr-FR")+" points.");
+    toast(taT("❌ Solde Wallet TA Points insuffisant.","❌ Solde Wallet TA Points la pa ase."));
     return;
   }
 
@@ -4877,6 +4940,7 @@ async function loadWallet(){
   if(!firebaseUser){
 
     balance=null;
+    taWalletHTG=0;
 
     updateUI();
 
@@ -4928,6 +4992,13 @@ async function loadWallet(){
 
     }
 
+    taWalletHTG=Number(
+      data.taWalletHTG ??
+      data.walletPointsHTG ??
+      data.pointsWalletHTG ??
+      data.ta_wallet_balance ??
+      0
+    );
 
     updateUI();
 
@@ -5780,9 +5851,7 @@ function renderActivities(){
     active
       .map((a,index)=>`
 
-      <div
-        class="activityCard"
-        onclick="openActivity(${index})">
+      <div class="activityCard" role="article">
 
         <div class="activityTop">
 
@@ -5816,18 +5885,22 @@ function renderActivities(){
         </div>
 
         <div class="activityReward">
-
-          ⭐
-          +
+          ⭐ +
           ${Number(
             a.points||
             a.rewardPoints||
             0
           )}
-
           TA Points
-
         </div>
+
+        <button
+          type="button"
+          class="primaryBtn"
+          style="margin-top:12px"
+          onclick="event.stopPropagation(); openActivity(${index})">
+          ${taT("🎮 Jouer","🎮 Jwe")}
+        </button>
 
       </div>
 
@@ -6095,14 +6168,39 @@ function updatePointsUI(){
     b.textContent=p;
 
   const cash=document.getElementById("pointsCashValue");
-  if(cash) cash.textContent="Valeur : "+(Number(points||0)/2).toLocaleString("fr-FR")+" HTG";
+  if(cash) cash.textContent=taT("Valeur à réclamer : ","Valè pou reklame : ")+(Number(points||0)/2).toLocaleString("fr-FR")+" HTG";
+
   const walletPoints=document.getElementById("walletPointsValue");
-  if(walletPoints) walletPoints.textContent=(Number(points||0)/2).toLocaleString("fr-FR")+" HTG";
+  if(walletPoints) walletPoints.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
+
+  const walletPointsHTG=document.getElementById("walletPointsHTG");
+  if(walletPointsHTG) walletPointsHTG.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
+
+  updateStaticRewardButtons();
+
   const headerPoints=document.getElementById("checkoutPointsBalance");
-  if(headerPoints) headerPoints.textContent=p+" ⭐";
+  if(headerPoints) headerPoints.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
 
 }
 
+
+function updateStaticRewardButtons(){
+  const box=document.getElementById("rewardsList");
+  if(!box)return;
+  const current=Number(points||0);
+  box.querySelectorAll(".rewardCard[data-default-reward]").forEach(card=>{
+    const required=Number(card.dataset.defaultReward||0);
+    const enough=current>=required;
+    const bal=card.querySelector(".staticPointsBalance");
+    const btn=card.querySelector(".rewardClaimBtn");
+    if(bal) bal.textContent=current.toLocaleString("fr-FR")+" TA Points";
+    if(btn){
+      btn.disabled=!enough;
+      btn.classList.toggle("available",enough);
+      btn.textContent=enough?"🎁 Réclamer":"🔒 Pas assez de TA Points";
+    }
+  });
+}
 
 async function loadRewards(){
 
@@ -6130,10 +6228,21 @@ async function loadRewards(){
       await response.json();
 
 
-    rewards=
+    const adminRewards=
       Array.isArray(data)
         ?data
         :(data.rewards||[]);
+
+    // Keep the standard TRUE ALPHA reward list visible;
+    // Admin rewards can be added without removing these defaults.
+    const merged=[...defaultRewards];
+    adminRewards.forEach(r=>{
+      const id=String(r?.id||"");
+      const existing=merged.findIndex(x=>String(x.id)===id);
+      if(existing>=0) merged[existing]=r;
+      else merged.push(r);
+    });
+    rewards=merged;
 
 
   }catch(e){
@@ -6147,87 +6256,57 @@ async function loadRewards(){
 
 function renderRewards(){
 
-  const box=
-    document.getElementById(
-      "rewardsList"
-    );
-
+  const box=document.getElementById("rewardsList");
   if(!box)return;
 
-
   if(!rewards.length){
-
     box.innerHTML=`
-
       <div class="emptyActivity">
-
         🎁
-
         <br><br>
-
         Les récompenses apparaîtront ici
         lorsque l’Admin les publiera.
-
       </div>
-
     `;
-
     return;
-
   }
 
+  const currentPoints=Number(points||0);
 
-  box.innerHTML=
-    rewards
-      .map(r=>`
+  box.innerHTML=rewards.map(r=>{
+    const required=Number(r.requiredPoints||r.points||0);
+    const value=Number(r.value||r.amount||0);
+    const enough=currentPoints>=required;
+    const fr=enough?"🎁 Réclamer":"🔒 Pas assez de TA Points";
+    const ht=enough?"🎁 Reklame":"🔒 Ou poko gen ase TA Points";
 
+    return `
       <div class="rewardCard">
-
         <div class="rewardCardTop">
-
-          <strong>
-            🎁
-            ${escapeHTML(
-              r.name||
-              "Rekonpans"
-            )}
-          </strong>
-
-          <strong>
-            ${Number(
-              r.requiredPoints||
-              r.points||
-              0
-            ).toLocaleString("fr-FR")}
-            ⭐
-          </strong>
-
+          <strong>🎁 ${escapeHTML(r.name||"Récompense")}</strong>
         </div>
 
-        <small>
-          Valeur:
-          ${Number(
-            r.value||
-            r.amount||
-            0
-          ).toLocaleString("fr-FR")}
-          HTG
+        <div style="margin-top:8px;font-weight:800">
+          ⭐ ${required.toLocaleString("fr-FR")} TA Points
+          <span style="opacity:.75">→ ${value.toLocaleString("fr-FR")} HTG</span>
+        </div>
+
+        <small style="display:block;margin-top:6px">
+          ${taT("Vos TA Points","TA Points ou genyen")} :
+          <b>${currentPoints.toLocaleString("fr-FR")} TA Points</b>
         </small>
 
         <button
-          class="primaryBtn"
+          class="primaryBtn rewardClaimBtn ${enough?"available":""}"
+          type="button"
           style="margin-top:12px"
-          onclick="claimReward('${escapeJS(r.id)}')">
-
-          🎁 Rachte rekonpans
-
+          ${enough?"":"disabled"}
+          onclick="event.stopPropagation(); claimReward('${escapeJS(r.id)}')">
+          ${taT(fr,ht)}
         </button>
-
       </div>
-
-    `)
-    .join("");
-
+    `;
+  }).join("");
 }
 
 
@@ -6314,6 +6393,20 @@ async function claimReward(id){
         points-required
       );
 
+    if(
+      data.taWalletHTG!==undefined ||
+      data.walletPointsHTG!==undefined ||
+      data.pointsWalletHTG!==undefined
+    ){
+      taWalletHTG=Number(
+        data.taWalletHTG ??
+        data.walletPointsHTG ??
+        data.pointsWalletHTG ??
+        0
+      );
+    }else{
+      taWalletHTG=Number(taWalletHTG||0)+Number(reward.value||reward.amount||0);
+    }
 
     updatePointsUI();
 
@@ -6647,7 +6740,7 @@ const TA_TRANSLATIONS={
     "🎮 Jwèt & Aktivite ALPHA":"🎮 Jwèt & Aktivite ALPHA","Mini-jeux TRUE ALPHA, défis et activités ajoutés par l’Admin.":"Mini-jwèt TRUE ALPHA, defi ak aktivite Admin nan ajoute.","🎮 Arcade • Défis ALPHA":"🎮 Arcade • Defi ALPHA","🕹️ Jouer à Arcade Alpha":"🕹️ Jwe Arcade Alpha",
     "Réclamez votre cadeau quotidien une seule fois par jour.":"Ranmase kado chak jou ou yon sèl fwa pa jou.","TRUE ALPHA n’a ajouté aucune activité pour le moment.":"TRUE ALPHA poko ajoute okenn aktivite pou kounye a.","Revenez plus tard pour découvrir de nouvelles activités ALPHA. 💎":"Tounen pita pou dekouvri nouvo aktivite ALPHA. 💎","Les récompenses apparaîtront ici lorsque l’Admin les publiera.":"Rekonpans yo ap parèt isit la lè Admin nan pibliye yo.",
     "📋 Mes commandes":"📋 Kòmand mwen yo","🔔 Notifications":"🔔 Notifikasyon","0 nouvelles":"0 nouvo","✓ Tout lire":"✓ Li tout","🗑️ Tout effacer":"🗑️ Efase tout","👤 Profil":"👤 Pwofil","Visiteur":"Vizitè","Konekte pou jwenn aksè ak kont ou.":"Konekte pou jwenn aksè ak kont ou.","👤 Compte":"👤 Kont","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","🛒 Mes commandes":"🛒 Kòmand mwen yo","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib","🌐 Langue":"🌐 Lang","🏅 Badges & achievements":"🏅 Badges ak reyalizasyon","🎨 Thème":"🎨 Tèm","Clair / Sombre":"Limyè / Fènwa","✨ Alpha Center":"✨ Alpha Center",
-    "🎂 Mon anniversaire":"🎂 Anivèsè mwen","Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.":"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.","Enregistrer":"Anrejistre","Effacer":"Efase","Alpha Level":"Nivo Alpha","Streak":"Seri","Badges":"Badges","🎯 Missions":"🎯 Misyon","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","📅 Événements":"📅 Evènman","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","❓ Centre d’aide":"❓ Sant èd","FAQ et réponses rapides.":"FAQ ak repons rapid.","📤 Partager":"📤 Pataje","Invite tes amis sur TRUE ALPHA.":"Envite zanmi ou sou TRUE ALPHA.","🤝 Alpha Family":"🤝 Alpha Family","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","🟢 État des services":"🟢 Eta sèvis yo","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.","🚪 Déconnexion":"🚪 Dekonekte",
+    "Alpha Level":"Nivo Alpha","Streak":"Seri","Badges":"Badges","🎯 Missions":"🎯 Misyon","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","📅 Événements":"📅 Evènman","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","❓ Centre d’aide":"❓ Sant èd","FAQ et réponses rapides.":"FAQ ak repons rapid.","📤 Partager":"📤 Pataje","Invite tes amis sur TRUE ALPHA.":"Envite zanmi ou sou TRUE ALPHA.","🤝 Alpha Family":"🤝 Alpha Family","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","🟢 État des services":"🟢 Eta sèvis yo","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.","🚪 Déconnexion":"🚪 Dekonekte",
     "🔐 Connexion / Créer un compte":"🔐 Konekte / Kreye kont","🔐 Connectez-vous avec Google pour créer ou accéder à votre compte TRUE ALPHA.":"🔐 Konekte ak Google pou kreye oswa antre nan kont TRUE ALPHA ou.","Votre compte sert pour le Wallet, les commandes, les TA Points et les activités.":"Kont ou sèvi pou Wallet, kòmand yo, TA Points ak aktivite yo.","Continuer avec Google":"Kontinye ak Google","Mot de passe":"Modpas","Se souvenir de moi":"Sonje mwen","Créer un compte":"Kreye kont",
     "🧾 Confirmation de commande":"🧾 Konfimasyon kòmand lan","Mode de paiement":"Mòd peman","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
     "1. Choisir le service":"1. Chwazi sèvis la","Recharge minimum :":"Minimòm rechaj :","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","MonCash — Bientôt disponible":"MonCash — Talè disponib","2. Montant":"2. Montan","Nom :":"Non :","📋 Copier":"📋 Kopi","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.","Email du destinataire":"Imèl moun k ap resevwa a","Minimum transfè :":"Minimòm transfè :",
@@ -6659,7 +6752,7 @@ const TA_TRANSLATIONS={
     "Payez facilement en ligne avec TRUE ALPHA Virtual Card 💳. Sèvis kat la fèt avèk patnè KIRIKOU.":"Peye fasil sou entènèt ak TRUE ALPHA Virtual Card 💳. Sèvis kat la fèt avèk patnè KIRIKOU.","Mini-jeux TRUE ALPHA, défis et activités ajoutés par l’Admin.":"Mini-jwèt TRUE ALPHA, defi ak aktivite Admin nan ajoute.",
     "Réclamez votre cadeau quotidien une seule fois par jour.":"Ranmase kado chak jou ou yon sèl fwa pa jou.","🎁 Réclamer":"🎁 Ranmase","Les récompenses apparaîtront ici lorsque l’Admin les publiera.":"Rekonpans yo ap parèt isit la lè Admin nan pibliye yo.",
     "🎁 Récompenses":"🎁 Rekonpans","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib",
-    "Ajoute ta date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.":"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","FAQ et réponses rapides.":"FAQ ak repons rapid.","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.",
+    "Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","FAQ et réponses rapides.":"FAQ ak repons rapid.","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.",
     "Messages":"Mesaj","🇬 Continuer avec Google":"🇬 Kontinye ak Google","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
     "💰 Recharger le Wallet":"💰 Rechaje Wallet","1. Choisir le service":"1. Chwazi sèvis la","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
     "Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.",
@@ -6712,102 +6805,7 @@ function applyLanguage(lang){
   const splashWelcomeSub=document.getElementById("splashWelcomeSub");
   if(splashWelcomeMain) splashWelcomeMain.textContent=lang==="fr"?"Bienvenue sur TRUE ALPHA":"Byenveni sou TRUE ALPHA";
   if(splashWelcomeSub) splashWelcomeSub.textContent=lang==="fr"?"Plus qu’un site, une communauté.":"Plis pase yon sit, yon kominote.";
-  updateBirthdayUI();
 }
-
-function initBirthdayPicker(){
-  const day=document.getElementById("birthDayInput");
-  const month=document.getElementById("birthMonthInput");
-  const year=document.getElementById("birthYearInput");
-  if(!day||!month||!year)return;
-  if(day.options.length===0){
-    day.innerHTML='<option value="">Jour</option>'+Array.from({length:31},(_,i)=>`<option value="${String(i+1).padStart(2,"0")}">${i+1}</option>`).join("");
-  }
-  const oldMonth=month.value;
-  const names=taLang()==="ht"?["Janvye","Fevriye","Mas","Avril","Me","Jen","Jiyè","Out","Septanm","Oktòb","Novanm","Desanm"]:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-  month.innerHTML='<option value="">'+(taLang()==="ht"?"Mwa":"Mois")+'</option>'+names.map((n,i)=>`<option value="${String(i+1).padStart(2,"0")}">${n}</option>`).join("");
-  if(oldMonth)month.value=oldMonth;
-  if(year.options.length===0){
-    const current=new Date().getFullYear();
-    year.innerHTML='<option value="">Année</option>'+Array.from({length:101},(_,i)=>{const y=current-i;return `<option value="${y}">${y}</option>`}).join("");
-  }
-}
-
-function setBirthdayPickerValue(iso){
-  initBirthdayPicker();
-  const parts=String(iso||"").split("-");
-  const day=document.getElementById("birthDayInput");
-  const month=document.getElementById("birthMonthInput");
-  const year=document.getElementById("birthYearInput");
-  if(day)day.value=parts[2]||"";
-  if(month)month.value=parts[1]||"";
-  if(year)year.value=parts[0]||"";
-}
-
-function getBirthdayPickerValue(){
-  initBirthdayPicker();
-  const day=document.getElementById("birthDayInput")?.value||"";
-  const month=document.getElementById("birthMonthInput")?.value||"";
-  const year=document.getElementById("birthYearInput")?.value||"";
-  if(!day||!month||!year)return "";
-  const d=new Date(Number(year),Number(month)-1,Number(day));
-  if(d.getFullYear()!==Number(year)||d.getMonth()!==Number(month)-1||d.getDate()!==Number(day))return "";
-  return `${year}-${month}-${day}`;
-}
-
-function updateBirthdayUI(){
-  initBirthdayPicker();
-  const ht=taLang()==="ht";
-  const title=document.getElementById("birthdayTitle");
-  const text=document.getElementById("birthdayText");
-  const buttons=document.querySelectorAll('#birthdayCard button');
-  const day=document.getElementById("birthDayInput");
-  const month=document.getElementById("birthMonthInput");
-  const year=document.getElementById("birthYearInput");
-  if(title) title.textContent=ht?"🎂 Anivèsè mwen":"🎂 Mon anniversaire";
-  if(text) text.textContent=localStorage.getItem("ta_birthday")
-    ? (ht?"Dat anivèsè ou anrejistre sou TRUE ALPHA. 🎉":"Votre date d’anniversaire est enregistrée sur TRUE ALPHA. 🎉")
-    : (ht?"Ajoute dat nesans ou pou aktive fonksyon anivèsè TRUE ALPHA.":"Ajoutez votre date de naissance pour activer les fonctions anniversaire de TRUE ALPHA.");
-  if(day)day.setAttribute("aria-label",ht?"Jou":"Jour");
-  if(month)month.setAttribute("aria-label",ht?"Mwa":"Mois");
-  if(year)year.setAttribute("aria-label",ht?"Ane":"Année");
-  if(day?.options[0])day.options[0].textContent=ht?"Jou":"Jour";
-  if(month?.options[0])month.options[0].textContent=ht?"Mwa":"Mois";
-  if(year?.options[0])year.options[0].textContent=ht?"Ane":"Année";
-  if(buttons[0]) buttons[0].textContent=ht?"Defini dat la":"Définir la date";
-  if(buttons[1]) buttons[1].textContent=ht?"Efase":"Effacer";
-}
-
-function saveBirthday(){
-  const iso=getBirthdayPickerValue();
-  if(!iso){
-    toast(taT("⚠️ Choisissez un jour, un mois et une année valides.","⚠️ Chwazi yon jou, yon mwa ak yon ane ki valab."));
-    return;
-  }
-  localStorage.setItem("ta_birthday",iso);
-  updateBirthdayUI();
-  const card=document.getElementById("birthdayCard");
-  if(card)card.classList.add("live");
-  toast(taT("✅ Date d’anniversaire enregistrée !","✅ Dat anivèsè a anrejistre !"));
-}
-
-function clearBirthday(){
-  localStorage.removeItem("ta_birthday");
-  setBirthdayPickerValue("");
-  const card=document.getElementById("birthdayCard");
-  if(card)card.classList.remove("live");
-  updateBirthdayUI();
-  toast(taT("🗑️ Date d’anniversaire supprimée.","🗑️ Dat anivèsè a efase."));
-}
-
-function loadBirthday(){
-  initBirthdayPicker();
-  setBirthdayPickerValue(localStorage.getItem("ta_birthday")||"");
-  const card=document.getElementById("birthdayCard");
-  if(card&&localStorage.getItem("ta_birthday"))card.classList.add("live");
-  updateBirthdayUI();
-}
-
 
 function shareTrueAlpha(){
   const shareData={
@@ -6846,9 +6844,6 @@ function changeLanguage(){
   applyLanguage(l);
 })();
 
-if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",loadBirthday);
-else loadBirthday();
-
 
 /* =====================================================
    CARD PARTNER
@@ -6869,6 +6864,14 @@ function contactCard(){
 ===================================================== */
 
 function closeModal(id){
+
+  // Tout bouton ✕ / fermeture d’un modal remet les formulaires à zéro.
+  // Les champs marqués persistants sont protégés par resetCurrentFormFields().
+  try{
+    resetCurrentFormFields();
+    sessionStorage.removeItem("taCheckoutDraft");
+    sessionStorage.removeItem("taCurrentForm");
+  }catch(e){}
 
   const modal=
     document.getElementById(id);
@@ -6913,6 +6916,12 @@ document
 
         if(e.target===modal){
 
+          try{
+            resetCurrentFormFields();
+            sessionStorage.removeItem("taCheckoutDraft");
+            sessionStorage.removeItem("taCurrentForm");
+          }catch(err){}
+
           modal.classList.remove(
             "show"
           );
@@ -6931,26 +6940,34 @@ document
 
 let toastTimer;
 
+function hideToast(){
+  const t=document.getElementById("toast");
+  if(!t)return;
+  t.classList.remove("show");
+  t.setAttribute("aria-hidden","true");
+}
+
 function toast(msg){
-
-  const t=
-    document.getElementById(
-      "toast"
-    );
-
-  t.textContent=msg;
-
-  t.classList.add("show");
+  const t=document.getElementById("toast");
+  if(!t)return;
 
   clearTimeout(toastTimer);
+  hideToast();
 
-  toastTimer=
-    setTimeout(
-      ()=>t.classList.remove("show"),
-      3000
-    );
+  t.textContent=msg;
+  t.setAttribute("aria-hidden","false");
+  requestAnimationFrame(()=>t.classList.add("show"));
 
+  toastTimer=setTimeout(hideToast,2200);
 }
+
+// Sécurité: aucun message toast ne reste affiché après un changement de page/fermeture.
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    clearTimeout(toastTimer);
+    hideToast();
+  }
+});
 
 
 /* =====================================================
@@ -7147,12 +7164,16 @@ const alphaMissions=[
   {title:"🎮 Arcade Alpha",titleHT:"🎮 Arcade Alpha",text:"Participe aux activités Arcade publiées par l’Admin.",textHT:"Patisipe nan aktivite Arcade Admin nan pibliye yo.",reward:"Badge Arcade Player"}
 ];
 function taLang(){return localStorage.getItem("ta_language")||"fr";}
+try{localStorage.removeItem("ta_birthday");}catch(e){}
 function taT(fr,ht){return taLang()==="ht"?ht:fr;}
 function alphaModal(title,html){
  const m=document.getElementById("alphaCenterModal"),t=document.getElementById("alphaCenterTitle"),c=document.getElementById("alphaCenterContent");
  if(!m||!t||!c)return; t.textContent=title;c.innerHTML=html;m.classList.add("show");
 }
-function closeAlphaCenter(){document.getElementById("alphaCenterModal")?.classList.remove("show")}
+function closeAlphaCenter(){
+  try{resetCurrentFormFields();}catch(e){}
+  document.getElementById("alphaCenterModal")?.classList.remove("show");
+}
 function openAlphaMissions(){
  const ht=taLang()==="ht";
  alphaModal(ht?"🎯 Misyon":"🎯 Missions",`<div class="alphaList">${alphaMissions.map(x=>`<div class="alphaRow"><div><b>${ht?x.titleHT:x.title}</b><div class="alphaNote">${ht?x.textHT:x.text}</div></div><strong>${x.reward}</strong></div>`).join("")}</div><p class="alphaNote">${ht?"Admin nan ka kontwole misyon ak rekonpans ki vrèman aktif yo.":"Les missions et récompenses réellement actives peuvent être contrôlées par l’Admin."}</p>`);
@@ -7170,10 +7191,9 @@ function openAlphaReferral(){
  localStorage.setItem("ta_alpha_id",id);
  alphaModal(taT("👥 Alpha ID & Parrainage","👥 Alpha ID & Parennaj"),`<div class="alphaList"><div class="alphaRow"><b>Alpha ID</b><strong>${escapeHTML(id)}</strong></div><p class="alphaNote">${taT("Le système de récompense du parrainage doit être validé par l’Admin.","Sistèm rekonpans parennaj la dwe valide pa Admin nan.")}</p></div>`);
 }
-function openAlphaBirthday(){
- const input=document.getElementById("birthdayDate");
- alphaModal(taT("🎂 Anniversaire","🎂 Anivèsè"),`<div class="alphaList"><div class="alphaRow"><div><b>${taT("Date d’anniversaire","Dat anivèsè")}</b><div class="alphaNote">${taT("Seul le jour/mois peut être utilisé pour le mode anniversaire.","Sèlman jou/mwa a ka sèvi pou mòd anivèsè a.")}</div></div></div></div>`);
- if(input) setTimeout(()=>input.focus(),50);
+function openAlphaSurpriseBox(){
+ const ht=taLang()==="ht";
+ alphaModal(ht?"🎁 Surprise Box":"🎁 Surprise Box",`<div class="alphaList"><div class="alphaRow"><div><b>${ht?"Yon sipriz ka disponib pou ou.":"Une surprise peut être disponible pour vous."}</b><div class="alphaNote">${ht?"Admin nan ka defini ki rekonpans ki disponib ak ki kondisyon ki nesesè. Sistèm nan pa bay rekonpans otomatikman san validasyon Admin.":"L’Admin peut définir les récompenses disponibles et les conditions requises. Le système n’accorde pas automatiquement une récompense sans validation Admin."}</div></div></div><div class="alphaRow"><span>${ht?"Estati":"Statut"}</span><strong>${ht?"Kontwole pa Admin":"Contrôlé par l’Admin"}</strong></div></div>`);
 }
 function openAlphaServiceStatus(){
  const ht=taLang()==="ht";
