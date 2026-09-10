@@ -1562,7 +1562,8 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 ========================= */
 .alphaHub{margin-top:14px;display:grid;gap:12px}
 .alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer}
+.alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer;width:100%;text-align:left;font:inherit;color:var(--text)}
+.alphaFeature:focus-visible,.menuItem:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .alphaFeature b{display:block;font-size:12px;margin-bottom:5px}.alphaFeature small{color:var(--muted);font-size:10px;line-height:1.45}
 .alphaProgress{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:9px}.alphaProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
 .alphaMiniStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.alphaStat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.alphaStat strong{display:block;font-size:15px}.alphaStat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
@@ -3002,7 +3003,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     <div style="height:15px"></div>
 
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="openLogin()">
 
@@ -3014,10 +3015,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         ›
       </span>
 
-    </div>
+    </button>
 
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="showMessages()">
 
@@ -3027,10 +3028,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
       <span>›</span>
 
-    </div>
+    </button>
 
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="privatePage('orders')">
 
@@ -3042,10 +3043,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         ›
       </span>
 
-    </div>
+    </button>
 
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="openRecharge()">
 
@@ -3057,7 +3058,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         ›
       </span>
 
-    </div>
+    </button>
 
 
     <div class="menuItem">
@@ -3086,7 +3087,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="changeLanguage()">
 
@@ -3098,7 +3099,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         Français / Kreyòl ›
       </span>
 
-    </div>
+    </button>
 
 
     <div class="badgesPanel">
@@ -3106,7 +3107,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
       <div id="profileBadges" class="badgesGrid"></div>
     </div>
 
-    <div
+    <button type="button"
       class="menuItem"
       onclick="toggleDark()">
 
@@ -3116,16 +3117,16 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
       <span id="themeLabel">Clair / Sombre</span>
 
-    </div>
+    </button>
 
 
 
     <div class="alphaHub">
       <div class="sectionTitle" style="margin-top:8px"><h3>✨ Alpha Center</h3></div>
-      <div class="alphaFeature" id="surpriseBoxCard" role="button" tabindex="0" onclick="openAlphaSurpriseBox()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaSurpriseBox()" style="margin-bottom:10px">
+      <div class="alphaFeature" id="surpriseBoxCard" style="margin-bottom:10px">
         <b id="surpriseBoxTitle">🎁 Surprise Box</b>
         <small id="surpriseBoxText">Une surprise peut être disponible selon les règles et récompenses publiées par l’Admin.</small>
-        <button class="alphaBtn" type="button" onclick="event.stopPropagation();openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
+        <button class="alphaBtn" type="button" onclick="openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
       </div>
       <div class="alphaMiniStats">
         <div class="alphaStat"><strong id="alphaLevel">1</strong><span>Alpha Level</span></div>
@@ -3133,16 +3134,16 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         <div class="alphaStat"><strong id="alphaBadgeCount">0</strong><span>Badges</span></div>
       </div>
       <div class="alphaHubGrid">
-        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaMissions()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></div>
-        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaEvents()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></div>
-        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaFAQ()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></div>
-        <div class="alphaFeature" role="button" tabindex="0" onclick="shareTrueAlpha()" onkeydown="if(event.key==='Enter'||event.key===' ')shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></div>
+        <button type="button" class="alphaFeature" onclick="openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></button>
+        <button type="button" class="alphaFeature" onclick="openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></button>
+        <button type="button" class="alphaFeature" onclick="openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></button>
+        <button type="button" class="alphaFeature" onclick="shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></button>
       </div>
-      <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaReferral()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></div>
-      <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaServiceStatus()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaServiceStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></div>
+      <button type="button" class="alphaFeature" onclick="openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></button>
+      <button type="button" class="alphaFeature" onclick="openAlphaServiceStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></button>
     </div>
 
-    <div
+    <button type="button"
       class="menuItem logout"
       onclick="logout()">
 
@@ -3154,7 +3155,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         ›
       </span>
 
-    </div>
+    </button>
 
   </div>
 
@@ -4121,7 +4122,7 @@ const localFeatureDefaults={
   other_games:false,
   virtual_card:true,
   arcade:false,
-  daily_gift:true
+  daily_gift:false
 };
 
 const featureAccessCache=new Map();
@@ -4149,7 +4150,6 @@ function featureUnavailable(key){
 
 async function isFeatureReleased(key){
   if(!canUseSite())return false;
-  if(featureAccessCache.has(key))return featureAccessCache.get(key);
   let allowed=localFeatureDefaults[key]!==false;
   try{
     const r=await fetch("/api/services?key="+encodeURIComponent(key)+"&active=true",{cache:"no-store"});
@@ -4164,7 +4164,6 @@ async function isFeatureReleased(key){
       }
     }
   }catch(e){}
-  featureAccessCache.set(key,allowed);
   return allowed;
 }
 
@@ -6888,26 +6887,52 @@ function applyLanguage(lang){
 }
 
 function shareTrueAlpha(){
-  const shareData={
-    title:"TRUE ALPHA TopUp",
-    text:taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎"),
-    url:window.location.href
-  };
+  const url=window.location.href;
+  const text=taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎");
+  alphaModal(
+    taT("📤 Partager TRUE ALPHA","📤 Pataje TRUE ALPHA"),
+    `<div class="alphaList">
+      <button type="button" class="alphaFeature" onclick="shareTrueAlphaWhatsApp()"><b>🟢 WhatsApp</b><small>${taT("Partager sur WhatsApp.","Pataje sou WhatsApp.")}</small></button>
+      <button type="button" class="alphaFeature" onclick="shareTrueAlphaFacebook()"><b>🔵 Facebook</b><small>${taT("Partager sur Facebook.","Pataje sou Facebook.")}</small></button>
+      <button type="button" class="alphaFeature" onclick="shareTrueAlphaOther()"><b>📱 ${taT("Autres applications","Lòt aplikasyon")}</b><small>${taT("Utiliser les applications de partage disponibles sur ton téléphone.","Sèvi ak aplikasyon pataj ki disponib sou telefòn ou.")}</small></button>
+      <button type="button" class="alphaFeature" onclick="copyTrueAlphaLink()"><b>🔗 ${taT("Copier le lien","Kopye lyen an")}</b><small>${taT("Copier le lien TRUE ALPHA.","Kopye lyen TRUE ALPHA a.")}</small></button>
+    </div>`
+  );
+}
+
+function shareTrueAlphaWhatsApp(){
+  const url=window.location.href;
+  const text=taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎");
+  window.open("https://wa.me/?text="+encodeURIComponent(text+"\n"+url),"_blank","noopener");
+}
+
+function shareTrueAlphaFacebook(){
+  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(window.location.href),"_blank","noopener");
+}
+
+async function shareTrueAlphaOther(){
   if(navigator.share){
-    navigator.share(shareData).then(()=>{
+    try{
+      await navigator.share({title:"TRUE ALPHA TopUp",text:taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎"),url:window.location.href});
       toast(taT("✅ TRUE ALPHA partagé.","✅ TRUE ALPHA pataje."));
-    }).catch(()=>{});
+    }catch(e){}
     return;
   }
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(window.location.href).then(()=>{
-      toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));
-    }).catch(()=>{
-      toast(taT("⚠️ Impossible de copier le lien.","⚠️ Pa kapab kopye lyen an."));
-    });
-    return;
+  toast(taT("ℹ️ Le partage système n’est pas disponible sur cet appareil. Utilise Copier le lien.","ℹ️ Pataj sistèm lan pa disponib sou aparèy sa a. Sèvi ak Kopye lyen an."));
+}
+
+async function copyTrueAlphaLink(){
+  const url=window.location.href;
+  try{
+    await navigator.clipboard.writeText(url);
+    toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));
+  }catch(e){
+    const temp=document.createElement("input");
+    temp.value=url;document.body.appendChild(temp);temp.select();
+    try{document.execCommand("copy");toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));}
+    catch(err){toast(taT("⚠️ Impossible de copier le lien.","⚠️ Pa kapab kopye lyen an."));}
+    temp.remove();
   }
-  toast(taT("ℹ️ Copiez le lien du site pour le partager.","ℹ️ Kopye lyen sit la pou pataje li."));
 }
 
 
