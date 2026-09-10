@@ -1886,7 +1886,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
     <div
       class="category"
-      onclick="showPage('cards')">
+      onclick="openControlledService('virtual_card')">
 
       <div class="categoryIcon cardsIcon">
         💳
@@ -2020,7 +2020,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
     <div
       class="gameCard"
-      onclick="openFreeFire()">
+      onclick="openControlledService('freefire')">
 
       <div class="gameVisual freefireBg">
         <div class="gameEmoji">
@@ -2043,7 +2043,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div class="gameCard">
+    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('dls')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('dls')">
 
       <div class="gameVisual dlsBg">
         <div class="gameEmoji">⚽</div>
@@ -2065,7 +2065,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div class="gameCard">
+    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('freefire_europe')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('freefire_europe')">
 
       <div class="gameVisual europeBg">
         <div class="gameEmoji">🌍</div>
@@ -2087,7 +2087,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div class="gameCard">
+    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('freefire_latam')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('freefire_latam')">
 
       <div class="gameVisual latamBg">
         <div class="gameEmoji">🌎</div>
@@ -2109,7 +2109,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div class="gameCard">
+    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('booyah')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('booyah')">
 
       <div class="gameVisual booyahBg">
         <div class="gameEmoji">🏆</div>
@@ -2131,7 +2131,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
     </div>
 
 
-    <div class="gameCard">
+    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('other_games')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('other_games')">
 
       <div class="gameVisual otherBg">
         <div class="gameEmoji">🎮</div>
@@ -2592,7 +2592,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
       </div>
     </div>
     <div class="activityReward">🎮 Arcade • Défis ALPHA</div>
-    <button class="primaryBtn" onclick="openArcadeAlpha()">🕹️ Jouer à Arcade Alpha</button>
+    <button class="primaryBtn" onclick="openControlledService('arcade')">🕹️ Jouer à Arcade Alpha</button>
   </div>
 
   <div id="dailyGiftCard" class="activityCard dailyGiftCard">
@@ -2604,7 +2604,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
       </div>
     </div>
     <div class="activityReward">⭐ +20 TA Points</div>
-    <button class="primaryBtn dailyGiftButton" onclick="claimDailyGift()">🎁 Réclamer</button>
+    <button class="primaryBtn dailyGiftButton" onclick="openControlledService('daily_gift')">🎁 Réclamer</button>
   </div>
 
   <div id="activitiesList">
@@ -3122,10 +3122,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
     <div class="alphaHub">
       <div class="sectionTitle" style="margin-top:8px"><h3>✨ Alpha Center</h3></div>
-      <div class="alphaFeature" id="surpriseBoxCard" style="margin-bottom:10px">
+      <div class="alphaFeature" id="surpriseBoxCard" role="button" tabindex="0" onclick="openAlphaSurpriseBox()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaSurpriseBox()" style="margin-bottom:10px">
         <b id="surpriseBoxTitle">🎁 Surprise Box</b>
         <small id="surpriseBoxText">Une surprise peut être disponible selon les règles et récompenses publiées par l’Admin.</small>
-        <button class="alphaBtn" type="button" onclick="openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
+        <button class="alphaBtn" type="button" onclick="event.stopPropagation();openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
       </div>
       <div class="alphaMiniStats">
         <div class="alphaStat"><strong id="alphaLevel">1</strong><span>Alpha Level</span></div>
@@ -3133,13 +3133,13 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         <div class="alphaStat"><strong id="alphaBadgeCount">0</strong><span>Badges</span></div>
       </div>
       <div class="alphaHubGrid">
-        <div class="alphaFeature" onclick="openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></div>
-        <div class="alphaFeature" onclick="openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></div>
-        <div class="alphaFeature" onclick="openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></div>
-        <div class="alphaFeature" onclick="shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></div>
+        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaMissions()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></div>
+        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaEvents()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></div>
+        <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaFAQ()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></div>
+        <div class="alphaFeature" role="button" tabindex="0" onclick="shareTrueAlpha()" onkeydown="if(event.key==='Enter'||event.key===' ')shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></div>
       </div>
-      <div class="alphaFeature" onclick="openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></div>
-      <div class="alphaFeature" onclick="openAlphaStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></div>
+      <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaReferral()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></div>
+      <div class="alphaFeature" role="button" tabindex="0" onclick="openAlphaServiceStatus()" onkeydown="if(event.key==='Enter'||event.key===' ')openAlphaServiceStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></div>
     </div>
 
     <div
@@ -4103,6 +4103,84 @@ function canUseSite(){
 
 }
 
+/* =====================================================
+   ADMIN-CONTROLLED FEATURES
+   Every game/service can be opened by the customer, but
+   access is allowed only when Admin has published/activated
+   the feature. The public endpoint is intentionally separate
+   from Admin endpoints. If it is unavailable, keep the
+   current local availability so the existing site is not
+   unexpectedly broken.
+===================================================== */
+const localFeatureDefaults={
+  freefire:true,
+  dls:false,
+  freefire_europe:false,
+  freefire_latam:false,
+  booyah:false,
+  other_games:false,
+  virtual_card:true,
+  arcade:false,
+  daily_gift:true
+};
+
+const featureAccessCache=new Map();
+
+function featureLabel(key){
+  const ht=taLang()==="ht";
+  const names={
+    freefire:ht?"Free Fire TopUp":"Free Fire TopUp",
+    dls:"DLS",
+    freefire_europe:ht?"Free Fire Europe":"Free Fire Europe",
+    freefire_latam:ht?"Free Fire PIN LATAM":"Free Fire PIN LATAM",
+    booyah:"Pass Booyah",
+    other_games:ht?"Lòt jwèt":"Autres jeux",
+    virtual_card:ht?"Kat vityèl":"Carte virtuelle",
+    arcade:"Arcade Alpha",
+    daily_gift:ht?"Kado chak jou":"Cadeau quotidien"
+  };
+  return names[key]||"TRUE ALPHA";
+}
+
+function featureUnavailable(key){
+  const ht=taLang()==="ht";
+  alphaModal(featureLabel(key),`<div class="alphaList"><div class="alphaRow"><div><b>🔒 ${ht?"TRUE ALPHA poko mete sèvis sa a disponib.":"TRUE ALPHA n’a pas encore rendu ce service disponible."}</b><div class="alphaNote">${ht?"Admin nan poko pibliye oswa aktive sèvis sa a. Lè Admin nan aktive li, w ap ka antre ladan l otomatikman.":"L’Admin n’a pas encore publié ou activé ce service. Dès qu’il l’active, vous pourrez y accéder automatiquement."}</div></div></div></div>`);
+}
+
+async function isFeatureReleased(key){
+  if(!canUseSite())return false;
+  if(featureAccessCache.has(key))return featureAccessCache.get(key);
+  let allowed=localFeatureDefaults[key]!==false;
+  try{
+    const r=await fetch("/api/services?key="+encodeURIComponent(key)+"&active=true",{cache:"no-store"});
+    if(r.ok){
+      const d=await r.json();
+      const items=Array.isArray(d)?d:(d.services||d.items||d.data||[]);
+      if(Array.isArray(items) && items.length){
+        const item=items.find(x=>String(x.key||x.slug||x.id||x.serviceKey||"").toLowerCase()===String(key).toLowerCase())||items[0];
+        allowed=!!item && item.active!==false && item.published!==false && item.status!=="inactive" && item.enabled!==false;
+      }else if(d && typeof d==="object" && ("active" in d || "enabled" in d || "published" in d || "status" in d)){
+        allowed=d.active!==false && d.enabled!==false && d.published!==false && d.status!=="inactive";
+      }
+    }
+  }catch(e){}
+  featureAccessCache.set(key,allowed);
+  return allowed;
+}
+
+async function openControlledService(key){
+  if(!canUseSite())return;
+  const allowed=await isFeatureReleased(key);
+  if(!allowed){featureUnavailable(key);return;}
+  if(key==="freefire")return openFreeFire();
+  if(key==="virtual_card")return goCards();
+  if(key==="arcade"){showPage("activities");document.getElementById("arcadeAlphaCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
+  if(key==="daily_gift"){showPage("activities");document.getElementById("dailyGiftCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
+  featureUnavailable(key);
+}
+
+function clearFeatureAccessCache(){featureAccessCache.clear();}
+
 
 /* =====================================================
    CINEMATIC SPLASH CONTROL
@@ -4518,61 +4596,35 @@ function closeLoginAndReset(){
 
 
 async function googleLogin(){
-
-  if(
-    !canUseSite() ||
-    !window.TA_FIREBASE
-  ){
-
-    toast(
-      "❌ Firebase pa chaje."
-    );
-
+  if(!canUseSite() || !window.TA_FIREBASE){
+    toast("❌ Firebase pa chaje.");
     return;
-
   }
-
   try{
-
-    toast(
-      "⏳ Connexion Google..."
+    toast("⏳ Connexion / création du compte Google...");
+    const r=await window.TA_FIREBASE.signInWithPopup(
+      window.TA_FIREBASE.auth,
+      window.TA_FIREBASE.googleProvider
     );
-
-    const r=
-      await window.TA_FIREBASE.signInWithPopup(
-        window.TA_FIREBASE.auth,
-        window.TA_FIREBASE.googleProvider
-      );
-
     firebaseUser=r.user;
-
     loggedIn=true;
-
     updateUI();
-
     closeModal("loginModal");
-
-    addNotification(
-      "Connexion réussie",
-      "Bienvenue sur TRUE ALPHA."
-    );
-
-    toast(
-      "✅ Kont konekte avèk siksè."
-    );
-
+    addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
+    toast("✅ Kont Google la konekte. Si se premye fwa, Firebase kreye kont la otomatikman.");
   }catch(e){
-
-    console.error(e);
-
-    toast(
-      "❌ Google Login pa reyisi."
-    );
-
+    console.error("GOOGLE AUTH ERROR",e);
+    const code=String(e?.code||"");
+    let msg="❌ Google pa kapab konekte pou kounye a.";
+    if(code==="auth/operation-not-allowed") msg="❌ Google Sign-In pa aktive nan Firebase Authentication.";
+    else if(code==="auth/unauthorized-domain") msg="❌ Domèn TRUE ALPHA a poko otorize nan Firebase Authentication.";
+    else if(code==="auth/popup-blocked") msg="❌ Fenèt Google la bloke. Pèmèt popup pou sit la epi eseye ankò.";
+    else if(code==="auth/popup-closed-by-user") msg="⚠️ Fenèt Google la fèmen anvan koneksyon an fini.";
+    else if(code==="auth/account-exists-with-different-credential") msg="⚠️ Email Google sa a deja lye ak yon lòt metòd koneksyon.";
+    else if(e?.message) msg="❌ Google: "+String(e.message).slice(0,180);
+    toast(msg);
   }
-
 }
-
 
 async function logout(){
 
@@ -6437,24 +6489,57 @@ async function claimReward(id){
    AUTH EMAIL/PASSWORD
 ===================================================== */
 async function emailLogin(mode){
-  if(!canUseSite() || !window.TA_FIREBASE)return;
+  if(!canUseSite() || !window.TA_FIREBASE){
+    toast("❌ Firebase pa chaje.");
+    return;
+  }
   const email=document.getElementById("authEmail")?.value.trim();
   const password=document.getElementById("authPassword")?.value||"";
   const remember=document.getElementById("rememberMe")?.checked===true;
-  if(!email || password.length<6){toast("⚠️ Entrez un email et un mot de passe d’au moins 6 caractères.");return;}
+  if(!email){
+    toast("⚠️ Mete email ou an.");
+    return;
+  }
+  if(password.length<6){
+    toast("⚠️ Modpas la dwe gen omwen 6 karaktè.");
+    return;
+  }
   try{
-    if(typeof window.TA_FIREBASE.emailLogin==="function"){
-      const r=await window.TA_FIREBASE.emailLogin(email,password,mode);
-      firebaseUser=r?.user||r||firebaseUser;
+    if(mode==="register"){
+      if(typeof window.TA_FIREBASE.createUserWithEmailAndPassword!=="function")
+        throw new Error("email_signup_not_available");
+      await window.TA_FIREBASE.createUserWithEmailAndPassword(
+        window.TA_FIREBASE.auth,
+        email,
+        password
+      );
     }else{
-      const response=await fetch("/api/auth/email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password,mode,remember})});
-      const data=await response.json().catch(()=>({}));
-      if(!response.ok)throw new Error(data.message||"auth_failed");
-      if(data.user)firebaseUser=data.user;
+      if(typeof window.TA_FIREBASE.signInWithEmailAndPassword!=="function")
+        throw new Error("email_login_not_available");
+      await window.TA_FIREBASE.signInWithEmailAndPassword(
+        window.TA_FIREBASE.auth,
+        email,
+        password
+      );
     }
-    if(remember)localStorage.setItem("ta_remember_email",email);else localStorage.removeItem("ta_remember_email");
-    loggedIn=true; updateUI(); closeModal("loginModal"); toast(mode==="register"?"✅ Compte créé avec succès.":"✅ Connexion réussie.");
-  }catch(e){toast("❌ Impossible de "+(mode==="register"?"créer le compte.":"se connecter."));}
+    if(remember)localStorage.setItem("ta_remember_email",email);
+    else localStorage.removeItem("ta_remember_email");
+    toast(mode==="register"?"✅ Kont ou kreye avèk siksè.":"✅ Ou konekte.");
+  }catch(e){
+    console.error("EMAIL AUTH ERROR",e);
+    const code=String(e?.code||"");
+    let msg=mode==="register"
+      ?"❌ Impossible de créer le compte pour le moment."
+      :"❌ Impossible de se connecter pour le moment.";
+    if(code==="auth/email-already-in-use") msg="❌ Email sa a deja gen yon kont. Eseye Konekte.";
+    else if(code==="auth/invalid-email") msg="❌ Email la pa valid.";
+    else if(code==="auth/weak-password") msg="❌ Modpas la twò fèb. Mete omwen 6 karaktè.";
+    else if(code==="auth/operation-not-allowed") msg="❌ Email/Password pa aktive nan Firebase Authentication.";
+    else if(code==="auth/invalid-credential" || code==="auth/wrong-password" || code==="auth/user-not-found") msg="❌ Email oswa modpas la pa bon.";
+    else if(code==="auth/too-many-requests") msg="⚠️ Gen twòp tantativ. Tann yon ti moman epi eseye ankò.";
+    else if(e?.message && !String(e.message).includes("email_signup_not_available") && !String(e.message).includes("email_login_not_available")) msg="❌ "+String(e.message).slice(0,180);
+    toast(msg);
+  }
 }
 
 /* =====================================================
@@ -6509,13 +6594,8 @@ async function copyNatCashNumber(event){
   }
 }
 
-function openArcadeAlpha(){
-  showPage("activities");
-  const card=document.getElementById("arcadeAlphaCard");
-  if(card){
-    card.scrollIntoView({behavior:"smooth",block:"center"});
-  }
-  toast("🕹️ Arcade Alpha est prêt. Les mini-jeux et défis seront gérés depuis l’Admin.");
+async function openArcadeAlpha(){
+  return openControlledService("arcade");
 }
 
 async function deleteCustomerConversation(){
@@ -7103,6 +7183,8 @@ import {
   auth,
   googleProvider,
   signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged
 }
@@ -7113,6 +7195,8 @@ window.TA_FIREBASE={
   auth,
   googleProvider,
   signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signOut
 };
 
@@ -7174,32 +7258,74 @@ function closeAlphaCenter(){
   try{resetCurrentFormFields();}catch(e){}
   document.getElementById("alphaCenterModal")?.classList.remove("show");
 }
-function openAlphaMissions(){
- const ht=taLang()==="ht";
- alphaModal(ht?"🎯 Misyon":"🎯 Missions",`<div class="alphaList">${alphaMissions.map(x=>`<div class="alphaRow"><div><b>${ht?x.titleHT:x.title}</b><div class="alphaNote">${ht?x.textHT:x.text}</div></div><strong>${x.reward}</strong></div>`).join("")}</div><p class="alphaNote">${ht?"Admin nan ka kontwole misyon ak rekonpans ki vrèman aktif yo.":"Les missions et récompenses réellement actives peuvent être contrôlées par l’Admin."}</p>`);
+async function fetchAlphaPublished(type){
+ try{
+   const urls=[
+     "/api/content?type="+encodeURIComponent(type)+"&active=true",
+     "/api/alpha?type="+encodeURIComponent(type)+"&active=true"
+   ];
+   for(const url of urls){
+     try{
+       const r=await fetch(url,{cache:"no-store"});
+       if(!r.ok)continue;
+       const d=await r.json();
+       const items=Array.isArray(d)?d:(d.items||d.content||d.data||[]);
+       if(Array.isArray(items)) return items.filter(x=>x && x.active!==false && x.status!=="inactive");
+       if(d && typeof d==="object"){
+         if(d.active===false || d.status==="inactive") return [];
+         return [d];
+       }
+     }catch(e){}
+   }
+ }catch(e){}
+ return [];
 }
-function openAlphaEvents(){
+function alphaUnavailable(type){
  const ht=taLang()==="ht";
- alphaModal(ht?"📅 Evènman TRUE ALPHA":"📅 Événements TRUE ALPHA",`<div class="alphaList"><div class="alphaRow"><b>🎮 Arcade Alpha</b><span>${ht?"Aktivite":"Activités"}</span></div><div class="alphaRow"><b>🎁 Taptap Kado</b><span>${ht?"Anons":"Annonce"}</span></div><div class="alphaRow"><b>🔥 Promos & Flash Deals</b><span>${ht?"Selon disponiblite":"Selon disponibilité"}</span></div><div class="alphaRow"><b>🆕 What’s New</b><span>${ht?"Nouvo bagay":"Nouveautés"}</span></div></div>`);
+ const names={
+   missions:ht?"Misyon":"Missions",
+   events:ht?"Evènman":"Événements",
+   faq:ht?"Sant èd":"Centre d’aide",
+   referral:ht?"Alpha Family":"Alpha Family",
+   surprise:ht?"Surprise Box":"Surprise Box",
+   status:ht?"Eta sèvis yo":"État des services"
+ };
+ alphaModal(names[type]||"TRUE ALPHA",`<div class="alphaList"><div class="alphaRow"><div><b>ℹ️ ${ht?"TRUE ALPHA poko ajoute sa.":"TRUE ALPHA n’a pas encore ajouté ce contenu."}</b><div class="alphaNote">${ht?"Admin nan poko pibliye kontni sa a. Lè Admin nan aktive l, l ap parèt otomatikman isit la.":"L’Admin n’a pas encore publié ce contenu. Dès qu’il l’active, il apparaîtra automatiquement ici."}</div></div></div></div>`);
 }
-function openAlphaFAQ(){
- const ht=taLang()==="ht";
- alphaModal(ht?"❓ Sant èd":"❓ Centre d’aide",`<div class="alphaList"><div class="alphaRow"><div><b>${ht?"Kijan pou rechaje Wallet la?":"Comment recharger le Wallet ?"}</b><div class="alphaNote">${ht?"Ale nan Wallet → Rechaje. Minimòm 50 HTG. Demann lan ale bay Admin pou verifikasyon.":"Depuis Wallet → Recharger. Minimum 50 HTG. La demande passe par l’Admin pour vérification."}</div></div></div><div class="alphaRow"><div><b>${ht?"Kijan pou peye yon TopUp?":"Comment payer un TopUp ?"}</b><div class="alphaNote">${ht?"Chwazi Free Fire, voye UID ou, chwazi pack la, epi Admin nan verifye kòmand lan.":"Choisis Free Fire, envoie ton UID, sélectionne le pack, puis l’Admin vérifie la commande."}</div></div></div><div class="alphaRow"><div><b>${ht?"Èske mwen ka retire TA Points?":"Les TA Points sont-ils retirables ?"}</b><div class="alphaNote">${ht?"Non. TA Points sèvi sèlman pou itilizasyon ak rekonpans TRUE ALPHA.":"Non. Les TA Points servent uniquement aux usages et récompenses TRUE ALPHA."}</div></div></div><div class="alphaRow"><div><b>${ht?"Ou bezwen èd?":"Besoin d’aide ?"}</b><div class="alphaNote">${ht?"Sèvi ak Messages pou kontakte TRUE ALPHA.":"Utilise Messages pour contacter TRUE ALPHA."}</div></div></div></div>`);
+function alphaItemTitle(x,ht){return escapeHTML(x.title||x.name||x.question||x.label||"TRUE ALPHA");}
+function alphaItemText(x,ht){return escapeHTML(x.description||x.text||x.answer||x.body||x.message||"");}
+async function openAlphaMissions(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("missions");
+ if(!items.length){alphaUnavailable("missions");return;}
+ alphaModal(ht?"🎯 Misyon":"🎯 Missions",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><strong>${escapeHTML(x.reward||x.points||"")}</strong></div>`).join("")}</div>`);
 }
-function openAlphaReferral(){
+async function openAlphaEvents(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("events");
+ if(!items.length){alphaUnavailable("events");return;}
+ alphaModal(ht?"📅 Evènman TRUE ALPHA":"📅 Événements TRUE ALPHA",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><span>${escapeHTML(x.date||x.startDate||x.type||"")}</span></div>`).join("")}</div>`);
+}
+async function openAlphaFAQ(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("faq");
+ if(!items.length){alphaUnavailable("faq");return;}
+ alphaModal(ht?"❓ Sant èd":"❓ Centre d’aide",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div></div>`).join("")}</div>`);
+}
+async function openAlphaReferral(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("referral");
+ if(!items.length){alphaUnavailable("referral");return;}
  const id=(firebaseUser?.uid||localStorage.getItem("ta_alpha_id")||( "TA-"+Math.random().toString(36).slice(2,8).toUpperCase()));
  localStorage.setItem("ta_alpha_id",id);
- alphaModal(taT("👥 Alpha ID & Parrainage","👥 Alpha ID & Parennaj"),`<div class="alphaList"><div class="alphaRow"><b>Alpha ID</b><strong>${escapeHTML(id)}</strong></div><p class="alphaNote">${taT("Le système de récompense du parrainage doit être validé par l’Admin.","Sistèm rekonpans parennaj la dwe valide pa Admin nan.")}</p></div>`);
+ alphaModal(ht?"👥 Alpha Family":"👥 Alpha Family",`<div class="alphaList"><div class="alphaRow"><b>Alpha ID</b><strong>${escapeHTML(id)}</strong></div>${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><strong>${escapeHTML(x.reward||x.points||"")}</strong></div>`).join("")}</div>`);
 }
-function openAlphaSurpriseBox(){
- const ht=taLang()==="ht";
- alphaModal(ht?"🎁 Surprise Box":"🎁 Surprise Box",`<div class="alphaList"><div class="alphaRow"><div><b>${ht?"Yon sipriz ka disponib pou ou.":"Une surprise peut être disponible pour vous."}</b><div class="alphaNote">${ht?"Admin nan ka defini ki rekonpans ki disponib ak ki kondisyon ki nesesè. Sistèm nan pa bay rekonpans otomatikman san validasyon Admin.":"L’Admin peut définir les récompenses disponibles et les conditions requises. Le système n’accorde pas automatiquement une récompense sans validation Admin."}</div></div></div><div class="alphaRow"><span>${ht?"Estati":"Statut"}</span><strong>${ht?"Kontwole pa Admin":"Contrôlé par l’Admin"}</strong></div></div>`);
+async function openAlphaSurpriseBox(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("surprise");
+ if(!items.length){alphaUnavailable("surprise");return;}
+ alphaModal(ht?"🎁 Surprise Box":"🎁 Surprise Box",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><strong>${escapeHTML(x.reward||x.points||"")}</strong></div>`).join("")}</div>`);
 }
-function openAlphaServiceStatus(){
- const ht=taLang()==="ht";
- alphaModal(ht?"🟢 Eta sèvis yo":"🟢 État des services",`<div class="alphaList"><div class="alphaRow"><b>💎 Free Fire TopUp</b><span>${ht?"Admin ap verifye":"Vérification Admin"}</span></div><div class="alphaRow"><b>💰 Wallet</b><span>${ht?"Disponib — validasyon Admin":"Disponible — validation Admin"}</span></div><div class="alphaRow"><b>⭐ TA Points</b><span>${ht?"Disponib":"Disponible"}</span></div><div class="alphaRow"><b>💳 Virtual Card</b><span>KIRIKOU / VISA</span></div><div class="alphaRow"><b>📱 MonCash</b><span>${ht?"Talè disponib":"Bientôt disponible"}</span></div></div>`);
+async function openAlphaServiceStatus(){
+ const ht=taLang()==="ht",items=await fetchAlphaPublished("status");
+ if(!items.length){alphaUnavailable("status");return;}
+ alphaModal(ht?"🟢 Eta sèvis yo":"🟢 État des services",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><span>${escapeHTML(x.statusLabel||x.status||x.available||"")}</span></div>`).join("")}</div>`);
 }
-
 </script>
 
 </body>
