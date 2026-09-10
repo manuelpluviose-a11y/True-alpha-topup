@@ -195,7 +195,7 @@ header{
   display:flex;
   align-items:center;
   gap:9px
-}
+
 
 .brandLogo{
   width:42px;
@@ -1563,8 +1563,6 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 .alphaHub{margin-top:14px;display:grid;gap:12px}
 .alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer}
-.shareOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.shareOption{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:14px;padding:12px;font-weight:800;cursor:pointer;text-align:left}.shareOption small{display:block;color:var(--muted);font-weight:500;margin-top:4px}.shareOption:active{transform:scale(.98)}
-
 .alphaFeature b{display:block;font-size:12px;margin-bottom:5px}.alphaFeature small{color:var(--muted);font-size:10px;line-height:1.45}
 .alphaProgress{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:9px}.alphaProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
 .alphaMiniStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.alphaStat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.alphaStat strong{display:block;font-size:15px}.alphaStat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
@@ -2585,7 +2583,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
   </div>
 
 
-  <div id="arcadeAlphaCard" class="activityCard arcadeAlphaCard" role="button" tabindex="0" onclick="openControlledService('arcade')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('arcade')">
+  <div id="arcadeAlphaCard" class="activityCard arcadeAlphaCard">
     <div class="activityTop">
       <div class="activityEmoji">🕹️</div>
       <div>
@@ -2594,10 +2592,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
       </div>
     </div>
     <div class="activityReward">🎮 Arcade • Défis ALPHA</div>
-    <button class="primaryBtn" onclick="event.stopPropagation();openControlledService('arcade')">🕹️ Jouer à Arcade Alpha</button>
+    <button class="primaryBtn" onclick="openControlledService('arcade')">🕹️ Jouer à Arcade Alpha</button>
   </div>
 
-  <div id="dailyGiftCard" class="activityCard dailyGiftCard" role="button" tabindex="0" onclick="openControlledService('daily_gift')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('daily_gift')">
+  <div id="dailyGiftCard" class="activityCard dailyGiftCard">
     <div class="activityTop">
       <div class="activityEmoji">🎁</div>
       <div>
@@ -2606,7 +2604,7 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
       </div>
     </div>
     <div class="activityReward">⭐ +20 TA Points</div>
-    <button class="primaryBtn dailyGiftButton" onclick="event.stopPropagation();claimDailyGift()">🎁 Réclamer</button>
+    <button class="primaryBtn dailyGiftButton" onclick="openControlledService('daily_gift')">🎁 Réclamer</button>
   </div>
 
   <div id="activitiesList">
@@ -4123,7 +4121,7 @@ const localFeatureDefaults={
   other_games:false,
   virtual_card:true,
   arcade:false,
-  daily_gift:false
+  daily_gift:true
 };
 
 const featureAccessCache=new Map();
@@ -4177,7 +4175,7 @@ async function openControlledService(key){
   if(key==="freefire")return openFreeFire();
   if(key==="virtual_card")return goCards();
   if(key==="arcade"){showPage("activities");document.getElementById("arcadeAlphaCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
-  if(key==="daily_gift"){return claimDailyGift();}
+  if(key==="daily_gift"){showPage("activities");document.getElementById("dailyGiftCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
   featureUnavailable(key);
 }
 
@@ -5905,7 +5903,7 @@ function renderActivities(){
     active
       .map((a,index)=>`
 
-      <div class="activityCard" role="button" tabindex="0" onclick="openActivity(${index})" onkeydown="if(event.key==='Enter'||event.key===' ')openActivity(${index})">
+      <div class="activityCard" role="article">
 
         <div class="activityTop">
 
@@ -6655,9 +6653,7 @@ async function loadBadges(){
    DAILY GIFT
 ===================================================== */
 async function claimDailyGift(){
-  if(!canUseSite() || !requireLogin())return;
-  const released=await isFeatureReleased("daily_gift");
-  if(!released){featureUnavailable("daily_gift");return;}
+  if(!requireLogin())return;
   const button=document.querySelector(".dailyGiftButton"); if(button){button.disabled=true;button.textContent=taT("⏳ Vérification...","⏳ Verifikasyon...");}
   try{
     const r=await fetch("/api/daily-gift/claim",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||"",rewardPoints:20})});
@@ -6892,40 +6888,397 @@ function applyLanguage(lang){
 }
 
 function shareTrueAlpha(){
-  const ht=taLang()==="ht";
-  const url=window.location.href;
-  const text=taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎");
-  const wa="https://wa.me/?text="+encodeURIComponent(text+" "+url);
-  const fb="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
-  alphaModal(
-    ht?"📤 Pataje TRUE ALPHA":"📤 Partager TRUE ALPHA",
-    `<div class="alphaList">
-      <div class="alphaRow"><div><b>${ht?"Chwazi kijan ou vle pataje sit la.":"Choisissez comment vous voulez partager le site."}</b><div class="alphaNote">${ht?"Ou ka voye li sou WhatsApp, Facebook, sèvi ak lòt aplikasyon oswa kopye lyen an.":"Vous pouvez l’envoyer sur WhatsApp, Facebook, une autre application ou copier le lien."}</div></div></div>
-      <div class="shareOptions">
-        <button class="shareOption" type="button" onclick="window.open('${wa}','_blank','noopener,noreferrer')">🟢 WhatsApp<small>${ht?"Pataje sou WhatsApp":"Partager sur WhatsApp"}</small></button>
-        <button class="shareOption" type="button" onclick="window.open('${fb}','_blank','noopener,noreferrer')">🔵 Facebook<small>${ht?"Pataje sou Facebook":"Partager sur Facebook"}</small></button>
-        <button class="shareOption" type="button" onclick="shareSystemTrueAlpha()">📱 ${ht?"Lòt aplikasyon":"Autres applications"}<small>${ht?"Louvri meni pataj telefòn nan":"Ouvrir le menu de partage du téléphone"}</small></button>
-        <button class="shareOption" type="button" onclick="copyTrueAlphaShareLink()">🔗 ${ht?"Kopye lyen":"Copier le lien"}<small>${escapeHTML(url)}</small></button>
-      </div>
-    </div>`
-  );
-}
-async function shareSystemTrueAlpha(){
-  const data={title:"TRUE ALPHA TopUp",text:taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎"),url:window.location.href};
-  try{
-    if(navigator.share){await navigator.share(data);toast(taT("✅ TRUE ALPHA partagé.","✅ TRUE ALPHA pataje."));}
-    else await copyTrueAlphaShareLink();
-  }catch(e){}
-}
-async function copyTrueAlphaShareLink(){
-  try{
-    await navigator.clipboard.writeText(window.location.href);
-    toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));
-  }catch(e){
-    const input=document.createElement("input");input.value=window.location.href;document.body.appendChild(input);input.select();
-    try{document.execCommand("copy");toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));}catch(err){toast(taT("⚠️ Impossible de copier le lien.","⚠️ Pa kapab kopye lyen an."));}
-    input.remove();
+  const shareData={
+    title:"TRUE ALPHA TopUp",
+    text:taT("Découvre TRUE ALPHA TopUp 💎","Dekouvri TRUE ALPHA TopUp 💎"),
+    url:window.location.href
+  };
+  if(navigator.share){
+    navigator.share(shareData).then(()=>{
+      toast(taT("✅ TRUE ALPHA partagé.","✅ TRUE ALPHA pataje."));
+    }).catch(()=>{});
+    return;
   }
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      toast(taT("✅ Lien TRUE ALPHA copié.","✅ Lyen TRUE ALPHA kopye."));
+    }).catch(()=>{
+      toast(taT("⚠️ Impossible de copier le lien.","⚠️ Pa kapab kopye lyen an."));
+    });
+    return;
+  }
+  toast(taT("ℹ️ Copiez le lien du site pour le partager.","ℹ️ Kopye lyen sit la pou pataje li."));
+}
+
+
+function changeLanguage(){
+  const current=localStorage.getItem("ta_language")||"fr";
+  const next=current==="fr"?"ht":"fr";
+  localStorage.setItem("ta_language",next);
+  applyLanguage(next);
+  toast(next==="fr"?"Langue : Français":"Lang : Kreyòl");
+}
+
+(function(){
+  const l=localStorage.getItem("ta_language")||"fr";
+  applyLanguage(l);
+})();
+
+
+/* =====================================================
+   CARD PARTNER
+===================================================== */
+
+function contactCard(){
+
+  window.open(
+    "https://wa.me/50932694670",
+    "_blank"
+  );
+
+}
+
+
+/* =====================================================
+   MODAL HELPERS
+===================================================== */
+
+function closeModal(id){
+
+  // Tout bouton ✕ / fermeture d’un modal remet les formulaires à zéro.
+  // Les champs marqués persistants sont protégés par resetCurrentFormFields().
+  try{
+    resetCurrentFormFields();
+    sessionStorage.removeItem("taCheckoutDraft");
+    sessionStorage.removeItem("taCurrentForm");
+  }catch(e){}
+
+  const modal=
+    document.getElementById(id);
+
+  if(modal)
+    modal.classList.remove("show");
+
+}
+
+
+function showInfo(
+  title,
+  content
+){
+
+  document.getElementById(
+    "infoTitle"
+  ).textContent=title;
+
+
+  document.getElementById(
+    "infoContent"
+  ).innerHTML=content;
+
+
+  document
+    .getElementById(
+      "infoModal"
+    )
+    .classList.add("show");
+
+}
+
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal=>{
+
+    modal.addEventListener(
+      "click",
+      e=>{
+
+        if(e.target===modal){
+
+          try{
+            resetCurrentFormFields();
+            sessionStorage.removeItem("taCheckoutDraft");
+            sessionStorage.removeItem("taCurrentForm");
+          }catch(err){}
+
+          modal.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function hideToast(){
+  const t=document.getElementById("toast");
+  if(!t)return;
+  t.classList.remove("show");
+  t.setAttribute("aria-hidden","true");
+}
+
+function toast(msg){
+  const t=document.getElementById("toast");
+  if(!t)return;
+
+  clearTimeout(toastTimer);
+  hideToast();
+
+  t.textContent=msg;
+  t.setAttribute("aria-hidden","false");
+  requestAnimationFrame(()=>t.classList.add("show"));
+
+  toastTimer=setTimeout(hideToast,2200);
+}
+
+// Sécurité: aucun message toast ne reste affiché après un changement de page/fermeture.
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    clearTimeout(toastTimer);
+    hideToast();
+  }
+});
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function loadTheme(){
+  const dark=localStorage.getItem("ta_dark")==="true";
+  document.body.classList.toggle("dark",dark);
+  updateThemeSwitch();
+}
+
+function updateThemeSwitch(){
+  const dark=document.body.classList.contains("dark");
+  const label=document.getElementById("themeLabel");
+  const icon=document.getElementById("themeSwitchIcon");
+  if(label)label.textContent=dark?"Sombre":"Clair";
+  if(icon)icon.textContent=dark?"🌙":"☀️";
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+(function(){
+
+  const l=
+    localStorage.getItem(
+      "ta_language"
+    )||"fr";
+
+
+  const text=
+    document.getElementById(
+      "languageText"
+    );
+
+
+  if(text){
+
+    text.textContent=
+      l==="ht"
+        ?"Kreyòl / Français ›"
+        :"Français / Kreyòl ›";
+
+  }
+
+})();
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(v){
+
+  return String(v??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJS(v){
+
+  return String(v??"")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* =====================================================
+   BANNER SLIDER
+===================================================== */
+
+let slideIndex=0;
+
+setInterval(()=>{
+
+  const slides=
+    document.querySelectorAll(
+      ".slide"
+    );
+
+  const dots=
+    document.querySelectorAll(
+      ".dot"
+    );
+
+
+  if(!slides.length)return;
+
+
+  slides.forEach(
+    x=>x.classList.remove("active")
+  );
+
+  dots.forEach(
+    x=>x.classList.remove("active")
+  );
+
+
+  slideIndex=
+    (slideIndex+1)%
+    slides.length;
+
+
+  slides[slideIndex]
+    .classList.add("active");
+
+
+  dots[slideIndex]
+    .classList.add("active");
+
+},4500);
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+</script>
+
+
+<script type="module">
+
+import {
+  auth,
+  googleProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "./firebase.js";
+
+
+window.TA_FIREBASE={
+  auth,
+  googleProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut
+};
+
+
+onAuthStateChanged(
+  auth,
+  async user=>{
+
+    firebaseUser=
+      user||null;
+
+    loggedIn=
+      !!user;
+
+
+    if(user){
+
+      await loadWallet();
+
+      await loadPoints();
+
+      await loadNotificationsFromBackend();
+
+      await refreshOrders();
+
+    }else{
+
+      balance=null;
+
+      points=0;
+
+    }
+
+
+    updateUI();
+
+  }
+);
+
+
+
+/* =====================================================
+   ALPHA CENTER
+===================================================== */
+const alphaMissions=[
+  {title:"🎁 Daily Gift",titleHT:"🎁 Kado chak jou",text:"Réclame ton bonus quotidien.",textHT:"Ranmase kado ou chak jou.",reward:"+20 TA Points"},
+  {title:"🛒 Première commande",titleHT:"🛒 Premye kòmand",text:"Passe ta première commande TRUE ALPHA.",textHT:"Fè premye kòmand TRUE ALPHA ou.",reward:"Badge First Order"},
+  {title:"⭐ TA Points",titleHT:"⭐ TA Points",text:"Accumule des TA Points avec les activités disponibles.",textHT:"Rasanble TA Points ak aktivite ki disponib yo.",reward:"Récompenses"},
+  {title:"🎮 Arcade Alpha",titleHT:"🎮 Arcade Alpha",text:"Participe aux activités Arcade publiées par l’Admin.",textHT:"Patisipe nan aktivite Arcade Admin nan pibliye yo.",reward:"Badge Arcade Player"}
+];
+function taLang(){return localStorage.getItem("ta_language")||"fr";}
+try{localStorage.removeItem("ta_birthday");}catch(e){}
+function taT(fr,ht){return taLang()==="ht"?ht:fr;}
+function alphaModal(title,html){
+ const m=document.getElementById("alphaCenterModal"),t=document.getElementById("alphaCenterTitle"),c=document.getElementById("alphaCenterContent");
+ if(!m||!t||!c)return; t.textContent=title;c.innerHTML=html;m.classList.add("show");
+}
+function closeAlphaCenter(){
+  try{resetCurrentFormFields();}catch(e){}
+  document.getElementById("alphaCenterModal")?.classList.remove("show");
+}
+async function fetchAlphaPublished(type){
+ try{
+   const urls=[
+     "/api/content?type="+encodeURIComponent(type)+"&active=true",
+     "/api/alpha?type="+encodeURIComponent(type)+"&active=true"
+   ];
+   for(const url of urls){
+     try{
+       const r=await fetch(url,{cache:"no-store"});
+       if(!r.ok)continue;
+       const d=await r.json();
+       const items=Array.isArray(d)?d:(d.items||d.content||d.data||[]);
+       if(Array.isArray(items)) return items.filter(x=>x && x.active!==false && x.status!=="inactive");
+       if(d && typeof d==="object"){
+         if(d.active===false || d.status==="inactive") return [];
+         return [d];
+       }
+     }catch(e){}
+   }
+ }catch(e){}
+ return [];
 }
 function alphaUnavailable(type){
  const ht=taLang()==="ht";
@@ -6973,17 +7326,6 @@ async function openAlphaServiceStatus(){
  if(!items.length){alphaUnavailable("status");return;}
  alphaModal(ht?"🟢 Eta sèvis yo":"🟢 État des services",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><span>${escapeHTML(x.statusLabel||x.status||x.available||"")}</span></div>`).join("")}</div>`);
 }
-
-// Keep every Alpha Center click handler available to inline buttons/cards.
-window.openAlphaMissions=openAlphaMissions;
-window.openAlphaEvents=openAlphaEvents;
-window.openAlphaFAQ=openAlphaFAQ;
-window.openAlphaReferral=openAlphaReferral;
-window.openAlphaSurpriseBox=openAlphaSurpriseBox;
-window.openAlphaServiceStatus=openAlphaServiceStatus;
-window.shareTrueAlpha=shareTrueAlpha;
-window.shareSystemTrueAlpha=shareSystemTrueAlpha;
-window.copyTrueAlphaShareLink=copyTrueAlphaShareLink;
 </script>
 
 </body>
