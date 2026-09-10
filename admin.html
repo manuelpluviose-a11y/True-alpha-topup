@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Titre de la page</title>
+</head>
+<body>
+    
+</body>
+</html><!DOCTYPE html>
 <html lang="ht">
 
 <head>
@@ -27,7 +36,7 @@ body{
 }
 
 h1{
-  text-align:center;
+  text-align:left;
   color:#00e5ff;
   margin-bottom:20px;
 }
@@ -107,6 +116,16 @@ button:disabled{
   background:#9b2226;
   color:white;
 }
+
+.admin-back{
+  background:#242438;
+  color:white;
+  border:1px solid #3a3a52;
+  margin-bottom:10px;
+}
+
+.admin-back:hover{filter:brightness(1.12)}
+
 
 .warning{
   background:#f59e0b;
@@ -359,7 +378,7 @@ button:disabled{
 
 <div class="container">
 
-<h1>TRUE ALPHA ADMIN</h1>
+<h1>TRUE ALPHA <span style="font-size:14px;color:#aaa;display:block;margin-top:4px">Admin Control Center</span></h1>
 
 <!-- LOGIN -->
 
@@ -425,6 +444,12 @@ Kontwòl Sit la
 onclick="openSection('activities',this)"
 >
 Jwèt & Aktivite ALPHA
+</button>
+
+<button
+onclick="openSection('dailyGift',this)"
+>
+🎁 Kado chak jou
 </button>
 
 <button
@@ -523,9 +548,14 @@ onclick="openSection('settings',this)"
 Paramèt
 </button>
 
-<button
-onclick="logoutAdmin()"
->
+<button onclick="openSection('finance',this)">💰 Fon Admin & Wallet</button>
+<button onclick="openSection('orders',this)">🧾 Kòmand & Peman</button>
+<button onclick="openSection('services',this)">🛍️ Sèvis & Pwodwi</button>
+<button onclick="openSection('content',this)">📝 Kontni Sit la</button>
+<button onclick="openSection('messages',this)">💬 Mesaj Kliyan</button>
+<button onclick="openSection('security',this)">🔐 Sekirite & Admin</button>
+
+<button onclick="logoutAdmin()">
 Dekonekte Admin
 </button>
 
@@ -942,6 +972,58 @@ RAFRECHI AKTIVITE
 
 </div>
 
+
+<!-- =========================
+     DAILY GIFT CONTROL
+========================= -->
+<div class="section" id="dailyGift">
+  <div class="card">
+    <h3>🎁 Kado chak jou — Kontwòl konplè</h3>
+    <p class="small">Se Admin ki deside si Kado chak jou a disponib, konbyen TA Points li bay, ak konbyen fwa chak kliyan ka reklame li.</p>
+
+    <input id="dailyGiftTitle" placeholder="Egzanp: 🎁 Kado chak jou">
+    <textarea id="dailyGiftDescription" placeholder="Egzanp: Retounen chak jou pou reklame +20 TA Points."></textarea>
+
+    <div class="grid">
+      <input id="dailyGiftPoints" type="number" min="0" placeholder="Egzanp: 20 — TA Points">
+      <input id="dailyGiftPerUser" type="number" min="1" placeholder="Egzanp: 1 — fwa pa jou">
+    </div>
+
+    <div class="grid">
+      <select id="dailyGiftStatus">
+        <option value="active">🟢 Aktif / Disponib</option>
+        <option value="inactive">🔴 Dezaktive</option>
+      </select>
+      <select id="dailyGiftReset">
+        <option value="daily">Chak jou</option>
+        <option value="24h">Chak 24 èdtan</option>
+      </select>
+    </div>
+
+    <div class="grid">
+      <input id="dailyGiftStart" type="datetime-local" aria-label="Kòmansman">
+      <input id="dailyGiftEnd" type="datetime-local" aria-label="Fin">
+    </div>
+
+    <input id="dailyGiftButtonLabel" placeholder="Egzanp: 🎁 Reklame +20 TA Points">
+
+    <button class="success" onclick="saveDailyGift()">💾 SOVE / AKTIVE KADO CHAK JOU</button>
+    <button class="danger" onclick="disableDailyGift()">🔴 DEZAKTIVE KADO CHAK JOU</button>
+    <button class="refresh" onclick="resetAdminForms(); loadDailyGift()">↩️ RETOUR / EFASE SA KI PA SOVE</button>
+  </div>
+
+  <div class="card">
+    <h3>📊 Eta aktyèl</h3>
+    <div id="dailyGiftStatusView" class="status status-off">Kado chak jou dezaktive</div>
+    <div class="money-box">
+      <div class="money-row"><span>TA Points:</span><strong id="dailyGiftPointsView">0</strong></div>
+      <div class="money-row"><span>Fwa pa kliyan:</span><strong id="dailyGiftPerUserView">1</strong></div>
+      <div class="money-row"><span>Règ reset:</span><strong id="dailyGiftResetView">Chak jou</strong></div>
+    </div>
+    <p class="small">Lè Admin mete l Aktif, index la dwe pran eta sa a nan backend la; pa bezwen retounen modifye index la pou chak chanjman.</p>
+    <button class="refresh" onclick="loadDailyGift()">RAFRECHI KADO CHAK JOU</button>
+  </div>
+</div>
 
 <!-- =========================
      POINTS
@@ -1820,6 +1902,64 @@ RAFRECHI JWÈT
 
 
 <!-- =========================
+     FINANCE / ADMIN FUND
+========================= -->
+<div class="section" id="finance">
+  <div class="card">
+    <h3>💰 Fon Admin & Wallet</h3>
+    <p class="small">Fon Admin nan se lajan sèvis la. TA Points rete separe.</p>
+    <div class="money-box">
+      <div class="money-row"><span>Fon Admin:</span><strong id="adminFundBalance">0 HTG</strong></div>
+      <div class="money-row"><span>Total Wallet kliyan:</span><strong id="customerWalletTotal">0 HTG</strong></div>
+      <div class="money-row"><span>Total TA Wallet:</span><strong id="taWalletTotal">0 HTG</strong></div>
+    </div>
+    <input id="fundAddAmount" type="number" min="1" placeholder="Egzanp: 50000 — HTG pou ajoute nan Fon Admin">
+    <input id="fundReason" placeholder="Egzanp: Kapital sèvis TRUE ALPHA">
+    <button class="success" onclick="adminAddFund()">AJOUTE NAN FON ADMIN</button>
+    <input id="fundAdjustAmount" type="number" placeholder="Egzanp: 1000 oswa -1000 — ajisteman HTG">
+    <input id="fundAdjustReason" placeholder="Egzanp: Koreksyon kontablite">
+    <button class="warning" onclick="adminAdjustFund()">AJISTE FON ADMIN</button>
+  </div>
+  <div class="card"><h3>⚠️ Règle finans</h3><div class="item-line">• Rechaj valide: Fon Admin ↓, Wallet kliyan ↑.</div><div class="item-line">• Rechaj refize: pa gen kredi.</div><div class="item-line">• Menm tranzaksyon an pa dwe kredite 2 fwa.</div><div class="item-line">• TA Points redemption pa itilize Fon Admin.</div></div>
+</div>
+
+<!-- =========================
+     ORDERS / PAYMENTS
+========================= -->
+<div class="section" id="orders">
+  <div class="card"><h3>🧾 Kòmand & Peman</h3><select id="orderFilter"><option value="all">Tout</option><option value="pending">An atant</option><option value="processing">Processing</option><option value="success">Completed</option><option value="failed">Failed</option></select><button class="refresh" onclick="loadAdminOrders()">RAFRECHI KÒMAND</button><div id="adminOrdersList"><div class="empty">Pa gen kòmand chaje.</div></div></div>
+  <div class="card"><h3>💳 Rechaj / Retrè / Transfè</h3><div id="financeRequestsList"><div class="empty">Pa gen demann chaje.</div></div><button class="refresh" onclick="loadFinanceRequests()">RAFRECHI DEMANN FINANS</button></div>
+</div>
+
+<!-- =========================
+     SERVICES / PRODUCTS
+========================= -->
+<div class="section" id="services">
+  <div class="card"><h3>🛍️ Sèvis & Pwodwi</h3><input id="serviceName" placeholder="Egzanp: Free Fire TopUp — NA"><input id="serviceCategory" placeholder="Egzanp: Jeux & services"><textarea id="serviceDescription" placeholder="Egzanp: TopUp Free Fire pou North America."></textarea><input id="servicePrice" type="number" min="0" placeholder="Egzanp: 200 — pri GDS"><input id="serviceIcon" placeholder="Egzanp: 💎"><select id="serviceStatus"><option value="active">Aktif</option><option value="inactive">Dezaktive</option><option value="soon">Bientôt disponible</option></select><input id="serviceOrder" type="number" placeholder="Egzanp: 1 — pozisyon"><button class="primary" onclick="createAdminService()">AJOUTE SÈVIS</button></div>
+  <div class="card"><h3>💎 Packs / Pri</h3><input id="packService" placeholder="Egzanp: Free Fire NA"><input id="packName" placeholder="Egzanp: 100 + 10 Diamonds"><input id="packValue" placeholder="Egzanp: 110 Diamonds"><input id="packPrice" type="number" min="0" placeholder="Egzanp: 200 — GDS"><select id="packStatus"><option value="active">Aktif</option><option value="inactive">Dezaktive</option><option value="soon">Bientôt disponible</option></select><button class="primary" onclick="createAdminPack()">AJOUTE PACK</button></div>
+  <div class="card"><h3>Sèvis/Packs ki egziste</h3><div id="servicesList"><div class="empty">Pa gen done chaje.</div></div><button class="refresh" onclick="loadAdminServices()">RAFRECHI</button></div>
+</div>
+
+<!-- =========================
+     SITE CONTENT / CMS
+========================= -->
+<div class="section" id="content">
+  <div class="card"><h3>📝 Kontni Sit la — CMS</h3><input id="contentKey" placeholder="Egzanp: home.heroTitle"><input id="contentTitle" placeholder="Egzanp: TRUE ALPHA — Tout sèvis ou yo"><textarea id="contentValue" placeholder="Egzanp: Rechaje jwèt ou yo nan yon sèl kote."></textarea><input id="contentImage" placeholder="Egzanp: https://... — URL imaj"><input id="contentLink" placeholder="Egzanp: games — paj bouton an"><select id="contentStatus"><option value="active">Aktif</option><option value="inactive">Dezaktive</option></select><input id="contentPosition" type="number" placeholder="Egzanp: 1 — pozisyon"><button class="primary" onclick="saveAdminContent()">PABLIYE / SOVE KONTNI</button></div>
+  <div class="card"><h3>📣 Anons / Promo / Taptap Kado</h3><input id="announcementTitle" placeholder="Egzanp: 🎁 Taptap Kado disponib jodi a"><textarea id="announcementText" placeholder="Egzanp: Tcheke Taptap Kado pou òf jodi a."></textarea><select id="announcementType"><option value="announcement">Anons</option><option value="promo">Promo</option><option value="taptap">Taptap Kado</option><option value="maintenance">Maintenance</option><option value="whatsnew">What's New</option></select><select id="announcementStatus"><option value="active">Aktif</option><option value="inactive">Dezaktive</option></select><button class="primary" onclick="publishAdminAnnouncement()">PABLIYE</button></div>
+  <div class="card"><h3>Kontni ki pibliye</h3><div id="contentList"><div class="empty">Pa gen kontni chaje.</div></div><button class="refresh" onclick="loadAdminContent()">RAFRECHI KONTNI</button></div>
+</div>
+
+<!-- =========================
+     CUSTOMER MESSAGES
+========================= -->
+<div class="section" id="messages"><div class="card"><h3>💬 Mesaj Kliyan</h3><input id="messageCustomer" placeholder="Egzanp: email kliyan an oswa Firebase UID"><textarea id="messageText" placeholder="Egzanp: Bonjou, nou verifye demann ou an."></textarea><button class="primary" onclick="sendAdminMessage()">📨 VOYE MESAJ</button><button class="refresh" onclick="loadAdminMessages()">RAFRECHI MESAJ</button></div><div class="card"><div id="adminMessagesList"><div class="empty">Pa gen mesaj chaje.</div></div></div></div>
+
+<!-- =========================
+     SECURITY
+========================= -->
+<div class="section" id="security"><div class="card"><h3>🔐 Sekirite & Admin</h3><p class="small">ADMIN_TOKEN ak API secrets dwe rete nan backend/Vercel, pa nan HTML.</p><input id="adminDisplayName" placeholder="Egzanp: Manuel — TRUE ALPHA Admin"><input id="adminSessionMinutes" type="number" min="5" placeholder="Egzanp: 60 — minit sesyon"><select id="adminMaintenanceLock"><option value="off">Pa bloke aksyon</option><option value="on">Bloke aksyon finansye</option></select><button class="success" onclick="saveAdminSecurity()">SOVE SEKIRITE</button></div><div class="card"><h3>🧹 Netwayaj fòm</h3><p class="small">Retour/Cancel/X ap efase sèlman sa ki poko sove.</p><button class="refresh" onclick="resetAdminForms()">🗑️ EFASE SA KI PA SOVE</button></div></div>
+
+<!-- =========================
      USERS
 ========================= -->
 
@@ -2012,6 +2152,8 @@ function toggleMenu(){
 
 function openSection(id,button){
 
+  resetAdminForms();
+
   document
     .querySelectorAll(".section")
     .forEach(section=>{
@@ -2102,9 +2244,37 @@ function openSection(id,button){
   if(id==="logs"){
     loadLogs();
   }
+  if(id==="finance"){ loadAdminFinance(); }
+  if(id==="orders"){ loadAdminOrders(); loadFinanceRequests(); }
+  if(id==="services"){ loadAdminServices(); }
+  if(id==="content"){ loadAdminContent(); }
+  if(id==="messages"){ loadAdminMessages(); }
+  if(id==="dailyGift"){ loadDailyGift(); }
+
+  ensureAdminBackButton(id);
 
 }
 
+
+/* =========================
+   ADMIN BACK / RESET
+========================= */
+function ensureAdminBackButton(id){
+  const section=document.getElementById(id);
+  if(!section) return;
+  let btn=section.querySelector(':scope > .admin-back');
+  if(!btn){
+    btn=document.createElement('button');
+    btn.className='admin-back';
+    btn.type='button';
+    btn.textContent='← Retour / Annuler';
+    btn.onclick=()=>{
+      resetAdminForms();
+      openSection('dashboard',document.querySelector('.menu button[onclick*="dashboard"]'));
+    };
+    section.insertBefore(btn,section.firstElementChild);
+  }
+}
 
 /* =========================
    LOGIN
@@ -2918,6 +3088,44 @@ async function savePointRules(){
 
 }
 
+
+async function addManualPointsByEmail(){
+  const email=document.getElementById("pointUserEmail").value.trim().toLowerCase();
+  const points=Number(document.getElementById("manualPointsEmail").value);
+  const reason=document.getElementById("pointEmailReason").value.trim();
+  if(!email || !email.includes("@") || points<1){showMessage("Mete yon email ak kantite TA Points valab.","#ff7777");return;}
+  try{
+    await adminJson("/admin/customers/credit","POST",{email,kind:"ta_points",amount:points,points,reason});
+    resetAdminForms();
+    showMessage("TA Points yo ajoute pou kliyan an.","#5ee39a");
+  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
+}
+
+async function addManualWalletByEmail(){
+  const email=document.getElementById("walletUserEmail").value.trim().toLowerCase();
+  const amount=Number(document.getElementById("manualWalletAmount").value);
+  const reason=document.getElementById("walletEmailReason").value.trim();
+  if(!email || !email.includes("@") || amount<1){showMessage("Mete yon email ak kantite HTG valab.","#ff7777");return;}
+  try{
+    await adminJson("/admin/customers/credit","POST",{email,kind:"wallet_htg",amount,reason});
+    resetAdminForms();
+    await loadAdminFinance();
+    showMessage("Wallet HTG kliyan an mete ajou.","#5ee39a");
+  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
+}
+
+async function addManualTAWalletByEmail(){
+  const email=document.getElementById("taWalletUserEmail").value.trim().toLowerCase();
+  const amount=Number(document.getElementById("manualTAWalletAmount").value);
+  const reason=document.getElementById("taWalletEmailReason").value.trim();
+  if(!email || !email.includes("@") || amount<1){showMessage("Mete yon email ak kantite HTG valab.","#ff7777");return;}
+  try{
+    await adminJson("/admin/customers/credit","POST",{email,kind:"ta_wallet_htg",amount,reason});
+    resetAdminForms();
+    await loadAdminFinance();
+    showMessage("Wallet TA Points kliyan an mete ajou.","#5ee39a");
+  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
+}
 
 async function addManualPoints(){
 
@@ -4880,6 +5088,92 @@ async function saveSettings(){
 
 }
 
+
+/* =========================
+   ADMIN CONTROL CENTER
+========================= */
+function resetAdminForms(){
+  const ids=["fundAddAmount","fundReason","fundAdjustAmount","fundAdjustReason","serviceName","serviceCategory","serviceDescription","servicePrice","serviceIcon","serviceOrder","packService","packName","packValue","packPrice","contentKey","contentTitle","contentValue","contentImage","contentLink","contentPosition","announcementTitle","announcementText","messageCustomer","messageText","adminDisplayName","adminSessionMinutes","dailyGiftTitle","dailyGiftDescription","dailyGiftPoints","dailyGiftPerUser","dailyGiftStart","dailyGiftEnd","dailyGiftButtonLabel"];
+  ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
+  const d={serviceStatus:"active",packStatus:"active",contentStatus:"active",announcementType:"announcement",announcementStatus:"active",adminMaintenanceLock:"off",dailyGiftStatus:"inactive",dailyGiftReset:"daily",dailyGiftPerUser:"1"};
+  Object.entries(d).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v;});
+}
+async function adminJson(endpoint,method="GET",body=null){const o={method,headers:{"x-admin-token":ADMIN_TOKEN,"Accept":"application/json"},cache:"no-store"};if(body!==null){o.headers["Content-Type"]="application/json";o.body=JSON.stringify(body)}const r=await fetch(API+endpoint,o);const d=await r.json().catch(()=>({}));if(!r.ok||d.success===false)throw new Error(d.message||"Backend la pa reponn byen.");return d}
+async function loadDailyGift(){
+  try{
+    const d=await adminJson("/admin/daily-gift");
+    const g=d.gift||d.dailyGift||d||{};
+    const set=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined&&v!==null)e.value=v};
+    set("dailyGiftTitle",g.title||"🎁 Kado chak jou");
+    set("dailyGiftDescription",g.description||"Retounen chak jou pou reklame TA Points.");
+    set("dailyGiftPoints",Number(g.points??20));
+    set("dailyGiftPerUser",Number(g.perUser??g.perUserLimit??1));
+    set("dailyGiftStatus",g.status||"inactive");
+    set("dailyGiftReset",g.reset||"daily");
+    set("dailyGiftStart",g.start||"");
+    set("dailyGiftEnd",g.end||"");
+    set("dailyGiftButtonLabel",g.buttonLabel||"🎁 Reklame TA Points");
+    document.getElementById("dailyGiftPointsView").textContent=Number(g.points??0);
+    document.getElementById("dailyGiftPerUserView").textContent=Number(g.perUser??g.perUserLimit??1);
+    document.getElementById("dailyGiftResetView").textContent=(g.reset||"daily")==="24h"?"Chak 24 èdtan":"Chak jou";
+    const st=document.getElementById("dailyGiftStatusView");
+    if(st){
+      const active=(g.status||"")==="active";
+      st.className="status "+(active?"status-on":"status-off");
+      st.textContent=active?"🟢 Kado chak jou DISPONIB":"🔴 Kado chak jou DEZAKTIVE";
+    }
+  }catch(e){
+    console.warn("DAILY GIFT",e.message);
+    const st=document.getElementById("dailyGiftStatusView");
+    if(st){st.className="status status-off";st.textContent="🔴 Kado chak jou — backend pa reponn";}
+  }
+}
+async function saveDailyGift(){
+  const data={
+    title:document.getElementById("dailyGiftTitle").value.trim()||"🎁 Kado chak jou",
+    description:document.getElementById("dailyGiftDescription").value.trim(),
+    points:Number(document.getElementById("dailyGiftPoints").value)||0,
+    perUser:Number(document.getElementById("dailyGiftPerUser").value)||1,
+    status:document.getElementById("dailyGiftStatus").value,
+    reset:document.getElementById("dailyGiftReset").value,
+    start:document.getElementById("dailyGiftStart").value,
+    end:document.getElementById("dailyGiftEnd").value,
+    buttonLabel:document.getElementById("dailyGiftButtonLabel").value.trim()||"🎁 Reklame TA Points"
+  };
+  if(data.points<0){showMessage("TA Points pa ka negatif.","#ff7777");return;}
+  try{
+    await adminJson("/admin/daily-gift","POST",data);
+    resetAdminForms();
+    await loadDailyGift();
+    showMessage("Kado chak jou a sove.","#5ee39a");
+  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
+}
+async function disableDailyGift(){
+  try{
+    await adminJson("/admin/daily-gift","POST",{status:"inactive"});
+    resetAdminForms();
+    await loadDailyGift();
+    showMessage("Kado chak jou a dezaktive.","#ffd54f");
+  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
+}
+
+async function loadAdminFinance(){try{const d=await adminJson("/admin/finance");document.getElementById("adminFundBalance").textContent=(d.adminFund??d.fund?.balance??0)+" HTG";document.getElementById("customerWalletTotal").textContent=(d.customerWalletTotal??0)+" HTG";document.getElementById("taWalletTotal").textContent=(d.taWalletTotal??0)+" HTG"}catch(e){console.warn("FINANCE",e.message)}}
+async function adminAddFund(){const amount=Number(document.getElementById("fundAddAmount").value),reason=document.getElementById("fundReason").value.trim();if(amount<1){showMessage("Mete yon kantite HTG valab.","#ff7777");return}try{await adminJson("/admin/finance/fund","POST",{action:"add",amount,reason});resetAdminForms();await loadAdminFinance();showMessage("Fon Admin nan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function adminAdjustFund(){const amount=Number(document.getElementById("fundAdjustAmount").value),reason=document.getElementById("fundAdjustReason").value.trim();if(!amount){showMessage("Mete yon ajisteman, egzanp 1000 oswa -1000.","#ff7777");return}try{await adminJson("/admin/finance/fund","POST",{action:"adjust",amount,reason});resetAdminForms();await loadAdminFinance();showMessage("Ajisteman an sove.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function loadAdminOrders(){try{const f=document.getElementById("orderFilter")?.value||"all",d=await adminJson("/admin/orders?status="+encodeURIComponent(f)),a=Array.isArray(d.orders)?d.orders:[];document.getElementById("adminOrdersList").innerHTML=a.length?a.map(o=>`<div class="item"><div class="item-title">${escapeHtml(o.id||"Kòmand")}</div><div class="item-line">Kliyan: ${escapeHtml(o.email||o.userId||"")}</div><div class="item-line">UID: ${escapeHtml(o.uid||"")} • ${Number(o.price||o.amount||0)} GDS</div><div class="item-line">Status: ${escapeHtml(o.status||"")}</div><button class="primary" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','processing')">PROCESSING</button><button class="success" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','success')">VALIDÉ / COMPLETED</button><button class="danger" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','failed')">ÉCHEC</button></div>`).join(""):"<div class='empty'>Pa gen kòmand.</div>"}catch(e){console.warn("ORDERS",e.message)}}
+async function updateAdminOrderStatus(id,status){if(!id)return;try{await adminJson("/admin/orders/"+encodeURIComponent(id),"POST",{status});await loadAdminOrders();showMessage("Status kòmand lan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function loadFinanceRequests(){try{const d=await adminJson("/admin/finance/requests"),a=Array.isArray(d.requests)?d.requests:[];document.getElementById("financeRequestsList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.type||"Demann")}</div><div class="item-line">${escapeHtml(x.email||x.userId||"")} • ${Number(x.amount||0)} HTG</div><div class="item-line">${escapeHtml(x.transactionId||x.status||"")}</div><button class="success" onclick="reviewFinanceRequest('${escapeJs(x.id||"")}','approve')">VALIDE</button><button class="danger" onclick="reviewFinanceRequest('${escapeJs(x.id||"")}','reject')">REFIZE</button></div>`).join(""):"<div class='empty'>Pa gen demann finans.</div>"}catch(e){console.warn("FINANCE REQUESTS",e.message)}}
+async function reviewFinanceRequest(id,action){if(!id)return;try{await adminJson("/admin/finance/requests/"+encodeURIComponent(id),"POST",{action});await loadFinanceRequests();await loadAdminFinance();showMessage("Demann finans lan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function createAdminService(){const data={name:document.getElementById("serviceName").value.trim(),category:document.getElementById("serviceCategory").value.trim(),description:document.getElementById("serviceDescription").value.trim(),price:Number(document.getElementById("servicePrice").value)||0,icon:document.getElementById("serviceIcon").value.trim(),status:document.getElementById("serviceStatus").value,position:Number(document.getElementById("serviceOrder").value)||0};if(!data.name){showMessage("Mete non sèvis la.","#ff7777");return}try{await adminJson("/admin/services","POST",data);resetAdminForms();await loadAdminServices();showMessage("Sèvis la ajoute.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function createAdminPack(){const data={service:document.getElementById("packService").value.trim(),name:document.getElementById("packName").value.trim(),value:document.getElementById("packValue").value.trim(),price:Number(document.getElementById("packPrice").value)||0,status:document.getElementById("packStatus").value};if(!data.service||!data.name){showMessage("Sèvis ak non pack obligatwa.","#ff7777");return}try{await adminJson("/admin/packs","POST",data);resetAdminForms();await loadAdminServices();showMessage("Pack la ajoute.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function loadAdminServices(){try{const d=await adminJson("/admin/services"),a=Array.isArray(d.services)?d.services:[];document.getElementById("servicesList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.icon||"")} ${escapeHtml(x.name||"")}</div><div class="item-line">${escapeHtml(x.category||"")} • ${escapeHtml(x.status||"")}</div><button class="warning" onclick="toggleAdminEntity('services','${escapeJs(x.id||"")}')">Aktive / Dezaktive</button></div>`).join(""):"<div class='empty'>Pa gen sèvis.</div>"}catch(e){console.warn("SERVICES",e.message)}}
+async function toggleAdminEntity(type,id){try{await adminJson(`/admin/${type}/${encodeURIComponent(id)}/toggle`,"POST");if(type==="services")await loadAdminServices();if(type==="content")await loadAdminContent()}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function saveAdminContent(){const data={key:document.getElementById("contentKey").value.trim(),title:document.getElementById("contentTitle").value.trim(),value:document.getElementById("contentValue").value.trim(),image:document.getElementById("contentImage").value.trim(),link:document.getElementById("contentLink").value.trim(),status:document.getElementById("contentStatus").value,position:Number(document.getElementById("contentPosition").value)||0};if(!data.key){showMessage("Mete kle kontni a.","#ff7777");return}try{await adminJson("/admin/content","POST",data);resetAdminForms();await loadAdminContent();showMessage("Kontni an sove.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function publishAdminAnnouncement(){const data={title:document.getElementById("announcementTitle").value.trim(),message:document.getElementById("announcementText").value.trim(),type:document.getElementById("announcementType").value,status:document.getElementById("announcementStatus").value};if(!data.title||!data.message){showMessage("Tit ak mesaj obligatwa.","#ff7777");return}try{await adminJson("/admin/announcements","POST",data);resetAdminForms();await loadAdminContent();showMessage("Piblikasyon an fèt.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function loadAdminContent(){try{const d=await adminJson("/admin/content"),a=Array.isArray(d.items)?d.items:[];document.getElementById("contentList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.title||x.key||"")}</div><div class="item-line">${escapeHtml(x.value||x.message||"")}</div><div class="item-line">Status: ${escapeHtml(x.status||"")}</div><button class="warning" onclick="toggleAdminEntity('content','${escapeJs(x.id||x.key||"")}')">Aktive / Dezaktive</button></div>`).join(""):"<div class='empty'>Pa gen kontni.</div>"}catch(e){console.warn("CONTENT",e.message)}}
+async function sendAdminMessage(){const customer=document.getElementById("messageCustomer").value.trim(),text=document.getElementById("messageText").value.trim();if(!customer||!text){showMessage("Kliyan ak mesaj obligatwa.","#ff7777");return}try{await adminJson("/messages","POST",{customer,text,from:"admin"});resetAdminForms();await loadAdminMessages();showMessage("Mesaj la voye.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function loadAdminMessages(){try{const d=await adminJson("/admin/messages"),a=Array.isArray(d.messages)?d.messages:[];document.getElementById("adminMessagesList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.customer||x.email||x.userId||"")}</div><div class="item-line">${escapeHtml(x.text||x.message||"")}</div><div class="item-line">${escapeHtml(x.createdAt||"")}</div></div>`).join(""):"<div class='empty'>Pa gen mesaj.</div>"}catch(e){console.warn("MESSAGES",e.message)}}
+async function saveAdminSecurity(){const data={displayName:document.getElementById("adminDisplayName").value.trim(),sessionMinutes:Number(document.getElementById("adminSessionMinutes").value)||60,maintenanceLock:document.getElementById("adminMaintenanceLock").value};try{await adminJson("/admin/security","POST",data);resetAdminForms();showMessage("Paramèt sekirite yo sove.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 
 /* =========================
    LOGOUT
