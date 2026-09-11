@@ -11,7 +11,7 @@
 <html lang="ht">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <title>TRUE ALPHA TopUp</title>
 
@@ -534,7 +534,7 @@ header{
 
 .page{
   display:none;
-  animation:fadeUp .3s ease
+  animation:fadeUp .42s ease
 }
 
 .page.active{
@@ -1562,8 +1562,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 ========================= */
 .alphaHub{margin-top:14px;display:grid;gap:12px}
 .alphaHubGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);cursor:pointer;width:100%;text-align:left;font:inherit;color:var(--text)}
-.alphaFeature:focus-visible,.menuItem:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.alphaFeature{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:14px;box-shadow:var(--shadow);width:100%;text-align:left;font:inherit;color:var(--text)}
+.alphaFeatureAction{display:flex;flex-direction:column;gap:9px}
+.alphaFeatureAction .alphaBtn{width:100%;margin-top:0}
+.alphaFeature:focus-visible,.menuItem:focus-visible,.alphaFeatureAction .alphaBtn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .alphaFeature b{display:block;font-size:12px;margin-bottom:5px}.alphaFeature small{color:var(--muted);font-size:10px;line-height:1.45}
 .alphaProgress{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:9px}.alphaProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
 .alphaMiniStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.alphaStat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.alphaStat strong{display:block;font-size:15px}.alphaStat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
@@ -1572,6 +1574,114 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 .alphaInput{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);outline:none;margin-top:7px}.alphaNote{font-size:10px;color:var(--muted);line-height:1.5;margin-top:7px}
 @keyframes alphaPulse{50%{transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,91,255,.15)}}
 @media(max-width:420px){.alphaHubGrid{grid-template-columns:1fr 1fr}.alphaMiniStats{grid-template-columns:1fr 1fr 1fr}}
+
+
+/* =========================
+   MOBILE / ORIENTATION FIX
+========================= */
+html{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+body{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow-x:hidden;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
+}
+
+button,input,textarea,select{
+  max-width:100%;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button{
+  touch-action:manipulation;
+}
+
+.container,
+.page,
+.profileBox,
+.alphaHub,
+.alphaHubGrid,
+.menuItem{
+  min-width:0;
+  max-width:100%;
+}
+
+.menuItem span,
+.menuItem strong{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+
+/* On phones in landscape, keep the site centered and usable
+   instead of letting a wide element create horizontal scrolling. */
+@media (max-width:900px){
+  .container{
+    width:calc(100% - 24px);
+    max-width:100%;
+  }
+
+  .profileBox{
+    width:100%;
+    overflow:hidden;
+  }
+
+  .alphaFeature,
+  .alphaFeatureAction,
+  .alphaBtn,
+  .menuItem{
+    max-width:100%;
+  }
+}
+
+@media (max-width:900px) and (orientation:landscape){
+  header{
+    height:62px;
+  }
+
+  #app{
+    padding-bottom:82px;
+  }
+
+  .page{
+    width:100%;
+  }
+
+  .profileBox{
+    padding:15px;
+  }
+
+  .alphaHubGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .bottomNav{
+    height:62px;
+  }
+}
+
+@media (max-width:520px){
+  .container{
+    width:calc(100% - 20px);
+  }
+
+  .headerRight{
+    min-width:0;
+    flex-wrap:nowrap;
+  }
+
+  .profileBox{
+    border-radius:17px;
+  }
+}
 
 </style>
 </head>
@@ -3123,10 +3233,10 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 
     <div class="alphaHub">
       <div class="sectionTitle" style="margin-top:8px"><h3>✨ Alpha Center</h3></div>
-      <div class="alphaFeature" id="surpriseBoxCard" style="margin-bottom:10px">
+      <div class="alphaFeature alphaFeatureAction" id="surpriseBoxCard" style="margin-bottom:10px">
         <b id="surpriseBoxTitle">🎁 Surprise Box</b>
         <small id="surpriseBoxText">Une surprise peut être disponible selon les règles et récompenses publiées par l’Admin.</small>
-        <button class="alphaBtn" type="button" onclick="openAlphaSurpriseBox()" style="margin-top:9px">🎁 Voir ma surprise</button>
+        <button class="alphaBtn" type="button" onclick="openAlphaSurpriseBox()">🎁 Voir ma surprise</button>
       </div>
       <div class="alphaMiniStats">
         <div class="alphaStat"><strong id="alphaLevel">1</strong><span>Alpha Level</span></div>
@@ -3134,13 +3244,13 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
         <div class="alphaStat"><strong id="alphaBadgeCount">0</strong><span>Badges</span></div>
       </div>
       <div class="alphaHubGrid">
-        <button type="button" class="alphaFeature" onclick="openAlphaMissions()"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small></button>
-        <button type="button" class="alphaFeature" onclick="openAlphaEvents()"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small></button>
-        <button type="button" class="alphaFeature" onclick="openAlphaFAQ()"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small></button>
-        <button type="button" class="alphaFeature" onclick="shareTrueAlpha()"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small></button>
+        <div class="alphaFeature alphaFeatureAction"><b>🎯 Missions</b><small>Défis quotidiens et hebdomadaires.</small><button type="button" class="alphaBtn" onclick="openAlphaMissions()">Ouvrir</button></div>
+        <div class="alphaFeature alphaFeatureAction"><b>📅 Événements</b><small>Moments, promos et nouveautés.</small><button type="button" class="alphaBtn" onclick="openAlphaEvents()">Ouvrir</button></div>
+        <div class="alphaFeature alphaFeatureAction"><b>❓ Centre d’aide</b><small>FAQ et réponses rapides.</small><button type="button" class="alphaBtn" onclick="openAlphaFAQ()">Voir la FAQ</button></div>
+        <div class="alphaFeature alphaFeatureAction"><b>📤 Partager</b><small>Invite tes amis sur TRUE ALPHA.</small><button type="button" class="alphaBtn" onclick="shareTrueAlpha()">Partager</button></div>
       </div>
-      <button type="button" class="alphaFeature" onclick="openAlphaReferral()"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small></button>
-      <button type="button" class="alphaFeature" onclick="openAlphaServiceStatus()"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small></button>
+      <div class="alphaFeature alphaFeatureAction"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small><button type="button" class="alphaBtn" onclick="openAlphaReferral()">Ouvrir</button></div>
+      <div class="alphaFeature alphaFeatureAction"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small><button type="button" class="alphaBtn" onclick="openAlphaServiceStatus()">Vérifier</button></div>
     </div>
 
     <button type="button"
@@ -4609,8 +4719,9 @@ async function googleLogin(){
     loggedIn=true;
     updateUI();
     closeModal("loginModal");
+    showPage("profile");
     addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
-    toast("✅ Kont Google la konekte. Si se premye fwa, Firebase kreye kont la otomatikman.");
+    toast("✅ Connexion réussie. Bienvenue sur TRUE ALPHA !");
   }catch(e){
     console.error("GOOGLE AUTH ERROR",e);
     const code=String(e?.code||"");
@@ -4627,38 +4738,33 @@ async function googleLogin(){
 
 async function logout(){
 
-  if(!firebaseUser)return;
-
-  try{
-
-    await window.TA_FIREBASE.signOut(
-      window.TA_FIREBASE.auth
-    );
-
-    firebaseUser=null;
+  if(!firebaseUser){
     loggedIn=false;
-
-    balance=null;
-    points=0;
-
     updateUI();
-
-    resetTopupFlow();
-
     showPage("home");
-
-    toast(
-      "✅ Déconnexion réussie."
-    );
-
-  }catch(e){
-
-    toast(
-      "❌ Erè pandan déconnexion."
-    );
-
+    return;
   }
 
+  try{
+    await window.TA_FIREBASE.signOut(window.TA_FIREBASE.auth);
+  }catch(e){
+    console.error("LOGOUT ERROR",e);
+    toast("❌ Erè pandan déconnexion. Eseye ankò.");
+    return;
+  }
+
+  // Nettoyage local après signOut Firebase réussi.
+  firebaseUser=null;
+  loggedIn=false;
+  balance=null;
+  points=0;
+  taWalletHTG=0;
+
+  try{ updateUI(); }catch(e){ console.error("LOGOUT UI ERROR",e); }
+  try{ resetTopupFlow(); }catch(e){}
+  try{ showPage("home"); }catch(e){}
+
+  toast("✅ Déconnexion réussie.");
 }
 
 
@@ -6523,7 +6629,19 @@ async function emailLogin(mode){
     }
     if(remember)localStorage.setItem("ta_remember_email",email);
     else localStorage.removeItem("ta_remember_email");
-    toast(mode==="register"?"✅ Kont ou kreye avèk siksè.":"✅ Ou konekte.");
+
+    // Firebase returns the authenticated user immediately. Update the UI
+    // here instead of waiting for the auth listener, so the result feels instant.
+    const currentUser=window.TA_FIREBASE.auth?.currentUser;
+    if(currentUser){
+      firebaseUser=currentUser;
+      loggedIn=true;
+      updateUI();
+    }
+
+    closeModal("loginModal");
+    showPage("profile");
+    toast(mode==="register"?"✅ Kont ou kreye avèk siksè. Byenveni sou TRUE ALPHA !":"✅ Ou konekte avèk siksè.");
   }catch(e){
     console.error("EMAIL AUTH ERROR",e);
     const code=String(e?.code||"");
