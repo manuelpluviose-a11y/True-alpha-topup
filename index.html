@@ -491,6 +491,34 @@ header{
   transform:translateY(-3px)
 }
 
+/* Alpha Activities: only the action button is clickable. */
+.alphaCategory{
+  cursor:default;
+}
+.alphaCategory:hover{
+  transform:none;
+}
+.alphaCategoryBtn{
+  display:block;
+  width:100%;
+  margin-top:12px;
+  border:0;
+  border-radius:12px;
+  padding:10px 12px;
+  background:var(--primary);
+  color:#fff;
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .16s ease,opacity .16s ease,box-shadow .16s ease;
+}
+.alphaCategoryBtn:active{
+  transform:scale(.975);
+  opacity:.9;
+  filter:brightness(.96);
+}
+
 .categoryIcon{
   width:52px;
   height:52px;
@@ -1056,11 +1084,27 @@ body.dark .pack.selected{
 
 .menuItem{
   padding:14px 0;
+  border:0;
   border-bottom:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  width:100%;
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  cursor:pointer
+  text-align:left;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:background-color .16s ease,transform .16s ease;
 }
+.menuItem:active{
+  transform:scale(.995);
+}
+.menuItem:disabled{
+  cursor:default;
+}
+
 
 .menuItem:last-child{
   border-bottom:0
@@ -1567,6 +1611,11 @@ body.dark .messageDeleteBtn{background:#2a1717;border-color:#5a2927;color:#ff8f8
 .alphaFeatureAction .alphaBtn{width:100%;margin-top:0}
 .alphaFeature:focus-visible,.menuItem:focus-visible,.alphaFeatureAction .alphaBtn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .alphaFeature b{display:block;font-size:12px;margin-bottom:5px}.alphaFeature small{color:var(--muted);font-size:10px;line-height:1.45}
+.alphaFeatureAction{cursor:default;pointer-events:auto}
+.alphaFeatureAction:hover{transform:none}
+.alphaFeatureAction:active{transform:none;opacity:1}
+.alphaFeatureAction .alphaBtn{cursor:pointer;transition:transform .12s ease,opacity .12s ease,filter .12s ease,box-shadow .12s ease}
+.alphaFeatureAction .alphaBtn:active{transform:scale(.975);opacity:.9;filter:brightness(.96)}
 .alphaProgress{height:7px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:9px}.alphaProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}
 .alphaMiniStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.alphaStat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.alphaStat strong{display:block;font-size:15px}.alphaStat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
 .alphaList{display:grid;gap:8px;margin-top:10px}.alphaRow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
@@ -1603,6 +1652,90 @@ button,input,textarea,select{
 
 button{
   touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+/* One clear, soft press effect for every real button.
+   Cards/containers themselves never receive a press effect. */
+button:not(:disabled){
+  transition:transform .12s ease,opacity .12s ease,filter .12s ease,background-color .12s ease,box-shadow .12s ease;
+}
+button:not(:disabled):active{
+  transform:translateY(2px) scale(.96);
+  opacity:.88;
+  filter:brightness(.94);
+  box-shadow:0 2px 6px rgba(0,0,0,.10) !important;
+}
+
+/* Touch-safe controls: never let mobile text selection/focus make a whole card look selected. */
+button,
+button *,
+.alphaFeature,
+.alphaCategory,
+.menuItem,
+.actionCard,
+.activityCard{
+  -webkit-user-select:none !important;
+  user-select:none !important;
+  -webkit-touch-callout:none;
+}
+button:focus{outline:none;}
+button:focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
+button.taPressed:not(:disabled){
+  transform:translateY(2px) scale(.96) !important;
+  opacity:.86 !important;
+  filter:brightness(.93) !important;
+  box-shadow:0 2px 7px rgba(0,0,0,.14) !important;
+}
+
+.iconBtn:active,.loginBtn:active,.themeSwitch:active,.onlineHeader:active,
+.navItem:active,.alphaCategoryBtn:active,.alphaBtn:active,.primaryBtn:active,
+.secondaryBtn:active,.menuItem:active,.copyNumberBtn:active{
+  transform:translateY(2px) scale(.96) !important;
+}
+
+.alphaCategory,
+.alphaFeatureAction{
+  -webkit-tap-highlight-color:transparent !important;
+  outline:none !important;
+}
+.alphaCategory:focus,.alphaFeatureAction:focus{outline:none !important;}
+.alphaFeatureAction .alphaBtn{position:relative;z-index:2;}
+
+.alphaShareOption{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  background:var(--card);
+  color:var(--text);
+  text-align:left;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+.alphaShareOption b{display:block;font-size:12px;margin-bottom:4px}
+.alphaShareOption small{display:block;color:var(--muted);font-size:10px;line-height:1.45}
+.alphaShareOption:active{transform:translateY(2px) scale(.97) !important;opacity:.86 !important;filter:brightness(.94) !important;}
+
+/* Informational cards are not selectable/clickable. Only their own
+   buttons may react to touch. */
+.category,
+.alphaFeature,
+.actionCard,
+.alphaStat,
+.badgesPanel,
+.balanceBox,
+.walletDualBox,
+.virtualCard{
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+.category,
+.alphaFeature{
+  -webkit-tap-highlight-color:transparent;
 }
 
 .container,
@@ -1682,6 +1815,56 @@ button{
     border-radius:17px;
   }
 }
+
+
+/* FINAL PHONE CONTAINMENT: nothing may create a horizontal page width. */
+*,*::before,*::after{box-sizing:border-box;max-width:100%;}
+img,svg,video,canvas{max-width:100%;height:auto;}
+html,body,#app,.container{width:100%;max-width:100%;}
+@media (max-width:520px){
+  .container{width:calc(100% - 20px);margin-inline:auto;}
+  header{min-width:0;max-width:100%;}
+  .brand,.headerRight{min-width:0;max-width:100%;}
+  .headerRight{overflow:hidden;}
+  .categories,.gamesGrid,.walletActions,.alphaHubGrid{width:100%;min-width:0;}
+  .category,.alphaFeature,.alphaFeatureAction,.menuItem,.actionCard{min-width:0;width:100%;}
+  .category strong,.category small,.alphaFeature b,.alphaFeature small,.menuItem span,.menuItem strong{overflow-wrap:anywhere;word-break:break-word;}
+}
+@media (max-width:900px) and (orientation:landscape){
+  body{overflow-x:hidden;}
+  .container{width:calc(100% - 20px);max-width:100%;}
+  .page{width:100%;max-width:100%;}
+}
+
+/* TRUE ALPHA — mobile fit */
+html,body{width:100%;max-width:100%;overflow-x:hidden!important;margin:0;padding:0;}
+body{min-width:0!important;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+#app,main,.container,.page{width:100%;max-width:100%;min-width:0!important;overflow-x:hidden;}
+.container{margin-left:auto;margin-right:auto;}
+img,svg,video,canvas{max-width:100%;height:auto;}
+@media(max-width:900px){.container{width:calc(100% - 20px)!important}.page,.profileBox,.alphaHub,.alphaHubGrid,.categories,.gamesGrid,.walletActions{width:100%;max-width:100%;min-width:0!important}.alphaHubGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.category,.alphaFeature,.actionCard,.activityCard,.menuItem,.walletDualBox,.balanceBox,.virtualCard{min-width:0!important;max-width:100%!important}input,select,textarea,button{max-width:100%;}}
+@media(max-width:520px){.container{width:calc(100% - 16px)!important}.alphaHubGrid{grid-template-columns:1fr!important}.headerRight,.brand{min-width:0!important;max-width:100%;}.headerRight{overflow:hidden}.brand span,.menuItem span,.menuItem strong,.category strong,.category small,.alphaFeature b,.alphaFeature small{overflow-wrap:anywhere;word-break:break-word;}}
+@media(max-width:900px) and (orientation:landscape){.container{width:calc(100% - 16px)!important}.alphaHubGrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* =====================================================
+   TRUE ALPHA — ALPHA UNIVERSE / RANKING / LEGACY
+   Added without replacing the existing project UI.
+===================================================== */
+.taUniverseGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.taUniverseCard{border:1px solid rgba(120,120,140,.16);border-radius:18px;padding:14px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(245,247,252,.96));box-shadow:0 10px 26px rgba(20,24,40,.06);min-width:0}
+body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),rgba(20,22,31,.96));border-color:rgba(255,255,255,.08)}
+.taUniverseCard b{display:block;font-size:14px;margin-bottom:5px}.taUniverseCard small{display:block;line-height:1.45;opacity:.74}.taUniverseCard button{margin-top:10px;width:100%}
+.taRankHero{padding:18px;border-radius:22px;background:linear-gradient(135deg,rgba(90,100,255,.12),rgba(0,200,180,.08));border:1px solid rgba(90,100,255,.16)}
+.taRankName{font-size:22px;font-weight:900}.taRankBadge{display:inline-flex;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px;margin-top:7px;background:rgba(90,100,255,.12)}
+.taProgress{height:9px;border-radius:999px;background:rgba(120,120,140,.14);overflow:hidden;margin:12px 0 6px}.taProgress>i{display:block;height:100%;width:62%;background:currentColor;border-radius:inherit}
+.taStatGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.taStatBox{padding:11px;border-radius:14px;background:rgba(120,120,140,.07)}.taStatBox strong{display:block;font-size:18px}.taStatBox span{font-size:11px;opacity:.7}
+.taTimeline{position:relative;margin:8px 0 0 8px;padding-left:18px;border-left:2px solid rgba(100,110,150,.18)}.taTimelineItem{position:relative;padding:0 0 15px}.taTimelineItem:before{content:"";position:absolute;left:-24px;top:3px;width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(100,110,150,.08)}
+.taPillRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.taPill{padding:7px 10px;border-radius:999px;background:rgba(120,120,140,.08);font-size:11px;font-weight:800}
+.taBattleOverlay{position:fixed;inset:0;z-index:99999;background:#080a10;color:#fff;display:none;align-items:center;justify-content:center;padding:12px}.taBattleOverlay.show{display:flex}.taBattleStage{width:min(1100px,100%);height:min(680px,96vh);border-radius:26px;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 35%,rgba(95,105,255,.18),transparent 38%),linear-gradient(135deg,#0a0c14,#111523 55%,#080a10);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.taBattleTop{display:flex;justify-content:space-between;gap:12px;padding:18px}.taFighter{width:42%;text-align:center}.taFighter strong{display:block;font-size:16px}.taBar{height:13px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:8px}.taBar i{display:block;height:100%;width:100%;background:currentColor;border-radius:inherit;transition:width .35s}.taBattleCenter{height:48%;display:flex;align-items:center;justify-content:space-around;text-align:center}.taBossCore{font-size:78px;filter:drop-shadow(0 0 24px rgba(120,130,255,.45));transition:.35s}.taBossCore.transform{transform:scale(1.2);filter:drop-shadow(0 0 38px rgba(255,190,80,.7))}.taBattleLog{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:min(440px,82%);text-align:center;font-weight:800;opacity:.95}.taBattleActions{position:absolute;left:12px;right:12px;bottom:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.taBattleActions button{padding:13px 8px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-weight:800}.taBattleActions button:active{transform:scale(.96)}.taSlow{animation:taSlow .9s ease-in-out 2}.taCinematic{animation:taCinema 1.6s ease both}.taBattleClose{position:absolute;right:14px;top:14px;z-index:3;border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:12px;padding:8px 11px}.taWinner{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;background:rgba(5,7,12,.84);backdrop-filter:blur(7px);z-index:5;padding:24px}.taWinner.show{display:flex}.taWinner h2{font-size:34px;margin:0 0 8px}.taWinner p{opacity:.82}.taChampionSeal{font-size:64px;margin-bottom:8px}
+@keyframes taSlow{50%{transform:scale(1.07)}}@keyframes taCinema{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@media(max-width:520px){.taUniverseGrid{grid-template-columns:1fr}.taBattleActions{grid-template-columns:repeat(2,1fr)}.taBossCore{font-size:58px}.taBattleStage{height:96vh;border-radius:18px}.taBattleCenter{height:46%}}
+@media(max-width:900px) and (orientation:landscape){.taBattleOverlay{padding:6px}.taBattleStage{height:98vh}.taBattleCenter{height:44%}.taBossCore{font-size:62px}}
 
 </style>
 </head>
@@ -1767,7 +1950,7 @@ button{
 
   <div class="headerRight">
 
-    <button
+    <button type="button"
       class="iconBtn languageBtn"
       id="languageButton"
       onclick="changeLanguage()"
@@ -1775,14 +1958,14 @@ button{
       🌐
     </button>
 
-    <button
+    <button type="button"
       class="iconBtn profileHeaderBtn"
-      onclick="openLogin()"
+      onclick="openAccountPanel()"
       aria-label="Mon compte">
       <span>👤</span>
     </button>
 
-    <button
+    <button type="button"
       class="themeSwitch"
       id="themeSwitch"
       onclick="toggleDark()"
@@ -1806,7 +1989,7 @@ button{
     <button
       class="loginBtn"
       id="loginButton"
-      onclick="openLogin()">
+      onclick="openAccountPanel()">
       Se connecter
     </button>
 
@@ -2012,9 +2195,7 @@ button{
     </div>
 
 
-    <div
-      class="category"
-      onclick="showPage('activities')">
+    <div class="category alphaCategory">
 
       <div class="categoryIcon activityIcon">
         🎁
@@ -2025,6 +2206,10 @@ button{
       <small>
         Aktivite ak rekonpans
       </small>
+
+      <button type="button" class="alphaCategoryBtn" onclick="showPage('activities')">
+        Ouvrir
+      </button>
 
     </div>
 
@@ -3115,7 +3300,7 @@ button{
 
     <button type="button"
       class="menuItem"
-      onclick="openLogin()">
+      onclick="openAccountPanel()">
 
       <span>
         👤 Compte
@@ -3251,6 +3436,8 @@ button{
       </div>
       <div class="alphaFeature alphaFeatureAction"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small><button type="button" class="alphaBtn" onclick="openAlphaReferral()">Ouvrir</button></div>
       <div class="alphaFeature alphaFeatureAction"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small><button type="button" class="alphaBtn" onclick="openAlphaServiceStatus()">Vérifier</button></div>
+      <div class="alphaFeature alphaFeatureAction" style="margin-top:10px"><b>🌌 Alpha Universe</b><small>Classement, records, passeport, boutique, équipes et héritage TRUE ALPHA.</small><button type="button" class="alphaBtn" onclick="openAlphaUniverse()">Explorer l’Univers</button></div>
+      <div class="alphaFeature alphaFeatureAction" style="margin-top:10px"><b>👑 TRUE ALPHA Final Trial</b><small>Affronte le boss final puis tente l’épreuve ultime.</small><button type="button" class="alphaBtn" onclick="openTrueAlphaBattle()">Commencer</button></div>
     </div>
 
     <button type="button"
@@ -3329,6 +3516,44 @@ button{
 </div>
 
 
+
+<!-- =========================
+     ALPHA UNIVERSE MODAL
+========================= -->
+<div class="modal" id="taUniverseModal">
+  <div class="modalBox">
+    <div class="modalHeader"><h3 id="taUniverseTitle">🌌 Alpha Universe</h3><button class="closeBtn" type="button" onclick="closeTaUniverse()">✕</button></div>
+    <div id="taUniverseContent"></div>
+  </div>
+</div>
+
+<!-- =========================
+     TRUE ALPHA FINAL BOSS — CINEMATIC BATTLE
+========================= -->
+<div class="taBattleOverlay" id="taBattleOverlay" aria-hidden="true">
+  <div class="taBattleStage">
+    <button class="taBattleClose" type="button" onclick="closeTrueAlphaBattle()">✕</button>
+    <div class="taBattleTop">
+      <div class="taFighter"><strong>Vous — Alpha Champion</strong><div class="taBar"><i id="taPlayerHp" style="width:100%"></i></div><small id="taPlayerHpText">100 HP</small></div>
+      <div class="taFighter"><strong id="taBossName">TRUE ALPHA</strong><div class="taBar"><i id="taBossHp" style="width:100%"></i></div><small id="taBossHpText">100 HP</small></div>
+    </div>
+    <div class="taBattleCenter">
+      <div><div>⚡</div><small>Votre Alpha</small></div>
+      <div class="taBossCore" id="taBossCore">👑</div>
+      <div><div id="taPhaseText">PHASE 1</div><small>Boss final</small></div>
+    </div>
+    <div class="taBattleLog" id="taBattleLog">Le combat commence. Reste concentré.</div>
+    <div class="taBattleActions">
+      <button type="button" onclick="taBattleMove('attack')">⚔️ Attaque</button>
+      <button type="button" onclick="taBattleMove('defend')">🛡️ Défense</button>
+      <button type="button" onclick="taBattleMove('dodge')">⚡ Esquive</button>
+      <button type="button" onclick="taBattleMove('special')">✨ Spécial</button>
+    </div>
+    <div class="taWinner" id="taWinner">
+      <div><div class="taChampionSeal">👑</div><h2>VICTOIRE</h2><p id="taWinnerText">TRUE ALPHA est vaincu.</p><button type="button" class="primaryBtn" onclick="taStartUltimateTrial()">Continuer vers l’Ultimate Trial</button></div>
+    </div>
+  </div>
+</div>
 
 <!-- =========================
      ALPHA CENTER MODAL
@@ -4679,6 +4904,14 @@ function privatePage(page){
 
 }
 
+
+function openAccountPanel(){
+  if(firebaseUser){
+    showPage("profile");
+    return;
+  }
+  openLogin();
+}
 
 function openLogin(){
 
@@ -7010,10 +7243,10 @@ function shareTrueAlpha(){
   alphaModal(
     taT("📤 Partager TRUE ALPHA","📤 Pataje TRUE ALPHA"),
     `<div class="alphaList">
-      <button type="button" class="alphaFeature" onclick="shareTrueAlphaWhatsApp()"><b>🟢 WhatsApp</b><small>${taT("Partager sur WhatsApp.","Pataje sou WhatsApp.")}</small></button>
-      <button type="button" class="alphaFeature" onclick="shareTrueAlphaFacebook()"><b>🔵 Facebook</b><small>${taT("Partager sur Facebook.","Pataje sou Facebook.")}</small></button>
-      <button type="button" class="alphaFeature" onclick="shareTrueAlphaOther()"><b>📱 ${taT("Autres applications","Lòt aplikasyon")}</b><small>${taT("Utiliser les applications de partage disponibles sur ton téléphone.","Sèvi ak aplikasyon pataj ki disponib sou telefòn ou.")}</small></button>
-      <button type="button" class="alphaFeature" onclick="copyTrueAlphaLink()"><b>🔗 ${taT("Copier le lien","Kopye lyen an")}</b><small>${taT("Copier le lien TRUE ALPHA.","Kopye lyen TRUE ALPHA a.")}</small></button>
+      <button type="button" class="alphaShareOption" onclick="shareTrueAlphaWhatsApp()"><b>🟢 WhatsApp</b><small>${taT("Partager sur WhatsApp.","Pataje sou WhatsApp.")}</small></button>
+      <button type="button" class="alphaShareOption" onclick="shareTrueAlphaFacebook()"><b>🔵 Facebook</b><small>${taT("Partager sur Facebook.","Pataje sou Facebook.")}</small></button>
+      <button type="button" class="alphaShareOption" onclick="shareTrueAlphaOther()"><b>📱 ${taT("Autres applications","Lòt aplikasyon")}</b><small>${taT("Utiliser les applications de partage disponibles sur ton téléphone.","Sèvi ak aplikasyon pataj ki disponib sou telefòn ou.")}</small></button>
+      <button type="button" class="alphaShareOption" onclick="copyTrueAlphaLink()"><b>🔗 ${taT("Copier le lien","Kopye lyen an")}</b><small>${taT("Copier le lien TRUE ALPHA.","Kopye lyen TRUE ALPHA a.")}</small></button>
     </div>`
   );
 }
@@ -7317,6 +7550,26 @@ setInterval(()=>{
    FIREBASE
 ===================================================== */
 
+
+// Give every real button a reliable visual press state on touch devices.
+document.addEventListener("pointerdown",function(e){
+  const btn=e.target.closest("button");
+  if(!btn || btn.disabled) return;
+  btn.classList.add("taPressed");
+},{passive:true});
+document.addEventListener("pointerup",function(e){
+  const btn=e.target.closest("button");
+  if(btn) btn.classList.remove("taPressed");
+},{passive:true});
+document.addEventListener("pointercancel",function(e){
+  const btn=e.target.closest("button");
+  if(btn) btn.classList.remove("taPressed");
+},{passive:true});
+document.addEventListener("pointerleave",function(e){
+  const btn=e.target.closest("button");
+  if(btn) btn.classList.remove("taPressed");
+},{passive:true});
+
 </script>
 
 
@@ -7469,6 +7722,80 @@ async function openAlphaServiceStatus(){
  if(!items.length){alphaUnavailable("status");return;}
  alphaModal(ht?"🟢 Eta sèvis yo":"🟢 État des services",`<div class="alphaList">${items.map(x=>`<div class="alphaRow"><div><b>${alphaItemTitle(x,ht)}</b><div class="alphaNote">${alphaItemText(x,ht)}</div></div><span>${escapeHTML(x.statusLabel||x.status||x.available||"")}</span></div>`).join("")}</div>`);
 }
+
+/* =====================================================
+   ALPHA UNIVERSE
+===================================================== */
+const taUniverseViews={
+ ranking:{title:"👑 Alpha Ranking",html:`
+   <div class="taRankHero"><div class="taRankName">Alpha Champion</div><div class="taRankBadge">💎 DIAMOND</div><div class="taProgress"><i></i></div><small>6 240 / 10 000 points vers le prochain palier</small></div>
+   <div class="taStatGrid"><div class="taStatBox"><strong>6 240</strong><span>Alpha Score</span></div><div class="taStatBox"><strong>#12</strong><span>Classement global</span></div><div class="taStatBox"><strong>38</strong><span>Achievements</span></div><div class="taStatBox"><strong>14</strong><span>Victoires</span></div></div>
+   <div class="taPillRow"><span class="taPill">Bronze</span><span class="taPill">Silver</span><span class="taPill">Gold</span><span class="taPill">Platinum</span><span class="taPill">💎 Diamond</span><span class="taPill">Master</span><span class="taPill">Alpha</span><span class="taPill">TRUE ALPHA</span></div>
+   <p class="alphaNote" style="margin-top:10px">Le score récompense les performances dans les activités, missions, records et événements. Aucun pari ni gain d’argent n’est utilisé.</p>`},
+ records:{title:"📊 Mes records",html:`<div class="taStatGrid"><div class="taStatBox"><strong>98</strong><span>Meilleur score</span></div><div class="taStatBox"><strong>00:18</strong><span>Meilleur temps</span></div><div class="taStatBox"><strong>12</strong><span>Streak maximum</span></div><div class="taStatBox"><strong>7 850</strong><span>Plus gros score de saison</span></div></div><div class="taPillRow"><span class="taPill">⚡ Speed Master</span><span class="taPill">🧠 Alpha Genius</span><span class="taPill">🔥 Personal Record</span></div>`},
+ passport:{title:"🪪 Alpha Passport",html:`<div class="taTimeline"><div class="taTimelineItem"><b>✓ Première connexion</b><div class="alphaNote">Bienvenue dans TRUE ALPHA.</div></div><div class="taTimelineItem"><b>✓ Premier achievement</b><div class="alphaNote">Ton parcours a commencé.</div></div><div class="taTimelineItem"><b>✓ Rank Diamond</b><div class="alphaNote">Tu as atteint l’élite.</div></div><div class="taTimelineItem"><b>🔒 Alpha Ascension</b><div class="alphaNote">Termine l’épreuve pour débloquer le prochain palier.</div></div><div class="taTimelineItem"><b>🔒 TRUE ALPHA Champion</b><div class="alphaNote">Débloqué après le Final Boss et l’Ultimate Trial.</div></div></div>`},
+ legacy:{title:"🏛️ Alpha Legacy",html:`<div class="taTimeline"><div class="taTimelineItem"><b>Season 01 — Rise of the Dragon</b><div class="alphaNote">Archives des champions et records de la saison.</div></div><div class="taTimelineItem"><b>Champion actuel</b><div class="alphaNote">Le Champion reste affiché jusqu’à ce qu’un autre joueur remporte le Final Trial.</div></div><div class="taTimelineItem"><b>Hall of Legends</b><div class="alphaNote">Les anciens champions et leurs exploits restent dans l’histoire.</div></div></div>`},
+ skills:{title:"🧬 Alpha Skill Tree",html:`<div class="taUniverseGrid"><div class="taUniverseCard"><b>🧠 Genius Path</b><small>Logic, mémoire et connaissances.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>⚡ Speed Path</b><small>Réaction et Time Attack.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>🎯 Precision Path</b><small>Accuracy et challenges de précision.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>🛡️ Guardian Path</b><small>Résistance et épreuves difficiles.</small><button type="button" class="alphaBtn">Développer</button></div></div>`},
+ inventory:{title:"🎒 Alpha Inventory",html:`<div class="taPillRow"><span class="taPill">🎟️ 4 Tickets</span><span class="taPill">🏅 12 Badges</span><span class="taPill">🏆 3 Trophées</span><span class="taPill">✨ 5 Effects</span><span class="taPill">👑 2 Titles</span><span class="taPill">⭐ 1 Legendary</span></div><p class="alphaNote" style="margin-top:12px">Les objets sont des collectibles/cosmétiques ou des accès à des activités. Ils ne sont pas échangeables contre de l’argent.</p>`},
+ shop:{title:"🛒 Alpha Shop",html:`<div class="taUniverseGrid"><div class="taUniverseCard"><b>✨ Profile Aura</b><small>Effet cosmétique pour ton profil.</small><button type="button" class="alphaBtn">Utiliser TA Points</button></div><div class="taUniverseCard"><b>🏷️ Legendary Title</b><small>Un titre rare à afficher.</small><button type="button" class="alphaBtn">Voir</button></div><div class="taUniverseCard"><b>🎟️ Challenge Ticket</b><small>Accès à une épreuve spéciale.</small><button type="button" class="alphaBtn">Voir</button></div><div class="taUniverseCard"><b>🖼️ Profile Frame</b><small>Cadre exclusif pour ton Alpha ID.</small><button type="button" class="alphaBtn">Voir</button></div></div>`},
+ teams:{title:"🤝 Alpha Teams",html:`<div class="taRankHero"><b>Team Alpha</b><div class="alphaNote">Niveau 8 • 24 membres • 18 420 points d’équipe</div><div class="taProgress"><i style="width:72%"></i></div></div><div class="taPillRow"><span class="taPill">🥇 Team Alpha</span><span class="taPill">🥈 Dragon Squad</span><span class="taPill">🥉 Shadow Team</span></div>`},
+ calendar:{title:"🗓️ Alpha Calendar",html:`<div class="taTimeline"><div class="taTimelineItem"><b>Aujourd’hui</b><div class="alphaNote">Daily Objectives • Daily Gift selon activation Admin.</div></div><div class="taTimelineItem"><b>Cette semaine</b><div class="alphaNote">Weekly Missions • Time Attack.</div></div><div class="taTimelineItem"><b>Prochain événement</b><div class="alphaNote">Événement saisonnier — contenu publié par l’Admin.</div></div></div>`},
+ friends:{title:"🧑‍🤝‍🧑 Alpha Friends",html:`<div class="taPillRow"><span class="taPill">🟢 8 amis actifs</span><span class="taPill">🏆 3 champions</span><span class="taPill">🔥 5 streaks</span></div><p class="alphaNote" style="margin-top:12px">Les profils publics peuvent afficher le rank, les achievements et les records choisis. Les informations privées restent protégées.</p>`}
+};
+function openAlphaUniverse(){
+ const m=document.getElementById('taUniverseModal'); if(!m)return;
+ const c=document.getElementById('taUniverseContent'); const t=document.getElementById('taUniverseTitle');
+ t.textContent='🌌 Alpha Universe';
+ c.innerHTML=`<div class="taUniverseGrid">${[['ranking','👑 Alpha Ranking','Classement global, rank et Alpha Score.'],['records','📊 Mes records','Tes meilleurs scores et performances.'],['passport','🪪 Alpha Passport','Ton parcours et tes déblocages.'],['legacy','🏛️ Alpha Legacy','Historique, champions et Hall of Legends.'],['skills','🧬 Skill Tree','Développe ton style de joueur.'],['inventory','🎒 Inventory','Tickets, badges, trophies et collectibles.'],['shop','🛒 Alpha Shop','Cosmétiques et accès aux challenges.'],['teams','🤝 Alpha Teams','Équipes, niveaux et classement.'],['calendar','🗓️ Calendar','Missions, événements et saisons.'],['friends','🧑‍🤝‍🧑 Friends','Tes connexions et performances publiques.']].map(([k,a,b])=>`<div class="taUniverseCard"><b>${a}</b><small>${b}</small><button type="button" class="alphaBtn" onclick="openTaUniverseView('${k}')">Ouvrir</button></div>`).join('')}</div>`;
+ m.classList.add('show');
+}
+function openTaUniverseView(k){const v=taUniverseViews[k];if(!v)return;document.getElementById('taUniverseTitle').textContent=v.title;document.getElementById('taUniverseContent').innerHTML=v.html}
+function closeTaUniverse(){try{resetCurrentFormFields()}catch(e){}document.getElementById('taUniverseModal')?.classList.remove('show')}
+
+/* =====================================================
+   TRUE ALPHA FINAL BOSS — NON-GRAPHIC CINEMATIC PROTOTYPE
+===================================================== */
+let taBattleState={playerHp:100,bossHp:100,phase:1,locked:false};
+function openTrueAlphaBattle(){
+ const o=document.getElementById('taBattleOverlay');if(!o)return;
+ taBattleState={playerHp:100,bossHp:100,phase:1,locked:false};
+ document.getElementById('taWinner')?.classList.remove('show');
+ document.getElementById('taBossCore')?.classList.remove('transform','taSlow');
+ document.getElementById('taPhaseText').textContent='PHASE 1';
+ document.getElementById('taBattleLog').textContent='Le combat commence. TRUE ALPHA vous attend.';
+ taRenderBattle();o.classList.add('show');o.setAttribute('aria-hidden','false');
+ if(screen.orientation?.lock){screen.orientation.lock('landscape').catch(()=>{})}
+}
+function closeTrueAlphaBattle(){const o=document.getElementById('taBattleOverlay');o?.classList.remove('show');o?.setAttribute('aria-hidden','true');if(screen.orientation?.unlock)screen.orientation.unlock().catch(()=>{})}
+function taRenderBattle(){
+ const p=Math.max(0,taBattleState.playerHp),b=Math.max(0,taBattleState.bossHp);
+ document.getElementById('taPlayerHp').style.width=p+'%';document.getElementById('taBossHp').style.width=b+'%';
+ document.getElementById('taPlayerHpText').textContent=p+' HP';document.getElementById('taBossHpText').textContent=b+' HP';
+}
+function taBattleMove(move){
+ if(taBattleState.locked||taBattleState.bossHp<=0)return;
+ const log=document.getElementById('taBattleLog');let dmg=0,playerDamage=0;
+ if(move==='attack'){dmg=11;log.textContent='⚔️ Attaque réussie.';playerDamage=8}
+ if(move==='special'){dmg=18;log.textContent='✨ Attaque spéciale réussie.';playerDamage=10}
+ if(move==='defend'){dmg=5;playerDamage=2;log.textContent='🛡️ Défense activée. Les dégâts entrants sont réduits.'}
+ if(move==='dodge'){dmg=3;playerDamage=Math.random()<.65?0:5;log.textContent=playerDamage===0?'⚡ Esquive parfaite.':'⚠️ Esquive ratée.'}
+ taBattleState.bossHp=Math.max(0,taBattleState.bossHp-dmg);taBattleState.playerHp=Math.max(0,taBattleState.playerHp-playerDamage);
+ if(taBattleState.bossHp<=50&&taBattleState.phase===1){taBattleState.phase=2;document.getElementById('taPhaseText').textContent='PHASE 2 — ALPHA FORM';document.getElementById('taBossName').textContent='ALPHA FORM';const core=document.getElementById('taBossCore');core.textContent='⚡';core.classList.add('transform');log.textContent='⚡ TRUE ALPHA atteint 50% HP… transformation en ALPHA FORM.'}
+ taRenderBattle();
+ if(taBattleState.playerHp<=0){taBattleState.locked=true;log.textContent='Épreuve échouée. Recommence lorsque tu es prêt.';return}
+ if(taBattleState.bossHp<=0){taFinishBattle();return}
+}
+function taFinishBattle(){
+ taBattleState.locked=true;const core=document.getElementById('taBossCore');core.classList.add('taSlow','taCinematic');
+ const log=document.getElementById('taBattleLog');log.textContent='C’est moi, Alpha.';
+ setTimeout(()=>{document.getElementById('taWinnerText').textContent='TRUE ALPHA est vaincu. Vainqueur : Alpha Champion.';document.getElementById('taWinner').classList.add('show')},1500);
+}
+function taStartUltimateTrial(){
+ document.getElementById('taWinner')?.classList.remove('show');
+ const box=document.getElementById('taBattleLog');box.textContent='ULTIMATE TRIAL : logique, mémoire, réaction et connaissances. Prépare-toi.';
+ setTimeout(()=>{closeTrueAlphaBattle();alphaModal('🧠 Ultimate Trial',`<div class="taRankHero"><b>Épreuve ultime</b><div class="alphaNote">Le Final Boss est terminé. La dernière étape mesure ta logique, ta mémoire, ta réaction et tes connaissances.</div><div class="taPillRow"><span class="taPill">🧠 Logic</span><span class="taPill">🧩 Memory</span><span class="taPill">⚡ Reaction</span><span class="taPill">📚 Knowledge</span></div><button type="button" class="primaryBtn" style="margin-top:14px" onclick="alert('Ultimate Trial à connecter au système de questions Admin.')">Commencer l’épreuve</button></div>`)},700)
+}
+
 </script>
 
 </body>
