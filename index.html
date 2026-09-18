@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Titre de la page</title>
-</head>
-<body>
-    
-</body>
-</html><!DOCTYPE html>
 <html lang="ht">
 <head>
 <meta charset="UTF-8">
@@ -809,6 +800,42 @@ body.dark .pack.selected{
 .selectedPackBox strong{
   font-size:20px
 }
+
+
+/* =========================
+   GIFT CARDS / SECRET CODE / RESPECT
+========================= */
+.giftCategoryIcon{background:#fff1d9}
+.giftCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:14px}
+.giftPack{border:1px solid var(--border);background:var(--card);border-radius:17px;padding:15px;box-shadow:var(--shadow);cursor:pointer;transition:.2s}
+.giftPack:hover{transform:translateY(-2px)}
+.giftPack.selected{border:2px solid var(--primary);background:#f2f0ff}
+body.dark .giftPack.selected{background:#211d39}
+.giftPackTop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.giftPackAmount{font-size:17px;font-weight:950}
+.giftPackBonus{margin-top:7px;color:var(--success);font-size:11px;font-weight:900}
+.giftPackTotal{margin-top:6px;color:var(--primary);font-size:12px;font-weight:900}
+.giftSelectedBox{display:none;margin-top:14px;background:#111827;color:#fff;border-radius:15px;padding:15px}
+.giftSelectedBox strong{font-size:19px}
+.secretBox{margin-top:16px;background:linear-gradient(135deg,#171b36,#312e81);color:#fff;border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.secretBox h3{font-size:17px}
+.secretBox p{margin-top:7px;font-size:11px;line-height:1.55;opacity:.9}
+.secretRow{display:flex;gap:8px;margin-top:13px}
+.secretRow input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:12px;padding:12px;outline:none}
+.secretRow button{border:0;border-radius:12px;padding:0 15px;background:#fff;color:#312e81;font-weight:900}
+.secretMessage{margin-top:9px;font-size:10px;line-height:1.45;min-height:15px}
+.giftBalanceBox{margin-top:15px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:15px;box-shadow:var(--shadow)}
+.giftBalanceBox small{color:var(--muted)}
+.giftBalanceBox strong{display:block;margin-top:4px;font-size:23px}
+.respectBox{margin-top:18px;padding:17px;border:1px solid var(--border);background:var(--card);border-radius:20px;box-shadow:var(--shadow)}
+.respectBox h3{font-size:16px}
+.respectBox p{margin-top:6px;color:var(--muted);font-size:10px}
+.respectChoices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.respectBtn{border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:15px;padding:13px;font-weight:900}
+.respectBtn.selected{border:2px solid var(--primary);background:#f2f0ff}
+body.dark .respectBtn.selected{background:#211d39}
+.respectCount{display:block;font-size:18px;margin-top:4px}
+@media(max-width:620px){.giftCardGrid{grid-template-columns:1fr 1fr}.secretRow{flex-direction:column}.secretRow button{padding:12px}}
 
 /* =========================
    CARD
@@ -1860,11 +1887,9 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 .taStatGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.taStatBox{padding:11px;border-radius:14px;background:rgba(120,120,140,.07)}.taStatBox strong{display:block;font-size:18px}.taStatBox span{font-size:11px;opacity:.7}
 .taTimeline{position:relative;margin:8px 0 0 8px;padding-left:18px;border-left:2px solid rgba(100,110,150,.18)}.taTimelineItem{position:relative;padding:0 0 15px}.taTimelineItem:before{content:"";position:absolute;left:-24px;top:3px;width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(100,110,150,.08)}
 .taPillRow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.taPill{padding:7px 10px;border-radius:999px;background:rgba(120,120,140,.08);font-size:11px;font-weight:800}
-.taBattleOverlay{position:fixed;inset:0;z-index:99999;background:#080a10;color:#fff;display:none;align-items:center;justify-content:center;padding:12px}.taBattleOverlay.show{display:flex}.taBattleStage{width:min(1100px,100%);height:min(680px,96vh);border-radius:26px;overflow:hidden;position:relative;background:radial-gradient(circle at 50% 35%,rgba(95,105,255,.18),transparent 38%),linear-gradient(135deg,#0a0c14,#111523 55%,#080a10);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 90px rgba(0,0,0,.55)}
-.taBattleTop{display:flex;justify-content:space-between;gap:12px;padding:18px}.taFighter{width:42%;text-align:center}.taFighter strong{display:block;font-size:16px}.taBar{height:13px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:8px}.taBar i{display:block;height:100%;width:100%;background:currentColor;border-radius:inherit;transition:width .35s}.taBattleCenter{height:48%;display:flex;align-items:center;justify-content:space-around;text-align:center}.taBossCore{font-size:78px;filter:drop-shadow(0 0 24px rgba(120,130,255,.45));transition:.35s}.taBossCore.transform{transform:scale(1.2);filter:drop-shadow(0 0 38px rgba(255,190,80,.7))}.taBattleLog{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:min(440px,82%);text-align:center;font-weight:800;opacity:.95}.taBattleActions{position:absolute;left:12px;right:12px;bottom:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.taBattleActions button{padding:13px 8px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#fff;font-weight:800}.taBattleActions button:active{transform:scale(.96)}.taSlow{animation:taSlow .9s ease-in-out 2}.taCinematic{animation:taCinema 1.6s ease both}.taBattleClose{position:absolute;right:14px;top:14px;z-index:3;border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:12px;padding:8px 11px}.taWinner{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;background:rgba(5,7,12,.84);backdrop-filter:blur(7px);z-index:5;padding:24px}.taWinner.show{display:flex}.taWinner h2{font-size:34px;margin:0 0 8px}.taWinner p{opacity:.82}.taChampionSeal{font-size:64px;margin-bottom:8px}
+
 @keyframes taSlow{50%{transform:scale(1.07)}}@keyframes taCinema{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
 @media(max-width:520px){.taUniverseGrid{grid-template-columns:1fr}.taBattleActions{grid-template-columns:repeat(2,1fr)}.taBossCore{font-size:58px}.taBattleStage{height:96vh;border-radius:18px}.taBattleCenter{height:46%}}
-@media(max-width:900px) and (orientation:landscape){.taBattleOverlay{padding:6px}.taBattleStage{height:98vh}.taBattleCenter{height:44%}.taBossCore{font-size:62px}}
 
 </style>
 </head>
@@ -2195,6 +2220,40 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
     </div>
 
 
+    <div
+      class="category"
+      onclick="showPage('giftcards')">
+
+      <div class="categoryIcon giftCategoryIcon">
+        🎁
+      </div>
+
+      <strong>Gift Cards</strong>
+
+      <small>
+        Achte epi redeem kòd
+      </small>
+
+    </div>
+
+
+    <div
+      class="category"
+      onclick="openSecretCodeModal()">
+
+      <div class="categoryIcon giftCategoryIcon">
+        🔐
+      </div>
+
+      <strong>Redeem Secret Code</strong>
+
+      <small>
+        Antre yon code secret TRUE ALPHA
+      </small>
+
+    </div>
+
+
     <div class="category alphaCategory">
 
       <div class="categoryIcon activityIcon">
@@ -2230,6 +2289,20 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
     </div>
 
+  </div>
+
+
+
+
+
+  <div class="respectBox">
+    <h3>Respè pou TRUE ALPHA</h3>
+    <p>Peze youn sèlman. Lè ou vote, ou pa ka chanje oswa retire vòt ou.</p>
+    <div class="respectChoices">
+      <button type="button" class="respectBtn" id="respectUpBtn" onclick="castRespectVote('up')">👍 Respè <span class="respectCount" id="respectUpCount">0</span></button>
+      <button type="button" class="respectBtn" id="respectDownBtn" onclick="castRespectVote('down')">👎 <span class="respectCount" id="respectDownCount">0</span></button>
+    </div>
+    <div id="respectVoteStatus" class="fieldMessage" aria-live="polite"></div>
   </div>
 
 
@@ -2768,6 +2841,55 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 </section>
 
 
+
+<!-- =========================
+     GIFT CARDS
+========================= -->
+<section id="giftcards" class="page">
+
+  <button class="backBtn" onclick="backFromGiftCards()">← Retour</button>
+
+  <div class="sectionTitle">
+    <h2>🎁 Gift Cards</h2>
+    <span>TRUE ALPHA</span>
+  </div>
+
+  <div class="giftIntro" style="background:linear-gradient(135deg,#171b4a,#4038a8);color:#fff;border-radius:22px;padding:19px;box-shadow:var(--shadow)">
+    <h2>🎁 Achte yon Gift Card</h2>
+    <p style="margin-top:7px;font-size:11px;line-height:1.55;opacity:.92">Chwazi montant ou vle achte a. Apre peman an konfime, TRUE ALPHA ap kreye yon kòd inik. Kòd la ka itilize nan Wallet pou ajoute montan an ak bonus la nan Gift Card Balance.</p>
+  </div>
+
+  <div class="giftCardGrid" id="giftCardPacks">
+    <div class="giftPack" onclick="selectGiftCard(this,250,50)"><div class="giftPackTop"><div class="giftPackAmount">250 GDS</div><span>🎁</span></div><div class="giftPackBonus">+50 GDS bonus</div><div class="giftPackTotal">Total: 300 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,500,100)"><div class="giftPackTop"><div class="giftPackAmount">500 GDS</div><span>🎁</span></div><div class="giftPackBonus">+100 GDS bonus</div><div class="giftPackTotal">Total: 600 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,1000,200)"><div class="giftPackTop"><div class="giftPackAmount">1 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+200 GDS bonus</div><div class="giftPackTotal">Total: 1 200 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,2500,500)"><div class="giftPackTop"><div class="giftPackAmount">2 500 GDS</div><span>🎁</span></div><div class="giftPackBonus">+500 GDS bonus</div><div class="giftPackTotal">Total: 3 000 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,5000,1000)"><div class="giftPackTop"><div class="giftPackAmount">5 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+1 000 GDS bonus</div><div class="giftPackTotal">Total: 6 000 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,10000,2000)"><div class="giftPackTop"><div class="giftPackAmount">10 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+2 000 GDS bonus</div><div class="giftPackTotal">Total: 12 000 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,25000,5000)"><div class="giftPackTop"><div class="giftPackAmount">25 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+5 000 GDS bonus</div><div class="giftPackTotal">Total: 30 000 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,50000,10000)"><div class="giftPackTop"><div class="giftPackAmount">50 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+10 000 GDS bonus</div><div class="giftPackTotal">Total: 60 000 GDS</div></div>
+    <div class="giftPack" onclick="selectGiftCard(this,100000,20000)"><div class="giftPackTop"><div class="giftPackAmount">100 000 GDS</div><span>🎁</span></div><div class="giftPackBonus">+20 000 GDS bonus</div><div class="giftPackTotal">Total: 120 000 GDS</div></div>
+  </div>
+
+  <div id="giftSelectedBox" class="giftSelectedBox">
+    <small>Gift Card sélectionnée</small><br>
+    <strong id="giftSelectedAmount">—</strong>
+    <div style="margin-top:7px;font-size:11px">Achat : <b id="giftPurchaseAmount">0 GDS</b> • Bonus : <b id="giftBonusAmount">0 GDS</b> • Total : <b id="giftTotalAmount">0 GDS</b></div>
+    <button type="button" class="primaryBtn" style="margin-top:13px" onclick="openGiftCardCheckout()">🎁 Achte kounye a</button>
+  </div>
+
+  <div class="giftBalanceBox">
+    <small>Gift Card Balance</small>
+    <strong id="giftCardBalance">0 GDS</strong>
+
+  </div>
+
+  <p style="margin-top:14px;color:var(--muted);font-size:10px;line-height:1.55">🎁 Apre redeem, montan an ak bonus la antre nan Gift Card Balance. Li pa disponib pou retrè oswa transfè.</p>
+
+
+
+</section>
+
 <!-- =========================
      CARDS
 ========================= -->
@@ -3129,6 +3251,19 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
       <div class="walletPointsFormula"><span id="walletPointsHTG">0 HTG</span><br>Utilisable uniquement sur TRUE ALPHA</div>
     </div>
 
+    <div class="giftBalanceBox" style="margin-top:14px">
+      <small>🎁 Gift Card Balance</small>
+      <strong id="walletGiftCardBalance">0 GDS</strong>
+      <button type="button" class="secondaryBtn" style="margin-top:9px;width:100%" onclick="openGiftCardRedeem()">🎟️ Redeem Gift Card Code</button>
+    </div>
+
+    <div class="secretBox" style="margin-top:14px">
+      <h3>🔐 Redeem Secret Code</h3>
+      <p>Si ou gen yon code secret TRUE ALPHA, antre li la pou ajoute HTG nan Wallet ou.</p>
+      <div class="secretRow"><input id="walletSecretCode" type="text" autocomplete="off" placeholder="Antre Secret Code"><button type="button" onclick="redeemSecretCode('walletSecretCode','walletSecretMessage')">Redeem</button></div>
+      <div id="walletSecretMessage" class="secretMessage" aria-live="polite"></div>
+    </div>
+
     <div class="walletActions">
 
 
@@ -3437,7 +3572,6 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
       <div class="alphaFeature alphaFeatureAction"><b>🤝 Alpha Family</b><small>Ton espace de parrainage et invitations.</small><button type="button" class="alphaBtn" onclick="openAlphaReferral()">Ouvrir</button></div>
       <div class="alphaFeature alphaFeatureAction"><b>🟢 État des services</b><small>Vérifie les services disponibles et les nouveautés.</small><button type="button" class="alphaBtn" onclick="openAlphaServiceStatus()">Vérifier</button></div>
       <div class="alphaFeature alphaFeatureAction" style="margin-top:10px"><b>🌌 Alpha Universe</b><small>Classement, records, passeport, boutique, équipes et héritage TRUE ALPHA.</small><button type="button" class="alphaBtn" onclick="openAlphaUniverse()">Explorer l’Univers</button></div>
-      <div class="alphaFeature alphaFeatureAction" style="margin-top:10px"><b>👑 TRUE ALPHA Final Trial</b><small>Affronte le boss final puis tente l’épreuve ultime.</small><button type="button" class="alphaBtn" onclick="openTrueAlphaBattle()">Commencer</button></div>
     </div>
 
     <button type="button"
@@ -3524,34 +3658,6 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
   <div class="modalBox">
     <div class="modalHeader"><h3 id="taUniverseTitle">🌌 Alpha Universe</h3><button class="closeBtn" type="button" onclick="closeTaUniverse()">✕</button></div>
     <div id="taUniverseContent"></div>
-  </div>
-</div>
-
-<!-- =========================
-     TRUE ALPHA FINAL BOSS — CINEMATIC BATTLE
-========================= -->
-<div class="taBattleOverlay" id="taBattleOverlay" aria-hidden="true">
-  <div class="taBattleStage">
-    <button class="taBattleClose" type="button" onclick="closeTrueAlphaBattle()">✕</button>
-    <div class="taBattleTop">
-      <div class="taFighter"><strong>Vous — Alpha Champion</strong><div class="taBar"><i id="taPlayerHp" style="width:100%"></i></div><small id="taPlayerHpText">100 HP</small></div>
-      <div class="taFighter"><strong id="taBossName">TRUE ALPHA</strong><div class="taBar"><i id="taBossHp" style="width:100%"></i></div><small id="taBossHpText">100 HP</small></div>
-    </div>
-    <div class="taBattleCenter">
-      <div><div>⚡</div><small>Votre Alpha</small></div>
-      <div class="taBossCore" id="taBossCore">👑</div>
-      <div><div id="taPhaseText">PHASE 1</div><small>Boss final</small></div>
-    </div>
-    <div class="taBattleLog" id="taBattleLog">Le combat commence. Reste concentré.</div>
-    <div class="taBattleActions">
-      <button type="button" onclick="taBattleMove('attack')">⚔️ Attaque</button>
-      <button type="button" onclick="taBattleMove('defend')">🛡️ Défense</button>
-      <button type="button" onclick="taBattleMove('dodge')">⚡ Esquive</button>
-      <button type="button" onclick="taBattleMove('special')">✨ Spécial</button>
-    </div>
-    <div class="taWinner" id="taWinner">
-      <div><div class="taChampionSeal">👑</div><h2>VICTOIRE</h2><p id="taWinnerText">TRUE ALPHA est vaincu.</p><button type="button" class="primaryBtn" onclick="taStartUltimateTrial()">Continuer vers l’Ultimate Trial</button></div>
-    </div>
   </div>
 </div>
 
@@ -3671,6 +3777,9 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
       <button class="paymentChoice" id="payPointsChoice" onclick="choosePaymentMethod('wallet_points')">
         <span>⭐</span><strong>Wallet TA Points</strong><small id="checkoutPointsBalance">0 ⭐</small>
       </button>
+      <button class="paymentChoice" id="payGiftChoice" onclick="choosePaymentMethod('gift_card')">
+        <span>🎁</span><strong>Gift Card Balance</strong><small id="checkoutGiftBalance">0 GDS</small>
+      </button>
     </div>
 
     <div class="checkoutFormula">Le Wallet TA Points contient du HTG obtenu après réclamation. Le serveur vérifie toujours le solde avant de valider la commande.</div>
@@ -3679,6 +3788,47 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
   </div>
 </div>
 
+
+
+<!-- =========================
+     SECRET / GIFT CARD REDEEM MODALS
+========================= -->
+<div class="modal" id="secretCodeModal">
+  <div class="modalBox">
+    <div class="modalHeader"><h3>🔐 Redeem Secret Code</h3><button class="close" onclick="closeModal('secretCodeModal')">✕</button></div>
+    <div class="instruction">Si ou gen yon code secret TRUE ALPHA, antre li la. Si li bon, kantite HTG code la vo ap ajoute nan Wallet ou.</div>
+    <div class="field"><label>Secret Code</label><input id="secretCodeInput" type="text" autocomplete="off" placeholder="Antre code la"><div id="secretCodeMessage" class="fieldMessage" aria-live="polite"></div></div>
+    <button class="primaryBtn" type="button" onclick="redeemSecretCode('secretCodeInput','secretCodeMessage')">🔐 Redeem Code</button>
+  </div>
+</div>
+
+<div class="modal" id="giftCardRedeemModal">
+  <div class="modalBox">
+    <div class="modalHeader"><h3>🎟️ Redeem Gift Card Code</h3><button class="close" onclick="closeModal('giftCardRedeemModal')">✕</button></div>
+    <div class="instruction">Antre kòd Gift Card ou resevwa a. Sistèm nan ap verifye l epi ajoute montant + bonus la nan Gift Card Balance.</div>
+    <div class="field"><label>Gift Card Code</label><input id="giftCardCodeInput" type="text" autocomplete="off" placeholder="Antre Gift Card Code"><div id="giftCardCodeMessage" class="fieldMessage" aria-live="polite"></div></div>
+    <button class="primaryBtn" type="button" onclick="redeemGiftCardCode()">🎟️ Redeem Gift Card</button>
+  </div>
+</div>
+
+
+<!-- =========================
+     GIFT CARD CHECKOUT
+========================= -->
+<div class="modal" id="giftCheckoutModal">
+  <div class="modalBox">
+    <div class="modalHeader"><h3>🧾 Confirmation Gift Card</h3><button class="close" onclick="closeGiftCheckout()">✕</button></div>
+    <div class="checkoutSummary" id="giftCheckoutSummary"></div>
+    <div class="sectionTitle checkoutTitle"><h2>Mode de paiement</h2></div>
+    <div class="paymentChoiceGrid">
+      <button class="paymentChoice selected" id="giftPayWalletChoice" onclick="chooseGiftPaymentMethod('wallet')"><span>💰</span><strong>Wallet</strong><small id="giftCheckoutWalletBalance">— HTG</small></button>
+      <button class="paymentChoice" id="giftPayPointsChoice" onclick="chooseGiftPaymentMethod('wallet_points')"><span>⭐</span><strong>Wallet TA Points</strong><small id="giftCheckoutPointsBalance">0 HTG</small></button>
+      <button class="paymentChoice" id="giftPayBalanceChoice" onclick="chooseGiftPaymentMethod('gift_card')"><span>🎁</span><strong>Gift Card Balance</strong><small id="giftCheckoutGiftBalance">0 GDS</small></button>
+    </div>
+    <div class="checkoutFormula">Le montant acheté et le bonus seront ajoutés à la Gift Card créée. Le Gift Card Balance reste séparé du Wallet et n’est pas retirable ni transférable.</div>
+    <button class="primaryBtn" id="confirmGiftPurchaseBtn" onclick="confirmGiftCardPurchase()">🎁 Confirmer et payer</button>
+  </div>
+</div>
 
 <!-- =========================
      RECHARGE MODAL
@@ -4260,6 +4410,9 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
    GLOBAL VARIABLES
 ===================================================== */
 
+
+window.TRUE_ALPHA_API_BASE=window.TRUE_ALPHA_API_BASE||"";
+
 let siteEnabled=true;
 let siteStatusLoaded=false;
 
@@ -4269,6 +4422,7 @@ let verifiedPlayerName="";
 let verifiedServer="";
 let verifiedUid="";
 let paymentMethod="wallet";
+let giftPaymentMethod="wallet";
 
 let firebaseUser=null;
 let loggedIn=false;
@@ -4276,6 +4430,9 @@ let loggedIn=false;
 let balance=null;
 let points=0;
 let taWalletHTG=0;
+let giftCardBalance=0;
+let selectedGiftCard=null;
+let respectVote=null;
 
 let orders=[];
 let notifications=[];
@@ -4302,6 +4459,8 @@ let depositAmount=0;
 let withdrawProvider=null;
 
 let selectedActivity=null;
+function taT(fr,ht){return (localStorage.getItem("ta_language")||"fr")==="ht"?ht:fr;}
+
 
 
 /* =====================================================
@@ -4351,6 +4510,12 @@ if(!notifications){
 ===================================================== */
 
 async function loadSiteStatus(){
+
+  if(!/^https?:$/i.test(location.protocol)){
+    siteEnabled=true;
+    siteStatusLoaded=false;
+    return;
+  }
 
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),5000);
@@ -4699,6 +4864,15 @@ function showPage(page){
 
   if(page==="profile")
     updateProfile();
+
+  if(page==="giftcards"){
+    updateGiftBalanceUI();
+  }
+
+  if(page==="home"){
+    loadRespectVotes();
+    syncRespectSelection();
+  }
 
 }
 
@@ -5134,40 +5308,61 @@ async function verifyUID(){
   const T=(fr,ht)=>isHT?ht:fr;
 
   clearUIDMessage();
-  if(!uid){ showUIDMessage(T("⚠️ Entrez votre UID Free Fire.","⚠️ Antre UID Free Fire ou.")); return; }
-  if(!/^[0-9]+$/.test(uid)){ showUIDMessage(T("⚠️ L’UID doit contenir uniquement des chiffres.","⚠️ UID la dwe gen chif sèlman.")); return; }
-  if(uid.length<5){ showUIDMessage(T("⚠️ Cet UID ne semble pas valide.","⚠️ UID sa a pa sanble valab.")); return; }
+  if(!uid){showUIDMessage(T("⚠️ Entrez votre UID Free Fire.","⚠️ Antre UID Free Fire ou."));return;}
+  if(!/^[0-9]+$/.test(uid)){showUIDMessage(T("⚠️ L’UID doit contenir uniquement des chiffres.","⚠️ UID la dwe gen chif sèlman."));return;}
+  if(uid.length<5){showUIDMessage(T("⚠️ Cet UID ne semble pas valide.","⚠️ UID sa a pa sanble valab."));return;}
 
   const btn=document.getElementById("verifyBtn");
   const result=document.getElementById("playerResult");
   const packs=document.getElementById("packsArea");
   const hint=document.getElementById("ffServerHint");
   const serverEl=document.getElementById("playerServer");
-  const errorBox=document.getElementById("ffServerError");
+  if(btn){btn.disabled=true;btn.textContent=T("⏳ Vérification...","⏳ Verifikasyon...");}
+  if(result)result.style.display="none";
+  if(packs)packs.style.display="none";
+  verifiedPlayerName="";verifiedServer="";verifiedUid="";
 
-  btn.disabled=true;
-  btn.textContent=T("⏳ Préparation...","⏳ Preparasyon...");
-  result.style.display="none";
-  packs.style.display="none";
-  if(errorBox) errorBox.remove();
-  clearUIDMessage();
-  verifiedPlayerName=""; verifiedServer=""; verifiedUid="";
+  if(!/^https?:$/i.test(location.protocol)){
+    showUIDMessage(T("⚠️ Ouvrez TRUE ALPHA sou HTTPS pou API vérification an ka travay.","⚠️ Louvri TRUE ALPHA sou HTTPS pou API verifikasyon an ka mache."));
+    if(btn){btn.disabled=false;btn.textContent=T("🔐 Vérifier le joueur","🔐 Verifye jwè a");}
+    return;
+  }
 
-  // Aucun appel API fournisseur ici : l'UID est envoyé à TRUE ALPHA
-  // et la vérification du joueur/serveur est faite par l'Admin.
-  verifiedUid=uid;
-  verifiedPlayerName=T("Joueur à vérifier par l’Admin","Jwè a pou Admin nan verifye");
-  verifiedServer="NA — North America";
+  try{
+    const base=(window.TRUE_ALPHA_API_BASE||"").replace(/\/$/,"");
+    const url=base+"/get_player_personal_show?server=NA&uid="+encodeURIComponent(uid)+"&need_gallery_info=false&need_blacklist=false&need_spark_info=false&call_sign_src=7";
+    const response=await fetch(url,{method:"GET",headers:{"Accept":"application/json"},cache:"no-store"});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.message||data.error||"PLAYER_VERIFY_FAILED");
 
-  document.getElementById("playerName").textContent=verifiedPlayerName;
-  if(serverEl) serverEl.textContent=T("Serveur : NA — North America","Sèvè : NA — North America");
-  if(hint) hint.textContent=T("Vérification manuelle par l’Admin","Admin nan ap fè verifikasyon an manyèlman");
-  result.style.display="block";
-  packs.style.display="block";
-  showUIDMessage(T("✅ UID enregistré. L’Admin vérifiera le joueur avant le traitement.","✅ UID la anrejistre. Admin nan ap verifye jwè a anvan l trete kòmand lan."),"ok");
+    const basic=data.basicinfo||data.basicInfo||data.data?.basicinfo||data.data?.basicInfo||{};
+    const nickname=basic.nickname||data.nickname||data.data?.nickname||"";
+    const region=basic.region||data.region||data.data?.region||"";
+    if(!nickname && !region)throw new Error("PLAYER_DATA_NOT_FOUND");
 
-  btn.disabled=false;
-  btn.textContent=T("🔐 Envoyer l’UID à l’Admin","🔐 Voye UID la bay Admin");
+    const normalized=String(region).trim().toUpperCase();
+    const isNA=normalized==="NA" || normalized==="US" || normalized.includes("NORTH AMERICA");
+    if(!isNA){
+      verifiedUid="";verifiedPlayerName="";verifiedServer=String(region);
+      if(hint)hint.textContent=T("Serveur détecté : "+String(region),"Sèvè yo jwenn : "+String(region));
+      showUIDMessage("Paiement impossible : Ce service est réservé uniquement aux comptes du serveur NA (North America).","error");
+      return;
+    }
+
+    verifiedUid=uid;
+    verifiedPlayerName=String(nickname);
+    verifiedServer="NA — North America";
+    document.getElementById("playerName").textContent=verifiedPlayerName;
+    if(serverEl)serverEl.textContent=T("Serveur : NA — North America","Sèvè : NA — North America");
+    if(hint)hint.textContent=T("Serveur détecté : NA — North America","Sèvè yo jwenn : NA — North America");
+    if(result)result.style.display="block";
+    if(packs)packs.style.display="block";
+    showUIDMessage(T("✅ Joueur vérifié. Vous pouvez choisir votre pack.","✅ Jwè a verifye. Ou ka chwazi pack ou a."),"ok");
+  }catch(e){
+    showUIDMessage(T("❌ Impossible de vérifier ce joueur pour le moment.","❌ Nou pa kapab verifye jwè sa a pou kounye a."));
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=T("🔐 Vérifier le joueur","🔐 Verifye jwè a");}
+  }
 }
 
 /* =====================================================
@@ -5223,6 +5418,7 @@ function choosePaymentMethod(method){
   paymentMethod=method;
   document.getElementById("payWalletChoice")?.classList.toggle("selected",method==="wallet");
   document.getElementById("payPointsChoice")?.classList.toggle("selected",method==="wallet_points");
+  document.getElementById("payGiftChoice")?.classList.toggle("selected",method==="gift_card");
 }
 
 function updateCheckoutUI(){
@@ -5238,8 +5434,10 @@ function updateCheckoutUI(){
   }
   const wb=document.getElementById("checkoutWalletBalance");
   const pb=document.getElementById("checkoutPointsBalance");
+  const gb=document.getElementById("checkoutGiftBalance");
   if(wb) wb.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
   if(pb) pb.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
+  if(gb) gb.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
 }
 
 function closeCheckout(){
@@ -5258,6 +5456,10 @@ async function confirmPurchase(){
   }
   if(paymentMethod==="wallet_points" && pointsValue<selectedPrice){
     toast(taT("❌ Solde Wallet TA Points insuffisant.","❌ Solde Wallet TA Points la pa ase."));
+    return;
+  }
+  if(paymentMethod==="gift_card" && Number(giftCardBalance||0)<selectedPrice){
+    toast(taT("❌ Solde Gift Card Balance insuffisant.","❌ Solde Gift Card Balance la pa ase."));
     return;
   }
 
@@ -5305,6 +5507,163 @@ async function confirmPurchase(){
 }
 
 
+
+/* =====================================================
+   GIFT CARDS
+===================================================== */
+function backFromGiftCards(){showPage("home");}
+function selectGiftCard(element,amount,bonus){
+  if(!canUseSite())return;
+  document.querySelectorAll(".giftPack").forEach(x=>x.classList.remove("selected"));
+  element?.classList.add("selected");
+  selectedGiftCard={amount:Number(amount),bonus:Number(bonus),total:Number(amount)+Number(bonus)};
+  const box=document.getElementById("giftSelectedBox");
+  if(box)box.style.display="block";
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set("giftSelectedAmount",Number(amount).toLocaleString("fr-FR")+" GDS");
+  set("giftPurchaseAmount",Number(amount).toLocaleString("fr-FR")+" GDS");
+  set("giftBonusAmount",Number(bonus).toLocaleString("fr-FR")+" GDS");
+  set("giftTotalAmount",(Number(amount)+Number(bonus)).toLocaleString("fr-FR")+" GDS");
+}
+function updateGiftBalanceUI(){
+  const el=document.getElementById("giftCardBalance");
+  if(el)el.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
+  const c=document.getElementById("checkoutGiftBalance");
+  if(c)c.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
+}
+function openGiftCardCheckout(){
+  if(!requireLogin())return;
+  if(!selectedGiftCard){toast(taT("⚠️ Sélectionnez une Gift Card.","⚠️ Chwazi yon Gift Card."));return;}
+  giftPaymentMethod="wallet";
+  updateGiftCheckoutUI();
+  document.getElementById("giftCheckoutModal")?.classList.add("show");
+}
+function chooseGiftPaymentMethod(method){
+  giftPaymentMethod=method;
+  document.getElementById("giftPayWalletChoice")?.classList.toggle("selected",method==="wallet");
+  document.getElementById("giftPayPointsChoice")?.classList.toggle("selected",method==="wallet_points");
+  document.getElementById("giftPayBalanceChoice")?.classList.toggle("selected",method==="gift_card");
+}
+function updateGiftCheckoutUI(){
+  const s=document.getElementById("giftCheckoutSummary");
+  if(s&&selectedGiftCard){s.innerHTML=`<div><b>Gift Card :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Achat :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Bonus :</b> +${selectedGiftCard.bonus.toLocaleString("fr-FR")} GDS</div><div><b>Total crédité :</b> ${selectedGiftCard.total.toLocaleString("fr-FR")} GDS</div>`;}
+  const a=document.getElementById("giftCheckoutWalletBalance");const b=document.getElementById("giftCheckoutPointsBalance");const c=document.getElementById("giftCheckoutGiftBalance");
+  if(a)a.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
+  if(b)b.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
+  if(c)c.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
+}
+function closeGiftCheckout(){document.getElementById("giftCheckoutModal")?.classList.remove("show");}
+async function confirmGiftCardPurchase(){
+  if(!requireLogin()||!selectedGiftCard)return;
+  const price=Number(selectedGiftCard.amount);
+  if(giftPaymentMethod==="wallet" && (balance===null||Number(balance)<price)){toast(taT("❌ Solde Wallet insuffisant.","❌ Solde Wallet la pa ase."));return;}
+  if(giftPaymentMethod==="wallet_points" && Number(taWalletHTG||0)<price){toast(taT("❌ Solde Wallet TA Points insuffisant.","❌ Solde Wallet TA Points la pa ase."));return;}
+  if(giftPaymentMethod==="gift_card" && Number(giftCardBalance||0)<price){toast(taT("❌ Solde Gift Card Balance insuffisant.","❌ Solde Gift Card Balance la pa ase."));return;}
+  const btn=document.getElementById("confirmGiftPurchaseBtn");if(btn){btn.disabled=true;btn.textContent=taT("⏳ Validation...","⏳ Validasyon...");}
+  try{
+    const response=await fetch("/api/gift-cards/purchase",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||"",amount:selectedGiftCard.amount,bonus:selectedGiftCard.bonus,total:selectedGiftCard.total,paymentMethod:giftPaymentMethod})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.message||"gift_card_purchase_failed");
+    const code=data.code||data.giftCardCode||"";
+    giftCardBalance=Number(data.giftCardBalance??data.balance??giftCardBalance);
+    if(giftPaymentMethod==="wallet"&&data.walletBalance!==undefined)balance=Number(data.walletBalance);
+    if(giftPaymentMethod==="wallet_points"&&data.pointsWalletHTG!==undefined)taWalletHTG=Number(data.pointsWalletHTG);
+    closeGiftCheckout();updateGiftBalanceUI();updateUI();
+    alphaModal("🎁 Gift Card",`<div class="successBox"><b>${taT("Commande réussie","Kòmand reyisi")}</b><div style="margin-top:8px">${taT("Achat : ","Achte : ")}${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS<br>${taT("Bonus : ","Bonus : ")}${selectedGiftCard.bonus.toLocaleString("fr-FR")} GDS<br>${taT("Total : ","Total : ")}${selectedGiftCard.total.toLocaleString("fr-FR")} GDS</div>${code?`<div style="margin-top:12px"><b>Code :</b> ${escapeHTML(code)}</div>`:""}</div>`);
+  }catch(e){toast(taT("❌ La Gift Card n’a pas pu être créée.","❌ Gift Card la pa t kapab kreye."));}
+  finally{if(btn){btn.disabled=false;btn.textContent=taT("🎁 Confirmer et payer","🎁 Konfime epi peye");}}
+}
+
+function openGiftCardRedeem(){
+  document.getElementById("giftCardRedeemModal")?.classList.add("show");
+}
+async function redeemGiftCardCode(){
+  if(!requireLogin())return;
+  const input=document.getElementById("giftCardCodeInput");
+  const msg=document.getElementById("giftCardCodeMessage");
+  const code=input?.value.trim();
+  if(!code){if(msg){msg.textContent=taT("⚠️ Entrez le code.","⚠️ Antre kòd la.");msg.className="fieldMessage show error";}return;}
+  try{
+    const response=await fetch("/api/gift-cards/redeem",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.message||"gift_card_redeem_failed");
+    const credited=Number(data.total??data.amount??0);
+    giftCardBalance=Number(data.giftCardBalance??data.balance??giftCardBalance+credited);
+    updateGiftBalanceUI();
+    if(msg){msg.textContent=taT("✅ Code valide. Bonus et montant ajoutés au Gift Card Balance.","✅ Kòd la bon. Montan ak bonus la ajoute nan Gift Card Balance.");msg.className="fieldMessage show ok";}
+    addNotification(taT("Gift Card redeem","Redeem Gift Card"),taT("Votre Gift Card a été créditée.","Gift Card ou a kredite."));
+  }catch(e){if(msg){msg.textContent=taT("❌ Code invalide ou déjà utilisé.","❌ Kòd la pa bon oswa li deja itilize.");msg.className="fieldMessage show error";}}
+}
+function openSecretCodeModal(){
+  document.getElementById("secretCodeModal")?.classList.add("show");
+  const input=document.getElementById("secretCodeInput");
+  const msg=document.getElementById("secretCodeMessage");
+  if(input){input.value="";setTimeout(()=>input.focus(),80);}
+  if(msg){msg.textContent="";msg.className="fieldMessage";}
+}
+
+async function redeemSecretCode(inputId="secretCodeInput",messageId="secretCodeMessage"){
+  if(!requireLogin())return;
+  const input=document.getElementById(inputId);
+  const msg=document.getElementById(messageId);
+  const code=input?.value.trim();
+  if(!code){if(msg){msg.textContent=taT("⚠️ Entrez le Secret Code.","⚠️ Antre Secret Code la.");msg.className="secretMessage fieldMessage show error";}return;}
+  try{
+    const response=await fetch("/api/secret-codes/redeem",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.message||"secret_code_failed");
+    const credited=Number(data.amount??data.reward??0);
+    if(balance!==null)balance=Number(data.walletBalance??balance+credited);
+    updateUI();
+    if(msg){msg.textContent=taT("✅ Code valide. "+credited.toLocaleString("fr-FR")+" HTG ajouté au Wallet.","✅ Kòd la bon. "+credited.toLocaleString("fr-FR")+" HTG ajoute nan Wallet la.");msg.className="secretMessage fieldMessage show ok";}
+  }catch(e){if(msg){msg.textContent=taT("❌ Secret Code invalide, expiré ou déjà utilisé.","❌ Secret Code la pa bon, li ekspire oswa li deja itilize.");msg.className="secretMessage fieldMessage show error";}}
+}
+
+/* =====================================================
+   RESPECT VOTE
+===================================================== */
+async function loadRespectVotes(){
+  try{
+    const r=await fetch("/api/respect-votes",{cache:"no-store"});
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    const up=Number(d.up??d.respect??d.yes??0),down=Number(d.down??d.no??0);
+    document.getElementById("respectUpCount")?.replaceChildren(document.createTextNode(String(up)));
+    document.getElementById("respectDownCount")?.replaceChildren(document.createTextNode(String(down)));
+  }catch(e){
+    const a=document.getElementById("respectUpCount"),b=document.getElementById("respectDownCount");
+    if(a)a.textContent="—";
+    if(b)b.textContent="—";
+    const status=document.getElementById("respectVoteStatus");
+    if(status){status.textContent=taT("Service de vote indisponible pour le moment.","Sèvis vòt la pa disponib pou kounye a.");status.className="fieldMessage show error";}
+  }
+  syncRespectSelection();
+}
+function getRespectVoteKey(){return "ta_respect_vote_"+(firebaseUser?.uid||"guest");}
+function syncRespectSelection(){
+  const v=localStorage.getItem(getRespectVoteKey());
+  document.getElementById("respectUpBtn")?.classList.toggle("selected",v==="up");
+  document.getElementById("respectDownBtn")?.classList.toggle("selected",v==="down");
+  if(v){document.getElementById("respectUpBtn")?.setAttribute("disabled","true");document.getElementById("respectDownBtn")?.setAttribute("disabled","true");}
+}
+async function castRespectVote(vote){
+  if(localStorage.getItem(getRespectVoteKey())){toast(taT("Vous avez déjà voté.","Ou deja vote."));return;}
+  if(!requireLogin())return;
+  try{
+    const r=await fetch("/api/respect-votes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vote,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.message||"vote_failed");
+    localStorage.setItem(getRespectVoteKey(),vote);
+  }catch(e){
+    const status=document.getElementById("respectVoteStatus");
+    if(status){status.textContent=taT("Vote non enregistré. Réessayez plus tard.","Vòt la pa anrejistre. Eseye ankò pita.");status.className="fieldMessage show error";}
+    return;
+  }
+  const status=document.getElementById("respectVoteStatus");
+  if(status){status.textContent=taT("✅ Votre vote est enregistré.","✅ Vòt ou anrejistre.");status.className="fieldMessage show ok";}
+  syncRespectSelection();await loadRespectVotes();
+}
+
 /* =====================================================
    WALLET
 ===================================================== */
@@ -5331,6 +5690,8 @@ async function loadWallet(){
 
     balance=null;
     taWalletHTG=0;
+    giftCardBalance=0;
+    updateGiftBalanceUI();
 
     updateUI();
 
@@ -5389,7 +5750,9 @@ async function loadWallet(){
       data.ta_wallet_balance ??
       0
     );
+    giftCardBalance=Number(data.giftCardBalance ?? data.gift_balance ?? data.giftCardBalanceHTG ?? giftCardBalance ?? 0);
 
+    updateGiftBalanceUI();
     updateUI();
 
 
@@ -7308,8 +7671,9 @@ function changeLanguage(){
 function contactCard(){
 
   window.open(
-    "https://wa.me/50932694670",
-    "_blank"
+    "https://kirikou-creation-et-recharge-rapide.vercel.app",
+    "_blank",
+    "noopener,noreferrer"
   );
 
 }
@@ -7553,20 +7917,24 @@ setInterval(()=>{
 
 // Give every real button a reliable visual press state on touch devices.
 document.addEventListener("pointerdown",function(e){
-  const btn=e.target.closest("button");
+  const target=e.target && e.target.nodeType===1 ? e.target : e.target?.parentElement;
+  const btn=target?.closest("button");
   if(!btn || btn.disabled) return;
   btn.classList.add("taPressed");
 },{passive:true});
 document.addEventListener("pointerup",function(e){
-  const btn=e.target.closest("button");
+  const target=e.target && e.target.nodeType===1 ? e.target : e.target?.parentElement;
+  const btn=target?.closest("button");
   if(btn) btn.classList.remove("taPressed");
 },{passive:true});
 document.addEventListener("pointercancel",function(e){
-  const btn=e.target.closest("button");
+  const target=e.target && e.target.nodeType===1 ? e.target : e.target?.parentElement;
+  const btn=target?.closest("button");
   if(btn) btn.classList.remove("taPressed");
 },{passive:true});
 document.addEventListener("pointerleave",function(e){
-  const btn=e.target.closest("button");
+  const target=e.target && e.target.nodeType===1 ? e.target : e.target?.parentElement;
+  const btn=target?.closest("button");
   if(btn) btn.classList.remove("taPressed");
 },{passive:true});
 
@@ -7645,7 +8013,6 @@ const alphaMissions=[
 ];
 function taLang(){return localStorage.getItem("ta_language")||"fr";}
 try{localStorage.removeItem("ta_birthday");}catch(e){}
-function taT(fr,ht){return taLang()==="ht"?ht:fr;}
 function alphaModal(title,html){
  const m=document.getElementById("alphaCenterModal"),t=document.getElementById("alphaCenterTitle"),c=document.getElementById("alphaCenterContent");
  if(!m||!t||!c)return; t.textContent=title;c.innerHTML=html;m.classList.add("show");
@@ -7733,7 +8100,7 @@ const taUniverseViews={
    <div class="taPillRow"><span class="taPill">Bronze</span><span class="taPill">Silver</span><span class="taPill">Gold</span><span class="taPill">Platinum</span><span class="taPill">💎 Diamond</span><span class="taPill">Master</span><span class="taPill">Alpha</span><span class="taPill">TRUE ALPHA</span></div>
    <p class="alphaNote" style="margin-top:10px">Le score récompense les performances dans les activités, missions, records et événements. Aucun pari ni gain d’argent n’est utilisé.</p>`},
  records:{title:"📊 Mes records",html:`<div class="taStatGrid"><div class="taStatBox"><strong>98</strong><span>Meilleur score</span></div><div class="taStatBox"><strong>00:18</strong><span>Meilleur temps</span></div><div class="taStatBox"><strong>12</strong><span>Streak maximum</span></div><div class="taStatBox"><strong>7 850</strong><span>Plus gros score de saison</span></div></div><div class="taPillRow"><span class="taPill">⚡ Speed Master</span><span class="taPill">🧠 Alpha Genius</span><span class="taPill">🔥 Personal Record</span></div>`},
- passport:{title:"🪪 Alpha Passport",html:`<div class="taTimeline"><div class="taTimelineItem"><b>✓ Première connexion</b><div class="alphaNote">Bienvenue dans TRUE ALPHA.</div></div><div class="taTimelineItem"><b>✓ Premier achievement</b><div class="alphaNote">Ton parcours a commencé.</div></div><div class="taTimelineItem"><b>✓ Rank Diamond</b><div class="alphaNote">Tu as atteint l’élite.</div></div><div class="taTimelineItem"><b>🔒 Alpha Ascension</b><div class="alphaNote">Termine l’épreuve pour débloquer le prochain palier.</div></div><div class="taTimelineItem"><b>🔒 TRUE ALPHA Champion</b><div class="alphaNote">Débloqué après le Final Boss et l’Ultimate Trial.</div></div></div>`},
+ passport:{title:"🪪 Alpha Passport",html:`<div class="taTimeline"><div class="taTimelineItem"><b>✓ Première connexion</b><div class="alphaNote">Bienvenue dans TRUE ALPHA.</div></div><div class="taTimelineItem"><b>✓ Premier achievement</b><div class="alphaNote">Ton parcours a commencé.</div></div><div class="taTimelineItem"><b>✓ Rank Diamond</b><div class="alphaNote">Tu as atteint l’élite.</div></div><div class="taTimelineItem"><b>🔒 Alpha Ascension</b><div class="alphaNote">Termine l’épreuve pour débloquer le prochain palier.</div></div><div class="taTimelineItem"><b>🔒 TRUE ALPHA Champion</b><div class="alphaNote">Débloqué après les épreuves et activités TRUE ALPHA.</div></div></div>`},
  legacy:{title:"🏛️ Alpha Legacy",html:`<div class="taTimeline"><div class="taTimelineItem"><b>Season 01 — Rise of the Dragon</b><div class="alphaNote">Archives des champions et records de la saison.</div></div><div class="taTimelineItem"><b>Champion actuel</b><div class="alphaNote">Le Champion reste affiché jusqu’à ce qu’un autre joueur remporte le Final Trial.</div></div><div class="taTimelineItem"><b>Hall of Legends</b><div class="alphaNote">Les anciens champions et leurs exploits restent dans l’histoire.</div></div></div>`},
  skills:{title:"🧬 Alpha Skill Tree",html:`<div class="taUniverseGrid"><div class="taUniverseCard"><b>🧠 Genius Path</b><small>Logic, mémoire et connaissances.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>⚡ Speed Path</b><small>Réaction et Time Attack.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>🎯 Precision Path</b><small>Accuracy et challenges de précision.</small><button type="button" class="alphaBtn">Développer</button></div><div class="taUniverseCard"><b>🛡️ Guardian Path</b><small>Résistance et épreuves difficiles.</small><button type="button" class="alphaBtn">Développer</button></div></div>`},
  inventory:{title:"🎒 Alpha Inventory",html:`<div class="taPillRow"><span class="taPill">🎟️ 4 Tickets</span><span class="taPill">🏅 12 Badges</span><span class="taPill">🏆 3 Trophées</span><span class="taPill">✨ 5 Effects</span><span class="taPill">👑 2 Titles</span><span class="taPill">⭐ 1 Legendary</span></div><p class="alphaNote" style="margin-top:12px">Les objets sont des collectibles/cosmétiques ou des accès à des activités. Ils ne sont pas échangeables contre de l’argent.</p>`},
@@ -7751,50 +8118,6 @@ function openAlphaUniverse(){
 }
 function openTaUniverseView(k){const v=taUniverseViews[k];if(!v)return;document.getElementById('taUniverseTitle').textContent=v.title;document.getElementById('taUniverseContent').innerHTML=v.html}
 function closeTaUniverse(){try{resetCurrentFormFields()}catch(e){}document.getElementById('taUniverseModal')?.classList.remove('show')}
-
-/* =====================================================
-   TRUE ALPHA FINAL BOSS — NON-GRAPHIC CINEMATIC PROTOTYPE
-===================================================== */
-let taBattleState={playerHp:100,bossHp:100,phase:1,locked:false};
-function openTrueAlphaBattle(){
- const o=document.getElementById('taBattleOverlay');if(!o)return;
- taBattleState={playerHp:100,bossHp:100,phase:1,locked:false};
- document.getElementById('taWinner')?.classList.remove('show');
- document.getElementById('taBossCore')?.classList.remove('transform','taSlow');
- document.getElementById('taPhaseText').textContent='PHASE 1';
- document.getElementById('taBattleLog').textContent='Le combat commence. TRUE ALPHA vous attend.';
- taRenderBattle();o.classList.add('show');o.setAttribute('aria-hidden','false');
- if(screen.orientation?.lock){screen.orientation.lock('landscape').catch(()=>{})}
-}
-function closeTrueAlphaBattle(){const o=document.getElementById('taBattleOverlay');o?.classList.remove('show');o?.setAttribute('aria-hidden','true');if(screen.orientation?.unlock)screen.orientation.unlock().catch(()=>{})}
-function taRenderBattle(){
- const p=Math.max(0,taBattleState.playerHp),b=Math.max(0,taBattleState.bossHp);
- document.getElementById('taPlayerHp').style.width=p+'%';document.getElementById('taBossHp').style.width=b+'%';
- document.getElementById('taPlayerHpText').textContent=p+' HP';document.getElementById('taBossHpText').textContent=b+' HP';
-}
-function taBattleMove(move){
- if(taBattleState.locked||taBattleState.bossHp<=0)return;
- const log=document.getElementById('taBattleLog');let dmg=0,playerDamage=0;
- if(move==='attack'){dmg=11;log.textContent='⚔️ Attaque réussie.';playerDamage=8}
- if(move==='special'){dmg=18;log.textContent='✨ Attaque spéciale réussie.';playerDamage=10}
- if(move==='defend'){dmg=5;playerDamage=2;log.textContent='🛡️ Défense activée. Les dégâts entrants sont réduits.'}
- if(move==='dodge'){dmg=3;playerDamage=Math.random()<.65?0:5;log.textContent=playerDamage===0?'⚡ Esquive parfaite.':'⚠️ Esquive ratée.'}
- taBattleState.bossHp=Math.max(0,taBattleState.bossHp-dmg);taBattleState.playerHp=Math.max(0,taBattleState.playerHp-playerDamage);
- if(taBattleState.bossHp<=50&&taBattleState.phase===1){taBattleState.phase=2;document.getElementById('taPhaseText').textContent='PHASE 2 — ALPHA FORM';document.getElementById('taBossName').textContent='ALPHA FORM';const core=document.getElementById('taBossCore');core.textContent='⚡';core.classList.add('transform');log.textContent='⚡ TRUE ALPHA atteint 50% HP… transformation en ALPHA FORM.'}
- taRenderBattle();
- if(taBattleState.playerHp<=0){taBattleState.locked=true;log.textContent='Épreuve échouée. Recommence lorsque tu es prêt.';return}
- if(taBattleState.bossHp<=0){taFinishBattle();return}
-}
-function taFinishBattle(){
- taBattleState.locked=true;const core=document.getElementById('taBossCore');core.classList.add('taSlow','taCinematic');
- const log=document.getElementById('taBattleLog');log.textContent='C’est moi, Alpha.';
- setTimeout(()=>{document.getElementById('taWinnerText').textContent='TRUE ALPHA est vaincu. Vainqueur : Alpha Champion.';document.getElementById('taWinner').classList.add('show')},1500);
-}
-function taStartUltimateTrial(){
- document.getElementById('taWinner')?.classList.remove('show');
- const box=document.getElementById('taBattleLog');box.textContent='ULTIMATE TRIAL : logique, mémoire, réaction et connaissances. Prépare-toi.';
- setTimeout(()=>{closeTrueAlphaBattle();alphaModal('🧠 Ultimate Trial',`<div class="taRankHero"><b>Épreuve ultime</b><div class="alphaNote">Le Final Boss est terminé. La dernière étape mesure ta logique, ta mémoire, ta réaction et tes connaissances.</div><div class="taPillRow"><span class="taPill">🧠 Logic</span><span class="taPill">🧩 Memory</span><span class="taPill">⚡ Reaction</span><span class="taPill">📚 Knowledge</span></div><button type="button" class="primaryBtn" style="margin-top:14px" onclick="alert('Ultimate Trial à connecter au système de questions Admin.')">Commencer l’épreuve</button></div>`)},700)
-}
 
 </script>
 
