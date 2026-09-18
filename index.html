@@ -5623,45 +5623,64 @@ async function redeemSecretCode(inputId="secretCodeInput",messageId="secretCodeM
    RESPECT VOTE
 ===================================================== */
 async function loadRespectVotes(){
+  const status=document.getElementById("respectVoteStatus");
   try{
-    const r=await fetch("/api/respect-votes",{cache:"no-store"});
+    const uid=firebaseUser?.uid||"";
+    const url="/api/respect-votes"+(uid?"?customerUid="+encodeURIComponent(uid):"");
+    const r=await fetch(url,{cache:"no-store"});
     if(!r.ok)throw new Error();
     const d=await r.json();
-    const up=Number(d.up??d.respect??d.yes??0),down=Number(d.down??d.no??0);
-    document.getElementById("respectUpCount")?.replaceChildren(document.createTextNode(String(up)));
-    document.getElementById("respectDownCount")?.replaceChildren(document.createTextNode(String(down)));
+    const up=Number(d.up??d.yes??0),down=Number(d.down??d.no??0);
+    const a=document.getElementById("respectUpCount"),b=document.getElementById("respectDownCount");
+    if(a)a.textContent=String(up);
+    if(b)b.textContent=String(down);
+    if(uid){
+      const serverVote=d.userVote??d.vote??d.voted??null;
+      if(serverVote==="up"||serverVote==="down") localStorage.setItem("ta_respect_vote_"+uid,serverVote);
+    }
+    if(status && !status.classList.contains("ok")) status.className="fieldMessage";
   }catch(e){
     const a=document.getElementById("respectUpCount"),b=document.getElementById("respectDownCount");
     if(a)a.textContent="—";
     if(b)b.textContent="—";
-    const status=document.getElementById("respectVoteStatus");
     if(status){status.textContent=taT("Service de vote indisponible pour le moment.","Sèvis vòt la pa disponib pou kounye a.");status.className="fieldMessage show error";}
   }
   syncRespectSelection();
 }
-function getRespectVoteKey(){return "ta_respect_vote_"+(firebaseUser?.uid||"guest");}
+function getRespectVoteKey(){return firebaseUser?.uid?"ta_respect_vote_"+firebaseUser.uid:"ta_respect_vote_guest";}
 function syncRespectSelection(){
-  const v=localStorage.getItem(getRespectVoteKey());
-  document.getElementById("respectUpBtn")?.classList.toggle("selected",v==="up");
-  document.getElementById("respectDownBtn")?.classList.toggle("selected",v==="down");
-  if(v){document.getElementById("respectUpBtn")?.setAttribute("disabled","true");document.getElementById("respectDownBtn")?.setAttribute("disabled","true");}
+  const up=document.getElementById("respectUpBtn"),down=document.getElementById("respectDownBtn");
+  if(!up||!down)return;
+  const v=firebaseUser?localStorage.getItem(getRespectVoteKey()):null;
+  up.classList.toggle("selected",v==="up");
+  down.classList.toggle("selected",v==="down");
+  up.disabled=!!v;
+  down.disabled=!!v;
 }
 async function castRespectVote(vote){
-  if(localStorage.getItem(getRespectVoteKey())){toast(taT("Vous avez déjà voté.","Ou deja vote."));return;}
   if(!requireLogin())return;
+  const key=getRespectVoteKey();
+  if(localStorage.getItem(key)){toast(taT("Vous avez déjà voté.","Ou deja vote."));return;}
+  const up=document.getElementById("respectUpBtn"),down=document.getElementById("respectDownBtn");
+  if(up)up.disabled=true;if(down)down.disabled=true;
   try{
     const r=await fetch("/api/respect-votes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vote,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok)throw new Error(d.message||"vote_failed");
-    localStorage.setItem(getRespectVoteKey(),vote);
-  }catch(e){
+    localStorage.setItem(key,vote);
     const status=document.getElementById("respectVoteStatus");
-    if(status){status.textContent=taT("Vote non enregistré. Réessayez plus tard.","Vòt la pa anrejistre. Eseye ankò pita.");status.className="fieldMessage show error";}
-    return;
+    if(status){status.textContent=taT("✅ Votre vote est enregistré.","✅ Vòt ou anrejistre.");status.className="fieldMessage show ok";}
+    await loadRespectVotes();
+  }catch(e){
+    if(String(e.message||"").toLowerCase().includes("already")||String(e.message||"").toLowerCase().includes("déjà")||String(e.message||"").toLowerCase().includes("deja")){
+      await loadRespectVotes();
+      toast(taT("⚠️ Vous avez déjà voté.","⚠️ Ou deja vote."));
+    }else{
+      if(up)up.disabled=false;if(down)down.disabled=false;
+      const status=document.getElementById("respectVoteStatus");
+      if(status){status.textContent=taT("Vote non enregistré. Réessayez plus tard.","Vòt la pa anrejistre. Eseye ankò pita.");status.className="fieldMessage show error";}
+    }
   }
-  const status=document.getElementById("respectVoteStatus");
-  if(status){status.textContent=taT("✅ Votre vote est enregistré.","✅ Vòt ou anrejistre.");status.className="fieldMessage show ok";}
-  syncRespectSelection();await loadRespectVotes();
 }
 
 /* =====================================================
