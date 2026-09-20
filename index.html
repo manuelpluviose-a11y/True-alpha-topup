@@ -165,7 +165,7 @@ button{
 ========================= */
 
 #app{
-  display:block;
+  display:none;
   padding-bottom:90px
 }
 
@@ -224,6 +224,18 @@ header{
   border-radius:12px;
   color:var(--text);
   position:relative
+}
+
+.notificationHeaderBtn{
+  position:relative;
+}
+.notificationHeaderBtn span[aria-hidden="true"]{
+  display:block;
+  font-size:18px;
+  line-height:1;
+}
+.notificationHeaderBtn .badge{
+  display:none;
 }
 
 .badge{
@@ -575,9 +587,31 @@ header{
 
 .gamesGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:13px
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;
+  align-items:stretch
 }
+
+
+.gameCatalogCard{height:210px;min-height:210px}
+.gameCatalogVisual{height:125px;display:flex;align-items:center;justify-content:center;background:#f5f6f8}
+.gameCatalogVisual img{width:100%;height:100%;object-fit:cover;display:block}
+.gameProductsHero{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:13px;margin-bottom:15px}
+.gameProductsLogo{width:62px;height:62px;border-radius:15px;object-fit:cover;border:1px solid var(--border)}
+.gameProductsHero strong{display:block;font-size:18px}
+.gameProductsHero small{display:block;margin-top:4px;opacity:.7}
+.gamePacksHeading{margin-top:14px}
+.gamePacksList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gamePack{min-height:100px;border:1px solid var(--border);background:var(--card);border-radius:18px;padding:12px;display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:10px;cursor:pointer;transition:.2s;box-shadow:var(--shadow)}
+.gamePack:hover{transform:translateY(-1px)}
+.gamePack.selected{border:2px solid var(--primary);background:#f2f0ff}
+body.dark .gamePack.selected{background:#211d39}
+.gamePackLogo{width:58px;height:58px;border-radius:14px;object-fit:cover;display:block}
+.gamePackMain{min-width:0}
+.gamePackMain strong{display:block;font-size:15px;line-height:1.2}
+.packAvailability{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:4px 8px;border-radius:999px;background:#e8fbf1;color:#11945a;font-size:11px;font-weight:800;white-space:nowrap}
+.packAvailability i{width:7px;height:7px;border-radius:50%;background:#20bf73;display:block}
+.gamePackPrice{font-size:16px;font-weight:900;color:var(--primary);white-space:nowrap}
 
 .gameCard{
   position:relative;
@@ -586,7 +620,8 @@ header{
   border:1px solid var(--border);
   border-radius:20px;
   box-shadow:var(--shadow);
-  min-height:185px;
+  height:210px;
+  min-height:210px;
   cursor:pointer
 }
 
@@ -1588,7 +1623,8 @@ body.dark .composerStatus.error{background:#321716;color:#ffaaa3;border-color:#6
 
 @media(max-width:420px){
   .gamesGrid{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:9px
   }
 
   .walletActions{
@@ -1984,10 +2020,12 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
     </button>
 
     <button type="button"
-      class="iconBtn profileHeaderBtn"
-      onclick="openAccountPanel()"
-      aria-label="Mon compte">
-      <span>👤</span>
+      class="iconBtn notificationHeaderBtn"
+      id="notificationHeaderButton"
+      onclick="showNotifications()"
+      aria-label="Notifications">
+      <span aria-hidden="true">🔔</span>
+      <span class="badge" id="notificationBadge">0</span>
     </button>
 
     <button type="button"
@@ -2374,157 +2412,80 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
 <section id="games" class="page">
 
-  <button
-    class="backBtn"
-    onclick="backFromGames()">
-    ← Retour
-  </button>
+  <button class="backBtn" onclick="backFromGames()">← Retour</button>
 
   <div class="sectionTitle">
     <h2>🎮 Jeux & services</h2>
-    <span>6 services</span>
+    <span>16 services</span>
   </div>
 
-  <div class="gamesGrid">
-
-    <div
-      class="gameCard"
-      onclick="openControlledService('freefire')">
-
-      <div class="gameVisual freefireBg">
-        <div class="gameEmoji">
-          🔥
-        </div>
-      </div>
-
-      <div class="gameInfo">
-
-        <strong>
-          Free Fire TopUp par UID
-        </strong>
-
-        <small class="available">
-          ● Disponible
-        </small>
-
-      </div>
-
-    </div>
-
-
-    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('dls')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('dls')">
-
-      <div class="gameVisual dlsBg">
-        <div class="gameEmoji">⚽</div>
-
-        <div class="soonLayer">
-          <span>
-            Bientôt disponible
-          </span>
-        </div>
-      </div>
-
-      <div class="gameInfo">
-        <strong>DLS</strong>
-        <small class="soon">
-          Bientôt disponible
-        </small>
-      </div>
-
-    </div>
-
-
-    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('freefire_europe')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('freefire_europe')">
-
-      <div class="gameVisual europeBg">
-        <div class="gameEmoji">🌍</div>
-
-        <div class="soonLayer">
-          <span>
-            Bientôt disponible
-          </span>
-        </div>
-      </div>
-
-      <div class="gameInfo">
-        <strong>Free Fire Europe</strong>
-        <small class="soon">
-          Bientôt disponible
-        </small>
-      </div>
-
-    </div>
-
-
-    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('freefire_latam')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('freefire_latam')">
-
-      <div class="gameVisual latamBg">
-        <div class="gameEmoji">🌎</div>
-
-        <div class="soonLayer">
-          <span>
-            Bientôt disponible
-          </span>
-        </div>
-      </div>
-
-      <div class="gameInfo">
-        <strong>Free Fire PIN LATAM</strong>
-        <small class="soon">
-          Bientôt disponible
-        </small>
-      </div>
-
-    </div>
-
-
-    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('booyah')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('booyah')">
-
-      <div class="gameVisual booyahBg">
-        <div class="gameEmoji">🏆</div>
-
-        <div class="soonLayer">
-          <span>
-            Bientôt disponible
-          </span>
-        </div>
-      </div>
-
-      <div class="gameInfo">
-        <strong>Pass Booyah</strong>
-        <small class="soon">
-          Bientôt disponible
-        </small>
-      </div>
-
-    </div>
-
-
-    <div class="gameCard" role="button" tabindex="0" onclick="openControlledService('other_games')" onkeydown="if(event.key==='Enter'||event.key===' ')openControlledService('other_games')">
-
-      <div class="gameVisual otherBg">
-        <div class="gameEmoji">🎮</div>
-
-        <div class="soonLayer">
-          <span>
-            Bientôt disponible
-          </span>
-        </div>
-      </div>
-
-      <div class="gameInfo">
-        <strong>Autres jeux</strong>
-        <small class="soon">
-          Bientôt disponible
-        </small>
-      </div>
-
-    </div>
-
-  </div>
+  <div class="gamesGrid" id="gamesCatalogGrid"></div>
 
 </section>
 
+
+
+<!-- =========================
+     GAME PRODUCTS / PACKS
+========================= -->
+<section id="gameProducts" class="page">
+
+  <button class="backBtn" onclick="backFromGameProducts()">← Retour aux jeux</button>
+
+  <div class="sectionTitle">
+    <h2 id="gameProductsTitle">Jeu</h2>
+    <span id="gameProductsRegion">—</span>
+  </div>
+
+  <div class="gameProductsHero">
+    <img id="gameProductsLogo" src="" alt="" class="gameProductsLogo">
+    <div>
+      <strong id="gameProductsName">—</strong>
+    </div>
+  </div>
+
+  <div class="ffBox gameVerifyBox">
+    <div class="instruction">
+      <b id="gameVerifyLabel">UID / Player ID</b>
+      <br>
+      <span id="gameVerifyHint">Entrez votre identifiant puis vérifiez le joueur avant de choisir un pack.</span>
+    </div>
+
+    <div class="field">
+      <label id="gamePlayerFieldLabel">UID / Player ID</label>
+      <input id="gamePlayerId" type="text" inputmode="text" autocomplete="off" placeholder="Entrez votre identifiant">
+      <div id="gameUidMessage" class="fieldMessage" aria-live="polite"></div>
+    </div>
+
+    <button class="verifyBtn" id="gameVerifyBtn" onclick="verifySelectedGamePlayer()">
+      🔐 Vérifier le joueur
+    </button>
+
+    <div class="playerResult" id="gamePlayerResult">
+      <b>✓ Joueur vérifié</b><br>
+      <span id="gamePlayerName">—</span><br>
+      <small id="gamePlayerServer">—</small>
+    </div>
+  </div>
+
+  <div class="sectionTitle gamePacksHeading">
+    <h2>💎 Packs disponibles</h2>
+    <span id="gamePackCount">—</span>
+  </div>
+
+  <div id="gamePacksList" class="gamePacksList"></div>
+
+  <div id="gameSelectedPackBox" class="selectedPackBox">
+    <small>Pack sélectionné</small><br>
+    <strong id="gameSelectedPackText">—</strong><br>
+    <span>Pri : <b id="gameSelectedPackPrice">0 HTG</b></span>
+  </div>
+
+  <button class="buyBtn" style="margin-top:14px" onclick="buySelectedGamePack()">
+    💎 Acheter maintenant
+  </button>
+
+</section>
 
 <!-- =========================
      FREE FIRE
@@ -2639,130 +2600,49 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
       <div class="packs">
 
-
-        <div
-          class="pack"
-          onclick="selectPack(this,'100 + 10 💎',200)">
-
-          <div>
-            <div class="diamonds">
-              💎 100 + 10
-            </div>
-
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            200 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'100 + 10 Diamonds',175)">
+          <div><div class="diamonds">💎 100 + 10 Diamonds</div></div>
+          <div class="price">175 HTG</div>
         </div>
 
-
-        <div
-          class="pack"
-          onclick="selectPack(this,'310 + 32 💎',450)">
-
-          <div>
-            <div class="diamonds">
-              💎 310 + 32
-            </div>
-
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            450 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'310 + 31 Diamonds',490)">
+          <div><div class="diamonds">💎 310 + 31 Diamonds</div></div>
+          <div class="price">490 HTG</div>
         </div>
 
-
-        <div
-          class="pack"
-          onclick="selectPack(this,'520 + 52 💎',750)">
-
-          <div>
-            <div class="diamonds">
-              💎 520 + 52
-            </div>
-
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            750 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'520 + 52 Diamonds',900)">
+          <div><div class="diamonds">💎 520 + 52 Diamonds</div></div>
+          <div class="price">900 HTG</div>
         </div>
 
-
-        <div
-          class="pack"
-          onclick="selectPack(this,'1,060 + 106 💎',1350)">
-
-          <div>
-            <div class="diamonds">
-              💎 1,060 + 106
-            </div>
-
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            1,350 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'1060 + 106 Diamonds',1600)">
+          <div><div class="diamonds">💎 1060 + 106 Diamonds</div></div>
+          <div class="price">1,600 HTG</div>
         </div>
 
-
-        <div
-          class="pack"
-          onclick="selectPack(this,'2,180 + 218 💎',3000)">
-
-          <div>
-            <div class="diamonds">
-              💎 2,180 + 218
-            </div>
-
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            3,000 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'2180 + 218 Diamonds',3100)">
+          <div><div class="diamonds">💎 2180 + 218 Diamonds</div></div>
+          <div class="price">3,100 HTG</div>
         </div>
 
+        <div class="pack" onclick="selectPack(this,'5600 + 560 Diamonds',8000)">
+          <div><div class="diamonds">💎 5600 + 560 Diamonds</div></div>
+          <div class="price">8,000 HTG</div>
+        </div>
 
-        <div
-          class="pack"
-          onclick="selectPack(this,'5,600 + 560 💎',8000)">
+        <div class="pack" onclick="selectPack(this,'Abonnement lite',125)">
+          <div><div class="diamonds">Abonnement lite</div></div>
+          <div class="price">125 HTG</div>
+        </div>
 
-          <div>
-            <div class="diamonds">
-              💎 5,600 + 560
-            </div>
+        <div class="pack" onclick="selectPack(this,'Abonnement semaine',400)">
+          <div><div class="diamonds">Abonnement semaine</div></div>
+          <div class="price">400 HTG</div>
+        </div>
 
-            <small>
-              Bonus inclus
-            </small>
-          </div>
-
-          <div class="price">
-            8,000 HTG
-          </div>
-
+        <div class="pack" onclick="selectPack(this,'Abonnement mois',1825)">
+          <div><div class="diamonds">Abonnement mois</div></div>
+          <div class="price">1,825 HTG</div>
         </div>
 
       </div>
@@ -3872,8 +3752,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
         <br><br>
 
-        Les recharges sont vérifiées manuellement par TRUE ALPHA.
-        Aucun PIN et aucune capture d’écran ne sont demandés.
+        La recharge NatCash est automatique. Après votre paiement, TRUE ALPHA détecte et crédite votre Wallet automatiquement. Aucun PIN et aucune capture d’écran ne sont demandés.
 
       </div>
 
@@ -3895,7 +3774,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
           <br>
 
           <small>
-            Disponible • Vérification manuelle
+            Disponible • Recharge automatique
           </small>
 
         </div>
@@ -3974,10 +3853,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
         <input id="depositPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Votre numéro NatCash">
       </div>
 
-      <div class="field" id="natcashTransactionField">
-        <label>Transaction ID</label>
-        <input id="depositTransactionId" type="text" autocomplete="off" placeholder="ID de transaction">
-      </div>
+      <div class="autoRechargeNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--border);font-size:10px;line-height:1.45;font-weight:800;">⚡ Recharge automatique : ne saisissez pas de Transaction ID. Le système détectera automatiquement la transaction NatCash.</div>
 
       <div class="field" id="natcashAccountField">
         <label>Nom du compte <span class="optional">(optionnel)</span></label>
@@ -4025,8 +3901,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
         <br><br>
 
-        Aucun montant n’est ajouté automatiquement.
-        L’Admin vérifie le paiement avant de créditer le Wallet.
+        La recharge NatCash est traitée automatiquement par le système TRUE ALPHA. Si le paiement est détecté, votre Wallet est crédité automatiquement.
 
       </div>
 
@@ -4667,11 +4542,188 @@ async function isFeatureReleased(key){
   return allowed;
 }
 
+
+const TRUE_ALPHA_GAME_CATALOG = {"freefire_na":{"name":"Free Fire NA","region":"North America","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"100 + 10 Diamonds","cost":175,"profit":0,"price":175},{"name":"310 + 31 Diamonds","cost":490,"profit":0,"price":490},{"name":"520 + 52 Diamonds","cost":900,"profit":0,"price":900},{"name":"1060 + 106 Diamonds","cost":1600,"profit":0,"price":1600},{"name":"2180 + 218 Diamonds","cost":3100,"profit":0,"price":3100},{"name":"5600 + 560 Diamonds","cost":8000,"profit":0,"price":8000},{"name":"Abonnement lite","cost":125,"profit":0,"price":125},{"name":"Abonnement semaine","cost":400,"profit":0,"price":400},{"name":"Abonnement mois","cost":1825,"profit":0,"price":1825}]},"freefire_bangladesh":{"name":"Free Fire Bangladesh","region":"Bangladesh","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"25 Diamonds","cost":75,"profit":25,"price":100},{"name":"50 Diamonds","cost":100,"profit":50,"price":150},{"name":"115 Diamonds","cost":160,"profit":75,"price":235},{"name":"240 Diamonds","cost":300,"profit":100,"price":400},{"name":"610 Diamonds","cost":750,"profit":125,"price":875},{"name":"2530 Diamonds","cost":1950,"profit":150,"price":2100},{"name":"Weekly Membership","cost":325,"profit":175,"price":500},{"name":"Monthly Membership","cost":950,"profit":200,"price":1150}]},"freefire_brazil":{"name":"Free Fire Brazil","region":"Brazil","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"110 Diamonds","cost":179,"profit":25,"price":204},{"name":"341 Diamonds","cost":484,"profit":50,"price":534},{"name":"572 Diamonds","cost":852,"profit":75,"price":927},{"name":"1166 Diamonds","cost":1903,"profit":100,"price":2003},{"name":"2398 Diamonds","cost":3901,"profit":125,"price":4026},{"name":"Weekly Lite","cost":65,"profit":150,"price":215},{"name":"Weekly Membership","cost":350,"profit":175,"price":525},{"name":"Monthly Membership","cost":1700,"profit":200,"price":1900},{"name":"Booyah Pass","cost":351,"profit":225,"price":576},{"name":"Booyah Pass Premium","cost":351,"profit":250,"price":601},{"name":"Evo access 3D","cost":80,"profit":275,"price":355},{"name":"Evo access 7D","cost":160,"profit":300,"price":460},{"name":"Evo access 30D","cost":450,"profit":325,"price":775}]},"freefire_indonesia":{"name":"Free Fire Indonesia","region":"Indonesia","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"50 Diamonds","cost":63,"profit":25,"price":88},{"name":"55 Diamonds","cost":75,"profit":50,"price":125},{"name":"70 Diamonds","cost":160,"profit":75,"price":235},{"name":"80 Diamonds","cost":175,"profit":100,"price":275},{"name":"100 Diamonds","cost":200,"profit":125,"price":325},{"name":"140 Diamonds","cost":226,"profit":150,"price":376},{"name":"145 Diamonds","cost":325,"profit":175,"price":500},{"name":"150 Diamonds","cost":301,"profit":200,"price":501},{"name":"190 Diamonds","cost":372,"profit":225,"price":597},{"name":"200 Diamonds","cost":382,"profit":250,"price":632}]},"freefire_middle_east":{"name":"Free Fire Middle East","region":"Middle East","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"110 Diamonds","cost":300,"profit":25,"price":325},{"name":"231 Diamonds","cost":500,"profit":50,"price":550},{"name":"583 Diamonds","cost":1000,"profit":75,"price":1075},{"name":"1188 Diamonds","cost":1900,"profit":100,"price":2000},{"name":"2420 Diamonds","cost":3750,"profit":125,"price":3875}]},"freefire_sg":{"name":"Free Fire SG","region":"Singapore","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"25 Diamonds","cost":81,"profit":25,"price":106},{"name":"100 Diamonds","cost":215,"profit":50,"price":265},{"name":"310 Diamonds","cost":410,"profit":75,"price":485},{"name":"520 Diamonds","cost":951,"profit":100,"price":1051},{"name":"1060 Diamonds","cost":1255,"profit":125,"price":1380},{"name":"2180 Diamonds","cost":3500,"profit":150,"price":3650},{"name":"5600 Diamonds","cost":8000,"profit":175,"price":8175},{"name":"11500 Diamonds","cost":14000,"profit":200,"price":14200},{"name":"Weekly Lite","cost":50,"profit":225,"price":275},{"name":"Weekly Membership","cost":450,"profit":250,"price":700},{"name":"Monthly Membership","cost":1650,"profit":275,"price":1925}]},"freefire_sgmy":{"name":"Free Fire SGMY","region":"Singapore / Malaysia","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"25 Diamonds","cost":60,"profit":25,"price":85},{"name":"100 Diamonds","cost":225,"profit":50,"price":275},{"name":"310 Diamonds","cost":650,"profit":75,"price":725},{"name":"520 Diamonds","cost":750,"profit":100,"price":850},{"name":"1060 Diamonds","cost":1850,"profit":125,"price":1975},{"name":"2180 Diamonds","cost":4000,"profit":150,"price":4150},{"name":"5600 Diamonds","cost":9500,"profit":175,"price":9675},{"name":"11500 Diamonds","cost":15500,"profit":200,"price":15700},{"name":"WeeklyLite","cost":75,"profit":225,"price":300},{"name":"Weekly","cost":350,"profit":250,"price":600},{"name":"Monthly","cost":1650,"profit":275,"price":1925}]},"freefire_taiwan":{"name":"Free Fire Taiwan","region":"Taiwan","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"925 Diamonds","cost":1750,"profit":25,"price":1775},{"name":"1060 Diamonds","cost":1800,"profit":50,"price":1850},{"name":"1875 Diamonds","cost":2900,"profit":75,"price":2975},{"name":"2180 Diamonds","cost":3500,"profit":100,"price":3600},{"name":"3800 Diamonds","cost":7500,"profit":125,"price":7625},{"name":"5600 Diamonds","cost":9500,"profit":150,"price":9650},{"name":"7650 Diamonds","cost":12500,"profit":175,"price":12675},{"name":"9800 Diamonds","cost":13500,"profit":200,"price":13700},{"name":"Weekly Lite","cost":250,"profit":225,"price":475},{"name":"Weekly Card","cost":355,"profit":250,"price":605},{"name":"Monthly Card","cost":1750,"profit":275,"price":2025},{"name":"Booyah Pass","cost":1100,"profit":300,"price":1400},{"name":"Level Up Pass","cost":360,"profit":325,"price":685}]},"freefire_europe":{"name":"Free Fire Europe","region":"Europe","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"25 Diamonds","cost":75,"profit":25,"price":100},{"name":"110 Diamonds","cost":180,"profit":50,"price":230},{"name":"231 Diamonds","cost":375,"profit":75,"price":450},{"name":"583 Diamonds","cost":950,"profit":100,"price":1050},{"name":"1188 Diamonds","cost":1700,"profit":125,"price":1825},{"name":"2420 Diamonds","cost":3750,"profit":150,"price":3900},{"name":"5600 Diamonds","cost":8500,"profit":175,"price":8675},{"name":"11500 Diamonds","cost":15000,"profit":200,"price":15200},{"name":"Abonnement Lite","cost":100,"profit":225,"price":325},{"name":"Abonnement semaine","cost":350,"profit":250,"price":600},{"name":"Abonnement mois","cost":1600,"profit":275,"price":1875}]},"freefire_vietnam":{"name":"Free Fire Vietnam","region":"Vietnam","logo":"a_vibrant_high_contrast_cinematic_digital_illust.png","provider":"","field":"UID Free Fire","packs":[{"name":"25 Diamonds","cost":75,"profit":25,"price":100},{"name":"51 Diamonds","cost":100,"profit":50,"price":150},{"name":"113 Diamonds","cost":200,"profit":75,"price":275},{"name":"283 Diamonds","cost":350,"profit":100,"price":450},{"name":"566 Diamonds","cost":850,"profit":125,"price":975},{"name":"1132 Diamonds","cost":1700,"profit":150,"price":1850},{"name":"2830 Diamonds","cost":3500,"profit":175,"price":3675},{"name":"Weekly Lite","cost":150,"profit":200,"price":350},{"name":"Weekly Membership","cost":450,"profit":225,"price":675},{"name":"Monthly Membership","cost":1750,"profit":250,"price":2000}]},"arena_breakout":{"name":"Arena Breakout","region":"Global","logo":"0d29acbb22439269b1f4cd6b8df9bb66 (1).jpg","provider":"","field":"UID / Player ID","packs":[{"name":"Beginner select","cost":625,"profit":25,"price":650},{"name":"66","cost":635,"profit":50,"price":685},{"name":"Monthly advanced","cost":650,"profit":75,"price":725},{"name":"Bulletproof case (30d)","cost":860,"profit":100,"price":960},{"name":"Monthly premium","cost":1085,"profit":125,"price":1210},{"name":"335","cost":1165,"profit":150,"price":1315},{"name":"Composition case (30d)","cost":1600,"profit":175,"price":1775},{"name":"675","cost":1835,"profit":200,"price":2035},{"name":"Quaterly premium","cost":2260,"profit":225,"price":2485},{"name":"1690","cost":3825,"profit":250,"price":4075},{"name":"3400","cost":7200,"profit":275,"price":7475},{"name":"6820","cost":14100,"profit":300,"price":14400},{"name":"13640","cost":27625,"profit":325,"price":27950},{"name":"20460","cost":41200,"profit":350,"price":41550}]},"arena_breakout_infinite":{"name":"Arena Breakout Infinite","region":"Global","logo":"0d29acbb22439269b1f4cd6b8df9bb66 (1).jpg","provider":"","field":"UID / Player ID","packs":[{"name":"1000","cost":700,"profit":25,"price":725},{"name":"Coppers work skin bundlle","cost":1425,"profit":50,"price":1475},{"name":"Premium battle pass","cost":3050,"profit":75,"price":3125},{"name":"2500","cost":1390,"profit":100,"price":1490},{"name":"5000","cost":1400,"profit":125,"price":1525}]},"blood_strike":{"name":"Blood Strike","region":"Global","logo":"132293e2b042c6dfeae4a3e5417187e9.jpg","provider":"","field":"UID / Player ID","packs":[{"name":"51 gold","cost":75,"profit":25,"price":100},{"name":"105 gold","cost":175,"profit":50,"price":225},{"name":"320 gold","cost":480,"profit":75,"price":555},{"name":"540 gold","cost":600,"profit":100,"price":700},{"name":"1100 gold","cost":1350,"profit":125,"price":1475},{"name":"2260 gold","cost":2750,"profit":150,"price":2900},{"name":"5800 gold","cost":7950,"profit":175,"price":8125},{"name":"Lukcy bac","cost":200,"profit":200,"price":400},{"name":"Season pass","cost":180,"profit":225,"price":405},{"name":"Level up pass","cost":350,"profit":250,"price":600},{"name":"Strike pass élite","cost":755,"profit":275,"price":1030},{"name":"Strike pass premium","cost":1600,"profit":300,"price":1900},{"name":"Cornucopia","cost":325,"profit":325,"price":650}]},"delta_force":{"name":"Delta Force","region":"Global","logo":"584651caaa790201bbf3139dcef03d85.jpg","provider":"","field":"UID / Player ID","packs":[{"name":"18","cost":50,"profit":25,"price":75},{"name":"30","cost":75,"profit":50,"price":125},{"name":"Meltdown supplies","cost":150,"profit":75,"price":225},{"name":"60","cost":190,"profit":100,"price":290},{"name":"Meltdown supplies - advanced","cost":150,"profit":125,"price":275},{"name":"320","cost":550,"profit":150,"price":700},{"name":"Season pass opération spéciale","cost":700,"profit":175,"price":875},{"name":"Season pass warfare spécial","cost":750,"profit":200,"price":950},{"name":"460","cost":1000,"profit":225,"price":1225},{"name":"Season pass Delta Force Deluxe","cost":1050,"profit":250,"price":1300},{"name":"Pass upgrade level 20","cost":1250,"profit":275,"price":1525},{"name":"750","cost":1550,"profit":300,"price":1850},{"name":"Pass upgrade level 10","cost":2250,"profit":325,"price":2575},{"name":"1480","cost":3000,"profit":350,"price":3350},{"name":"1980","cost":3500,"profit":375,"price":3875},{"name":"3050","cost":7500,"profit":400,"price":7900},{"name":"Pass upgrade level 40","cost":8500,"profit":425,"price":8925},{"name":"Pass upgrade level 80","cost":14500,"profit":450,"price":14950},{"name":"8100","cost":13500,"profit":475,"price":13975},{"name":"16200","cost":27500,"profit":500,"price":28000}]},"pubg_mobile":{"name":"PUBG Mobile","region":"Global","logo":"41ce0c7f44cfff77307af888aab9a77b.jpg","provider":"","field":"UID / Player ID","packs":[{"name":"60 UC","cost":200,"profit":25,"price":225},{"name":"325 UC","cost":850,"profit":50,"price":900},{"name":"1800 UC","cost":3500,"profit":75,"price":3575},{"name":"3850 UC","cost":8500,"profit":100,"price":8600},{"name":"16200 UC","cost":30000,"profit":125,"price":30125}]},"stumble_guys":{"name":"Stumble Guys","region":"Global","logo":"25dab300721b5e25c586b92b001030ab.jpg","provider":"","field":"UID / Player ID","packs":[{"name":"250 gems","cost":250,"profit":25,"price":275},{"name":"800 gems","cost":450,"profit":50,"price":500},{"name":"120 tokens","cost":500,"profit":75,"price":575},{"name":"1600 gems + 75 tokens","cost":800,"profit":100,"price":900},{"name":"5000 gems + 275 tokens","cost":1750,"profit":125,"price":1875},{"name":"1300 tokens","cost":4000,"profit":150,"price":4150}]}};
+
+let selectedGameKey="";
+let selectedGameVerified=false;
+let selectedGamePlayerId="";
+
+function renderGamesCatalog(){
+  const grid=document.getElementById("gamesCatalogGrid");
+  if(!grid)return;
+  grid.innerHTML=Object.entries(TRUE_ALPHA_GAME_CATALOG).map(([key,g])=>`
+    <div class="gameCard gameCatalogCard" role="button" tabindex="0"
+      onclick="openGameCatalog('${key}')"
+      onkeydown="if(event.key==='Enter'||event.key===' ')openGameCatalog('${key}')">
+      <div class="gameVisual gameCatalogVisual">
+        <img src="${escapeHTML(g.logo)}" alt="${escapeHTML(g.name)}" loading="lazy">
+      </div>
+      <div class="gameInfo">
+        <strong>${escapeHTML(g.name)}</strong>
+        <small class="available">● Disponible</small>
+      </div>
+    </div>
+  `).join("");
+}
+
+function openGameCatalog(key){
+  if(!canUseSite())return;
+  const g=TRUE_ALPHA_GAME_CATALOG[key];
+  if(!g)return;
+  selectedGameKey=key;
+  selectedGameVerified=false;
+  selectedGamePlayerId="";
+  selectedPack=null;
+  selectedPrice=0;
+  const title=document.getElementById("gameProductsTitle");
+  const region=document.getElementById("gameProductsRegion");
+  const logo=document.getElementById("gameProductsLogo");
+  const name=document.getElementById("gameProductsName");
+  const field=document.getElementById("gamePlayerFieldLabel");
+  const verifyLabel=document.getElementById("gameVerifyLabel");
+  const hint=document.getElementById("gameVerifyHint");
+  const input=document.getElementById("gamePlayerId");
+  const result=document.getElementById("gamePlayerResult");
+  const msg=document.getElementById("gameUidMessage");
+  if(title)title.textContent=g.name;
+  if(region)region.textContent=g.region;
+  if(logo){logo.src=g.logo;logo.alt=g.name;}
+  if(name)name.textContent=g.name;
+  if(field)field.textContent=g.field;
+  if(verifyLabel)verifyLabel.textContent=g.field;
+  if(hint)hint.textContent="Entrez votre "+g.field+" puis vérifiez le joueur avant de choisir un pack.";
+  if(input){input.value="";input.placeholder="Entrez votre "+g.field;}
+  if(result)result.style.display="none";
+  if(msg){msg.textContent="";msg.className="fieldMessage";}
+  renderGamePacks();
+  showPage("gameProducts");
+}
+
+function renderGamePacks(){
+  const box=document.getElementById("gamePacksList");
+  const count=document.getElementById("gamePackCount");
+  const g=TRUE_ALPHA_GAME_CATALOG[selectedGameKey];
+  if(!box||!g)return;
+  if(count)count.textContent=g.packs.length+" packs";
+  box.innerHTML=g.packs.map((p,i)=>`
+    <div class="gamePack ${selectedPack===p.name ? "selected":""}" onclick="selectGameCatalogPack(this,${i})">
+      <img src="${escapeHTML(g.logo)}" alt="" class="gamePackLogo" loading="lazy">
+      <div class="gamePackMain">
+        <strong>${escapeHTML(p.name)}</strong>
+        <span class="packAvailability"><i></i> Disponible</span>
+      </div>
+      <div class="gamePackPrice">${Number(p.price).toLocaleString("fr-FR")} HTG</div>
+    </div>
+  `).join("");
+}
+
+function selectGameCatalogPack(el,index){
+  const g=TRUE_ALPHA_GAME_CATALOG[selectedGameKey];
+  if(!g)return;
+  if(!selectedGameVerified){
+    const msg=document.getElementById("gameUidMessage");
+    if(msg){msg.textContent="⚠️ Vérifiez le joueur avant de choisir un pack.";msg.className="fieldMessage show error";}
+    return;
+  }
+  const p=g.packs[index];
+  selectedPack=p.name;
+  selectedPrice=Number(p.price);
+  document.querySelectorAll("#gamePacksList .gamePack").forEach(x=>x.classList.remove("selected"));
+  el.classList.add("selected");
+  const box=document.getElementById("gameSelectedPackBox");
+  const text=document.getElementById("gameSelectedPackText");
+  const price=document.getElementById("gameSelectedPackPrice");
+  if(box)box.style.display="block";
+  if(text)text.textContent=p.name;
+  if(price)price.textContent=Number(p.price).toLocaleString("fr-FR")+" HTG";
+}
+
+async function verifySelectedGamePlayer(){
+  if(!canUseSite())return;
+  const g=TRUE_ALPHA_GAME_CATALOG[selectedGameKey];
+  const input=document.getElementById("gamePlayerId");
+  const btn=document.getElementById("gameVerifyBtn");
+  const msg=document.getElementById("gameUidMessage");
+  const result=document.getElementById("gamePlayerResult");
+  const name=document.getElementById("gamePlayerName");
+  const server=document.getElementById("gamePlayerServer");
+  const id=String(input?.value||"").trim();
+  if(msg){msg.textContent="";msg.className="fieldMessage";}
+  selectedGameVerified=false;
+  if(!id){
+    if(msg){msg.textContent="⚠️ Entrez votre identifiant.";msg.className="fieldMessage show error";}
+    return;
+  }
+  if(btn){btn.disabled=true;btn.textContent="⏳ Vérification...";}
+  try{
+    if(selectedGameKey==="freefire_na"){
+      if(!/^[0-9]+$/.test(id) || id.length<5)throw new Error("INVALID_UID");
+      if(!/^https?:$/i.test(location.protocol))throw new Error("HTTPS_REQUIRED");
+      const base=(window.TRUE_ALPHA_API_BASE||"").replace(/\/$/,"");
+      const url=base+"/get_player_personal_show?server=NA&uid="+encodeURIComponent(id)+"&need_gallery_info=false&need_blacklist=false&need_spark_info=false&call_sign_src=7";
+      const response=await fetch(url,{method:"GET",headers:{"Accept":"application/json"},cache:"no-store"});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(data.message||data.error||"PLAYER_VERIFY_FAILED");
+      const basic=data.basicinfo||data.basicInfo||data.data?.basicinfo||data.data?.basicInfo||{};
+      const nickname=basic.nickname||data.nickname||data.data?.nickname||"";
+      const region=basic.region||data.region||data.data?.region||"";
+      if(!nickname && !region)throw new Error("PLAYER_DATA_NOT_FOUND");
+      const normalized=String(region).trim().toUpperCase();
+      const isNA=normalized==="NA" || normalized==="US" || normalized.includes("NORTH AMERICA");
+      if(!isNA)throw new Error("WRONG_REGION");
+      selectedGameVerified=true;
+      selectedGamePlayerId=id;
+      verifiedUid=id;
+      verifiedPlayerName=String(nickname);
+      verifiedServer="NA — North America";
+      if(name)name.textContent=verifiedPlayerName;
+      if(server)server.textContent="Serveur : NA — North America";
+      if(result)result.style.display="block";
+      if(msg){msg.textContent="✅ Joueur vérifié. Vous pouvez choisir un pack.";msg.className="fieldMessage show ok";}
+    }else{
+      // The exact verification endpoints for these games have not been supplied yet.
+      // Do not fake a successful player verification.
+      throw new Error("API_NOT_CONFIGURED");
+    }
+  }catch(e){
+    const text=e.message==="WRONG_REGION"
+      ?"⚠️ Ce compte n'est pas sur la région demandée."
+      :e.message==="API_NOT_CONFIGURED"
+      ?"ℹ️ L’API de vérification de ce jeu doit encore être connectée."
+      :"❌ Impossible de vérifier ce joueur pour le moment.";
+    if(msg){msg.textContent=text;msg.className="fieldMessage show error";}
+    if(result)result.style.display="none";
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent="🔐 Vérifier le joueur";}
+  }
+}
+
+function buySelectedGamePack(){
+  if(!canUseSite() || !requireLogin())return;
+  if(!selectedGameVerified){toast("⚠️ Vérifiez le joueur avant de continuer.");return;}
+  if(!selectedPack){toast("⚠️ Sélectionnez un pack.");return;}
+  paymentMethod="wallet";
+  updateCheckoutUI();
+  document.getElementById("checkoutModal")?.classList.add("show");
+}
+
+function backFromGameProducts(){
+  resetTopupFlow();
+  selectedGameKey="";
+  selectedGameVerified=false;
+  selectedGamePlayerId="";
+  showPage("games");
+}
+
+document.addEventListener("DOMContentLoaded",renderGamesCatalog);
+
 async function openControlledService(key){
   if(!canUseSite())return;
   const allowed=await isFeatureReleased(key);
   if(!allowed){featureUnavailable(key);return;}
   if(key==="freefire")return openFreeFire();
+  if(TRUE_ALPHA_GAME_CATALOG[key])return openGameCatalog(key);
   if(key==="virtual_card")return goCards();
   if(key==="arcade"){showPage("activities");document.getElementById("arcadeAlphaCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
   if(key==="daily_gift"){showPage("activities");document.getElementById("dailyGiftCard")?.scrollIntoView({behavior:"smooth",block:"center"});return;}
@@ -5892,31 +5944,28 @@ async function depositContinue(){
 
   const amount=Number(document.getElementById("depositAmount")?.value);
   const phone=document.getElementById("depositPhone")?.value.trim();
-  const transactionId=document.getElementById("depositTransactionId")?.value.trim();
   const accountName=document.getElementById("depositAccountName")?.value.trim();
 
   if(!Number.isFinite(amount) || amount<50){toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));return;}
   if(!phone){toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));return;}
-  if(!transactionId){toast(taT("⚠️ Entrez le Transaction ID.","⚠️ Antre ID tranzaksyon an."));return;}
 
   depositAmount=amount;
   try{
     const response=await fetch("/api/wallet/recharge",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        method:"natcash",amount,phone,transactionId,accountName:accountName||null,
+        method:"natcash",mode:"automatic",amount,phone,accountName:accountName||null,
         customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""
       })
     });
     const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data.message||"recharge_failed");
-    if(data.status && String(data.status).toLowerCase()!="pending") throw new Error("unexpected_status");
     closeRechargeReset();
-    addNotification("Recharge en attente",taT("Votre demande NatCash est en attente de vérification manuelle.","Demann NatCash ou a an atant pou Admin verifye li manyèlman."));
-    toast(taT("✅ Demande envoyée. Votre recharge est Pending jusqu’à validation Admin.","✅ Demann lan voye. Rechaj ou a an atant jouk Admin valide li."));
+    addNotification("Recharge NatCash",taT("Votre recharge est en cours de détection automatique. Votre Wallet sera crédité dès confirmation du paiement.","Rechaj NatCash ou a ap detekte otomatikman. Wallet ou ap kredite dèske peman an konfime."));
+    toast(taT("⚡ Recharge automatique activée. Nous détectons votre paiement NatCash.","⚡ Rechaj otomatik aktive. Sistèm nan ap detekte peman NatCash ou."));
     await loadWallet();
   }catch(e){
-    toast(taT("❌ Impossible d’envoyer la demande de recharge. Aucun crédit n’a été ajouté.","❌ Demann rechaj la pa t kapab voye. Pa gen lajan ki ajoute."));
+    toast(taT("❌ Impossible de lancer la recharge automatique. Aucun crédit n’a été ajouté.","❌ Rechaj otomatik la pa t kapab lanse. Pa gen lajan ki ajoute."));
   }
 }
 
@@ -7533,7 +7582,7 @@ const TA_TRANSLATIONS={
     "Recharger le Wallet":"Rechaje Wallet","Recharge minimum :":"Minimòm rechaj :","Choisir le service":"Chwazi sèvis la","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
     "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
     "Continuer":"Kontinye","Fermer":"Fèmen","Retrait Wallet":"Retrè Wallet","Numéro":"Nimewo","Montant HTG":"Montan HTG","Demander le retrait":"Mande retrè a",
-    "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
+    "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Recharge automatique":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
     "Messages":"Mesaj","Écrivez votre message à TRUE ALPHA...":"Ekri mesaj ou bay TRUE ALPHA...","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.",
     "Envoyer le message":"Voye mesaj la","Effacer la conversation":"Efase konvèsasyon an","Découvre TRUE ALPHA TopUp 💎":"Dekouvri TRUE ALPHA TopUp 💎","TRUE ALPHA partagé.":"TRUE ALPHA pataje.","Lien TRUE ALPHA copié.":"Lyen TRUE ALPHA kopye.","Impossible de copier le lien.":"Pa kapab kopye lyen an.","Copiez le lien du site pour le partager.":"Kopye lyen sit la pou pataje li.","Supprimer toute la conversation avec TRUE ALPHA ?":"Efase tout konvèsasyon an ak TRUE ALPHA ?","Aucun message pour le moment.":"Pa gen mesaj pou kounye a.","Les messages sont momentanément indisponibles.":"Mesaj yo pa disponib pou kounye a.",
     "Réclamer":"Ranmase","Progress":"Pwogrè","Progression":"Pwogrè","First Order":"Premye kòmand","Diamond Buyer":"Achtè Diamonds","Arcade Player":"Jwè Arcade","Daily Gift":"Kado chak jou",
@@ -7555,7 +7604,7 @@ const TA_TRANSLATIONS={
     "Alpha Level":"Nivo Alpha","Streak":"Seri","Badges":"Badges","🎯 Missions":"🎯 Misyon","Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","📅 Événements":"📅 Evènman","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","❓ Centre d’aide":"❓ Sant èd","FAQ et réponses rapides.":"FAQ ak repons rapid.","📤 Partager":"📤 Pataje","Invite tes amis sur TRUE ALPHA.":"Envite zanmi ou sou TRUE ALPHA.","🤝 Alpha Family":"🤝 Alpha Family","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","🟢 État des services":"🟢 Eta sèvis yo","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.","🚪 Déconnexion":"🚪 Dekonekte",
     "🔐 Connexion / Créer un compte":"🔐 Konekte / Kreye kont","🔐 Connectez-vous avec Google pour créer ou accéder à votre compte TRUE ALPHA.":"🔐 Konekte ak Google pou kreye oswa antre nan kont TRUE ALPHA ou.","Votre compte sert pour le Wallet, les commandes, les TA Points et les activités.":"Kont ou sèvi pou Wallet, kòmand yo, TA Points ak aktivite yo.","Continuer avec Google":"Kontinye ak Google","Mot de passe":"Modpas","Se souvenir de moi":"Sonje mwen","Créer un compte":"Kreye kont",
     "🧾 Confirmation de commande":"🧾 Konfimasyon kòmand lan","Mode de paiement":"Mòd peman","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
-    "1. Choisir le service":"1. Chwazi sèvis la","Recharge minimum :":"Minimòm rechaj :","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","MonCash — Bientôt disponible":"MonCash — Talè disponib","2. Montant":"2. Montan","Nom :":"Non :","📋 Copier":"📋 Kopi","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.","Email du destinataire":"Imèl moun k ap resevwa a","Minimum transfè :":"Minimòm transfè :",
+    "1. Choisir le service":"1. Chwazi sèvis la","Recharge minimum :":"Minimòm rechaj :","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Recharge automatique":"Disponib • Verifikasyon manyèl","MonCash — Bientôt disponible":"MonCash — Talè disponib","2. Montant":"2. Montan","Nom :":"Non :","📋 Copier":"📋 Kopi","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.","Email du destinataire":"Imèl moun k ap resevwa a","Minimum transfè :":"Minimòm transfè :",
     "Transfè a pral pase atravè backend TRUE ALPHA lè sistèm lan konekte.":"Transfè a ap pase atravè sistèm TRUE ALPHA a epi li rete an atant pou Admin valide li.","📭 Vous n’avez aucune commande.":"📭 Ou poko gen okenn kòmand.","Aucune notification":"Pa gen notifikasyon","Vous n’avez aucune notification.":"Ou pa gen okenn notifikasyon.","Paiement":"Peman","En attente":"An atant",
     "TRUE ALPHA fèmen pou kounye a":"TRUE ALPHA fèmen pou kounye a","+ Recharger":"+ Rechaje","Contactez TRUE ALPHA pour le service de carte.":"Kontakte TRUE ALPHA pou sèvis kat la.",
     "Entrez votre UID, verifye joueur la, chwazi pack ou epi peye ak Wallet ou.":"Antre UID ou, Admin verifye jwè a, chwazi pack ou epi peye ak Wallet ou.","Rechargez vos jeux, obtenez une carte virtuelle, participez aux activités et gérez votre Wallet nan yon sèl kote.":"Rechaje jwèt ou yo, jwenn yon kat vityèl, patisipe nan aktivite epi jere Wallet ou nan yon sèl kote.",
@@ -7566,7 +7615,7 @@ const TA_TRANSLATIONS={
     "🎁 Récompenses":"🎁 Rekonpans","💬 Messages avec TRUE ALPHA":"💬 Mesaj ak TRUE ALPHA","💰 Recharger Wallet":"💰 Rechaje Wallet","💵 Wallet disponible":"💵 Wallet disponib",
     "Défis quotidiens et hebdomadaires.":"Defi chak jou ak chak semèn.","Moments, promos et nouveautés.":"Moman, pwomosyon ak nouvote.","FAQ et réponses rapides.":"FAQ ak repons rapid.","Ton espace de parrainage et invitations.":"Espas parennaj ak envitasyon ou yo.","Vérifie les services disponibles et les nouveautés.":"Verifye sèvis ki disponib yo ak nouvote yo.",
     "Messages":"Mesaj","🇬 Continuer avec Google":"🇬 Kontinye ak Google","2 TA Points = 1 HTG. Le serveur vérifie toujours le solde avant de valider la commande.":"2 TA Points = 1 HTG. Sistèm nan verifye solde a anvan kòmand lan valide.","💎 Confirmer et payer":"💎 Konfime epi peye",
-    "💰 Recharger le Wallet":"💰 Rechaje Wallet","1. Choisir le service":"1. Chwazi sèvis la","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Vérification manuelle":"Disponib • Verifikasyon manyèl","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
+    "💰 Recharger le Wallet":"💰 Rechaje Wallet","1. Choisir le service":"1. Chwazi sèvis la","Les recharges sont vérifiées manuellement par TRUE ALPHA. Aucun PIN et aucune capture d’écran ne sont demandés.":"TRUE ALPHA verifye rechaj yo manyèlman. Nou pa mande PIN ni ekran prèv.","Disponible • Recharge automatique":"Disponib • Verifikasyon manyèl","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
     "Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.":"🔒 Pa janm mete PIN ou epi pa voye ekran prèv.","Service indisponible pour le moment.":"Sèvis la pa disponib pou kounye a.","Aucun montant n’est ajouté automatiquement. L’Admin vérifie le paiement avant de créditer le Wallet.":"Pa gen montan ki ajoute otomatikman. Admin nan verifye peman an anvan li mete lajan nan Wallet la.",
     "↗️ Transférer":"↗️ Transfè","🏦 Retrait Wallet":"🏦 Retrè Wallet","Minimum retrè :":"Minimòm retrè :","Retrè yo pase an atant epi Admin nan verifye yo manyèlman. Pa gen retrè otomatik.":"Retrè yo pase an atant epi Admin nan verifye yo manyèlman. Pa gen retrè otomatik.","Retrè ak verifikasyon Admin":"Retrè ak verifikasyon Admin","🎯 Fè aktivite a":"🎯 Fè aktivite a"
   }
