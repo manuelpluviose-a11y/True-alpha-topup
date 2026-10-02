@@ -1,9 +1,14 @@
 {
-  "name": "true-alpha-topup",
+  "name": "true-alpha-topup-backend",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "@vercel/blob": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "firebase-admin": "^13.5.0"
   }
 }
