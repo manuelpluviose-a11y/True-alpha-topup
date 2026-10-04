@@ -19,7 +19,10 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json({ limit: "5mb" }));
+app.use(express.json({
+  limit: "5mb"
+}));
+
 app.use(express.urlencoded({
   extended: true,
   limit: "5mb"
@@ -34,24 +37,16 @@ app.use(express.static(__dirname, {
 }));
 
 /* =========================
-   HEALTH CHECK
-========================= */
-
-app.get("/api/health", (_req, res) => {
-  res.json({
-    success: true,
-    service: "TRUE ALPHA TopUp",
-    status: "online"
-  });
-});
-
-/* =========================
-   ADMIN AUTH
+   ADMIN TOKEN
 ========================= */
 
 function checkAdmin(req, res, next) {
-  const savedToken = process.env.ADMIN_TOKEN || "";
-  const receivedToken = req.headers["x-admin-token"] || "";
+
+  const savedToken =
+    process.env.ADMIN_TOKEN || "";
+
+  const receivedToken =
+    req.headers["x-admin-token"] || "";
 
   if (!savedToken) {
     return res.status(500).json({
@@ -60,7 +55,14 @@ function checkAdmin(req, res, next) {
     });
   }
 
-  if (!receivedToken || receivedToken !== savedToken) {
+  if (!receivedToken) {
+    return res.status(401).json({
+      success: false,
+      message: "ADMIN_TOKEN manke."
+    });
+  }
+
+  if (receivedToken !== savedToken) {
     return res.status(401).json({
       success: false,
       message: "ADMIN_TOKEN la pa bon."
@@ -71,26 +73,62 @@ function checkAdmin(req, res, next) {
 }
 
 /* =========================
-   ADMIN LOGIN CHECK
+   HEALTH
 ========================= */
 
-app.get("/get-orders", checkAdmin, async (_req, res) => {
+app.get("/api/health", (_req, res) => {
+
   res.json({
     success: true,
-    orders: [],
-    message: "Admin backend TRUE ALPHA TopUp konekte."
+    service: "TRUE ALPHA TopUp",
+    status: "online"
   });
+
+});
+
+/* =========================
+   ADMIN LOGIN
+   IMPORTANT:
+   Admin HTML itilize /api/get-orders
+========================= */
+
+app.get("/api/get-orders", checkAdmin, (_req, res) => {
+
+  res.json({
+    success: true,
+    orders: []
+  });
+
 });
 
 /* =========================
    SITE STATUS
 ========================= */
 
-app.get("/site-status", (_req, res) => {
+app.get("/api/site-status", (_req, res) => {
+
   res.json({
     success: true,
-    enabled: true
+    enabled: true,
+    message: ""
   });
+
+});
+
+app.post("/api/site-status", checkAdmin, (req, res) => {
+
+  const enabled =
+    req.body?.enabled !== false;
+
+  const message =
+    String(req.body?.message || "");
+
+  res.json({
+    success: true,
+    enabled,
+    message
+  });
+
 });
 
 /* =========================
@@ -98,19 +136,23 @@ app.get("/site-status", (_req, res) => {
 ========================= */
 
 app.get("/", (_req, res) => {
+
   res.sendFile(
     path.join(__dirname, "index.html")
   );
+
 });
 
 /* =========================
-   HOME ROUTE
+   HOME
 ========================= */
 
 app.get("/home", (_req, res) => {
+
   res.sendFile(
     path.join(__dirname, "index.html")
   );
+
 });
 
 /* =========================
@@ -118,10 +160,12 @@ app.get("/home", (_req, res) => {
 ========================= */
 
 app.use("/api", (_req, res) => {
+
   res.status(404).json({
     success: false,
     message: "API route not implemented yet."
   });
+
 });
 
 /* =========================
@@ -129,6 +173,7 @@ app.use("/api", (_req, res) => {
 ========================= */
 
 app.use((req, res, next) => {
+
   if (req.method !== "GET") {
     return next();
   }
@@ -140,6 +185,7 @@ app.use((req, res, next) => {
   res.sendFile(
     path.join(__dirname, "index.html")
   );
+
 });
 
 /* =========================
@@ -147,18 +193,22 @@ app.use((req, res, next) => {
 ========================= */
 
 app.use((_req, res) => {
+
   res.status(404).json({
     success: false,
     message: "Route not found."
   });
+
 });
 
 /* =========================
-   START SERVER
+   START
 ========================= */
 
 app.listen(PORT, "0.0.0.0", () => {
+
   console.log(
     `TRUE ALPHA TopUp running on port ${PORT}`
   );
+
 });
