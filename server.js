@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import { requireUser } from "./lib/firebaseAdmin.js";
 
 const app = express();
 
@@ -11,100 +10,112 @@ const PORT = Number(process.env.PORT || 10000);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/* ================================
+/* =========================
    MIDDLEWARE
-================================ */
+========================= */
 
 app.use(cors({
   origin: true,
   credentials: true
 }));
 
-app.use(express.json({
-  limit: "2mb"
-}));
-
+app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({
   extended: true,
-  limit: "2mb"
+  limit: "5mb"
 }));
 
-/* ================================
+/* =========================
    FRONTEND
-================================ */
-
-/*
-  Render ap sèvi index.html ki nan
-  menm folder ak server.js la.
-*/
+========================= */
 
 app.use(express.static(__dirname, {
   index: false
 }));
 
-/* ================================
-   BASIC BACKEND CHECK
-================================ */
+/* =========================
+   HEALTH CHECK
+========================= */
 
 app.get("/api/health", (_req, res) => {
-  res.status(200).json({
+  res.json({
     success: true,
     service: "TRUE ALPHA TopUp",
     status: "online"
   });
 });
 
-/* ================================
-   FIREBASE USER CHECK
-================================ */
+/* =========================
+   ADMIN AUTH
+========================= */
 
-app.get("/api/me", async (req, res) => {
-  try {
-    const user = await requireUser(req);
+function checkAdmin(req, res, next) {
+  const savedToken = process.env.ADMIN_TOKEN || "";
+  const receivedToken = req.headers["x-admin-token"] || "";
 
-    res.status(200).json({
-      success: true,
-      uid: user.uid,
-      email: user.email || "",
-      name: user.name || "",
-      picture: user.picture || ""
-    });
-
-  } catch (error) {
-    res.status(error.statusCode || 500).json({
+  if (!savedToken) {
+    return res.status(500).json({
       success: false,
-      message: error.message || "Backend error."
+      message: "ADMIN_TOKEN pa configuré nan Render."
     });
   }
+
+  if (!receivedToken || receivedToken !== savedToken) {
+    return res.status(401).json({
+      success: false,
+      message: "ADMIN_TOKEN la pa bon."
+    });
+  }
+
+  next();
+}
+
+/* =========================
+   ADMIN LOGIN CHECK
+========================= */
+
+app.get("/get-orders", checkAdmin, async (_req, res) => {
+  res.json({
+    success: true,
+    orders: [],
+    message: "Admin backend TRUE ALPHA TopUp konekte."
+  });
 });
 
-/* ================================
-   FRONTEND ROUTE
-================================ */
+/* =========================
+   SITE STATUS
+========================= */
 
-/*
-  Lè moun ouvri:
-  https://YOUR-RENDER-LINK.onrender.com/
+app.get("/site-status", (_req, res) => {
+  res.json({
+    success: true,
+    enabled: true
+  });
+});
 
-  Render ap voye index.html.
-*/
+/* =========================
+   FRONTEND HOME
+========================= */
 
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(
+    path.join(__dirname, "index.html")
+  );
 });
 
-/*
-  Si frontend la itilize lòt URL san
-  extension, retounen index.html tou.
-*/
+/* =========================
+   HOME ROUTE
+========================= */
 
 app.get("/home", (_req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(
+    path.join(__dirname, "index.html")
+  );
 });
 
-/* ================================
+/* =========================
    API 404
-================================ */
+========================= */
 
 app.use("/api", (_req, res) => {
   res.status(404).json({
@@ -113,17 +124,11 @@ app.use("/api", (_req, res) => {
   });
 });
 
-/* ================================
+/* =========================
    FRONTEND FALLBACK
-================================ */
-
-/*
-  Nenpòt route ki pa API kapab retounen
-  index.html pou navigation frontend la.
-*/
+========================= */
 
 app.use((req, res, next) => {
-
   if (req.method !== "GET") {
     return next();
   }
@@ -132,12 +137,14 @@ app.use((req, res, next) => {
     return next();
   }
 
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(
+    path.join(__dirname, "index.html")
+  );
 });
 
-/* ================================
+/* =========================
    FINAL 404
-================================ */
+========================= */
 
 app.use((_req, res) => {
   res.status(404).json({
@@ -146,12 +153,12 @@ app.use((_req, res) => {
   });
 });
 
-/* ================================
+/* =========================
    START SERVER
-================================ */
+========================= */
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(
-    `TRUE ALPHA TopUp backend running on port ${PORT}`
+    `TRUE ALPHA TopUp running on port ${PORT}`
   );
 });
