@@ -2981,6 +2981,22 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
   </div>
 
 
+  <div id="topupLoyaltyCard" class="rewardCard" style="margin-bottom:14px;">
+    <div class="rewardCardTop">
+      <strong>🏆 Récompense TopUp</strong>
+      <span style="font-size:9px;color:var(--muted);font-weight:800;">10 TopUps valides</span>
+    </div>
+    <div style="margin-top:8px;font-weight:900;">10 TopUps → 250 HTG</div>
+    <div style="margin-top:8px;height:8px;background:var(--border);border-radius:99px;overflow:hidden;">
+      <span id="topupLoyaltyProgressBar" style="display:block;width:0%;height:100%;background:var(--primary);border-radius:99px;transition:width .25s ease;"></span>
+    </div>
+    <div id="topupLoyaltyProgressText" style="margin-top:6px;font-size:9px;color:var(--muted);font-weight:800;">0 / 10 TopUps valides</div>
+    <button id="topupLoyaltyClaimBtn" class="primaryBtn rewardClaimBtn" type="button" disabled style="margin-top:10px;width:100%;">
+      🔒 Réclamer 250 HTG
+    </button>
+    <div id="topupLoyaltyMessage" style="margin-top:7px;font-size:9px;color:var(--muted);"></div>
+  </div>
+
   <div id="rewardsList">
 
     <!-- Liste par défaut visible immédiatement, même si l'API Admin n'est pas disponible. -->
@@ -3853,7 +3869,11 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
         <input id="depositPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Votre numéro NatCash">
       </div>
 
-      <div class="autoRechargeNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--border);font-size:10px;line-height:1.45;font-weight:800;">⚡ Recharge automatique : ne saisissez pas de Transaction ID. Le système détectera automatiquement la transaction NatCash.</div>
+      <div class="field" id="natcashTransactionField">
+        <label>ID Transaction <span style="color:#d92d20">*</span></label>
+        <input id="depositTransactionId" type="text" inputmode="text" autocomplete="off" maxlength="120" placeholder="Entrez l’ID de votre transaction NatCash">
+        <div class="fieldMessage" id="depositTransactionMessage"></div>
+      </div>
 
       <div class="field" id="natcashAccountField">
         <label>Nom du compte <span class="optional">(optionnel)</span></label>
@@ -5235,7 +5255,7 @@ function updateUI(){
 
   const balanceText=
     balance===null
-      ? "— HTG"
+      ? "0.00 HTG"
       : Number(balance)
           .toLocaleString("fr-FR")
           +" HTG";
@@ -5487,7 +5507,7 @@ function updateCheckoutUI(){
   const wb=document.getElementById("checkoutWalletBalance");
   const pb=document.getElementById("checkoutPointsBalance");
   const gb=document.getElementById("checkoutGiftBalance");
-  if(wb) wb.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
+  if(wb) wb.textContent=(balance===null?"0.00":Number(balance).toLocaleString("fr-FR"))+" HTG";
   if(pb) pb.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
   if(gb) gb.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
 }
@@ -5600,7 +5620,7 @@ function updateGiftCheckoutUI(){
   const s=document.getElementById("giftCheckoutSummary");
   if(s&&selectedGiftCard){s.innerHTML=`<div><b>Gift Card :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Achat :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Bonus :</b> +${selectedGiftCard.bonus.toLocaleString("fr-FR")} GDS</div><div><b>Total crédité :</b> ${selectedGiftCard.total.toLocaleString("fr-FR")} GDS</div>`;}
   const a=document.getElementById("giftCheckoutWalletBalance");const b=document.getElementById("giftCheckoutPointsBalance");const c=document.getElementById("giftCheckoutGiftBalance");
-  if(a)a.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
+  if(a)a.textContent=(balance===null?"0.00":Number(balance).toLocaleString("fr-FR"))+" HTG";
   if(b)b.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
   if(c)c.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
 }
@@ -5904,6 +5924,14 @@ function resetDeposit(){
   if(amount)
     amount.value="";
 
+  ["depositPhone","depositTransactionId","depositAccountName"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value="";
+  });
+
+  const txMsg=document.getElementById("depositTransactionMessage");
+  if(txMsg) txMsg.textContent="";
+
 }
 
 
@@ -5944,28 +5972,76 @@ async function depositContinue(){
 
   const amount=Number(document.getElementById("depositAmount")?.value);
   const phone=document.getElementById("depositPhone")?.value.trim();
+  const transactionId=document.getElementById("depositTransactionId")?.value.trim();
   const accountName=document.getElementById("depositAccountName")?.value.trim();
+  const txMsg=document.getElementById("depositTransactionMessage");
 
-  if(!Number.isFinite(amount) || amount<50){toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));return;}
-  if(!phone){toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));return;}
+  if(txMsg) txMsg.textContent="";
+
+  if(!Number.isFinite(amount) || amount<50){
+    toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));
+    return;
+  }
+
+  if(!phone){
+    toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));
+    return;
+  }
+
+  if(!transactionId){
+    if(txMsg) txMsg.textContent=taT("⚠️ L’ID Transaction est obligatoire.","⚠️ ID Transaction lan obligatwa.");
+    document.getElementById("depositTransactionId")?.focus();
+    return;
+  }
 
   depositAmount=amount;
+
   try{
     const response=await fetch("/api/wallet/recharge",{
-      method:"POST",headers:{"Content-Type":"application/json"},
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        method:"natcash",mode:"automatic",amount,phone,accountName:accountName||null,
-        customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""
+        method:"natcash",
+        mode:"manual",
+        amount,
+        phone,
+        accountName:accountName||null,
+        transactionId,
+        customerUid:firebaseUser.uid,
+        customerEmail:firebaseUser.email||""
       })
     });
+
     const data=await response.json().catch(()=>({}));
+
     if(!response.ok)throw new Error(data.message||"recharge_failed");
+
     closeRechargeReset();
-    addNotification("Recharge NatCash",taT("Votre recharge est en cours de détection automatique. Votre Wallet sera crédité dès confirmation du paiement.","Rechaj NatCash ou a ap detekte otomatikman. Wallet ou ap kredite dèske peman an konfime."));
-    toast(taT("⚡ Recharge automatique activée. Nous détectons votre paiement NatCash.","⚡ Rechaj otomatik aktive. Sistèm nan ap detekte peman NatCash ou."));
+
+    addNotification(
+      "Recharge NatCash",
+      taT(
+        "Votre demande de recharge est en attente de vérification par TRUE ALPHA.",
+        "Demann rechaj NatCash ou a an atant pou TRUE ALPHA verifye li."
+      )
+    );
+
+    toast(
+      taT(
+        "✅ Demande envoyée. TRUE ALPHA va vérifier votre Transaction ID avant de créditer le Wallet.",
+        "✅ Demann lan ale. TRUE ALPHA ap verifye ID Transaction lan anvan li kredite Wallet ou."
+      )
+    );
+
     await loadWallet();
+
   }catch(e){
-    toast(taT("❌ Impossible de lancer la recharge automatique. Aucun crédit n’a été ajouté.","❌ Rechaj otomatik la pa t kapab lanse. Pa gen lajan ki ajoute."));
+    toast(
+      taT(
+        "❌ Impossible d’envoyer la demande de recharge.",
+        "❌ Nou pa kapab voye demann rechaj la."
+      )
+    );
   }
 }
 
@@ -7023,6 +7099,97 @@ function updateStaticRewardButtons(){
   });
 }
 
+async function loadTopupLoyalty(){
+  const progressText=document.getElementById("topupLoyaltyProgressText");
+  const progressBar=document.getElementById("topupLoyaltyProgressBar");
+  const claimBtn=document.getElementById("topupLoyaltyClaimBtn");
+  const message=document.getElementById("topupLoyaltyMessage");
+
+  if(!progressText || !progressBar || !claimBtn)return;
+
+  if(!firebaseUser){
+    progressText.textContent="0 / 10 TopUps valides";
+    progressBar.style.width="0%";
+    claimBtn.disabled=true;
+    claimBtn.classList.remove("available");
+    claimBtn.textContent="🔒 Réclamer 250 HTG";
+    if(message)message.textContent="";
+    return;
+  }
+
+  try{
+    const response=await fetch("/api/loyalty/topups",{
+      headers:{
+        "Authorization":"Bearer "+await firebaseUser.getIdToken()
+      },
+      cache:"no-store"
+    });
+
+    if(!response.ok)throw new Error();
+
+    const data=await response.json();
+    const count=Math.max(0,Number(data.validTopups||data.count||0));
+    const claimable=data.claimable===true || count>=10;
+    const percent=Math.min(100,(count/10)*100);
+
+    progressText.textContent=Math.min(count,10)+" / 10 TopUps valides";
+    progressBar.style.width=percent+"%";
+    claimBtn.disabled=!claimable;
+    claimBtn.classList.toggle("available",claimable);
+    claimBtn.textContent=claimable?"🎁 Réclamer 250 HTG":"🔒 Réclamer 250 HTG";
+
+    if(message)message.textContent=data.message||"";
+  }catch(e){
+    progressText.textContent="0 / 10 TopUps valides";
+    progressBar.style.width="0%";
+    claimBtn.disabled=true;
+    claimBtn.classList.remove("available");
+    claimBtn.textContent="🔒 Réclamer 250 HTG";
+  }
+}
+
+async function claimTopupLoyalty(){
+  if(!requireLogin())return;
+
+  const btn=document.getElementById("topupLoyaltyClaimBtn");
+  if(btn)btn.disabled=true;
+
+  try{
+    const response=await fetch("/api/loyalty/claim",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+await firebaseUser.getIdToken()
+      },
+      body:JSON.stringify({reward:250})
+    });
+
+    const data=await response.json().catch(()=>({}));
+
+    if(!response.ok)throw new Error(data.message||"claim_failed");
+
+    if(data.walletBalance!==undefined){
+      balance=Number(data.walletBalance);
+      updateUI();
+    }
+
+    toast(taT(
+      "🎉 250 HTG ont été ajoutés à votre Wallet.",
+      "🎉 250 HTG ajoute nan Wallet ou."
+    ));
+
+    await loadTopupLoyalty();
+    await loadWallet();
+
+  }catch(e){
+    toast(taT(
+      "❌ La récompense n’a pas pu être réclamée.",
+      "❌ Rekonpans lan pa t kapab reklame."
+    ));
+    if(btn)btn.disabled=false;
+  }
+}
+
 async function loadRewards(){
 
   const box=
@@ -7580,7 +7747,7 @@ const TA_TRANSLATIONS={
     "Voir les commandes":"Gade kòmand yo","Mode de paiement":"Mòd peman","Confirmer et payer":"Konfime epi peye","Confirmation de commande":"Konfimasyon kòmand lan",
     "Choisir un pack":"Chwazi yon pack","Pack sélectionné":"Pack chwazi","Prix":"Pri","Server":"Sèvè","Player Name":"Non jwè a",
     "Recharger le Wallet":"Rechaje Wallet","Recharge minimum :":"Minimòm rechaj :","Choisir le service":"Chwazi sèvis la","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
-    "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
+    "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","ID Transaction":"ID Transaction","Entrez l’ID de votre transaction NatCash":"Antre ID tranzaksyon NatCash ou","⚠️ L’ID Transaction est obligatoire.":"⚠️ ID Transaction lan obligatwa.","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
     "Continuer":"Kontinye","Fermer":"Fèmen","Retrait Wallet":"Retrè Wallet","Numéro":"Nimewo","Montant HTG":"Montan HTG","Demander le retrait":"Mande retrè a",
     "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Recharge automatique":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
     "Messages":"Mesaj","Écrivez votre message à TRUE ALPHA...":"Ekri mesaj ou bay TRUE ALPHA...","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.",
@@ -8068,6 +8235,9 @@ onAuthStateChanged(
   }
 );
 
+
+
+document.getElementById("topupLoyaltyClaimBtn")?.addEventListener("click",claimTopupLoyalty);
 
 
 /* =====================================================
