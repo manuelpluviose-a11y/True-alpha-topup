@@ -5325,6 +5325,7 @@ async function googleLogin(){
   }
   try{
     toast("⏳ Connexion / création du compte Google...");
+    window.TA_FIREBASE.googleProvider.setCustomParameters({prompt:"select_account"});
     const r=await window.TA_FIREBASE.signInWithPopup(
       window.TA_FIREBASE.auth,
       window.TA_FIREBASE.googleProvider
@@ -5387,6 +5388,8 @@ async function logout(){
 ===================================================== */
 
 function updateUI(){
+
+  loadTrueAlphaId();
 
   const balanceText=
     balance===null
@@ -8544,8 +8547,26 @@ async function messengerApi(path,options={}){
     return {ok:r.ok,data:d};
   }catch(e){return {ok:false,data:{}};}
 }
+async function loadTrueAlphaId(){
+  const el=document.getElementById("trueAlphaIdValue");
+  if(!el)return;
+  if(!firebaseUser){el.textContent="—";return;}
+  try{
+    const token=await firebaseUser.getIdToken();
+    const r=await fetch("/api/user/me",{headers:{Authorization:"Bearer "+token}});
+    const d=await r.json().catch(()=>({}));
+    if(r.ok && d.trueAlphaId) el.textContent=d.trueAlphaId;
+    else el.textContent="—";
+  }catch(e){el.textContent="—";}
+}
+function copyTrueAlphaId(){
+  const v=document.getElementById("trueAlphaIdValue")?.textContent||"";
+  if(!v || v==="—")return toast("⚠️ TRUE ALPHA ID poko disponib.");
+  if(navigator.clipboard) navigator.clipboard.writeText(v).then(()=>toast("✅ TRUE ALPHA ID kopye."));
+}
+
 function showMessenger(){
-  if(!requireLogin())return;
+  if(!firebaseUser){ openLogin(); return; }
   messengerLoadLocal();
   showPage("messenger");
   document.getElementById("messengerHome").style.display="";
