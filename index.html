@@ -4435,6 +4435,9 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
 
 <script>
+// TRUE ALPHA global compatibility: keep legacy handlers from throwing
+// “TRUE_ALPHA is not defined” during login/register/Google callbacks.
+var TRUE_ALPHA = window.TRUE_ALPHA = window.TRUE_ALPHA || {};
 
 /* =====================================================
    GLOBAL VARIABLES
@@ -5325,17 +5328,18 @@ async function googleLogin(){
   }
   try{
     toast("⏳ Connexion / création du compte Google...");
-    window.TA_FIREBASE.googleProvider.setCustomParameters({prompt:"select_account"});
+    // Force Google account chooser every time.
+    window.TA_FIREBASE.googleProvider?.setCustomParameters?.({prompt:"select_account"});
     const r=await window.TA_FIREBASE.signInWithPopup(
       window.TA_FIREBASE.auth,
       window.TA_FIREBASE.googleProvider
     );
     firebaseUser=r.user;
     loggedIn=true;
-    updateUI();
+    try{ updateUI(); }catch(err){ console.error("LOGIN UI ERROR",err); }
     closeModal("loginModal");
     showPage("profile");
-    addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
+    try{ addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA."); }catch(err){}
     toast("✅ Connexion réussie. Bienvenue sur TRUE ALPHA !");
   }catch(e){
     console.error("GOOGLE AUTH ERROR",e);
@@ -5388,8 +5392,6 @@ async function logout(){
 ===================================================== */
 
 function updateUI(){
-
-  loadTrueAlphaId();
 
   const balanceText=
     balance===null
@@ -7605,7 +7607,7 @@ async function emailLogin(mode){
     if(currentUser){
       firebaseUser=currentUser;
       loggedIn=true;
-      updateUI();
+      try{ updateUI(); }catch(err){ console.error("LOGIN UI ERROR",err); }
     }
 
     closeModal("loginModal");
@@ -8341,35 +8343,35 @@ window.TA_FIREBASE={
 onAuthStateChanged(
   auth,
   async user=>{
+    try{
+      firebaseUser=user||null;
+      loggedIn=!!user;
 
-    firebaseUser=
-      user||null;
+      if(user){
+        try{ await loadWallet(); }catch(err){ console.error("AUTH WALLET ERROR",err); }
+        try{ await loadPoints(); }catch(err){ console.error("AUTH POINTS ERROR",err); }
+        try{ await loadNotificationsFromBackend(); }catch(err){ console.error("AUTH NOTIFICATIONS ERROR",err); }
+        try{ await refreshOrders(); }catch(err){ console.error("AUTH ORDERS ERROR",err); }
+      }else{
+        balance=null;
+        points=0;
+      }
 
-    loggedIn=
-      !!user;
-
-
-    if(user){
-
-      await loadWallet();
-
-      await loadPoints();
-
-      await loadNotificationsFromBackend();
-
-      await refreshOrders();
-
-    }else{
-
-      balance=null;
-
-      points=0;
-
+      try{ updateUI(); }catch(err){
+        console.error("AUTH UI ERROR",err);
+        // Never expose an internal JavaScript error as a login failure.
+        if(user) toast("✅ Koneksyon an reyisi. Byenveni sou TRUE ALPHA !");
+      }
+    }catch(err){
+      console.error("AUTH STATE ERROR",err);
+      if(user){
+        // Firebase authentication already succeeded; keep the account signed in.
+        firebaseUser=user;
+        loggedIn=true;
+        try{ showPage("profile"); }catch(e){}
+        toast("✅ Koneksyon an reyisi. Byenveni sou TRUE ALPHA !");
+      }
     }
-
-
-    updateUI();
-
   }
 );
 
@@ -8547,26 +8549,8 @@ async function messengerApi(path,options={}){
     return {ok:r.ok,data:d};
   }catch(e){return {ok:false,data:{}};}
 }
-async function loadTrueAlphaId(){
-  const el=document.getElementById("trueAlphaIdValue");
-  if(!el)return;
-  if(!firebaseUser){el.textContent="—";return;}
-  try{
-    const token=await firebaseUser.getIdToken();
-    const r=await fetch("/api/user/me",{headers:{Authorization:"Bearer "+token}});
-    const d=await r.json().catch(()=>({}));
-    if(r.ok && d.trueAlphaId) el.textContent=d.trueAlphaId;
-    else el.textContent="—";
-  }catch(e){el.textContent="—";}
-}
-function copyTrueAlphaId(){
-  const v=document.getElementById("trueAlphaIdValue")?.textContent||"";
-  if(!v || v==="—")return toast("⚠️ TRUE ALPHA ID poko disponib.");
-  if(navigator.clipboard) navigator.clipboard.writeText(v).then(()=>toast("✅ TRUE ALPHA ID kopye."));
-}
-
 function showMessenger(){
-  if(!firebaseUser){ openLogin(); return; }
+  if(!requireLogin())return;
   messengerLoadLocal();
   showPage("messenger");
   document.getElementById("messengerHome").style.display="";
