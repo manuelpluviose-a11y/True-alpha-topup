@@ -3380,7 +3380,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
         <strong id="trueAlphaIdValue" style="overflow-wrap:anywhere">—</strong>
         <button type="button" class="smallBtn" onclick="copyTrueAlphaId()">📋 Copier</button>
       </div>
-      <small id="trueAlphaIdHint" style="display:block;margin-top:6px">ID kont ou a ap parèt isit la apre verifikasyon.</small>
+      <small id="trueAlphaIdHint" style="display:none;margin-top:6px"></small>
     </div>
 
     <div style="height:15px"></div>
@@ -5299,27 +5299,29 @@ function privatePage(page){
 
 
 function openAccountPanel(){
-  if(firebaseUser){
+  const currentUser=window.TA_FIREBASE?.auth?.currentUser||null;
+  firebaseUser=currentUser;
+  loggedIn=!!currentUser;
+  if(currentUser){
+    updateUI();
     showPage("profile");
     return;
   }
+  updateUI();
   openLogin();
 }
 
 function openLogin(){
-
-  if(firebaseUser){
-
+  const currentUser=window.TA_FIREBASE?.auth?.currentUser||null;
+  firebaseUser=currentUser;
+  loggedIn=!!currentUser;
+  if(currentUser){
+    updateUI();
     showPage("profile");
-
     return;
-
   }
-
-  document
-    .getElementById("loginModal")
-    .classList.add("show");
-
+  const modal=document.getElementById("loginModal");
+  if(modal) modal.classList.add("show");
 }
 
 
@@ -5336,7 +5338,7 @@ async function googleLogin(){
     return;
   }
   try{
-    toast("⏳ Connexion / création du compte Google...");
+    toast("Connexion en cours...");
     window.TA_FIREBASE.googleProvider.setCustomParameters({prompt:"select_account"});
     const r=await window.TA_FIREBASE.signInWithPopup(
       window.TA_FIREBASE.auth,
@@ -5349,7 +5351,7 @@ async function googleLogin(){
     showPage("profile");
     try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
     addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
-    toast("✅ Connexion réussie. Bienvenue sur TRUE ALPHA !");
+    toast("Connexion réussie");
   }catch(e){
     console.error("GOOGLE AUTH ERROR",e);
     const code=String(e?.code||"");
@@ -7624,7 +7626,7 @@ async function emailLogin(mode){
     closeModal("loginModal");
     showPage("profile");
     try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
-    toast(mode==="register"?"✅ Kont ou kreye avèk siksè. Byenveni sou TRUE ALPHA !":"✅ Ou konekte avèk siksè.");
+    toast(mode==="register"?"Compte créé avec succès":"Connexion réussie");
   }catch(e){
     console.error("EMAIL AUTH ERROR",e);
     const code=String(e?.code||"");
@@ -8569,28 +8571,23 @@ async function loadTrueAlphaId(){
   if(!el||!card)return;
   card.style.display=firebaseUser?"block":"none";
   if(!firebaseUser){el.textContent="—";return;}
-  el.textContent="…";
-  if(hint)hint.textContent="Ap verifye ID kont ou…";
+  el.textContent="—";
+  if(hint)hint.textContent="";
   try{
     const token=await firebaseUser.getIdToken();
     const r=await fetch("/api/user/me",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
     const d=await r.json().catch(()=>({}));
     if(r.ok && d.trueAlphaId){
       el.textContent=String(d.trueAlphaId);
-      if(hint)hint.textContent="Bay zanmi ou ID sa a pou yo jwenn ou sou Messenger.";
-    }else{
-      el.textContent="Poko disponib";
-      if(hint)hint.textContent="Backend la poko retounen TRUE ALPHA ID a. Li bezwen aktive /api/user/me sou Render.";
     }
   }catch(e){
-    el.textContent="Poko disponib";
-    if(hint)hint.textContent="Pa t kapab verifye ID a. Tcheke koneksyon an ak backend Render la.";
+    // Keep technical service details private; leave the ID placeholder unchanged.
   }
 }
 
 async function copyTrueAlphaId(){
   const v=document.getElementById("trueAlphaIdValue")?.textContent?.trim()||"";
-  if(!v || v==="—" || v==="…" || v==="Poko disponib")return toast("⚠️ TRUE ALPHA ID poko disponib.");
+  if(!v || v==="—" || v==="…" || v==="Poko disponib")return toast("TRUE ALPHA ID poko pare.");
   try{
     if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(v);
     else {
