@@ -3374,6 +3374,14 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
       Konekte pou jwenn aksè ak kont ou.
     </div>
 
+    <div id="trueAlphaIdCard" class="profileEmail" style="margin-top:12px;padding:12px;border:1px solid var(--border-color,#dbe3ef);border-radius:12px;text-align:left;display:none">
+      <div style="font-weight:700;margin-bottom:6px">🪪 TRUE ALPHA ID</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <strong id="trueAlphaIdValue" style="overflow-wrap:anywhere">—</strong>
+        <button type="button" class="smallBtn" onclick="copyTrueAlphaId()">📋 Copier</button>
+      </div>
+      <small id="trueAlphaIdHint" style="display:block;margin-top:6px">ID kont ou a ap parèt isit la apre verifikasyon.</small>
+    </div>
 
     <div style="height:15px"></div>
 
@@ -3803,7 +3811,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
     <div class="paymentChoiceGrid">
       <button class="paymentChoice selected" id="payWalletChoice" onclick="choosePaymentMethod('wallet')">
-        <span>💰</span><strong>Wallet</strong><small id="checkoutWalletBalance">— HTG</small>
+        <span>💰</span><strong>Wallet</strong><small id="checkoutWalletBalance">0.00 HTG</small>
       </button>
       <button class="paymentChoice" id="payPointsChoice" onclick="choosePaymentMethod('wallet_points')">
         <span>⭐</span><strong>Wallet TA Points</strong><small id="checkoutPointsBalance">0 ⭐</small>
@@ -3852,7 +3860,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
     <div class="checkoutSummary" id="giftCheckoutSummary"></div>
     <div class="sectionTitle checkoutTitle"><h2>Mode de paiement</h2></div>
     <div class="paymentChoiceGrid">
-      <button class="paymentChoice selected" id="giftPayWalletChoice" onclick="chooseGiftPaymentMethod('wallet')"><span>💰</span><strong>Wallet</strong><small id="giftCheckoutWalletBalance">— HTG</small></button>
+      <button class="paymentChoice selected" id="giftPayWalletChoice" onclick="chooseGiftPaymentMethod('wallet')"><span>💰</span><strong>Wallet</strong><small id="giftCheckoutWalletBalance">0.00 HTG</small></button>
       <button class="paymentChoice" id="giftPayPointsChoice" onclick="chooseGiftPaymentMethod('wallet_points')"><span>⭐</span><strong>Wallet TA Points</strong><small id="giftCheckoutPointsBalance">0 HTG</small></button>
       <button class="paymentChoice" id="giftPayBalanceChoice" onclick="chooseGiftPaymentMethod('gift_card')"><span>🎁</span><strong>Gift Card Balance</strong><small id="giftCheckoutGiftBalance">0 GDS</small></button>
     </div>
@@ -4435,9 +4443,10 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
 
 <script>
-// TRUE ALPHA global compatibility: keep legacy handlers from throwing
-// “TRUE_ALPHA is not defined” during login/register/Google callbacks.
-var TRUE_ALPHA = window.TRUE_ALPHA = window.TRUE_ALPHA || {};
+
+/* TRUE ALPHA legacy compatibility: define the global binding before handlers run. */
+var TRUE_ALPHA = window.TRUE_ALPHA || {};
+window.TRUE_ALPHA = TRUE_ALPHA;
 
 /* =====================================================
    GLOBAL VARIABLES
@@ -5328,18 +5337,18 @@ async function googleLogin(){
   }
   try{
     toast("⏳ Connexion / création du compte Google...");
-    // Force Google account chooser every time.
-    window.TA_FIREBASE.googleProvider?.setCustomParameters?.({prompt:"select_account"});
+    window.TA_FIREBASE.googleProvider.setCustomParameters({prompt:"select_account"});
     const r=await window.TA_FIREBASE.signInWithPopup(
       window.TA_FIREBASE.auth,
       window.TA_FIREBASE.googleProvider
     );
     firebaseUser=r.user;
     loggedIn=true;
-    try{ updateUI(); }catch(err){ console.error("LOGIN UI ERROR",err); }
+    updateUI();
     closeModal("loginModal");
     showPage("profile");
-    try{ addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA."); }catch(err){}
+    try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
+    addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
     toast("✅ Connexion réussie. Bienvenue sur TRUE ALPHA !");
   }catch(e){
     console.error("GOOGLE AUTH ERROR",e);
@@ -5392,6 +5401,8 @@ async function logout(){
 ===================================================== */
 
 function updateUI(){
+
+  loadTrueAlphaId();
 
   const balanceText=
     balance===null
@@ -7607,11 +7618,12 @@ async function emailLogin(mode){
     if(currentUser){
       firebaseUser=currentUser;
       loggedIn=true;
-      try{ updateUI(); }catch(err){ console.error("LOGIN UI ERROR",err); }
+      updateUI();
     }
 
     closeModal("loginModal");
     showPage("profile");
+    try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
     toast(mode==="register"?"✅ Kont ou kreye avèk siksè. Byenveni sou TRUE ALPHA !":"✅ Ou konekte avèk siksè.");
   }catch(e){
     console.error("EMAIL AUTH ERROR",e);
@@ -8343,35 +8355,36 @@ window.TA_FIREBASE={
 onAuthStateChanged(
   auth,
   async user=>{
-    try{
-      firebaseUser=user||null;
-      loggedIn=!!user;
 
-      if(user){
-        try{ await loadWallet(); }catch(err){ console.error("AUTH WALLET ERROR",err); }
-        try{ await loadPoints(); }catch(err){ console.error("AUTH POINTS ERROR",err); }
-        try{ await loadNotificationsFromBackend(); }catch(err){ console.error("AUTH NOTIFICATIONS ERROR",err); }
-        try{ await refreshOrders(); }catch(err){ console.error("AUTH ORDERS ERROR",err); }
-      }else{
-        balance=null;
-        points=0;
-      }
+    firebaseUser=
+      user||null;
 
-      try{ updateUI(); }catch(err){
-        console.error("AUTH UI ERROR",err);
-        // Never expose an internal JavaScript error as a login failure.
-        if(user) toast("✅ Koneksyon an reyisi. Byenveni sou TRUE ALPHA !");
-      }
-    }catch(err){
-      console.error("AUTH STATE ERROR",err);
-      if(user){
-        // Firebase authentication already succeeded; keep the account signed in.
-        firebaseUser=user;
-        loggedIn=true;
-        try{ showPage("profile"); }catch(e){}
-        toast("✅ Koneksyon an reyisi. Byenveni sou TRUE ALPHA !");
-      }
+    loggedIn=
+      !!user;
+
+
+    if(user){
+
+      try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
+      await loadWallet();
+
+      await loadPoints();
+
+      await loadNotificationsFromBackend();
+
+      await refreshOrders();
+
+    }else{
+
+      balance=null;
+
+      points=0;
+
     }
+
+
+    updateUI();
+
   }
 );
 
@@ -8549,17 +8562,73 @@ async function messengerApi(path,options={}){
     return {ok:r.ok,data:d};
   }catch(e){return {ok:false,data:{}};}
 }
-function showMessenger(){
-  if(!requireLogin())return;
-  messengerLoadLocal();
-  showPage("messenger");
-  document.getElementById("messengerHome").style.display="";
-  document.getElementById("messengerChat").style.display="none";
-  switchMessengerTab("friends");
-  loadMessengerFriends();
-  loadMessengerRequests();
-  loadMessengerChats();
+async function loadTrueAlphaId(){
+  const card=document.getElementById("trueAlphaIdCard");
+  const el=document.getElementById("trueAlphaIdValue");
+  const hint=document.getElementById("trueAlphaIdHint");
+  if(!el||!card)return;
+  card.style.display=firebaseUser?"block":"none";
+  if(!firebaseUser){el.textContent="—";return;}
+  el.textContent="…";
+  if(hint)hint.textContent="Ap verifye ID kont ou…";
+  try{
+    const token=await firebaseUser.getIdToken();
+    const r=await fetch("/api/user/me",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
+    const d=await r.json().catch(()=>({}));
+    if(r.ok && d.trueAlphaId){
+      el.textContent=String(d.trueAlphaId);
+      if(hint)hint.textContent="Bay zanmi ou ID sa a pou yo jwenn ou sou Messenger.";
+    }else{
+      el.textContent="Poko disponib";
+      if(hint)hint.textContent="Backend la poko retounen TRUE ALPHA ID a. Li bezwen aktive /api/user/me sou Render.";
+    }
+  }catch(e){
+    el.textContent="Poko disponib";
+    if(hint)hint.textContent="Pa t kapab verifye ID a. Tcheke koneksyon an ak backend Render la.";
+  }
 }
+
+async function copyTrueAlphaId(){
+  const v=document.getElementById("trueAlphaIdValue")?.textContent?.trim()||"";
+  if(!v || v==="—" || v==="…" || v==="Poko disponib")return toast("⚠️ TRUE ALPHA ID poko disponib.");
+  try{
+    if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(v);
+    else {
+      const temp=document.createElement("textarea");temp.value=v;temp.style.position="absolute";temp.style.left="-9999px";document.body.appendChild(temp);temp.select();
+      const ok=document.execCommand("copy");temp.remove();if(!ok)throw new Error("copy_failed");
+    }
+    toast("✅ TRUE ALPHA ID kopye.");
+  }catch(e){toast("⚠️ Pa t kapab kopye ID a. Kenbe dwèt ou sou ID a pou kopye l.");}
+}
+
+function showMessenger(){
+  if(!firebaseUser){
+    if(typeof openLogin==="function")openLogin();
+    else toast("Konekte anvan ou ouvri Messenger.");
+    return;
+  }
+  const home=document.getElementById("messengerHome");
+  const chat=document.getElementById("messengerChat");
+  if(!document.getElementById("messenger")){
+    toast("❌ Paj Messenger la pa nan vèsyon Index sa a.");
+    return;
+  }
+  try{
+    messengerLoadLocal();
+    showPage("messenger");
+    if(home)home.style.display="";
+    if(chat)chat.style.display="none";
+    if(typeof loadTrueAlphaId==="function")loadTrueAlphaId();
+    switchMessengerTab("friends");
+    loadMessengerFriends();
+    loadMessengerRequests();
+    loadMessengerChats();
+  }catch(e){
+    console.error("TRUE ALPHA MESSENGER OPEN ERROR",e);
+    toast("❌ Messenger pa t kapab ouvri. Verifye kòd Index la ak Console la.");
+  }
+}
+
 function backFromMessenger(){
   closeMessengerChat();
   resetTopupFlow();
@@ -8826,6 +8895,18 @@ function playMessengerVoice(button,url){
 document.getElementById("messengerTextInput")?.addEventListener("keydown",e=>{
   if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessengerText();}
 });
+
+// Messenger handlers are called by existing inline HTML buttons.
+Object.assign(window,{
+  showMessenger,backFromMessenger,switchMessengerTab,loadMessengerFriends,loadMessengerRequests,loadMessengerChats,
+  searchMessengerUser,sendMessengerFriendRequest,acceptMessengerRequest,rejectMessengerRequest,
+  openMessengerChatByIndex,openMessengerChatByChatIndex,openMessengerChat,closeMessengerChat,loadMessengerConversation,
+  sendMessengerText,insertMessengerEmoji,toggleMessengerModeration,reportMessengerUser,blockMessengerUser,
+  deleteMessengerConversation,toggleMessengerVoice,stopMessengerVoice,sendMessengerVoice,playMessengerVoice
+});
+
+// Compatibility global for any cached/legacy TRUE ALPHA handler.
+window.TRUE_ALPHA=window.TRUE_ALPHA||{};
 
 </script>
 
