@@ -1573,6 +1573,7 @@ body.dark .paymentDetails{background:#2b2414;border-color:#5a481e;color:#f5d98b}
 .authDivider{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:10px;margin:15px 0 4px}.authDivider:before,.authDivider:after{content:"";height:1px;background:var(--border);flex:1}.authDivider span{padding:0 5px}
 .rememberRow{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:2px 0 12px}.rememberRow input{width:16px;height:16px}
 .authActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.secondaryBtn{width:100%;border:1px solid var(--border);background:var(--card);color:var(--text);padding:14px;border-radius:13px;font-weight:900}
+.passwordWrap{position:relative}.passwordWrap input{padding-right:48px}.passwordEye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--muted);display:grid;place-items:center;font-size:17px;cursor:pointer}.passwordEye:active{background:var(--bg)}
 .walletDualBox{margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:17px;padding:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:var(--shadow)}
 .walletDualBox small{display:block;color:var(--muted);font-size:10px}.walletDualBox strong{display:block;margin-top:4px;font-size:18px}.walletPointsFormula{font-size:10px;color:var(--primary);font-weight:900;text-align:right}
 .checkoutSummary{background:#f7f6ff;border:1px solid #dedaff;border-radius:15px;padding:14px;font-size:11px;line-height:1.8}.checkoutSummary b{font-weight:900}.checkoutTitle{margin-top:18px}.paymentChoiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paymentChoice{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:15px;padding:13px;text-align:left;display:grid;gap:4px;cursor:pointer}.paymentChoice span{font-size:20px}.paymentChoice strong{font-size:11px}.paymentChoice small{font-size:9px;color:var(--muted)}.paymentChoice.selected{border:2px solid var(--primary);background:#f2f0ff}.checkoutFormula{font-size:9px;color:var(--muted);line-height:1.5;margin:11px 0 14px}.onlinePresence{display:none;position:fixed;right:14px;top:74px;z-index:95;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:999px;padding:8px 11px;display:flex;align-items:center;gap:6px;font-size:9px;color:var(--muted)}.onlinePresence strong{font-size:10px;color:var(--text)}.onlineEye{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:11px;border:1px solid var(--border)}.onlineHeader{border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow);border-radius:999px;min-height:38px;padding:6px 10px;display:flex;align-items:center;gap:6px;cursor:pointer}.onlineHeaderEye{width:24px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--primary)}.onlineHeaderEye svg{width:24px;height:16px}.onlineHeader strong{font-size:10px;color:var(--text)}
@@ -2475,6 +2476,12 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
       <div id="gameUidMessage" class="fieldMessage" aria-live="polite"></div>
     </div>
 
+    <div class="field" id="gamePlayerConfirmField" style="display:none">
+      <label id="gamePlayerConfirmLabel">Confirmer UID / Player ID</label>
+      <input id="gamePlayerIdConfirm" type="text" inputmode="text" autocomplete="off" placeholder="Confirmez votre identifiant">
+      <div id="gameUidConfirmMessage" class="fieldMessage" aria-live="polite"></div>
+    </div>
+
     <button class="verifyBtn" id="gameVerifyBtn" onclick="verifySelectedGamePlayer()">
       🔐 Vérifier le joueur
     </button>
@@ -3198,23 +3205,6 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
       <div
         class="actionCard"
-        onclick="withdrawMoney()">
-
-        🏦
-
-        <strong>
-          Retrait
-        </strong>
-
-        <small>
-          Minimum 5,000 HTG
-        </small>
-
-      </div>
-
-
-      <div
-        class="actionCard"
         onclick="privatePage('orders')">
 
         📋
@@ -3621,7 +3611,10 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
     <div class="field">
       <label>Mot de passe</label>
-      <input id="authPassword" type="password" autocomplete="current-password" placeholder="Mot de passe">
+      <div class="passwordWrap">
+        <input id="authPassword" type="password" autocomplete="current-password" placeholder="Mot de passe">
+        <button type="button" class="passwordEye" aria-label="Afficher le mot de passe" onclick="togglePasswordVisibility('authPassword',this)">👁️</button>
+      </div>
     </div>
 
     <label class="rememberRow">
@@ -3763,7 +3756,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
         <br><br>
 
-        La recharge NatCash est automatique. Après votre paiement, TRUE ALPHA détecte et crédite votre Wallet automatiquement. Aucun PIN et aucune capture d’écran ne sont demandés.
+        Les recharges NatCash et MonCash passent par l’API TRUE ALPHA. Après confirmation du paiement, l’API crédite votre Wallet.
 
       </div>
 
@@ -3794,7 +3787,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 
 
       <div
-        class="providerCard disabled"
+        class="providerCard"
         onclick="chooseDepositProvider('moncash')">
 
         <div class="providerLogo mon">
@@ -3810,7 +3803,7 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
           <br>
 
           <small>
-            MonCash — Bientôt disponible
+            Disponible • Recharge via API
           </small>
 
         </div>
@@ -3835,50 +3828,22 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
       </div>
 
 
-      <div id="natcashDetails" class="paymentDetails">
-        <div class="paymentDetailsTitle">NatCash</div>
-        <div class="natcashCopyRow">
-          <span>Numéro : <b id="natcashNumber">55544179</b></span>
-          <button type="button" class="copyNumberBtn" onclick="copyNatCashNumber(event)">📋 Copier</button>
-        </div>
-        <div>Nom : <b>Manuel Pluviose</b></div>
-      </div>
-
       <div class="field">
-
-        <label>
-          Montant HTG
-        </label>
-
-        <input
-          id="depositAmount"
-          type="number"
-          min="50"
-          inputmode="numeric"
-          placeholder="Ex. : 500">
-
+        <label>Montant HTG</label>
+        <input id="depositAmount" type="number" min="50" inputmode="numeric" placeholder="Ex. : 500">
       </div>
 
-      <div class="field" id="natcashPhoneField">
-        <label>Numéro utilisé pour envoyer l’argent</label>
-        <input id="depositPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Votre numéro NatCash">
+      <div class="paymentDetails" style="margin-top:8px">
+        <div class="paymentDetailsTitle">⚡ Recharge via API</div>
+        <div>Après avoir choisi NatCash ou MonCash et saisi le montant, TRUE ALPHA envoie la demande directement à l’API de recharge.</div>
       </div>
-
-      <div class="autoRechargeNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--border);font-size:10px;line-height:1.45;font-weight:800;">⚡ Recharge automatique : ne saisissez pas de Transaction ID. Le système détectera automatiquement la transaction NatCash.</div>
-
-      <div class="field" id="natcashAccountField">
-        <label>Nom du compte <span class="optional">(optionnel)</span></label>
-        <input id="depositAccountName" type="text" autocomplete="name" placeholder="Nom du compte">
-      </div>
-
-      <div class="noProofNote">🔒 Ne saisissez jamais votre PIN et n’envoyez pas de capture d’écran.</div>
 
 
       <button
         class="primaryBtn"
         onclick="depositContinue()">
 
-        Continuer
+        Recharger
 
       </button>
 
@@ -4595,6 +4560,9 @@ function openGameCatalog(key){
   const verifyLabel=document.getElementById("gameVerifyLabel");
   const hint=document.getElementById("gameVerifyHint");
   const input=document.getElementById("gamePlayerId");
+  const confirmField=document.getElementById("gamePlayerConfirmField");
+  const confirmInput=document.getElementById("gamePlayerIdConfirm");
+  const confirmMsg=document.getElementById("gameUidConfirmMessage");
   const result=document.getElementById("gamePlayerResult");
   const msg=document.getElementById("gameUidMessage");
   if(title)title.textContent=g.name;
@@ -4605,6 +4573,10 @@ function openGameCatalog(key){
   if(verifyLabel)verifyLabel.textContent=g.field;
   if(hint)hint.textContent="Entrez votre "+g.field+" puis vérifiez le joueur avant de choisir un pack.";
   if(input){input.value="";input.placeholder="Entrez votre "+g.field;}
+  const isFreeFire=selectedGameKey==="freefire_na";
+  if(confirmField)confirmField.style.display=isFreeFire?"none":"block";
+  if(confirmInput){confirmInput.value="";confirmInput.placeholder="Confirmez votre "+g.field;}
+  if(confirmMsg){confirmMsg.textContent="";confirmMsg.className="fieldMessage";}
   if(result)result.style.display="none";
   if(msg){msg.textContent="";msg.className="fieldMessage";}
   renderGamePacks();
@@ -4654,16 +4626,29 @@ async function verifySelectedGamePlayer(){
   if(!canUseSite())return;
   const g=TRUE_ALPHA_GAME_CATALOG[selectedGameKey];
   const input=document.getElementById("gamePlayerId");
+  const confirmInput=document.getElementById("gamePlayerIdConfirm");
+  const confirmMsg=document.getElementById("gameUidConfirmMessage");
   const btn=document.getElementById("gameVerifyBtn");
   const msg=document.getElementById("gameUidMessage");
   const result=document.getElementById("gamePlayerResult");
   const name=document.getElementById("gamePlayerName");
   const server=document.getElementById("gamePlayerServer");
   const id=String(input?.value||"").trim();
+  const isFreeFire=selectedGameKey==="freefire_na";
+  const confirmId=String(confirmInput?.value||"").trim();
   if(msg){msg.textContent="";msg.className="fieldMessage";}
+  if(confirmMsg){confirmMsg.textContent="";confirmMsg.className="fieldMessage";}
   selectedGameVerified=false;
   if(!id){
     if(msg){msg.textContent="⚠️ Entrez votre identifiant.";msg.className="fieldMessage show error";}
+    return;
+  }
+  if(!isFreeFire && !confirmId){
+    if(confirmMsg){confirmMsg.textContent="⚠️ Confirmez votre identifiant.";confirmMsg.className="fieldMessage show error";}
+    return;
+  }
+  if(!isFreeFire && confirmId!==id){
+    if(confirmMsg){confirmMsg.textContent="❌ Les deux identifiants ne correspondent pas.";confirmMsg.className="fieldMessage show error";}
     return;
   }
   if(btn){btn.disabled=true;btn.textContent="⏳ Vérification...";}
@@ -5173,6 +5158,17 @@ function closeLoginAndReset(){
   showPage("home");
 }
 
+
+function togglePasswordVisibility(id,button){
+  const input=document.getElementById(id);
+  if(!input)return;
+  const visible=input.type==="text";
+  input.type=visible?"password":"text";
+  if(button){
+    button.textContent=visible?"👁️":"🙈";
+    button.setAttribute("aria-label",visible?"Afficher le mot de passe":"Masquer le mot de passe");
+  }
+}
 
 async function googleLogin(){
   if(!canUseSite() || !window.TA_FIREBASE){
@@ -5911,11 +5907,10 @@ function resetDeposit(){
 
 
 function chooseDepositProvider(provider){
-  if(provider==="moncash"){
-    toast("🟡 MonCash sera disponible bientôt.");
-    return;
-  }
+  if(!["natcash","moncash"].includes(provider))return;
   depositProvider=provider;
+  const title=document.querySelector("#depositStep2 .stepTitle");
+  if(title)title.textContent=provider==="natcash"?"2. Montant — NatCash":"2. Montant — MonCash";
   showDepositStep("depositStep2");
 }
 
@@ -5940,32 +5935,29 @@ function showDepositStep(id){
 
 async function depositContinue(){
   if(!requireLogin())return;
-  if(depositProvider!=="natcash"){
-    toast(taT("⚠️ MonCash est bientôt disponible.","⚠️ MonCash ap disponib talè."));
+  if(!["natcash","moncash"].includes(depositProvider)){
+    toast(taT("⚠️ Choisissez NatCash ou MonCash.","⚠️ Chwazi NatCash oswa MonCash."));
     return;
   }
 
   const amount=Number(document.getElementById("depositAmount")?.value);
-  const phone=document.getElementById("depositPhone")?.value.trim();
-  const accountName=document.getElementById("depositAccountName")?.value.trim();
-
   if(!Number.isFinite(amount) || amount<50){toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));return;}
-  if(!phone){toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));return;}
 
   depositAmount=amount;
   try{
     const response=await fetch("/api/wallet/recharge",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        method:"natcash",mode:"automatic",amount,phone,accountName:accountName||null,
+        method:depositProvider,mode:"api",amount,
         customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""
       })
     });
     const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data.message||"recharge_failed");
     closeRechargeReset();
-    addNotification("Recharge NatCash",taT("Votre recharge est en cours de détection automatique. Votre Wallet sera crédité dès confirmation du paiement.","Rechaj NatCash ou a ap detekte otomatikman. Wallet ou ap kredite dèske peman an konfime."));
-    toast(taT("⚡ Recharge automatique activée. Nous détectons votre paiement NatCash.","⚡ Rechaj otomatik aktive. Sistèm nan ap detekte peman NatCash ou."));
+    const paymentName=depositProvider==="natcash"?"NatCash":"MonCash";
+    addNotification("Recharge "+paymentName,taT("Votre demande de recharge a été envoyée à l’API. Le Wallet sera crédité après confirmation du paiement.","Demann rechaj ou a voye bay API a. Wallet ou ap kredite apre konfimasyon peman an."));
+    toast(taT("⚡ Demande de recharge "+paymentName+" envoyée à l’API.","⚡ Demann rechaj "+paymentName+" lan voye bay API a."));
     await loadWallet();
   }catch(e){
     toast(taT("❌ Impossible de lancer la recharge automatique. Aucun crédit n’a été ajouté.","❌ Rechaj otomatik la pa t kapab lanse. Pa gen lajan ki ajoute."));
