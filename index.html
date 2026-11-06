@@ -1928,58 +1928,27 @@ body.dark .taUniverseCard{background:linear-gradient(145deg,rgba(28,31,42,.96),r
 @media(max-width:520px){.taUniverseGrid{grid-template-columns:1fr}.taBattleActions{grid-template-columns:repeat(2,1fr)}.taBossCore{font-size:58px}.taBattleStage{height:96vh;border-radius:18px}.taBattleCenter{height:46%}}
 
 
-/* =========================
-   TRUE ALPHA MESSENGER
-========================= */
-.messengerShell{background:var(--card);border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
-.messengerTabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
-.messengerTab{border:0;background:transparent;color:var(--muted);padding:12px 8px;font-size:11px;font-weight:900}
-.messengerTab.active{color:var(--primary);box-shadow:inset 0 -2px var(--primary)}
-.messengerSearch{padding:13px;border-bottom:1px solid var(--border)}
-.messengerSearchRow{display:flex;gap:8px}
-.messengerSearchRow input{flex:1;min-width:0;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:12px;padding:12px}
-.messengerSearchRow button{border:0;border-radius:12px;background:var(--primary);color:#fff;font-weight:900;padding:0 14px}
-.messengerList{padding:10px}
-.messengerUser,.messengerFriend{display:flex;align-items:center;gap:11px;padding:12px;border-bottom:1px solid var(--border)}
-.messengerUser:last-child,.messengerFriend:last-child{border-bottom:0}
-.messengerAvatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#635bff,#7c3aed);color:#fff;display:grid;place-items:center;font-weight:900;flex-shrink:0}
-.messengerUserMain{min-width:0;flex:1}.messengerUserMain strong{display:block;font-size:12px}.messengerUserMain small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
-.messengerAction{border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:10px;padding:8px 10px;font-size:10px;font-weight:900}
-.messengerAction.primary{background:var(--primary);border-color:var(--primary);color:#fff}
-.messengerStatusDot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#12b76a;margin-right:4px}
-.messengerEmpty{text-align:center;padding:28px 14px;color:var(--muted);font-size:11px}
-.chatTop{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--border)}
-.chatBack{border:0;background:var(--bg);color:var(--text);width:36px;height:36px;border-radius:10px}
-.chatHeadMain{min-width:0;flex:1}.chatHeadMain strong{display:block;font-size:13px}.chatHeadMain small{color:var(--muted);font-size:9px}
-.chatMore{border:0;background:var(--bg);color:var(--text);width:36px;height:36px;border-radius:10px}
-.chatMessages{height:min(52vh,470px);overflow:auto;padding:14px;background:var(--bg)}
-.chatBubble{max-width:82%;padding:9px 11px;border-radius:15px;margin:6px 0;font-size:11px;line-height:1.45;word-break:break-word}
-.chatBubble.me{margin-left:auto;background:#635bff;color:#fff;border-bottom-right-radius:5px}
-.chatBubble.them{margin-right:auto;background:var(--card);border:1px solid var(--border);border-bottom-left-radius:5px}
-.chatMeta{font-size:8px;opacity:.65;margin-top:4px}
-.chatVoice{display:flex;align-items:center;gap:8px}
-.voicePlay{border:0;background:rgba(255,255,255,.18);color:inherit;width:30px;height:30px;border-radius:50%}
-.chatComposer{padding:10px;border-top:1px solid var(--border);display:flex;gap:7px;align-items:flex-end}
-.chatComposer textarea{flex:1;resize:none;min-height:42px;max-height:110px;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:13px;padding:11px;font-size:11px}
-.chatIconBtn{width:42px;height:42px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;font-size:18px}
-.chatSendBtn{background:var(--primary);color:#fff;border-color:var(--primary)}
-.messengerNotice{margin:10px;padding:11px;border-radius:13px;background:#fff8e7;border:1px solid #f4d99b;color:#6b4b00;font-size:10px;line-height:1.5}
-body.dark .messengerNotice{background:#2b2414;border-color:#5a481e;color:#f5d98b}
-.messengerRequestBadge{min-width:18px;height:18px;padding:0 5px;border-radius:20px;background:#f04438;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:8px;margin-left:5px}
-.messengerModerationBox{padding:13px;border-top:1px solid var(--border);display:none}
-.messengerModerationBox.show{display:block}
-.messengerModerationBox select{width:100%;padding:11px;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:12px;margin-bottom:8px}
-.messengerModalActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.messengerDanger{border:0;background:#fff0ef;color:#b42318;border-radius:11px;padding:10px;font-weight:900;font-size:10px}
-.messengerWarn{border:0;background:#fff8e7;color:#a15c00;border-radius:11px;padding:10px;font-weight:900;font-size:10px}
-body.dark .messengerDanger{background:#321716;color:#ffaaa3}
-body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
-@media(max-width:620px){.chatMessages{height:48vh}.messengerSearchRow button{padding:0 11px}}
+/* TRUE ALPHA APK DOWNLOAD BANNER */
+#taApkBanner{position:sticky;top:0;z-index:12000;padding:9px 12px;background:linear-gradient(105deg,#1457d9,#7c3aed,#ec4899,#f59e0b,#1457d9);background-size:300% 300%;animation:taApkFlow 7s ease infinite;color:#fff;box-shadow:0 5px 20px rgba(55,65,180,.22)}
+#taApkBanner .taApkInner{max-width:760px;margin:auto;display:flex;align-items:center;gap:10px}
+#taApkBanner .taApkText{flex:1;min-width:0;font-size:11px;line-height:1.35;font-weight:800}
+#taApkBanner .taApkText small{display:block;font-size:9px;font-weight:600;opacity:.92}
+#taApkBanner .taApkDownload{border:0;border-radius:999px;padding:10px 13px;background:#fff;color:#4b35b7;font-size:10px;font-weight:900;white-space:nowrap;text-decoration:none;box-shadow:0 3px 10px #1113}
+#taApkBanner .taApkClose{border:0;background:#ffffff25;color:#fff;border-radius:50%;width:28px;height:28px;font-size:17px;flex:none}
+@keyframes taApkFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media(prefers-reduced-motion:reduce){#taApkBanner{animation:none}}
 
 </style>
 </head>
 
 <body>
+<div id="taApkBanner">
+  <div class="taApkInner">
+    <div class="taApkText">📲 TRUE ALPHA TOPUP — Télécharge notre application !<small>Accès rapide • Installation Android • Toujours avec toi</small></div>
+    <a class="taApkDownload" href="https://median.co/share/abpyekn" target="_blank" rel="noopener">⬇ Télécharger</a>
+    <button class="taApkClose" type="button" aria-label="Fermer" onclick="document.getElementById('taApkBanner').remove()">×</button>
+  </div>
+</div>
 
 <!-- =========================
      SITE CLOSED
@@ -2785,7 +2754,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
   <div class="giftIntro" style="background:linear-gradient(135deg,#171b4a,#4038a8);color:#fff;border-radius:22px;padding:19px;box-shadow:var(--shadow)">
     <h2>🎁 Achte yon Gift Card</h2>
-    <p style="margin-top:7px;font-size:11px;line-height:1.55;opacity:.92">Chwazi montant ou vle achte a. Apre peman an konfime, TRUE ALPHA ap kreye yon kòd inik. Kòd la ka itilize nan Wallet pou ajoute montan an ak bonus la nan Gift Card Balance.</p>
+    <p style="margin-top:7px;font-size:11px;line-height:1.55;opacity:.92">Chwazi montant ou vle achte a. Apre peman an konfime, TRUE ALPHA ap kreye yon kòd inik. Kòd la ka itilize pou ajoute montan an ak bonus la dirèkteman nan Wallet ou.</p>
   </div>
 
   <div class="giftCardGrid" id="giftCardPacks">
@@ -2807,13 +2776,9 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
     <button type="button" class="primaryBtn" style="margin-top:13px" onclick="openGiftCardCheckout()">🎁 Achte kounye a</button>
   </div>
 
-  <div class="giftBalanceBox">
-    <small>Gift Card Balance</small>
-    <strong id="giftCardBalance">0 GDS</strong>
 
-  </div>
 
-  <p style="margin-top:14px;color:var(--muted);font-size:10px;line-height:1.55">🎁 Apre redeem, montan an ak bonus la antre nan Gift Card Balance. Li pa disponib pou retrè oswa transfè.</p>
+  <p style="margin-top:14px;color:var(--muted);font-size:10px;line-height:1.55">🎁 Apre redeem, montan an ak bonus la antre dirèkteman nan Wallet prensipal ou.</p>
 
 
 
@@ -3030,22 +2995,6 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
   </div>
 
 
-  <div id="topupLoyaltyCard" class="rewardCard" style="margin-bottom:14px;">
-    <div class="rewardCardTop">
-      <strong>🏆 Récompense TopUp</strong>
-      <span style="font-size:9px;color:var(--muted);font-weight:800;">10 TopUps valides</span>
-    </div>
-    <div style="margin-top:8px;font-weight:900;">10 TopUps → 250 HTG</div>
-    <div style="margin-top:8px;height:8px;background:var(--border);border-radius:99px;overflow:hidden;">
-      <span id="topupLoyaltyProgressBar" style="display:block;width:0%;height:100%;background:var(--primary);border-radius:99px;transition:width .25s ease;"></span>
-    </div>
-    <div id="topupLoyaltyProgressText" style="margin-top:6px;font-size:9px;color:var(--muted);font-weight:800;">0 / 10 TopUps valides</div>
-    <button id="topupLoyaltyClaimBtn" class="primaryBtn rewardClaimBtn" type="button" disabled style="margin-top:10px;width:100%;">
-      🔒 Réclamer 250 HTG
-    </button>
-    <div id="topupLoyaltyMessage" style="margin-top:7px;font-size:9px;color:var(--muted);"></div>
-  </div>
-
   <div id="rewardsList">
 
     <!-- Liste par défaut visible immédiatement, même si l'API Admin n'est pas disponible. -->
@@ -3190,16 +3139,17 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
     <div class="walletDualBox">
       <div>
-        <small>Wallet TA Points</small>
+        <small>⭐ Wallet TA Points</small>
         <strong id="walletPointsValue">0 HTG</strong>
+        <div style="font-size:9px;margin-top:5px;opacity:.85">Montant issu des TA Points réclamés</div>
       </div>
-      <div class="walletPointsFormula"><span id="walletPointsHTG">0 HTG</span><br>Utilisable uniquement sur TRUE ALPHA</div>
+      <div class="walletPointsFormula"><span id="walletPointsHTG">0 HTG</span><br>Wallet réservé aux achats TRUE ALPHA. Aucun rechargement ni retrait.</div>
     </div>
 
-    <div class="giftBalanceBox" style="margin-top:14px">
-      <small>🎁 Gift Card Balance</small>
-      <strong id="walletGiftCardBalance">0 GDS</strong>
-      <button type="button" class="secondaryBtn" style="margin-top:9px;width:100%" onclick="openGiftCardRedeem()">🎟️ Redeem Gift Card Code</button>
+    <div class="secretBox" style="margin-top:14px">
+      <h3>🎟️ Redeem Gift Card Code</h3>
+      <p>Antre kòd Gift Card ou resevwa a pou ajoute montan ak bonus la dirèkteman nan Wallet ou.</p>
+      <button type="button" class="secondaryBtn" style="margin-top:9px;width:100%" onclick="openGiftCardRedeem()">🎟️ Antre Gift Card Code</button>
     </div>
 
     <div class="secretBox" style="margin-top:14px">
@@ -3374,14 +3324,6 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
       Konekte pou jwenn aksè ak kont ou.
     </div>
 
-    <div id="trueAlphaIdCard" class="profileEmail" style="margin-top:12px;padding:12px;border:1px solid var(--border-color,#dbe3ef);border-radius:12px;text-align:left;display:none">
-      <div style="font-weight:700;margin-bottom:6px">🪪 TRUE ALPHA ID</div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <strong id="trueAlphaIdValue" style="overflow-wrap:anywhere">—</strong>
-        <button type="button" class="smallBtn" onclick="copyTrueAlphaId()">📋 Copier</button>
-      </div>
-      <small id="trueAlphaIdHint" style="display:none;margin-top:6px"></small>
-    </div>
 
     <div style="height:15px"></div>
 
@@ -3407,18 +3349,6 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
       <span>
         💬 Messages avec TRUE ALPHA
-      </span>
-
-      <span>›</span>
-
-    </button>
-
-    <button type="button"
-      class="menuItem"
-      onclick="showMessenger()">
-
-      <span>
-        👥 TRUE ALPHA Messenger
       </span>
 
       <span>›</span>
@@ -3558,80 +3488,6 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 </section>
 
 </div>
-
-
-
-<!-- =========================
-     TRUE ALPHA MESSENGER
-========================= -->
-<section id="messenger" class="page">
-  <button class="backBtn" onclick="backFromMessenger()">← Retour</button>
-  <div class="sectionTitle">
-    <h2>👥 TRUE ALPHA Messenger</h2>
-  </div>
-
-  <div class="messengerShell" id="messengerHome">
-    <div class="messengerNotice">
-      💬 Kominike ak zanmi ou sou TRUE ALPHA. Respekte lòt moun. Ou ka bloke oswa siyale yon kont si gen pwoblèm.
-    </div>
-
-    <div class="messengerSearch">
-      <div class="messengerSearchRow">
-        <input id="messengerSearchInput" placeholder="Chèche ak TRUE ALPHA ID oswa email" autocomplete="off">
-        <button type="button" onclick="searchMessengerUser()">Chèche</button>
-      </div>
-      <div id="messengerSearchResults"></div>
-    </div>
-
-    <div class="messengerTabs">
-      <button type="button" class="messengerTab active" data-mtab="friends" onclick="switchMessengerTab('friends')">👥 Zanmi</button>
-      <button type="button" class="messengerTab" data-mtab="requests" onclick="switchMessengerTab('requests')">📨 Demann <span id="messengerRequestBadge" class="messengerRequestBadge" style="display:none">0</span></button>
-      <button type="button" class="messengerTab" data-mtab="chats" onclick="switchMessengerTab('chats')">💬 Chat</button>
-    </div>
-
-    <div id="messengerFriendsPanel" class="messengerList"></div>
-    <div id="messengerRequestsPanel" class="messengerList" style="display:none"></div>
-    <div id="messengerChatsPanel" class="messengerList" style="display:none"></div>
-  </div>
-
-  <div class="messengerShell" id="messengerChat" style="display:none">
-    <div class="chatTop">
-      <button type="button" class="chatBack" onclick="closeMessengerChat()">←</button>
-      <div class="messengerAvatar" id="messengerChatAvatar">?</div>
-      <div class="chatHeadMain">
-        <strong id="messengerChatName">Ami</strong>
-        <small id="messengerChatStatus">Hors ligne</small>
-      </div>
-      <button type="button" class="chatMore" onclick="toggleMessengerModeration()">⋮</button>
-    </div>
-
-    <div id="messengerMessages" class="chatMessages"></div>
-
-    <div id="messengerModerationBox" class="messengerModerationBox">
-      <select id="messengerReportReason">
-        <option value="spam">Spam</option>
-        <option value="harassment">Harcèlement</option>
-        <option value="inappropriate">Contenu inapproprié</option>
-        <option value="sexual">Contenu sexuel</option>
-        <option value="fake">Faux compte</option>
-        <option value="other">Autre</option>
-      </select>
-      <div class="messengerModalActions">
-        <button type="button" class="messengerWarn" onclick="reportMessengerUser()">🚩 Signaler</button>
-        <button type="button" class="messengerDanger" onclick="blockMessengerUser()">🚫 Bloquer</button>
-      </div>
-      <button type="button" class="messengerDanger" style="width:100%;margin-top:8px" onclick="deleteMessengerConversation()">🗑️ Supprimer la conversation</button>
-    </div>
-
-    <div class="chatComposer">
-      <button type="button" class="chatIconBtn" onclick="insertMessengerEmoji()">😊</button>
-      <textarea id="messengerTextInput" rows="1" maxlength="2000" placeholder="Écrire un message..."></textarea>
-      <button type="button" class="chatIconBtn" id="messengerVoiceBtn" onclick="toggleMessengerVoice()" title="Message vocal — 10 min maximum">🎙️</button>
-      <button type="button" class="chatIconBtn chatSendBtn" onclick="sendMessengerText()">➤</button>
-    </div>
-    <div id="messengerVoiceStatus" style="display:none;padding:0 12px 10px;color:var(--muted);font-size:9px"></div>
-  </div>
-</section>
 
 
 <!-- =========================
@@ -3811,13 +3667,10 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
     <div class="paymentChoiceGrid">
       <button class="paymentChoice selected" id="payWalletChoice" onclick="choosePaymentMethod('wallet')">
-        <span>💰</span><strong>Wallet</strong><small id="checkoutWalletBalance">0.00 HTG</small>
+        <span>💰</span><strong>Wallet</strong><small id="checkoutWalletBalance">— HTG</small>
       </button>
       <button class="paymentChoice" id="payPointsChoice" onclick="choosePaymentMethod('wallet_points')">
         <span>⭐</span><strong>Wallet TA Points</strong><small id="checkoutPointsBalance">0 ⭐</small>
-      </button>
-      <button class="paymentChoice" id="payGiftChoice" onclick="choosePaymentMethod('gift_card')">
-        <span>🎁</span><strong>Gift Card Balance</strong><small id="checkoutGiftBalance">0 GDS</small>
       </button>
     </div>
 
@@ -3844,7 +3697,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 <div class="modal" id="giftCardRedeemModal">
   <div class="modalBox">
     <div class="modalHeader"><h3>🎟️ Redeem Gift Card Code</h3><button class="close" onclick="closeModal('giftCardRedeemModal')">✕</button></div>
-    <div class="instruction">Antre kòd Gift Card ou resevwa a. Sistèm nan ap verifye l epi ajoute montant + bonus la nan Gift Card Balance.</div>
+    <div class="instruction">Antre kòd Gift Card ou resevwa a. Sistèm nan ap verifye l epi ajoute montant + bonus la dirèkteman nan Wallet prensipal ou.</div>
     <div class="field"><label>Gift Card Code</label><input id="giftCardCodeInput" type="text" autocomplete="off" placeholder="Antre Gift Card Code"><div id="giftCardCodeMessage" class="fieldMessage" aria-live="polite"></div></div>
     <button class="primaryBtn" type="button" onclick="redeemGiftCardCode()">🎟️ Redeem Gift Card</button>
   </div>
@@ -3860,11 +3713,10 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
     <div class="checkoutSummary" id="giftCheckoutSummary"></div>
     <div class="sectionTitle checkoutTitle"><h2>Mode de paiement</h2></div>
     <div class="paymentChoiceGrid">
-      <button class="paymentChoice selected" id="giftPayWalletChoice" onclick="chooseGiftPaymentMethod('wallet')"><span>💰</span><strong>Wallet</strong><small id="giftCheckoutWalletBalance">0.00 HTG</small></button>
+      <button class="paymentChoice selected" id="giftPayWalletChoice" onclick="chooseGiftPaymentMethod('wallet')"><span>💰</span><strong>Wallet</strong><small id="giftCheckoutWalletBalance">— HTG</small></button>
       <button class="paymentChoice" id="giftPayPointsChoice" onclick="chooseGiftPaymentMethod('wallet_points')"><span>⭐</span><strong>Wallet TA Points</strong><small id="giftCheckoutPointsBalance">0 HTG</small></button>
-      <button class="paymentChoice" id="giftPayBalanceChoice" onclick="chooseGiftPaymentMethod('gift_card')"><span>🎁</span><strong>Gift Card Balance</strong><small id="giftCheckoutGiftBalance">0 GDS</small></button>
     </div>
-    <div class="checkoutFormula">Le montant acheté et le bonus seront ajoutés à la Gift Card créée. Le Gift Card Balance reste séparé du Wallet et n’est pas retirable ni transférable.</div>
+    <div class="checkoutFormula">Le code créé pourra être utilisé pour créditer directement le Wallet principal avec le montant et le bonus.</div>
     <button class="primaryBtn" id="confirmGiftPurchaseBtn" onclick="confirmGiftCardPurchase()">🎁 Confirmer et payer</button>
   </div>
 </div>
@@ -4012,11 +3864,7 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
         <input id="depositPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Votre numéro NatCash">
       </div>
 
-      <div class="field" id="natcashTransactionField">
-        <label>ID Transaction <span style="color:#d92d20">*</span></label>
-        <input id="depositTransactionId" type="text" inputmode="text" autocomplete="off" maxlength="120" placeholder="Entrez l’ID de votre transaction NatCash">
-        <div class="fieldMessage" id="depositTransactionMessage"></div>
-      </div>
+      <div class="autoRechargeNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--border);font-size:10px;line-height:1.45;font-weight:800;">⚡ Recharge automatique : ne saisissez pas de Transaction ID. Le système détectera automatiquement la transaction NatCash.</div>
 
       <div class="field" id="natcashAccountField">
         <label>Nom du compte <span class="optional">(optionnel)</span></label>
@@ -4443,10 +4291,6 @@ body.dark .messengerWarn{background:#2b2414;color:#f5d98b}
 
 
 <script>
-
-/* TRUE ALPHA legacy compatibility: define the global binding before handlers run. */
-var TRUE_ALPHA = window.TRUE_ALPHA || {};
-window.TRUE_ALPHA = TRUE_ALPHA;
 
 /* =====================================================
    GLOBAL VARIABLES
@@ -5299,29 +5143,27 @@ function privatePage(page){
 
 
 function openAccountPanel(){
-  const currentUser=window.TA_FIREBASE?.auth?.currentUser||null;
-  firebaseUser=currentUser;
-  loggedIn=!!currentUser;
-  if(currentUser){
-    updateUI();
+  if(firebaseUser){
     showPage("profile");
     return;
   }
-  updateUI();
   openLogin();
 }
 
 function openLogin(){
-  const currentUser=window.TA_FIREBASE?.auth?.currentUser||null;
-  firebaseUser=currentUser;
-  loggedIn=!!currentUser;
-  if(currentUser){
-    updateUI();
+
+  if(firebaseUser){
+
     showPage("profile");
+
     return;
+
   }
-  const modal=document.getElementById("loginModal");
-  if(modal) modal.classList.add("show");
+
+  document
+    .getElementById("loginModal")
+    .classList.add("show");
+
 }
 
 
@@ -5338,8 +5180,7 @@ async function googleLogin(){
     return;
   }
   try{
-    toast("Connexion en cours...");
-    window.TA_FIREBASE.googleProvider.setCustomParameters({prompt:"select_account"});
+    toast("⏳ Connexion / création du compte Google...");
     const r=await window.TA_FIREBASE.signInWithPopup(
       window.TA_FIREBASE.auth,
       window.TA_FIREBASE.googleProvider
@@ -5349,9 +5190,8 @@ async function googleLogin(){
     updateUI();
     closeModal("loginModal");
     showPage("profile");
-    try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
     addNotification("Connexion réussie","Bienvenue sur TRUE ALPHA.");
-    toast("Connexion réussie");
+    toast("✅ Connexion réussie. Bienvenue sur TRUE ALPHA !");
   }catch(e){
     console.error("GOOGLE AUTH ERROR",e);
     const code=String(e?.code||"");
@@ -5404,11 +5244,9 @@ async function logout(){
 
 function updateUI(){
 
-  loadTrueAlphaId();
-
   const balanceText=
     balance===null
-      ? "0.00 HTG"
+      ? "— HTG"
       : Number(balance)
           .toLocaleString("fr-FR")
           +" HTG";
@@ -5643,7 +5481,6 @@ function choosePaymentMethod(method){
   paymentMethod=method;
   document.getElementById("payWalletChoice")?.classList.toggle("selected",method==="wallet");
   document.getElementById("payPointsChoice")?.classList.toggle("selected",method==="wallet_points");
-  document.getElementById("payGiftChoice")?.classList.toggle("selected",method==="gift_card");
 }
 
 function updateCheckoutUI(){
@@ -5659,10 +5496,8 @@ function updateCheckoutUI(){
   }
   const wb=document.getElementById("checkoutWalletBalance");
   const pb=document.getElementById("checkoutPointsBalance");
-  const gb=document.getElementById("checkoutGiftBalance");
-  if(wb) wb.textContent=(balance===null?"0.00":Number(balance).toLocaleString("fr-FR"))+" HTG";
+  if(wb) wb.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
   if(pb) pb.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
-  if(gb) gb.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
 }
 
 function closeCheckout(){
@@ -5681,10 +5516,6 @@ async function confirmPurchase(){
   }
   if(paymentMethod==="wallet_points" && pointsValue<selectedPrice){
     toast(taT("❌ Solde Wallet TA Points insuffisant.","❌ Solde Wallet TA Points la pa ase."));
-    return;
-  }
-  if(paymentMethod==="gift_card" && Number(giftCardBalance||0)<selectedPrice){
-    toast(taT("❌ Solde Gift Card Balance insuffisant.","❌ Solde Gift Card Balance la pa ase."));
     return;
   }
 
@@ -5751,10 +5582,8 @@ function selectGiftCard(element,amount,bonus){
   set("giftTotalAmount",(Number(amount)+Number(bonus)).toLocaleString("fr-FR")+" GDS");
 }
 function updateGiftBalanceUI(){
-  const el=document.getElementById("giftCardBalance");
-  if(el)el.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
-  const c=document.getElementById("checkoutGiftBalance");
-  if(c)c.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
+  // Aucun solde Gift Card séparé : les codes créditent le Wallet principal.
+  updateUI();
 }
 function openGiftCardCheckout(){
   if(!requireLogin())return;
@@ -5767,15 +5596,13 @@ function chooseGiftPaymentMethod(method){
   giftPaymentMethod=method;
   document.getElementById("giftPayWalletChoice")?.classList.toggle("selected",method==="wallet");
   document.getElementById("giftPayPointsChoice")?.classList.toggle("selected",method==="wallet_points");
-  document.getElementById("giftPayBalanceChoice")?.classList.toggle("selected",method==="gift_card");
 }
 function updateGiftCheckoutUI(){
   const s=document.getElementById("giftCheckoutSummary");
   if(s&&selectedGiftCard){s.innerHTML=`<div><b>Gift Card :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Achat :</b> ${selectedGiftCard.amount.toLocaleString("fr-FR")} GDS</div><div><b>Bonus :</b> +${selectedGiftCard.bonus.toLocaleString("fr-FR")} GDS</div><div><b>Total crédité :</b> ${selectedGiftCard.total.toLocaleString("fr-FR")} GDS</div>`;}
-  const a=document.getElementById("giftCheckoutWalletBalance");const b=document.getElementById("giftCheckoutPointsBalance");const c=document.getElementById("giftCheckoutGiftBalance");
-  if(a)a.textContent=(balance===null?"0.00":Number(balance).toLocaleString("fr-FR"))+" HTG";
+  const a=document.getElementById("giftCheckoutWalletBalance");const b=document.getElementById("giftCheckoutPointsBalance");
+  if(a)a.textContent=(balance===null?"—":Number(balance).toLocaleString("fr-FR"))+" HTG";
   if(b)b.textContent=Number(taWalletHTG||0).toLocaleString("fr-FR")+" HTG";
-  if(c)c.textContent=Number(giftCardBalance||0).toLocaleString("fr-FR")+" GDS";
 }
 function closeGiftCheckout(){document.getElementById("giftCheckoutModal")?.classList.remove("show");}
 async function confirmGiftCardPurchase(){
@@ -5783,7 +5610,6 @@ async function confirmGiftCardPurchase(){
   const price=Number(selectedGiftCard.amount);
   if(giftPaymentMethod==="wallet" && (balance===null||Number(balance)<price)){toast(taT("❌ Solde Wallet insuffisant.","❌ Solde Wallet la pa ase."));return;}
   if(giftPaymentMethod==="wallet_points" && Number(taWalletHTG||0)<price){toast(taT("❌ Solde Wallet TA Points insuffisant.","❌ Solde Wallet TA Points la pa ase."));return;}
-  if(giftPaymentMethod==="gift_card" && Number(giftCardBalance||0)<price){toast(taT("❌ Solde Gift Card Balance insuffisant.","❌ Solde Gift Card Balance la pa ase."));return;}
   const btn=document.getElementById("confirmGiftPurchaseBtn");if(btn){btn.disabled=true;btn.textContent=taT("⏳ Validation...","⏳ Validasyon...");}
   try{
     const response=await fetch("/api/gift-cards/purchase",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||"",amount:selectedGiftCard.amount,bonus:selectedGiftCard.bonus,total:selectedGiftCard.total,paymentMethod:giftPaymentMethod})});
@@ -5812,11 +5638,13 @@ async function redeemGiftCardCode(){
     const response=await fetch("/api/gift-cards/redeem",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""})});
     const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data.message||"gift_card_redeem_failed");
-    const credited=Number(data.total??data.amount??0);
-    giftCardBalance=Number(data.giftCardBalance??data.balance??giftCardBalance+credited);
-    updateGiftBalanceUI();
-    if(msg){msg.textContent=taT("✅ Code valide. Bonus et montant ajoutés au Gift Card Balance.","✅ Kòd la bon. Montan ak bonus la ajoute nan Gift Card Balance.");msg.className="fieldMessage show ok";}
-    addNotification(taT("Gift Card redeem","Redeem Gift Card"),taT("Votre Gift Card a été créditée.","Gift Card ou a kredite."));
+    const credited=Number(data.total??data.amount??data.creditedAmount??0);
+    if(data.walletBalance!==undefined) balance=Number(data.walletBalance);
+    else if(credited>0 && balance!==null) balance=Number(balance)+credited;
+    await loadWallet();
+    updateUI();
+    if(msg){msg.textContent=taT("✅ Code valide. Montant et bonus ajoutés à votre Wallet.","✅ Kòd la bon. Montan ak bonus la ajoute dirèkteman nan Wallet ou.");msg.className="fieldMessage show ok";}
+    addNotification(taT("Gift Card redeem","Redeem Gift Card"),taT("Le montant et le bonus ont été ajoutés à votre Wallet.","Montan ak bonus la ajoute nan Wallet ou."));
   }catch(e){if(msg){msg.textContent=taT("❌ Code invalide ou déjà utilisé.","❌ Kòd la pa bon oswa li deja itilize.");msg.className="fieldMessage show error";}}
 }
 function openSecretCodeModal(){
@@ -5838,7 +5666,9 @@ async function redeemSecretCode(inputId="secretCodeInput",messageId="secretCodeM
     const data=await response.json().catch(()=>({}));
     if(!response.ok)throw new Error(data.message||"secret_code_failed");
     const credited=Number(data.amount??data.reward??0);
-    if(balance!==null)balance=Number(data.walletBalance??balance+credited);
+    if(data.walletBalance!==undefined)balance=Number(data.walletBalance);
+    else if(balance!==null)balance=Number(balance)+credited;
+    await loadWallet();
     updateUI();
     if(msg){msg.textContent=taT("✅ Code valide. "+credited.toLocaleString("fr-FR")+" HTG ajouté au Wallet.","✅ Kòd la bon. "+credited.toLocaleString("fr-FR")+" HTG ajoute nan Wallet la.");msg.className="secretMessage fieldMessage show ok";}
   }catch(e){if(msg){msg.textContent=taT("❌ Secret Code invalide, expiré ou déjà utilisé.","❌ Secret Code la pa bon, li ekspire oswa li deja itilize.");msg.className="secretMessage fieldMessage show error";}}
@@ -6077,14 +5907,6 @@ function resetDeposit(){
   if(amount)
     amount.value="";
 
-  ["depositPhone","depositTransactionId","depositAccountName"].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.value="";
-  });
-
-  const txMsg=document.getElementById("depositTransactionMessage");
-  if(txMsg) txMsg.textContent="";
-
 }
 
 
@@ -6125,76 +5947,28 @@ async function depositContinue(){
 
   const amount=Number(document.getElementById("depositAmount")?.value);
   const phone=document.getElementById("depositPhone")?.value.trim();
-  const transactionId=document.getElementById("depositTransactionId")?.value.trim();
   const accountName=document.getElementById("depositAccountName")?.value.trim();
-  const txMsg=document.getElementById("depositTransactionMessage");
 
-  if(txMsg) txMsg.textContent="";
-
-  if(!Number.isFinite(amount) || amount<50){
-    toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));
-    return;
-  }
-
-  if(!phone){
-    toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));
-    return;
-  }
-
-  if(!transactionId){
-    if(txMsg) txMsg.textContent=taT("⚠️ L’ID Transaction est obligatoire.","⚠️ ID Transaction lan obligatwa.");
-    document.getElementById("depositTransactionId")?.focus();
-    return;
-  }
+  if(!Number.isFinite(amount) || amount<50){toast(taT("⚠️ Minimum de recharge : 50 HTG.","⚠️ Minimòm rechaj la se 50 HTG."));return;}
+  if(!phone){toast(taT("⚠️ Entrez le numéro utilisé pour envoyer l’argent.","⚠️ Antre nimewo ou te itilize pou voye lajan an."));return;}
 
   depositAmount=amount;
-
   try{
     const response=await fetch("/api/wallet/recharge",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
+      method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        method:"natcash",
-        mode:"manual",
-        amount,
-        phone,
-        accountName:accountName||null,
-        transactionId,
-        customerUid:firebaseUser.uid,
-        customerEmail:firebaseUser.email||""
+        method:"natcash",mode:"automatic",amount,phone,accountName:accountName||null,
+        customerUid:firebaseUser.uid,customerEmail:firebaseUser.email||""
       })
     });
-
     const data=await response.json().catch(()=>({}));
-
     if(!response.ok)throw new Error(data.message||"recharge_failed");
-
     closeRechargeReset();
-
-    addNotification(
-      "Recharge NatCash",
-      taT(
-        "Votre demande de recharge est en attente de vérification par TRUE ALPHA.",
-        "Demann rechaj NatCash ou a an atant pou TRUE ALPHA verifye li."
-      )
-    );
-
-    toast(
-      taT(
-        "✅ Demande envoyée. TRUE ALPHA va vérifier votre Transaction ID avant de créditer le Wallet.",
-        "✅ Demann lan ale. TRUE ALPHA ap verifye ID Transaction lan anvan li kredite Wallet ou."
-      )
-    );
-
+    addNotification("Recharge NatCash",taT("Votre recharge est en cours de détection automatique. Votre Wallet sera crédité dès confirmation du paiement.","Rechaj NatCash ou a ap detekte otomatikman. Wallet ou ap kredite dèske peman an konfime."));
+    toast(taT("⚡ Recharge automatique activée. Nous détectons votre paiement NatCash.","⚡ Rechaj otomatik aktive. Sistèm nan ap detekte peman NatCash ou."));
     await loadWallet();
-
   }catch(e){
-    toast(
-      taT(
-        "❌ Impossible d’envoyer la demande de recharge.",
-        "❌ Nou pa kapab voye demann rechaj la."
-      )
-    );
+    toast(taT("❌ Impossible de lancer la recharge automatique. Aucun crédit n’a été ajouté.","❌ Rechaj otomatik la pa t kapab lanse. Pa gen lajan ki ajoute."));
   }
 }
 
@@ -7252,97 +7026,6 @@ function updateStaticRewardButtons(){
   });
 }
 
-async function loadTopupLoyalty(){
-  const progressText=document.getElementById("topupLoyaltyProgressText");
-  const progressBar=document.getElementById("topupLoyaltyProgressBar");
-  const claimBtn=document.getElementById("topupLoyaltyClaimBtn");
-  const message=document.getElementById("topupLoyaltyMessage");
-
-  if(!progressText || !progressBar || !claimBtn)return;
-
-  if(!firebaseUser){
-    progressText.textContent="0 / 10 TopUps valides";
-    progressBar.style.width="0%";
-    claimBtn.disabled=true;
-    claimBtn.classList.remove("available");
-    claimBtn.textContent="🔒 Réclamer 250 HTG";
-    if(message)message.textContent="";
-    return;
-  }
-
-  try{
-    const response=await fetch("/api/loyalty/topups",{
-      headers:{
-        "Authorization":"Bearer "+await firebaseUser.getIdToken()
-      },
-      cache:"no-store"
-    });
-
-    if(!response.ok)throw new Error();
-
-    const data=await response.json();
-    const count=Math.max(0,Number(data.validTopups||data.count||0));
-    const claimable=data.claimable===true || count>=10;
-    const percent=Math.min(100,(count/10)*100);
-
-    progressText.textContent=Math.min(count,10)+" / 10 TopUps valides";
-    progressBar.style.width=percent+"%";
-    claimBtn.disabled=!claimable;
-    claimBtn.classList.toggle("available",claimable);
-    claimBtn.textContent=claimable?"🎁 Réclamer 250 HTG":"🔒 Réclamer 250 HTG";
-
-    if(message)message.textContent=data.message||"";
-  }catch(e){
-    progressText.textContent="0 / 10 TopUps valides";
-    progressBar.style.width="0%";
-    claimBtn.disabled=true;
-    claimBtn.classList.remove("available");
-    claimBtn.textContent="🔒 Réclamer 250 HTG";
-  }
-}
-
-async function claimTopupLoyalty(){
-  if(!requireLogin())return;
-
-  const btn=document.getElementById("topupLoyaltyClaimBtn");
-  if(btn)btn.disabled=true;
-
-  try{
-    const response=await fetch("/api/loyalty/claim",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Bearer "+await firebaseUser.getIdToken()
-      },
-      body:JSON.stringify({reward:250})
-    });
-
-    const data=await response.json().catch(()=>({}));
-
-    if(!response.ok)throw new Error(data.message||"claim_failed");
-
-    if(data.walletBalance!==undefined){
-      balance=Number(data.walletBalance);
-      updateUI();
-    }
-
-    toast(taT(
-      "🎉 250 HTG ont été ajoutés à votre Wallet.",
-      "🎉 250 HTG ajoute nan Wallet ou."
-    ));
-
-    await loadTopupLoyalty();
-    await loadWallet();
-
-  }catch(e){
-    toast(taT(
-      "❌ La récompense n’a pas pu être réclamée.",
-      "❌ Rekonpans lan pa t kapab reklame."
-    ));
-    if(btn)btn.disabled=false;
-  }
-}
-
 async function loadRewards(){
 
   const box=
@@ -7625,8 +7308,7 @@ async function emailLogin(mode){
 
     closeModal("loginModal");
     showPage("profile");
-    try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
-    toast(mode==="register"?"Compte créé avec succès":"Connexion réussie");
+    toast(mode==="register"?"✅ Kont ou kreye avèk siksè. Byenveni sou TRUE ALPHA !":"✅ Ou konekte avèk siksè.");
   }catch(e){
     console.error("EMAIL AUTH ERROR",e);
     const code=String(e?.code||"");
@@ -7901,7 +7583,7 @@ const TA_TRANSLATIONS={
     "Voir les commandes":"Gade kòmand yo","Mode de paiement":"Mòd peman","Confirmer et payer":"Konfime epi peye","Confirmation de commande":"Konfimasyon kòmand lan",
     "Choisir un pack":"Chwazi yon pack","Pack sélectionné":"Pack chwazi","Prix":"Pri","Server":"Sèvè","Player Name":"Non jwè a",
     "Recharger le Wallet":"Rechaje Wallet","Recharge minimum :":"Minimòm rechaj :","Choisir le service":"Chwazi sèvis la","Entrez le montant que vous souhaitez ajouter à votre Wallet.":"Antre montan ou vle ajoute nan Wallet ou a.",
-    "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","ID Transaction":"ID Transaction","Entrez l’ID de votre transaction NatCash":"Antre ID tranzaksyon NatCash ou","⚠️ L’ID Transaction est obligatoire.":"⚠️ ID Transaction lan obligatwa.","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
+    "Numéro :":"Nimewo :","Nom :":"Non :","Numéro utilisé pour envoyer l’argent":"Nimewo ou itilize pou voye lajan an","Transaction ID":"ID tranzaksyon","Nom du compte":"Non kont lan","optionnel":"opsyonèl",
     "Continuer":"Kontinye","Fermer":"Fèmen","Retrait Wallet":"Retrè Wallet","Numéro":"Nimewo","Montant HTG":"Montan HTG","Demander le retrait":"Mande retrè a",
     "Retrait avec vérification Admin":"Retrè ak verifikasyon Admin","Disponible • Recharge automatique":"Disponib • Verifikasyon manyèl","Bientôt disponible":"Talè disponib",
     "Messages":"Mesaj","Écrivez votre message à TRUE ALPHA...":"Ekri mesaj ou bay TRUE ALPHA...","Écrivez votre message ici. / Ekri mesaj ou la isit la.":"Ekri mesaj ou isit la.",
@@ -8367,7 +8049,6 @@ onAuthStateChanged(
 
     if(user){
 
-      try{await loadTrueAlphaId();}catch(idError){console.warn("TRUE ALPHA ID not ready",idError);}
       await loadWallet();
 
       await loadPoints();
@@ -8390,9 +8071,6 @@ onAuthStateChanged(
   }
 );
 
-
-
-document.getElementById("topupLoyaltyClaimBtn")?.addEventListener("click",claimTopupLoyalty);
 
 
 /* =====================================================
@@ -8511,399 +8189,6 @@ function openAlphaUniverse(){
 }
 function openTaUniverseView(k){const v=taUniverseViews[k];if(!v)return;document.getElementById('taUniverseTitle').textContent=v.title;document.getElementById('taUniverseContent').innerHTML=v.html}
 function closeTaUniverse(){try{resetCurrentFormFields()}catch(e){}document.getElementById('taUniverseModal')?.classList.remove('show')}
-
-
-/* =====================================================
-   TRUE ALPHA MESSENGER — FRIENDS / PRIVATE CHAT
-   Voice messages: maximum 10 minutes.
-===================================================== */
-let messengerCurrentFriend=null;
-let messengerTab="friends";
-let messengerFriends=[];
-let messengerRequests=[];
-let messengerChats=[];
-let messengerRecorder=null;
-let messengerVoiceChunks=[];
-let messengerVoiceTimer=null;
-let messengerVoiceStartedAt=0;
-
-function messengerStorageKey(type){
-  return "ta_messenger_"+type+"_"+(firebaseUser?.uid||"guest");
-}
-function messengerLoadLocal(){
-  try{
-    messengerFriends=JSON.parse(localStorage.getItem(messengerStorageKey("friends"))||"[]");
-    messengerRequests=JSON.parse(localStorage.getItem(messengerStorageKey("requests"))||"[]");
-    messengerChats=JSON.parse(localStorage.getItem(messengerStorageKey("chats"))||"[]");
-  }catch(e){messengerFriends=[];messengerRequests=[];messengerChats=[];}
-}
-function messengerSaveLocal(){
-  try{
-    localStorage.setItem(messengerStorageKey("friends"),JSON.stringify(messengerFriends));
-    localStorage.setItem(messengerStorageKey("requests"),JSON.stringify(messengerRequests));
-    localStorage.setItem(messengerStorageKey("chats"),JSON.stringify(messengerChats));
-  }catch(e){}
-}
-function messengerName(u){
-  return String(u?.displayName||u?.name||u?.email||u?.trueAlphaId||"TRUE ALPHA");
-}
-function messengerInitial(u){
-  return messengerName(u).trim().charAt(0).toUpperCase()||"?";
-}
-function messengerEscape(v){
-  if(typeof escapeHTML==="function")return escapeHTML(String(v??""));
-  return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-async function messengerApi(path,options={}){
-  try{
-    const headers={"Content-Type":"application/json",...(options.headers||{})};
-    const token=await firebaseUser?.getIdToken?.();
-    if(token)headers.Authorization="Bearer "+token;
-    const r=await fetch(path,{...options,headers});
-    const d=await r.json().catch(()=>({}));
-    return {ok:r.ok,data:d};
-  }catch(e){return {ok:false,data:{}};}
-}
-async function loadTrueAlphaId(){
-  const card=document.getElementById("trueAlphaIdCard");
-  const el=document.getElementById("trueAlphaIdValue");
-  const hint=document.getElementById("trueAlphaIdHint");
-  if(!el||!card)return;
-  card.style.display=firebaseUser?"block":"none";
-  if(!firebaseUser){el.textContent="—";return;}
-  el.textContent="—";
-  if(hint)hint.textContent="";
-  try{
-    const token=await firebaseUser.getIdToken();
-    const r=await fetch("/api/user/me",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
-    const d=await r.json().catch(()=>({}));
-    if(r.ok && d.trueAlphaId){
-      el.textContent=String(d.trueAlphaId);
-    }
-  }catch(e){
-    // Keep technical service details private; leave the ID placeholder unchanged.
-  }
-}
-
-async function copyTrueAlphaId(){
-  const v=document.getElementById("trueAlphaIdValue")?.textContent?.trim()||"";
-  if(!v || v==="—" || v==="…" || v==="Poko disponib")return toast("TRUE ALPHA ID poko pare.");
-  try{
-    if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(v);
-    else {
-      const temp=document.createElement("textarea");temp.value=v;temp.style.position="absolute";temp.style.left="-9999px";document.body.appendChild(temp);temp.select();
-      const ok=document.execCommand("copy");temp.remove();if(!ok)throw new Error("copy_failed");
-    }
-    toast("✅ TRUE ALPHA ID kopye.");
-  }catch(e){toast("⚠️ Pa t kapab kopye ID a. Kenbe dwèt ou sou ID a pou kopye l.");}
-}
-
-function showMessenger(){
-  if(!firebaseUser){
-    if(typeof openLogin==="function")openLogin();
-    else toast("Konekte anvan ou ouvri Messenger.");
-    return;
-  }
-  const home=document.getElementById("messengerHome");
-  const chat=document.getElementById("messengerChat");
-  if(!document.getElementById("messenger")){
-    toast("❌ Paj Messenger la pa nan vèsyon Index sa a.");
-    return;
-  }
-  try{
-    messengerLoadLocal();
-    showPage("messenger");
-    if(home)home.style.display="";
-    if(chat)chat.style.display="none";
-    if(typeof loadTrueAlphaId==="function")loadTrueAlphaId();
-    switchMessengerTab("friends");
-    loadMessengerFriends();
-    loadMessengerRequests();
-    loadMessengerChats();
-  }catch(e){
-    console.error("TRUE ALPHA MESSENGER OPEN ERROR",e);
-    toast("❌ Messenger pa t kapab ouvri. Verifye kòd Index la ak Console la.");
-  }
-}
-
-function backFromMessenger(){
-  closeMessengerChat();
-  resetTopupFlow();
-  showPage("profile");
-}
-function switchMessengerTab(tab){
-  messengerTab=tab;
-  document.querySelectorAll(".messengerTab").forEach(b=>b.classList.toggle("active",b.dataset.mtab===tab));
-  document.getElementById("messengerFriendsPanel").style.display=tab==="friends"?"":"none";
-  document.getElementById("messengerRequestsPanel").style.display=tab==="requests"?"":"none";
-  document.getElementById("messengerChatsPanel").style.display=tab==="chats"?"":"none";
-  if(tab==="friends")loadMessengerFriends();
-  if(tab==="requests")loadMessengerRequests();
-  if(tab==="chats")loadMessengerChats();
-}
-async function loadMessengerFriends(){
-  messengerLoadLocal();
-  const r=await messengerApi("/api/messenger/friends");
-  if(r.ok && Array.isArray(r.data?.friends))messengerFriends=r.data.friends;
-  const box=document.getElementById("messengerFriendsPanel");
-  if(!box)return;
-  if(!messengerFriends.length){
-    box.innerHTML="<div class='messengerEmpty'>👥 Ou poko gen zanmi. Chèche yon TRUE ALPHA ID pou voye demann.</div>";
-    return;
-  }
-  box.innerHTML=messengerFriends.map((f,i)=>`
-    <div class="messengerFriend">
-      <div class="messengerAvatar">${messengerEscape(messengerInitial(f))}</div>
-      <div class="messengerUserMain">
-        <strong>${messengerEscape(messengerName(f))}</strong>
-        <small><span class="messengerStatusDot"></span>${f.online?"En ligne":"Dernière présence indisponible"}</small>
-      </div>
-      <button type="button" class="messengerAction primary" onclick="openMessengerChatByIndex(${i})">💬</button>
-    </div>`).join("");
-}
-async function loadMessengerRequests(){
-  messengerLoadLocal();
-  const r=await messengerApi("/api/messenger/requests");
-  if(r.ok && Array.isArray(r.data?.requests))messengerRequests=r.data.requests;
-  const badge=document.getElementById("messengerRequestBadge");
-  if(badge){badge.textContent=messengerRequests.length>99?"99+":String(messengerRequests.length);badge.style.display=messengerRequests.length?"inline-flex":"none";}
-  const box=document.getElementById("messengerRequestsPanel");
-  if(!box)return;
-  if(!messengerRequests.length){
-    box.innerHTML="<div class='messengerEmpty'>📨 Pa gen demann zanmi kounye a.</div>";
-    return;
-  }
-  box.innerHTML=messengerRequests.map((r,i)=>`
-    <div class="messengerUser">
-      <div class="messengerAvatar">${messengerEscape(messengerInitial(r.from||r))}</div>
-      <div class="messengerUserMain">
-        <strong>${messengerEscape(messengerName(r.from||r))}</strong>
-        <small>${messengerEscape(r.from?.trueAlphaId||r.trueAlphaId||"Demann zanmi")}</small>
-      </div>
-      <button type="button" class="messengerAction primary" onclick="acceptMessengerRequest(${i})">✓ Aksepte</button>
-      <button type="button" class="messengerAction" onclick="rejectMessengerRequest(${i})">✕</button>
-    </div>`).join("");
-}
-async function loadMessengerChats(){
-  const r=await messengerApi("/api/messenger/conversations");
-  if(r.ok && Array.isArray(r.data?.conversations))messengerChats=r.data.conversations;
-  const box=document.getElementById("messengerChatsPanel");
-  if(!box)return;
-  if(!messengerChats.length){
-    box.innerHTML="<div class='messengerEmpty'>💬 Pa gen konvèsasyon pou kounye a.</div>";
-    return;
-  }
-  box.innerHTML=messengerChats.map((c,i)=>{
-    const f=c.friend||c.user||c;
-    return `<div class="messengerFriend"><div class="messengerAvatar">${messengerEscape(messengerInitial(f))}</div><div class="messengerUserMain"><strong>${messengerEscape(messengerName(f))}</strong><small>${messengerEscape(c.lastMessage?.text||c.lastMessage||"Nouvo konvèsasyon")}</small></div><button type="button" class="messengerAction primary" onclick="openMessengerChatByChatIndex(${i})">Ouvri</button></div>`;
-  }).join("");
-}
-async function searchMessengerUser(){
-  if(!requireLogin())return;
-  const input=document.getElementById("messengerSearchInput");
-  const q=input?.value.trim();
-  const box=document.getElementById("messengerSearchResults");
-  if(!box)return;
-  if(!q){box.innerHTML="";return;}
-  const r=await messengerApi("/api/messenger/users/search?q="+encodeURIComponent(q));
-  let users=Array.isArray(r.data?.users)?r.data.users:[];
-  if(!users.length && !r.ok){
-    box.innerHTML="<div class='messengerEmpty'>🔎 Rechèch Messenger bezwen backend la aktive sou Render.</div>";
-    return;
-  }
-  if(!users.length){box.innerHTML="<div class='messengerEmpty'>Pa jwenn itilizatè sa a.</div>";return;}
-  box.innerHTML=users.slice(0,10).map((u,i)=>`
-    <div class="messengerUser">
-      <div class="messengerAvatar">${messengerEscape(messengerInitial(u))}</div>
-      <div class="messengerUserMain"><strong>${messengerEscape(messengerName(u))}</strong><small>${messengerEscape(u.trueAlphaId||u.email||"")}</small></div>
-      <button type="button" class="messengerAction primary" onclick='sendMessengerFriendRequest(${JSON.stringify(u).replace(/'/g,"&#39;")})'>➕ Zanmi</button>
-    </div>`).join("");
-}
-async function sendMessengerFriendRequest(user){
-  if(!user)return;
-  const r=await messengerApi("/api/messenger/requests",{method:"POST",body:JSON.stringify({toUserId:user.uid||user.id||user.trueAlphaId||user.email})});
-  if(r.ok){
-    toast("✅ Demann zanmi a voye.");
-  }else{
-    const exists=messengerFriends.some(f=>(f.uid||f.id||f.trueAlphaId||f.email)===(user.uid||user.id||user.trueAlphaId||user.email));
-    if(!exists){messengerRequests.push({type:"outgoing",to:user});messengerSaveLocal();}
-    toast("📨 Demann lan pare; backend Messenger dwe aktive pou lòt itilizatè a resevwa li.");
-  }
-}
-async function acceptMessengerRequest(i){
-  const req=messengerRequests[i]; if(!req)return;
-  const id=req.id||req.requestId||req.from?.uid||req.from?.trueAlphaId||req.from?.email;
-  const r=await messengerApi("/api/messenger/requests/"+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify({action:"accept"})});
-  if(r.ok || req.from){
-    const friend=req.from||req;
-    if(!messengerFriends.some(f=JSON.stringify(f)===JSON.stringify(friend)))messengerFriends.push(friend);
-    messengerRequests.splice(i,1);messengerSaveLocal();loadMessengerRequests();loadMessengerFriends();toast("✅ Nouvo zanmi ajoute.");
-  }
-}
-async function rejectMessengerRequest(i){
-  const req=messengerRequests[i]; if(!req)return;
-  const id=req.id||req.requestId||req.from?.uid||req.from?.trueAlphaId||req.from?.email;
-  await messengerApi("/api/messenger/requests/"+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify({action:"reject"})});
-  messengerRequests.splice(i,1);messengerSaveLocal();loadMessengerRequests();
-}
-function openMessengerChatByIndex(i){const f=messengerFriends[i];if(f)openMessengerChat(f);}
-function openMessengerChatByChatIndex(i){const c=messengerChats[i];if(c)openMessengerChat(c.friend||c.user||c);}
-async function openMessengerChat(friend){
-  if(!friend)return;
-  messengerCurrentFriend=friend;
-  document.getElementById("messengerHome").style.display="none";
-  document.getElementById("messengerChat").style.display="";
-  document.getElementById("messengerChatAvatar").textContent=messengerInitial(friend);
-  document.getElementById("messengerChatName").textContent=messengerName(friend);
-  document.getElementById("messengerChatStatus").innerHTML=friend.online?"<span class='messengerStatusDot'></span>En ligne":"Hors ligne";
-  document.getElementById("messengerModerationBox").classList.remove("show");
-  await loadMessengerConversation();
-}
-function closeMessengerChat(){
-  stopMessengerVoice(false);
-  messengerCurrentFriend=null;
-  const h=document.getElementById("messengerChat"),home=document.getElementById("messengerHome");
-  if(h)h.style.display="none";
-  if(home)home.style.display="";
-}
-async function loadMessengerConversation(){
-  const box=document.getElementById("messengerMessages");if(!box||!messengerCurrentFriend)return;
-  const id=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  const r=await messengerApi("/api/messenger/conversations/"+encodeURIComponent(id));
-  let list=Array.isArray(r.data?.messages)?r.data.messages:[];
-  if(!list.length){
-    list=messengerChats.filter(c=>(c.friend?.uid||c.friend?.id||c.friend?.trueAlphaId||c.friend?.email)===id).flatMap(c=>c.messages||[]);
-  }
-  if(!list.length){
-    box.innerHTML="<div class='messengerEmpty'>💬 Kòmanse konvèsasyon an. Voye premye mesaj la.</div>";return;
-  }
-  box.innerHTML=list.map(m=>{
-    const mine=m.senderId===(firebaseUser?.uid||"")||m.from==="me";
-    if(m.type==="voice" && m.voiceUrl)return `<div class="chatBubble ${mine?"me":"them"}"><div class="chatVoice"><button class="voicePlay" type="button" onclick="playMessengerVoice(this,'${messengerEscape(m.voiceUrl)}')">▶</button><span>🎙️ Message vocal</span></div><div class="chatMeta">${messengerEscape(m.duration||"")}</div></div>`;
-    return `<div class="chatBubble ${mine?"me":"them"}">${messengerEscape(m.text||"")}<div class="chatMeta">${messengerEscape(m.createdAt||"")}</div></div>`;
-  }).join("");
-  box.scrollTop=box.scrollHeight;
-}
-async function sendMessengerText(){
-  if(!messengerCurrentFriend||!requireLogin())return;
-  const input=document.getElementById("messengerTextInput"),text=input?.value.trim();
-  if(!text)return;
-  const toUserId=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  const r=await messengerApi("/api/messenger/messages",{method:"POST",body:JSON.stringify({receiverId:toUserId,type:"text",text})});
-  if(!r.ok){
-    messengerChats.push({friend:messengerCurrentFriend,lastMessage:{text},messages:[{from:"me",senderId:firebaseUser?.uid,type:"text",text,createdAt:new Date().toLocaleTimeString()}]});
-    messengerSaveLocal();
-  }
-  input.value="";loadMessengerConversation();
-}
-function insertMessengerEmoji(){
-  const input=document.getElementById("messengerTextInput");if(!input)return;
-  input.value+="😊";input.focus();
-}
-function toggleMessengerModeration(){
-  document.getElementById("messengerModerationBox")?.classList.toggle("show");
-}
-async function reportMessengerUser(){
-  if(!messengerCurrentFriend)return;
-  const reason=document.getElementById("messengerReportReason")?.value||"other";
-  const id=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  const r=await messengerApi("/api/messenger/reports",{method:"POST",body:JSON.stringify({reportedUserId:id,reason,conversationId:id})});
-  toast(r.ok?"✅ Signalement envoyé à TRUE ALPHA.":"🚩 Signalement enregistré localement; le backend de modération doit être activé.");
-}
-async function blockMessengerUser(){
-  if(!messengerCurrentFriend)return;
-  const id=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  await messengerApi("/api/messenger/blocks",{method:"POST",body:JSON.stringify({blockedUserId:id})});
-  messengerFriends=messengerFriends.filter(f=>(f.uid||f.id||f.trueAlphaId||f.email)!==id);messengerSaveLocal();
-  toast("🚫 Utilizatè a bloke.");closeMessengerChat();loadMessengerFriends();
-}
-async function deleteMessengerConversation(){
-  if(!messengerCurrentFriend)return;
-  const id=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  if(!confirm("Efase konvèsasyon sa a?"))return;
-  await messengerApi("/api/messenger/conversations/"+encodeURIComponent(id),{method:"DELETE"});
-  messengerChats=messengerChats.filter(c=>(c.friend?.uid||c.friend?.id||c.friend?.trueAlphaId||c.friend?.email)!==id);
-  messengerSaveLocal();toast("🗑️ Konvèsasyon an efase.");closeMessengerChat();
-}
-async function toggleMessengerVoice(){
-  if(!messengerCurrentFriend||!requireLogin())return;
-  if(messengerRecorder && messengerRecorder.state==="recording"){stopMessengerVoice(true);return;}
-  if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){
-    toast("❌ Aparèy sa a pa sipòte mesaj vocal.");
-    return;
-  }
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    messengerVoiceChunks=[];
-    messengerRecorder=new MediaRecorder(stream);
-    messengerVoiceStartedAt=Date.now();
-    const status=document.getElementById("messengerVoiceStatus");
-    if(status){status.style.display="block";status.textContent="🎙️ Ap anrejistre... 0:00 / 10:00 — peze bouton an ankò pou voye.";}
-    messengerRecorder.ondataavailable=e=>{if(e.data.size)messengerVoiceChunks.push(e.data);};
-    messengerRecorder.onstop=async()=>{
-      stream.getTracks().forEach(t=>t.stop());
-      const blob=new Blob(messengerVoiceChunks,{type:messengerRecorder.mimeType||"audio/webm"});
-      const seconds=Math.min(600,Math.max(1,Math.round((Date.now()-messengerVoiceStartedAt)/1000)));
-      await sendMessengerVoice(blob,seconds);
-    };
-    messengerRecorder.start(1000);
-    messengerVoiceTimer=setInterval(()=>{
-      const sec=Math.min(600,Math.floor((Date.now()-messengerVoiceStartedAt)/1000));
-      const m=Math.floor(sec/60),ss=String(sec%60).padStart(2,"0");
-      if(status)status.textContent=`🎙️ Ap anrejistre... ${m}:${ss} / 10:00`;
-      if(sec>=600)stopMessengerVoice(true);
-    },500);
-  }catch(e){toast("❌ TRUE ALPHA pa jwenn aksè ak mikwo a.");}
-}
-function stopMessengerVoice(send=true){
-  if(messengerVoiceTimer){clearInterval(messengerVoiceTimer);messengerVoiceTimer=null;}
-  const r=messengerRecorder;
-  messengerRecorder=null;
-  if(r && r.state==="recording")r.stop();
-  const status=document.getElementById("messengerVoiceStatus");
-  if(status){status.style.display="none";status.textContent="";}
-  if(!send)messengerVoiceChunks=[];
-}
-async function sendMessengerVoice(blob,duration){
-  if(!messengerCurrentFriend||!blob?.size)return;
-  if(duration>600)duration=600;
-  const toUserId=messengerCurrentFriend.uid||messengerCurrentFriend.id||messengerCurrentFriend.trueAlphaId||messengerCurrentFriend.email;
-  /* Backend should upload the blob and return a protected voiceUrl. */
-  const form=new FormData();
-  form.append("receiverId",toUserId);
-  form.append("type","voice");
-  form.append("duration",String(duration));
-  form.append("voice",blob,"voice.webm");
-  try{
-    const token=await firebaseUser?.getIdToken?.();
-    const headers={};if(token)headers.Authorization="Bearer "+token;
-    const r=await fetch("/api/messenger/messages",{method:"POST",headers,body:form});
-    if(!r.ok)throw new Error("voice_upload_failed");
-    await loadMessengerConversation();
-    toast("🎙️ Mesaj vocal voye.");
-  }catch(e){
-    toast("⚠️ Mesaj vocal la anrejistre sou aparèy la sèlman jiskaske backend Messenger la aktive.");
-  }
-}
-function playMessengerVoice(button,url){
-  if(!url||url==="undefined")return;
-  const audio=new Audio(url);audio.play().catch(()=>toast("⚠️ Audio a pa disponib."));
-}
-document.getElementById("messengerTextInput")?.addEventListener("keydown",e=>{
-  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessengerText();}
-});
-
-// Messenger handlers are called by existing inline HTML buttons.
-Object.assign(window,{
-  showMessenger,backFromMessenger,switchMessengerTab,loadMessengerFriends,loadMessengerRequests,loadMessengerChats,
-  searchMessengerUser,sendMessengerFriendRequest,acceptMessengerRequest,rejectMessengerRequest,
-  openMessengerChatByIndex,openMessengerChatByChatIndex,openMessengerChat,closeMessengerChat,loadMessengerConversation,
-  sendMessengerText,insertMessengerEmoji,toggleMessengerModeration,reportMessengerUser,blockMessengerUser,
-  deleteMessengerConversation,toggleMessengerVoice,stopMessengerVoice,sendMessengerVoice,playMessengerVoice
-});
-
-// Compatibility global for any cached/legacy TRUE ALPHA handler.
-window.TRUE_ALPHA=window.TRUE_ALPHA||{};
 
 </script>
 
