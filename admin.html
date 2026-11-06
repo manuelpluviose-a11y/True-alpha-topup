@@ -548,7 +548,6 @@ onclick="openSection('settings',this)"
 Paramèt
 </button>
 
-<button onclick="openSection('finance',this)">💰 Fon Admin & Wallet</button>
 <button onclick="openSection('orders',this)">🧾 Kòmand & Peman</button>
 <button onclick="openSection('services',this)">🛍️ Sèvis & Pwodwi</button>
 <button onclick="openSection('content',this)">📝 Kontni Sit la</button>
@@ -1902,28 +1901,6 @@ RAFRECHI JWÈT
 
 
 <!-- =========================
-     FINANCE / ADMIN FUND
-========================= -->
-<div class="section" id="finance">
-  <div class="card">
-    <h3>💰 Fon Admin & Wallet</h3>
-    <p class="small">Fon Admin nan se lajan sèvis la. TA Points rete separe.</p>
-    <div class="money-box">
-      <div class="money-row"><span>Fon Admin:</span><strong id="adminFundBalance">0 HTG</strong></div>
-      <div class="money-row"><span>Total Wallet kliyan:</span><strong id="customerWalletTotal">0 HTG</strong></div>
-      <div class="money-row"><span>Total TA Wallet:</span><strong id="taWalletTotal">0 HTG</strong></div>
-    </div>
-    <input id="fundAddAmount" type="number" min="1" placeholder="Egzanp: 50000 — HTG pou ajoute nan Fon Admin">
-    <input id="fundReason" placeholder="Egzanp: Kapital sèvis TRUE ALPHA">
-    <button class="success" onclick="adminAddFund()">AJOUTE NAN FON ADMIN</button>
-    <input id="fundAdjustAmount" type="number" placeholder="Egzanp: 1000 oswa -1000 — ajisteman HTG">
-    <input id="fundAdjustReason" placeholder="Egzanp: Koreksyon kontablite">
-    <button class="warning" onclick="adminAdjustFund()">AJISTE FON ADMIN</button>
-  </div>
-  <div class="card"><h3>⚠️ Règle finans</h3><div class="item-line">• Rechaj valide: Fon Admin ↓, Wallet kliyan ↑.</div><div class="item-line">• Rechaj refize: pa gen kredi.</div><div class="item-line">• Menm tranzaksyon an pa dwe kredite 2 fwa.</div><div class="item-line">• TA Points redemption pa itilize Fon Admin.</div></div>
-</div>
-
-<!-- =========================
      ORDERS / PAYMENTS
 ========================= -->
 <div class="section" id="orders">
@@ -2244,7 +2221,6 @@ function openSection(id,button){
   if(id==="logs"){
     loadLogs();
   }
-  if(id==="finance"){ loadAdminFinance(); }
   if(id==="orders"){ loadAdminOrders(); loadFinanceRequests(); }
   if(id==="services"){ loadAdminServices(); }
   if(id==="content"){ loadAdminContent(); }
@@ -3098,32 +3074,6 @@ async function addManualPointsByEmail(){
     await adminJson("/admin/customers/credit","POST",{email,kind:"ta_points",amount:points,points,reason});
     resetAdminForms();
     showMessage("TA Points yo ajoute pou kliyan an.","#5ee39a");
-  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
-}
-
-async function addManualWalletByEmail(){
-  const email=document.getElementById("walletUserEmail").value.trim().toLowerCase();
-  const amount=Number(document.getElementById("manualWalletAmount").value);
-  const reason=document.getElementById("walletEmailReason").value.trim();
-  if(!email || !email.includes("@") || amount<1){showMessage("Mete yon email ak kantite HTG valab.","#ff7777");return;}
-  try{
-    await adminJson("/admin/customers/credit","POST",{email,kind:"wallet_htg",amount,reason});
-    resetAdminForms();
-    await loadAdminFinance();
-    showMessage("Wallet HTG kliyan an mete ajou.","#5ee39a");
-  }catch(e){showMessage("❌ "+e.message,"#ff7777")}
-}
-
-async function addManualTAWalletByEmail(){
-  const email=document.getElementById("taWalletUserEmail").value.trim().toLowerCase();
-  const amount=Number(document.getElementById("manualTAWalletAmount").value);
-  const reason=document.getElementById("taWalletEmailReason").value.trim();
-  if(!email || !email.includes("@") || amount<1){showMessage("Mete yon email ak kantite HTG valab.","#ff7777");return;}
-  try{
-    await adminJson("/admin/customers/credit","POST",{email,kind:"ta_wallet_htg",amount,reason});
-    resetAdminForms();
-    await loadAdminFinance();
-    showMessage("Wallet TA Points kliyan an mete ajou.","#5ee39a");
   }catch(e){showMessage("❌ "+e.message,"#ff7777")}
 }
 
@@ -5093,7 +5043,7 @@ async function saveSettings(){
    ADMIN CONTROL CENTER
 ========================= */
 function resetAdminForms(){
-  const ids=["fundAddAmount","fundReason","fundAdjustAmount","fundAdjustReason","serviceName","serviceCategory","serviceDescription","servicePrice","serviceIcon","serviceOrder","packService","packName","packValue","packPrice","contentKey","contentTitle","contentValue","contentImage","contentLink","contentPosition","announcementTitle","announcementText","messageCustomer","messageText","adminDisplayName","adminSessionMinutes","dailyGiftTitle","dailyGiftDescription","dailyGiftPoints","dailyGiftPerUser","dailyGiftStart","dailyGiftEnd","dailyGiftButtonLabel"];
+  const ids=["serviceName","serviceCategory","serviceDescription","servicePrice","serviceIcon","serviceOrder","packService","packName","packValue","packPrice","contentKey","contentTitle","contentValue","contentImage","contentLink","contentPosition","announcementTitle","announcementText","messageCustomer","messageText","adminDisplayName","adminSessionMinutes","dailyGiftTitle","dailyGiftDescription","dailyGiftPoints","dailyGiftPerUser","dailyGiftStart","dailyGiftEnd","dailyGiftButtonLabel"];
   ids.forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
   const d={serviceStatus:"active",packStatus:"active",contentStatus:"active",announcementType:"announcement",announcementStatus:"active",adminMaintenanceLock:"off",dailyGiftStatus:"inactive",dailyGiftReset:"daily",dailyGiftPerUser:"1"};
   Object.entries(d).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v;});
@@ -5157,13 +5107,10 @@ async function disableDailyGift(){
   }catch(e){showMessage("❌ "+e.message,"#ff7777")}
 }
 
-async function loadAdminFinance(){try{const d=await adminJson("/admin/finance");document.getElementById("adminFundBalance").textContent=(d.adminFund??d.fund?.balance??0)+" HTG";document.getElementById("customerWalletTotal").textContent=(d.customerWalletTotal??0)+" HTG";document.getElementById("taWalletTotal").textContent=(d.taWalletTotal??0)+" HTG"}catch(e){console.warn("FINANCE",e.message)}}
-async function adminAddFund(){const amount=Number(document.getElementById("fundAddAmount").value),reason=document.getElementById("fundReason").value.trim();if(amount<1){showMessage("Mete yon kantite HTG valab.","#ff7777");return}try{await adminJson("/admin/finance/fund","POST",{action:"add",amount,reason});resetAdminForms();await loadAdminFinance();showMessage("Fon Admin nan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
-async function adminAdjustFund(){const amount=Number(document.getElementById("fundAdjustAmount").value),reason=document.getElementById("fundAdjustReason").value.trim();if(!amount){showMessage("Mete yon ajisteman, egzanp 1000 oswa -1000.","#ff7777");return}try{await adminJson("/admin/finance/fund","POST",{action:"adjust",amount,reason});resetAdminForms();await loadAdminFinance();showMessage("Ajisteman an sove.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 async function loadAdminOrders(){try{const f=document.getElementById("orderFilter")?.value||"all",d=await adminJson("/admin/orders?status="+encodeURIComponent(f)),a=Array.isArray(d.orders)?d.orders:[];document.getElementById("adminOrdersList").innerHTML=a.length?a.map(o=>`<div class="item"><div class="item-title">${escapeHtml(o.id||"Kòmand")}</div><div class="item-line">Kliyan: ${escapeHtml(o.email||o.userId||"")}</div><div class="item-line">UID: ${escapeHtml(o.uid||"")} • ${Number(o.price||o.amount||0)} GDS</div><div class="item-line">Status: ${escapeHtml(o.status||"")}</div><button class="primary" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','processing')">PROCESSING</button><button class="success" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','success')">VALIDÉ / COMPLETED</button><button class="danger" onclick="updateAdminOrderStatus('${escapeJs(o.id||"")}','failed')">ÉCHEC</button></div>`).join(""):"<div class='empty'>Pa gen kòmand.</div>"}catch(e){console.warn("ORDERS",e.message)}}
 async function updateAdminOrderStatus(id,status){if(!id)return;try{await adminJson("/admin/orders/"+encodeURIComponent(id),"POST",{status});await loadAdminOrders();showMessage("Status kòmand lan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 async function loadFinanceRequests(){try{const d=await adminJson("/admin/finance/requests"),a=Array.isArray(d.requests)?d.requests:[];document.getElementById("financeRequestsList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.type||"Demann")}</div><div class="item-line">${escapeHtml(x.email||x.userId||"")} • ${Number(x.amount||0)} HTG</div><div class="item-line">${escapeHtml(x.transactionId||x.status||"")}</div><button class="success" onclick="reviewFinanceRequest('${escapeJs(x.id||"")}','approve')">VALIDE</button><button class="danger" onclick="reviewFinanceRequest('${escapeJs(x.id||"")}','reject')">REFIZE</button></div>`).join(""):"<div class='empty'>Pa gen demann finans.</div>"}catch(e){console.warn("FINANCE REQUESTS",e.message)}}
-async function reviewFinanceRequest(id,action){if(!id)return;try{await adminJson("/admin/finance/requests/"+encodeURIComponent(id),"POST",{action});await loadFinanceRequests();await loadAdminFinance();showMessage("Demann finans lan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
+async function reviewFinanceRequest(id,action){if(!id)return;try{await adminJson("/admin/finance/requests/"+encodeURIComponent(id),"POST",{action});await loadFinanceRequests();showMessage("Demann finans lan mete ajou.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 async function createAdminService(){const data={name:document.getElementById("serviceName").value.trim(),category:document.getElementById("serviceCategory").value.trim(),description:document.getElementById("serviceDescription").value.trim(),price:Number(document.getElementById("servicePrice").value)||0,icon:document.getElementById("serviceIcon").value.trim(),status:document.getElementById("serviceStatus").value,position:Number(document.getElementById("serviceOrder").value)||0};if(!data.name){showMessage("Mete non sèvis la.","#ff7777");return}try{await adminJson("/admin/services","POST",data);resetAdminForms();await loadAdminServices();showMessage("Sèvis la ajoute.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 async function createAdminPack(){const data={service:document.getElementById("packService").value.trim(),name:document.getElementById("packName").value.trim(),value:document.getElementById("packValue").value.trim(),price:Number(document.getElementById("packPrice").value)||0,status:document.getElementById("packStatus").value};if(!data.service||!data.name){showMessage("Sèvis ak non pack obligatwa.","#ff7777");return}try{await adminJson("/admin/packs","POST",data);resetAdminForms();await loadAdminServices();showMessage("Pack la ajoute.","#5ee39a")}catch(e){showMessage("❌ "+e.message,"#ff7777")}}
 async function loadAdminServices(){try{const d=await adminJson("/admin/services"),a=Array.isArray(d.services)?d.services:[];document.getElementById("servicesList").innerHTML=a.length?a.map(x=>`<div class="item"><div class="item-title">${escapeHtml(x.icon||"")} ${escapeHtml(x.name||"")}</div><div class="item-line">${escapeHtml(x.category||"")} • ${escapeHtml(x.status||"")}</div><button class="warning" onclick="toggleAdminEntity('services','${escapeJs(x.id||"")}')">Aktive / Dezaktive</button></div>`).join(""):"<div class='empty'>Pa gen sèvis.</div>"}catch(e){console.warn("SERVICES",e.message)}}
